@@ -1,0 +1,90 @@
+{
+  "id": "mengram",
+  "name": "Mengram",
+  "repo_url": "https://github.com/alibaizhanov/mengram",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P3",
+    "group_meaning": "免代码用法默认走第三方托管服务（对话内容经第三方服务器）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "会学习的 agent 记忆，可导入 ChatGPT/Claude Code 历史",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "事实、经历、流程",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP＋钩子",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Cursor、Codex、OpenClaw",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "托管（mengram.io）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低到中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Mengram 账号",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "免代码用法默认经第三方服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-16",
+    "stars": 204,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "alibaizhanov/mengram",
+      "url": "https://github.com/alibaizhanov/mengram",
+      "desc": "Agent memory with semantic, episodic and procedural types, a knowledge graph, Claude Code auto-save/recall hooks, smart triggers and multi-user isolation."
+    },
+    "人工筛选": {
+      "name": "Mengram",
+      "v": "待定",
+      "c": "P3",
+      "desc": "会学习的 agent 记忆，可导入 ChatGPT/Claude Code 历史",
+      "subj": "事实、经历、流程",
+      "acc": "MCP＋钩子",
+      "cli": "Claude Desktop、Claude Code、Cursor、Codex、OpenClaw",
+      "run": "托管（mengram.io）",
+      "diff": "低到中",
+      "need": "Mengram 账号",
+      "note": ""
+    }
+  }
+}

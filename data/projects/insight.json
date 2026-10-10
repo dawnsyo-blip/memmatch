@@ -1,0 +1,130 @@
+{
+  "id": "insight",
+  "name": "洞察捕捉 Insight",
+  "repo_url": "https://github.com/pipsqueakkk0613/insight",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 12 项，②类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "在写入端做“同意＋筛选”，宁少勿滥",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实（重要时刻）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP（SSE）＋网页面板",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "MCP 客户端（SSE）；同一 WiFi 下手机可连",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "本机；同一 WiFi 下手机可连；可选 Supabase 云同步",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低：npm install、npm start",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "电脑＋Node.js；手机上的 MCP 客户端（如橙子聊天）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "无 LICENSE 文件；README 写 MIT",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "根目录无 LICENSE 文件；治理靠同意：写入前征得用户确认，拿不准的进候选层，防止什么都记",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-07-01",
+    "stars": 6,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 12,
+      "项目名": "洞察捕捉 Insight",
+      "作者": "@岁岁 / pipsqueakkk0613",
+      "开放程度（站点标注）": "开源",
+      "主分类": "② 记忆治理与可信：审核・回滚・隔离・同意",
+      "记忆形态 Form": "词元级・扁平",
+      "记忆功能 Function": "用户事实（重要时刻）",
+      "形成 Formation（据 README）": "AI 暂存候选洞察（带触发句和置信度），经用户确认才入库",
+      "演化 Evolution（据 README）": "确认时可保留、合并或丢弃；可删除",
+      "检索 Retrieval（据 README）": "search_insights 搜索；网页面板浏览",
+      "核心特点": "在写入端做“同意＋筛选”，宁少勿滥",
+      "技术栈": "JavaScript",
+      "运行平台": "Self-host / MCP / Web",
+      "站点更新日期": "2026-07-01",
+      "详情页": "https://www.ailover-atlas.com/projects/insight/",
+      "仓库链接": "https://github.com/pipsqueakkk0613/insight",
+      "仓库最后提交日期": "2026-07-01",
+      "许可证（仓库实际文件）": "无 LICENSE 文件；README 写 MIT",
+      "README 与站点简介的一致性说明": "候选层、待确认、Web 面板均在 README",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "人工确认",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "MCP（SSE）＋网页面板",
+      "运行位置": "本机；同一 WiFi 下手机可连；可选 Supabase 云同步",
+      "所需设备与账号": "电脑＋Node.js；手机上的 MCP 客户端（如橙子聊天）",
+      "上手门槛": "低：npm install、npm start",
+      "记忆由谁写入": "AI 识别高价值时刻→暂存候选→用户确认后入库",
+      "召回怎么触发": "AI 调 search_insights；网页面板浏览",
+      "差异要点": "治理靠同意：写入前征得用户确认，拿不准的进候选层，防止什么都记",
+      "记忆保存形式": "带触发句和类型的洞察条目",
+      "治理手段": "候选层：先暂存，用户确认后才入库，可合并或丢弃",
+      "人在哪一步介入": "AI 写入之前",
+      "主要防住哪种错误": "过度记录、记下不该记的内容",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "手动删除",
+      "整合（合并、摘要）方式": "确认时可合并候选"
+    },
+    "使用方式对比": {
+      "主分类": "② 记忆治理与可信：审核・回滚・隔离・同意",
+      "项目名": "洞察捕捉 Insight",
+      "接入方式": "MCP（SSE）＋网页面板",
+      "运行位置": "本机；同一 WiFi 下手机可连；可选 Supabase 云同步",
+      "所需设备与账号": "电脑＋Node.js；手机上的 MCP 客户端（如橙子聊天）",
+      "上手门槛": "低：npm install、npm start",
+      "记忆由谁写入": "AI 识别高价值时刻→暂存候选→用户确认后入库",
+      "召回怎么触发": "AI 调 search_insights；网页面板浏览",
+      "差异要点": "治理靠同意：写入前征得用户确认，拿不准的进候选层，防止什么都记",
+      "记忆保存形式": "带触发句和类型的洞察条目",
+      "治理手段": "候选层：先暂存，用户确认后才入库，可合并或丢弃",
+      "人在哪一步介入": "AI 写入之前",
+      "主要防住哪种错误": "过度记录、记下不该记的内容",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "手动删除",
+      "整合（合并、摘要）方式": "确认时可合并候选"
+    }
+  }
+}

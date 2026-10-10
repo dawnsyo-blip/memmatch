@@ -1,0 +1,130 @@
+{
+  "id": "machine-studio",
+  "name": "机的独立工作室 Machine Studio",
+  "repo_url": "https://github.com/Maymay05072/Machine-studio",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 34 项，⑥类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "把项目进度、部署参数等技术记忆从情感记忆中剥离，可与 Ombre Brain 配合",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "环境事实（技术记忆）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP＋网页工作室",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "MCP 客户端",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低：三条命令",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Python 3.10+；支持 MCP 的客户端（如 Kelivo）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "专门存会过期的技术记忆，与情感记忆分开；支持真删除；可与 Ombre Brain 配合",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-01",
+    "stars": 14,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 34,
+      "项目名": "机的独立工作室 Machine Studio",
+      "作者": "@Maymay05072",
+      "开放程度（站点标注）": "开源",
+      "主分类": "⑥ 工作记忆与场景化上下文",
+      "记忆形态 Form": "词元级・扁平（按项目）",
+      "记忆功能 Function": "环境事实（技术记忆）",
+      "形成 Formation（据 README）": "AI 通过 MCP 按项目手动保存",
+      "演化 Evolution（据 README）": "更新；真删除条目或整个项目，不可恢复",
+      "检索 Retrieval（据 README）": "关键词优先，可选向量兜底（低于阈值不返回）",
+      "核心特点": "把项目进度、部署参数等技术记忆从情感记忆中剥离，可与 Ombre Brain 配合",
+      "技术栈": "Python / JavaScript",
+      "运行平台": "Self-host / MCP / Web",
+      "站点更新日期": "2026-09-01",
+      "详情页": "https://www.ailover-atlas.com/projects/machine-studio/",
+      "仓库链接": "https://github.com/Maymay05072/Machine-studio",
+      "仓库最后提交日期": "2026-09-01",
+      "许可证（仓库实际文件）": "MIT",
+      "README 与站点简介的一致性说明": "按项目保存、搜索、更新、真删除，可配合 Ombre Brain 均在 README",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "手动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "MCP＋网页工作室",
+      "运行位置": "自己的电脑或服务器",
+      "所需设备与账号": "Python 3.10+；支持 MCP 的客户端（如 Kelivo）",
+      "上手门槛": "低：三条命令",
+      "记忆由谁写入": "AI 通过 MCP 按项目手动保存",
+      "召回怎么触发": "关键词优先，可选向量兜底",
+      "差异要点": "专门存会过期的技术记忆，与情感记忆分开；支持真删除；可与 Ombre Brain 配合",
+      "记忆保存形式": "SQLite 单文件，按项目分条",
+      "治理手段": "真删除；Bearer 令牌鉴权",
+      "人在哪一步介入": "手动更新、删除",
+      "主要防住哪种错误": "过期的技术方案干扰判断",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "手动真删除",
+      "整合（合并、摘要）方式": "无"
+    },
+    "使用方式对比": {
+      "主分类": "⑥ 工作记忆与场景化上下文",
+      "项目名": "机的独立工作室 Machine Studio",
+      "接入方式": "MCP＋网页工作室",
+      "运行位置": "自己的电脑或服务器",
+      "所需设备与账号": "Python 3.10+；支持 MCP 的客户端（如 Kelivo）",
+      "上手门槛": "低：三条命令",
+      "记忆由谁写入": "AI 通过 MCP 按项目手动保存",
+      "召回怎么触发": "关键词优先，可选向量兜底",
+      "差异要点": "专门存会过期的技术记忆，与情感记忆分开；支持真删除；可与 Ombre Brain 配合",
+      "记忆保存形式": "SQLite 单文件，按项目分条",
+      "治理手段": "真删除；Bearer 令牌鉴权",
+      "人在哪一步介入": "手动更新、删除",
+      "主要防住哪种错误": "过期的技术方案干扰判断",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "手动真删除",
+      "整合（合并、摘要）方式": "无"
+    }
+  }
+}

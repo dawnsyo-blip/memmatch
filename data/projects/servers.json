@@ -1,0 +1,90 @@
+{
+  "id": "servers",
+  "name": "Knowledge Graph Memory Server（MCP 官方）",
+  "repo_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "MCP 官方示例：用本地知识图谱记住关于用户的信息",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实（实体、关系、观察）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、VS Code 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低到中：npx 一行配置",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "仓库为官方 servers 合集，记忆服务在 src/memory",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 91115,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "modelcontextprotocol/server-memory",
+      "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "desc": "Knowledge graph-based persistent memory for maintaining context."
+    },
+    "人工筛选": {
+      "name": "Knowledge Graph Memory Server（MCP 官方）",
+      "v": "纳入",
+      "c": "",
+      "desc": "MCP 官方示例：用本地知识图谱记住关于用户的信息",
+      "subj": "用户事实（实体、关系、观察）",
+      "acc": "MCP",
+      "cli": "Claude Desktop、VS Code 等",
+      "run": "自己的电脑",
+      "diff": "低到中：npx 一行配置",
+      "need": "无",
+      "note": "仓库为官方 servers 合集，记忆服务在 src/memory"
+    }
+  }
+}

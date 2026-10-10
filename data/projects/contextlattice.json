@@ -1,0 +1,85 @@
+{
+  "id": "contextlattice",
+  "name": "ContextLattice",
+  "repo_url": "https://github.com/sheawinkler/ContextLattice",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "跨 agent 的连续性与可解释检索层",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "任务连续性",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "CLI 为主；MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Codex、Claude Code、Hermes 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑（容器运行时）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "偏编程场景",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-26",
+    "stars": 154,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "sheawinkler/ContextLattice",
+      "url": "https://github.com/sheawinkler/ContextLattice",
+      "desc": "Private-by-default memory and context layer for agents with staged retrieval across fused data backends and long-horizon context continuity."
+    },
+    "人工筛选": {
+      "name": "ContextLattice",
+      "v": "待定",
+      "c": "P2",
+      "desc": "跨 agent 的连续性与可解释检索层",
+      "subj": "任务连续性",
+      "acc": "CLI 为主；MCP",
+      "cli": "Codex、Claude Code、Hermes 等",
+      "run": "自己的电脑（容器运行时）",
+      "diff": "高",
+      "need": "",
+      "note": ""
+    }
+  }
+}

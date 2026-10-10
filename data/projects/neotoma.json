@@ -1,0 +1,85 @@
+{
+  "id": "neotoma",
+  "name": "Neotoma",
+  "repo_url": "https://github.com/markmhendrickson/neotoma",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "版本化的事实记录：每条事实有版本、来源和归属；可导入 ChatGPT/Claude 聊天记录",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "联系人、任务、决定等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP＋钩子；OpenClaw 原生插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、OpenClaw、ChatGPT、OpenCode",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无（单用户本地模式）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-09",
+    "stars": 34,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "markmhendrickson/neotoma",
+      "url": "https://github.com/markmhendrickson/neotoma",
+      "desc": "Deterministic state layer for agents: versioned entities like contacts, tasks and decisions with immutable observations and provenance, in local SQLite."
+    },
+    "人工筛选": {
+      "name": "Neotoma",
+      "v": "纳入",
+      "c": "",
+      "desc": "版本化的事实记录：每条事实有版本、来源和归属；可导入 ChatGPT/Claude 聊天记录",
+      "subj": "联系人、任务、决定等",
+      "acc": "MCP＋钩子；OpenClaw 原生插件",
+      "cli": "Claude Desktop、Claude Code、OpenClaw、ChatGPT、OpenCode",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无（单用户本地模式）",
+      "note": ""
+    }
+  }
+}

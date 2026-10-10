@@ -1,0 +1,85 @@
+{
+  "id": "piia-engram",
+  "name": "Piia Engram",
+  "repo_url": "https://github.com/Patdolitse/piia-engram",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "本地文件形式的“AI 工作身份”：你是谁、怎么做事，可查看、编辑、覆盖",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户偏好与工作方式",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；可导出身份卡",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Claude Desktop、Codex、Cursor、Hermes；与 OpenClaw 文件互通；ChatGPT 等可粘贴身份卡",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 163,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Patdolitse/piia-engram",
+      "url": "https://github.com/Patdolitse/piia-engram",
+      "desc": "Persistent user identity across AI tools: preferences, lessons and decisions in local JSON with staged verification, AES-256-GCM encryption and cross-tool sync."
+    },
+    "人工筛选": {
+      "name": "Piia Engram",
+      "v": "纳入",
+      "c": "",
+      "desc": "本地文件形式的“AI 工作身份”：你是谁、怎么做事，可查看、编辑、覆盖",
+      "subj": "用户偏好与工作方式",
+      "acc": "MCP；可导出身份卡",
+      "cli": "Claude Code、Claude Desktop、Codex、Cursor、Hermes；与 OpenClaw 文件互通；ChatGPT 等可粘贴身份卡",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无",
+      "note": ""
+    }
+  }
+}

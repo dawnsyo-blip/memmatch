@@ -1,0 +1,95 @@
+{
+  "id": "letta",
+  "name": "Letta（原 MemGPT）",
+  "repo_url": "https://github.com/letta-ai/letta",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "P1",
+    "group_meaning": "自带助手的完整应用：记忆不能单独接到用户已有的助手上，愿意换助手才适用",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（MemGPT）",
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "有状态 agent 平台，现为 Letta Code（桌面、网页、Telegram 等）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "agent 自身记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "独立应用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "自带",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "本地或 Letta Cloud",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低到中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-10",
+    "stars": 25096,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 1,
+      "框架": "MemGPT",
+      "仓库链接": "https://github.com/letta-ai/letta",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2026-09-10",
+      "备注": "项目已更名为 Letta"
+    },
+    "人工筛选": {
+      "name": "Letta（原 MemGPT）",
+      "v": "待定",
+      "c": "P1",
+      "desc": "有状态 agent 平台，现为 Letta Code（桌面、网页、Telegram 等）",
+      "subj": "agent 自身记忆",
+      "acc": "独立应用",
+      "cli": "自带",
+      "run": "本地或 Letta Cloud",
+      "diff": "低到中",
+      "need": "",
+      "note": "源码已迁至 letta-ai/letta-code"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "Letta (formerly MemGPT)",
+      "url": "https://github.com/letta-ai/letta",
+      "desc": "Stateful-agent platform with hierarchical memory that learns and self-improves over time."
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "id": "mem0",
+  "name": "Mem0",
+  "repo_url": "https://github.com/mem0ai/mem0",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P3",
+    "group_meaning": "免代码用法默认走第三方托管服务（对话内容经第三方服务器）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（Mem0）",
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "通用记忆层：开源 SDK＋托管平台",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "SDK、CLI、各宿主插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex、Cursor、OpenClaw 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "托管平台或自托管服务",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "免代码用法默认经第三方服务器；README 称基准成绩来自托管平台，含开源版没有的优化；开源核心模式：README 说明其基准成绩基于托管平台，含开源版没有的专有优化",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-07",
+    "stars": 66942,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 2,
+      "框架": "Mem0",
+      "仓库链接": "https://github.com/mem0ai/mem0",
+      "许可证": "Apache-2.0",
+      "开源状态": "开源但有限制",
+      "仓库最后提交日期": "2026-10-07",
+      "备注": "开源核心模式：README 说明其基准成绩基于托管平台，含开源版没有的专有优化"
+    },
+    "人工筛选": {
+      "name": "Mem0",
+      "v": "待定",
+      "c": "P3",
+      "desc": "通用记忆层：开源 SDK＋托管平台",
+      "subj": "用户事实",
+      "acc": "SDK、CLI、各宿主插件",
+      "cli": "Claude Code、Codex、Cursor、OpenClaw 等",
+      "run": "托管平台或自托管服务",
+      "diff": "中到高",
+      "need": "API 密钥",
+      "note": "README 称基准成绩来自托管平台，含开源版没有的优化"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "Mem0",
+      "url": "https://github.com/mem0ai/mem0",
+      "desc": "Universal memory layer for AI agents."
+    }
+  }
+}

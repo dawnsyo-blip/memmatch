@@ -1,0 +1,130 @@
+{
+  "id": "resonant-mind",
+  "name": "Resonant Mind",
+  "repo_url": "https://github.com/codependentai/resonant-mind",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 24 项，⑤类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "同作者的认知基础设施版：v4 提供 47 个 MCP 工具，Postgres 存储，后台守护进程持续整合、反思、做梦",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "身份连续＋情绪",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP 服务（47 个工具）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "MCP 客户端",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "Cloudflare Workers＋Neon PostgreSQL＋R2",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高：要配多个云资源与密钥",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Cloudflare 账号、Neon 数据库、Gemini 密钥、Node.js 22+",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Codependent AI Source-Available License（自定义）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "MCP 服务；自定义禁止商用许可；按“区域”组织心智：身份（Spine）、关系（Bonds）、梦、驱力等；后台持续“代谢”记忆；仅限非商业使用",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-04",
+    "stars": 31,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 24,
+      "项目名": "Resonant Mind",
+      "作者": "@codependentai",
+      "开放程度（站点标注）": "非商业",
+      "主分类": "⑤ 身份与关系记忆：以 AI 自我为记忆对象",
+      "记忆形态 Form": "词元级・扁平（语义记忆）",
+      "记忆功能 Function": "身份连续＋情绪",
+      "形成 Formation（据 README）": "write、record 等工具写入；R2 存视觉记忆",
+      "演化 Evolution（据 README）": "定时守护进程“代谢”记忆：情绪与新奇度、保留、孤儿检测、整合、反思、梦境复现",
+      "检索 Retrieval（据 README）": "pgvector 语义检索；recall、thread back",
+      "核心特点": "同作者的认知基础设施版：v4 提供 47 个 MCP 工具，Postgres 存储，后台守护进程持续整合、反思、做梦",
+      "技术栈": "TypeScript",
+      "运行平台": "Cloudflare Workers / MCP",
+      "站点更新日期": "2026-09-20",
+      "详情页": "https://www.ailover-atlas.com/projects/resonant-mind/",
+      "仓库链接": "https://github.com/codependentai/resonant-mind",
+      "仓库最后提交日期": "2026-10-04",
+      "许可证（仓库实际文件）": "Codependent AI Source-Available License（自定义）",
+      "README 与站点简介的一致性说明": "站点写 28 个 MCP 工具、跑在 Cloudflare Workers；README v4 为 47 个工具，主存储改为 Postgres（经 Cloudflare Hyperdrive 连 Neon），v3 暂不能直接升级",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "MCP 服务（47 个工具）",
+      "运行位置": "Cloudflare Workers＋Neon PostgreSQL＋R2",
+      "所需设备与账号": "Cloudflare 账号、Neon 数据库、Gemini 密钥、Node.js 22+",
+      "上手门槛": "高：要配多个云资源与密钥",
+      "记忆由谁写入": "AI 调用 write、record 等工具写入",
+      "召回怎么触发": "AI 调用 recall、search；守护进程主动浮现",
+      "差异要点": "按“区域”组织心智：身份（Spine）、关系（Bonds）、梦、驱力等；后台持续“代谢”记忆；仅限非商业使用",
+      "记忆保存形式": "Postgres 中按“区域”组织的记忆",
+      "治理手段": "Surgery 区可编辑、删除、归档；身份修改有提案机制",
+      "人在哪一步介入": "可选：调用修订工具",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "守护进程处理保留与孤儿检测",
+      "遗忘的终点": "归档（Surgery 区）",
+      "整合（合并、摘要）方式": "整合、反思、梦境复现"
+    },
+    "使用方式对比": {
+      "主分类": "⑤ 身份与关系记忆：以 AI 自我为记忆对象",
+      "项目名": "Resonant Mind",
+      "接入方式": "MCP 服务（47 个工具）",
+      "运行位置": "Cloudflare Workers＋Neon PostgreSQL＋R2",
+      "所需设备与账号": "Cloudflare 账号、Neon 数据库、Gemini 密钥、Node.js 22+",
+      "上手门槛": "高：要配多个云资源与密钥",
+      "记忆由谁写入": "AI 调用 write、record 等工具写入",
+      "召回怎么触发": "AI 调用 recall、search；守护进程主动浮现",
+      "差异要点": "按“区域”组织心智：身份（Spine）、关系（Bonds）、梦、驱力等；后台持续“代谢”记忆；仅限非商业使用",
+      "记忆保存形式": "Postgres 中按“区域”组织的记忆",
+      "治理手段": "Surgery 区可编辑、删除、归档；身份修改有提案机制",
+      "人在哪一步介入": "可选：调用修订工具",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "守护进程处理保留与孤儿检测",
+      "遗忘的终点": "归档（Surgery 区）",
+      "整合（合并、摘要）方式": "整合、反思、梦境复现"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "id": "llmcompressor",
+  "name": "notebook.py",
+  "repo_url": "https://github.com/minjimindypark/llmcompressor",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "把对话记录折叠成带日期的 Markdown 行，可以直接打开改错，再贴进系统提示",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "历史对话要点",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "单个 Python 脚本",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code（原理上任何可设系统提示的助手）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "Star 为 0",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-07",
+    "stars": 0,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "notebook.py",
+      "url": "https://github.com/minjimindypark/llmcompressor",
+      "desc": "Single-file Python tool for Claude Code transcript memory, stored as editable Markdown with source references and retained history of retired entries."
+    },
+    "人工筛选": {
+      "name": "notebook.py",
+      "v": "纳入",
+      "c": "",
+      "desc": "把对话记录折叠成带日期的 Markdown 行，可以直接打开改错，再贴进系统提示",
+      "subj": "历史对话要点",
+      "acc": "单个 Python 脚本",
+      "cli": "Claude Code（原理上任何可设系统提示的助手）",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无",
+      "note": "Star 为 0"
+    }
+  }
+}

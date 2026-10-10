@@ -1,0 +1,85 @@
+{
+  "id": "basic-memory",
+  "name": "Basic Memory",
+  "repo_url": "https://github.com/basicmachines-co/basic-memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "人和 AI 共同读写的 Markdown 知识图谱；本地版免费，另有付费云版",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "笔记＋对话上下文",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Codex、Cursor、ChatGPT、VS Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑（uv）或付费云版",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中（本地）／低（云版）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "云版需订阅",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-09",
+    "stars": 4129,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "basicmachines-co/basic-memory",
+      "url": "https://github.com/basicmachines-co/basic-memory",
+      "desc": "Local-first AI memory: a semantic knowledge graph of Markdown files that humans and LLMs both read and write, with optional cloud sync and team workspaces."
+    },
+    "人工筛选": {
+      "name": "Basic Memory",
+      "v": "纳入",
+      "c": "",
+      "desc": "人和 AI 共同读写的 Markdown 知识图谱；本地版免费，另有付费云版",
+      "subj": "笔记＋对话上下文",
+      "acc": "MCP",
+      "cli": "Claude Desktop、Claude Code、Codex、Cursor、ChatGPT、VS Code",
+      "run": "自己的电脑（uv）或付费云版",
+      "diff": "中（本地）／低（云版）",
+      "need": "云版需订阅",
+      "note": ""
+    }
+  }
+}

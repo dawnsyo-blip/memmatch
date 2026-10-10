@@ -1,0 +1,90 @@
+{
+  "id": "mem9",
+  "name": "mem9",
+  "repo_url": "https://github.com/mem9-ai/mem9",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "跨会话、跨机器的持久记忆，混合检索，带可视化面板",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋项目上下文",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "各宿主插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "OpenClaw、Hermes、Claude Code、OpenCode、Codex、Dify",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "托管 API 或自托管",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中（托管）／高（自托管）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "mem9 API Key",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "托管模式下数据经第三方",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-29",
+    "stars": 1221,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "Mem9",
+      "url": "https://github.com/mem9-ai/mem9",
+      "desc": "Local private memory hub for OpenClaw and similar coding agents."
+    },
+    "人工筛选": {
+      "name": "mem9",
+      "v": "纳入",
+      "c": "",
+      "desc": "跨会话、跨机器的持久记忆，混合检索，带可视化面板",
+      "subj": "用户事实＋项目上下文",
+      "acc": "各宿主插件",
+      "cli": "OpenClaw、Hermes、Claude Code、OpenCode、Codex、Dify",
+      "run": "托管 API 或自托管",
+      "diff": "中（托管）／高（自托管）",
+      "need": "mem9 API Key",
+      "note": "托管模式下数据经第三方"
+    }
+  }
+}

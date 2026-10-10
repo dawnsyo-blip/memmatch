@@ -1,0 +1,130 @@
+{
+  "id": "astrbot-plugin-self-learning",
+  "name": "AstrBot 自主学习",
+  "repo_url": "https://github.com/NickCharlie/astrbot_plugin_self_learning",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 20 项，④类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "群聊场景：学的是“怎么说话”和“谁和谁什么关系”",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "经验（说话风格、群黑话）＋用户事实（关系、好感度）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "AstrBot 插件",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "AstrBot",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "AstrBot 所在的电脑或服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：手动克隆、在 WebUI 里手动装依赖、按顺序配置",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "已运行的 AstrBot 及其接入的 QQ 群等；默认 PostgreSQL（可换 SQLite、MySQL）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "AstrBot 插件，学习说话风格与经验；学的是“怎么说话”和“谁和谁什么关系”；人格变化先进审查，可批准或回滚；WebUI 默认免密",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-08",
+    "stars": 414,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 20,
+      "项目名": "AstrBot 自主学习",
+      "作者": "@NickCharlie",
+      "开放程度（站点标注）": "开源",
+      "主分类": "④ 经验记忆与自进化：策略・技能・行为学习",
+      "记忆形态 Form": "词元级・平面（社交关系网）",
+      "记忆功能 Function": "经验（说话风格、群黑话）＋用户事实（关系、好感度）",
+      "形成 Formation（据 README）": "从群聊 user→bot 对话对抽取表达模式、黑话、社交关系",
+      "演化 Evolution（据 README）": "学习结果进审查链，可批准、拒绝、回滚或自动应用；人格自适应演化",
+      "检索 Retrieval（据 README）": "在模型请求阶段注入社交、黑话、记忆和示例；记忆图与知识图谱查询",
+      "核心特点": "群聊场景：学的是“怎么说话”和“谁和谁什么关系”",
+      "技术栈": "Python",
+      "运行平台": "AstrBot",
+      "站点更新日期": "2026-09-19",
+      "详情页": "https://www.ailover-atlas.com/projects/astrbot-self-learning/",
+      "仓库链接": "https://github.com/NickCharlie/astrbot_plugin_self_learning",
+      "仓库最后提交日期": "2026-10-08",
+      "许可证（仓库实际文件）": "AGPL-3.0",
+      "README 与站点简介的一致性说明": "README 说明与 LivingMemory 同时安装时，会跳过本地重叠的长期记忆能力",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "半自动（人工审查）",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "AstrBot 插件",
+      "运行位置": "AstrBot 所在的电脑或服务器",
+      "所需设备与账号": "已运行的 AstrBot 及其接入的 QQ 群等；默认 PostgreSQL（可换 SQLite、MySQL）",
+      "上手门槛": "中：手动克隆、在 WebUI 里手动装依赖、按顺序配置",
+      "记忆由谁写入": "从群聊的 user→bot 对话对自动学习",
+      "召回怎么触发": "在模型请求阶段注入表达方式、黑话、社交关系和示例",
+      "差异要点": "学的是“怎么说话”和“谁和谁什么关系”；人格变化先进审查，可批准或回滚；WebUI 默认免密",
+      "记忆保存形式": "表达模式、黑话、社交关系、记忆图与知识图谱",
+      "治理手段": "学习结果先进审查链，可批准、拒绝、回滚",
+      "人在哪一步介入": "人格变化生效之前（审查）",
+      "主要防住哪种错误": "学坏或人格漂移",
+      "遗忘怎么发生": "README 未描述",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "表达模式与黑话累积；人格增量"
+    },
+    "使用方式对比": {
+      "主分类": "④ 经验记忆与自进化：策略・技能・行为学习",
+      "项目名": "AstrBot 自主学习",
+      "接入方式": "AstrBot 插件",
+      "运行位置": "AstrBot 所在的电脑或服务器",
+      "所需设备与账号": "已运行的 AstrBot 及其接入的 QQ 群等；默认 PostgreSQL（可换 SQLite、MySQL）",
+      "上手门槛": "中：手动克隆、在 WebUI 里手动装依赖、按顺序配置",
+      "记忆由谁写入": "从群聊的 user→bot 对话对自动学习",
+      "召回怎么触发": "在模型请求阶段注入表达方式、黑话、社交关系和示例",
+      "差异要点": "学的是“怎么说话”和“谁和谁什么关系”；人格变化先进审查，可批准或回滚；WebUI 默认免密",
+      "记忆保存形式": "表达模式、黑话、社交关系、记忆图与知识图谱",
+      "治理手段": "学习结果先进审查链，可批准、拒绝、回滚",
+      "人在哪一步介入": "人格变化生效之前（审查）",
+      "主要防住哪种错误": "学坏或人格漂移",
+      "遗忘怎么发生": "README 未描述",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "表达模式与黑话累积；人格增量"
+    }
+  }
+}

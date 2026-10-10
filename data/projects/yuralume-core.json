@@ -1,0 +1,130 @@
+{
+  "id": "yuralume-core",
+  "name": "Yuralume Core",
+  "repo_url": "https://github.com/Yuralume/yuralume-core",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "E1",
+    "group_meaning": "某个应用自带的记忆功能，无法接到用户已有的助手上",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 45 项，⑦类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "记忆与角色“自己的日程和生活”结合，多通道",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋角色日程",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "自托管网页平台（多通道）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "自带网页；多通道",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低：一条安装命令",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Docker；模型密钥",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "BUSL-1.1（每版四年后转 Apache-2.0）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "伴侣平台自带记忆；角色有自己的日程、动态和生活；一个身份跨 Telegram、LINE、Discord、WhatsApp；四年后转开源",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-28",
+    "stars": 38,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 45,
+      "项目名": "Yuralume Core",
+      "作者": "@Yuralume",
+      "开放程度（站点标注）": "源码公开",
+      "主分类": "⑦ 应用内置记忆：伴侣应用自带记忆功能",
+      "记忆形态 Form": "词元级",
+      "记忆功能 Function": "用户事实＋角色日程",
+      "形成 Formation（据 README）": "五层人设模型（身份、生活、情绪、互动、信任）；日程活动成为情节记忆；共享活动经用户同意才成为共同记忆",
+      "演化 Evolution（据 README）": "梦境时段整合；角色间关系记忆整合成名册",
+      "检索 Retrieval（据 README）": "pgvector 语义检索；按角色的互动热度",
+      "核心特点": "记忆与角色“自己的日程和生活”结合，多通道",
+      "技术栈": "Python / TypeScript",
+      "运行平台": "Self-host / Web",
+      "站点更新日期": "2026-08-28",
+      "详情页": "https://www.ailover-atlas.com/projects/yuralume-core/",
+      "仓库链接": "https://github.com/Yuralume/yuralume-core",
+      "仓库最后提交日期": "2026-08-28",
+      "许可证（仓库实际文件）": "BUSL-1.1（每版四年后转 Apache-2.0）",
+      "README 与站点简介的一致性说明": "日程、长期记忆、主动生活、多通道、Vue 前端均在 README",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "自托管网页平台（多通道）",
+      "运行位置": "自己的电脑或服务器",
+      "所需设备与账号": "Docker；模型密钥",
+      "上手门槛": "低：一条安装命令",
+      "记忆由谁写入": "五层人设模型；日程活动成为情节记忆",
+      "召回怎么触发": "pgvector 语义检索",
+      "差异要点": "角色有自己的日程、动态和生活；一个身份跨 Telegram、LINE、Discord、WhatsApp；四年后转开源",
+      "记忆保存形式": "Postgres：五层人设模型＋情节记忆",
+      "治理手段": "共享活动须用户同意才成为共同记忆",
+      "人在哪一步介入": "共享经历入库前",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "README 未描述",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "梦境时段整合；角色间关系整合为名册"
+    },
+    "使用方式对比": {
+      "主分类": "⑦ 应用内置记忆：伴侣应用自带记忆功能",
+      "项目名": "Yuralume Core",
+      "接入方式": "自托管网页平台（多通道）",
+      "运行位置": "自己的电脑或服务器",
+      "所需设备与账号": "Docker；模型密钥",
+      "上手门槛": "低：一条安装命令",
+      "记忆由谁写入": "五层人设模型；日程活动成为情节记忆",
+      "召回怎么触发": "pgvector 语义检索",
+      "差异要点": "角色有自己的日程、动态和生活；一个身份跨 Telegram、LINE、Discord、WhatsApp；四年后转开源",
+      "记忆保存形式": "Postgres：五层人设模型＋情节记忆",
+      "治理手段": "共享活动须用户同意才成为共同记忆",
+      "人在哪一步介入": "共享经历入库前",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "README 未描述",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "梦境时段整合；角色间关系整合为名册"
+    }
+  }
+}

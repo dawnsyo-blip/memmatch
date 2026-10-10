@@ -1,0 +1,85 @@
+{
+  "id": "tstockham96-engram",
+  "name": "Engram（tstockham96）",
+  "repo_url": "https://github.com/tstockham96/engram",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "知识图谱＋自动整合＋扩散激活的本地记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；REST",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Cursor",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Gemini API 密钥（默认）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-02",
+    "stars": 47,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "tstockham96/engram",
+      "url": "https://github.com/tstockham96/engram",
+      "desc": "Agent memory with semantic recall, automatic consolidation, contradiction detection and a bi-temporal knowledge graph."
+    },
+    "人工筛选": {
+      "name": "Engram（tstockham96）",
+      "v": "纳入",
+      "c": "",
+      "desc": "知识图谱＋自动整合＋扩散激活的本地记忆",
+      "subj": "用户事实",
+      "acc": "MCP；REST",
+      "cli": "Claude Code、Cursor",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "Gemini API 密钥（默认）",
+      "note": ""
+    }
+  }
+}

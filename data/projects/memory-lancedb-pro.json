@@ -1,0 +1,90 @@
+{
+  "id": "memory-lancedb-pro",
+  "name": "memory-lancedb-pro",
+  "repo_url": "https://github.com/CortexReach/memory-lancedb-pro",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "OpenClaw 的增强记忆插件：自动记下偏好和决定，噪音会自然淡出",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户偏好＋决定",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "OpenClaw 插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "OpenClaw",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "OpenClaw 所在的电脑或服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：OpenClaw 命令安装后改 openclaw.json",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "嵌入模型密钥（OpenAI 兼容或 Ollama）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "无 LICENSE 文件；package.json 写 MIT",
+      "source": "Claude 人工核对仓库许可证",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "根目录无 LICENSE 文件，package.json 写 MIT",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 4453,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "memory-lancedb-pro",
+      "url": "https://github.com/CortexReach/memory-lancedb-pro",
+      "desc": "Enhanced [LanceDB](https://lancedb.com/) memory plugin for [OpenClaw](https://openclaw.ai/)"
+    },
+    "人工筛选": {
+      "name": "memory-lancedb-pro",
+      "v": "纳入",
+      "c": "",
+      "desc": "OpenClaw 的增强记忆插件：自动记下偏好和决定，噪音会自然淡出",
+      "subj": "用户偏好＋决定",
+      "acc": "OpenClaw 插件",
+      "cli": "OpenClaw",
+      "run": "OpenClaw 所在的电脑或服务器",
+      "diff": "中：OpenClaw 命令安装后改 openclaw.json",
+      "need": "嵌入模型密钥（OpenAI 兼容或 Ollama）",
+      "note": "根目录无 LICENSE 文件，package.json 写 MIT"
+    }
+  }
+}

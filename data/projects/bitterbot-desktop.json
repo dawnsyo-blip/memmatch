@@ -1,0 +1,130 @@
+{
+  "id": "bitterbot-desktop",
+  "name": "Bitterbot",
+  "repo_url": "https://github.com/Bitterbot-AI/bitterbot-desktop",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "P1",
+    "group_meaning": "自带助手的完整应用：记忆不能单独接到用户已有的助手上，愿意换助手才适用",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 21 项，④类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "经验沉淀为技能，并有点对点（P2P）技能经济，技能可交换",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "经验（技能结晶）＋AI 自我概念",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "桌面 Agent（自带控制台网页）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "自带",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑；也可用 Docker 镜像、Fly.io 或 VPS 常驻",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中到高：多条命令＋引导向导",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "macOS 或 Linux（Windows 须用 WSL2）；Node.js 22.12+、pnpm；模型密钥",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "桌面 Agent 自带控制台；含钱包与真实资金；成败经验转成候选技能；点对点网络可交换技能；带钱包，涉及真实资金",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-08",
+    "stars": 2470,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 21,
+      "项目名": "Bitterbot",
+      "作者": "@Bitterbot-AI",
+      "开放程度（站点标注）": "开源",
+      "主分类": "④ 经验记忆与自进化：策略・技能・行为学习",
+      "记忆形态 Form": "词元级・分层（多模块“生物式记忆”）",
+      "记忆功能 Function": "经验（技能结晶）＋AI 自我概念",
+      "形成 Formation（据 README）": "记忆、身份、技能存为本地 SQLite 与 Markdown；类型化知识图谱",
+      "演化 Evolution（据 README）": "事实不被用到就衰减，印证升置信、矛盾降置信；Dream Engine 离线整合并改写工作记忆与自我概念；成败经验转候选技能",
+      "检索 Retrieval（据 README）": "把相关记忆召回送入模型（README 未细述检索算法）",
+      "核心特点": "经验沉淀为技能，并有点对点（P2P）技能经济，技能可交换",
+      "技术栈": "TypeScript",
+      "运行平台": "Desktop / Self-host",
+      "站点更新日期": "2026-09-24",
+      "详情页": "https://www.ailover-atlas.com/projects/bitterbot-desktop/",
+      "仓库链接": "https://github.com/Bitterbot-AI/bitterbot-desktop",
+      "仓库最后提交日期": "2026-10-08",
+      "许可证（仓库实际文件）": "MIT",
+      "README 与站点简介的一致性说明": "生物式记忆、Dream Engine、技能演化、点对点网络、自我概念均在 README",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "桌面 Agent（自带控制台网页）",
+      "运行位置": "自己的电脑；也可用 Docker 镜像、Fly.io 或 VPS 常驻",
+      "所需设备与账号": "macOS 或 Linux（Windows 须用 WSL2）；Node.js 22.12+、pnpm；模型密钥",
+      "上手门槛": "中到高：多条命令＋引导向导",
+      "记忆由谁写入": "自动：事实、技能、身份写入本地 SQLite 与 Markdown",
+      "召回怎么触发": "Agent 自动召回；Dream 改写工作记忆",
+      "差异要点": "成败经验转成候选技能；点对点网络可交换技能；带钱包，涉及真实资金",
+      "记忆保存形式": "SQLite＋Markdown；类型化知识图谱；技能文件",
+      "治理手段": "置信度随印证升降；钱包须自设限额",
+      "人在哪一步介入": "不需要人；钱包限额自定",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "事实不再被用到就衰减",
+      "遗忘的终点": "README 未细述",
+      "整合（合并、摘要）方式": "Dream Engine 离线整合，改写工作记忆与自我概念"
+    },
+    "使用方式对比": {
+      "主分类": "④ 经验记忆与自进化：策略・技能・行为学习",
+      "项目名": "Bitterbot",
+      "接入方式": "桌面 Agent（自带控制台网页）",
+      "运行位置": "自己的电脑；也可用 Docker 镜像、Fly.io 或 VPS 常驻",
+      "所需设备与账号": "macOS 或 Linux（Windows 须用 WSL2）；Node.js 22.12+、pnpm；模型密钥",
+      "上手门槛": "中到高：多条命令＋引导向导",
+      "记忆由谁写入": "自动：事实、技能、身份写入本地 SQLite 与 Markdown",
+      "召回怎么触发": "Agent 自动召回；Dream 改写工作记忆",
+      "差异要点": "成败经验转成候选技能；点对点网络可交换技能；带钱包，涉及真实资金",
+      "记忆保存形式": "SQLite＋Markdown；类型化知识图谱；技能文件",
+      "治理手段": "置信度随印证升降；钱包须自设限额",
+      "人在哪一步介入": "不需要人；钱包限额自定",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "事实不再被用到就衰减",
+      "遗忘的终点": "README 未细述",
+      "整合（合并、摘要）方式": "Dream Engine 离线整合，改写工作记忆与自我概念"
+    }
+  }
+}

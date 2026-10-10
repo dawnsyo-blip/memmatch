@@ -1,0 +1,130 @@
+{
+  "id": "imprint-memory",
+  "name": "imprint-memory",
+  "repo_url": "https://github.com/Qizhan7/imprint-memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 5 项，①类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "重点在“采集端”：把多个聊天入口的对话自动收进同一层本地记忆",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP＋钩子（Hook）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code（MCP＋钩子）",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "本机",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：一条安装命令＋修改 settings.json",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "装了 Claude Code 的 Mac 或 Linux 电脑；免费 Google AI Studio 密钥或本机 Ollama；可选 Chrome",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "不改变你和模型的连接；可同步 claude.ai 网页聊天和 Telegram；向量模型须在首次写入前选定",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-06-02",
+    "stars": 80,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 5,
+      "项目名": "imprint-memory",
+      "作者": "@Qizhan7",
+      "开放程度（站点标注）": "源码公开",
+      "主分类": "① 记忆基础设施：独立事实记忆层／网关",
+      "记忆形态 Form": "词元级・扁平",
+      "记忆功能 Function": "用户事实",
+      "形成 Formation（据 README）": "Hook 自动捕获每轮对话；按事件分段并生成一段摘要和关键词；图片多模态向量",
+      "演化 Evolution（据 README）": "提供衰减、钉选、查找陈旧、删除等工具，需模型或人调用；事件之间自动建相似度图边",
+      "检索 Retrieval（据 README）": "向量＋BM25 关键词＋RRF 排名融合，跨记忆、知识库、事件三个池；可选图模式",
+      "核心特点": "重点在“采集端”：把多个聊天入口的对话自动收进同一层本地记忆",
+      "技术栈": "Python",
+      "运行平台": "Self-host / MCP",
+      "站点更新日期": "2026-06-01",
+      "详情页": "https://www.ailover-atlas.com/projects/imprint-memory/",
+      "仓库链接": "https://github.com/Qizhan7/imprint-memory",
+      "仓库最后提交日期": "2026-06-02",
+      "许可证（仓库实际文件）": "AGPL-3.0",
+      "README 与站点简介的一致性说明": "Hook 自动捕获、Chrome 扩展同步 claude.ai、Telegram 适配、FTS5＋向量混合检索均在 README",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "手动为主",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "MCP＋钩子（Hook）",
+      "运行位置": "本机",
+      "所需设备与账号": "装了 Claude Code 的 Mac 或 Linux 电脑；免费 Google AI Studio 密钥或本机 Ollama；可选 Chrome",
+      "上手门槛": "中：一条安装命令＋修改 settings.json",
+      "记忆由谁写入": "Stop 钩子每轮自动记录对话",
+      "召回怎么触发": "提问时钩子自动浮现；AI 也可主动搜索",
+      "差异要点": "不改变你和模型的连接；可同步 claude.ai 网页聊天和 Telegram；向量模型须在首次写入前选定",
+      "记忆保存形式": "原始对话＋事件摘要",
+      "治理手段": "提供衰减、钉选、找陈旧、删除等工具，由模型或人调用",
+      "人在哪一步介入": "事后手动",
+      "主要防住哪种错误": "陈旧记忆占位",
+      "遗忘怎么发生": "手动调用 decay 工具降低重要度",
+      "遗忘的终点": "手动硬删除",
+      "整合（合并、摘要）方式": "按事件分段并生成摘要"
+    },
+    "使用方式对比": {
+      "主分类": "① 记忆基础设施：独立事实记忆层／网关",
+      "项目名": "imprint-memory",
+      "接入方式": "MCP＋钩子（Hook）",
+      "运行位置": "本机",
+      "所需设备与账号": "装了 Claude Code 的 Mac 或 Linux 电脑；免费 Google AI Studio 密钥或本机 Ollama；可选 Chrome",
+      "上手门槛": "中：一条安装命令＋修改 settings.json",
+      "记忆由谁写入": "Stop 钩子每轮自动记录对话",
+      "召回怎么触发": "提问时钩子自动浮现；AI 也可主动搜索",
+      "差异要点": "不改变你和模型的连接；可同步 claude.ai 网页聊天和 Telegram；向量模型须在首次写入前选定",
+      "记忆保存形式": "原始对话＋事件摘要",
+      "治理手段": "提供衰减、钉选、找陈旧、删除等工具，由模型或人调用",
+      "人在哪一步介入": "事后手动",
+      "主要防住哪种错误": "陈旧记忆占位",
+      "遗忘怎么发生": "手动调用 decay 工具降低重要度",
+      "遗忘的终点": "手动硬删除",
+      "整合（合并、摘要）方式": "按事件分段并生成摘要"
+    }
+  }
+}

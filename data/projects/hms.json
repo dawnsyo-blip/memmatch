@@ -1,0 +1,85 @@
+{
+  "id": "hms",
+  "name": "HMS",
+  "repo_url": "https://github.com/Shadow-Weave/HMS",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "包裹 OpenAI 客户端、自动召回和保存的长期记忆层",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "长期记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "代码库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "开发者自建",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑＋PostgreSQL",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "OpenAI 兼容 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-05",
+    "stars": 811,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "HMS (Holographic Memory System)",
+      "url": "https://github.com/Shadow-Weave/HMS",
+      "desc": "Long-term memory QA framework that wraps OpenAI clients with automatic recall and retain, PostgreSQL-backed, evaluated on LongMemEval."
+    },
+    "人工筛选": {
+      "name": "HMS",
+      "v": "排除",
+      "c": "A",
+      "desc": "包裹 OpenAI 客户端、自动召回和保存的长期记忆层",
+      "subj": "长期记忆",
+      "acc": "代码库",
+      "cli": "开发者自建",
+      "run": "自己的电脑＋PostgreSQL",
+      "diff": "高",
+      "need": "OpenAI 兼容 API 密钥",
+      "note": ""
+    }
+  }
+}

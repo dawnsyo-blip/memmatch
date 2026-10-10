@@ -1,0 +1,85 @@
+{
+  "id": "magnemo",
+  "name": "Magnemo",
+  "repo_url": "https://github.com/Magnemo-AI/magnemo",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "记忆存成本地普通文件；AI 只能写进暂存区，经你批准才成为记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Claude Desktop（.mcpb，作者称未完整测试）、Cursor、Cline",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低到中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-06",
+    "stars": 3,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Magnemo-AI/magnemo",
+      "url": "https://github.com/Magnemo-AI/magnemo",
+      "desc": "Governed local agent memory in plain files: each entry records who wrote it, when and through which gate, and nothing is kept without user approval."
+    },
+    "人工筛选": {
+      "name": "Magnemo",
+      "v": "纳入",
+      "c": "",
+      "desc": "记忆存成本地普通文件；AI 只能写进暂存区，经你批准才成为记忆",
+      "subj": "用户事实",
+      "acc": "MCP",
+      "cli": "Claude Code、Claude Desktop（.mcpb，作者称未完整测试）、Cursor、Cline",
+      "run": "自己的电脑",
+      "diff": "低到中",
+      "need": "无",
+      "note": ""
+    }
+  }
+}

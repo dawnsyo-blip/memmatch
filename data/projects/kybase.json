@@ -1,0 +1,85 @@
+{
+  "id": "kybase",
+  "name": "Kybase",
+  "repo_url": "https://github.com/Kyrzin/kybase",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "一个 Markdown 知识库兼长期记忆，所有 agent 都能读写，你也能在浏览器里手动编辑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "笔记＋长期记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP（本地或远程连接器）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、claude.ai 网页、Cursor、Windsurf",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：不需要 Docker 和数据库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Google 或 OpenAI API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-02",
+    "stars": 5,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Kyrzin/kybase",
+      "url": "https://github.com/Kyrzin/kybase",
+      "desc": "Self-hosted Markdown knowledge base that doubles as persistent memory for AI agents: a notes app you browse and edit (wikilinks, backlinks, graph), 18 MCP tools over Streamable HTTP with OAuth (works as a claude.ai connector) or stdio. Hybrid search (Postgres full-text + pgvector, RRF, optional reranker) with section-level reads and conflict-safe appends. `npx -y kybase-mcp`"
+    },
+    "人工筛选": {
+      "name": "Kybase",
+      "v": "纳入",
+      "c": "",
+      "desc": "一个 Markdown 知识库兼长期记忆，所有 agent 都能读写，你也能在浏览器里手动编辑",
+      "subj": "笔记＋长期记忆",
+      "acc": "MCP（本地或远程连接器）",
+      "cli": "Claude Desktop、claude.ai 网页、Cursor、Windsurf",
+      "run": "自己的电脑",
+      "diff": "中：不需要 Docker 和数据库",
+      "need": "Google 或 OpenAI API 密钥",
+      "note": ""
+    }
+  }
+}

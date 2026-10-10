@@ -1,0 +1,85 @@
+{
+  "id": "midas",
+  "name": "Midas",
+  "repo_url": "https://github.com/vornicx/Midas",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "本地长期记忆：只保留当前有效的事实，不依据过时记忆行动；可从 mem0、Zep 导入",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Codex、Cursor、Gemini CLI 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-07-28",
+    "stars": 15,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "vornicx/Midas",
+      "url": "https://github.com/vornicx/Midas",
+      "desc": "Local-first long-horizon agent memory: source-traceable recall, belief revision, selective forgetting and a guard against memory-driven destructive actions."
+    },
+    "人工筛选": {
+      "name": "Midas",
+      "v": "纳入",
+      "c": "",
+      "desc": "本地长期记忆：只保留当前有效的事实，不依据过时记忆行动；可从 mem0、Zep 导入",
+      "subj": "用户事实",
+      "acc": "MCP",
+      "cli": "Claude Desktop、Claude Code、Codex、Cursor、Gemini CLI 等",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无",
+      "note": ""
+    }
+  }
+}

@@ -9,7 +9,12 @@
 - `sources/snapshots/` 三个来源清单的 README 快照（2026-10-10），生成脚本从这里解析
 - `记忆框架开源情况.xlsx` 负责人原始整理表，只读
 
+- `data/projects/<id>.json` 每个项目一个文件，结构见 `data/schema/project.schema.json`；`raw` 保存各来源原文，不要改
+
 重新生成候选表：`python -X utf8 scripts/build_candidates.py`
+重新导入项目 JSON（阶段 0）：`python -X utf8 scripts/import_projects.py`（只覆盖/删除 source 为 initial 的文件）
+
+两个脚本共用 `build_candidates.collect_rows()`，改筛选结论后两条命令都要跑。
 
 ## 踩过的坑
 

@@ -1,0 +1,94 @@
+{
+  "id": "reme",
+  "name": "ReMe",
+  "repo_url": "https://github.com/agentscope-ai/ReMe",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（ReMe）"
+  ],
+  "info": {
+    "summary": {
+      "value": "本地优先、会自我进化的个人知识库，把对话变成可读可改的记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋经验",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "OpenClaw、Hermes、DeepSeek Harness",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "阿里 AgentScope；论文表 9 已列；论文表 9 中出现两次，此处合并",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-09",
+    "stars": 3573,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 19,
+      "框架": "ReMe",
+      "仓库链接": "https://github.com/agentscope-ai/ReMe",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2026-10-09",
+      "备注": "论文表 9 中出现两次，此处合并"
+    },
+    "人工筛选": {
+      "name": "ReMe",
+      "v": "纳入",
+      "c": "",
+      "desc": "本地优先、会自我进化的个人知识库，把对话变成可读可改的记忆",
+      "subj": "用户事实＋经验",
+      "acc": "插件",
+      "cli": "OpenClaw、Hermes、DeepSeek Harness",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "模型 API 密钥",
+      "note": "阿里 AgentScope；论文表 9 已列"
+    }
+  }
+}

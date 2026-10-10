@@ -1,0 +1,142 @@
+{
+  "id": "telemem",
+  "name": "TeleMem",
+  "repo_url": "https://github.com/TeleAI-UAGI/telemem",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 3 项，①类）",
+    "Awesome-Agent-Memory",
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "与 Mem0 接口兼容、一行替换；每个角色独立记忆档案；名单里少有的支持视频多模态记忆的记忆层",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋角色建模",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "代码库／MCP",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "开发者自建应用；MCP 客户端",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "本机",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高：要写代码或配置 MCP",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Python 开发环境；默认需 OpenAI 密钥，也可用 Ollama 全本地",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "MCP 需自行配置；面向开发者，无界面；与 Mem0 接口兼容；每个角色独立档案；可存视频记忆",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-05",
+    "stars": 493,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 3,
+      "项目名": "TeleMem",
+      "作者": "@TeleAI-UAGI",
+      "开放程度（站点标注）": "开源",
+      "主分类": "① 记忆基础设施：独立事实记忆层／网关",
+      "记忆形态 Form": "词元级・扁平（含视频多模态）",
+      "记忆功能 Function": "用户事实＋角色建模",
+      "形成 Formation（据 README）": "LLM 自动抽取，生成角色化摘要；也可不经 LLM 原样存储",
+      "演化 Evolution（据 README）": "LLM 语义聚类，对相似记忆融合、更新、去重；无遗忘机制",
+      "检索 Retrieval（据 README）": "FAISS 语义检索；视频经帧→字幕→向量库后做多步问答",
+      "核心特点": "与 Mem0 接口兼容、一行替换；每个角色独立记忆档案；名单里少有的支持视频多模态记忆的记忆层",
+      "技术栈": "Python",
+      "运行平台": "Self-host / MCP",
+      "站点更新日期": "2026-09-21",
+      "详情页": "https://www.ailover-atlas.com/projects/telemem/",
+      "仓库链接": "https://github.com/TeleAI-UAGI/telemem",
+      "仓库最后提交日期": "2026-10-05",
+      "许可证（仓库实际文件）": "Apache-2.0",
+      "README 与站点简介的一致性说明": "站点称“混合检索”，README 只写 FAISS 语义检索，未提混合检索；README 更突出每个角色独立的记忆档案，以及项目自测的 ZH-4O 基准（86.33%，比 Mem0 高 19%）",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "代码库／MCP",
+      "运行位置": "本机",
+      "所需设备与账号": "Python 开发环境；默认需 OpenAI 密钥，也可用 Ollama 全本地",
+      "上手门槛": "高：要写代码或配置 MCP",
+      "记忆由谁写入": "程序调用 add，由 LLM 抽取角色化摘要",
+      "召回怎么触发": "程序或 AI 调用 search",
+      "差异要点": "面向开发者，无界面；与 Mem0 接口兼容；每个角色独立档案；可存视频记忆",
+      "记忆保存形式": "LLM 生成的角色化摘要条目（也可原样存）",
+      "治理手段": "LLM 语义聚类，融合、更新、去重相似记忆",
+      "人在哪一步介入": "不需要人",
+      "主要防住哪种错误": "重复和相互矛盾的条目",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "LLM 语义聚类，融合相似记忆"
+    },
+    "使用方式对比": {
+      "主分类": "① 记忆基础设施：独立事实记忆层／网关",
+      "项目名": "TeleMem",
+      "接入方式": "代码库／MCP",
+      "运行位置": "本机",
+      "所需设备与账号": "Python 开发环境；默认需 OpenAI 密钥，也可用 Ollama 全本地",
+      "上手门槛": "高：要写代码或配置 MCP",
+      "记忆由谁写入": "程序调用 add，由 LLM 抽取角色化摘要",
+      "召回怎么触发": "程序或 AI 调用 search",
+      "差异要点": "面向开发者，无界面；与 Mem0 接口兼容；每个角色独立档案；可存视频记忆",
+      "记忆保存形式": "LLM 生成的角色化摘要条目（也可原样存）",
+      "治理手段": "LLM 语义聚类，融合、更新、去重相似记忆",
+      "人在哪一步介入": "不需要人",
+      "主要防住哪种错误": "重复和相互矛盾的条目",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "LLM 语义聚类，融合相似记忆"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "TeleMem",
+      "url": "https://github.com/TeleAI-UAGI/TeleMem",
+      "desc": "API-compatible high-performance drop-in replacement for Mem0 (`import telemem as mem0`); listed as an unranked sub-item of Mem0 per the drop-in replacement convention. Maintainer-affiliated."
+    },
+    "awesome-mcp-servers": {
+      "name": "TeleAI-UAGI/telemem",
+      "url": "https://github.com/TeleAI-UAGI/telemem",
+      "desc": "Mem0-compatible long-term and multimodal agent memory: character-isolated profiles, semantic deduplication, optional local stack and video memory with QA."
+    }
+  }
+}

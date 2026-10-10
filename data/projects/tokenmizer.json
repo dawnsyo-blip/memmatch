@@ -1,0 +1,85 @@
+{
+  "id": "tokenmizer",
+  "name": "TokenMizer",
+  "repo_url": "https://github.com/Shweta-Mishra-ai/tokenmizer",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "OpenAI 兼容代理，把会话里的决定、文件、错误建成图，上下文满了时回放",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "会话知识图",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "代理（网关）；Claude Code 插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "OpenAI 兼容客户端、Claude Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "偏编程场景",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-07",
+    "stars": 33,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Shweta-Mishra-ai/tokenmizer",
+      "url": "https://github.com/Shweta-Mishra-ai/tokenmizer",
+      "desc": "Session memory via a local OpenAI-compatible proxy that extracts tasks, decisions and files into a knowledge graph and checkpoints before context overflow."
+    },
+    "人工筛选": {
+      "name": "TokenMizer",
+      "v": "待定",
+      "c": "P2",
+      "desc": "OpenAI 兼容代理，把会话里的决定、文件、错误建成图，上下文满了时回放",
+      "subj": "会话知识图",
+      "acc": "代理（网关）；Claude Code 插件",
+      "cli": "OpenAI 兼容客户端、Claude Code",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "",
+      "note": ""
+    }
+  }
+}

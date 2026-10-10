@@ -1,0 +1,85 @@
+{
+  "id": "mcp-agent-memory",
+  "name": "mcp-agent-memory",
+  "repo_url": "https://github.com/tverney/mcp-agent-memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "把记忆守护进程暴露给 MCP 客户端的文件桥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "记忆文件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Kiro、Claude Desktop、Cursor",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "整理需 Bedrock/OpenAI 或 Kiro",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 6,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "tverney/mcp-agent-memory",
+      "url": "https://github.com/tverney/mcp-agent-memory",
+      "desc": "Filesystem-based persistent agent memory: agents read, write and search memory while a background daemon handles consolidation and extraction."
+    },
+    "人工筛选": {
+      "name": "mcp-agent-memory",
+      "v": "待定",
+      "c": "P4",
+      "desc": "把记忆守护进程暴露给 MCP 客户端的文件桥",
+      "subj": "记忆文件",
+      "acc": "MCP",
+      "cli": "Kiro、Claude Desktop、Cursor",
+      "run": "自己的电脑",
+      "diff": "中到高",
+      "need": "整理需 Bedrock/OpenAI 或 Kiro",
+      "note": ""
+    }
+  }
+}

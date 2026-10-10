@@ -1,0 +1,85 @@
+{
+  "id": "memo",
+  "name": "memo",
+  "repo_url": "https://github.com/jagoff/memo",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "编程 agent 的本地记忆，基于 Apple MLX",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "编程记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP＋钩子",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Claude Desktop、Cursor 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的 Mac（另有 Docker）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "偏编程场景",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-01",
+    "stars": 21,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "jagoff/memo",
+      "url": "https://github.com/jagoff/memo",
+      "desc": "Local-first semantic memory: hybrid search, Markdown storage, MLX or CPU embeddings, contradiction detection, time-travel history and cross-machine git sync."
+    },
+    "人工筛选": {
+      "name": "memo",
+      "v": "待定",
+      "c": "P2",
+      "desc": "编程 agent 的本地记忆，基于 Apple MLX",
+      "subj": "编程记忆",
+      "acc": "MCP＋钩子",
+      "cli": "Claude Code、Claude Desktop、Cursor 等",
+      "run": "自己的 Mac（另有 Docker）",
+      "diff": "中",
+      "need": "",
+      "note": ""
+    }
+  }
+}

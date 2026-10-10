@@ -1,0 +1,85 @@
+{
+  "id": "fbisiri-engram",
+  "name": "Engram（FBISiri）",
+  "repo_url": "https://github.com/FBISiri/engram",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "写入时去重、按重要性筛选、按类型自动过期的记忆服务",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；REST",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（Docker＋Qdrant）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "OpenAI 或 Voyage 嵌入密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-29",
+    "stars": 1,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "engram (by FBISiri)",
+      "url": "https://github.com/FBISiri/engram",
+      "desc": "Go memory service on Qdrant with write-time dedup and importance gating, type-based TTL decay, reflection into insights, and MCP plus REST interfaces."
+    },
+    "人工筛选": {
+      "name": "Engram（FBISiri）",
+      "v": "纳入",
+      "c": "",
+      "desc": "写入时去重、按重要性筛选、按类型自动过期的记忆服务",
+      "subj": "用户事实",
+      "acc": "MCP；REST",
+      "cli": "Claude Desktop、Claude Code",
+      "run": "自己的电脑或服务器（Docker＋Qdrant）",
+      "diff": "高",
+      "need": "OpenAI 或 Voyage 嵌入密钥",
+      "note": ""
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "id": "lean-memory",
+  "name": "lean-memory",
+  "repo_url": "https://github.com/Wuesteon/lean-memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "嵌入式本地记忆，整理操作要人工审核后才生效",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；Claude Code 插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中（首次下载约 2GB 模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-07",
+    "stars": 43,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Wuesteon/lean-memory",
+      "url": "https://github.com/Wuesteon/lean-memory",
+      "desc": "Embedded local agent memory in one SQLite file per namespace: hybrid retrieval, append-only history queryable at any past time and human-reviewed maintenance."
+    },
+    "人工筛选": {
+      "name": "lean-memory",
+      "v": "纳入",
+      "c": "",
+      "desc": "嵌入式本地记忆，整理操作要人工审核后才生效",
+      "subj": "用户事实",
+      "acc": "MCP；Claude Code 插件",
+      "cli": "Claude Desktop、Claude Code",
+      "run": "自己的电脑",
+      "diff": "中（首次下载约 2GB 模型）",
+      "need": "无",
+      "note": ""
+    }
+  }
+}

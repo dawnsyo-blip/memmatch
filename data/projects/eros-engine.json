@@ -1,0 +1,130 @@
+{
+  "id": "eros-engine",
+  "name": "Eros Engine",
+  "repo_url": "https://github.com/etherfunlab/eros-engine",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 27 项，⑤类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "Rust 伴侣内核库，目标是数千轮互动后人格不漂移",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实（结构化用户洞察）＋关系状态",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "Rust 服务（API）＋可嵌入的库",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "需自备前端",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高：要自备前端，官方网页客户端未开源",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Rust、PostgreSQL 16+（pgvector）、OpenRouter 密钥、Voyage 向量密钥",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0-only",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "需自备前端，官方网页客户端未开源；关系量化为六个亲密度维度，会衰减，甚至影响“回不回消息”；可选模拟世界",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 66,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 27,
+      "项目名": "Eros Engine",
+      "作者": "@etherfunlab",
+      "开放程度（站点标注）": "开源",
+      "主分类": "⑤ 身份与关系记忆：以 AI 自我为记忆对象",
+      "记忆形态 Form": "词元级＋结构化关系状态",
+      "记忆功能 Function": "用户事实（结构化用户洞察）＋关系状态",
+      "形成 Formation（据 README）": "双层记忆：稳定用户事实与共同经历；结构化用户洞察",
+      "演化 Evolution（据 README）": "六个亲密度维度按档位写入、经衰减落库并随时间回落",
+      "检索 Retrieval（据 README）": "embedding 向量检索（pgvector）",
+      "核心特点": "Rust 伴侣内核库，目标是数千轮互动后人格不漂移",
+      "技术栈": "Rust",
+      "运行平台": "Library / Self-host",
+      "站点更新日期": "2026-09-22",
+      "详情页": "https://www.ailover-atlas.com/projects/eros-engine/",
+      "仓库链接": "https://github.com/etherfunlab/eros-engine",
+      "仓库最后提交日期": "2026-10-10",
+      "许可证（仓库实际文件）": "AGPL-3.0-only",
+      "README 与站点简介的一致性说明": "README 另有可选的实验性“模拟世界”",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "Rust 服务（API）＋可嵌入的库",
+      "运行位置": "自己的服务器",
+      "所需设备与账号": "Rust、PostgreSQL 16+（pgvector）、OpenRouter 密钥、Voyage 向量密钥",
+      "上手门槛": "高：要自备前端，官方网页客户端未开源",
+      "记忆由谁写入": "自动：用户事实、共同经历、结构化洞察",
+      "召回怎么触发": "embedding 向量检索",
+      "差异要点": "关系量化为六个亲密度维度，会衰减，甚至影响“回不回消息”；可选模拟世界",
+      "记忆保存形式": "Postgres：用户事实、共同经历、亲密度、洞察",
+      "治理手段": "—",
+      "人在哪一步介入": "—",
+      "主要防住哪种错误": "人设在数千轮后漂移",
+      "遗忘怎么发生": "亲密度随时间回落",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "结构化用户洞察持续更新"
+    },
+    "使用方式对比": {
+      "主分类": "⑤ 身份与关系记忆：以 AI 自我为记忆对象",
+      "项目名": "Eros Engine",
+      "接入方式": "Rust 服务（API）＋可嵌入的库",
+      "运行位置": "自己的服务器",
+      "所需设备与账号": "Rust、PostgreSQL 16+（pgvector）、OpenRouter 密钥、Voyage 向量密钥",
+      "上手门槛": "高：要自备前端，官方网页客户端未开源",
+      "记忆由谁写入": "自动：用户事实、共同经历、结构化洞察",
+      "召回怎么触发": "embedding 向量检索",
+      "差异要点": "关系量化为六个亲密度维度，会衰减，甚至影响“回不回消息”；可选模拟世界",
+      "记忆保存形式": "Postgres：用户事实、共同经历、亲密度、洞察",
+      "治理手段": "—",
+      "人在哪一步介入": "—",
+      "主要防住哪种错误": "人设在数千轮后漂移",
+      "遗忘怎么发生": "亲密度随时间回落",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "结构化用户洞察持续更新"
+    }
+  }
+}

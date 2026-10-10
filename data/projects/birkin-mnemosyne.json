@@ -1,0 +1,85 @@
+{
+  "id": "birkin-mnemosyne",
+  "name": "birkin-mnemosyne",
+  "repo_url": "https://github.com/ashmoonori-afk/birkin-mnemosyne",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "面向个人 agent 的本地 Markdown 记忆，多语言检索，按使用情况衰减",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户笔记与事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；Python 库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Codex、Cursor；OpenClaw/Hermes 可接",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无需 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 5,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "birkin-mnemosyne",
+      "url": "https://github.com/ashmoonori-afk/birkin-mnemosyne",
+      "desc": "Stdlib-only Python memory for agents: Markdown vault with BM25, Korean bigrams and usage decay; model curation passes through a deterministic safety-clamping executor; optional MCP server."
+    },
+    "人工筛选": {
+      "name": "birkin-mnemosyne",
+      "v": "纳入",
+      "c": "",
+      "desc": "面向个人 agent 的本地 Markdown 记忆，多语言检索，按使用情况衰减",
+      "subj": "用户笔记与事实",
+      "acc": "MCP；Python 库",
+      "cli": "Claude Desktop、Claude Code、Codex、Cursor；OpenClaw/Hermes 可接",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无需 API 密钥",
+      "note": ""
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "id": "memory-mcp-1file",
+  "name": "memory-mcp-1file",
+  "repo_url": "https://github.com/pomazanbohdan/memory-mcp-1file",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "纯 Rust 的语义＋图记忆，会索引项目代码",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "项目记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Cursor 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "Docker 或二进制",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "偏编程场景",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-12",
+    "stars": 25,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "pomazanbohdan/memory-mcp-1file",
+      "url": "https://github.com/pomazanbohdan/memory-mcp-1file",
+      "desc": "Persistent semantic and graph-based agent memory in a single self-contained binary with embedded database and models."
+    },
+    "人工筛选": {
+      "name": "memory-mcp-1file",
+      "v": "待定",
+      "c": "P2",
+      "desc": "纯 Rust 的语义＋图记忆，会索引项目代码",
+      "subj": "项目记忆",
+      "acc": "MCP",
+      "cli": "Claude Desktop、Claude Code、Cursor 等",
+      "run": "Docker 或二进制",
+      "diff": "中",
+      "need": "",
+      "note": ""
+    }
+  }
+}

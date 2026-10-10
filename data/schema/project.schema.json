@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project.schema.json",
+  "title": "记忆项目（阶段 0：导入版）",
+  "description": "每个项目一个文件，放在 data/projects/<id>.json。阶段 0 只导入、合并、保留原文；阶段 1 再把 info 里的自由文字整理成固定选项（access、runs_on、difficulty 等字段）。",
+  "type": "object",
+  "required": ["id", "name", "repo_url", "source", "review_status", "candidate", "origins", "info", "repo_health", "raw"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "description": "文件名，同时用作网址路径"},
+    "name": {"type": "string"},
+    "repo_url": {"type": "string", "description": "代码仓库链接；代码不在代码托管网站上的，填实际存放位置"},
+    "source": {"enum": ["initial", "community"], "description": "initial＝最初导入，community＝访客推荐"},
+    "review_status": {"enum": ["reviewed", "unreviewed"], "description": "是否经过负责人审核；只有 reviewed 的项目进入推荐结果"},
+    "candidate": {
+      "type": "object",
+      "description": "候选表阶段的筛选结论",
+      "required": ["category", "group_code", "decided_on"],
+      "properties": {
+        "category": {"enum": ["可接入已有助手", "自带记忆的应用", "需写代码（开发者向）", "边缘项（存的不是对话记忆）"]},
+        "group_code": {"type": "string", "description": "筛选时的分组代码（含义见 group_meaning）；空字符串表示直接符合标准"},
+        "group_meaning": {"type": "string"},
+        "decided_on": {"type": "string", "format": "date"}
+      }
+    },
+    "origins": {"type": "array", "items": {"type": "string"}, "minItems": 1, "description": "这个项目出现在哪些来源里"},
+    "info": {
+      "type": "object",
+      "description": "使用信息（自由文字，未规范化）。每个字段都带来源和读取日期",
+      "required": ["summary"],
+      "properties": {
+        "summary": {"$ref": "#/$defs/sourced"},
+        "memory_subject": {"$ref": "#/$defs/sourced"},
+        "access": {"$ref": "#/$defs/sourced"},
+        "compatible_clients": {"$ref": "#/$defs/sourced"},
+        "runs_on": {"$ref": "#/$defs/sourced"},
+        "difficulty": {"$ref": "#/$defs/sourced"},
+        "accounts_needed": {"$ref": "#/$defs/sourced"},
+        "license": {"$ref": "#/$defs/sourced"},
+        "notes": {"$ref": "#/$defs/sourced"}
+      },
+      "additionalProperties": false
+    },
+    "repo_health": {
+      "type": "object",
+      "description": "仓库状态快照；阶段 2 会用 GitHub 接口补全",
+      "properties": {
+        "last_commit": {"type": ["string", "null"]},
+        "stars": {"type": ["integer", "null"]},
+        "archived": {"type": ["boolean", "null"]},
+        "source": {"type": "string"},
+        "read_date": {"type": "string", "format": "date"}
+      }
+    },
+    "raw": {
+      "type": "object",
+      "description": "各来源的原始字段原文，按来源名分组，供以后核对；不要修改"
+    }
+  },
+  "$defs": {
+    "sourced": {
+      "type": "object",
+      "required": ["value", "source", "read_date"],
+      "properties": {
+        "value": {"type": "string"},
+        "source": {"type": "string"},
+        "read_date": {"type": "string", "format": "date"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

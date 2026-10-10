@@ -1,0 +1,89 @@
+{
+  "id": "acontext",
+  "name": "Acontext",
+  "repo_url": "https://github.com/memodb-io/Acontext",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（Acontext）"
+  ],
+  "info": {
+    "summary": {
+      "value": "供开发者构建 agent 的技能记忆平台：从运行中自动沉淀可读可改的技能文件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "经验/技能",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "服务＋SDK",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "开发者自建",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "托管或 Docker 自托管",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "OpenAI API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-04-21",
+    "stars": 3692,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 22,
+      "框架": "Acontext",
+      "仓库链接": "https://github.com/memodb-io/Acontext",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2026-04-21",
+      "备注": null
+    },
+    "人工筛选": {
+      "name": "Acontext",
+      "v": "排除",
+      "c": "A",
+      "desc": "供开发者构建 agent 的技能记忆平台：从运行中自动沉淀可读可改的技能文件",
+      "subj": "经验/技能",
+      "acc": "服务＋SDK",
+      "cli": "开发者自建",
+      "run": "托管或 Docker 自托管",
+      "diff": "高",
+      "need": "OpenAI API 密钥",
+      "note": ""
+    }
+  }
+}

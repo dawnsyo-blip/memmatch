@@ -1,0 +1,90 @@
+{
+  "id": "central-intelligence",
+  "name": "Central Intelligence",
+  "repo_url": "https://github.com/AlekseiMarchenko/central-intelligence",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P3",
+    "group_meaning": "免代码用法默认走第三方托管服务（对话内容经第三方服务器）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "持久记忆服务，默认需 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Cursor",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "托管；可自托管",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "CI API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "免代码用法默认经第三方服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-05-08",
+    "stars": 3,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "AlekseiMarchenko/central-intelligence",
+      "url": "https://github.com/AlekseiMarchenko/central-intelligence",
+      "desc": "Persistent agent memory to remember, recall, forget and share, with semantic vector search and agent, user and org scoping."
+    },
+    "人工筛选": {
+      "name": "Central Intelligence",
+      "v": "待定",
+      "c": "P3",
+      "desc": "持久记忆服务，默认需 API 密钥",
+      "subj": "事实",
+      "acc": "MCP",
+      "cli": "Claude Code、Cursor",
+      "run": "托管；可自托管",
+      "diff": "中",
+      "need": "CI API 密钥",
+      "note": ""
+    }
+  }
+}

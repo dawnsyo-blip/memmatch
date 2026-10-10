@@ -1,0 +1,94 @@
+{
+  "id": "memori",
+  "name": "Memori",
+  "repo_url": "https://github.com/MemoriLabs/Memori",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P3",
+    "group_meaning": "免代码用法默认走第三方托管服务（对话内容经第三方服务器）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（Memori）"
+  ],
+  "info": {
+    "summary": {
+      "value": "从 agent 行为中提取记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "事实与行为",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "OpenClaw/Hermes 插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "OpenClaw、Hermes",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "Memori Cloud",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低到中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Memori Cloud API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "免代码用法默认经第三方服务器；论文表 9 已列；原仓库 GibsonAI/memori",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-17",
+    "stars": 17148,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 18,
+      "框架": "Memori",
+      "仓库链接": "https://github.com/MemoriLabs/Memori",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2026-09-17",
+      "备注": "原仓库 GibsonAI/memori"
+    },
+    "人工筛选": {
+      "name": "Memori",
+      "v": "待定",
+      "c": "P3",
+      "desc": "从 agent 行为中提取记忆",
+      "subj": "事实与行为",
+      "acc": "OpenClaw/Hermes 插件",
+      "cli": "OpenClaw、Hermes",
+      "run": "Memori Cloud",
+      "diff": "低到中",
+      "need": "Memori Cloud API 密钥",
+      "note": "论文表 9 已列"
+    }
+  }
+}

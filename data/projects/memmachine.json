@@ -1,0 +1,85 @@
+{
+  "id": "memmachine",
+  "name": "MemMachine",
+  "repo_url": "https://github.com/MemMachine/MemMachine",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "开源长期记忆层：对话情节、用户画像、工作记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋对话情节",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；REST/SDK",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Cursor 等 MCP 客户端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（Docker）；另有托管版",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高：需先运行记忆服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-09",
+    "stars": 3065,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "MemMachine",
+      "url": "https://github.com/MemMachine/MemMachine",
+      "desc": "Interoperable memory layer providing extensible storage and retrieval primitives for AI agents."
+    },
+    "人工筛选": {
+      "name": "MemMachine",
+      "v": "纳入",
+      "c": "",
+      "desc": "开源长期记忆层：对话情节、用户画像、工作记忆",
+      "subj": "用户事实＋对话情节",
+      "acc": "MCP；REST/SDK",
+      "cli": "Claude Desktop、Cursor 等 MCP 客户端",
+      "run": "自己的电脑或服务器（Docker）；另有托管版",
+      "diff": "高：需先运行记忆服务器",
+      "need": "模型 API 密钥",
+      "note": ""
+    }
+  }
+}

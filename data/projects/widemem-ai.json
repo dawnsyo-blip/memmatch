@@ -1,0 +1,85 @@
+{
+  "id": "widemem-ai",
+  "name": "widemem",
+  "repo_url": "https://github.com/remete618/widemem-ai",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "本地优先的记忆层：抽取事实、按重要性与时效排序、一次调用解决矛盾，回答前给出置信度",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；REST；Python 库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Cursor 等 MCP 客户端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Ollama（本地）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-09",
+    "stars": 49,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "widemem-ai",
+      "url": "https://github.com/remete618/widemem-ai",
+      "desc": "Lightweight memory layer with importance scoring, temporal decay, and 3-tier hierarchy."
+    },
+    "人工筛选": {
+      "name": "widemem",
+      "v": "纳入",
+      "c": "",
+      "desc": "本地优先的记忆层：抽取事实、按重要性与时效排序、一次调用解决矛盾，回答前给出置信度",
+      "subj": "用户事实",
+      "acc": "MCP；REST；Python 库",
+      "cli": "Claude Desktop、Cursor 等 MCP 客户端",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "Ollama（本地）",
+      "note": ""
+    }
+  }
+}

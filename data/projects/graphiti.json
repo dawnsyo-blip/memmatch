@@ -1,0 +1,100 @@
+{
+  "id": "graphiti",
+  "name": "Graphiti（Zep）",
+  "repo_url": "https://github.com/getzep/graphiti",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（Zep）",
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "时序知识图谱框架，带 MCP 服务",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "随时间变化的事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP（需图数据库）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "MCP 客户端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "Docker＋Neo4j/FalkorDB",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "社区版已停止维护，代码移入 legacy/ 目录；可自部署核心为 Graphiti（https://github.com/getzep/graphiti，Apache-2.0，最后提交 2026-10-09）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 31613,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 7,
+      "框架": "Zep",
+      "仓库链接": "https://github.com/getzep/zep",
+      "许可证": "Apache-2.0",
+      "开源状态": "开源但有限制",
+      "仓库最后提交日期": "2026-10-08",
+      "备注": "社区版已停止维护，代码移入 legacy/ 目录；可自部署核心为 Graphiti（https://github.com/getzep/graphiti，Apache-2.0，最后提交 2026-10-09）"
+    },
+    "人工筛选": {
+      "name": "Graphiti（Zep）",
+      "v": "待定",
+      "c": "P4",
+      "desc": "时序知识图谱框架，带 MCP 服务",
+      "subj": "随时间变化的事实",
+      "acc": "MCP（需图数据库）",
+      "cli": "MCP 客户端",
+      "run": "Docker＋Neo4j/FalkorDB",
+      "diff": "高",
+      "need": "模型 API 密钥",
+      "note": ""
+    },
+    "Awesome-Agent-Memory": {
+      "name": "Zep (powered by Graphiti)",
+      "url": "https://github.com/getzep/graphiti",
+      "desc": "Real-time temporal knowledge graphs for AI agents."
+    }
+  }
+}

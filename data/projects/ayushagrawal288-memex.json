@@ -1,0 +1,80 @@
+{
+  "id": "ayushagrawal288-memex",
+  "name": "memex（ayushagrawal288）",
+  "repo_url": "https://github.com/ayushagrawal288/memex",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "生产级记忆服务，带监控",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "对话记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "Docker",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-06-04",
+    "stars": 1,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "ayushagrawal288/memex",
+      "url": "https://github.com/ayushagrawal288/memex",
+      "desc": "Persistent agent memory with semantic search and recency decay, local ONNX embeddings, background summarization and Prometheus/Grafana observability."
+    },
+    "人工筛选": {
+      "name": "memex（ayushagrawal288）",
+      "v": "待定",
+      "c": "P4",
+      "desc": "生产级记忆服务，带监控",
+      "subj": "对话记忆",
+      "acc": "MCP",
+      "cli": "Claude Desktop、Claude Code",
+      "run": "Docker",
+      "diff": "高",
+      "need": "",
+      "note": ""
+    }
+  }
+}

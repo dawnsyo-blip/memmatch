@@ -1,0 +1,85 @@
+{
+  "id": "mcp-memory-service",
+  "name": "mcp-memory-service",
+  "repo_url": "https://github.com/doobidoo/mcp-memory-service",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网页版用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋决定",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP（本地＋远程 OAuth）；REST",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、claude.ai 网页、ChatGPT、OpenCode",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑；远程需 Cloudflare Tunnel 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中（本地）／高（远程）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 2006,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "doobidoo/mcp-memory-service",
+      "url": "https://github.com/doobidoo/mcp-memory-service",
+      "desc": "Memory service with semantic search, persistent storage and autonomous memory consolidation."
+    },
+    "人工筛选": {
+      "name": "mcp-memory-service",
+      "v": "纳入",
+      "c": "",
+      "desc": "自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网页版用",
+      "subj": "用户事实＋决定",
+      "acc": "MCP（本地＋远程 OAuth）；REST",
+      "cli": "Claude Desktop、claude.ai 网页、ChatGPT、OpenCode",
+      "run": "自己的电脑；远程需 Cloudflare Tunnel 等",
+      "diff": "中（本地）／高（远程）",
+      "need": "无",
+      "note": ""
+    }
+  }
+}

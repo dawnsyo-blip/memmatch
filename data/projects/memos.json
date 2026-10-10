@@ -1,0 +1,146 @@
+{
+  "id": "memos",
+  "name": "MemOS",
+  "repo_url": "https://github.com/MemTensor/MemOS",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 18 项，④类）",
+    "论文表 9（MemOS）",
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "名单里最接近论文“经验记忆”的研究型通用框架，面向任务型 Agent 而非伴侣",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "经验（策略＋技能）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "四选一：云端 API、本地 REST 服务、OpenClaw 云插件、本地插件",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "OpenClaw（插件）；REST 服务",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "云端（MemOS Cloud）或自己的电脑、服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：本地插件一条安装命令；自建服务需 Docker",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "本地插件：电脑＋Node.js＋已装好的 DeepSeek Harness、Hermes 或 OpenClaw；本地服务：Docker（含 Neo4j、Qdrant）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "也在论文表 9 中；面向任务型 Agent，不是陪伴应用；经验分层为轨迹→策略→世界模型→技能；有托管云服务，基准成绩为项目自报",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-22",
+    "stars": 11792,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 18,
+      "项目名": "MemOS",
+      "作者": "@MemTensor",
+      "开放程度（站点标注）": "开源",
+      "主分类": "④ 经验记忆与自进化：策略・技能・行为学习",
+      "记忆形态 Form": "词元级・分层（轨迹→策略→世界模型→技能）",
+      "记忆功能 Function": "经验（策略＋技能）",
+      "形成 Formation（据 README）": "Agent 回合结束后异步沉淀新经验与对话",
+      "演化 Evolution（据 README）": "L1 轨迹→L2 策略→L3 世界模型→结晶化技能；自然语言反馈可纠正、补充、替换记忆；智能去重",
+      "检索 Retrieval（据 README）": "任务开始前自动召回；FTS5＋向量混合检索；反馈驱动",
+      "核心特点": "名单里最接近论文“经验记忆”的研究型通用框架，面向任务型 Agent 而非伴侣",
+      "技术栈": "Python",
+      "运行平台": "Self-host / Plugin",
+      "站点更新日期": "2026-09-22",
+      "详情页": "https://www.ailover-atlas.com/projects/memos/",
+      "仓库链接": "https://github.com/MemTensor/MemOS",
+      "仓库最后提交日期": "2026-09-22",
+      "许可证（仓库实际文件）": "Apache-2.0",
+      "README 与站点简介的一致性说明": "轨迹→策略→世界模型→技能的分层演化在本地插件说明中确认；README 更突出统一记忆 API、图结构、多模态、MemCube 和云服务；基准成绩为项目自报",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "四选一：云端 API、本地 REST 服务、OpenClaw 云插件、本地插件",
+      "运行位置": "云端（MemOS Cloud）或自己的电脑、服务器",
+      "所需设备与账号": "本地插件：电脑＋Node.js＋已装好的 DeepSeek Harness、Hermes 或 OpenClaw；本地服务：Docker（含 Neo4j、Qdrant）",
+      "上手门槛": "中：本地插件一条安装命令；自建服务需 Docker",
+      "记忆由谁写入": "Agent 回合成功结束后自动沉淀经验",
+      "召回怎么触发": "任务开始前自动召回相关经验与技能",
+      "差异要点": "面向任务型 Agent，不是陪伴应用；经验分层为轨迹→策略→世界模型→技能；有托管云服务，基准成绩为项目自报",
+      "记忆保存形式": "分层：轨迹、策略、世界模型、技能；图结构",
+      "治理手段": "自然语言反馈可纠正、补充、替换记忆；智能去重",
+      "人在哪一步介入": "可选：用自然语言反馈修正",
+      "主要防住哪种错误": "重复犯同样的错",
+      "遗忘怎么发生": "README 未描述",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "轨迹→策略→世界模型→结晶化技能；任务摘要"
+    },
+    "使用方式对比": {
+      "主分类": "④ 经验记忆与自进化：策略・技能・行为学习",
+      "项目名": "MemOS",
+      "接入方式": "四选一：云端 API、本地 REST 服务、OpenClaw 云插件、本地插件",
+      "运行位置": "云端（MemOS Cloud）或自己的电脑、服务器",
+      "所需设备与账号": "本地插件：电脑＋Node.js＋已装好的 DeepSeek Harness、Hermes 或 OpenClaw；本地服务：Docker（含 Neo4j、Qdrant）",
+      "上手门槛": "中：本地插件一条安装命令；自建服务需 Docker",
+      "记忆由谁写入": "Agent 回合成功结束后自动沉淀经验",
+      "召回怎么触发": "任务开始前自动召回相关经验与技能",
+      "差异要点": "面向任务型 Agent，不是陪伴应用；经验分层为轨迹→策略→世界模型→技能；有托管云服务，基准成绩为项目自报",
+      "记忆保存形式": "分层：轨迹、策略、世界模型、技能；图结构",
+      "治理手段": "自然语言反馈可纠正、补充、替换记忆；智能去重",
+      "人在哪一步介入": "可选：用自然语言反馈修正",
+      "主要防住哪种错误": "重复犯同样的错",
+      "遗忘怎么发生": "README 未描述",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "轨迹→策略→世界模型→结晶化技能；任务摘要"
+    },
+    "框架开源情况": {
+      "序号": 6,
+      "框架": "MemOS",
+      "仓库链接": "https://github.com/MemTensor/MemOS",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2026-09-22",
+      "备注": "另有云端插件服务"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "MemOS (by MemTensor)",
+      "url": "https://github.com/MemTensor/MemOS",
+      "desc": "Memory OS for LLM agents with hybrid retrieval and cross-task skill reuse."
+    }
+  }
+}

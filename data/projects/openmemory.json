@@ -1,0 +1,90 @@
+{
+  "id": "openmemory",
+  "name": "LongMemory（原 OpenMemory）",
+  "repo_url": "https://github.com/caviraoss/openmemory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "本地优先的时序记忆引擎，带面板，提供多种宿主插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋聊天记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；HTTP；插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、ChatGPT/Codex 桌面版、OpenClaw、VS Code、n8n",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑（npm 或 Docker）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "嵌入模型（可用本地 Ollama）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "仓库已更名为 LongMemory",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-20",
+    "stars": 4525,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "OpenMemory",
+      "url": "https://github.com/caviraoss/openmemory",
+      "desc": "Local persistent memory store for LLM apps (Claude Desktop, Copilot, Codex, etc.)."
+    },
+    "人工筛选": {
+      "name": "LongMemory（原 OpenMemory）",
+      "v": "纳入",
+      "c": "",
+      "desc": "本地优先的时序记忆引擎，带面板，提供多种宿主插件",
+      "subj": "用户事实＋聊天记忆",
+      "acc": "MCP；HTTP；插件",
+      "cli": "Claude Code、ChatGPT/Codex 桌面版、OpenClaw、VS Code、n8n",
+      "run": "自己的电脑（npm 或 Docker）",
+      "diff": "中",
+      "need": "嵌入模型（可用本地 Ollama）",
+      "note": "仓库已更名为 LongMemory"
+    }
+  }
+}

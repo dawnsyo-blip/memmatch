@@ -1,0 +1,85 @@
+{
+  "id": "memora",
+  "name": "Memora",
+  "repo_url": "https://github.com/agentic-mcp-tools/memora",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "MCP 记忆层：结构化存储、语义检索、图关系",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "agent 工作记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "MCP 客户端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或 Cloudflare",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "配置步骤繁多",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-23",
+    "stars": 733,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "agentic-mcp-tools/memora",
+      "url": "https://github.com/agentic-mcp-tools/memora",
+      "desc": "Persistent memory with knowledge graph visualization, semantic/hybrid search, cloud sync (S3/R2) and cross-session context management."
+    },
+    "人工筛选": {
+      "name": "Memora",
+      "v": "待定",
+      "c": "P4",
+      "desc": "MCP 记忆层：结构化存储、语义检索、图关系",
+      "subj": "agent 工作记忆",
+      "acc": "MCP",
+      "cli": "MCP 客户端",
+      "run": "自己的电脑或 Cloudflare",
+      "diff": "高",
+      "need": "",
+      "note": "配置步骤繁多"
+    }
+  }
+}

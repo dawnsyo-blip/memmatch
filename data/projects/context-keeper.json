@@ -1,0 +1,85 @@
+{
+  "id": "context-keeper",
+  "name": "Context-Keeper",
+  "repo_url": "https://github.com/redleaves/context-keeper",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "中文项目：LLM 驱动的记忆与上下文管理，面向开发者",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "开发上下文",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "编程助手",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "Docker",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "偏编程场景",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-01-13",
+    "stars": 155,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "redleaves/context-keeper",
+      "url": "https://github.com/redleaves/context-keeper",
+      "desc": "LLM-driven context and memory management: short- and long-term memory with vector, timeline and knowledge graph retrieval plus reranking."
+    },
+    "人工筛选": {
+      "name": "Context-Keeper",
+      "v": "待定",
+      "c": "P2",
+      "desc": "中文项目：LLM 驱动的记忆与上下文管理，面向开发者",
+      "subj": "开发上下文",
+      "acc": "MCP",
+      "cli": "编程助手",
+      "run": "Docker",
+      "diff": "中到高",
+      "need": "",
+      "note": ""
+    }
+  }
+}

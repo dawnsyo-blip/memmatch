@@ -1,0 +1,85 @@
+{
+  "id": "synapse",
+  "name": "Synapse",
+  "repo_url": "https://github.com/anshulyadav1976/synapse",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "把 ChatGPT/Claude 导出的聊天记录变成可搜索档案和 Markdown wiki，供 agent 查询",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "历史对话",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP（本地）；CLI/技能",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex、OpenCode、OpenClaw、Hermes 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "生成 wiki 时用 OpenAI 兼容模型（可用本地 Ollama）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-05",
+    "stars": 7,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "Synapse",
+      "url": "https://github.com/anshulyadav1976/synapse",
+      "desc": "Zero-dependency Markdown memory vault with ChatGPT/Claude imports, SQLite keyword and optional semantic search, linked wiki pages, MCP retrieval, and human-approved agent notes."
+    },
+    "人工筛选": {
+      "name": "Synapse",
+      "v": "纳入",
+      "c": "",
+      "desc": "把 ChatGPT/Claude 导出的聊天记录变成可搜索档案和 Markdown wiki，供 agent 查询",
+      "subj": "历史对话",
+      "acc": "MCP（本地）；CLI/技能",
+      "cli": "Claude Code、Codex、OpenCode、OpenClaw、Hermes 等",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "生成 wiki 时用 OpenAI 兼容模型（可用本地 Ollama）",
+      "note": ""
+    }
+  }
+}

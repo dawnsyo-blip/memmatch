@@ -1,0 +1,85 @@
+{
+  "id": "mnemostack",
+  "name": "mnemostack",
+  "repo_url": "https://github.com/udjin-labs/mnemostack",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "基于 Qdrant 的混合记忆检索层，MCP 服务几条命令接入",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP；HTTP API",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Cursor、ChatGPT",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（Qdrant）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "嵌入模型",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-28",
+    "stars": 9,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "udjin-labs/mnemostack",
+      "url": "https://github.com/udjin-labs/mnemostack",
+      "desc": "Self-hosted hybrid agent memory on Qdrant combining vector search, BM25, temporal retrieval and an optional Memgraph knowledge graph via rank fusion."
+    },
+    "人工筛选": {
+      "name": "mnemostack",
+      "v": "纳入",
+      "c": "",
+      "desc": "基于 Qdrant 的混合记忆检索层，MCP 服务几条命令接入",
+      "subj": "用户事实",
+      "acc": "MCP；HTTP API",
+      "cli": "Claude Desktop、Claude Code、Cursor、ChatGPT",
+      "run": "自己的电脑或服务器（Qdrant）",
+      "diff": "高",
+      "need": "嵌入模型",
+      "note": ""
+    }
+  }
+}

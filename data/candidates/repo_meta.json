@@ -1266,6 +1266,254 @@
    "license_head": "",
    "has_readme": true
   },
+  "baodq06/memocall": {
+   "repo": "baodq06/memocall",
+   "last_commit": "2026-06-18",
+   "stars": 2,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 baodq06\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge",
+   "has_readme": true
+  },
+  "cavinooo/claude-find": {
+   "repo": "Cavinooo/claude-find",
+   "last_commit": "2026-06-10",
+   "stars": 12,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Cavin\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, ",
+   "has_readme": true
+  },
+  "erebusenigma/context-memory": {
+   "repo": "ErebusEnigma/context-memory",
+   "last_commit": "2026-02-17",
+   "stars": 7,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 ErebusEnigma\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true
+  },
+  "grooverlab/fable": {
+   "repo": "grooverLab/fable",
+   "last_commit": "2026-08-10",
+   "stars": 15,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Anoop Grover\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true
+  },
+  "hyunjae-labs/lore": {
+   "repo": "hyunjae-labs/lore",
+   "last_commit": "2026-05-13",
+   "stars": 9,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 hyunjae-labs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true
+  },
+  "kunwar-shah/claudex": {
+   "repo": "kunwar-shah/claudex",
+   "last_commit": "2026-06-21",
+   "stars": 96,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Kunwar Shah\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true
+  },
+  "leesgit/passbaton": {
+   "repo": "leesgit/passbaton",
+   "last_commit": "2026-09-09",
+   "stars": 7,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Byeongchang Lee\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modif",
+   "has_readme": true
+  },
+  "majiayu000/remem": {
+   "repo": "majiayu000/remem",
+   "last_commit": "2026-10-08",
+   "stars": 33,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 majiayu000\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true
+  },
+  "minjimindypark/llmcompressor": {
+   "repo": "minjimindypark/llmcompressor",
+   "last_commit": "2026-09-07",
+   "stars": 0,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "ohad6k/emulo": {
+   "repo": "ohad6k/emulo",
+   "last_commit": "2026-10-02",
+   "stars": 294,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Ohad\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, p",
+   "has_readme": true
+  },
+  "domdemetz/claude-soul": {
+   "repo": "DomDemetz/claude-soul",
+   "last_commit": "2026-05-29",
+   "stars": 91,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Dominik Bauer\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify,",
+   "has_readme": true
+  },
+  "thegoatpsy/mneme": {
+   "repo": "TheGoatPsy/mneme",
+   "last_commit": "2026-09-06",
+   "stars": 3,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "wynelson94/longhand": {
+   "repo": "Wynelson94/longhand",
+   "last_commit": "2026-09-27",
+   "stars": 15,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Nate Nelson\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true
+  },
+  "zzallirog/weighted-compact": {
+   "repo": "zzallirog/weighted-compact",
+   "last_commit": "2026-06-10",
+   "stars": 5,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 zzalli\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true
+  },
+  "vasilispapg/claude-handoff": {
+   "repo": "Vasilispapg/claude-handoff",
+   "last_commit": "2026-09-01",
+   "stars": 1,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Vasilispapg\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true
+  },
+  "cdeust/cortex": {
+   "repo": "cdeust/Cortex",
+   "last_commit": "2026-10-10",
+   "stars": 73,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Clément Deust\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify,",
+   "has_readme": true
+  },
+  "vshulcz/deja-vu": {
+   "repo": "vshulcz/deja-vu",
+   "last_commit": "2026-10-10",
+   "stars": 1166,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Vladislav Shulcz\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modi",
+   "has_readme": true
+  },
+  "catfish-1234/sessionmem": {
+   "repo": "catfish-1234/sessionmem",
+   "last_commit": "2026-08-15",
+   "stars": 9,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true
+  },
+  "zengliangyi/chatcrystal": {
+   "repo": "ZengLiangYi/ChatCrystal",
+   "last_commit": "2026-09-20",
+   "stars": 61,
+   "archived": false,
+   "license_head": "Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction,\nand distribution as defined by Sections 1 through 9 of this document.\n\n\"Licens",
+   "has_readme": true
+  },
+  "betabots-llc/callimachus": {
+   "repo": "BetaBots-LLC/callimachus",
+   "last_commit": "2026-07-10",
+   "stars": 43,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true
+  },
+  "evermind-ai/everos": {
+   "repo": "EverMind-AI/EverOS",
+   "last_commit": "2026-10-10",
+   "stars": 13397,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true
+  },
+  "langchain-ai/langmem": {
+   "repo": "langchain-ai/langmem",
+   "last_commit": "2026-10-02",
+   "stars": 1700,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 LangChain\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, mer",
+   "has_readme": true
+  },
+  "modernrelay/omnigraph": {
+   "repo": "ModernRelay/omnigraph",
+   "last_commit": "2026-10-10",
+   "stars": 1271,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 NanoGraph Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy",
+   "has_readme": true
+  },
+  "shadow-weave/hms": {
+   "repo": "Shadow-Weave/HMS",
+   "last_commit": "2026-08-05",
+   "stars": 811,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 HMS AI, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true
+  },
+  "smaramwbc/statewave": {
+   "repo": "smaramwbc/statewave",
+   "last_commit": "2026-10-09",
+   "stars": 270,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true
+  },
+  "maximem-ai/maximem_synap_sdk": {
+   "repo": "maximem-ai/maximem_synap_sdk",
+   "last_commit": "2026-09-30",
+   "stars": 77,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true
+  },
+  "remete618/widemem-ai": {
+   "repo": "remete618/widemem-ai",
+   "last_commit": "2026-10-09",
+   "stars": 49,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "voxmastery/fluctlightdb": {
+   "repo": "voxmastery/FluctlightDB",
+   "last_commit": "2026-10-01",
+   "stars": 13,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Ganesh S\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merg",
+   "has_readme": true
+  },
+  "aetna000/atmem": {
+   "repo": "aetna000/atmem",
+   "last_commit": "2026-10-10",
+   "stars": 12,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "eddyflores100-lang/alethech": {
+   "repo": "eddyflores100-lang/alethech",
+   "last_commit": "2026-10-07",
+   "stars": 0,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 AliceLabs LLC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify,",
+   "has_readme": true
+  },
+  "nuster1128/memengine": {
+   "repo": "nuster1128/MemEngine",
+   "last_commit": "2025-05-13",
+   "stars": 116,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true
+  },
   "a1batr055/drivesoid": {
    "repo": "a1batr055/drivesoid",
    "stars": 74,
@@ -1451,11 +1699,6 @@
    "stars": 2659,
    "archived": false
   },
-  "langchain-ai/langmem": {
-   "repo": "langchain-ai/langmem",
-   "stars": 1700,
-   "archived": false
-  },
   "lxfight-s-astrbot-plugins/astrbot_plugin_livingmemory": {
    "repo": "lxfight-s-astrbot-plugins/astrbot_plugin_livingmemory",
    "stars": 352,
@@ -1474,11 +1717,6 @@
   "memex-lab/memex": {
    "repo": "memex-lab/memex",
    "stars": 775,
-   "archived": false
-  },
-  "nuster1128/memengine": {
-   "repo": "nuster1128/memengine",
-   "stars": 116,
    "archived": false
   },
   "obscuraknight/echo-mistik": {

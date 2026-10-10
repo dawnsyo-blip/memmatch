@@ -1,0 +1,85 @@
+{
+  "id": "mneme",
+  "name": "mneme",
+  "repo_url": "https://github.com/TheGoatPsy/mneme",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "以 Markdown 为准的 Claude Code 记忆，会话结束时不调用大模型",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "会话摘要与事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "插件＋钩子",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-06",
+    "stars": 3,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "TheGoatPsy/mneme",
+      "url": "https://github.com/TheGoatPsy/mneme",
+      "desc": "Vault-native, accountable memory for Claude Code: Markdown is the source of truth, with no LLM on the Stop path and redaction before any derived store."
+    },
+    "人工筛选": {
+      "name": "mneme",
+      "v": "纳入",
+      "c": "",
+      "desc": "以 Markdown 为准的 Claude Code 记忆，会话结束时不调用大模型",
+      "subj": "会话摘要与事实",
+      "acc": "插件＋钩子",
+      "cli": "Claude Code",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无",
+      "note": ""
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "mnemo-cortex",
+  "name": "Mnemo Cortex",
+  "repo_url": "https://github.com/GuyMannDude/mnemo-cortex",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 9 项，②类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "可信度导向最强：每条记忆可追溯来源和置信度，冲突交人裁决；多 Agent 共享，支持加密 U 盘迁移",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "本地服务器＋MCP；另有会话文件监听",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop（.mcpb 安装包）及其它 MCP 客户端",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：命令行向导；Claude Desktop 可拖拽 .mcpb 安装包",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "电脑；Python 3.11+；推荐 Ollama 跑本地模型（也可用云端密钥）；接 Claude Desktop 等需 Node.js 18+",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "治理靠规则：事实分权限等级，冲突写入变提案、由用户裁决；防篡改记忆账本；多 Agent 共享；加密 U 盘同步",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-09",
+    "stars": 157,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 9,
+      "项目名": "Mnemo Cortex",
+      "作者": "@GuyMannDude",
+      "开放程度（站点标注）": "开源",
+      "主分类": "② 记忆治理与可信：审核・回滚・隔离・同意",
+      "记忆形态 Form": "词元级・扁平＋结构化事实",
+      "记忆功能 Function": "用户事实",
+      "形成 Formation（据 README）": "自动捕获、入库时分类、脱敏；Analyst 把原始会话日志蒸馏成笔记",
+      "演化 Evolution（据 README）": "夜间跨 Agent 整合（Dreaming）与压缩；事实置信度三级阶梯随印证升降；与锁定事实冲突的写入转为提案，由用户裁决",
+      "检索 Retrieval（据 README）": "语义检索＋复合排序；结构化事实精确查询",
+      "核心特点": "可信度导向最强：每条记忆可追溯来源和置信度，冲突交人裁决；多 Agent 共享，支持加密 U 盘迁移",
+      "技术栈": "Python",
+      "运行平台": "Self-host / MCP",
+      "站点更新日期": "2026-09-24",
+      "详情页": "https://www.ailover-atlas.com/projects/mnemo-cortex/",
+      "仓库链接": "https://github.com/GuyMannDude/mnemo-cortex",
+      "仓库最后提交日期": "2026-10-09",
+      "许可证（仓库实际文件）": "MIT",
+      "README 与站点简介的一致性说明": "来源标签、置信度阶梯、结构化事实、加密 U 盘同步均有；冲突裁决见 README「权限分级」（v4.23）：与已锁定事实冲突的写入记为提案，列入每晚简报，只能由用户裁决（2026-10-10 第二次核对时更正，初次核对漏看）。README 还突出站点没提的夜间整合（Dreaming）、防篡改记忆账本和轨迹学习",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "本地服务器＋MCP；另有会话文件监听",
+      "运行位置": "本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步",
+      "所需设备与账号": "电脑；Python 3.11+；推荐 Ollama 跑本地模型（也可用云端密钥）；接 Claude Desktop 等需 Node.js 18+",
+      "上手门槛": "中：命令行向导；Claude Desktop 可拖拽 .mcpb 安装包",
+      "记忆由谁写入": "监听会话文件自动捕获，入库时分类、脱敏",
+      "召回怎么触发": "AI 调 recall／search；结构化事实精确查询",
+      "差异要点": "治理靠规则：事实分权限等级，冲突写入变提案、由用户裁决；防篡改记忆账本；多 Agent 共享；加密 U 盘同步",
+      "记忆保存形式": "压缩后的会话＋带置信度的结构化事实",
+      "治理手段": "权限分级：与锁定事实冲突的写入转为提案；置信度阶梯；防篡改记忆账本",
+      "人在哪一步介入": "发生冲突时，裁决提案",
+      "主要防住哪种错误": "自信但错误的覆盖写入；记录被篡改",
+      "遗忘怎么发生": "有衰减阈值配置（README 未细述）",
+      "遗忘的终点": "README 未细述",
+      "整合（合并、摘要）方式": "夜间跨 Agent 整合（Dreaming）；滚动压缩会话"
+    },
+    "使用方式对比": {
+      "主分类": "② 记忆治理与可信：审核・回滚・隔离・同意",
+      "项目名": "Mnemo Cortex",
+      "接入方式": "本地服务器＋MCP；另有会话文件监听",
+      "运行位置": "本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步",
+      "所需设备与账号": "电脑；Python 3.11+；推荐 Ollama 跑本地模型（也可用云端密钥）；接 Claude Desktop 等需 Node.js 18+",
+      "上手门槛": "中：命令行向导；Claude Desktop 可拖拽 .mcpb 安装包",
+      "记忆由谁写入": "监听会话文件自动捕获，入库时分类、脱敏",
+      "召回怎么触发": "AI 调 recall／search；结构化事实精确查询",
+      "差异要点": "治理靠规则：事实分权限等级，冲突写入变提案、由用户裁决；防篡改记忆账本；多 Agent 共享；加密 U 盘同步",
+      "记忆保存形式": "压缩后的会话＋带置信度的结构化事实",
+      "治理手段": "权限分级：与锁定事实冲突的写入转为提案；置信度阶梯；防篡改记忆账本",
+      "人在哪一步介入": "发生冲突时，裁决提案",
+      "主要防住哪种错误": "自信但错误的覆盖写入；记录被篡改",
+      "遗忘怎么发生": "有衰减阈值配置（README 未细述）",
+      "遗忘的终点": "README 未细述",
+      "整合（合并、摘要）方式": "夜间跨 Agent 整合（Dreaming）；滚动压缩会话"
+    }
+  }
+}

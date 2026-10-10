@@ -1,0 +1,130 @@
+{
+  "id": "xinchao-nian",
+  "name": "心潮念",
+  "repo_url": "https://github.com/tianyupaipai-cmd/xinchao-nian",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 32 项，⑤类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "动态驱力引擎与 Ombre Brain 合并发行，记忆服务于“主动惦记”",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋欲望驱力状态",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "Docker 双服务（心潮＋Ombre Brain）＋MCP（OAuth）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "MCP 客户端（OAuth）",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中到高：多个端口、密钥和口令要分清",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Docker；公网 HTTPS 地址（给 Claude.ai 连接）；模型密钥",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "AGPL-3.0（根目录）＋ MIT（xinchao/）＋ 含非商业约束的 Ombre Brain 二改",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "MCP（OAuth）；18+、含非商业约束；会“惦记”你：12 维驱力＋两层情绪＋记得在为什么生气；18+；整体不可商用",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-06",
+    "stars": 247,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 32,
+      "项目名": "心潮念",
+      "作者": "@tianyupaipai-cmd",
+      "开放程度（站点标注）": "非商业・18+",
+      "主分类": "⑤ 身份与关系记忆：以 AI 自我为记忆对象",
+      "记忆形态 Form": "词元级（复用 Ombre Brain）＋驱力状态",
+      "记忆功能 Function": "用户事实＋欲望驱力状态",
+      "形成 Formation（据 README）": "经 Ombre Brain：hold 沉淀、grow 拆分",
+      "演化 Evolution（据 README）": "Ombre Brain 的 dream 消化与遗忘曲线；梦境不冒充真实记忆",
+      "检索 Retrieval（据 README）": "breath 浮现；驱力按亲和度偏置召回哪些记忆",
+      "核心特点": "动态驱力引擎与 Ombre Brain 合并发行，记忆服务于“主动惦记”",
+      "技术栈": "Python / Docker",
+      "运行平台": "Self-host",
+      "站点更新日期": "2026-09-24",
+      "详情页": "https://www.ailover-atlas.com/projects/xinchao-nian/",
+      "仓库链接": "https://github.com/tianyupaipai-cmd/xinchao-nian",
+      "仓库最后提交日期": "2026-10-06",
+      "许可证（仓库实际文件）": "AGPL-3.0（根目录）＋ MIT（xinchao/）＋ 含非商业约束的 Ombre Brain 二改",
+      "README 与站点简介的一致性说明": "动态驱力引擎与 Ombre Brain 联合部署、梦境、主动联系均在 README",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "Docker 双服务（心潮＋Ombre Brain）＋MCP（OAuth）",
+      "运行位置": "自己的电脑或服务器",
+      "所需设备与账号": "Docker；公网 HTTPS 地址（给 Claude.ai 连接）；模型密钥",
+      "上手门槛": "中到高：多个端口、密钥和口令要分清",
+      "记忆由谁写入": "经 Ombre Brain 写入；驱力与情绪状态自动变化",
+      "召回怎么触发": "breath 浮现，驱力决定优先想起什么",
+      "差异要点": "会“惦记”你：12 维驱力＋两层情绪＋记得在为什么生气；18+；整体不可商用",
+      "记忆保存形式": "Ombre Brain 记忆桶＋驱力、情绪状态",
+      "治理手段": "梦境不冒充真实记忆；状态不自动注入窗口",
+      "人在哪一步介入": "主动回应或转成便签后才进桥",
+      "主要防住哪种错误": "梦境被当成真事",
+      "遗忘怎么发生": "经 Ombre Brain 遗忘曲线；和好或气消后自动忘掉“在气什么”",
+      "遗忘的终点": "Ombre Brain 归档",
+      "整合（合并、摘要）方式": "Ombre Brain dream 消化；梦 2.0"
+    },
+    "使用方式对比": {
+      "主分类": "⑤ 身份与关系记忆：以 AI 自我为记忆对象",
+      "项目名": "心潮念",
+      "接入方式": "Docker 双服务（心潮＋Ombre Brain）＋MCP（OAuth）",
+      "运行位置": "自己的电脑或服务器",
+      "所需设备与账号": "Docker；公网 HTTPS 地址（给 Claude.ai 连接）；模型密钥",
+      "上手门槛": "中到高：多个端口、密钥和口令要分清",
+      "记忆由谁写入": "经 Ombre Brain 写入；驱力与情绪状态自动变化",
+      "召回怎么触发": "breath 浮现，驱力决定优先想起什么",
+      "差异要点": "会“惦记”你：12 维驱力＋两层情绪＋记得在为什么生气；18+；整体不可商用",
+      "记忆保存形式": "Ombre Brain 记忆桶＋驱力、情绪状态",
+      "治理手段": "梦境不冒充真实记忆；状态不自动注入窗口",
+      "人在哪一步介入": "主动回应或转成便签后才进桥",
+      "主要防住哪种错误": "梦境被当成真事",
+      "遗忘怎么发生": "经 Ombre Brain 遗忘曲线；和好或气消后自动忘掉“在气什么”",
+      "遗忘的终点": "Ombre Brain 归档",
+      "整合（合并、摘要）方式": "Ombre Brain dream 消化；梦 2.0"
+    }
+  }
+}

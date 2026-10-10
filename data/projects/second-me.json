@@ -1,0 +1,95 @@
+{
+  "id": "second-me",
+  "name": "Second Me",
+  "repo_url": "https://github.com/mindverse/Second-Me",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "P1",
+    "group_meaning": "自带助手的完整应用：记忆不能单独接到用户已有的助手上，愿意换助手才适用",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（Second Me）",
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "用你的资料在本地训练一个“AI 分身”",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户本人（训练进模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "独立应用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "自带",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑（Docker）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "最后提交 2025-09，更新放缓；更新放缓",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2025-09-19",
+    "stars": 15693,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 15,
+      "框架": "Second Me",
+      "仓库链接": "https://github.com/mindverse/Second-Me",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2025-09-19",
+      "备注": "更新放缓"
+    },
+    "人工筛选": {
+      "name": "Second Me",
+      "v": "待定",
+      "c": "P1",
+      "desc": "用你的资料在本地训练一个“AI 分身”",
+      "subj": "用户本人（训练进模型）",
+      "acc": "独立应用",
+      "cli": "自带",
+      "run": "自己的电脑（Docker）",
+      "diff": "高",
+      "need": "",
+      "note": "最后提交 2025-09，更新放缓"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "Second Me",
+      "url": "https://github.com/mindverse/Second-Me",
+      "desc": "Personal AI trained on the user to represent them across applications."
+    }
+  }
+}

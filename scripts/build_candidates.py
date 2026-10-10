@@ -104,19 +104,37 @@ def license_label(head):
     return "其它（见仓库）"
 
 
-def main():
+# 各字段的信息来源说明（写进项目 JSON 的 provenance）
+PROV_ATLAS = "负责人原表「记忆项目总表」，据各仓库 README"
+PROV_ATLAS_CLI = "Claude 据原表「接入方式」「差异要点」补写"
+PROV_PAPER = "负责人原表「框架开源情况」（论文表 9）"
+PROV_CLAUDE = "Claude 据仓库 README 判断"
+PROV_LICENSE = "仓库 LICENSE 文件开头自动识别"
+PROV_LICENSE_FIX = "Claude 人工核对仓库许可证"
+PROV_META = "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面"
+INFO_FIELDS = ["desc", "subj", "acc", "cli", "run", "diff", "need", "lic", "note"]
+
+
+def collect_rows():
+    """合并四个来源、套用筛选结论，返回 {键: 行}。键为仓库（小写）或 name:项目名。"""
     meta = json.loads((ROOT / "data/candidates/repo_meta.json").read_text(encoding="utf-8"))["repos"]
     wb_in = openpyxl.load_workbook(ROOT / "记忆框架开源情况.xlsx", data_only=True)
     new = {k.lower(): v for k, v in R.NEW.items()}
     desc_only = {k.lower(): v for k, v in R.DESC_ONLY.items()}
 
-    rows = {}  # 键：仓库（小写）或非 GitHub 项目的名称
+    rows = {}
 
     def m(key, field):
         return (meta.get(key) or {}).get(field)
 
-    # 1) 原表「记忆项目总表」
-    for r in wb_in["记忆项目总表"].iter_rows(min_row=2, values_only=True):
+    def sheet_dicts(ws, header_row):
+        rs = list(ws.iter_rows(min_row=header_row, values_only=True))
+        hdr = rs[0]
+        return [{h: v for h, v in zip(hdr, r) if h} for r in rs[1:] if any(r)]
+
+    # 1) 原表「记忆项目总表」（及同名的「使用方式对比」行）
+    usage = {d["项目名"]: d for d in sheet_dicts(wb_in["使用方式对比"], 3) if d.get("项目名")}
+    for raw, r in zip(sheet_dicts(wb_in["记忆项目总表"], 1), wb_in["记忆项目总表"].iter_rows(min_row=2, values_only=True)):
         no, name, url = r[0], r[1], r[15]
         v, code, note = R.XLSX[no]
         key = repo_key(url) or f"name:{name}"
@@ -125,14 +143,18 @@ def main():
             name=name, v=v, c=code, desc=r[10] or "", subj=r[6] or "", acc=r[24] or "",
             cli=R.XLSX_CLIENTS.get(no, ""), run=r[25] or "", diff=r[27] or "", need=r[26] or "",
             lic=r[17] or "", date=str(r[16] or ""), stars=m(key, "stars"), url=url,
-            src=[f"{SRC_ATLAS}（原表第 {no} 项，{r[4][:1]}类）"], note="；".join(x for x in [note, diff_note] if x))
+            src=[f"{SRC_ATLAS}（原表第 {no} 项，{r[4][:1]}类）"], note="；".join(x for x in [note, diff_note] if x),
+            prov={**{f: PROV_ATLAS for f in INFO_FIELDS}, "cli": PROV_ATLAS_CLI, "note": PROV_ATLAS},
+            raw={"记忆项目总表": raw, **({"使用方式对比": usage[name]} if name in usage else {})})
 
     # 2) 原表「框架开源情况」（论文表 9）
+    paper_raw = {d["框架"]: d for d in sheet_dicts(wb_in["框架开源情况"], 1)}
     paper_rows = {r[1]: r for r in wb_in["框架开源情况"].iter_rows(min_row=2, values_only=True)}
     for fname, (v, code, note, repo) in R.PAPER.items():
         key = repo.lower()
         if key in rows:
             rows[key]["src"].append(f"{SRC_PAPER}（{fname}）")
+            rows[key]["raw"]["框架开源情况"] = paper_raw[fname]
             continue
         pr = paper_rows[fname]
         e = new.get(key, {})
@@ -141,15 +163,19 @@ def main():
             acc=e.get("acc", ""), cli=e.get("cli", ""), run=e.get("run", ""), diff=e.get("diff", ""),
             need=e.get("need", ""), lic=pr[3] or "", date=str(m(key, "last_commit") or pr[5] or ""),
             stars=m(key, "stars"), url=f"https://github.com/{repo}", src=[f"{SRC_PAPER}（{fname}）"],
-            note="；".join(x for x in [note, e.get("note", ""), pr[6] if e else ""] if x))
+            note="；".join(x for x in [note, e.get("note", ""), pr[6] if e else ""] if x),
+            prov={**{f: PROV_CLAUDE if e else PROV_PAPER for f in INFO_FIELDS}, "lic": PROV_PAPER},
+            raw={"框架开源情况": paper_raw[fname], **({"人工筛选": e} if e else {})})
 
     # 3) 两个 awesome 清单
     for it in parse_teleai(ROOT / "sources/snapshots/TeleAI-UAGI_Awesome-Agent-Memory.md") + \
             parse_mcp(ROOT / "sources/snapshots/punkpeye_awesome-mcp-servers.md"):
         key = repo_key(it["url"]) or f"name:{it['name']}"
+        list_raw = {"name": it["name"], "url": it["url"], "desc": it["desc"]}
         if key in rows:
             if it["src"] not in " ".join(rows[key]["src"]):
                 rows[key]["src"].append(it["src"])
+            rows[key]["raw"].setdefault(it["src"], list_raw)
             continue
         if key in new:
             e = new[key]
@@ -164,7 +190,10 @@ def main():
             need=e.get("need", ""),
             lic=R.LICENSE_OVERRIDE.get(key) or (license_label(m(key, "license_head")) if m(key, "repo") else ""),
             date=m(key, "last_commit") or "", stars=m(key, "stars"), url=it["url"], src=[it["src"]],
-            note=e.get("note", ""), list_desc=it["desc"], judged=bool(e))
+            note=e.get("note", ""), list_desc=it["desc"], judged=bool(e),
+            prov={**{f: PROV_CLAUDE for f in INFO_FIELDS},
+                  "lic": PROV_LICENSE_FIX if key in R.LICENSE_OVERRIDE else PROV_LICENSE},
+            raw={it["src"]: list_raw, **({"人工筛选": e} if e else {})})
 
     # 4) 套用负责人对各分组的决定
     for r in rows.values():
@@ -175,8 +204,12 @@ def main():
                 r["note"] = "；".join(x for x in [flag, r["note"]] if x)
         if r["v"] == "纳入":
             r["cat"] = R.CATEGORY_OVERRIDE.get(r["name"]) or r["cat"] or R.DEFAULT_CATEGORY
+        r["meta"] = meta.get(r["url"] and repo_key(r["url"]) or "", {})
+    return rows
 
-    write_xlsx(rows)
+
+def main():
+    write_xlsx(collect_rows())
 
 
 HEAD_FILL = PatternFill("solid", fgColor="DDE6F0")

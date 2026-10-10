@@ -1,0 +1,85 @@
+{
+  "id": "claude-find",
+  "name": "claude-find",
+  "repo_url": "https://github.com/Cavinooo/claude-find",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "对全部 Claude Code 历史对话做语义搜索，搜原文而非摘要",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "历史对话",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Ollama（自动下载嵌入模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-06-10",
+    "stars": 12,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Cavinooo/claude-find",
+      "url": "https://github.com/Cavinooo/claude-find",
+      "desc": "Retrieve memory from across your Claude Code sessions on demand."
+    },
+    "人工筛选": {
+      "name": "claude-find",
+      "v": "纳入",
+      "c": "",
+      "desc": "对全部 Claude Code 历史对话做语义搜索，搜原文而非摘要",
+      "subj": "历史对话",
+      "acc": "MCP",
+      "cli": "Claude Code",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "Ollama（自动下载嵌入模型）",
+      "note": ""
+    }
+  }
+}

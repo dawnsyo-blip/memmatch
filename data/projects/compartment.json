@@ -1,0 +1,85 @@
+{
+  "id": "compartment",
+  "name": "Compartment",
+  "repo_url": "https://github.com/MaxFreedomPollard/Compartment",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "加密、完全离线的本地记忆库，一条命令接入多个客户端，带桌面应用和面板",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实（每条带来源和日期）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Hermes、OpenClaw、Cursor、Codex",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：pip 安装＋一条 integrate 命令",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无需账号和密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-30",
+    "stars": 579,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "Compartment",
+      "url": "https://github.com/MaxFreedomPollard/Compartment",
+      "desc": "Offline, encrypted-at-rest vector memory for agents via MCP server, Python, or CLI; AEAD-encrypted embeddings, hybrid recall, per-record crypto-shred deletion, hash-chained audit log."
+    },
+    "人工筛选": {
+      "name": "Compartment",
+      "v": "纳入",
+      "c": "",
+      "desc": "加密、完全离线的本地记忆库，一条命令接入多个客户端，带桌面应用和面板",
+      "subj": "用户事实（每条带来源和日期）",
+      "acc": "MCP",
+      "cli": "Claude Desktop、Claude Code、Hermes、OpenClaw、Cursor、Codex",
+      "run": "自己的电脑",
+      "diff": "中：pip 安装＋一条 integrate 命令",
+      "need": "无需账号和密钥",
+      "note": ""
+    }
+  }
+}

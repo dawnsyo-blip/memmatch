@@ -1,0 +1,130 @@
+{
+  "id": "mochibot",
+  "name": "MochiBot",
+  "repo_url": "https://github.com/shikidmsh-rgb/mochibot",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "E1",
+    "group_meaning": "某个应用自带的记忆功能，无法接到用户已有的助手上",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 38 项，⑦类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "轻量小机器即可运行，微信／Telegram 双通道，Heartbeat 主动关心",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "用户事实＋习惯／待办",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "自托管伴侣（Telegram、微信）＋管理后台",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "自带；Telegram、微信",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑或云服务器",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低：下载发布包运行安装脚本",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Windows、macOS 或 Linux；模型密钥；Telegram 或微信",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "伴侣应用自带记忆；轻量；管理后台默认只监听本机；可从 ChatGPT 导出记录迁入",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-07",
+    "stars": 101,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 38,
+      "项目名": "MochiBot",
+      "作者": "@shikidmsh-rgb",
+      "开放程度（站点标注）": "开源",
+      "主分类": "⑦ 应用内置记忆：伴侣应用自带记忆功能",
+      "记忆形态 Form": "词元级",
+      "记忆功能 Function": "用户事实＋习惯／待办",
+      "形成 Formation（据 README）": "多聊天自动记住；可从 ChatGPT 导出记录生成核心设定和记忆草稿",
+      "演化 Evolution（据 README）": "README 只提到近期对话摘要，未描述长期记忆整合或遗忘",
+      "检索 Retrieval（据 README）": "长期记忆条按需找回；聊天、日记、记忆可主动搜索",
+      "核心特点": "轻量小机器即可运行，微信／Telegram 双通道，Heartbeat 主动关心",
+      "技术栈": "Python",
+      "运行平台": "Self-host / Telegram / WeChat",
+      "站点更新日期": "2026-09-24",
+      "详情页": "https://www.ailover-atlas.com/projects/mochibot-companion/",
+      "仓库链接": "https://github.com/shikidmsh-rgb/mochibot",
+      "仓库最后提交日期": "2026-10-07",
+      "许可证（仓库实际文件）": "MIT",
+      "README 与站点简介的一致性说明": "README 自承主动消息“还不够灵”",
+      "覆盖形成": "✓",
+      "覆盖演化": "—",
+      "覆盖检索": "✓",
+      "演化方式": "—",
+      "动态覆盖类型": "Ⅱ 形成＋检索：无记忆演化",
+      "接入方式": "自托管伴侣（Telegram、微信）＋管理后台",
+      "运行位置": "自己的电脑或云服务器",
+      "所需设备与账号": "Windows、macOS 或 Linux；模型密钥；Telegram 或微信",
+      "上手门槛": "低：下载发布包运行安装脚本",
+      "记忆由谁写入": "多聊天自动记住；核心设定（Core）建议人工维护",
+      "召回怎么触发": "记忆条按需找回；历史可搜索",
+      "差异要点": "轻量；管理后台默认只监听本机；可从 ChatGPT 导出记录迁入",
+      "记忆保存形式": "Core 核心设定＋近期摘要＋记忆条",
+      "治理手段": "Core 建议人工维护",
+      "人在哪一步介入": "维护 Core 时",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "近期对话摘要"
+    },
+    "使用方式对比": {
+      "主分类": "⑦ 应用内置记忆：伴侣应用自带记忆功能",
+      "项目名": "MochiBot",
+      "接入方式": "自托管伴侣（Telegram、微信）＋管理后台",
+      "运行位置": "自己的电脑或云服务器",
+      "所需设备与账号": "Windows、macOS 或 Linux；模型密钥；Telegram 或微信",
+      "上手门槛": "低：下载发布包运行安装脚本",
+      "记忆由谁写入": "多聊天自动记住；核心设定（Core）建议人工维护",
+      "召回怎么触发": "记忆条按需找回；历史可搜索",
+      "差异要点": "轻量；管理后台默认只监听本机；可从 ChatGPT 导出记录迁入",
+      "记忆保存形式": "Core 核心设定＋近期摘要＋记忆条",
+      "治理手段": "Core 建议人工维护",
+      "人在哪一步介入": "维护 Core 时",
+      "主要防住哪种错误": "—",
+      "遗忘怎么发生": "无",
+      "遗忘的终点": "—",
+      "整合（合并、摘要）方式": "近期对话摘要"
+    }
+  }
+}

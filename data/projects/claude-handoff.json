@@ -1,0 +1,85 @@
+{
+  "id": "claude-handoff",
+  "name": "claude-handoff",
+  "repo_url": "https://github.com/Vasilispapg/claude-handoff",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "awesome-mcp-servers"
+  ],
+  "info": {
+    "summary": {
+      "value": "把任意 Claude Code 会话（含崩溃的）整理成交接文件，并从历史提炼项目记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "会话交接＋项目记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "命令行",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code；交接文件可给 claude.ai、GPT 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "Claude Pro/Max 或自己的 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-01",
+    "stars": 1,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "awesome-mcp-servers": {
+      "name": "Vasilispapg/claude-handoff",
+      "url": "https://github.com/Vasilispapg/claude-handoff",
+      "desc": "Claude Code session handoffs: turns any transcript, even crashed ones, into a handoff file and distills project history into a cited memory brief."
+    },
+    "人工筛选": {
+      "name": "claude-handoff",
+      "v": "纳入",
+      "c": "",
+      "desc": "把任意 Claude Code 会话（含崩溃的）整理成交接文件，并从历史提炼项目记忆",
+      "subj": "会话交接＋项目记忆",
+      "acc": "命令行",
+      "cli": "Claude Code；交接文件可给 claude.ai、GPT 等",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "Claude Pro/Max 或自己的 API 密钥",
+      "note": ""
+    }
+  }
+}

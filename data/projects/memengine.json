@@ -1,0 +1,94 @@
+{
+  "id": "memengine",
+  "name": "MemEngine",
+  "repo_url": "https://github.com/nuster1128/MemEngine",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（MemEngine）"
+  ],
+  "info": {
+    "summary": {
+      "value": "研究用的模块化记忆库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "多种记忆模型",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "Python 库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "开发者自建",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "README 徽章标注 MIT",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "研究用记忆模型库；无许可证文件；根目录无 LICENSE 文件；最后提交 2025-05；仓库无许可证文件，授权不够明确，商用前建议联系作者确认",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2025-05-13",
+    "stars": 116,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 17,
+      "框架": "MemEngine",
+      "仓库链接": "https://github.com/nuster1128/MemEngine",
+      "许可证": "README 徽章标注 MIT",
+      "开源状态": "开源但有限制",
+      "仓库最后提交日期": "2025-05-13",
+      "备注": "仓库无许可证文件，授权不够明确，商用前建议联系作者确认"
+    },
+    "人工筛选": {
+      "name": "MemEngine",
+      "v": "排除",
+      "c": "A",
+      "desc": "研究用的模块化记忆库",
+      "subj": "多种记忆模型",
+      "acc": "Python 库",
+      "cli": "开发者自建",
+      "run": "自己的电脑",
+      "diff": "高",
+      "need": "模型 API 密钥",
+      "note": "根目录无 LICENSE 文件；最后提交 2025-05"
+    }
+  }
+}

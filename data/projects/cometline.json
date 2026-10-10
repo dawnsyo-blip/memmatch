@@ -1,0 +1,130 @@
+{
+  "id": "cometline",
+  "name": "Cometline",
+  "repo_url": "https://github.com/Cometline/cometline",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "AI Companion Atlas（原表第 33 项，⑥类）"
+  ],
+  "info": {
+    "summary": {
+      "value": "每个项目一份独立记忆，并调度编码 Agent",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "工作记忆＋环境事实（工作区上下文）",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "桌面应用",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "自带 Mac 应用；调度 Claude Code、Codex",
+      "source": "Claude 据原表「接入方式」「差异要点」补写",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的 Mac",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "低：Homebrew 一条命令或下载签名安装包",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "macOS 13+；模型密钥或本机 Ollama",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "偏编程场景；按项目分区记忆并调度编码 Agent 的 Mac 桌面应用；每个项目一份独立记忆；可把编码任务交给 Claude Code、Codex 等；另有 LLM Wiki 知识库",
+      "source": "负责人原表「记忆项目总表」，据各仓库 README",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-10",
+    "stars": 29,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "记忆项目总表": {
+      "序号": 33,
+      "项目名": "Cometline",
+      "作者": "@Cometline",
+      "开放程度（站点标注）": "开源",
+      "主分类": "⑥ 工作记忆与场景化上下文",
+      "记忆形态 Form": "词元级・扁平（按项目分区）",
+      "记忆功能 Function": "工作记忆＋环境事实（工作区上下文）",
+      "形成 Formation（据 README）": "对话后自动抽取事实与偏好；Inbox 回复被后台内化为记忆",
+      "演化 Evolution（据 README）": "自动或手动压缩：合并、清理陈旧条目；换向量模型后台重建",
+      "检索 Retrieval（据 README）": "每轮前自动注入相关记忆；按项目隔离",
+      "核心特点": "每个项目一份独立记忆，并调度编码 Agent",
+      "技术栈": "Rust / TypeScript",
+      "运行平台": "Desktop",
+      "站点更新日期": "2026-09-24",
+      "详情页": "https://www.ailover-atlas.com/projects/cometline/",
+      "仓库链接": "https://github.com/Cometline/cometline",
+      "仓库最后提交日期": "2026-10-10",
+      "许可证（仓库实际文件）": "Apache-2.0",
+      "README 与站点简介的一致性说明": "每项目独立记忆、编码 Agent 调度、桌面聊天均在 README；README 另有 LLM Wiki 与 Inbox",
+      "覆盖形成": "✓",
+      "覆盖演化": "✓",
+      "覆盖检索": "✓",
+      "演化方式": "自动",
+      "动态覆盖类型": "Ⅰ 完整闭环：形成＋演化＋检索",
+      "接入方式": "桌面应用",
+      "运行位置": "自己的 Mac",
+      "所需设备与账号": "macOS 13+；模型密钥或本机 Ollama",
+      "上手门槛": "低：Homebrew 一条命令或下载签名安装包",
+      "记忆由谁写入": "对话后自动抽取事实与偏好",
+      "召回怎么触发": "每轮前自动注入，按项目隔离",
+      "差异要点": "每个项目一份独立记忆；可把编码任务交给 Claude Code、Codex 等；另有 LLM Wiki 知识库",
+      "记忆保存形式": "按项目隔离的事实与偏好＋LLM Wiki",
+      "治理手段": "可在设置里浏览、编辑、压缩",
+      "人在哪一步介入": "可选：手动整理",
+      "主要防住哪种错误": "不同项目的记忆串在一起",
+      "遗忘怎么发生": "无自动衰减",
+      "遗忘的终点": "合并、清理陈旧条目",
+      "整合（合并、摘要）方式": "自动或手动压缩（compaction）"
+    },
+    "使用方式对比": {
+      "主分类": "⑥ 工作记忆与场景化上下文",
+      "项目名": "Cometline",
+      "接入方式": "桌面应用",
+      "运行位置": "自己的 Mac",
+      "所需设备与账号": "macOS 13+；模型密钥或本机 Ollama",
+      "上手门槛": "低：Homebrew 一条命令或下载签名安装包",
+      "记忆由谁写入": "对话后自动抽取事实与偏好",
+      "召回怎么触发": "每轮前自动注入，按项目隔离",
+      "差异要点": "每个项目一份独立记忆；可把编码任务交给 Claude Code、Codex 等；另有 LLM Wiki 知识库",
+      "记忆保存形式": "按项目隔离的事实与偏好＋LLM Wiki",
+      "治理手段": "可在设置里浏览、编辑、压缩",
+      "人在哪一步介入": "可选：手动整理",
+      "主要防住哪种错误": "不同项目的记忆串在一起",
+      "遗忘怎么发生": "无自动衰减",
+      "遗忘的终点": "合并、清理陈旧条目",
+      "整合（合并、摘要）方式": "自动或手动压缩（compaction）"
+    }
+  }
+}
