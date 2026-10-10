@@ -173,8 +173,8 @@ def main():
             r["v"], r["cat"], flag = R.GROUP_POLICY[r["c"]]
             if flag and flag not in r["note"]:
                 r["note"] = "；".join(x for x in [flag, r["note"]] if x)
-        if r["v"] == "纳入" and not r["cat"]:
-            r["cat"] = R.DEFAULT_CATEGORY
+        if r["v"] == "纳入":
+            r["cat"] = R.CATEGORY_OVERRIDE.get(r["name"]) or r["cat"] or R.DEFAULT_CATEGORY
 
     write_xlsx(rows)
 
@@ -206,7 +206,7 @@ def write_xlsx(rows):
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
     order = {"纳入": 0, "待定": 1}
-    cat_order = {R.DEFAULT_CATEGORY: 0, "自带记忆的应用": 1, "需写代码（开发者向）": 2}
+    cat_order = {R.DEFAULT_CATEGORY: 0, "自带记忆的应用": 1, "需写代码（开发者向）": 2, "边缘项（存的不是对话记忆）": 3}
     cand = sorted((r for r in rows.values() if r["v"] in order),
                   key=lambda r: (order[r["v"]], cat_order.get(r["cat"], 9), r["c"], -(r["stars"] or 0)))
     excl = sorted((r for r in rows.values() if r["v"] == "排除"), key=lambda r: (r["c"], r["name"].lower()))
@@ -224,8 +224,9 @@ def write_xlsx(rows):
         ["收录类别", f"{R.DEFAULT_CATEGORY}：有现成接法（MCP 服务、网关／代理、宿主插件，如 OpenClaw、Hermes、AstrBot、Claude Code），不用写代码就能接到用户已有的助手上。只支持 Claude Code 的会话记忆、偏编程的记忆（P2）、默认走托管服务的（P3）也算这一类，后两者在备注里标出。"],
         ["", "自带记忆的应用：记忆是某个应用（多为伴侣应用或完整的 agent）的一部分，不能单独接到已有助手上；用户愿意换用这个应用就能直接用。对应代码 E1、P1。"],
         ["", "需写代码（开发者向）：只提供代码库或服务，要自己写代码对接或自备前端（代码 A），或部署门槛很高（代码 P4）。"],
+        ["", "边缘项（存的不是对话记忆）：存情绪状态或模型权重（代码 E2），原表第⑧类，按负责人要求保留。"],
         ["结论含义", "纳入：进入候选。待定：还需负责人决定，按「分组代码」归类。排除：不收录，附原因代码。"],
-        ["负责人决定（2026-10-10）", "收录需写代码（A）、应用自带记忆（E1）和自带助手的完整应用（P1）；收录只支持 Claude Code 的会话记忆；排除 P5（证据不足）、P6（偏工作/团队）。之后又决定：收录 P2（偏编程，备注标出）、P3（默认托管，备注标风险）、P4（并入“需写代码”类别），排除 P7（人格/档案）。"],
+        ["负责人决定（2026-10-10）", "收录需写代码（A）、应用自带记忆（E1）和自带助手的完整应用（P1）；收录只支持 Claude Code 的会话记忆；排除 P5（证据不足）、P6（偏工作/团队）。之后又决定：收录 P2（偏编程，备注标出）、P3（默认托管，备注标风险）、P4（并入“需写代码”类别），排除 P7（人格/档案）；原表 50 个项目全部收录（E2 两项单列“边缘项”类别）；Mnemosyne OS 因核心私有排除；只支持 Claude Code 但偏编程场景的会话记忆排除。"],
         ["", ""],
         ["来源", f"{SRC_ATLAS}：原表「记忆项目总表」50 个项目（https://www.ailover-atlas.com/?filter=memory）"],
         ["", f"{SRC_PAPER}：原表「框架开源情况」24 个框架（论文 Memory in the Age of AI Agents，arXiv 2512.13564）"],
