@@ -170,7 +170,9 @@ def main():
     for r in rows.values():
         r["cat"] = ""
         if r["c"] in R.GROUP_POLICY:
-            r["v"], r["cat"] = R.GROUP_POLICY[r["c"]]
+            r["v"], r["cat"], flag = R.GROUP_POLICY[r["c"]]
+            if flag and flag not in r["note"]:
+                r["note"] = "；".join(x for x in [flag, r["note"]] if x)
         if r["v"] == "纳入" and not r["cat"]:
             r["cat"] = R.DEFAULT_CATEGORY
 
@@ -219,11 +221,11 @@ def write_xlsx(rows):
         ["结论统计", f"四个来源共 523 条，按仓库去重合并后 {len(rows)} 条：纳入 {n_in} 个（" + "、".join(f"{k} {v}" for k, v in n_cat.items()) + f"），待定 {n_pend} 个，排除 {len(excl)} 个。"],
         ["", ""],
         ["基本标准（所有纳入项目）", "① 代码开源，可自己部署（托管服务只作可选项）；② 场景以文字对话为主（排除屏幕录制、多模态生活日志、代码库索引、企业文档检索）；③ 记的是“记忆”：用户事实与偏好、对话历史、AI 自身身份与关系、做事经验，不是单纯的笔记或文档搜索。"],
-        ["收录类别", f"{R.DEFAULT_CATEGORY}：有现成接法（MCP 服务、网关／代理、宿主插件，如 OpenClaw、Hermes、AstrBot、Claude Code），不用写代码就能接到用户已有的助手上。只支持 Claude Code 的会话记忆也算这一类。"],
+        ["收录类别", f"{R.DEFAULT_CATEGORY}：有现成接法（MCP 服务、网关／代理、宿主插件，如 OpenClaw、Hermes、AstrBot、Claude Code），不用写代码就能接到用户已有的助手上。只支持 Claude Code 的会话记忆、偏编程的记忆（P2）、默认走托管服务的（P3）也算这一类，后两者在备注里标出。"],
         ["", "自带记忆的应用：记忆是某个应用（多为伴侣应用或完整的 agent）的一部分，不能单独接到已有助手上；用户愿意换用这个应用就能直接用。对应代码 E1、P1。"],
-        ["", "需写代码（开发者向）：只提供代码库或服务，要自己写代码对接或自备前端。对应代码 A。"],
+        ["", "需写代码（开发者向）：只提供代码库或服务，要自己写代码对接或自备前端（代码 A），或部署门槛很高（代码 P4）。"],
         ["结论含义", "纳入：进入候选。待定：还需负责人决定，按「分组代码」归类。排除：不收录，附原因代码。"],
-        ["负责人决定（2026-10-10）", "收录需写代码（A）、应用自带记忆（E1）和自带助手的完整应用（P1）；收录只支持 Claude Code 的会话记忆；排除 P5（证据不足）、P6（偏工作/团队）。P2、P3、P4、P7 待定。"],
+        ["负责人决定（2026-10-10）", "收录需写代码（A）、应用自带记忆（E1）和自带助手的完整应用（P1）；收录只支持 Claude Code 的会话记忆；排除 P5（证据不足）、P6（偏工作/团队）。之后又决定：收录 P2（偏编程，备注标出）、P3（默认托管，备注标风险）、P4（并入“需写代码”类别），排除 P7（人格/档案）。"],
         ["", ""],
         ["来源", f"{SRC_ATLAS}：原表「记忆项目总表」50 个项目（https://www.ailover-atlas.com/?filter=memory）"],
         ["", f"{SRC_PAPER}：原表「框架开源情况」24 个框架（论文 Memory in the Age of AI Agents，arXiv 2512.13564）"],
