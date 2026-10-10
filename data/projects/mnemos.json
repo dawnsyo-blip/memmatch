@@ -86,5 +86,98 @@
       "need": "模型 API 密钥",
       "note": "Star 为 0"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：FastAPI 服务"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（gvector locally (e.g. on macOS, `brew install postgresq）；用跨平台运行时安装（docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实与对话"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“ments (via real LLM tool-use calls) and decayed stale facts' confidence; a low-value”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：、语义、程序记忆＋反思遗忘的框架，带 React 面板；FastAPI 服务；Star 为 0；# mn；cli：strategy outcome. The CLI and the API both call th；tools：ue fact that crossed the forget threshold is now archive"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

@@ -81,5 +81,101 @@
       "need": "",
       "note": "Star 很多（约 9.9 万），但以编程项目为主"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：插件/钩子"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex",
+        "cursor",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Codex、Cursor、OpenClaw、Grok Bot"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本机服务；部分宿主默认用托管的 CMEM Pro"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（orage (bundled) --- ### Windows Setup Notes If you see）；用跨平台运行时安装（npx），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "费用原文未识别：本机服务；部分宿主默认用托管的 CMEM Pro；偏编程场景；Star 很多（约 9.9 万），但以编程项目为主"
+    },
+    "accounts_needed": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "账号原文未识别：（空）"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：编程会话"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“ly preserves context across sessions by automatically capturing tool usage observations, generating”"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：skill - 🖥️ **Web Viewer UI** - Real-time memory str；cli：install for Antigravity CLI ([setup guide](https://d"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

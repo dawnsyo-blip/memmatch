@@ -81,5 +81,105 @@
       "need": "无",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP（本地＋远程 OAuth）；REST"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "chatgpt",
+        "claude_desktop",
+        "claude_web_mobile",
+        "opencode"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、claude.ai 网页、ChatGPT、OpenCode；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account",
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；远程需 Cloudflare Tunnel 等"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（desktop_config.json` - **Windows**: `%APPDATA%\\Claude\\cla）；macos（to your config file: - **macOS**: `~/Library/Applicatio）；linux（desktop_config.json` - **Linux**: `~/.config/Claude/cla）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中（本地）／高（远程）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋决定"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网页版用；MCP（本地＋远程；cli：**REST API, MCP, OAuth, CLI, dashboard**. One self-h"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

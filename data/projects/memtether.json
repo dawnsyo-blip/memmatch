@@ -81,5 +81,106 @@
       "need": "无（语义检索可选）",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；REST"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor 等 23 个客户端；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（des to keyword search 4. Windows-first. macOS/Linux shoul）；macos（search 4. Windows-first. macOS/Linux should work but no）；linux（4. Windows-first. macOS/Linux should work but not full）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：pip 安装"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无（语义检索可选）"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“===+ ``` ## TL;DR - **Your AI clients forget each other?** Every agent keeps its own”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：录谁写的、何时生效、取代了什么，冲突交给人裁决，带面板；MCP；REST；<div align=\"cen；files：Go binary) | Cloud API | Markdown files | | Supersession | ✅ bi-；cli：er-verifiable) | ✅ court CLI + zip | ❌ | ❌ | ❌ | ❌ |"
+    },
+    "export": {
+      "value": [
+        "markdown",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“| ✅ | ❌ | ❌ | ❌ | ❌ | | Export as markdown | ✅ | ❌ | ❌ | ❌ | ✅ | |”；“it chain memtether stats memtether export-md --out ./backup #”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

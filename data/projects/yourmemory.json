@@ -86,5 +86,104 @@
       "need": "无",
       "note": "CC BY-NC 4.0，禁止商用"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；API 代理"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor、Windsurf、Cline；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（linux-x86_64.tar.gz` | | Windows (x86-64) | `yourmemory-w）；macos（| |----------|-------| | macOS (Apple Silicon) | `yourm）；linux（macos-x86_64.tar.gz` | | Linux (x86-64) | `yourmemory-l）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中（另有约 2GB 的离线整合包）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "README：“cal decay** | Every memory ages on an **Ebbinghaus forgetting curve**. Stale, unused facts”"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：按遗忘曲线衰减的记忆，带面板，另有保证注入记忆的 API 代理；MCP；API；tools：o access) and **right-to-forget** (purge), plus SOC 2-al"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“d}/import` | Re-import a previous export | | **Recoverability** |”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：CC BY-NC"
+    }
   }
 }

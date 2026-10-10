@@ -126,5 +126,103 @@
       "遗忘的终点": "移入归档，可恢复",
       "整合（合并、摘要）方式": "无"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP（教程＋代码框架）；MCP（教程＋代码框架）"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：安卓上的 MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "phone"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：安卓手机（Termux）；安卓手机（Termux）"
+    },
+    "os": {
+      "value": [
+        "android"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：android（安卓手机（Termux）；安卓手机（Termux）；A）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：中到高：要让 AI 照教程补全代码；中到高：要让 AI 照教程补全代码（区间取较高一档）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：Android 手机＋Termux＋Python；Android 手机＋Termux＋Python"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋近期工作记忆；用户事实＋近期工作记忆"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：原文写入日记、钉选、归档三个文件夹；事后手动；归档可恢复，钉选永不衰减（依据站点介绍）"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：日记重要度随时间衰减（依据站点介绍）；移入归档，可恢复"
+    },
+    "human_review": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "no_license",
+      "status": "auto",
+      "basis": "许可证原文：无法核实（代码在小红书附件）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（Markdown 原文）",
+      "function": "用户事实＋近期工作记忆",
+      "formation": "（站点）Markdown 保存日记、钉选、归档，不做摘要",
+      "evolution": "（站点未提）",
+      "retrieval": "（站点）回看最近几天以续接新窗口",
+      "dynamics_coverage": "Ⅵ 无法核实"
+    }
   }
 }

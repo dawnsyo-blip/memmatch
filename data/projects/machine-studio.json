@@ -126,5 +126,106 @@
       "遗忘的终点": "手动真删除",
       "整合（合并、摘要）方式": "无"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋网页工作室；MCP＋网页工作室"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器；自己的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：三条命令；低：三条命令"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：Python 3.10+；支持 MCP 的客户端（如 Kelivo）；Python 3.10+；支持 MCP 的客户端（如 Kelivo）"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：环境事实（技术记忆）；环境事实（技术记忆）"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：AI 通过 MCP 按项目手动保存；手动更新、删除；真删除；Bearer 令牌鉴权"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "tools：| 真删某条（不可恢复） | | `project_delete` | 真删整个项目及其所有条目 | | `lis"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（按项目）",
+      "function": "环境事实（技术记忆）",
+      "formation": "AI 通过 MCP 按项目手动保存",
+      "evolution": "更新；真删除条目或整个项目，不可恢复",
+      "retrieval": "关键词优先，可选向量兜底（低于阈值不返回）",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

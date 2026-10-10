@@ -81,5 +81,100 @@
       "need": "",
       "note": "当前分支为开发版，作者称不适合生产"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；HTTP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“at the HTTP endpoint with the API key. Example for Claude Code / Cu”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：多类记忆"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“nce scoring, consolidation, lifecycle decay, and circadian/interoceptive modulati”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ngine**, not an app — no UI, no dashboard to log int；tools：`confirm_destructive`, `memory_delete`, `memory_update` | Conf"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“receipts. - Added native checkpoint export/import routes and a vers”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

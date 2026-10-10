@@ -85,5 +85,96 @@
       "need": "OpenAI API 密钥",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：服务＋SDK"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：托管或 Docker 自托管"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：OpenAI API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "experience"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：经验/技能"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：picture> <img alt=\"Dashboard\" src=\"./assets/onboard.p；files：k** — Skill memories are Markdown files. Use them with LangGraph"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“ZIP, reuse anywhere** — Export skill files as ZIP. Run locally, in another”"
+    },
+    "data_passes_through": {
+      "value": [
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

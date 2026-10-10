@@ -81,5 +81,97 @@
       "need": "无",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop（聊天/Code/Cowork）、Claude Code；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（stall build-essential` - Windows: [Visual Studio Build To）；macos（ed native build tools: - macOS: `xcode-select --install）；linux（code-select --install` - Linux: `sudo apt install build）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：改 Claude 桌面版配置"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：决定与上下文"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“ype, tags | | `bridge_delete_context` | Forget a saved context | | `bridge_status` | O”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

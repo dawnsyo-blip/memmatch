@@ -71,5 +71,95 @@
       "need": "",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：API/MCP"
+    },
+    "compatible_clients": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "客户端原文："
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：Docker＋Neo4j（Docker/数据库可在自己电脑或服务器上跑）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（te virtual environment # Windows (PowerShell, inside /api）；macos（v\\Scripts\\activate.bat # macOS / Linux source .venv/bin）；linux（s\\activate.bat # macOS / Linux source .venv/bin/activat）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“ies | | Service API | `/v1` | API Key | Knowledge extraction, graph”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：知识"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“nsion model of memory strength and time decay: - Each knowledge item is assigned an”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ight=\"652\" alt=\"Frontend UI\" src=\"https://github.com"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

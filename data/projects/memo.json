@@ -81,5 +81,100 @@
       "need": "",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋钩子"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Claude Desktop、Cursor 等；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的 Mac（另有 Docker）"
+    },
+    "os": {
+      "value": [
+        "macos"
+      ],
+      "status": "auto",
+      "basis": "原文：自己的 Mac（另有 Docker）；中；偏编程场景；"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“n, and OpenCode. No cloud, no API keys, no Ollama, no vector DB to”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：编程记忆"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“` `search` `ask` `get` `edit` `rename` `delete` `list` **Recall & Hooks:** `recall` `”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ration, and a local chat UI over your memory (`memo；cli：ambient-memory) | | Full CLI reference (145 commands)"
+    },
+    "export": {
+      "value": [
+        "markdown"
+      ],
+      "status": "needs_review",
+      "basis": "没写导出功能，但记忆本身存成 Markdown 文件，可以直接拷走：“s/diagram-recall.svg) **Markdown is the source of truth.** Every memory is a pla”，建议值 markdown"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

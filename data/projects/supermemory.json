@@ -90,5 +90,102 @@
       "need": "Supermemory 账号",
       "note": "插件调用托管 API，数据经第三方；论文表 9 已列"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：插件＋MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "cursor",
+        "hermes",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor、OpenClaw、Hermes 等；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：默认托管 API；可自托管"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中（托管）（区间取较高一档）"
+    },
+    "cost": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "费用原文未识别：Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署"
+    },
+    "accounts_needed": {
+      "value": [
+        "vendor_account"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Supermemory 账号"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋画像"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“mic) # Recent context ``` Supermemory automatically extracts memories, builds user profiles, and returns r”"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“t does | |---|---| | `memory` | Save or forget information. Your AI calls this automat”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：/console.supermemory.ai\">Dashboard</a> · <a href=\"https:/；tools：--| | `memory` | Save or forget information. Your AI cal"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

@@ -81,5 +81,99 @@
       "need": "Cloudflare 账号",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：远程 MCP（OAuth）"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "chatgpt"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：ChatGPT 及其它支持远程 MCP 的网页端客户端；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的 Cloudflare 账号"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "free",
+      "status": "needs_review",
+      "basis": "只需免费账号（Cloudflare 账号；自己的 Cloudflare 账号），但云平台免费额度有限，需确认"
+    },
+    "accounts_needed": {
+      "value": [
+        "cloudflare"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Cloudflare 账号"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：偏好、决定、笔记"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“re useful in the moment, but they often forget project context across chats, sessions,”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "files",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "files：d preferences as concise plain text. ``` Full guide: [`docs；cli：l needed | | Local IDE / CLI MCP clients | **Expected；tools：e moment, but they often forget project context across c"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

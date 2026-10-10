@@ -126,5 +126,100 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "从最近对话生成长期印象摘要"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：仅前端（可装成 iPhone PWA）；仅前端（可装成 iPhone PWA）"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：需自行实现后端"
+    },
+    "runs_on": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "运行位置原文未识别：浏览器；后端需自行实现；浏览器；后端需自行实现"
+    },
+    "os": {
+      "value": [
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：ios（浏览器；后端需自行实现；浏览器；后端需自行实现；iPhone / Web / PWA；高：后端接口要自己实现；）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：后端接口要自己实现；高：后端接口要自己实现"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：浏览器；能自己写后端（可借 Claude 订阅）"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription"
+      ],
+      "status": "auto",
+      "basis": "账号原文：浏览器；能自己写后端（可借 Claude 订阅）；浏览器；能自己写后端（可借 Claude 订阅）"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：模型通过接口写记忆，后端去重；去重时；近似去重，前端标红、人来定夺"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "cli：/ Max 订阅，装好 Claude Code CLI 之后，用官方的 `claude-agent-sd"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "运行位置未识别"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "needs_review",
+      "basis": "许可证原文：自定义源码可用许可（禁止商用、强制署名）（含多份许可，取限制最多的一项）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级",
+      "function": "用户事实",
+      "formation": "模型通过接口自己写记忆，后端按近似规则拦截重复",
+      "evolution": "从最近对话生成长期印象摘要；近似去重",
+      "retrieval": "全库搜聊天记录；新鲜度排序",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

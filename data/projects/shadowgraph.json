@@ -81,5 +81,95 @@
       "need": "",
       "note": "技术预览版，npm 上没有"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：插件"
+    },
+    "compatible_clients": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "客户端原文：Claude 系列"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（Git Bash (macOS, Linux, WSL) | single quotes, plain）；macos（| bash / zsh / Git Bash (macOS, Linux, WSL) | single qu）；linux（/ zsh / Git Bash (macOS, Linux, WSL) | single quotes, p）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "费用原文未识别：自己的电脑；偏编程场景；技术预览版，npm 上没有"
+    },
+    "accounts_needed": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "账号原文未识别：（空）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：决策记录"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“d). Omitted scope means all-null scope. Purge is previewable, logical by default, and”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：/health ``` A read-only dashboard is served at `http://127；cli：uilding agents on MCP, a CLI, or a local HTTP API who"
+    },
+    "export": {
+      "value": [
+        "markdown",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“redact`'s output and the public export (`GET /records`, `list`)”；“ver the whole store; the public export and a redaction are read”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

@@ -126,5 +126,108 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "定时触发记忆整合、标签细化、自省"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：完整应用（WebUI＋Discord、Telegram 等多通道）；完整应用（WebUI＋Discord、Telegram 等多通道）"
+    },
+    "compatible_clients": {
+      "value": [
+        "discord",
+        "self_contained",
+        "telegram"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带 WebUI；Discord、Telegram 等"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器；自己的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（install (Recommended) **Windows** — download `SyntH-Setu）；linux（ch AI service to use. **Linux** — one command: ```bas）；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中：一键安装包自带 PostgreSQL 和 Python；低到中：一键安装包自带 PostgreSQL 和 Python（区间取较高一档）"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Windows 一键安装包、Linux 一条命令，或 Docker；模型密钥；Windows 一键安装包、Linux 一条命令，或 Docker；模型密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身份＋内部状态；AI 身份＋内部状态"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：缓冲的对话编译为持久状态；自动写日记；—；—"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：情绪随时间衰减；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：人格、意志（Will）、梦境、插件动作；完整应用（WebUI＋Discord、Telegram 等多通道）；完"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "needs_review",
+      "basis": "许可证原文：GPL-3.0＋附加条款（LICENSE_ADDENDUM）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・多模块",
+      "function": "AI 身份＋内部状态",
+      "formation": "缓冲对话编译为结构化持久状态；日记",
+      "evolution": "情绪随时间衰减；定时“心跳”触发记忆整合、标签细化、自我反思；自主写成长状态",
+      "retrieval": "长期记忆语义检索",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

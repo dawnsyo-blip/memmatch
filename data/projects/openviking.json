@@ -86,5 +86,104 @@
       "need": "模型 API 密钥",
       "note": "火山引擎出品"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；OpenClaw/Hermes 插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "hermes",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、任意 MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器；有网页版 Studio 可先试"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（8+ and curl, no sudo. On Windows, use the [desktop app](#）；macos（it. The installer needs macOS or Linux, Node.js 18+ an）；linux（installer needs macOS or Linux, Node.js 18+ and curl, n）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：中到高（区间取较高一档）"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "experience",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户偏好＋经验＋知识"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：e the server and console UI. Details: [VikingBot gui；cli：s> ### Explore with the CLI The `openviking` packag"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    }
   }
 }

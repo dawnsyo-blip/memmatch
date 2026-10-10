@@ -81,5 +81,98 @@
       "need": "可选本地 Ollama 或托管模型",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：插件；一条命令接 Hermes"
+    },
+    "compatible_clients": {
+      "value": [
+        "hermes",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Hermes、OpenClaw；LangChain 等框架"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（encrypted]' # macOS and Windows can install the extra di）；macos（de 'atmem[encrypted]' # macOS and Windows can install）；linux（re migration: ```bash # Ubuntu/Debian first: sudo apt-g）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：中到高（区间取较高一档）"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "账号原文：可选本地 Ollama 或托管模型（含“可选”，需确认是否必需）"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：agent 记忆与证据"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“uded from ordinary search and recall. - Forget cascades through canonical, graph, medi”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：doctor atmem init atmem dashboard ``` That one Python ins；cli：spect it from either the CLI or the dashboard: ```ba"
+    },
+    "export": {
+      "value": [
+        "json",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“kbox verify RUN_ID atmem blackbox export RUN_ID --format json --o”；“Evidence Collector** can additionally export plaintext after exact”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

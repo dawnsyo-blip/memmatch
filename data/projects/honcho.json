@@ -81,5 +81,105 @@
       "need": "托管需账号；自托管需模型密钥",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：官方插件＋MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "hermes",
+        "openclaw",
+        "opencode"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、OpenCode 等；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：托管（api.honcho.dev）或本地／Docker 自托管"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（n/install.sh | bash ``` Windows (PowerShell): `irm https）；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key",
+        "vendor_account"
+      ],
+      "status": "auto",
+      "basis": "账号原文：托管需账号；自托管需模型密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户画像"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "cli：ckage/@honcho-ai/sdk) [![CLI](https://img.shields.io/"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    }
   }
 }

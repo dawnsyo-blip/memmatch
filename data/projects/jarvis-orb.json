@@ -86,5 +86,97 @@
       "need": "无",
       "note": "仅支持 Apple Silicon"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp",
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋桌面应用"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的 Apple Silicon Mac"
+    },
+    "os": {
+      "value": [
+        "macos"
+      ],
+      "status": "auto",
+      "basis": "原文：自己的 Apple Silicon Mac；低到中；仅支持 Apple Silic"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中（区间取较高一档）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：决定与生活事务"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“| | 02 | **Temporal Scoring** | 30-day half-life decay. Recent memories surface first. O”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：CP 服务＋桌面上会发光的“大脑”可视化；MCP＋桌面应用；仅支持 Apple Silicon；<div a"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

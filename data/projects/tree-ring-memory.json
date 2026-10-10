@@ -81,5 +81,103 @@
       "need": "",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：CLI＋插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "chatgpt",
+        "claude_code",
+        "codex"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：ChatGPT/Codex、Claude Code、Agent Zero"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（Ring-Memory/issues/26> - Homebrew tap: <https://github.com）；linux（stall for macOS ARM64 or Linux x86_64: ```bash curl -f）；用跨平台运行时安装（cargo install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：中到高（区间取较高一档）"
+    },
+    "cost": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "费用原文未识别：自己的电脑；偏编程场景"
+    },
+    "accounts_needed": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "账号原文未识别：（空）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience",
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：决定、警告、教训"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“s portable guidance for when to recall, automatically capture, remember, redact, forget, or avoid me”"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“ring recall \"protocol design\" tree-ring forget mem_example --mode delete --reason \"exa”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：discovery, and terminal UI. - Same-host multi-agent；cli：年轮式记忆：新的详细，旧的压缩，重要教训保留；CLI＋插件；偏编程场景；# Tree Ring Mem；tools：otocol design\" tree-ring forget mem_example --mode delet"
+    },
+    "export": {
+      "value": [
+        "json",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“- v0.4 added Rust-owned JSONL import/export with privacy-preserving”；“reason \"example cleanup\" tree-ring export --output memories.jsonl”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

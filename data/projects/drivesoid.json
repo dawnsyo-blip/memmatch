@@ -121,5 +121,94 @@
       "遗忘的终点": "回到基线",
       "整合（合并、摘要）方式": "—"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "接入方式原文未识别：HTTP 旁路服务；HTTP 旁路服务"
+    },
+    "compatible_clients": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "客户端原文："
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 和原表都没提到系统"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：npm start 后网页向导；低：npm start 后网页向导"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Node.js 18+；Python 3（接 Claude Code 钩子时）；OpenAI 兼容密钥（推荐 DeepSeek）；Node.js 18+；Python 3（接 Claude Code 钩子时）；OpenAI 兼容密钥（推荐 DeepSeek）"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：工作／状态记忆（快情绪、慢心境）；工作／状态记忆（快情绪、慢心境）"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：你的桥接层上报对话事件；—；—"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：快情绪衰减向慢心境；心境按天回归性情锚点；回到基线"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：empty when stale) | | `/dashboard` | GET | Live dashboard；files：system prompt injection (plain text; empty when stale) | | `"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：CC BY-NC-SA 4.0（2.1.0 起；2.0.0 及以前为 MIT）（含多份许可，取限制最多的一项）"
+    },
+    "paper_taxonomy": {
+      "form": "数值状态（16 个心理维度），不属论文三种形态",
+      "function": "工作／状态记忆（快情绪、慢心境）",
+      "formation": "上报的对话事件更新情感状态（不存记忆内容）",
+      "evolution": "快情绪衰减向慢心境，心境按天回归性情锚点",
+      "retrieval": "每轮读取当前情感状态",
+      "dynamics_coverage": "Ⅴ 不适用：存的不是记忆内容"
+    }
   }
 }

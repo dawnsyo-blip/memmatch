@@ -86,5 +86,103 @@
       "need": "Mengram 账号",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋钩子"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "codex",
+        "cursor",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor、Codex、OpenClaw；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：托管（mengram.io）"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中（区间取较高一档）"
+    },
+    "cost": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "费用原文未识别：Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器"
+    },
+    "accounts_needed": {
+      "value": [
+        "vendor_account"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Mengram 账号"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：事实、经历、流程"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“ram ``` Auto-recall before every turn, auto-capture after. 12 tools, slash commands, Graph”"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：sole](https://mengram.io/dashboard)** · **[Examples](exampl；files：ng it manually? See the [plain-text guide](https://mengram.i；cli：you first (policy gate, CLI hooks) Before compact →"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

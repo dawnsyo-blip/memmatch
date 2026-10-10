@@ -126,5 +126,108 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "表达模式与黑话累积；人格增量"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：AstrBot 插件；AstrBot 插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "astrbot"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：AstrBot"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：AstrBot 所在的电脑或服务器；AstrBot 所在的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：手动克隆、在 WebUI 里手动装依赖、按顺序配置；中：手动克隆、在 WebUI 里手动装依赖、按顺序配置"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：已运行的 AstrBot 及其接入的 QQ 群等；默认 PostgreSQL（可换 SQLite、MySQL）；已运行的 AstrBot 及其接入的 QQ 群等；默认 PostgreSQL（可换 SQLite、MySQL）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：经验（说话风格、群黑话）＋用户事实（关系、好感度）；经验（说话风格、群黑话）＋用户事实（关系、好感度）"
+    },
+    "write_mode": {
+      "value": [
+        "auto",
+        "review_first"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：从群聊的 user→bot 对话对自动学习；人格变化生效之前（审查）；学习结果先进审查链，可批准、拒绝、回滚"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：谁和谁什么关系”；人格变化先进审查，可批准或回滚；WebUI 默认免密；<div align=\"center\""
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・平面（社交关系网）",
+      "function": "经验（说话风格、群黑话）＋用户事实（关系、好感度）",
+      "formation": "从群聊 user→bot 对话对抽取表达模式、黑话、社交关系",
+      "evolution": "学习结果进审查链，可批准、拒绝、回滚或自动应用；人格自适应演化",
+      "retrieval": "在模型请求阶段注入社交、黑话、记忆和示例；记忆图与知识图谱查询",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

@@ -81,5 +81,96 @@
       "need": "",
       "note": "MIT 或 Apache-2.0"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Python/Rust 库；MCP 扩展"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（.22\" # Linux / macOS / Windows (x64 + arm64); abi3 whee）；macos（ve]>=0.5.22\" # Linux / macOS / Windows (x64 + arm64);）；linux（tdb[native]>=0.5.22\" # Linux / macOS / Windows (x64 +）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "费用原文未识别：自己的电脑；MIT 或 Apache-2.0"
+    },
+    "accounts_needed": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "账号原文未识别：（空）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：经验记忆"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "README：“Role/order structure | | `forgetting` | Ebbinghaus + rehearsal | Adaptive retention | | `c”"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：| --- ## Living Brain viewer ```bash fluctlight serv"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

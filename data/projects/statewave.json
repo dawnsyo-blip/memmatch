@@ -76,5 +76,92 @@
       "need": "",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：服务＋SDK"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：Postgres＋pgvector（Docker/数据库可在自己电脑或服务器上跑）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（sh ``` ```powershell # Windows (PowerShell) irm https:/）；macos（nning server: ```bash # macOS / Linux npx @statewavede）；linux（rver: ```bash # macOS / Linux npx @statewavedev/statew）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“s `stub` (local heuristic, no API key) | | SDKs | [Python](https://”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：情节与编译记忆"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“ines, trace every memory to its source, delete by subject Everything is organised aro”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

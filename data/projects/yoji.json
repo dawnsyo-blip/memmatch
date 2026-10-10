@@ -126,5 +126,106 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "长对话生成摘要"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：桌面应用（Electron）；桌面应用（Electron）"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带（桌面）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（自己的电脑；自己的电脑；Windows / macOS / Linux；中：源码运行或自）；macos（自己的电脑；自己的电脑；Windows / macOS / Linux；中：源码运行或自己打包；伴侣应用）；linux（；自己的电脑；Windows / macOS / Linux；中：源码运行或自己打包；伴侣应用自带记忆；能操作）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：源码运行或自己打包；中：源码运行或自己打包"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Windows、macOS 或 Linux；pnpm 11；DeepSeek 或通义千问密钥；Windows、macOS 或 Linux；pnpm 11；DeepSeek 或通义千问密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋情绪状态；用户事实＋情绪状态"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：用户画像写入 AGENTS.md；长对话生成摘要；—；—"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：侣：三层记忆＋激素情绪＋Live2D＋可操作电脑；桌面应用（Electron）；伴侣应用自带记忆；能操作电脑；files：播**不等待 - Markdown 自动清洗，只读纯文本，不会念出 `*斜体*` 和 `**加粗**` -"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“；能操作电脑、接 MCP、建子 Agent；可整体打包导出带走 # Yoji — 你的桌面 AI 伙伴 [”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・分层（三层）",
+      "function": "用户事实＋情绪状态",
+      "formation": "用户画像写入 AGENTS.md；长期对话生成摘要存入 sqlite-vec",
+      "evolution": "README 未描述",
+      "retrieval": "向量＋混合检索",
+      "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
+    }
   }
 }

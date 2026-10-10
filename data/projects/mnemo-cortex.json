@@ -126,5 +126,108 @@
       "遗忘的终点": "README 未细述",
       "整合（合并、摘要）方式": "夜间跨 Agent 整合（Dreaming）；滚动压缩会话"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：本地服务器＋MCP；另有会话文件监听；本地服务器＋MCP；另有会话文件监听"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_desktop"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop（.mcpb 安装包）及其它 MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步；本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步；本机（Linux／m）；macos（本机（Linux／macOS／Windows）；多台电脑可用 U 盘同步；本机）；linux（本机（Linux／macOS／Windows）；多台电脑可用 U）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：命令行向导；Claude Desktop 可拖拽 .mcpb 安装包；中：命令行向导；Claude Desktop 可拖拽 .mcpb 安装包"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：电脑；Python 3.11+；推荐 Ollama 跑本地模型（也可用云端密钥）；接 Claude Desktop 等需 Node.js 18+；电脑；Python 3.11+；推荐 Ollama 跑本地模型（也可用云端密钥）；接 Claude Desktop 等需 Node.js 18+"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：监听会话文件自动捕获，入库时分类、脱敏；发生冲突时，裁决提案；权限分级：与锁定事实冲突的写入转为提案；置信度阶梯；防篡改记忆账本"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：有衰减阈值配置（README 未细述）；README 未细述"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：-any-local-llm)** — Open WebUI, llama.cpp, Ollama, Lobe；files：l companion: a folder of markdown files in Git that you write an；cli：de Desktop, OpenAI Codex CLI, and **any local MCP cli"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平＋结构化事实",
+      "function": "用户事实",
+      "formation": "自动捕获、入库时分类、脱敏；Analyst 把原始会话日志蒸馏成笔记",
+      "evolution": "夜间跨 Agent 整合（Dreaming）与压缩；事实置信度三级阶梯随印证升降；与锁定事实冲突的写入转为提案，由用户裁决",
+      "retrieval": "语义检索＋复合排序；结构化事实精确查询",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

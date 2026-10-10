@@ -81,5 +81,105 @@
       "need": "无",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor、Windsurf；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（de_desktop_config.json` (macOS: `~/Library/Application）；用跨平台运行时安装（npx），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中：npx 一条命令自动配置（区间取较高一档）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：讨论上下文"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“Code**, `install` adds a **`SessionEnd` auto-capture hook** — every substantive session is d”"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "README：“t from scratch. Memory you stop using **cools and decays gracefully** into one-line traces (it's”"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：忆＋会话交接：在一个工具里记下，换个工具接着聊；带面板和“记忆护照”导出；MCP；# 🧠 Mind Ma；files：.** Because memories are plain files — and imports can pull i；cli：**Claude Code** via its CLI if present. Restart your"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“-labs/mindmap-mcp-server passport export # → ~/mi”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

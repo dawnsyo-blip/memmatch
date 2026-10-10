@@ -142,5 +142,108 @@
       "url": "https://github.com/MemTensor/MemOS",
       "desc": "Memory OS for LLM agents with hybrid retrieval and cross-task skill reuse."
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：四选一：云端 API、本地 REST 服务、OpenClaw 云插件、本地插件；四选一：云端 API、本地 REST 服务、OpenClaw 云插件、本地插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenClaw（插件）；REST 服务"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：云端（MemOS Cloud）或自己的电脑、服务器；云端（MemOS Cloud）或自己的电脑、服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（.sh | bash ``` Install (Windows PowerShell): ```powersh）；macos（ll for DeepSeek Harness (macOS / Linux): ```bash curl）；linux（eepSeek Harness (macOS / Linux): ```bash curl -fsSL ht）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：本地插件一条安装命令；自建服务需 Docker；中：本地插件一条安装命令；自建服务需 Docker"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：本地插件：电脑＋Node.js＋已装好的 DeepSeek Harness、Hermes 或 OpenClaw；本地服务：Docker（含 Neo4j、Qdrant）；本地插件：电脑＋Node.js＋已装好的 DeepSeek Harness、Hermes 或 OpenClaw；本地服务：Docker（含 Neo4j、Qdrant）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：经验（策略＋技能）；经验（策略＋技能）"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：Agent 回合成功结束后自动沉淀经验；可选：用自然语言反馈修正；自然语言反馈可纠正、补充、替换记忆；智能去重"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：and a full Memory Viewer dashboard. ## 📊 Performance MemO"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・分层（轨迹→策略→世界模型→技能）",
+      "function": "经验（策略＋技能）",
+      "formation": "Agent 回合结束后异步沉淀新经验与对话",
+      "evolution": "L1 轨迹→L2 策略→L3 世界模型→结晶化技能；自然语言反馈可纠正、补充、替换记忆；智能去重",
+      "retrieval": "任务开始前自动召回；FTS5＋向量混合检索；反馈驱动",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

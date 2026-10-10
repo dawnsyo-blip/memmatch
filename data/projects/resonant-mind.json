@@ -126,5 +126,102 @@
       "遗忘的终点": "归档（Surgery 区）",
       "整合（合并、摘要）方式": "整合、反思、梦境复现"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP 服务（47 个工具）；MCP 服务（47 个工具）"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：Cloudflare Workers＋Neon PostgreSQL＋R2；Cloudflare Workers＋Neon PostgreSQL＋R2"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：要配多个云资源与密钥；高：要配多个云资源与密钥"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "cloudflare",
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Cloudflare 账号、Neon 数据库、Gemini 密钥、Node.js 22+；Cloudflare 账号、Neon 数据库、Gemini 密钥、Node.js 22+"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：身份连续＋情绪；身份连续＋情绪"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：AI 调用 write、record 等工具写入；可选：调用修订工具；Surgery 区可编辑、删除、归档；身份修改有提案机制"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：守护进程处理保留与孤儿检测；归档（Surgery 区）"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：composition - no bundled dashboard or Observatory - no D1 f"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "source_available",
+      "status": "needs_review",
+      "basis": "许可证原文：Codependent AI Source-Available License（自定义）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（语义记忆）",
+      "function": "身份连续＋情绪",
+      "formation": "write、record 等工具写入；R2 存视觉记忆",
+      "evolution": "定时守护进程“代谢”记忆：情绪与新奇度、保留、孤儿检测、整合、反思、梦境复现",
+      "retrieval": "pgvector 语义检索；recall、thread back",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

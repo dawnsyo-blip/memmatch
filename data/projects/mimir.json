@@ -126,5 +126,111 @@
       "遗忘的终点": "生动度降到底（README 未细述是否删除）",
       "整合（合并、摘要）方式": "再巩固；时间要点提取"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Python 代码库；Python 代码库"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：嵌入你自己的程序；嵌入你自己的程序（Docker/数据库可在自己电脑或服务器上跑）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：要写代码；高：要写代码"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：Python 环境（pip install vividmimir）；Python 环境（pip install vividmimir）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：事实（情景、社会印象）＋经验（程序、教训）＋前瞻（未来）；事实（情景、社会印象）＋经验（程序、教训）＋前瞻（未来）"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：程序调用 remember，带情绪、重要度和保存理由；不需要人；内容去重；可选静态加密"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：间隔重复式自然衰减；检索诱发遗忘；生动度降到底（README 未细述是否删除）"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：Yes | | Project overview dashboard | Yes | — | Yes | ### L；files：age] {description}` as a plain text memory. ### 11. Huginn；tools：from to remember, feel, forget, and grow — not as a fla"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“| — | Yes | | Yggdrasil graph export | — | — | Yes | | All-in”；“ph()` → dict | Adjacency list export for graph visualization”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：PolyForm Noncommercial 1.0.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・分层（多模块）",
+      "function": "事实（情景、社会印象）＋经验（程序、教训）＋前瞻（未来）",
+      "formation": "按情景、程序、社会、时间、视觉等类型写入，带情绪向量",
+      "evolution": "间隔重复式自然衰减、生动度生命周期、再巩固、检索诱发遗忘、内容去重",
+      "retrieval": "BM25＋语义向量融合；不自主联想召回",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

@@ -76,5 +76,97 @@
       "need": "",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_desktop",
+        "opencode"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、OpenCode"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：Postgres；或作者在 Hugging Face 上的免费实例"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“Decisions > **Bring your own API key.** TypeSafe is in early acces”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "记忆对象原文未识别：agent 记忆"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“esses historical memories based on time decay, shrinking 24-hour granular details int”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：│ │ Verify: open dashboard.php, must load OK.\" │；files：s` | Add instructions in plain text | | **Windsurf** | `.win；cli：use the HTTP endpoint or CLI scripts. ### 🖥️ Display"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

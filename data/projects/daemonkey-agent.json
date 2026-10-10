@@ -126,5 +126,108 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "画像分层；成功任务沉淀为手册"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：本地伴侣应用（网页工作台＋房间＋桌宠）；可接微信、飞书；本地伴侣应用（网页工作台＋房间＋桌宠）；可接微信、飞书"
+    },
+    "compatible_clients": {
+      "value": [
+        "feishu",
+        "self_contained",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带网页工作台；微信、飞书"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（自己的电脑；自己的电脑；Windows / macOS / Linux；低：Window）；macos（自己的电脑；自己的电脑；Windows / macOS / Linux；低：Windows 双击安装约）；linux（；自己的电脑；Windows / macOS / Linux；低：Windows 双击安装约 1 分钟；本地伴）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：Windows 双击安装约 1 分钟；低：Windows 双击安装约 1 分钟"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Windows（双击启动器）或 macOS、Linux；Python 3.10+；一个 OpenAI 兼容接口密钥；Windows（双击启动器）或 macOS、Linux；Python 3.10+；一个 OpenAI 兼容接口密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "experience",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实（画像）＋经验（Playbook 手册）；用户事实（画像）＋经验（Playbook 手册）"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：自动：画像、日记；任务跑通后写成手册；改坏时回档；官方升级只换程序不碰记忆；可一键回档"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：带上）两套记忆；本地自托管，可回档；本地伴侣应用（网页工作台＋房间＋桌宠）；可接微信、飞书；本地伴侣应用（网页"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级（本地）",
+      "function": "用户事实（画像）＋经验（Playbook 手册）",
+      "formation": "写入画像、日记；任务跑通后写成手册",
+      "evolution": "画像分层，常用短条常驻；成长日志",
+      "retrieval": "多轮自主翻记忆＋重排；同类任务自动带出手册",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

@@ -126,5 +126,110 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "日记通道整理对话；旧窗口可重新整理接续"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：网页、桌面或 PWA；也可只拆模块用；网页、桌面或 PWA；也可只拆模块用"
+    },
+    "compatible_clients": {
+      "value": [
+        "chatgpt",
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带（网页/桌面/PWA）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或浏览器；自己的电脑或浏览器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（览器；自己的电脑或浏览器；Web / PWA / Windows；低：npm install、npm run de）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：npm install、npm run dev；低：npm install、npm run dev"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Node.js；模型密钥；Node.js；模型密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身份（人格核）＋用户事实；AI 身份（人格核）＋用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：记忆档案由用户管理；回忆种子是候选；种子转正时；回忆种子不自动写入；记忆是路标不是命令"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：增加总量安全上限，未超限时行为保持一致；实时上下文面板可以看到 `recent sets / resto"
+    },
+    "export": {
+      "value": [
+        "markdown",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“ivate chat logs private memory exports Obsidian vault paths”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：CC BY-NC-SA 4.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・分层",
+      "function": "AI 身份（人格核）＋用户事实",
+      "formation": "记忆档案由用户管理；回忆种子只是候选，不自动写入；日记通道整理对话",
+      "evolution": "后台整理任务走轻量模型；旧窗口记录可重新整理接续",
+      "retrieval": "轻量召回判断（短句不触发）；召回顺序稳定以利缓存；旧聊天全文检索",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

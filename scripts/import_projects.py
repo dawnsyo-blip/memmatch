@@ -86,8 +86,11 @@ def main():
     written = set()
     for key, r in rows.items():
         doc = json.loads(json.dumps(to_json(ids[key], r), ensure_ascii=False, default=str))
-        jsonschema.validate(doc, SCHEMA)
         path = OUT / f"{doc['id']}.json"
+        if path.exists():  # 保留后续阶段写入的字段（如阶段 1 的 normalized）
+            old = json.loads(path.read_text(encoding="utf-8"))
+            doc.update({k: v for k, v in old.items() if k not in doc})
+        jsonschema.validate(doc, SCHEMA)
         path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         written.add(path.name)
 

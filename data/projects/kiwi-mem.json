@@ -126,5 +126,113 @@
       "遗忘的终点": "又冷又老的记忆按热度阈值清走；锁定的永不退役",
       "整合（合并、摘要）方式": "Dream 三层（清理→融合成场景→前瞻推断）；日→周→月→季→年层级摘要"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：网关；网关"
+    },
+    "compatible_clients": {
+      "value": [
+        "openai_compatible"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenAI 兼容客户端（网关）"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account",
+        "own_server",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：云服务器（VPS，1 核 1G 即可）或 Zeabur 等托管平台；云服务器（VPS，1 核 1G 即可）或 Zeabur 等托管平台"
+    },
+    "os": {
+      "value": [
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：ios（为什么需要域名和 HTTPS？** 因为苹果手机（iOS）和大部分手机应用只允许连接 `https://`）；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：SSH 登录后几条命令＋配隧道和管理面板；中：SSH 登录后几条命令＋配隧道和管理面板"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "cloudflare",
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：VPS＋域名＋Cloudflare（手机端必须 HTTPS）；一个模型中转站密钥；VPS＋域名＋Cloudflare（手机端必须 HTTPS）；一个模型中转站密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：网关每 N 轮自动从对话中提取；可选：在面板锁定、添加、修改；矛盾时旧记忆自动失效；用户锁定的记忆永不衰减"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：热度按半衰期衰减，被召回则升温；每晚软化老记忆细节（默认冷却 21 天）；又冷又老的记忆按热度阈值清走；锁定的永不退役"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：式的 LLM 服务商。Docker 一键部署，管理面板里点点就能配。 **技术栈**：Python /"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“| |---|---|---| | `/sync/export` | GET | 导出备份 | | `/sync/import-backup”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "own_cloud",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0-or-later"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・分层（日／周／月摘要）",
+      "function": "用户事实",
+      "formation": "网关从每轮回复中提取新记忆",
+      "evolution": "热度随时间衰减、反复提及升温；每晚模糊旧记忆细节；Dream 三层整合（清理→融合场景→推断）；日→周→月→季→年摘要；矛盾时旧记忆失效",
+      "retrieval": "记忆搜索；高热度全文注入、中热度注入摘要；Dream 场景带向量索引可被搜到",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

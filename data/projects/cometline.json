@@ -126,5 +126,109 @@
       "遗忘的终点": "合并、清理陈旧条目",
       "整合（合并、摘要）方式": "自动或手动压缩（compaction）"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：桌面应用；桌面应用"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex",
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带 Mac 应用；调度 Claude Code、Codex"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的 Mac；自己的 Mac"
+    },
+    "os": {
+      "value": [
+        "macos"
+      ],
+      "status": "auto",
+      "basis": "原文：自己的 Mac；自己的 Mac；Desktop；低：H"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：Homebrew 一条命令或下载签名安装包；低：Homebrew 一条命令或下载签名安装包"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：macOS 13+；模型密钥或本机 Ollama；macOS 13+；模型密钥或本机 Ollama"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：工作记忆＋环境事实（工作区上下文）；工作记忆＋环境事实（工作区上下文）"
+    },
+    "write_mode": {
+      "value": [
+        "auto",
+        "on_request"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：对话后自动抽取事实与偏好；可选：手动整理；可在设置里浏览、编辑、压缩"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "auto",
+      "basis": "原表：无自动衰减；合并、清理陈旧条目"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：i；每个项目一份独立记忆，并调度编码 Agent；桌面应用；偏编程场景；按项目分区记忆并调度编码 Agent；cli：gh fixed non-interactive CLI profiles. Command paths；tools：ries`, `create_memory`, `update_memory`, `delete_memory`, `reca"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（按项目分区）",
+      "function": "工作记忆＋环境事实（工作区上下文）",
+      "formation": "对话后自动抽取事实与偏好；Inbox 回复被后台内化为记忆",
+      "evolution": "自动或手动压缩：合并、清理陈旧条目；换向量模型后台重建",
+      "retrieval": "每轮前自动注入相关记忆；按项目隔离",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

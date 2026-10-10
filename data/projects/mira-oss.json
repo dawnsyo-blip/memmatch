@@ -126,5 +126,107 @@
       "遗忘的终点": "README 未细述",
       "整合（合并、摘要）方式": "段落收拢为第一人称摘要；超长对话压成滚动简报"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：本地服务＋终端客户端；或 Docker；本地服务＋终端客户端；或 Docker"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带终端客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（macOS 或 Linux）；自己的电脑（macOS 或 Linux）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（自己的电脑（macOS 或 Linux）；自己的电脑（macOS 或 L）；linux（自己的电脑（macOS 或 Linux）；自己的电脑（macOS 或 Linux）；ma）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：安装器会装 PostgreSQL、Valkey、HashiCorp Vault；高：安装器会装 PostgreSQL、Valkey、HashiCorp Vault"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：macOS 或 Linux；模型服务（安装器推荐付费的 LunaRoute，也可分项配置或本地模型）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：macOS 或 Linux；模型服务（安装器推荐付费的 LunaRoute，也可分项配置或本地模型）；macOS 或 Linux；模型服务（安装器推荐付费的 LunaRoute，也可分项配置或本地模型）"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity",
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：工作记忆＋AI 身份；工作记忆＋AI 身份"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：对话段落收拢时自动生成第一人称记忆；—；—"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：按公式衰减，除非被访问、引用、链接；README 未细述"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "tools：ation does not make MIRA forget you. Memories are discr"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（第一人称叙事）",
+      "function": "工作记忆＋AI 身份",
+      "formation": "对话段落收拢时生成第一人称记忆摘要",
+      "evolution": "记忆按公式衰减，除非靠被访问、引用、链接“挣到”保留；超长对话压缩成滚动简报",
+      "retrieval": "回复前按语义相似、实体枢纽、记忆遍历、重排被动加载",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

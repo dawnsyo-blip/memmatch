@@ -81,5 +81,98 @@
       "need": "Claude Pro/Max 或自己的 API 密钥",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "接入方式原文未识别：命令行"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "claude_web_mobile"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code；交接文件可给 claude.ai、GPT 等"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（**Garbled characters on Windows** Set `PYTHONUTF8=1` (th）；macos（ude-handoff ``` ```bash brew install Vasilispapg/tap/claude-h）；linux（— or add `~/.local/bin` (Linux) / `~/Library/Python/3.x）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：Claude Pro/Max 或自己的 API 密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription",
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Claude Pro/Max 或自己的 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：会话交接＋项目记忆"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "cli：（含崩溃的）整理成交接文件，并从历史提炼项目记忆；命令行；# claude-handoff ![clau"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“CORS\" # or export the newest match directl”；“TML only — bring a real, redacted export to build against) - Sess”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

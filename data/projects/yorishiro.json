@@ -126,5 +126,102 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "值得记的时刻摘要累积"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：macOS 桌面应用（终端＋3D 角色）；macOS 桌面应用（终端＋3D 角色）"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带（macOS）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的 Mac；自己的 Mac"
+    },
+    "os": {
+      "value": [
+        "macos"
+      ],
+      "status": "auto",
+      "basis": "原文：自己的 Mac；自己的 Mac；macOS；低：Hom"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：Homebrew 或签名安装包；低：Homebrew 或签名安装包"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：macOS；Claude Code 或 Codex 的官方登录；macOS；Claude Code 或 Codex 的官方登录"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实（共同经历）；用户事实（共同经历）"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：角色按人格写日记，要点累积进 memories.md；—；—"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：量的人格日记与要点摘要，偶尔回想旧事；macOS 桌面应用（终端＋3D 角色）；伴侣应用自带记忆；本质是给编；cli：arate **Install official CLI** buttons for Codex and"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT（名称与图标为商标，不在 MIT 授权内）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（日记＋memories.md）",
+      "function": "用户事实（共同经历）",
+      "formation": "按人格写每日日记",
+      "evolution": "值得记的时刻摘要累积到 memories.md",
+      "retrieval": "按频率设置偶尔回想昨天或几个月前的条目（不是按需检索）",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

@@ -126,5 +126,109 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "梦境时段整合；角色间关系整合为名册"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：自托管网页平台（多通道）；自托管网页平台（多通道）"
+    },
+    "compatible_clients": {
+      "value": [
+        "discord",
+        "self_contained",
+        "telegram"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带网页；多通道"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器；自己的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "android",
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（install.sh | bash ``` **Windows (PowerShell)** ```power）；macos（s the whole stack up: **macOS / Linux** ```bash curl）；linux（ole stack up: **macOS / Linux** ```bash curl -fsSL ht）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：一条安装命令；低：一条安装命令"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Docker；模型密钥；Docker；模型密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋角色日程；用户事实＋角色日程"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：tus first; otherwise the UI steers you to phone-styl；files：e, and never returned in plain text from the API. You can k"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "source_available",
+      "status": "auto",
+      "basis": "许可证原文：BUSL-1.1（每版四年后转 Apache-2.0）（含多份许可，取限制最多的一项）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级",
+      "function": "用户事实＋角色日程",
+      "formation": "五层人设模型（身份、生活、情绪、互动、信任）；日程活动成为情节记忆；共享活动经用户同意才成为共同记忆",
+      "evolution": "梦境时段整合；角色间关系记忆整合成名册",
+      "retrieval": "pgvector 语义检索；按角色的互动热度",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

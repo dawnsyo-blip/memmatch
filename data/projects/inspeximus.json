@@ -82,5 +82,104 @@
       "url": "https://github.com/DanceNitra/inspeximus",
       "desc": "Agent memory with a correction channel: supersede or revert stale facts, block restated old values, and prove deletions with signed tombstones."
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋库"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Cursor 等"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（in python-bitcoinlib; on Windows that import reaches for）；macos（no longer matches. The macOS path for Claude Desktop）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“eck in three seconds, with no API key Measured 2026-08-25 against”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“n Windows, live sessions on 3.16.2 show hook captures in the store, the recall block on each”"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“t once and the old value stays retired; erase a person and prove it; show an auditor”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：a hosted service with a dashboard, a knowledge graph over；cli：Code tab (3.14.4), Codex CLI, Gemini CLI, Antigravity；tools：by the first erasure.** `forget`, `forget_subject` and `"
+    },
+    "export": {
+      "value": [
+        "json",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“e actor and the reason | the export's manifest hash sits in”；“pendices, the Annex VIII export and the audit bundle, after `intake_form()` a”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

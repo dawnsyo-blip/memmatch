@@ -86,5 +86,102 @@
       "need": "嵌入模型密钥（OpenAI 兼容或 Ollama）",
       "note": "根目录无 LICENSE 文件，package.json 写 MIT"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：OpenClaw 插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenClaw"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：OpenClaw 所在的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：linux（require **AVX2** on some Linux x64 builds and can crash）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：OpenClaw 命令安装后改 openclaw.json"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：嵌入模型密钥（OpenAI 兼容或 Ollama）"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户偏好＋决定"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“nt into an **AI Memory Assistant** — it automatically captures what matters, lets noise naturally fa”"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "README：“it automatically captures what matters, lets noise naturally fade, and retrieves the right memory at the”"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "cli：I | | **Full Toolkit** | CLI, backup, migration, upgr；tools：gents have amnesia. They forget everything the moment yo"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“ash # 1) Backup openclaw memory-pro export --scope global --output”；“01] [--dry-run] openclaw memory-pro export [--scope global] [--outp”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "no_license",
+      "status": "auto",
+      "basis": "许可证原文：无 LICENSE 文件；package.json 写 MIT（含多份许可，取限制最多的一项）"
+    }
   }
 }

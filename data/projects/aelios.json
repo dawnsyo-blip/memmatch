@@ -126,5 +126,109 @@
       "遗忘的终点": "归档或删除（手动）",
       "整合（合并、摘要）方式": "夜间 Dream 从当天对话抽事实成候选；周期汇总（rollup）"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：网关＋MCP（两种都支持）；网关＋MCP（两种都支持）"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_web_mobile",
+        "openai_compatible"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenAI 兼容的第三方客户端（网关）；Claude 网页版和手机 App（MCP）；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：Cloudflare 云端（你自己的账号）；Cloudflare 云端（你自己的账号）"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：全程网页点选，无需命令行；中：全程网页点选，无需命令行"
+    },
+    "cost": {
+      "value": "free",
+      "status": "needs_review",
+      "basis": "只需免费账号（浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器；Cloudflare 云端（你自己的账号）；网关＋MCP 两种接法，Claude 官方网页和手机 App 也能用；覆盖面最广：第三方客户端走网关，Claude 官方网页和手机 App 走 MCP；只有登记过的主模型才有记忆；浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器），但云平台免费额度有限，需确认"
+    },
+    "accounts_needed": {
+      "value": [
+        "cloudflare",
+        "github"
+      ],
+      "status": "auto",
+      "basis": "账号原文：浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器；浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto",
+        "review_first"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：原文自动存下；夜间整理成候选事实，模型或人审核；夜间整理之后（可选）；候选审核队列：默认由模型自动审定，可改为人工批准；定下的随时可撤回"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "auto",
+      "basis": "原表：不自动衰减；用 forget 工具或面板手动遗忘；归档或删除（手动）"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ge. 2. In the Cloudflare dashboard, go to **Workers & Pages；tools：Want the AI to remember, forget, or fix something? It's"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0（封存的 v1-final 为 MIT）（含多份许可，取限制最多的一项）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・分层",
+      "function": "用户事实",
+      "formation": "每轮对话原文入库；助手可直接 remember",
+      "evolution": "夜间 Dream 从当天对话抽事实成候选，由模型或人审核；可撤回、取代、归档、遗忘",
+      "retrieval": "每轮自动召回相关旧记忆；可跨多个记忆空间读取；冷启动包",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

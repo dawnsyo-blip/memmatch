@@ -81,5 +81,107 @@
       "need": "Claude 付费套餐（抽取在 Claude Code 内完成）；远程需 Cloudflare 账号",
       "note": ""
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP（远程 OAuth）"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "claude_web_mobile"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Claude Desktop、claude.ai 网页；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account",
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（Docker 两个服务）；远程需 Cloudflare"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（- **Docker** (Desktop on Windows/macOS, or Docker Engine）；macos（er** (Desktop on Windows/macOS, or Docker Engine on Lin）；linux（cOS, or Docker Engine on Linux) with Docker Compose v2）"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：Claude 付费套餐（抽取在 Claude Code 内完成）；远程需 Cloudflare 账号"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription",
+        "cloudflare"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Claude 付费套餐（抽取在 Claude Code 内完成）；远程需 Cloudflare 账号"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：个人知识与决定"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“: - **Weighted edges with configurable decay** — frequently-confirmed knowledge stay”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：its own custom-connector UI — the URL is the same.；tools：`, `graph_weaken`, `graph_delete`, `graph_merge`, `graph_"
+    },
+    "export": {
+      "value": [
+        "json"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“aph-memory/`) - A `graph_export` tool produces portable JSONL backups; `~/graph-memor”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

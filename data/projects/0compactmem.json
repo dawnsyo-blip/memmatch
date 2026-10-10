@@ -86,5 +86,95 @@
       "need": "无",
       "note": "根目录无 LICENSE 文件"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：插件／旁路服务"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code 等"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：linux（ms. We borrowed what the Linux kernel has been doing fo）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：工作上下文"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "needs_review",
+      "basis": "README：“only | recency | recency + decay| | Pin / mlock semantics | ✅”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "status": "needs_review",
+      "basis": "没写导出功能，但数据在单个 SQLite 文件里：“he store. 2. **Store** — single SQLite file (WAL mode) with FTS5 ful”，建议值 sqlite"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "no_license",
+      "status": "auto",
+      "basis": "许可证原文：无 LICENSE 文件"
+    }
   }
 }

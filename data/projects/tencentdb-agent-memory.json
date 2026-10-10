@@ -86,5 +86,95 @@
       "need": "README 称无需外部 API",
       "note": "许可证文件为 MIT"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway",
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：插件＋代理（proxy）"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "hermes",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、CodeBuddy"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（Node.js，一条命令起三个服务）"
+    },
+    "os": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 和原表都没提到系统"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：README 称无需外部 API"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋任务上下文"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：腾讯开源的全本地长期记忆，四层渐进处理，带管理面板；插件＋代理（proxy）；许可证文件为 MIT；"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    }
   }
 }

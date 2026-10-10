@@ -126,5 +126,103 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "Librarian 每晚分类整理；可选分层记忆宫殿"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：完整应用（网页界面＋语音唤醒）；完整应用（网页界面＋语音唤醒）"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带网页端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（Mac 只能用 Docker）；自己的电脑（Mac 只能用 Docker）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（linux&logoColor=black) ![Windows 11+](https://img.shields）；macos（自己的电脑（Mac 只能用 Docker）；自己的电脑（Mac 只能）；linux（width=\"100%\"></video> ![Linux](https://img.shields.io/）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中：图形启动器一键安装；低到中：图形启动器一键安装（区间取较高一档）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：Ubuntu 22.04+ 或 Windows 11+；建议 16GB 内存、Nvidia 显卡（语音）；Ubuntu 22.04+ 或 Windows 11+；建议 16GB 内存、Nvidia 显卡（语音）"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身份＋目标＋联系人；AI 身份＋目标＋联系人"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：带标签的记忆条目；Librarian 每晚整理；—；Librarian 改动记入人格账本"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：最大一档，带层级目标系统与定时自主任务；完整应用（网页界面＋语音唤醒）；完整应用（网页界面＋语音唤醒）；人格"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（十万级语义记忆）＋知识库",
+      "function": "AI 身份＋目标＋联系人",
+      "formation": "带标签的记忆条目；知识库文件上传自动分块",
+      "evolution": "Librarian 每晚整理、分类记忆，改动记入人格账本；可选分层“记忆宫殿”",
+      "retrieval": "十万级条目语义向量检索",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

@@ -126,5 +126,109 @@
       "遗忘的终点": "软删除（memory_close），只追加不覆盖",
       "整合（合并、摘要）方式": "明确不做自动 LLM 整合，靠人工策展"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：HTTP MCP 服务（33 个工具）；可作 kimi-room 等的后端；HTTP MCP 服务（33 个工具）；可作 kimi-room 等的后端"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：MCP 客户端；kimi-room"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account",
+        "own_computer",
+        "own_server",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本机或服务器；Postgres 可本地 Docker、自托管或用 Supabase／Neon 托管；本机或服务器；Postgres 可本地 Docker、自托管或用 Supabase／Neon 托管"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：多步命令、数据库迁移，README 未给客户端接入步骤；高：多步命令、数据库迁移，README 未给客户端接入步骤"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription"
+      ],
+      "status": "needs_review",
+      "basis": "账号原文：电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）；电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）（含“可选”，需确认是否必需）"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋关切／驱力状态；用户事实＋关切／驱力状态"
+    },
+    "write_mode": {
+      "value": [
+        "auto",
+        "review_first"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：显式写入；关于用户的事实须用户确认；不做自动 LLM 整合；写入前确认；修改时授权；人工策展；用户事实须用户确认；修改须用户明确授权；检索评测与对抗式自审"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：关切（concern）有衰减与复发；软删除（memory_close），只追加不覆盖"
+    },
+    "human_review": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "own_cloud",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0-or-later（据 GitHub 页面，未能克隆核对 LICENSE 原文）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平",
+      "function": "用户事实＋关切／驱力状态",
+      "formation": "显式写入（带效价、唤醒度）；会话收尾存情节；聊天抽取器产生候选，用户事实需用户确认",
+      "evolution": "只追加的事件溯源存储＋定期人工策展；软删除；关切（concern）有衰减与复发；不做自动 LLM 整合",
+      "retrieval": "向量＋BM25／三元组词法＋时间衰减＋重要度混合检索；可选重排；图谱 1–3 跳游走",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

@@ -126,5 +126,112 @@
       "遗忘的终点": "手动硬删除",
       "整合（合并、摘要）方式": "按事件分段并生成摘要"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋钩子（Hook）；MCP＋钩子（Hook）"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_web_mobile",
+        "telegram"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code（MCP＋钩子）；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本机；本机"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（al Ollama | $0, local | `brew install ollama && ollama pull bg）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：一条安装命令＋修改 settings.json；中：一条安装命令＋修改 settings.json"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：装了 Claude Code 的 Mac 或 Linux 电脑；免费 Google AI Studio 密钥或本机 Ollama；可选 Chrome；装了 Claude Code 的 Mac 或 Linux 电脑；免费 Google AI Studio 密钥或本机 Ollama；可选 Chrome（Ollama 在本机运行，不需注册）"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto",
+        "on_request"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：Stop 钩子每轮自动记录对话；事后手动；提供衰减、钉选、找陈旧、删除等工具，由模型或人调用"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "auto",
+      "basis": "原表：手动调用 decay 工具降低重要度；手动硬删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：lt. Account ID is in the dashboard URL. Create a token at [；cli：ly use the `compress.py` CLI. `brew install ollama &&；tools：stale`, `memory_decay`, `memory_delete` | Periodic clean-up | I"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平",
+      "function": "用户事实",
+      "formation": "Hook 自动捕获每轮对话；按事件分段并生成一段摘要和关键词；图片多模态向量",
+      "evolution": "提供衰减、钉选、查找陈旧、删除等工具，需模型或人调用；事件之间自动建相似度图边",
+      "retrieval": "向量＋BM25 关键词＋RRF 排名融合，跨记忆、知识库、事件三个池；可选图模式",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

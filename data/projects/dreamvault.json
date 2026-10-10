@@ -126,5 +126,93 @@
       "遗忘的终点": "梦库永久封存，不回流检索",
       "整合（合并、摘要）方式": "不适用"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Python 代码库（零依赖）；Python 代码库（零依赖）"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "运行位置原文未识别：嵌入你自己的记忆系统所在机器；嵌入你自己的记忆系统所在机器"
+    },
+    "os": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 和原表都没提到系统"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：要写代码对接到写入闸口；高：要写代码对接到写入闸口"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：Python 3.9+；一个已有的长期记忆系统；Python 3.9+；一个已有的长期记忆系统"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实（纠错）；用户事实（纠错）"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截；写入闸口检查事实锚点，不通过即隔离；只有 AI 本人能认领"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：不适用；梦库永久封存，不回流检索"
+    },
+    "human_review": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "运行位置未识别"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0（代码）＋ CC BY 4.0（文档）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平",
+      "function": "用户事实（纠错）",
+      "formation": "在写入长期记忆的闸口检测没有锚点的生成内容（幻觉）",
+      "evolution": "移入物理隔离的梦库，原文封存，小模型写第三人称“验尸”摘要；只有本人可认领",
+      "retrieval": "梦库刻意不提供搜索，永不回流检索；只有专门窗口可读",
+      "dynamics_coverage": "Ⅳ 只做演化：记忆治理组件"
+    }
   }
 }

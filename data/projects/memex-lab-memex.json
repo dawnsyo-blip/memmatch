@@ -121,5 +121,108 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "记忆整理子 Agent；按 P.A.R.A 归档；生成知识洞察"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：独立 App；独立 App"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文："
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "phone",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：手机本地（可存 iCloud Drive）；手机本地（可存 iCloud Drive）"
+    },
+    "os": {
+      "value": [
+        "android",
+        "ios"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：android（地（可存 iCloud Drive）；iOS / Android；低：应用商店安装；记忆来源是多模态生活日志，是采）；ios（e）；手机本地（可存 iCloud Drive）；iOS / Android；低：应用商店安装；记忆来源是）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：应用商店安装；低：应用商店安装"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：iPhone 或 Android 手机；一个模型服务密钥或 OAuth 登录；iPhone 或 Android 手机；一个模型服务密钥或 OAuth 登录"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实（生活日志）；用户事实（生活日志）"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：你随手记录，多个 AI 助手整理成卡片；—；无专门机制"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：t is posted, when a card UI config changes, or when；files：series of interconnected Markdown files, making one-click diary"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“ur expectations, you can one-click export all your records as stan”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：GPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（生活时间线）",
+      "function": "用户事实（生活日志）",
+      "formation": "多 Agent 把碎片记录整理成结构化卡片，自动打标签、实体抽取、关联链接",
+      "evolution": "专门的记忆整理子 Agent；按 P.A.R.A 方法归档；生成知识洞察",
+      "retrieval": "README 未写明检索机制（只说角色在评论和聊天中维护长期记忆）",
+      "dynamics_coverage": "Ⅲ 形成＋演化：检索未写明或依赖外部"
+    }
   }
 }

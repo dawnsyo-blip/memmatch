@@ -86,5 +86,101 @@
       "need": "mem9 API Key",
       "note": "托管模式下数据经第三方"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：各宿主插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex",
+        "hermes",
+        "openclaw",
+        "opencode"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、OpenCode、Codex、Dify"
+    },
+    "runs_on": {
+      "value": [
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：托管 API 或自托管"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中（托管）／高（自托管）"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key",
+        "vendor_account"
+      ],
+      "status": "auto",
+      "basis": "账号原文：mem9 API Key"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋项目上下文"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": "manual_only",
+      "status": "needs_review",
+      "basis": "README 只提到删除：“AI Agents.</strong><br/> Your agents forget everything between sessions. mem9 fixes”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：跨会话、跨机器的持久记忆，混合检索，带可视化面板；各宿主插件；托管模式下数据经第三方；<p ali；cli：`](cli/) | Standalone Go CLI for exercising mem9 API；tools：rong><br/> Your agents forget everything between sessi"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    }
   }
 }

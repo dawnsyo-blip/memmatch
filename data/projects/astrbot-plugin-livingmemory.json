@@ -126,5 +126,102 @@
       "遗忘的终点": "归档",
       "整合（合并、摘要）方式": "达到轮数后总结成长期记忆（README 未细述合并方式）"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：AstrBot 插件；AstrBot 插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "astrbot"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：AstrBot"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：AstrBot 所在的电脑或服务器；AstrBot 所在的电脑或服务器"
+    },
+    "os": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "README 和原表都没提到系统"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：插件市场安装，在 AstrBot 里选向量和模型服务；低：插件市场安装，在 AstrBot 里选向量和模型服务"
+    },
+    "cost": {
+      "value": "free",
+      "status": "needs_review",
+      "basis": "只需免费账号（已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台；AstrBot 所在的电脑或服务器；AstrBot 插件；只服务 AstrBot；与自主学习插件配合时分工明确；正在测试 2.7.0 版；已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台），但云平台免费额度有限，需确认"
+    },
+    "accounts_needed": {
+      "value": [
+        "telegram"
+      ],
+      "status": "auto",
+      "basis": "账号原文：已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台；已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：达到配置轮数后自动总结；Agent 也可主动写入；可选：在管理页编辑；生命周期管理；面板可编辑、测试召回"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：衰减，访问会强化；归档"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：生命周期管理；面板可编辑、测试召回；总结后的长期记忆，重要记录保留原"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平",
+      "function": "用户事实",
+      "formation": "达到配置轮数后自动生成长期记忆，重要记录保留原文；Agent 可主动写入",
+      "evolution": "归档、衰减、访问强化",
+      "retrieval": "文档与图谱均支持关键词＋向量检索，融合排序后按会话、人格、生命周期筛选",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

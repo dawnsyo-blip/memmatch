@@ -126,5 +126,109 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "滚动维护单份剧情梗概"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Android 阅读器 App；Android 阅读器 App"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带（Android）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "phone"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：手机本地；手机本地"
+    },
+    "os": {
+      "value": [
+        "android",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（'s Java 21 classes. - On Windows, if the checkout path co）；android（手机本地；手机本地；Android；低：下载 APK 安装；Android 阅读器）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：下载 APK 安装；低：下载 APK 安装"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "账号原文：Android 8.0+ 手机；模型服务密钥（可选）；Android 8.0+ 手机；模型服务密钥（可选）（含“可选”，需确认是否必需）"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：工作记忆（阅读进度）＋环境事实（书中内容）；工作记忆（阅读进度）＋环境事实（书中内容）"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：伴读对话自动总结为向量记忆；—；召回限定在已读范围"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：+), but only part of the UI is translated so far and"
+    },
+    "export": {
+      "value": [
+        "markdown",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“mmentary and co-writing, and export with reusable share temp”；“ose and reorder widgets; export notes as Markdown. ### AI companion · bri”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：GPL-3.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（向量）",
+      "function": "工作记忆（阅读进度）＋环境事实（书中内容）",
+      "formation": "对话自动总结固化为向量记忆",
+      "evolution": "滚动维护单份剧情梗概",
+      "retrieval": "向量＋词法双路检索，可选重排；召回限定在已读进度和所属书籍、角色内",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

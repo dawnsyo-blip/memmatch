@@ -126,5 +126,110 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "无（每日自动轮换的日记线程）"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：自托管网页应用；自托管网页应用"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带网页端（仅 Claude）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（minal on macOS/Linux, or PowerShell / Git Bash on Windows) t）；macos（mand window: Terminal on macOS/Linux, or PowerShell / G）；linux（indow: Terminal on macOS/Linux, or PowerShell / Git Bas）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：终端里复制粘贴约 6 条命令；中：终端里复制粘贴约 6 条命令"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：Node.js 20–24（不支持 25 以上）；Claude Code 订阅登录或 Anthropic 密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription",
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Node.js 20–24（不支持 25 以上）；Claude Code 订阅登录或 Anthropic 密钥；Node.js 20–24（不支持 25 以上）；Claude Code 订阅登录或 Anthropic 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：关系理解＋身份持续；关系理解＋身份持续"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：全部对话自动存入本地 SQLite；你手写身份；身份文件由你编辑"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：a lightweight relational dashboard: planner, care/wellness；files：elationship — lives in a plain-text file you write and can e；cli：.mjs the \"res\" CLI — your AI's own organs ("
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "status": "needs_review",
+      "basis": "没写导出功能，但数据在单个 SQLite 文件里：“.** One Node.js process, one SQLite database, one web page you open i”，建议值 sqlite"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0（须保留 NOTICE 署名）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平",
+      "function": "关系理解＋身份持续",
+      "formation": "全部对话与对 AI 的感知存入单个本地 SQLite 文件",
+      "evolution": "README 未描述记忆整合或衰减；身份文件由用户手动编辑",
+      "retrieval": "本地 MiniLM 语义检索＋FTS5 全文检索；Hook 在模型看到提示前浮现上下文",
+      "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
+    }
   }
 }

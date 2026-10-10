@@ -126,5 +126,105 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "—"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：本地 Agent（本地网页、微信、飞书）；本地 Agent（本地网页、微信、飞书）"
+    },
+    "compatible_clients": {
+      "value": [
+        "feishu",
+        "hermes",
+        "self_contained",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带本地网页；微信、飞书"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（自己的电脑；自己的电脑；macOS / Linux；低：一条安装命令＋问答式配置；基）；linux（自己的电脑；自己的电脑；macOS / Linux；低：一条安装命令＋问答式配置；基于 Hermes）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：一条安装命令＋问答式配置；低：一条安装命令＋问答式配置"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：macOS 或 Linux；模型服务地址和密钥；macOS 或 Linux；模型服务地址和密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：关系／身份＋工具使用；关系／身份＋工具使用"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：身份、关系、用户三类记忆写入文件；关系记忆需双方确认；确认关系约定时；关系记忆需双方确认；高风险操作先确认"
+    },
+    "forgetting": {
+      "value": "",
+      "status": "needs_review",
+      "basis": "原表：README 未描述；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": ""
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT（版权方为 Nous Research）"
+    },
+    "paper_taxonomy": {
+      "form": "词元级",
+      "function": "关系／身份＋工具使用",
+      "formation": "身份、关系、用户三类记忆写入 IDENTITY.md、MEMORY.md 等文件；关系记忆需双方确认",
+      "evolution": "README 未描述自动整合或遗忘",
+      "retrieval": "历史搜索；短期连续记忆；换窗口、换入口续接",
+      "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
+    }
   }
 }

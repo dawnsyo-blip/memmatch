@@ -126,5 +126,106 @@
       "遗忘的终点": "手动删除",
       "整合（合并、摘要）方式": "外接模式下每 N 轮总结一次"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：网关；网关"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built",
+        "openai_compatible"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenAI 兼容客户端（网关）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本机（Windows／Mac／Linux）；本机（Windows／Mac／Linux）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（本机（Windows／Mac／Linux）；本机（Windows／Ma）；macos（本机（Windows／Mac／Linux）；本机（Windows／Mac／Li）；linux（本机（Windows／Mac／Linux）；本机（Windows／Mac／Linux）；S）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中：三条命令＋网页设置向导；低到中：三条命令＋网页设置向导（区间取较高一档）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：装了 Python 的电脑；装了 Python 的电脑"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实；用户事实"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：主模型在回复末尾写记忆标签，或另一模型每 5 轮总结；事后手动；无专门机制，只能在网页手动增删改"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：localhost:8080/` 可使用 Web 管理界面查看和管理记忆。 ## 数据存储 记忆数据存储"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平",
+      "function": "用户事实",
+      "formation": "内置模式：模型在回复末尾写记忆标签；外接模式：每 N 轮用独立模型总结",
+      "evolution": "模型或接口按编号更新、删除记忆；无衰减与整合",
+      "retrieval": "全量注入系统提示，或用检索增强生成（RAG）只注入相关记忆",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

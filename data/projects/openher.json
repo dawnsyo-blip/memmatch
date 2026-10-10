@@ -126,5 +126,109 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "重要的风格记忆“结晶”加深"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：后端服务＋macOS 桌面客户端；可接微信；后端服务＋macOS 桌面客户端；可接微信"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带 macOS 客户端；微信"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [
+        "android",
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（b；中：一键脚本＋改 .env＋下载客户端；后端＋macOS 客户端，可接微信；人格从驱力与记忆中涌现，不靠固）；android（都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · **同在** — *走）；ios（她读懂你自己都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · *）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：一键脚本＋改 .env＋下载客户端；中：一键脚本＋改 .env＋下载客户端"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "账号原文：Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama；Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama（含“可选”，需确认是否必需）"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身份（纵贯性自我）＋关系；AI 身份（纵贯性自我）＋关系"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：每轮交互沉淀为风格记忆；长期记忆交给外部 EverMemOS；—；—"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：风格记忆按衰减公式淡去；—"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "cli：需要 macOS 14.0+ 和 Xcode 命令行工具（`xcode-select --instal"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "paper_taxonomy": {
+      "form": "词元级＋驱力状态",
+      "function": "AI 身份（纵贯性自我）＋关系",
+      "formation": "每轮交互沉淀为风格记忆；长期画像与叙事摘要交给 EverMemOS",
+      "evolution": "风格记忆按衰减公式淡去，重要的加深",
+      "retrieval": "异步两阶段：每轮结束触发搜索，下一轮按 80% 相关、20% 稳定混合注入",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

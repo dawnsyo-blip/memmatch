@@ -126,5 +126,109 @@
       "遗忘的终点": "删除只切断访问路径，正文和历史版本保留",
       "整合（合并、摘要）方式": "无自动整合；诊断入口可找出过时、拥挤、孤儿节点"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：MCP 客户端；Docker 版可供多设备远程连接"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本机（stdio）；或 Docker 服务栈供多设备远程连接；本机（stdio）；或 Docker 服务栈供多设备远程连接"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（ckend/mcp_wrapper.py`（解决 Windows CRLF 问题）。 - 其他客户端：指向）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中：两步安装；有只读演示服务器可先试；低到中：两步安装；有只读演示服务器可先试（区间取较高一档）"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：电脑；Python 3.10+、Node.js；远程部署需 Docker；电脑；Python 3.10+、Node.js；远程部署需 Docker"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋AI 身份／关系；用户事实＋AI 身份／关系"
+    },
+    "write_mode": {
+      "value": [
+        "on_request",
+        "review_first"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：AI 自己决定写什么、存在哪个路径；AI 写入之后，审核接受或回滚；每次修改留快照，可对比、接受或回滚；删除只切断路径"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无自动遗忘”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：动可回滚；MCP；治理靠版本：每次修改留快照，人在面板对比后接受或回滚；“删除”只切断访问路径；# No；cli：line / OpenCode / Gemini CLI / OpenAI Codex / Claude；tools：disclosure`（回想触发条件） | | `update_memory` | 精确修改已有记忆（Patch 模式 / A"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・扁平（带版本）",
+      "function": "用户事实＋AI 身份／关系",
+      "formation": "AI 通过 MCP 自己决定写什么、怎么归类、何时该想起",
+      "evolution": "每次修改自动生成快照，人在网页对比差异后接受或回滚；清理旧版本需人确认",
+      "retrieval": "启动时按 Boot URI 加载核心记忆；条件触发；搜索",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

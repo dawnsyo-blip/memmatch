@@ -126,5 +126,106 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "结构化用户洞察持续更新"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Rust 服务（API）＋可嵌入的库；Rust 服务（API）＋可嵌入的库"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：需自备前端"
+    },
+    "runs_on": {
+      "value": [
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的服务器；自己的服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：要自备前端，官方网页客户端未开源；高：要自备前端，官方网页客户端未开源"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Rust、PostgreSQL 16+（pgvector）、OpenRouter 密钥、Voyage 向量密钥；Rust、PostgreSQL 16+（pgvector）、OpenRouter 密钥、Voyage 向量密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实（结构化用户洞察）＋关系状态；用户事实（结构化用户洞察）＋关系状态"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：自动：用户事实、共同经历、结构化洞察；—；—"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：亲密度随时间回落；—"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ource, so bring your own UI or embed the crates in a；tools：haracter apps eventually forget who you are. Their relat"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0-only"
+    },
+    "paper_taxonomy": {
+      "form": "词元级＋结构化关系状态",
+      "function": "用户事实（结构化用户洞察）＋关系状态",
+      "formation": "双层记忆：稳定用户事实与共同经历；结构化用户洞察",
+      "evolution": "六个亲密度维度按档位写入、经衰减落库并随时间回落",
+      "retrieval": "embedding 向量检索（pgvector）",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

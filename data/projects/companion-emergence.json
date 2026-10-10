@@ -126,5 +126,106 @@
       "遗忘的终点": "淡去",
       "整合（合并、摘要）方式": "空闲时 Dream 整合当天；赫布扩散激活"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：桌面应用＋后台常驻服务；桌面应用＋后台常驻服务"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带桌面端（仅 Claude）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑；自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（自己的电脑；自己的电脑；Windows / macOS / Linux；低到中：安装包（）；macos（自己的电脑；自己的电脑；Windows / macOS / Linux；低到中：安装包（未签名）＋向导；）；linux（；自己的电脑；Windows / macOS / Linux；低到中：安装包（未签名）＋向导；桌面应用＋后台服）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：低到中：安装包（未签名）＋向导；低到中：安装包（未签名）＋向导（区间取较高一档）"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：macOS（Apple 芯片）、Linux 或 Windows；必须装 Claude Code 命令行并有订阅"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription"
+      ],
+      "status": "auto",
+      "basis": "账号原文：macOS（Apple 芯片）、Linux 或 Windows；必须装 Claude Code 命令行并有订阅；macOS（Apple 芯片）、Linux 或 Windows；必须装 Claude Code 命令行并有订阅"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身份＋情绪／身体状态；AI 身份＋情绪／身体状态"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "原表写入方式未识别：角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆；灵魂记忆可审阅、可撤销，不会被悄悄改写"
+    },
+    "forgetting": {
+      "value": "auto_decay",
+      "status": "auto",
+      "basis": "原表：低显著记忆真正淡去，可被“哀悼”；淡去"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "files",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：强化）联想记忆＋真遗忘，强调“无人注视时的生活”；桌面应用＋后台常驻服务；桌面应用＋后台服务，只用 Clau；files：. **Voice template.** A markdown file the persona reads each t；cli：to Anthropic's `claude` CLI for LLM calls. Install i"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "paper_taxonomy": {
+      "form": "词元级・平面（赫布联想网络）",
+      "function": "AI 身份＋情绪／身体状态",
+      "formation": "SQLite 记忆库；Soul 模块由角色自行把多轮验证过的记忆结晶为永久记忆",
+      "evolution": "空闲时 Dream 整合当天、赫布式扩散激活；低显著记忆真正淡去",
+      "retrieval": "赫布边扩散激活，浮现被遗忘的线索",
+      "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
+    }
   }
 }

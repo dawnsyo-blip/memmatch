@@ -126,5 +126,110 @@
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "近期对话摘要"
     }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：自托管伴侣（Telegram、微信）＋管理后台；自托管伴侣（Telegram、微信）＋管理后台"
+    },
+    "compatible_clients": {
+      "value": [
+        "chatgpt",
+        "self_contained",
+        "telegram",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带；Telegram、微信"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或云服务器；自己的电脑或云服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（ochibot/releases/latest)，Windows 运行 `setup.bat`，macOS / L）；macos（)，Windows 运行 `setup.bat`，macOS / Linux 运行 `bash setup.s）；linux（s 运行 `setup.bat`，macOS / Linux 运行 `bash setup.sh`。 2. 在）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：下载发布包运行安装脚本；低：下载发布包运行安装脚本"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key",
+        "telegram"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Windows、macOS 或 Linux；模型密钥；Telegram 或微信；Windows、macOS 或 Linux；模型密钥；Telegram 或微信"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户事实＋习惯／待办；用户事实＋习惯／待办"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "原表写入方式：多聊天自动记住；核心设定（Core）建议人工维护；维护 Core 时；Core 建议人工维护"
+    },
+    "forgetting": {
+      "value": "none",
+      "status": "needs_review",
+      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：、Oura 等设备数据或 API，也可以自行开发 UI。目前开源版本包含管理后台，未包含上述设备集成或自"
+    },
+    "export": {
+      "value": [],
+      "status": "needs_review",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "paper_taxonomy": {
+      "form": "词元级",
+      "function": "用户事实＋习惯／待办",
+      "formation": "多聊天自动记住；可从 ChatGPT 导出记录生成核心设定和记忆草稿",
+      "evolution": "README 只提到近期对话摘要，未描述长期记忆整合或遗忘",
+      "retrieval": "长期记忆条按需找回；聊天、日记、记忆可主动搜索",
+      "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
+    }
   }
 }
