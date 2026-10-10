@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.env
+.env.*
+node_modules/
+# Excel 打开文件时生成的锁文件
+~$*.xlsx
+*.sqlite
+*.db
