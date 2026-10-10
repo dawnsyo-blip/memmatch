@@ -8,7 +8,7 @@
 输出：
   data/candidates/个人记忆库候选表.xlsx
 
-用法（在仓库根目录）：python -X utf8 scripts/build_candidates.py
+用法（在仓库根目录）：python -X utf8 scripts/build_candidates.py [输出路径]
 """
 import json
 import re
@@ -166,6 +166,14 @@ def main():
             date=m(key, "last_commit") or "", stars=m(key, "stars"), url=it["url"], src=[it["src"]],
             note=e.get("note", ""), list_desc=it["desc"], judged=bool(e))
 
+    # 4) 套用负责人对各分组的决定
+    for r in rows.values():
+        r["cat"] = ""
+        if r["c"] in R.GROUP_POLICY:
+            r["v"], r["cat"] = R.GROUP_POLICY[r["c"]]
+        if r["v"] == "纳入" and not r["cat"]:
+            r["cat"] = R.DEFAULT_CATEGORY
+
     write_xlsx(rows)
 
 
@@ -196,24 +204,26 @@ def write_xlsx(rows):
     wb = openpyxl.Workbook()
     wb.remove(wb.active)
     order = {"纳入": 0, "待定": 1}
+    cat_order = {R.DEFAULT_CATEGORY: 0, "自带记忆的应用": 1, "需写代码（开发者向）": 2}
     cand = sorted((r for r in rows.values() if r["v"] in order),
-                  key=lambda r: (order[r["v"]], r["c"], -(r["stars"] or 0)))
+                  key=lambda r: (order[r["v"]], cat_order.get(r["cat"], 9), r["c"], -(r["stars"] or 0)))
     excl = sorted((r for r in rows.values() if r["v"] == "排除"), key=lambda r: (r["c"], r["name"].lower()))
 
     n_in = sum(r["v"] == "纳入" for r in cand)
     n_pend = len(cand) - n_in
+    n_cat = {k: sum(r["cat"] == k for r in cand) for k in cat_order}
     intro = [
         ["个人记忆库候选表", ""],
         ["用途", "从已知项目和三个公开清单中，筛出“普通个人用户能直接用、或配合自己已有的 agent 就能用、以文字交流为主”的记忆库项目，供后续建站导入。"],
         ["读取日期", f"{READ_DATE}。所有判断据各仓库 README 与清单简介，未实际安装验证。"],
-        ["结论统计", f"四个来源共 523 条，按仓库去重合并后 {len(rows)} 条：纳入 {n_in} 个，待定 {n_pend} 个，排除 {len(excl)} 个。"],
+        ["结论统计", f"四个来源共 523 条，按仓库去重合并后 {len(rows)} 条：纳入 {n_in} 个（" + "、".join(f"{k} {v}" for k, v in n_cat.items()) + f"），待定 {n_pend} 个，排除 {len(excl)} 个。"],
         ["", ""],
-        ["筛选标准（纳入需同时满足）", "① 代码开源，可自己部署（托管服务只作可选项）；"],
-        ["", "② 不用自己写代码：有现成接法——MCP 服务、网关／代理、宿主插件（OpenClaw、Hermes、AstrBot、Claude Code 等），或可直接安装的应用；按说明文档几条命令或点选能装好；"],
-        ["", "③ 能接到用户已有的助手上，而不是只能在它自带的界面里用；"],
-        ["", "④ 场景以文字对话为主（排除屏幕录制、多模态生活日志、代码库索引、企业文档检索）；"],
-        ["", "⑤ 记的是“记忆”：用户事实与偏好、对话历史、AI 自身身份与关系、做事经验，不是单纯的笔记或文档搜索。"],
-        ["结论含义", "纳入：符合全部标准。待定：有一项拿不准，按「待定分组」归类，需要负责人决定。排除：明确不符合，附原因代码。"],
+        ["基本标准（所有纳入项目）", "① 代码开源，可自己部署（托管服务只作可选项）；② 场景以文字对话为主（排除屏幕录制、多模态生活日志、代码库索引、企业文档检索）；③ 记的是“记忆”：用户事实与偏好、对话历史、AI 自身身份与关系、做事经验，不是单纯的笔记或文档搜索。"],
+        ["收录类别", f"{R.DEFAULT_CATEGORY}：有现成接法（MCP 服务、网关／代理、宿主插件，如 OpenClaw、Hermes、AstrBot、Claude Code），不用写代码就能接到用户已有的助手上。只支持 Claude Code 的会话记忆也算这一类。"],
+        ["", "自带记忆的应用：记忆是某个应用（多为伴侣应用或完整的 agent）的一部分，不能单独接到已有助手上；用户愿意换用这个应用就能直接用。对应代码 E1、P1。"],
+        ["", "需写代码（开发者向）：只提供代码库或服务，要自己写代码对接或自备前端。对应代码 A。"],
+        ["结论含义", "纳入：进入候选。待定：还需负责人决定，按「分组代码」归类。排除：不收录，附原因代码。"],
+        ["负责人决定（2026-10-10）", "收录需写代码（A）、应用自带记忆（E1）和自带助手的完整应用（P1）；收录只支持 Claude Code 的会话记忆；排除 P5（证据不足）、P6（偏工作/团队）。P2、P3、P4、P7 待定。"],
         ["", ""],
         ["来源", f"{SRC_ATLAS}：原表「记忆项目总表」50 个项目（https://www.ailover-atlas.com/?filter=memory）"],
         ["", f"{SRC_PAPER}：原表「框架开源情况」24 个框架（论文 Memory in the Age of AI Agents，arXiv 2512.13564）"],
@@ -223,22 +233,22 @@ def write_xlsx(rows):
         ["", ""],
         ["如何读这张表", "「候选项目」页：纳入在前（绿色），待定在后（黄色）。上手门槛、需要的账号均据 README 判断。Star 与最后提交为读取当日数据。"],
         ["", "「排除项目」页：每条附原因代码。标“据清单简介”的条目没有打开 README，只按清单里的一句话描述归类；其余条目读过 README。"],
-        ["", "「代码说明」页：待定分组（P1–P7）与排除原因（A、B、C、E1、E2、F1–F8、DUP）的含义。A/B/C/E1/E2 与路线图阶段 3 的排除代码一致。"],
+        ["", "「代码说明」页：分组代码（P1–P7）与排除原因（A、B、C、E1、E2、F1–F8、DUP）的含义。A/B/C/E1/E2 与路线图阶段 3 的排除代码一致。"],
         ["重要局限", "① 未实际安装，门槛和兼容性可能与说明文档不符；② 只按简介排除的条目可能有误判；③ 许可证据 LICENSE 文件开头自动识别，商用前请看原文；④ 原表 50 个项目沿用原表字段，未重新读 README。"],
     ]
     ws = sheet(wb, "说明", ["项", "内容"], intro[1:], [22, 120])
     ws["A1"].value, ws["B1"].value = intro[0][0], "（生成脚本：scripts/build_candidates.py）"
 
-    header = ["序号", "项目名", "筛选结论", "待定分组", "分组说明", "一句话说明", "主要记住什么", "接入方式",
+    header = ["序号", "项目名", "筛选结论", "收录类别", "分组代码", "代码说明", "一句话说明", "主要记住什么", "接入方式",
               "能配合的助手/客户端", "运行位置", "上手门槛（据 README，未实测）", "需要的账号/密钥", "许可证",
               "最后提交", "Star", "仓库链接", "来源", "备注"]
-    data = [[i, r["name"], r["v"], r["c"], R.CODES.get(r["c"], ""), r["desc"], r["subj"], r["acc"], r["cli"],
+    data = [[i, r["name"], r["v"], r["cat"], r["c"], R.CODES.get(r["c"], ""), r["desc"], r["subj"], r["acc"], r["cli"],
              r["run"], r["diff"], r["need"], r["lic"], r["date"], r["stars"], r["url"], "；".join(r["src"]),
              r["note"]] for i, r in enumerate(cand, 1)]
-    ws = sheet(wb, "候选项目", header, data, [5, 22, 8, 7, 24, 40, 16, 20, 30, 22, 18, 20, 14, 11, 8, 36, 26, 36])
+    ws = sheet(wb, "候选项目", header, data, [5, 22, 8, 14, 7, 24, 40, 16, 20, 30, 22, 18, 20, 14, 11, 8, 36, 26, 36])
     for row in ws.iter_rows(min_row=2):
         fill = FILLS.get(row[2].value)
-        for c in row[:3]:
+        for c in row[:4]:
             c.fill = fill
 
     data = [[i, r["name"], r["c"], R.CODES.get(r["c"], ""),
@@ -261,9 +271,12 @@ def write_xlsx(rows):
     stat.append(["合计（去重后）", len(rows), n_in, n_pend, len(excl)])
     sheet(wb, "来源统计", ["来源", "条目数", "纳入", "待定", "排除"], stat, [24, 10, 8, 8, 8])
 
-    out = ROOT / "data/candidates/个人记忆库候选表.xlsx"
-    wb.save(out)
-    print(f"已生成 {out.relative_to(ROOT)}：纳入 {n_in}，待定 {n_pend}，排除 {len(excl)}，去重后共 {len(rows)}")
+    out = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "data/candidates/个人记忆库候选表.xlsx"
+    try:
+        wb.save(out)
+    except PermissionError:
+        sys.exit(f"无法写入 {out}：文件可能正在 Excel 里打开，关掉后重试。")
+    print(f"已生成 {out}：纳入 {n_in}，待定 {n_pend}，排除 {len(excl)}，去重后共 {len(rows)}")
 
 
 if __name__ == "__main__":
