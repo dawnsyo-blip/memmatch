@@ -161,7 +161,8 @@ def main():
         rows[key] = dict(
             name=e.get("name", it["name"]), v=v, c=code, desc=e.get("desc", ""), subj=e.get("subj", ""),
             acc=e.get("acc", ""), cli=e.get("cli", ""), run=e.get("run", ""), diff=e.get("diff", ""),
-            need=e.get("need", ""), lic=license_label(m(key, "license_head")) if m(key, "repo") else "",
+            need=e.get("need", ""),
+            lic=R.LICENSE_OVERRIDE.get(key) or (license_label(m(key, "license_head")) if m(key, "repo") else ""),
             date=m(key, "last_commit") or "", stars=m(key, "stars"), url=it["url"], src=[it["src"]],
             note=e.get("note", ""), list_desc=it["desc"], judged=bool(e))
 
@@ -205,7 +206,7 @@ def write_xlsx(rows):
         ["个人记忆库候选表", ""],
         ["用途", "从已知项目和三个公开清单中，筛出“普通个人用户能直接用、或配合自己已有的 agent 就能用、以文字交流为主”的记忆库项目，供后续建站导入。"],
         ["读取日期", f"{READ_DATE}。所有判断据各仓库 README 与清单简介，未实际安装验证。"],
-        ["结论统计", f"纳入 {n_in} 个，待定 {n_pend} 个，排除 {len(excl)} 个（含重复合并前的全部条目）。"],
+        ["结论统计", f"四个来源共 523 条，按仓库去重合并后 {len(rows)} 条：纳入 {n_in} 个，待定 {n_pend} 个，排除 {len(excl)} 个。"],
         ["", ""],
         ["筛选标准（纳入需同时满足）", "① 代码开源，可自己部署（托管服务只作可选项）；"],
         ["", "② 不用自己写代码：有现成接法——MCP 服务、网关／代理、宿主插件（OpenClaw、Hermes、AstrBot、Claude Code 等），或可直接安装的应用；按说明文档几条命令或点选能装好；"],

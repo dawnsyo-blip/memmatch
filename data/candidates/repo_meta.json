@@ -1002,6 +1002,270 @@
    "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
    "has_readme": true
   },
+  "kyrzin/kybase": {
+   "repo": "Kyrzin/kybase",
+   "last_commit": "2026-10-02",
+   "stars": 5,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true
+  },
+  "udjin-labs/mnemostack": {
+   "repo": "udjin-labs/mnemostack",
+   "last_commit": "2026-09-28",
+   "stars": 9,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "lamantinai/kaeru": {
+   "repo": "LamantinAI/kaeru",
+   "last_commit": "2026-10-06",
+   "stars": 40,
+   "archived": false,
+   "license_head": "Business Source License 1.1\n\nParameters\n\nLicensor:             LamantinAI (GrumpyChubbyCat)\nLicensed Work:        kaeru\n                      The Licensed Work is (c) 2026 LamantinAI.\nAdditional Use Grant: You may use, modify, and deploy the Licensed Work,\n                      including for product",
+   "has_readme": true
+  },
+  "dfrancislyondflabc-tech/agentic-recall": {
+   "repo": "dfrancislyondflabc-tech/agentic-recall",
+   "last_commit": "2026-10-09",
+   "stars": 0,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Daniel Francis-Lyon\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, m",
+   "has_readme": true
+  },
+  "darktw/usecortex-mcp": {
+   "repo": "darktw/usecortex-mcp",
+   "last_commit": "2026-03-17",
+   "stars": 1,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Altazi Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, mod",
+   "has_readme": true
+  },
+  "syndicalt/zaxy": {
+   "repo": "syndicalt/zaxy",
+   "last_commit": "2026-08-10",
+   "stars": 17,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Zaxy Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, mod",
+   "has_readme": true
+  },
+  "carrasquelalex1/hipocampo": {
+   "repo": "carrasquelalex1/hipocampo",
+   "last_commit": "2026-09-19",
+   "stars": 4,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Alexander José Carrasquel Burgos\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto",
+   "has_readme": true
+  },
+  "makeamouse/fish-bridge-mcp": {
+   "repo": "MakeaMouse/fish-bridge-mcp",
+   "last_commit": "2026-05-20",
+   "stars": 2,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 fish_bridge contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, co",
+   "has_readme": true
+  },
+  "trust-delta/conversation-handoff-mcp": {
+   "repo": "trust-delta/conversation-handoff-mcp",
+   "last_commit": "2026-09-03",
+   "stars": 7,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 trust-delta\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true
+  },
+  "chatmcp/mcp-server-chatsum": {
+   "repo": "chatmcp/mcp-server-chatsum",
+   "last_commit": "2024-12-04",
+   "stars": 1028,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true
+  },
+  "xjtlumedia/context-first-mcp": {
+   "repo": "XJTLUmedia/Context-First-MCP",
+   "last_commit": "2026-04-15",
+   "stars": 1,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Context-First MCP Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto u",
+   "has_readme": true
+  },
+  "smart-ai-memory/empathy-framework": {
+   "repo": "Smart-AI-Memory/empathy-framework",
+   "last_commit": "2026-01-31",
+   "stars": 13,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true
+  },
+  "unibaseio/membase-mcp": {
+   "repo": "unibaseio/membase-mcp",
+   "last_commit": "2026-10-09",
+   "stars": 24,
+   "archived": false,
+   "license_head": "Membase SDK (membase-ai) — Proprietary License\n\nCopyright (c) 2026 Unibase. All rights reserved.\n\nThis software, including its source code, packages, documentation and assets (the \"Software\"),\nis proprietary to Unibase and is licensed, not sold.\n\n1. Use. Unibase grants you a non-exclusive, non-trans",
+   "has_readme": true
+  },
+  "battam1111/myco": {
+   "repo": "Battam1111/Myco",
+   "last_commit": "2026-06-09",
+   "stars": 66,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Yanjun\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true
+  },
+  "lilara-ai/shadowgraph": {
+   "repo": "LiLara-AI/shadowgraph",
+   "last_commit": "2026-10-09",
+   "stars": 3,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 ShadowGraph contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, co",
+   "has_readme": true
+  },
+  "ccf/agentcairn": {
+   "repo": "ccf/agentcairn",
+   "last_commit": "2026-09-28",
+   "stars": 65,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "oomkapwn/enquire-mcp": {
+   "repo": "oomkapwn/enquire-mcp",
+   "last_commit": "2026-10-04",
+   "stars": 34,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Alex (@OomkaBear)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, mod",
+   "has_readme": true
+  },
+  "sgx-labs/statelessagent": {
+   "repo": "sgx-labs/statelessagent",
+   "last_commit": "2026-08-06",
+   "stars": 23,
+   "archived": false,
+   "license_head": "SPDX-License-Identifier: BUSL-1.1\n\nBusiness Source License 1.1\n\nParameters\n\nLicensor:             SGX Labs\nLicensed Work:        SAME (Stateless Agent Memory Engine)\n                      The Licensed Work is (c) 2025-2026 SGX Labs.\nAdditional Use Grant: You may use the Licensed Work for personal,\n ",
+   "has_readme": true
+  },
+  "skitchy/rekindle": {
+   "repo": "Skitchy/rekindle",
+   "last_commit": "2026-08-08",
+   "stars": 5,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Skitch\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true
+  },
+  "seanmarkwei/agentram-mcp": {
+   "repo": "seanmarkwei/agentram-mcp",
+   "last_commit": "2026-08-12",
+   "stars": 0,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Sean Markwei\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true
+  },
+  "ivenkoolab/loci": {
+   "repo": "IvenKooLab/loci",
+   "last_commit": "2026-10-10",
+   "stars": 100,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 IvenKooLab\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true
+  },
+  "semiotronika/linza-mcp": {
+   "repo": "Semiotronika/LINZA-MCP",
+   "last_commit": "2026-08-13",
+   "stars": 5,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Semiotronika\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true
+  },
+  "fish827-08/rag-kb": {
+   "repo": "fish827-08/rag-kb",
+   "last_commit": "2026-09-01",
+   "stars": 3,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true
+  },
+  "aliasunder/vault-cortex": {
+   "repo": "aliasunder/vault-cortex",
+   "last_commit": "2026-10-10",
+   "stars": 26,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 aliasunder\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true
+  },
+  "besslframework-stack/project-tessera": {
+   "repo": "besslframework-stack/project-tessera",
+   "last_commit": "2026-03-22",
+   "stars": 18,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true
+  },
+  "chenxiachan/thoughtdag": {
+   "repo": "chenxiachan/thoughtdag",
+   "last_commit": "2026-10-07",
+   "stars": 601,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Xia Chen\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merg",
+   "has_readme": true
+  },
+  "soolaugust/0compactmem": {
+   "repo": "soolaugust/0CompactMem",
+   "last_commit": "2026-07-14",
+   "stars": 5,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true
+  },
+  "shweta-mishra-ai/tokenmizer": {
+   "repo": "Shweta-Mishra-ai/tokenmizer",
+   "last_commit": "2026-10-07",
+   "stars": 33,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Shweta Mishra (https://github.com/Shweta-Mishra-ai)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limit",
+   "has_readme": true
+  },
+  "schubeler-consulting/knowmind": {
+   "repo": "Schubeler-Consulting/knowmind",
+   "last_commit": "2026-10-10",
+   "stars": 0,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true
+  },
+  "atakanelik34/bilinc": {
+   "repo": "atakanelik34/Bilinc",
+   "last_commit": "2026-10-09",
+   "stars": 1,
+   "archived": false,
+   "license_head": "Business Source License 1.1\n\nParameters\n\nLicensor: Atakan Elik\nLicensed Work: Bilinc\nChange Date: 2030-04-14\nChange License: Apache License, Version 2.0\n\nAdditional Use Grant: You may use the Licensed Work for personal, research,\nand non-commercial purposes. You may not use the Licensed Work to prov",
+   "has_readme": true
+  },
+  "tykolt/kremis": {
+   "repo": "TyKolt/kremis",
+   "last_commit": "2026-09-25",
+   "stars": 15,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true
+  },
+  "auctalis/nocturnusai": {
+   "repo": "Auctalis/nocturnusai",
+   "last_commit": "2026-08-14",
+   "stars": 3,
+   "archived": false,
+   "license_head": "SPDX-License-Identifier: BUSL-1.1\n\nBusiness Source License 1.1\n\nParameters\n\nLicensor:             Auctalis LLC.\nLicensed Work:        Nocturnus.AI\n                      The Licensed Work is (c) 2026 Auctalis LLC.\nAdditional Use Grant: You may make non-production use of the Licensed Work,\n           ",
+   "has_readme": true
+  },
+  "lithtrix/lithtrix-mcp": {
+   "repo": "lithtrix/lithtrix-mcp",
+   "last_commit": "2026-06-20",
+   "stars": 1,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true
+  },
   "a1batr055/drivesoid": {
    "repo": "a1batr055/drivesoid",
    "stars": 74,
