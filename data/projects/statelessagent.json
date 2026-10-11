@@ -251,5 +251,38 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 23,
+    "archived": false,
+    "release_count": 22,
+    "last_commit": "2026-08-06",
+    "days_since_commit": 65,
+    "commits_1y": 435,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "SPDX-License-Identifier: BUSL-1.1\n\nBusiness Source License 1.1\n\nParameters\n\nLicensor:             SGX Labs\nLicensed Work:        SAME (Stateless Agent Memory Engine)\n                      The Licensed Work is (c) 2025-2026 SGX Labs.\nAdditional Use Grant: You may use the Licensed Work for personal,\n                      educational, hobby, research, and evaluation\n                      purposes.\nChange Date:          2030-02-02\nChange License:       Apache License, Version 2.0\n\nFor information about alternative licensing arrangements for the\nLicensed Work, please contact: licensing@thirty3labs.com\n\nNotice\n\nThe Business Source License (this document, or the \"License\") is not\nan Open Source license. However, the Licensed Work will eventually be\nmade available under an Open Source License, as stated in this License.\n\nLicense text: https://mariadb.com/bsl11/\n\nTerms\n\nThe Licensor hereby grants you the right to copy, modify, create derivative\nworks, redistribute, and make non-production use of the Licensed Work. The\nLicensor may make an Additional Use Grant, above, permitting limited\nproduction use.\n\nEffective on the Change Date, or the fourth anniversary of the first publicly\navailable d"
+    },
+    "license_label": "BUSL-1.1",
+    "license_category": "source_available",
+    "flags": [
+      "许可证限制使用（源码可见）"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "许可证限制使用（源码可见）"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-11"
+  }
 }

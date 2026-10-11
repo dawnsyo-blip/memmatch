@@ -299,5 +299,24 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "not_github",
+    "note": "代码不在 GitHub 上，无法自动检查",
+    "flags": [
+      "无法自动检查"
+    ]
+  },
+  "inclusion": {
+    "status": "pending",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "代码不在 GitHub 上，无法自动检查"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

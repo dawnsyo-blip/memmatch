@@ -299,5 +299,40 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 277,
+    "archived": false,
+    "release_count": 3,
+    "last_commit": "2026-06-27",
+    "days_since_commit": 106,
+    "commits_1y": 259,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated docu"
+    },
+    "license_label": "Apache-2.0",
+    "license_category": "permissive",
+    "flags": [
+      "近一年只有一人维护"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

@@ -304,5 +304,42 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 74,
+    "archived": false,
+    "release_count": 7,
+    "last_commit": "2026-07-20",
+    "days_since_commit": 83,
+    "commits_1y": 64,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Drivesoid is licensed under the Creative Commons\nAttribution-NonCommercial-ShareAlike 4.0 International License\n(CC BY-NC-SA 4.0), effective from version 2.1.0 onward.\n\nThis license applies to the project source code and all software\ncomponents in this repository.\n\nCopyright (c) 2026 A1batr055\n\nYou are free to use, study, modify, and redistribute this software for\nNON-COMMERCIAL purposes, provided that you (1) give appropriate credit to\nthe original author, and (2) license any derivative or redistributed work\nunder these same terms (no closed-source, no relicensing). Commercial use\nis NOT permitted under this license.\n\nThis is a community, non-profit project. If you want a commercial license,\nyou must obtain separate written permission from the copyright holder.\n\nHISTORICAL NOTE\nVersions up to and including 2.0.0 were released under the MIT License and\nremain available under those terms for those versions; that grant cannot be\nrevoked. From version 2.1.0 onward, this project is licensed under\nCC BY-NC-SA 4.0. The MIT text for the historical versions is preserved at\nthe end of this file.\n\nThe full legal text of CC BY-NC-SA 4.0 follows.\n\n=============================================="
+    },
+    "license_label": "CC BY-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "近一年只有一人维护",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：边缘项（存的不是对话记忆）"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

@@ -246,5 +246,34 @@
       "basis": "README 命中的“openclaw memory-pro import memories.json [--scope globa”经核对不算：只是导入自己的备份"
     }
   },
-  "uncertainties": []
+  "uncertainties": [],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 4453,
+    "archived": false,
+    "release_count": 37,
+    "last_commit": "2026-10-10",
+    "days_since_commit": 1,
+    "commits_1y": 573,
+    "contributors_1y": 83,
+    "license_files": [],
+    "license_text_head": {},
+    "license_label": "无许可证文件",
+    "license_category": "no_license",
+    "flags": [
+      "没有许可证文件"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有许可证文件"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-11"
+  }
 }

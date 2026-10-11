@@ -307,5 +307,42 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 38,
+    "archived": false,
+    "release_count": 8,
+    "last_commit": "2026-08-28",
+    "days_since_commit": 44,
+    "commits_1y": 19,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "SPDX-License-Identifier: BUSL-1.1\n\nBusiness Source License 1.1\n\nLicensor: LIN CHIN AN\n\nLicensed Work: The Yuralume software and documentation in this repository,\nformerly known as Kokoro-Link, including source code, build scripts,\nconfiguration examples, product documentation, and official examples.\n\nAdditional Use Grant:\n\nYou may make Production Use of the Licensed Work only for Non-Commercial\nPurposes.\n\n\"Production Use\" means use of the Licensed Work, or a modified version of it,\nto provide services to end users, run live workloads, operate a hosted service,\nor support an application, integration, workflow, or product used outside\ndevelopment, testing, evaluation, or research environments.\n\n\"Non-Commercial Purposes\" means personal, educational, academic research,\ncharitable, evaluation, development, testing, hobby, or internal non-revenue\nuse that is not intended for or directed toward commercial advantage or\nmonetary compensation.\n\nFor clarity, this Additional Use Grant does not permit Production Use of the\nLicensed Work, or any modified version of it, to provide a paid product, paid\nhosted service, SaaS offering, managed service, commercial integration,\nconsulting deliverable, "
+    },
+    "license_label": "BUSL-1.1",
+    "license_category": "source_available",
+    "flags": [
+      "近一年只有一人维护",
+      "许可证限制使用（源码可见）"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "许可证限制使用（源码可见）"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

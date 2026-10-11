@@ -303,5 +303,44 @@
       "label": "怎么遗忘",
       "note": "原表：README 未描述；—"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 415,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-10-11",
+    "days_since_commit": 1,
+    "commits_1y": 80,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Required Notice: Copyright © 2025-2026 Sui (https://github.com/Sui-IB)\n\n# PolyForm Noncommercial License 1.0.0\n\n<https://polyformproject.org/licenses/noncommercial/1.0.0>\n\n## Acceptance\n\nIn order to get any license under these terms, you must agree\nto them as both strict obligations and conditions to all\nyour licenses.\n\n## Copyright License\n\nThe licensor grants you a copyright license for the\nsoftware to do everything you might do with the software\nthat would otherwise infringe the licensor's copyright\nin it for any permitted purpose.  However, you may\nonly distribute the software according to [Distribution\nLicense](#distribution-license) and make changes or new works\nbased on the software according to [Changes and New Works\nLicense](#changes-and-new-works-license).\n\n## Distribution License\n\nThe licensor grants you an additional copyright license\nto distribute copies of the software.  Your license\nto distribute covers distributing the software with\nchanges and new works permitted by [Changes and New Works\nLicense](#changes-and-new-works-license).\n\n## Notices\n\nYou must ensure that anyone who gets a copy of any part of\nthe software from you also gets a copy of these terms or the\nURL "
+    },
+    "license_label": "PolyForm-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

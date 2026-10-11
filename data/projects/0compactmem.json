@@ -250,5 +250,36 @@
       "label": "能否查看和修改记忆",
       "note": "没找到查看或修改记忆的方式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 5,
+    "archived": false,
+    "release_count": 1,
+    "last_commit": "2026-07-14",
+    "days_since_commit": 89,
+    "commits_1y": 1422,
+    "contributors_1y": 1,
+    "license_files": [],
+    "license_text_head": {},
+    "license_label": "无许可证文件",
+    "license_category": "no_license",
+    "flags": [
+      "近一年只有一人维护",
+      "没有许可证文件"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "没有许可证文件"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-11"
+  }
 }

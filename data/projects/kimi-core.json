@@ -304,5 +304,24 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "unreachable",
+    "note": "仓库无法访问（已删除、改名或设为私有）",
+    "flags": [
+      "无法自动检查"
+    ]
+  },
+  "inclusion": {
+    "status": "pending",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "仓库无法访问（已删除、改名或设为私有）"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

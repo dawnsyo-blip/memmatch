@@ -245,5 +245,38 @@
       "basis": "README：“e: application/json\" \\ -d '{\"data\": \"<ChatGPT export JSON>\", \"source\": \"chatgpt\"}' ``` Expo”（已核对）"
     }
   },
-  "uncertainties": []
+  "uncertainties": [],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 18,
+    "archived": false,
+    "release_count": 13,
+    "last_commit": "2026-03-22",
+    "days_since_commit": 204,
+    "commits_1y": 111,
+    "contributors_1y": 2,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of i"
+    },
+    "license_label": "AGPL-3.0",
+    "license_category": "copyleft",
+    "flags": [
+      "超过 180 天没有提交"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "超过 180 天没有提交"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-11"
+  }
 }

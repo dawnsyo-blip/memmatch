@@ -298,5 +298,40 @@
       "label": "怎么遗忘",
       "note": "原表：README 未描述；—"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 106,
+    "archived": false,
+    "release_count": 2,
+    "last_commit": "2026-08-19",
+    "days_since_commit": 53,
+    "commits_1y": 19,
+    "contributors_1y": 2,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International\n\nThis work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.\n\nYou are free to share and adapt this project for non-commercial purposes, as long as you give appropriate credit, indicate changes, and distribute contributions under the same license.\n\nFull license text:\nhttps://creativecommons.org/licenses/by-nc-sa/4.0/legalcode\n"
+    },
+    "license_label": "CC BY-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

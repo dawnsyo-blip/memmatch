@@ -310,5 +310,42 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 16,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2025-12-11",
+    "days_since_commit": 304,
+    "commits_1y": 3,
+    "contributors_1y": 1,
+    "license_files": [],
+    "license_text_head": {},
+    "license_label": "无许可证文件",
+    "license_category": "no_license",
+    "flags": [
+      "超过 180 天没有提交",
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "没有许可证文件"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "超过 180 天没有提交",
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "没有许可证文件"
+    ],
+    "reasons": [
+      "收录类别：边缘项（存的不是对话记忆）"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

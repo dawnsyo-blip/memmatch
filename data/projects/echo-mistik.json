@@ -295,5 +295,42 @@
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 21,
+    "archived": false,
+    "release_count": 1,
+    "last_commit": "2026-05-25",
+    "days_since_commit": 139,
+    "commits_1y": 8,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "PolyForm Noncommercial License 1.0.0\n\nhttps://polyformproject.org/licenses/noncommercial/1.0.0\n\nRequired Notice: Copyright © 2026 Anonimos Web. Commercial rights reserved. Commercial use requires a separate written license from the copyright holder.\n\nAcceptance\n\nIn order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.\n\nCopyright License\n\nThe licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose. However, you may only distribute the software according to Distribution License and make changes or new works based on the software according to Changes and New Works License.\n\nDistribution License\n\nThe licensor grants you an additional copyright license to distribute copies of the software. Your license to distribute covers distributing the software with changes and new works permitted by Changes and New Works License.\n\nNotices\n\nYou must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as c"
+    },
+    "license_label": "PolyForm-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "近一年只有一人维护",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }

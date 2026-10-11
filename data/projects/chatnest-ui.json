@@ -305,5 +305,42 @@
       "label": "数据经过谁的服务器",
       "note": "运行位置未识别"
     }
-  ]
+  ],
+  "health": {
+    "checked_on": "2026-10-11",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 62,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-09-04",
+    "days_since_commit": 37,
+    "commits_1y": 6,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Source-Available License — Non-Commercial, Attribution Required\n源码可用许可证 —— 禁止商用，署名强制\n\nCopyright (c) 2026 zaochuanyitian (https://github.com/zaochuanyitian)\nAll rights reserved.\n\nThis project is SOURCE-AVAILABLE, not open source. The source is published so\nthat people can read it, learn from it, and run it for themselves. Nothing here\ngrants an open-source license such as MIT or Apache-2.0.\n\n------------------------------------------------------------------------------\n1. YOU MAY\n\n   a. View, read, and study the source code.\n   b. Run the project for your own personal, non-commercial use.\n   c. Modify it for your own personal, non-commercial use.\n   d. Redistribute it, modified or unmodified, ONLY IF all of the following\n      hold: the redistribution is non-commercial, Section 3 (Attribution) is\n      satisfied, and this license is included unchanged.\n\n2. YOU MAY NOT\n\n   a. Use this project, in whole or in part, modified or unmodified, for any\n      commercial purpose. This includes selling it, bundling it into a paid\n      product or service, offering it as a hosted or ad-supported service,\n      using it in paid consulting deliverables, or any use whose purpose is to\n      genera"
+    },
+    "license_label": "源码可见（自定义许可）（含禁止商用条款）",
+    "license_category": "noncommercial",
+    "flags": [
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-11"
+  }
 }
