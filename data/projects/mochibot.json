@@ -174,11 +174,10 @@
     },
     "accounts_needed": {
       "value": [
-        "model_api_key",
-        "telegram"
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：Windows、macOS 或 Linux；模型密钥；Telegram 或微信；Windows、macOS 或 Linux；模型密钥；Telegram 或微信"
+      "status": "confirmed",
+      "basis": "Claude 更正（2026-10-11）：原文“Telegram 或微信”是二选一的聊天入口，不应记为必须有 Telegram"
     },
     "memory_subject": {
       "value": [
