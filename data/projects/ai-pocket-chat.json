@@ -277,6 +277,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“d swings, long/short-term memory, and a relationship growth ladder; characters proactively post to”（已核对）"
+    },
+    "independent_life": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“数据全存手机；记忆驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；Android 原生”"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“数据全存手机；记忆驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；Android 原生应用；”"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
     "paper_taxonomy": {
       "form": "词元级（手机本地）",
       "function": "用户事实＋日程／情绪",

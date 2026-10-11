@@ -245,6 +245,41 @@
       "value": "yes",
       "status": "auto",
       "basis": "README：“t --adapter gemini` | | mem0 | `@remnic/import-mem0` | `remnic import --adapter mem0` | | S”（已核对）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ing search and then recency-ordered reads. ###”经核对不算：只是检索失败时按新旧读取"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“k, and transparent AES-256-GCM [at-rest encryption](docs/encryption.md) (opt-in via `secur”（已核对）"
     }
   },
   "uncertainties": [

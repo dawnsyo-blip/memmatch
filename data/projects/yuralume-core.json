@@ -282,6 +282,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“合成名册；pgvector 语义检索；按角色的互动热度；角色有自己的日程、动态和生活；一个身份跨 Tel”"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“patch, quiet hours, persona dream, self-reflection, disposition drift, and post-turn promp”（已核对）"
+    },
+    "relationship_stage": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“）；日程活动成为情节记忆；共享活动经用户同意才成为共同记忆；梦境时段整合；角色间关系记忆整合成名册；pgve”"
+    },
+    "independent_life": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆与角色“自己的日程和生活”结合，多通道；用户事实＋角色日程；自托管网”"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“d safe-area aware. (Live2D was tried and dropp”经核对不算：原文是 Live2D 试过后放弃了"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“INE / Discord / WhatsApp), and optional TTS playback per character. - **Guided char”（已核对）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“tches for individual cases. Everything stays on your machine. Third-party APIs are called only when”（已核对）"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋角色日程",

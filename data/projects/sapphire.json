@@ -276,6 +276,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“lugins highlighted, trust levels indicated. [sapphi”经核对不算：trust level 指插件可信度"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“n model and display images in chat. - **3D Avatar** - Supports rigged GLB avatar files wi”（已核对）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“务；AI 身份＋目标＋联系人；完整应用（网页界面＋语音唤醒）；自带网页端；完整应用（网页界面＋语音唤醒）”"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ulti-account inbox, privacy-first sending, daemon aut”经核对不算：说的是邮件插件"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（十万级语义记忆）＋知识库",
       "function": "AI 身份＋目标＋联系人",

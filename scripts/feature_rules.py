@@ -1,6 +1,7 @@
 """阶段 1 追加：用户在意的特性（是否保持人格连续、换窗是否续得上、能否保留原话……）。
 
-依据：负责人整理的《独立事实记忆层_使用流程.md》中的选型问题，以及社区讨论
+依据：负责人整理的《独立事实记忆层_使用流程.md》中的选型问题；Emotion Machine《How to Build Realistic AI
+Companions》梳理的用户需求（召回排序、反思推断、关系阶段、独立生活、视觉形象、语音、隐私，2026-10-11 追加）；以及社区讨论
 （MIT 对 r/MyBoyfriendIsAI 的研究：换模型后关系断裂、人格漂移是最大痛点；
 中文报道中的“换窗像陌生人”“升级后失忆”；Claude 用户给 AI 补“时间感”的做法）。
 
@@ -23,6 +24,14 @@ FEATURES = {
     "pinning": ("钉选重要记忆", "可把重要记忆标为核心、永不衰减或锁定"),
     "error_guard": ("记错防护", "能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真"),
     "import_history": ("迁入旧记录", "能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据"),
+    # 以下 7 项据 Emotion Machine《How to Build Realistic AI Companions》追加
+    "retrieval_weighting": ("召回排序", "挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似"),
+    "reflection": ("反思推断", "从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）"),
+    "relationship_stage": ("关系阶段", "记录关系进展、亲密度或信任度，刚认识和久别重逢时表现不同"),
+    "independent_life": ("独立生活", "AI 有自己的日程或生活线，能聊它“不在线时”做了什么"),
+    "visual_presence": ("视觉形象", "有 Live2D、3D 角色、桌宠等形象，或用画面表现情绪"),
+    "voice_interaction": ("语音交互", "支持语音对话、朗读，或从声音里识别情绪"),
+    "privacy_protection": ("隐私保护", "加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机"),
 }
 
 # 中文模式用于原表与 info；英文模式用于 README（也会扫中文 README）
@@ -80,8 +89,81 @@ PATTERNS = {
         r"claude\.ai export|migrate from|import-mem0|--from (?:mem0|zep|cursorrules)|chat[- ]history import|imports? chats?"),
 }
 
+PATTERNS.update({
+    "retrieval_weighting": (
+        r"重要度|重要性评分|热度|情感权重|情绪浓度|权重取|综合评分|按时效|新旧和命中|显著性",
+        r"\brecency\b|importance (?:scor|weight|rank)|salience|relevance,? (?:importance|recency)|importance and recency|"
+        r"emotional (?:weight|intensity)|composite score|weighted (?:score|rank|retrieval)|ranked by (?:importance|recency)|"
+        r"spreading activation|reinforce(?:d|ment) (?:on|by) (?:access|use)"),
+    "reflection": (
+        r"反思|推断|归纳|洞察|自省|模式观察|高层理解|提炼规律",
+        r"\breflection|reflect(?:s)? on (?:past|its|the)|higher-level (?:insights?|beliefs|observations)|"
+        r"infer(?:s|red|ence)? (?:patterns|preferences|about)|synthesi[sz]e(?:s|d)? (?:insights|patterns|beliefs)|"
+        r"observations?: consolidated|cross-memory reflection|pattern (?:detection|mining) (?:over|across)"),
+    "relationship_stage": (
+        r"关系阶段|亲密度|好感度|关系发展|信任度|关系进展|关系成长|共同记忆",
+        r"relationship (?:stage|phase|growth|progress|level|depth)|intimacy (?:level|score)|affection (?:level|score)|"
+        r"trust (?:level|score)|bond(?:ing)? (?:level|strength)|stages? of (?:the|your) relationship|believable relationship"),
+    "independent_life": (
+        r"生活线|自己的日程|自己的生活|无人注视时|后台“生活”|日程活动|朋友圈|角色日程",
+        r"(?:its|her|his|their) own (?:life|schedule|routine|day|activities)|independent (?:life|lives)|off-screen|"
+        r"while you(?:'re| are) away|when no one is watching|social feed|daily life of"),
+    "visual_presence": (
+        r"Live2D|VRM|3D 角色|桌宠|立绘|发光|光球|动态形象",
+        r"Live2D|\bVRM\b|3D (?:character|avatar|model)|animated (?:character|avatar|orb)|desktop (?:pet|companion character)|"
+        r"glow(?:s|ing)? on your desktop|brain visuali[sz]er|character sprite|facial expressions?"),
+    "voice_interaction": (
+        r"语音|朗读|唤醒词|通话|来电|TTS",
+        r"voice (?:chat|calls?|conversation|mode|input|output|notes|messages)|speech[- ](?:to[- ]text|synthesis|recognition)|"
+        r"text-to-speech|\bTTS\b|wake[- ]?word|ElevenLabs|speak(?:s)? (?:and|aloud)|read-aloud"),
+    "privacy_protection": (
+        r"加密|脱敏|敏感信息|隐私|不上传|数据不出|全离线|本地优先|密钥不",
+        r"encrypt(?:ed|ion|s)?\b|redact(?:ed|ion|s)?|\bPII\b|secret (?:detection|redaction|scrubbing)|scrub(?:s|bed)? secrets|"
+        r"no telemetry|never leaves (?:your|the) (?:machine|device|computer)|nothing leaves|stays on your (?:machine|device)|"
+        r"zero-knowledge|privacy[- ]first|fully offline|100% local"),
+})
+
 # Claude 核对 README 摘录后认定的误判：(项目 id, 特性) -> 原因。逐条核对后补充。
 README_REJECT = {
+    # retrieval_weighting（2026-10-11）
+    ("0compactmem", "retrieval_weighting"): "只是对比表的一列",
+    ("inspeximus", "retrieval_weighting"): "在说按新旧排序做不到的事",
+    ("llmcompressor", "retrieval_weighting"): "只按引用次数和新旧排列，没有综合排序",
+    ("memgres", "retrieval_weighting"): "说的是标题加权的文本检索",
+    ("memorybear", "retrieval_weighting"): "说的是模型的近因偏差",
+    ("midas", "retrieval_weighting"): "说的是评测基线",
+    ("mindmap-mcp-server", "retrieval_weighting"): "说的是按新旧分组展示",
+    ("personal-understanding", "retrieval_weighting"): "只是一个脚本文件名",
+    ("remnic", "retrieval_weighting"): "只是检索失败时按新旧读取",
+    ("weighted-compact", "retrieval_weighting"): "说的是评测基线",
+    # reflection（2026-10-11）
+    ("agentrecall", "reflection"): "实验性评测工具",
+    ("bitterbot-desktop", "reflection"): "宣传文字",
+    ("memory-mcp-1file", "reflection"): "写在“未来版本”计划里",
+    ("weighted-compact", "reflection"): "在说它不做推断",
+    # relationship_stage（2026-10-11）
+    ("piia-engram", "relationship_stage"): "trust level 指调用方权限",
+    ("sapphire", "relationship_stage"): "trust level 指插件可信度",
+    # visual_presence（2026-10-11）
+    ("everos", "visual_presence"): "说的是示例集成",
+    ("yuralume-core", "visual_presence"): "原文是 Live2D 试过后放弃了",
+    # voice_interaction（2026-10-11）
+    ("eros-engine", "voice_interaction"): "原文说语音要调用方自己实现",
+    ("gbrain", "voice_interaction"): "说的是导入通话记录",
+    ("prism-mcp", "voice_interaction"): "说的是另一个编辑器扩展",
+    ("psycheros", "voice_interaction"): "只是待接入列表",
+    # privacy_protection（2026-10-11）
+    ("mcp-memory-service", "privacy_protection"): "Let's Encrypt 是 HTTPS 证书服务",
+    ("remembra", "privacy_protection"): "断词误匹配（did nothing leaves none）",
+    ("roampal-core", "privacy_protection"): "说的是某个旧版本破坏了这个承诺",
+    ("sapphire", "privacy_protection"): "说的是邮件插件",
+    ("tokenmizer", "privacy_protection"): "说的是提交问题时可脱敏",
+    ("gbrain", "privacy_protection"): "说的是会把脱敏后的数据发出本机",
+    ("mnemos", "privacy_protection"): "说的是单元测试离线运行",
+    ("basic-memory", "privacy_protection"): "说的是遥测收集范围",
+    ("central-intelligence", "privacy_protection"): "只是使用建议",
+    ("memgres", "privacy_protection"): "原文说加密要部署方自己做",
+    ("mnemo-mcp", "privacy_protection"): "该功能已移除",
     # persona_continuity
     ("aurasdk", "persona_continuity"): "指用户的性格偏好",
     ("cometline", "persona_continuity"): "只是选择预设人格",
@@ -321,6 +403,7 @@ README_REJECT = {
 
 # 原表／说明中的中文命中经核对不算的：(项目 id, 特性) -> 原因。被剔除后仍会继续看 README。
 STRUCTURED_REJECT = {
+    ("pawwake", "retrieval_weighting"): "“按时效”指去重",
     ("ai-pocket-chat", "multimodal"): "语音识别只是输入方式",
     ("sapphire", "multimodal"): "语音唤醒只是输入方式",
     ("claude-handoff", "dream_consolidation"): "“整理”指生成交接文件",
@@ -342,4 +425,11 @@ STRUCTURED_REJECT = {
 }
 
 # 已完成逐条核对的特性；未核对的特性里，只靠 README 命中的条目标为待审核
-CHECKED = set(FEATURES)  # 2026-10-10 全部特性的 README 摘录已逐条核对
+CHECKED = {  # README 摘录已逐条核对的特性
+    # 2026-10-10
+    "persona_continuity", "window_handoff", "cross_client", "verbatim", "multimodal", "time_awareness",
+    "dream_consolidation", "emotion", "proactive", "pinning", "error_guard", "import_history",
+    # 2026-10-11
+    "retrieval_weighting", "reflection", "relationship_stage", "independent_life", "visual_presence",
+    "voice_interaction", "privacy_protection",
+}

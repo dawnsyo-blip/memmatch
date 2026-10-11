@@ -286,6 +286,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“tion · state- │ │ │ │ dependent · spreading activation · │ │ │ │ RIF · Zeigarnik · inv”（已核对）"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“| — | Yes (Cortex) | Yes | | LLM-driven reflection & self-analysis | — | Yes (Cortex) | Ye”（已核对）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“带情绪向量、生动度的多类型记忆；内容去重；可选静态加密；再巩固；时间要点提取；程序调用 recall 或”"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块）",
       "function": "事实（情景、社会印象）＋经验（程序、教训）＋前瞻（未来）",

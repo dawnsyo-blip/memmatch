@@ -281,6 +281,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“漂移；双层记忆：稳定用户事实与共同经历；结构化用户洞察；六个亲密度维度按档位写入、经衰减落库并随时间回落”"
+    },
+    "relationship_stage": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆：稳定用户事实与共同经历；结构化用户洞察；六个亲密度维度按档位写入、经衰减落库并随时间回落；embed”"
+    },
+    "independent_life": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“*A simulated world** — personas have an off-screen life. A scheduled world director evolve”（已核对）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“n already ship; STT/TTS currently stay on t”经核对不算：原文说语音要调用方自己实现"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
     "paper_taxonomy": {
       "form": "词元级＋结构化关系状态",
       "function": "用户事实（结构化用户洞察）＋关系状态",

@@ -38,6 +38,13 @@
 | `pinning` | **钉选重要记忆**：可把重要记忆标为核心、永不衰减或锁定。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
 | `error_guard` | **记错防护**：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
 | `import_history` | **迁入旧记录**：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `retrieval_weighting` | **召回排序**：挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `reflection` | **反思推断**：从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `relationship_stage` | **关系阶段**：记录关系进展、亲密度或信任度，刚认识和久别重逢时表现不同。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `independent_life` | **独立生活**：AI 有自己的日程或生活线，能聊它“不在线时”做了什么。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `visual_presence` | **视觉形象**：有 Live2D、3D 角色、桌宠等形象，或用画面表现情绪。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `voice_interaction` | **语音交互**：支持语音对话、朗读，或从声音里识别情绪。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
+| `privacy_protection` | **隐私保护**：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
 
 共 179 个项目：文档未说明 315 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 
@@ -76,6 +83,20 @@
   Aelios、afair、agent-memory（g1itchbot）、agentic-recall、AgentRecall、Alaya、archon-memory-core、AstrBot 自主学习、AtMem、birkin-mnemosyne、Bitterbot、Central Intelligence、Claude Soul、Claudex、Compartment、ContextLattice、CRBRO、DreamVault、Facthouse、FluctlightDB、GBrain、Graph Memory、Graphiti（Zep）、Engram（HBarefoot）、Hipocampo、HMS、IAI 个人记忆引擎、imprint-memory、洞察捕捉 Insight、inspeximus、Jarvis Orb、kimi-core、kiwi-mem、lean-memory、notebook.py、mem0-mcp-selfhosted、memgres、memo、Memora、记忆星图 Memory Constellations、MemoryMesh、MemOS、MemTether、Midas、Mímir、Mnemo Cortex、mnemo、mnemory、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、草履虫 Paramecium、爪迹 Pawwake、people-context、Personal Understanding、Piia Engram、Tessera、Remembra Relay、Remnic、RetainDB、ShadowGraph、Shodh-Memory、SAME、Statewave、Supermemory、Synapse、Talamus、taOSmd、TeleMem、TokenMizer、Tree Ring Memory、Engram（tstockham96）、widemem、YourMemory
 - **迁入旧记录**（21 个）：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。
   agentic-recall、Alaya、Basic Memory、Central Intelligence、claude-handoff、HoneyOS、inspeximus、InternalBeyond 移动版、KI-CO 小屋、Mengram、Midas、Mind Map、MochiBot、Neotoma、爪迹 Pawwake、people-context、Tessera、Psycheros、Remnic、RetainDB、Synapse
+- **召回排序**（37 个）：挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似。
+  agent-memory（g1itchbot）、agentic-recall、AgentRecall、Alaya、archon-memory-core、Aura Memory、memex（ayushagrawal288）、causal-memory、Celiums Memory、Companion Emergence、Compartment、CRBRO、Engram（FBISiri）、FluctlightDB、GBrain、Engram（HBarefoot）、Hipocampo、IAI 个人记忆引擎、imprint-memory、Jarvis Orb、kimi-core、kiwi-mem、lean-memory、memory-lancedb-pro、记忆星图 Memory Constellations、Mímir、mneme、mnemo、mnemos（vishalbanwari26）、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Tessera、Shodh-Memory、Engram（tstockham96）、widemem、Yuralume Core、ZenBrain
+- **反思推断**（22 个）：从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）。
+  Aura Memory、Being、Claude Soul、Companion Emergence、Echo Mistik、Eros Engine、EverOS、Engram（FBISiri）、imprint-memory、洞察捕捉 Insight、kiwi-mem、L.I.F.E.、Memex、memory-lancedb-pro、MemoryBear、记忆星图 Memory Constellations、Mímir、mnemos（vishalbanwari26）、Resonant Mind、Synthetic Heart、taOSmd、Yuralume Core
+- **关系阶段**（5 个）：记录关系进展、亲密度或信任度，刚认识和久别重逢时表现不同。
+  AI Pocket Chat、AstrBot 自主学习、Eros Engine、Utsuwa、Yuralume Core
+- **独立生活**（6 个）：AI 有自己的日程或生活线，能聊它“不在线时”做了什么。
+  AI Pocket Chat、Companion Emergence、Eros Engine、InternalBeyond 移动版、KI-CO 小屋、Yuralume Core
+- **视觉形象**（8 个）：有 Live2D、3D 角色、桌宠等形象，或用画面表现情绪。
+  守护猴 Daemonkey、Echo Mistik、Jarvis Orb、Sapphire、Synthetic Heart、Utsuwa、Yoji、Yorishiro
+- **语音交互**（14 个）：支持语音对话、朗读，或从声音里识别情绪。
+  AI Pocket Chat、Echo Mistik、InternalBeyond 移动版、L.I.F.E.、墨知 MoRead、OpenHer、Resonant、Sapphire、Synthetic Heart、三天没睡、Utsuwa、Yoji、Yorishiro、Yuralume Core
+- **隐私保护**（67 个）：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。
+  Acheron、agentic-recall、AgentRecall、Akephalos、alethech、archon-memory-core、AtMem、Aura Memory、Being、Celiums Memory、claude-handoff、Companion Emergence、Compartment、ContextLattice、CRBRO、fable、GENOME、GoodMemory、Graph Memory、Engram（HBarefoot）、Hindsight、Hyperconsciousness、IAI 个人记忆引擎、inspeximus、InternalBeyond 移动版、KI-CO 小屋、lean-memory、Longhand、LoreRoom、Memex、MemHeaven、memo、Memora、memory-mcp-1file、记忆星图 Memory Constellations、MemOS、Mengram、Midas、Mímir、Mind Map、MIRA OS、mneme、Mnemo Cortex、Neotoma、OMEGA、LongMemory（原 OpenMemory）、people-context、Piia Engram、Prism Coder、Tessera、ReMe、Remnic、Resonant、ShadowGraph、Shodh-Memory、SAME、Statewave、Supermemory、Talamus、taOSmd、TeleMem、Tree Ring Memory、Engram（tstockham96）、Utsuwa、widemem、YourMemory、Yuralume Core
 
 ## `access` 接入方式（3 处）
 

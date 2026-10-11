@@ -155,7 +155,7 @@
     },
     "normalized": {
       "type": "object",
-      "description": "阶段 1 规范化结果（含用户在意的 12 个特性，定义见 scripts/feature_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
+      "description": "阶段 1 规范化结果（含用户在意的 19 个特性，定义见 scripts/feature_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
       "required": [
         "access",
         "compatible_clients",
@@ -182,7 +182,14 @@
         "proactive",
         "pinning",
         "error_guard",
-        "import_history"
+        "import_history",
+        "retrieval_weighting",
+        "reflection",
+        "relationship_stage",
+        "independent_life",
+        "visual_presence",
+        "voice_interaction",
+        "privacy_protection"
       ],
       "properties": {
         "access": {
@@ -261,6 +268,27 @@
           "$ref": "#/$defs/normalizedField"
         },
         "import_history": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "retrieval_weighting": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "reflection": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "relationship_stage": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "independent_life": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "visual_presence": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "voice_interaction": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "privacy_protection": {
           "$ref": "#/$defs/normalizedField"
         },
         "paper_taxonomy": {

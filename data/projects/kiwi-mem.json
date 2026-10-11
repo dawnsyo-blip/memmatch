@@ -288,6 +288,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“按日历层级逐步压缩，用“热度”决定哪些记忆留在前台；用户事实；网关；OpenA”"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“旧记忆细节；Dream 三层整合（清理→融合场景→推断）；日→周→月→季→年摘要；矛盾时旧记忆失效；记忆”"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（日／周／月摘要）",
       "function": "用户事实",

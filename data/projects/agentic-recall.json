@@ -239,6 +239,41 @@
       "value": "yes",
       "status": "auto",
       "basis": "README：“ves somewhere else, import it once.** A ChatGPT export `.zip`, a folder of Obsidian/Notion mar”（已核对）"
+    },
+    "retrieval_weighting": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“**, the **hot-tier boost** and a **mild recency decay**. Every result reports its `prov”（已核对）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“islyon@gmail.com**. ## Privacy Policy Nothing leaves your machine. Memories are plain files”（已核对）"
     }
   },
   "uncertainties": [

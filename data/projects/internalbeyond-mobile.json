@@ -283,6 +283,41 @@
       "status": "auto",
       "basis": "README：“GPT / Claude exports (the zip itself or conversations.json), other JSON / JSONL logs, or plain-tex”（已核对）"
     },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“and Wallet Card. - **Circle** — Shared social feed where you and authorized AIs post, comm”（已核对）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“HTML 文件的离线 PWA，带跨端备份；聊天、通话结束可一键生成第一人称记忆；每位 AI 维护独立档”"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“obile-native twin of Internal Beyond: a fully offline, single-file personal website app desig”（已核对）"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实（情感记忆）",

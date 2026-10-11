@@ -284,6 +284,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“, comfort, and respect separately - **8 Relationship Stages**: Progress from Stranger → Acquaintan”（已核对）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“托管；自带（网页/桌面）；伴侣应用自带记忆；3D VRM 角色＋8 阶段恋爱进阶；早期版本存档可能不兼容，”"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“t aligned) with streaming responses - **Voice Input**: Speech-to-text via a local Whisper s”（已核对）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ocused: your data is stored locally and never leaves your device. \"Utsuwa\" means \"vessel\" in Japanese.”（已核对）"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋角色成长",

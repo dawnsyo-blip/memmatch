@@ -281,6 +281,41 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "retrieval_weighting": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ay, surface latent connections (Hebbian spreading activation), and process emotional residue. What s”（已核对）"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“on injection attempts. **Initiate + D-reflection.** The brain can queue outbound candida”（已核对）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“赫布式（共同激活即强化）联想记忆＋真遗忘，强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后”"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“a correspondence as peers — end-to-end encrypted, with key rotation, a slowly-maturing r”（已核对）"
+    },
     "paper_taxonomy": {
       "form": "词元级・平面（赫布联想网络）",
       "function": "AI 身份＋情绪／身体状态",
