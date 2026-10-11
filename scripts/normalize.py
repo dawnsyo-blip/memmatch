@@ -558,7 +558,7 @@ def original_text(doc, field):
            "accounts_needed": [info.get("accounts_needed")], "cost": [info.get("accounts_needed")],
            "memory_subject": [info.get("memory_subject")], "write_mode": [x.get("记忆由谁写入"), x.get("人在哪一步介入")],
            "forgetting": [x.get("遗忘怎么发生")], "license_category": [info.get("license")]}.get(field, [])
-    return "；".join(str(s) for s in dict.fromkeys(src) if s) or "（见理由）"
+    return "；".join(str(s) for s in dict.fromkeys(src) if s) or "—"
 
 
 def write_review(docs):

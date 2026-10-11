@@ -90,9 +90,9 @@
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
 | Aura Memory（`aurasdk`） | 文档未说明 | 多个 AI 工具 | — | 客户端原文：多个 AI 工具 |
-| Drivesoid（`drivesoid`） | 文档未说明 | （见理由） | — | 客户端原文： |
-| MemoryBear（`memorybear`） | 文档未说明 | （见理由） | — | 客户端原文： |
-| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | （见理由） | — | 客户端原文： |
+| Drivesoid（`drivesoid`） | 文档未说明 | — | — | 客户端原文： |
+| MemoryBear（`memorybear`） | 文档未说明 | — | — | 客户端原文： |
+| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | — | — | 客户端原文： |
 | Personal Understanding（`personal-understanding`） | 文档未说明 | 支持技能的 agent（README 未逐一列出） | — | 客户端原文：支持技能的 agent（README 未逐一列出） |
 | ShadowGraph（`shadowgraph`） | 文档未说明 | Claude 系列 | — | 客户端原文：Claude 系列 |
 
@@ -107,56 +107,56 @@
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| Akephalos（`akephalos`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| LivingMemory（`astrbot-plugin-livingmemory`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| DreamVault（`dreamvault`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| Drivesoid（`drivesoid`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| HMS（`hms`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| kimi-room（`kimi-room`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| notebook.py（`llmcompressor`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| 记忆星图 Memory Constellations（`memoryconstellations`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| Myco（`myco`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
-| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | （见理由） | — | README 和原表都没提到系统 |
+| Akephalos（`akephalos`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| LivingMemory（`astrbot-plugin-livingmemory`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| DreamVault（`dreamvault`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| Drivesoid（`drivesoid`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| HMS（`hms`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| kimi-room（`kimi-room`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| notebook.py（`llmcompressor`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| 记忆星图 Memory Constellations（`memoryconstellations`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| Myco（`myco`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | — | — | README 和原表都没提到系统 |
+| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | — | — | README 和原表都没提到系统 |
 
 ## `cost` 费用（16 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| alethech（`alethech`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；Star 为 0”，归不进固定选项 |
-| Claude-Mem（`claude-mem`） | 文档未说明 | （见理由） | — | 文档写的是“本机服务；部分宿主默认用托管的 CMEM Pro；偏编程场景；Star 很多（约 9.9 万），但以编程项目为主”，归不进固定选项 |
-| ContextLattice（`contextlattice`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑（容器运行时）；偏编程场景”，归不进固定选项 |
+| alethech（`alethech`） | 文档未说明 | — | — | 文档写的是“自己的电脑；Star 为 0”，归不进固定选项 |
+| Claude-Mem（`claude-mem`） | 文档未说明 | — | — | 文档写的是“本机服务；部分宿主默认用托管的 CMEM Pro；偏编程场景；Star 很多（约 9.9 万），但以编程项目为主”，归不进固定选项 |
+| ContextLattice（`contextlattice`） | 文档未说明 | — | — | 文档写的是“自己的电脑（容器运行时）；偏编程场景”，归不进固定选项 |
 | cosmos-mcp（`cosmos-mcp`） | 文档未说明 | Cosmos 账号 | — | 文档写的是“Cosmos 账号；需 Cosmos 服务密钥；同步 App 仅 macOS；免代码用法默认经第三方服务器”，归不进固定选项 |
-| FluctlightDB（`fluctlightdb`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；MIT 或 Apache-2.0”，归不进固定选项 |
-| Kremis（`kremis`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑（需 Rust 编译）；alpha 版”，归不进固定选项 |
-| Letta（原 MemGPT）（`letta`） | 文档未说明 | （见理由） | — | 文档写的是“本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta”，归不进固定选项 |
-| Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
+| FluctlightDB（`fluctlightdb`） | 文档未说明 | — | — | 文档写的是“自己的电脑；MIT 或 Apache-2.0”，归不进固定选项 |
+| Kremis（`kremis`） | 文档未说明 | — | — | 文档写的是“自己的电脑（需 Rust 编译）；alpha 版”，归不进固定选项 |
+| Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | 文档写的是“本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta”，归不进固定选项 |
+| Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
 | Mengram（`mengram`） | 文档未说明 | Mengram 账号 | — | 文档写的是“Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器”，归不进固定选项 |
-| Myco（`myco`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
-| Omnigraph（`omnigraph`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑或对象存储”，归不进固定选项 |
-| Second Me（`second-me`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑（Docker）；最后提交 2025-09，更新放缓；更新放缓”，归不进固定选项 |
-| ShadowGraph（`shadowgraph`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；偏编程场景；技术预览版，npm 上没有”，归不进固定选项 |
+| Myco（`myco`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
+| Omnigraph（`omnigraph`） | 文档未说明 | — | — | 文档写的是“自己的电脑或对象存储”，归不进固定选项 |
+| Second Me（`second-me`） | 文档未说明 | — | — | 文档写的是“自己的电脑（Docker）；最后提交 2025-09，更新放缓；更新放缓”，归不进固定选项 |
+| ShadowGraph（`shadowgraph`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景；技术预览版，npm 上没有”，归不进固定选项 |
 | Supermemory（`supermemory`） | 文档未说明 | Supermemory 账号 | — | 文档写的是“Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署”，归不进固定选项 |
-| Talamus（`talamus`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
-| Tree Ring Memory（`tree-ring-memory`） | 文档未说明 | （见理由） | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
+| Talamus（`talamus`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
+| Tree Ring Memory（`tree-ring-memory`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
 
 ## `accounts_needed` 需要的账号（13 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| alethech（`alethech`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Claude-Mem（`claude-mem`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| ContextLattice（`contextlattice`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| FluctlightDB（`fluctlightdb`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Kremis（`kremis`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Letta（原 MemGPT）（`letta`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Myco（`myco`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Omnigraph（`omnigraph`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Second Me（`second-me`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| ShadowGraph（`shadowgraph`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Talamus（`talamus`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
-| Tree Ring Memory（`tree-ring-memory`） | 文档未说明 | （见理由） | — | 说明文档没有写 |
+| alethech（`alethech`） | 文档未说明 | — | — | 说明文档没有写 |
+| Claude-Mem（`claude-mem`） | 文档未说明 | — | — | 说明文档没有写 |
+| ContextLattice（`contextlattice`） | 文档未说明 | — | — | 说明文档没有写 |
+| FluctlightDB（`fluctlightdb`） | 文档未说明 | — | — | 说明文档没有写 |
+| Kremis（`kremis`） | 文档未说明 | — | — | 说明文档没有写 |
+| Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | 说明文档没有写 |
+| Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | — | — | 说明文档没有写 |
+| Myco（`myco`） | 文档未说明 | — | — | 说明文档没有写 |
+| Omnigraph（`omnigraph`） | 文档未说明 | — | — | 说明文档没有写 |
+| Second Me（`second-me`） | 文档未说明 | — | — | 说明文档没有写 |
+| ShadowGraph（`shadowgraph`） | 文档未说明 | — | — | 说明文档没有写 |
+| Talamus（`talamus`） | 文档未说明 | — | — | 说明文档没有写 |
+| Tree Ring Memory（`tree-ring-memory`） | 文档未说明 | — | — | 说明文档没有写 |
 
 ## `memory_subject` 主要记住什么（26 处）
 
@@ -193,47 +193,47 @@
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| vMem（`0compactmem`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| Acontext（`acontext`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| vMem（`0compactmem`） | 文档未说明 | — | — | README 没提写入方式 |
+| Acontext（`acontext`） | 文档未说明 | — | — | README 没提写入方式 |
 | AI Pocket Chat（`ai-pocket-chat`） | 文档未说明 | 长期／近期记忆；— | — | 原表写入方式未识别：长期／近期记忆；—；— |
-| alethech（`alethech`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| archon-memory-core（`archon-memory-core`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| AtMem（`atmem`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| alethech（`alethech`） | 文档未说明 | — | — | README 没提写入方式 |
+| archon-memory-core（`archon-memory-core`） | 文档未说明 | — | — | README 没提写入方式 |
+| AtMem（`atmem`） | 文档未说明 | — | — | README 没提写入方式 |
 | 和机的另一个家 ChatNest UI（`chatnest-ui`） | 文档未说明 | 模型通过接口写记忆，后端去重；去重时 | — | 原表写入方式未识别：模型通过接口写记忆，后端去重；去重时；近似去重，前端标红、人来定夺 |
-| claude-handoff（`claude-handoff`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| claude-handoff（`claude-handoff`） | 文档未说明 | — | — | README 没提写入方式 |
 | Companion Emergence（`companion-emergence`） | 文档未说明 | 角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆 | — | 原表写入方式未识别：角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆；灵魂记忆可审阅、可撤销，不会被悄悄改写 |
 | DreamVault（`dreamvault`） | 文档未说明 | 不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截 | — | 原表写入方式未识别：不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截；写入闸口检查事实锚点，不通过即隔离；只有 AI 本人能认领 |
 | Drivesoid（`drivesoid`） | 文档未说明 | 你的桥接层上报对话事件；— | — | 原表写入方式未识别：你的桥接层上报对话事件；—；— |
-| HMS（`hms`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| HMS（`hms`） | 文档未说明 | — | — | README 没提写入方式 |
 | HoneyOS（`honey-os`） | 文档未说明 | 身份、关系、用户三类记忆写入文件；关系记忆需双方确认；确认关系约定时 | — | 原表写入方式未识别：身份、关系、用户三类记忆写入文件；关系记忆需双方确认；确认关系约定时；关系记忆需双方确认；高风险操作先确认 |
 | 洞察捕捉 Insight（`insight`） | 文档未说明 | AI 识别高价值时刻→暂存候选→用户确认后入库；AI 写入之前 | — | 原表写入方式未识别：AI 识别高价值时刻→暂存候选→用户确认后入库；AI 写入之前；候选层：先暂存，用户确认后才入库，可合并或丢弃 |
 | InternalBeyond 移动版（`internalbeyond-mobile`） | 文档未说明 | 聊天、通话结束可一键生成记忆；每位 AI 独立档案；可选：在透视区纠正 | — | 原表写入方式未识别：聊天、通话结束可一键生成记忆；每位 AI 独立档案；可选：在透视区纠正；记忆可查可纠 |
 | kimi-room（`kimi-room`） | 文档未说明 | 换窗时把旧窗口总结存入浏览器；整理时 | — | 原表写入方式未识别：换窗时把旧窗口总结存入浏览器；整理时；记忆回顾页人工整理 |
-| LangMem（`langmem`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| Letta（原 MemGPT）（`letta`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| notebook.py（`llmcompressor`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| Mem0（`mem0`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| mem9（`mem9`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| MemEngine（`memengine`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| LangMem（`langmem`） | 文档未说明 | — | — | README 没提写入方式 |
+| Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | README 没提写入方式 |
+| notebook.py（`llmcompressor`） | 文档未说明 | — | — | README 没提写入方式 |
+| Mem0（`mem0`） | 文档未说明 | — | — | README 没提写入方式 |
+| mem9（`mem9`） | 文档未说明 | — | — | README 没提写入方式 |
+| MemEngine（`memengine`） | 文档未说明 | — | — | README 没提写入方式 |
 | Memex（`memex-lab-memex`） | 文档未说明 | 你随手记录，多个 AI 助手整理成卡片；— | — | 原表写入方式未识别：你随手记录，多个 AI 助手整理成卡片；—；无专门机制 |
-| Memobase（`memobase`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| mneme（`mneme`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| mnemos（vishalbanwari26）（`mnemos`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| Memobase（`memobase`） | 文档未说明 | — | — | README 没提写入方式 |
+| mneme（`mneme`） | 文档未说明 | — | — | README 没提写入方式 |
+| mnemos（vishalbanwari26）（`mnemos`） | 文档未说明 | — | — | README 没提写入方式 |
+| Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | 文档未说明 | — | — | README 没提写入方式 |
 | Ombre Brain（`ombre-brain`） | 文档未说明 | AI 通过 MCP 工具自己写入（hold、grow），并打情感坐标；不需要人；可在面板钉选、主动遗忘、归档 | — | 原表写入方式未识别：AI 通过 MCP 工具自己写入（hold、grow），并打情感坐标；不需要人；可在面板钉选、主动遗忘、归档；删除只移入归档；trace 是唯一的元数据写入口；可验证的备份与恢复 |
 | OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | 训练期通过微调内化；— | — | 原表写入方式未识别：训练期通过微调内化；—；— |
 | 草履虫 Paramecium（`paramecium`） | 文档未说明 | 原文机械入库；小模型摘录信息点，必须附可校验的逐字引用；不需要人 | — | 原表写入方式未识别：原文机械入库；小模型摘录信息点，必须附可校验的逐字引用；不需要人；机器校验摘录的逐字引用；矛盾时旧条目标记“被取代”，不删除 |
-| Personal Understanding（`personal-understanding`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| ReMe（`reme`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| Personal Understanding（`personal-understanding`） | 文档未说明 | — | — | README 没提写入方式 |
+| ReMe（`reme`） | 文档未说明 | — | — | README 没提写入方式 |
 | Resonant Mind（`resonant-mind`） | 文档未说明 | AI 调用 write、record 等工具写入；可选：调用修订工具 | — | 原表写入方式未识别：AI 调用 write、record 等工具写入；可选：调用修订工具；Surgery 区可编辑、删除、归档；身份修改有提案机制 |
 | Sapphire（`sapphire`） | 文档未说明 | 带标签的记忆条目；Librarian 每晚整理；— | — | 原表写入方式未识别：带标签的记忆条目；Librarian 每晚整理；—；Librarian 改动记入人格账本 |
-| Second Me（`second-me`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| ShadowGraph（`shadowgraph`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
-| Statewave（`statewave`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| Second Me（`second-me`） | 文档未说明 | — | — | README 没提写入方式 |
+| ShadowGraph（`shadowgraph`） | 文档未说明 | — | — | README 没提写入方式 |
+| Statewave（`statewave`） | 文档未说明 | — | — | README 没提写入方式 |
 | TeleMem（`telemem`） | 文档未说明 | 程序调用 add，由 LLM 抽取角色化摘要；不需要人 | — | 原表写入方式未识别：程序调用 add，由 LLM 抽取角色化摘要；不需要人；LLM 语义聚类，融合、更新、去重相似记忆 |
-| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | — | — | README 没提写入方式 |
 | 三天没睡（`three-days-no-sleep`） | 文档未说明 | README 未描述；— | — | 原表写入方式未识别：README 未描述；—；— |
-| TokenMizer（`tokenmizer`） | 文档未说明 | （见理由） | — | README 没提写入方式 |
+| TokenMizer（`tokenmizer`） | 文档未说明 | — | — | README 没提写入方式 |
 | Yoji（`yoji`） | 文档未说明 | 用户画像写入 AGENTS.md；长对话生成摘要；— | — | 原表写入方式未识别：用户画像写入 AGENTS.md；长对话生成摘要；—；— |
 | Yorishiro（`yorishiro`） | 文档未说明 | 角色按人格写日记，要点累积进 memories.md；— | — | 原表写入方式未识别：角色按人格写日记，要点累积进 memories.md；—；— |
 | Yuralume Core（`yuralume-core`） | 文档未说明 | 五层人设模型；日程活动成为情节记忆；共享经历入库前 | — | 原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆 |
@@ -242,58 +242,58 @@
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| Acontext（`acontext`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Acontext（`acontext`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | AI Pocket Chat（`ai-pocket-chat`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Akephalos（`akephalos`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| alethech（`alethech`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Akephalos（`akephalos`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| alethech（`alethech`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | AstrBot 自主学习（`astrbot-plugin-self-learning`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Basic Memory（`basic-memory`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| claude-find（`claude-find`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| claude-handoff（`claude-handoff`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Claude-Mem（`claude-mem`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Claude Soul（`claude-soul`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Claudex（`claudex`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Context-Keeper（`context-keeper`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| ContextLattice（`contextlattice`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| cosmos-mcp（`cosmos-mcp`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Basic Memory（`basic-memory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| claude-find（`claude-find`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| claude-handoff（`claude-handoff`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Claude-Mem（`claude-mem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Claude Soul（`claude-soul`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Claudex（`claudex`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Context-Keeper（`context-keeper`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| ContextLattice（`contextlattice`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| cosmos-mcp（`cosmos-mcp`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | 守护猴 Daemonkey（`daemonkey-agent`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| EverOS（`everos`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| fable（`fable`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| GBrain（`gbrain`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Hindsight（`hindsight`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| HMS（`hms`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Honcho（`honcho`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| EverOS（`everos`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| fable（`fable`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| GBrain（`gbrain`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Hindsight（`hindsight`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| HMS（`hms`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Honcho（`honcho`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | HoneyOS（`honey-os`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Hyperconsciousness（`hyperconsciousness`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Hyperconsciousness（`hyperconsciousness`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | InternalBeyond 移动版（`internalbeyond-mobile`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | KI-CO 小屋（`ki-co`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Kremis（`kremis`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Kybase（`kybase`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| LangMem（`langmem`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Letta（原 MemGPT）（`letta`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| notebook.py（`llmcompressor`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| LoreRoom（`loreroom`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Magnemo（`magnemo`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| mcp-memory-service（`mcp-memory-service`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| MemEngine（`memengine`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| MemMachine（`memmachine`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| MemoCall（`memocall`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| MemoryOS（`memoryos`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Kremis（`kremis`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Kybase（`kybase`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| LangMem（`langmem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| notebook.py（`llmcompressor`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| LoreRoom（`loreroom`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Magnemo（`magnemo`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| mcp-memory-service（`mcp-memory-service`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| MemEngine（`memengine`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| MemMachine（`memmachine`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| MemoCall（`memocall`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| MemoryOS（`memoryos`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | MemOS（`memos`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Mengram（`mengram`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| mnemory（`mnemory`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Myco（`myco`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Mengram（`mengram`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| mnemory（`mnemory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Myco（`myco`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | 不适用 | — | 原表：不适用；— |
-| Omnigraph（`omnigraph`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| OpenViking（`openviking`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Prism Coder（`prism-mcp`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| Omnigraph（`omnigraph`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| OpenViking（`openviking`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Prism Coder（`prism-mcp`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Psycheros（`psycheros`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| ReMe（`reme`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Remnic（`remnic`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| ReMe（`reme`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Remnic（`remnic`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Sapphire（`sapphire`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| SAME（`statelessagent`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| Talamus（`talamus`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
-| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | （见理由） | — | README 没提遗忘或删除 |
+| SAME（`statelessagent`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| Talamus（`talamus`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | 三天没睡（`three-days-no-sleep`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Yoji（`yoji`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Yuralume Core（`yuralume-core`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
@@ -302,152 +302,152 @@
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| vMem（`0compactmem`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| Acheron（`acheron-mcp-server`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| Being（`being`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| claude-find（`claude-find`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| DreamVault（`dreamvault`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| EchoVault（`echovault`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| HMS（`hms`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| kimi-core（`kimi-core`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| LangMem（`langmem`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| LoreRoom（`loreroom`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| MemEngine（`memengine`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| MemMachine（`memmachine`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| MemoryMesh（`memorymesh`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| MemoryOS（`memoryos`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| Myco（`myco`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| Knowledge Graph Memory Server（MCP 官方）（`servers`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
-| Statewave（`statewave`） | 文档未说明 | （见理由） | — | 没找到查看或修改记忆的方式 |
+| vMem（`0compactmem`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| Acheron（`acheron-mcp-server`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| Being（`being`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| claude-find（`claude-find`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| DreamVault（`dreamvault`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| EchoVault（`echovault`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| HMS（`hms`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| kimi-core（`kimi-core`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| LangMem（`langmem`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| LoreRoom（`loreroom`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| MemEngine（`memengine`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| MemMachine（`memmachine`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| MemoryMesh（`memorymesh`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| MemoryOS（`memoryos`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| Myco（`myco`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| Knowledge Graph Memory Server（MCP 官方）（`servers`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| Statewave（`statewave`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
 
 ## `export` 能否导出（119 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| Acheron（`acheron-mcp-server`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Aelios（`aelios`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| agent-memory（g1itchbot）（`agent-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| agentic-recall（`agentic-recall`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| AgentRecall（`agentrecall`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| AI Pocket Chat（`ai-pocket-chat`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| archon-memory-core（`archon-memory-core`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| LivingMemory（`astrbot-plugin-livingmemory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| AstrBot 自主学习（`astrbot-plugin-self-learning`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| memex（ayushagrawal288）（`ayushagrawal288-memex`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Being（`being`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| birkin-mnemosyne（`birkin-mnemosyne`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| causal-memory（`causal-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 和机的另一个家 ChatNest UI（`chatnest-ui`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| claude-find（`claude-find`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Claude-Mem（`claude-mem`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Claude Soul（`claude-soul`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Cometline（`cometline`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Companion Emergence（`companion-emergence`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Context-Keeper（`context-keeper`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| ContextLattice（`contextlattice`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| cosmos-mcp（`cosmos-mcp`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| CRBRO（`crbro-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 守护猴 Daemonkey（`daemonkey-agent`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| DreamVault（`dreamvault`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Drivesoid（`drivesoid`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Echo Mistik（`echo-mistik`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| EchoVault（`echovault`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Eros Engine（`eros-engine`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| EverOS（`everos`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Engram（FBISiri）（`fbisiri-engram`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| FluctlightDB（`fluctlightdb`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| GENOME（`genome`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Graphiti（Zep）（`graphiti`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Hindsight（`hindsight`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Hipocampo（`hipocampo`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| HMS（`hms`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Honcho（`honcho`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| HoneyOS（`honey-os`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Hyperconsciousness（`hyperconsciousness`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| IAI 个人记忆引擎（`iai-personal-memory-engine`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| imprint-memory（`imprint-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 洞察捕捉 Insight（`insight`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Jarvis Orb（`jarvis-orb`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| kimi-core（`kimi-core`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| kimi-room（`kimi-room`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Kremis（`kremis`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| LangMem（`langmem`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Letta（原 MemGPT）（`letta`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| L.I.F.E.（`life`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| notebook.py（`llmcompressor`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| LocalKeep（`localkeep`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| LoreRoom（`loreroom`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 机的独立工作室 Machine Studio（`machine-studio`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| mcp-agent-memory（`mcp-agent-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| mcp-memory-service（`mcp-memory-service`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| mem0-mcp-selfhosted（`mem0-mcp-selfhosted`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Mem0（`mem0`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| mem9（`mem9`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemEngine（`memengine`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| memgres（`memgres`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemHeaven（`memheaven`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemMachine（`memmachine`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Memobase（`memobase`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemoCall（`memocall`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Memora（`memora`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Memori（`memori`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| memory-mcp-1file（`memory-mcp-1file`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemoryBear（`memorybear`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 记忆星图 Memory Constellations（`memoryconstellations`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemoryMesh（`memorymesh`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemoryOS（`memoryos`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MemOS（`memos`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| memU（`memu`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Mengram（`mengram`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MIRA OS（`mira-oss`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Mnemo Cortex（`mnemo-cortex`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| mnemory（`mnemory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| mnemos（vishalbanwari26）（`mnemos`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| MochiBot（`mochibot`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Myco（`myco`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Nocturne Memory（`nocturne-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| OMEGA（`omega-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| omemo（`omemo`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Omnigraph（`omnigraph`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| OpenHer（`openher`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| LongMemory（原 OpenMemory）（`openmemory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| OpenViking（`openviking`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 草履虫 Paramecium（`paramecium`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Personal Understanding（`personal-understanding`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Psycheros（`psycheros`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| ReMe（`reme`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Remembra Relay（`remembra`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Resonant Mind（`resonant-mind`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| RetainDB（`retaindb`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| roampal-core（`roampal-core`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Sapphire（`sapphire`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Second Me（`second-me`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Knowledge Graph Memory Server（MCP 官方）（`servers`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Shodh-Memory（`shodh-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| SAME（`statelessagent`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Statewave（`statewave`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Supermemory（`supermemory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Synapse（`synapse`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Synthetic Heart（`synthetic-heart`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Talamus（`talamus`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| taOSmd（`taosmd`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| TeleMem（`telemem`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 三天没睡（`three-days-no-sleep`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| TokenMizer（`tokenmizer`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| weighted-compact（`weighted-compact`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| 心潮念（`xinchao-nian`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Yorishiro（`yorishiro`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| Yuralume Core（`yuralume-core`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
-| ZenBrain（`zenbrain`） | 文档未说明 | （见理由） | — | 没写导出功能，也看不出数据格式 |
+| Acheron（`acheron-mcp-server`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Aelios（`aelios`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| agent-memory（g1itchbot）（`agent-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| agentic-recall（`agentic-recall`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| AgentRecall（`agentrecall`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| AI Pocket Chat（`ai-pocket-chat`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| archon-memory-core（`archon-memory-core`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| LivingMemory（`astrbot-plugin-livingmemory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| AstrBot 自主学习（`astrbot-plugin-self-learning`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| memex（ayushagrawal288）（`ayushagrawal288-memex`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Being（`being`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| birkin-mnemosyne（`birkin-mnemosyne`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| causal-memory（`causal-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 和机的另一个家 ChatNest UI（`chatnest-ui`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| claude-find（`claude-find`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Claude-Mem（`claude-mem`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Claude Soul（`claude-soul`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Cometline（`cometline`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Companion Emergence（`companion-emergence`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Context-Keeper（`context-keeper`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| ContextLattice（`contextlattice`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| cosmos-mcp（`cosmos-mcp`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| CRBRO（`crbro-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 守护猴 Daemonkey（`daemonkey-agent`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| DreamVault（`dreamvault`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Drivesoid（`drivesoid`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Echo Mistik（`echo-mistik`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| EchoVault（`echovault`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Eros Engine（`eros-engine`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| EverOS（`everos`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Engram（FBISiri）（`fbisiri-engram`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| FluctlightDB（`fluctlightdb`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| GENOME（`genome`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Graphiti（Zep）（`graphiti`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Hindsight（`hindsight`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Hipocampo（`hipocampo`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| HMS（`hms`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Honcho（`honcho`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| HoneyOS（`honey-os`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Hyperconsciousness（`hyperconsciousness`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| IAI 个人记忆引擎（`iai-personal-memory-engine`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| imprint-memory（`imprint-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 洞察捕捉 Insight（`insight`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Jarvis Orb（`jarvis-orb`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| kimi-core（`kimi-core`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| kimi-room（`kimi-room`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Kremis（`kremis`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| LangMem（`langmem`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| L.I.F.E.（`life`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| notebook.py（`llmcompressor`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| LocalKeep（`localkeep`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| LoreRoom（`loreroom`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 机的独立工作室 Machine Studio（`machine-studio`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| mcp-agent-memory（`mcp-agent-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| mcp-memory-service（`mcp-memory-service`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| mem0-mcp-selfhosted（`mem0-mcp-selfhosted`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Mem0（`mem0`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| mem9（`mem9`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemEngine（`memengine`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| memgres（`memgres`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemHeaven（`memheaven`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemMachine（`memmachine`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Memobase（`memobase`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemoCall（`memocall`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Memora（`memora`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Memori（`memori`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| memory-mcp-1file（`memory-mcp-1file`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemoryBear（`memorybear`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 记忆星图 Memory Constellations（`memoryconstellations`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemoryMesh（`memorymesh`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemoryOS（`memoryos`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MemOS（`memos`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| memU（`memu`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Mengram（`mengram`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MIRA OS（`mira-oss`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Mnemo Cortex（`mnemo-cortex`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| mnemory（`mnemory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| mnemos（vishalbanwari26）（`mnemos`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MochiBot（`mochibot`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Myco（`myco`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Nocturne Memory（`nocturne-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| OMEGA（`omega-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| omemo（`omemo`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Omnigraph（`omnigraph`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| OpenHer（`openher`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| LongMemory（原 OpenMemory）（`openmemory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| OpenViking（`openviking`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 草履虫 Paramecium（`paramecium`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Personal Understanding（`personal-understanding`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Psycheros（`psycheros`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| ReMe（`reme`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Remembra Relay（`remembra`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Resonant Mind（`resonant-mind`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| RetainDB（`retaindb`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| roampal-core（`roampal-core`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Sapphire（`sapphire`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Second Me（`second-me`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Knowledge Graph Memory Server（MCP 官方）（`servers`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Shodh-Memory（`shodh-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| SAME（`statelessagent`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Statewave（`statewave`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Supermemory（`supermemory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Synapse（`synapse`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Synthetic Heart（`synthetic-heart`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Talamus（`talamus`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| taOSmd（`taosmd`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| TeleMem（`telemem`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 三天没睡（`three-days-no-sleep`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| TokenMizer（`tokenmizer`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| weighted-compact（`weighted-compact`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| 心潮念（`xinchao-nian`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Yorishiro（`yorishiro`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| Yuralume Core（`yuralume-core`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| ZenBrain（`zenbrain`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 
 ## `data_passes_through` 数据经过谁的服务器（2 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
-| 和机的另一个家 ChatNest UI（`chatnest-ui`） | 文档未说明 | （见理由） | — | 运行位置未识别 |
-| DreamVault（`dreamvault`） | 文档未说明 | （见理由） | — | 运行位置未识别 |
+| 和机的另一个家 ChatNest UI（`chatnest-ui`） | 文档未说明 | — | — | 运行位置未识别 |
+| DreamVault（`dreamvault`） | 文档未说明 | — | — | 运行位置未识别 |
