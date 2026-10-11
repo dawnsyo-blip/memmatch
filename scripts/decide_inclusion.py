@@ -14,6 +14,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+SETTINGS = json.loads((ROOT / "data/settings.json").read_text(encoding="utf-8"))
 PROJECTS = ROOT / "data/projects"
 REPORT = ROOT / "docs/inclusion-report.md"
 TODAY = date.today().isoformat()
@@ -22,6 +23,7 @@ EXCLUSION_CODES = {
     "B": "核心闭源，只能用对方的托管服务",
     "C": "停更且有证据表明已经跑不通（已归档）",
     "D": "数据格式不开放，也没有导出功能",
+    "N": "无法获取代码：仓库无法访问，或代码不在代码托管网站上",
 }
 STATUS_LABELS = {"included": "收录", "flagged": "收录但加风险提示", "excluded": "排除", "pending": "待定（证据不足）"}
 
@@ -31,8 +33,11 @@ def decide(doc):
     n = doc["normalized"]
     reasons, flags = [], []
 
-    # 证据不足：无法自动检查维护情况和许可证
+    # 无法获取代码：负责人 2026-10-11 决定直接排除（settings.exclude_unreachable）；关掉开关则归为待定
     if h.get("status") in ("not_github", "unreachable"):
+        if SETTINGS.get("exclude_unreachable"):
+            return {"status": "excluded", "exclusion_code": "N", "flags": [],
+                    "reasons": [h.get("note", "无法自动检查")], "decided_on": TODAY}
         return {"status": "pending", "exclusion_code": None, "flags": [],
                 "reasons": [h.get("note", "无法自动检查")], "decided_on": TODAY}
 
@@ -77,7 +82,7 @@ def write_report(docs):
         "## 判定规则", "",
         "- **排除 C**：仓库已归档。只是长期没有提交、但没有“跑不通”的证据的，不排除，只加风险提示（仓库问题反馈没有逐个查看）。",
         "- **排除 B**（核心闭源、只能用托管）已在候选表阶段排除，此处不再出现；**排除 D**（无导出且格式不开放）目前没有项目被确认“无导出”，暂未触发。",
-        "- **待定**：代码不在 GitHub 上或仓库无法访问，无法检查维护情况和许可证。",
+        "- **排除 N**：代码不在 GitHub 上或仓库无法访问（负责人 2026-10-11 决定排除；`data/settings.json` 的 `exclude_unreachable` 关掉后改为待定）。",
         "- **风险提示**（只提示、不排除）：超过停更阈值没有提交、近一年只有一人维护、没有正式发布版本、没有许可证文件、许可证禁止商用或限制使用、对话内容经过第三方服务器。",
         "- **与路线图的差异**：负责人决定收录需写代码（A）、应用自带记忆（E1）、存的不是记忆（E2）的项目，用“收录类别”区分，不排除。", "",
         "## 统计", "",

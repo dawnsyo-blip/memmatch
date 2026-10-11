@@ -314,8 +314,8 @@
     ]
   },
   "inclusion": {
-    "status": "pending",
-    "exclusion_code": null,
+    "status": "excluded",
+    "exclusion_code": "N",
     "flags": [],
     "reasons": [
       "仓库无法访问（已删除、改名或设为私有）"

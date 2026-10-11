@@ -311,8 +311,8 @@
     ]
   },
   "inclusion": {
-    "status": "pending",
-    "exclusion_code": null,
+    "status": "excluded",
+    "exclusion_code": "N",
     "flags": [],
     "reasons": [
       "代码不在 GitHub 上，无法自动检查"
