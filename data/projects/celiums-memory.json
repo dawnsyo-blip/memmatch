@@ -145,7 +145,9 @@
       "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "needs_review",
       "basis": "README：“nce scoring, consolidation, lifecycle decay, and circadian/interoceptive modulati”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
@@ -175,6 +177,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“. --- ## Connect an MCP client Point any MCP client at the HTTP endpoint with the API key.”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“, consolidation, lifecycle decay, and circadian/interoceptive modulation. - **Journal”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“e/PAD resonance), importance scoring, consolidation, lifecycle decay, and circadian/inte”（已核对）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ybrid retrieval (vector + full-text + affective/PAD resonance), importance scoring, c”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“-person journal, an auditable ethics engine,”经核对不算：说的是伦理引擎"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

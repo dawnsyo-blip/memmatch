@@ -202,7 +202,9 @@
       "basis": "原表写入方式未识别：程序调用 add，由 LLM 抽取角色化摘要；不需要人；LLM 语义聚类，融合、更新、去重相似记忆"
     },
     "forgetting": {
-      "value": "none",
+      "value": [
+        "none"
+      ],
       "status": "needs_review",
       "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
@@ -229,6 +231,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ole-play, companion AI, NPCs, and multi-persona assistants. - 🎬 **Memory for video, not”（已核对）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“# Checkpoint for resume │ ├── 0_1”经核对不算：resume 指训练断点"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“openai` | | **Claude Desktop / Cursor / any MCP client** | [MCP Server](#mcp-server) | `pip in”（已核对）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“True`); `False` stores message contents verbatim with no LLM call | | `memory_type` | `O”（已核对）"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“、一行替换；每个角色独立记忆档案；名单里少有的支持视频多模态记忆的记忆层；用户事实＋角色建模；代码库／M”"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ities, actions, and timestamps | | Deduplication m”经核对不算：只是摘要字段"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“调用 search；用户事实＋角色建模；重复和相互矛盾的条目”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（含视频多模态）",

@@ -152,7 +152,7 @@
       "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "README 没提遗忘或删除"
     },
@@ -183,6 +183,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ain` (MCP + skills; persona variants `gbrain-co”经核对不算：persona 指安装变体"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“memory overnight. I wake up smarter than whe”经核对不算：wake up 指夜间整理后的比喻"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“忆”：事实带来源，可纠正和撤回，多个 agent 共用；用户事实＋技能；MCP；可经 Tailscale”"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“l) by context) timeline) + backlinks)”经核对不算：只是图示文字"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ounters. It fixes its own citations and consolidates memory overnight. I wake up smarter t”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“经在用的 agent 一份你能掌控的记忆”：事实带来源，可纠正和撤回，多个 agent 共用；用户事实＋”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

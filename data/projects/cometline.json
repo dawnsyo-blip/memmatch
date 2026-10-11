@@ -192,7 +192,9 @@
       "basis": "原表写入方式：对话后自动抽取事实与偏好；可选：手动整理；可在设置里浏览、编辑、压缩"
     },
     "forgetting": {
-      "value": "manual_only",
+      "value": [
+        "manual_only"
+      ],
       "status": "auto",
       "basis": "原表：无自动衰减；合并、清理陈旧条目"
     },
@@ -221,6 +223,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“Pick the companion personality that fits your work”经核对不算：只是选择预设人格"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“allel subagents, or hand off to OpenCode / Claud”经核对不算：handoff 指把任务交给其它编程工具"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“and edit diffs - **Multimodal input** — paste or”经核对不算：只是能发图片聊天，不存成记忆"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“Inbox 回复被后台内化为记忆；自动或手动压缩：合并、清理陈旧条目；换向量模型后台重建；每轮前自动注入”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（按项目分区）",

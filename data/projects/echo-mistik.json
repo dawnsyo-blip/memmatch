@@ -190,7 +190,9 @@
       "basis": "原表写入方式：后台进程写长期记忆与滚动摘要；Mistik：修改记忆前；Mistik 版本的记忆修改需用户批准"
     },
     "forgetting": {
-      "value": "none",
+      "value": [
+        "none"
+      ],
       "status": "needs_review",
       "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
@@ -217,6 +219,66 @@
       "value": "noncommercial",
       "status": "auto",
       "basis": "许可证原文：PolyForm Noncommercial 1.0.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“pacing and pitch - wake-word listening - vo”经核对不算：wake 指语音唤醒词"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“browser's built-in speech synthesis, so the e”经核对不算：只是语音朗读输出"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“进程把对话写成长期记忆事实与滚动会话摘要；后台写“梦境”反思笔记；Mistik 版本的记忆修改需用户批”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“th a persistent context layer — memory, mood state, a reflective notes system, and a curat”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级",

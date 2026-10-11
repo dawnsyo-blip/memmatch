@@ -193,7 +193,7 @@
       "basis": "原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "原表：README 未描述；—"
     },
@@ -221,6 +221,66 @@
       "value": "source_available",
       "status": "auto",
       "basis": "许可证原文：BUSL-1.1（每版四年后转 Apache-2.0）（含多份许可，取限制最多的一项）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“；记忆与角色“自己的日程和生活”结合，多通道；五层人设模型（身份、生活、情绪、互动、信任）；日程活动成为”"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“tion back up properly. 2. **Same person across devices.** You chat on the web in the morning,”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ee turns are always verbatim. Off, the chat prom”经核对不算：说的是提示词里保留最近三轮"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“rn emotion / state, multimodal user input (drag im”经核对不算：只是能发图片聊天"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆与角色“自己的日程和生活”结合，多通道；用户事实＋角色日程；自托管网”"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“动成为情节记忆；共享活动经用户同意才成为共同记忆；梦境时段整合；角色间关系记忆整合成名册；pgvect”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“程和生活”结合，多通道；五层人设模型（身份、生活、情绪、互动、信任）；日程活动成为情节记忆；共享活动经用”"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“t memory. A social feed. The freedom to message you first. [![License: BUSL-1.1](https://img.s”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级",

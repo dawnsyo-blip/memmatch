@@ -148,7 +148,9 @@
       "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
-      "value": "manual_only",
+      "value": [
+        "manual_only"
+      ],
       "status": "needs_review",
       "basis": "README 只提到删除：“ts and integrates — compaction does not delete the transcript, and the hook does not p”，没提自动衰减，建议值 manual_only"
     },
@@ -177,6 +179,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ry.** `get_session_context` is the same briefing as `memory://briefing`. Tools-only clie”（已核对）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“rsor or Grok Build logs, or record from any MCP client: [How conversations get in](#how-conver”（已核对）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“s. ## Reclaiming space Facthouse logs raw conversation and tool output to `session_events`. On”（已核对）"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“--content-type text | json | image | audio | binary (default: text) # --content”（已核对）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“list`. ### Embeddings, model, timeout, bitemporal Set `embedding.provider` in `config.js”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“把 agent 的活动按“数据→信息→知识”逐级整合，链接实体、去重、调和冲突；用户事实＋实体关系；M”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：““数据→信息→知识”逐级整合，链接实体、去重、调和冲突；用户事实＋实体关系；MCP（npx）＋钩子；Cl”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

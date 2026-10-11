@@ -152,7 +152,9 @@
       "basis": "README：“nt into an **AI Memory Assistant** — it automatically captures what matters, lets noise naturally fa”"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "README：“it automatically captures what matters, lets noise naturally fade, and retrieves the right memory at the”"
     },
@@ -182,6 +184,66 @@
       "value": "no_license",
       "status": "auto",
       "basis": "许可证原文：无 LICENSE 文件；package.json 写 MIT（含多份许可，取限制最多的一项）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“s, decisions, and project context, then auto-recalls them in future sessions. [![OpenClaw”（已核对）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“t actually remembers — across sessions, across agents, across time.* A LanceDB-backed OpenCl”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ance score 0-1 | | `timestamp` | int64 | Creation”经核对不算：只是字段"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“OnSearch\": true }, \"dreaming\": { \"enabled\": false”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“-uninstall # Revert config and remove p”经核对不算：说的是卸载还原配置"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“openclaw memory-pro import memories.json [--scope globa”经核对不算：只是导入自己的备份"
     }
   }
 }

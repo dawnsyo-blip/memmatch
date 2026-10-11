@@ -191,7 +191,9 @@
       "basis": "原表写入方式：保存事实与会话摘要；可选：手动增删；记忆检查器可查看、添加、删除"
     },
     "forgetting": {
-      "value": "none",
+      "value": [
+        "none"
+      ],
       "status": "needs_review",
       "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
@@ -221,6 +223,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：AGPL-3.0-or-later（0.12.0 及以前为 MIT）（含多份许可，取限制最多的一项）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ompanion's name and personality, or replace the bui”经核对不算：只是自定义人设"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“y. - **Keep Screen Awake**: Opt in under Set”经核对不算：说的是屏幕常亮"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“load and is kept in sync across the main app and ov”经核对不算：说的是同一应用的不同窗口"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“pinch to resize - **Photo Mode**: Pose her fr”经核对不算：说的是拍照模式"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“for believable relationship growth - **Time-Aware**: Your companion notices when you've b”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“ADME 未描述记忆整合或遗忘；演化的是关系阶段与心情；Transformers.js 本地语义检索；按”"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“growth - **Time-Aware**: Your companion notices when you've been away and reacts accordingly - **Scheduled Ta”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“istent preview that reverts when you leave the”经核对不算：说的是界面预览"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级",

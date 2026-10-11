@@ -191,9 +191,12 @@
       "basis": "原表写入方式：经 Ombre Brain 写入；驱力与情绪状态自动变化；主动回应或转成便签后才进桥；梦境不冒充真实记忆；状态不自动注入窗口"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
       "status": "auto",
-      "basis": "原表：经 Ombre Brain 遗忘曲线；和好或气消后自动忘掉“在气什么”；Ombre Brain 归档"
+      "basis": "原表：经 Ombre Brain 遗忘曲线；和好或气消后自动忘掉“在气什么”；Ombre Brain 归档；有归档：“Ombre Brain 归档；经 Ombre Brain 遗忘曲线；”"
     },
     "human_review": {
       "value": [
@@ -219,6 +222,66 @@
       "value": "noncommercial",
       "status": "auto",
       "basis": "许可证原文：AGPL-3.0（根目录）＋ MIT（xinchao/）＋ 含非商业约束的 Ombre Brain 二改（含多份许可，取限制最多的一项）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“：状态、匣子、记忆与凭据均不进入公开仓库。 ## 3.1 更新重点 - **Personality Core 性格内核层**：新增与 12 维当下驱力分离的月度内核，由 AI 自”（已核对）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“Brain** 给它一个真正的长期记忆库——breath 浮现、hold 沉淀、dream 消化、trace 追溯。 - **融合** 让\"欲望影响记忆影响行动\"闭环：驱”（已核对）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“+、含非商业约束；会“惦记”你：12 维驱力＋两层情绪＋记得在为什么生气；18+；整体不可商用；动态驱力”"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“改为不传 query、限最近 14 天、mode=automatic，按权重取；核心准则段、沉底桶、技术域一律不当原料。 - **OB 3.6+**：`/mcp` 鉴权”（已核对）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级（复用 Ombre Brain）＋驱力状态",

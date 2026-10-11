@@ -1,0 +1,345 @@
+"""阶段 1 追加：用户在意的特性（是否保持人格连续、换窗是否续得上、能否保留原话……）。
+
+依据：负责人整理的《独立事实记忆层_使用流程.md》中的选型问题，以及社区讨论
+（MIT 对 r/MyBoyfriendIsAI 的研究：换模型后关系断裂、人格漂移是最大痛点；
+中文报道中的“换窗像陌生人”“升级后失忆”；Claude 用户给 AI 补“时间感”的做法）。
+
+每个特性取值：yes（有）/ not_mentioned（README 和原表都没提到，不等于没有）。
+判定来源分两层：
+  - 原表结构化字段、info 说明（负责人或 Claude 已人工整理）中命中 → 直接判定
+  - 只在 README 中命中 → 摘录经 Claude 逐条核对；误判记在 README_REJECT 里
+"""
+
+FEATURES = {
+    "persona_continuity": ("人格／身份连续性", "专门保存 AI 自身的人格、身份、关系，换窗、换模型后仍是同一个“TA”"),
+    "window_handoff": ("换窗续接", "新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节"),
+    "cross_client": ("跨入口共享", "同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）"),
+    "verbatim": ("保留原话", "存下对话原文，结论可追溯到原话，而不只是摘要"),
+    "multimodal": ("多模态记忆", "能记住图片、语音、视频等非文字内容"),
+    "time_awareness": ("时间感", "记忆带时间线或时间戳，知道过了多久、事实何时有效"),
+    "dream_consolidation": ("梦境／离线整理", "在夜间、空闲或定期自动整理、合并、反思记忆"),
+    "emotion": ("情绪记忆", "记录情绪、心境，或用情感强度给记忆加权"),
+    "proactive": ("主动性", "AI 会主动联系或提起（主动消息、定时问候、心跳任务）"),
+    "pinning": ("钉选重要记忆", "可把重要记忆标为核心、永不衰减或锁定"),
+    "error_guard": ("记错防护", "能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真"),
+    "import_history": ("迁入旧记录", "能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据"),
+}
+
+# 中文模式用于原表与 info；英文模式用于 README（也会扫中文 README）
+PATTERNS = {
+    "persona_continuity": (
+        r"人格|灵魂|人设|性格|自我认知|身份认同|身份核心|AI 自身|AI 自我|关系状态|关系记忆|亲密度|同一个“?TA|同一个实体|跨载体",
+        r"\bpersona\b|personality|self-model|SOUL\.md|\bsoul\b|identity core|entity-core|relationship (?:memory|state)|"
+        r"same (?:entity|person|companion)|character consistency|who (?:I|it) (?:am|is) becoming|人格|灵魂|人设"),
+    "window_handoff": (
+        r"换窗|新窗口|新会话|新对话|开窗|冷启动|开场|交接|续上|每轮自动(?:召回|注入)|压缩前|会话延续|上下文延续|接着聊",
+        r"new (?:session|chat|conversation|window)s? (?:start|begin|knows|picks)|session start|SessionStart|start of (?:each|every|a new) session|"
+        r"handoff|hand off|PreCompact|before compact|compaction|pick(?:s)? up where|resume|session continuity|"
+        r"inject(?:s|ed)? (?:relevant |the )?(?:context|memor)|auto-recall|recall before every turn|bootpack|wake|briefing|前情|换窗|新会话"),
+    "cross_client": (
+        r"多个客户端|跨客户端|跨设备|跨入口|多端|共用|共享一份|多设备|同一份记忆|不同客户端|跨平台|跨窗口",
+        r"across (?:\w+ )?(?:clients|tools|agents|devices|machines|harnesses|surfaces)|every agent|one memory|shared memory across|"
+        r"multiple (?:clients|tools|agents|devices)|same (?:memory|store|vault)|any MCP client|cross-(?:client|tool|agent|device)|sync across"),
+    "verbatim": (
+        r"原文|原话|逐字|一字不改|原始对话|对话全文|会话全文|原文入库|保留原始",
+        r"verbatim|word-for-word|raw (?:transcripts?|conversations?|messages?|turns)|original (?:passages|messages|text|turns|quotes)|"
+        r"source quotes|full transcripts?|lossless|append-only (?:archive|log|transcript)|exact (?:quotes|wording)"),
+    "multimodal": (
+        r"多模态|图片|图像|照片|语音|音频|视频|截图",
+        r"multimodal|multi-modal|\bimages? (?:memory|memories|and text|understanding)|photos?\b|\baudio\b|video memor|"
+        r"screenshots?|\bOCR\b|vision model|voice (?:notes|messages|memory|input|wake)|speech"),
+    "time_awareness": (
+        r"时间感|时间线|时间戳|时间推移|多久|几天|时序|双时态|时间边界|日程|生活线|昼夜|节律|有效期",
+        r"time[- ]aware|time awareness|timeline|timestamps?|bi-?temporal|temporal (?:knowledge|graph|reasoning|query|queries|memory)|"
+        r"point-in-time|as-of|valid[_ -](?:from|to|time|until|at)|how long (?:since|ago)|you've been away|circadian|chronolog|"
+        r"\bdated (?:lines|records?|memor|entries|notes|mark)|time-based|temporal recall"),
+    "dream_consolidation": (
+        r"梦|Dream|dream|睡眠|夜间|每晚|整合|整理|反思|自省|周期汇总|rollup|合并",
+        r"\bdream|sleep[- ](?:cycle|replay|consolidation)|nightly|consolidat|reflection|reflect(?:s|ion)? (?:on|periodically)|"
+        r"background (?:pass|process|consolidation|summarization)|idle[- ]time|periodic (?:review|summar)|梦|整合|反思"),
+    "emotion": (
+        r"情绪|情感|心情|心境|情感权重|激素",
+        r"\bemotion|\bmood (?:state|tracking)|\byour (?:recent )?mood|\bvalence|\barousal|feelings|affective|情绪|情感|心境"),
+    "proactive": (
+        r"主动消息|主动联系|主动找|主动问候|来电|心跳|定时自主|主动发|主动提醒|主动唤醒|Pulse|朋友圈|会主动",
+        r"initiat(?:e|es) (?:a )?(?:conversation|contact|messages|calls?)|reach(?:es)? out to you|messages? you first|comes? to find you|"
+        r"proactive (?:messages?|outreach|check-?ins?)|scheduled (?:messages|check-?ins)|timers?/reminders|notices when you've been away|"
+        r"主动(?:消息|发起|来找|找你|联系|问候|回访|关怀)|来电"),
+    "pinning": (
+        r"钉选|钉进|置顶|锁定|永不衰减|核心记忆|标记核心|permanent|固定记忆|重要记忆不",
+        r"pinned (?:memor|facts?|notes?|collection|sections? of memory)|pin (?:a |important |key )?(?:memor|fact)|explicit pins|"
+        r"pins? or fades|pinning, fading|facts get pinned|\(pinned\b|pinned with|pinned \+ state|never decay|permanent memories the|"
+        r"protected memor|lock(?:ed)? (?:memor|facts)|immune to decay|pins are logged|核心准则|钉选|锁定记忆"),
+    "error_guard": (
+        r"纠错|纠正|更正|取代|撤回|回滚|冲突|矛盾|幻觉|错误记忆|置信度|溯源|来源|审核|防误记|隔离",
+        r"supersed|contradiction|conflict(?:s| detection| resolution)|rollback|roll back|revert|retract|correction|provenance|"
+        r"confidence|hallucinat|quarantine|verif(?:y|ied|ier) (?:facts|memor|against)|audit"),
+    "import_history": (
+        r"导入|迁入|迁移|聊天记录导入|旧记录",
+        r"import (?:your )?(?:ChatGPT|Claude|chat|conversation|history|exports?|memories)|ChatGPT (?:export|history)|conversations\.json|"
+        r"claude\.ai export|migrate from|import-mem0|--from (?:mem0|zep|cursorrules)|chat[- ]history import|imports? chats?"),
+}
+
+# Claude 核对 README 摘录后认定的误判：(项目 id, 特性) -> 原因。逐条核对后补充。
+README_REJECT = {
+    # persona_continuity
+    ("aurasdk", "persona_continuity"): "指用户的性格偏好",
+    ("cometline", "persona_continuity"): "只是选择预设人格",
+    ("drivesoid", "persona_continuity"): "只是配置 AI 名字",
+    ("everos", "persona_continuity"): "介绍的是另一个示例项目",
+    ("gbrain", "persona_continuity"): "persona 指安装变体",
+    ("honcho", "persona_continuity"): "对用户做性格建模",
+    ("inspeximus", "persona_continuity"): "same person 与人格无关",
+    ("internalbeyond-mobile", "persona_continuity"): "只是系统提示里的人设",
+    ("kiwi-mem", "persona_continuity"): "只是系统提示里的人设",
+    ("memex-lab-memex", "persona_continuity"): "只是导入角色卡",
+    ("memorymesh", "persona_continuity"): "same entity 与人格无关",
+    ("memoryos", "persona_continuity"): "persona 指用户画像",
+    ("memu", "persona_continuity"): "只是读取宿主的 SOUL.md 路径",
+    ("mimir", "persona_continuity"): "same entity 与人格无关",
+    ("mindmap-mcp-server", "persona_continuity"): "persona 指用户画像",
+    ("mnemory", "persona_continuity"): "只是提示词模板",
+    ("mnemosyne-agentmemory-engine-openclaw-hermes", "persona_continuity"): "只是往 SOUL.md 注入协议",
+    ("moread", "persona_continuity"): "只是导入角色卡",
+    ("ombre-brain", "persona_continuity"): "断词误匹配（每人 设自己的）",
+    ("pawwake", "persona_continuity"): "只是自定义系统提示里的人设",
+    ("piia-engram", "persona_continuity"): "SOUL.md 互通，但存的是用户身份",
+    ("statewave", "persona_continuity"): "relationship 指客户关系",
+    ("tencentdb-agent-memory", "persona_continuity"): "Persona 层是用户画像",
+    ("tokenmizer", "persona_continuity"): "same person 与人格无关",
+    ("utsuwa", "persona_continuity"): "只是自定义人设",
+    ("yourmemory", "persona_continuity"): "same entity 与人格无关",
+    # window_handoff
+    ("agentic-recall", "window_handoff"): "说的是程序报错",
+    ("aurasdk", "window_handoff"): "compaction 指存储压缩",
+    ("ayushagrawal288-memex", "window_handoff"): "说的是后台任务唤醒",
+    ("bitterbot-desktop", "window_handoff"): "说的是工具钩子",
+    ("cometline", "window_handoff"): "handoff 指把任务交给其它编程工具",
+    ("companion-emergence", "window_handoff"): "说的是电脑重启后服务恢复",
+    ("compartment", "window_handoff"): "compaction 指存储压缩",
+    ("echo-mistik", "window_handoff"): "wake 指语音唤醒词",
+    ("fluctlightdb", "window_handoff"): "compaction 指存储压缩",
+    ("gbrain", "window_handoff"): "wake up 指夜间整理后的比喻",
+    ("goodmemory", "window_handoff"): "只是一个适配器名字",
+    ("internalbeyond-mobile", "window_handoff"): "前情梗概指看视频的上下文",
+    ("kiwi-mem", "window_handoff"): "命中的是文档锚点",
+    ("longhand", "window_handoff"): "说的是程序修复记录",
+    ("memu", "window_handoff"): "说的是重装后恢复配置",
+    ("mnemos", "window_handoff"): "说的是 MCP 加载时机",
+    ("moread", "window_handoff"): "resume 指恢复提取任务",
+    ("openher", "window_handoff"): "说的是内部状态",
+    ("remnic", "window_handoff"): "说的是不需要交接",
+    ("resonant", "window_handoff"): "wake 指定时唤醒任务",
+    ("sapphire", "window_handoff"): "wake 指叫你起床",
+    ("statewave", "window_handoff"): "handoff 指客服升级",
+    ("synapse", "window_handoff"): "resume 指断点续跑",
+    ("synthetic-heart", "window_handoff"): "resume 指数据库迁移后启动",
+    ("taosmd", "window_handoff"): "wake 指消息总线",
+    ("telemem", "window_handoff"): "resume 指训练断点",
+    ("utsuwa", "window_handoff"): "说的是屏幕常亮",
+    ("yorishiro", "window_handoff"): "说的是语音会话",
+    # cross_client
+    ("agentic-recall", "cross_client"): "说的是本机只有一个记忆目录",
+    ("bitterbot-desktop", "cross_client"): "说的是写入审批",
+    ("causal-memory", "cross_client"): "说的是 agent 会遗忘",
+    ("claude-handoff", "cross_client"): "说的是一份项目文档",
+    ("crbro-memory", "cross_client"): "说的是命令行访问同一存储",
+    ("fable", "cross_client"): "说的是多个项目而非多个客户端",
+    ("genome", "cross_client"): "说的是可复现",
+    ("goodmemory", "cross_client"): "说的是评测",
+    ("inspeximus", "cross_client"): "说的是写入一致性",
+    ("ki-co", "cross_client"): "在说不被单一应用绑定",
+    ("life", "cross_client"): "seeds one memory 与共享无关",
+    ("memengine", "cross_client"): "说的是开发框架适用面",
+    ("memex-lab-memex", "cross_client"): "说的是自建 agent",
+    ("memgres", "cross_client"): "说的是数据模型",
+    ("memora", "cross_client"): "说的是工具注入",
+    ("mimir", "cross_client"): "说的是检索抑制",
+    ("retaindb", "cross_client"): "说的是同一数据模型",
+    ("roampal-core", "cross_client"): "说的是跨项目而非跨客户端",
+    ("shodh-memory", "cross_client"): "说的是联想召回",
+    ("taosmd", "cross_client"): "说的是多 agent 命名",
+    ("utsuwa", "cross_client"): "说的是同一应用的不同窗口",
+    ("weighted-compact", "cross_client"): "说的是评测工具",
+    # verbatim
+    ("birkin-mnemosyne", "verbatim"): "lossless 指拆分笔记",
+    ("claude-handoff", "verbatim"): "说的是子任务记录",
+    ("fbisiri-engram", "verbatim"): "说的是去重阈值",
+    ("goodmemory", "verbatim"): "说的是导入网页",
+    ("magnemo", "verbatim"): "说的是启动包原样返回",
+    ("mengram", "verbatim"): "说的是压缩后放回状态",
+    ("mneme", "verbatim"): "lossless 指迁移",
+    ("mnemos", "verbatim"): "说的是展示表格",
+    ("mnemostack", "verbatim"): "说的是图片描述",
+    ("moread", "verbatim"): "说的是书籍原文",
+    ("neotoma", "verbatim"): "存的是事实观察记录而非对话原文",
+    ("people-context", "verbatim"): "说的是命令照抄",
+    ("prism-mcp", "verbatim"): "说的是技能恢复",
+    ("shadowgraph", "verbatim"): "说的是导出完整性",
+    ("weighted-compact", "verbatim"): "说的是命令结果",
+    ("yuralume-core", "verbatim"): "说的是提示词里保留最近三轮",
+    # multimodal
+    ("atmem", "multimodal"): "说的是边界检查",
+    ("aurasdk", "multimodal"): "只是预留接口（stub）",
+    ("causal-memory", "multimodal"): "只是演示截图",
+    ("claudex", "multimodal"): "只是演示截图",
+    ("cometline", "multimodal"): "只是能发图片聊天，不存成记忆",
+    ("companion-emergence", "multimodal"): "只是能看图，不存成记忆",
+    ("daemonkey-agent", "multimodal"): "说的是评测数据",
+    ("echo-mistik", "multimodal"): "只是语音朗读输出",
+    ("eros-engine", "multimodal"): "只是图片理解与生成请求",
+    ("genome", "multimodal"): "说的是自然语言",
+    ("hyperconsciousness", "multimodal"): "只是界面截图",
+    ("internalbeyond-mobile", "multimodal"): "只是能发图片、语音聊天",
+    ("ki-co", "multimodal"): "说的是看电影功能",
+    ("life", "multimodal"): "只是视觉输入",
+    ("memora", "multimodal"): "说的是模型目录",
+    ("memorybear", "multimodal"): "论文标题",
+    ("mira-oss", "multimodal"): "说的是作者自己修图",
+    ("mnemory", "multimodal"): "只是界面截图",
+    ("mnemos", "multimodal"): "只是演示动图",
+    ("moread", "multimodal"): "只是界面截图",
+    ("openher", "multimodal"): "只是界面截图",
+    ("resonant", "multimodal"): "只是语音输出",
+    ("synthetic-heart", "multimodal"): "只是界面截图",
+    ("tree-ring-memory", "multimodal"): "只是界面截图",
+    ("utsuwa", "multimodal"): "说的是拍照模式",
+    ("yoji", "multimodal"): "只是语音唤醒",
+    ("yorishiro", "multimodal"): "只是语音输出",
+    ("yuralume-core", "multimodal"): "只是能发图片聊天",
+    # time_awareness
+    ("0compactmem", "time_awareness"): "只是对比表的一列",
+    ("agentic-recall", "time_awareness"): "说的是程序标记",
+    ("alaya", "time_awareness"): "只是代码里的时间戳字段",
+    ("alethech", "time_awareness"): "说的是签名时间",
+    ("archon-memory-core", "time_awareness"): "说的是别的项目",
+    ("atmem", "time_awareness"): "说的是 agent 操作时间线",
+    ("ayushagrawal288-memex", "time_awareness"): "只是一般描述",
+    ("basic-memory", "time_awareness"): "指备份还原",
+    ("central-intelligence", "time_awareness"): "只是跑分项目名",
+    ("claudex", "time_awareness"): "只是代码里的时间戳字段",
+    ("context-memory", "time_awareness"): "只是元数据时间戳",
+    ("cosmos-mcp", "time_awareness"): "只是消息时间戳",
+    ("crbro-memory", "time_awareness"): "只是带日期的记录",
+    ("everos", "time_awareness"): "只是示例数据",
+    ("fbisiri-engram", "time_awareness"): "TTL 属于遗忘机制",
+    ("gbrain", "time_awareness"): "只是图示文字",
+    ("goodmemory", "time_awareness"): "只是日志字段",
+    ("hbarefoot-engram", "time_awareness"): "说的是备份文件",
+    ("hindsight", "time_awareness"): "只是示例参数",
+    ("hipocampo", "time_awareness"): "说的是程序错误",
+    ("hyperconsciousness", "time_awareness"): "说的是分页顺序",
+    ("iai-personal-memory-engine", "time_awareness"): "只是带时间戳",
+    ("inspeximus", "time_awareness"): "说的是签名时间",
+    ("loreroom", "time_awareness"): "只是搜索结果带时间",
+    ("mcp-agent-memory", "time_awareness"): "说的是备份目录",
+    ("memgres", "time_awareness"): "只是字段",
+    ("memory-lancedb-pro", "time_awareness"): "只是字段",
+    ("memoryconstellations", "time_awareness"): "TTL 属于遗忘机制",
+    ("memorymesh", "time_awareness"): "只是给用户的建议",
+    ("memoryos", "time_awareness"): "说的是 Star 历史图",
+    ("mnemo-cortex", "time_awareness"): "只是会话时间戳",
+    ("mnemos", "time_awareness"): "说的是统计图",
+    ("neotoma", "time_awareness"): "只是字段",
+    ("ombre-brain", "time_awareness"): "说的是登录凭证报错",
+    ("prism-mcp", "time_awareness"): "说的是时区处理",
+    ("reme", "time_awareness"): "只是跑分项目名",
+    ("resonant", "time_awareness"): "说的是推理过程时间线",
+    ("retaindb", "time_awareness"): "只是访问时间",
+    ("supermemory", "time_awareness"): "只是跑分项目名",
+    ("synapse", "time_awareness"): "只是字段",
+    ("taosmd", "time_awareness"): "只是跑分项目名",
+    ("telemem", "time_awareness"): "只是摘要字段",
+    ("tencentdb-agent-memory", "time_awareness"): "只是可核对时间戳",
+    ("tokenmizer", "time_awareness"): "只是界面",
+    ("yourmemory", "time_awareness"): "说的是审计日志",
+    # dream_consolidation
+    ("astrbot-plugin-self-learning", "dream_consolidation"): "说的是另一个插件的功能",
+    ("basic-memory", "dream_consolidation"): "consolidated 指代码合并",
+    ("honcho", "dream_consolidation"): "只是队列状态接口",
+    ("kybase", "dream_consolidation"): "说的是夜间数据库备份",
+    ("memory-mcp-1file", "dream_consolidation"): "说的是空闲超时",
+    ("mira-oss", "dream_consolidation"): "dream up 是“想出”的意思",
+    ("neotoma", "dream_consolidation"): "说的是合并联系人",
+    ("piia-engram", "dream_consolidation"): "说的是工具合并",
+    # emotion
+    ("memorybear", "emotion"): "论文标题",
+    ("memoryos", "emotion"): "宣传语",
+    ("nocturne-memory", "emotion"): "只是使用示例",
+    ("paramecium", "emotion"): "在说尚未实现的功能",
+    ("personal-understanding", "emotion"): "说的是分析问题的方法",
+    # pinning
+    ("hyperconsciousness", "pinning"): "指锁定软件版本",
+    # error_guard
+    ("alethech", "error_guard"): "说的是清单维护者的审核",
+    ("aurasdk", "error_guard"): "只是宣传语",
+    ("basic-memory", "error_guard"): "说的是同步冲突",
+    ("causal-memory", "error_guard"): "只是示例文字",
+    ("celiums-memory", "error_guard"): "说的是伦理引擎",
+    ("claude-handoff", "error_guard"): "说的是脚本可审阅",
+    ("companion-emergence", "error_guard"): "说的是接口审计",
+    ("daemonkey-agent", "error_guard"): "说的是软件回滚",
+    ("eros-engine", "error_guard"): "说的是模型调用记录",
+    ("fable", "error_guard"): "说的是第二意见",
+    ("fbisiri-engram", "error_guard"): "只是去重",
+    ("genome", "error_guard"): "只是宣传语",
+    ("goodmemory", "error_guard"): "只是一般描述",
+    ("honcho", "error_guard"): "说的是文档",
+    ("hyperconsciousness", "error_guard"): "说的是安全审计",
+    ("ki-co", "error_guard"): "说的是召回判断",
+    ("kremis", "error_guard"): "只是文章链接",
+    ("kybase", "error_guard"): "只是示例",
+    ("longhand", "error_guard"): "说的是安全审计",
+    ("magnemo", "error_guard"): "说的是欢迎反馈",
+    ("mem9", "error_guard"): "说的是检索阈值",
+    ("memheaven", "error_guard"): "只是审计表",
+    ("memkeeper", "error_guard"): "说的是数据库回滚",
+    ("memory-lancedb-pro", "error_guard"): "说的是卸载还原配置",
+    ("memory-mcp-1file", "error_guard"): "说的是任务续接",
+    ("memorybear", "error_guard"): "说的是问题背景",
+    ("mengram", "error_guard"): "说的是工作流测试",
+    ("mindmap-mcp-server", "error_guard"): "说的是部署冲突",
+    ("mira-oss", "error_guard"): "说的是安全限制",
+    ("mneme", "error_guard"): "说的是日志",
+    ("mnemos", "error_guard"): "说的是反思日志",
+    ("omnidimen-emotion", "error_guard"): "说的是模型效果",
+    ("omnigraph", "error_guard"): "说的是访问审计",
+    ("prism-mcp", "error_guard"): "说的是省钱统计",
+    ("resonant-mind", "error_guard"): "说的是依赖安全检查",
+    ("roampal-core", "error_guard"): "说的是端口冲突",
+    ("utsuwa", "error_guard"): "说的是界面预览",
+    ("weighted-compact", "error_guard"): "说的是会话记录",
+    ("yorishiro", "error_guard"): "说的是界面撤销",
+    ("zenbrain", "error_guard"): "说的是软件发布来源",
+    # import_history
+    ("chatnest-ui", "import_history"): "命中的是代码 import 语句",
+    ("graphiti", "import_history"): "命中的是代码 import 语句",
+    ("memory-lancedb-pro", "import_history"): "只是导入自己的备份",
+    ("tree-ring-memory", "import_history"): "只是导入自己的备份",
+}
+
+
+# 原表／说明中的中文命中经核对不算的：(项目 id, 特性) -> 原因。被剔除后仍会继续看 README。
+STRUCTURED_REJECT = {
+    ("ai-pocket-chat", "multimodal"): "语音识别只是输入方式",
+    ("sapphire", "multimodal"): "语音唤醒只是输入方式",
+    ("claude-handoff", "dream_consolidation"): "“整理”指生成交接文件",
+    ("insight", "dream_consolidation"): "“合并”指确认入库时的操作",
+    ("kimi-core", "dream_consolidation"): "说的是要防止自动整合改坏记忆",
+    ("kimi-room", "dream_consolidation"): "说的是人工整理",
+    ("reme", "dream_consolidation"): "命中的是备注文字",
+    ("xinchao-nian", "dream_consolidation"): "“合并”指合并发行",
+    ("dreamvault", "dream_consolidation"): "“梦库”是隔离区，不是整理",
+    ("machine-studio", "emotion"): "说的是把技术记忆从情感记忆中剥离",
+    ("omnidimen-emotion", "emotion"): "是模型的情绪能力，不是记忆",
+    ("cometline", "error_guard"): "“隔离”指按项目分区",
+    ("ombre-brain", "error_guard"): "“隔离”指多人分开使用",
+    ("memex-lab-memex", "error_guard"): "“来源”指记忆来源",
+    ("kimi-core", "import_history"): "“迁移”指数据库迁移",
+    ("memex-lab-memex", "import_history"): "说的是导出",
+    ("mnemo-cortex", "import_history"): "说的是搬迁自己的数据",
+    ("astrbot-plugin-livingmemory", "persona_continuity"): "只是按 AstrBot 人格筛选记忆",
+}
+
+# 已完成逐条核对的特性；未核对的特性里，只靠 README 命中的条目标为待审核
+CHECKED = set(FEATURES)  # 2026-10-10 全部特性的 README 摘录已逐条核对

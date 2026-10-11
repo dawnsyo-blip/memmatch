@@ -190,7 +190,7 @@
       "basis": "原表写入方式未识别：身份、关系、用户三类记忆写入文件；关系记忆需双方确认；确认关系约定时；关系记忆需双方确认；高风险操作先确认"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "原表：README 未描述；—"
     },
@@ -217,6 +217,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT（版权方为 Nous Research）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“E 未描述自动整合或遗忘；历史搜索；短期连续记忆；换窗口、换入口续接；伴侣与干活的 Agent 合一；基”"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“ermes Agent 改造的本地 Agent，可迁入其他 AI 的记忆；伴侣与干活的 Agent 合一”"
     },
     "paper_taxonomy": {
       "form": "词元级",

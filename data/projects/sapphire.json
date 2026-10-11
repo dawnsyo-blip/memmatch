@@ -188,7 +188,7 @@
       "basis": "原表写入方式未识别：带标签的记忆条目；Librarian 每晚整理；—；Librarian 改动记入人格账本"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "原表：README 未描述；—"
     },
@@ -215,6 +215,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“t remembers you and wakes you up in the morn”经核对不算：wake 指叫你起床"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“l, don't hand it to an LLM. <sub>🔊 Has audio</sub> <video src=\"https://github.com/u”（已核对）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“LS.md) Hierarchical with priority and a timestamped progress journal. - **Entities** - [P”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“条目；知识库文件上传自动分块；Librarian 每晚整理、分类记忆，改动记入人格账本；可选分层“记忆宫”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“t you swap one section like location or emotions for dynamic feels. - **Spice** - [SPIC”（已核对）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆规模最大一档，带层级目标系统与定时自主任务；AI 身份＋目标＋联系人；完整应用（网页界面”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（十万级语义记忆）＋知识库",

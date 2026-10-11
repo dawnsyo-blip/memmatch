@@ -146,7 +146,9 @@
       "basis": "README 没提写入方式"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "needs_review",
       "basis": "README：“几轮实测事故磨出来的**——分类器曾把「我堵得慌」锁在档案外、缺日期记录曾被时间衰减无声埋掉、整句口语查询曾被假切片霸榜，每一版修补都在 [CHANGELOG](C”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
@@ -173,6 +175,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“先一字不改存下你的原话，再从原话派生理解，每条结论都能追回原”"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“：「你现在处于某阶段」的断言要先对日期再讲故事；[细则](references/timeline-and-followup-policy.md)） - **实体档案 + 情境卡”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“法（侦探拼图）**——「我该怎么办」拆成情绪线/利益线/人物线分头查，再拼起来；回答”经核对不算：说的是分析问题的方法"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“nalized PageRank` `时间线记忆` `可审计记忆` `anti-hallucination memory` `personal knowledge manageme”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

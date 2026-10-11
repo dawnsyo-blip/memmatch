@@ -148,9 +148,12 @@
       "basis": "README：“als* — nothing changes in stored memory until you approve. Run the `/review-memory` plugin comman”"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "basis": "README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“s), or demotes to a cold tier, so your full histo”"
     },
     "human_review": {
       "value": [
@@ -177,6 +180,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“core) # → I now work at Vercel. 0.89 # Point-in-time query — what was true at a specific mom”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“嵌入式本地记忆，整理操作要人工审核后才生效；用户事实；MCP；Clau”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“嵌入式本地记忆，整理操作要人工审核后才生效；用户事实；MCP；Claude Code”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

@@ -192,7 +192,7 @@
       "basis": "原表写入方式：记忆档案由用户管理；回忆种子是候选；种子转正时；回忆种子不自动写入；记忆是路标不是命令"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "原表：README 未描述；—"
     },
@@ -222,6 +222,66 @@
       "value": "noncommercial",
       "status": "auto",
       "basis": "许可证原文：CC BY-NC-SA 4.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“one model version, one memory implementation, or”经核对不算：在说不被单一应用绑定"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“movies, subtitles, screenshots, watch progress, we”经核对不算：说的是看电影功能"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“人格核＋分层记忆＋生活线，本地优先；AI 身份（人格核）＋用户事实；网页、”"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“README 称可只拆模块用，但需开发；聊天与后台整理可用不同模型；可导入 ChatGPT 记录；仅限非”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“对话整理成未来可以回看的自然记录。 日记不是系统日志。 它可以记录事实、情绪、项目进展、玩笑、锚点和重要瞬间，但会避免把每件小事都写成宏大叙事。 ##”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ion / needsRecall / confidence`，避免每轮都花钱，也避免“用户没说还记”经核对不算：说的是召回判断"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“全文检索；AI 身份（人格核）＋用户事实；AI 把旧记录当命令执行”"
     },
     "paper_taxonomy": {
       "form": "词元级・分层",

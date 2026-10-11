@@ -154,7 +154,9 @@
       "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "README：“cal decay** | Every memory ages on an **Ebbinghaus forgetting curve**. Stale, unused facts”"
     },
@@ -184,6 +186,66 @@
       "value": "noncommercial",
       "status": "auto",
       "basis": "许可证原文：CC BY-NC"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“in DuckDB\"` merge (same entity). No hardcoded word”经核对不算：same entity 与人格无关"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ined. Same preferences forgotten. Every session starts from zero. Most \"memory\" tools bolt a”（已核对）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ith Claude, Cursor, Cline, Windsurf, or any MCP client. Runs entirely on your machine — no API”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ach row records the timestamp, actor user + agent”经核对不算：说的是审计日志"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“D -->|\"related facts pile up\"| E[\"✨ Consolidate<br/>N → 1 summary\"] D -->|\"stale +”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“here you were. | | 🔒 | **Tamper-evident audit trail** | Every read / write / delete i”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

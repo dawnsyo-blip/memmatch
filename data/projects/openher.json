@@ -193,7 +193,9 @@
       "basis": "原表写入方式：每轮交互沉淀为风格记忆；长期记忆交给外部 EverMemOS；—；—"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：风格记忆按衰减公式淡去；—"
     },
@@ -221,6 +223,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“是一个**有内部状态的动力学系统**在当前情境、历史记忆与内驱力的共同作用下涌现出的”经核对不算：说的是内部状态"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“mg src=\"docs/assets/screenshot_iris.png\" alt=\"苏漫 ·”经核对不算：只是界面截图"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“你做事，更是真正懂你的*人*。** 每个角色运行在一个活的神经网络之上。性格、情绪和行为从内在驱力中自然涌现，被每一次对话不断塑造。她不只是思考和行动——她会*渴”（已核对）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“S** — 跨会话长期记忆：你是谁、你们聊过什么、她对你的预感 - [x] **主动消息** — 她想你的时候，会主动找你 - [x] **她的语言** — 语音、照片”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级＋驱力状态",

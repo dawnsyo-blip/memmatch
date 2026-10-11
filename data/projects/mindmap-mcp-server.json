@@ -148,7 +148,9 @@
       "basis": "README：“Code**, `install` adds a **`SessionEnd` auto-capture hook** — every substantive session is d”"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "README：“t from scratch. Memory you stop using **cools and decays gracefully** into one-line traces (it's”"
     },
@@ -180,6 +182,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“?\"** → reads your **persona** (see below) - **\"”经核对不算：persona 指用户画像"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“本地共享记忆＋会话交接：在一个工具里记下，换个工具接着聊；带面板和“记忆”"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“s your prior thinking so ideas continue across tools - **\"Add this to my Goals\"** / **\"park”（已核对）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ge + filter mark memories that have a full transcript; a **File into…** control files it into”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“so they never clutter your shelf. 3. **Consolidate** (automatic) — a background pass cool”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ng protects from decay.** A memory in a pinned collection won't be forgotten while it's filed —”（已核对）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“lic endpoint, which conflicts with > local-first.”经核对不算：说的是部署冲突"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“dmap-mcp-server passport import-chatgpt conversations.json # your ChatGPT export npx @ravi-labs/”（已核对）"
     }
   }
 }

@@ -19,11 +19,23 @@
 | `accounts_needed` | `none` 不需要；`github` GitHub；`cloudflare` Cloudflare；`render` Render；`model_api_key` 模型接口密钥；`vendor_account` 项目方账号；`telegram` Telegram 机器人；`claude_subscription` Claude 付费套餐 | 134 | 45 | 0 |
 | `memory_subject` | `user_facts` 用户本人的事实和偏好；`ai_identity` AI 自身身份与关系；`experience` 做事经验；`task_context` 当前任务上下文；`conversation_history` 历史对话原文 | 153 | 26 | 0 |
 | `write_mode` | `auto` 自动记；`review_first` 先出候选再由人审核；`on_request` 由 AI 或用户主动调用时才记 | 56 | 123 | 0 |
-| `forgetting` | `auto_decay` 自动衰减；`manual_only` 只能手动删除；`none` 不遗忘 | 35 | 144 | 0 |
+| `forgetting` | `auto_decay` 自动衰减；`archive` 沉底归档（不删除）；`manual_only` 手动删除；`none` 不遗忘 | 35 | 144 | 0 |
 | `human_review` | `dashboard` 网页面板／应用界面；`files` 直接看改文件；`cli` 命令行；`tools` 让 AI 调工具改 | 161 | 18 | 0 |
 | `export` | `markdown` Markdown；`json` JSON；`sqlite` SQLite 数据库文件；`other_file` 其它文件格式；`none` 无 | 49 | 130 | 0 |
 | `data_passes_through` | `local_only` 仅本机或自己的服务器；`own_cloud` 用户自己的云账号；`third_party` 第三方服务器 | 177 | 2 | 0 |
 | `license_category` | `permissive` 宽松；`copyleft` 要求开源衍生作品；`noncommercial` 禁止商用；`source_available` 源码可见但限制使用；`no_license` 无许可证文件 | 176 | 3 | 0 |
+| `persona_continuity` | **人格／身份连续性**：专门保存 AI 自身的人格、身份、关系，换窗、换模型后仍是同一个“TA”。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `window_handoff` | **换窗续接**：新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `cross_client` | **跨入口共享**：同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `verbatim` | **保留原话**：存下对话原文，结论可追溯到原话，而不只是摘要。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `multimodal` | **多模态记忆**：能记住图片、语音、视频等非文字内容。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `time_awareness` | **时间感**：记忆带时间线或时间戳，知道过了多久、事实何时有效。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `dream_consolidation` | **梦境／离线整理**：在夜间、空闲或定期自动整理、合并、反思记忆。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `emotion` | **情绪记忆**：记录情绪、心境，或用情感强度给记忆加权。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `proactive` | **主动性**：AI 会主动联系或提起（主动消息、定时问候、心跳任务）。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `pinning` | **钉选重要记忆**：可把重要记忆标为核心、永不衰减或锁定。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `error_guard` | **记错防护**：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
+| `import_history` | **迁入旧记录**：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。`yes` 有；`not_mentioned` 未提及 | 179 | 0 | 0 |
 
 共 179 个项目、536 处待审核。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 
@@ -33,6 +45,35 @@
 - `os`：README 没写明但用 npx、pip、Docker 等跨平台方式安装的，按 Windows/macOS/Linux 都能用处理（理由里会注明“推断”）。
 - `data_passes_through` 只看记忆服务本身存在哪里；用云端大模型时，对话还会发给模型提供方，网站上会统一说明。
 - `difficulty` 原文是区间（如“低到中”）时取较高一档。
+
+## 用户在意的特性一览
+
+判定为“有”的项目。依据是原表、说明和 README；README 里的命中已由 Claude 逐条核对，误判记在 `scripts/feature_rules.py`。“未提及”只表示文档没写，不等于没有。要更正某一项，同样在 xlsx 里填写（xlsx 另有“特性”页列出全部判定）。
+
+- **人格／身份连续性**（30 个）：专门保存 AI 自身的人格、身份、关系，换窗、换模型后仍是同一个“TA”。
+  Aelios、agent-memory（g1itchbot）、LivingMemory、AstrBot 自主学习、Being、birkin-mnemosyne、Bitterbot、Claude Soul、Companion Emergence、守护猴 Daemonkey、Echo Mistik、Eros Engine、HoneyOS、KI-CO 小屋、L.I.F.E.、记忆星图 Memory Constellations、MIRA OS、Nocturne Memory、OpenHer、草履虫 Paramecium、Psycheros、Resonant Mind、Resonant、Sapphire、Synthetic Heart、TeleMem、心潮念、Yoji、Yorishiro、Yuralume Core
+- **换窗续接**（69 个）：新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节。
+  vMem、Aelios、agent-memory（g1itchbot）、AgentRecall、Basic Memory、Being、birkin-mnemosyne、causal-memory、Central Intelligence、claude-handoff、Claude-Mem、Claude Soul、context-memory、ContextLattice、CRBRO、Drivesoid、EchoVault、engram-rs、fable、Facthouse、Graph Memory、Hipocampo、HMS、Honcho、HoneyOS、Hyperconsciousness、IAI 个人记忆引擎、inspeximus、Jarvis Orb、kimi-room、L.I.F.E.、notebook.py、Magnemo、mcp-agent-memory、mcp-memory-service、mem0-mcp-selfhosted、MemHeaven、memkeeper、memo、MemoCall、memory-lancedb-pro、memory-mcp-1file、Memory MCP（michael-denyer）、Mengram、Midas、Mind Map、MIRA OS、mneme、Mnemo Cortex、mnemo、mnemostack、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、草履虫 Paramecium、爪迹 Pawwake、Piia Engram、Prism Coder、Remembra Relay、RetainDB、roampal-core、SAME、TokenMizer、Tree Ring Memory、Engram（tstockham96）、weighted-compact、YourMemory
+- **跨入口共享**（65 个）：同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）。
+  vMem、Acheron、Acontext、Aelios、afair、Akephalos、AtMem、Aura Memory、Basic Memory、birkin-mnemosyne、Celiums Memory、Central Intelligence、Compartment、ContextLattice、cosmos-mcp、守护猴 Daemonkey、EverOS、Facthouse、Engram（FBISiri）、GBrain、Graph Memory、Hindsight、Hipocampo、Honcho、Hyperconsciousness、imprint-memory、Kremis、Kybase、Longhand、lore、mcp-memory-service、mem9、memkeeper、memo、memory-lancedb-pro、MemOS、MemTether、memU、Mengram、Midas、Mind Map、mneme、Mnemo Cortex、mnemo、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、Omnigraph、people-context、Piia Engram、Prism Coder、Psycheros、ReMe、Remembra Relay、Remnic、SAME、Synapse、Synthetic Heart、TeleMem、TencentDB Agent Memory、Engram（tstockham96）、YourMemory、Yuralume Core、ZenBrain
+- **保留原话**（33 个）：存下对话原文，结论可追溯到原话，而不只是摘要。
+  Aelios、agentic-recall、Alaya、LivingMemory、Aura Memory、causal-memory、Central Intelligence、claude-find、Companion Emergence、DreamVault、fable、Facthouse、Hindsight、IAI 个人记忆引擎、imprint-memory、Longhand、LoreRoom、MemHeaven、memo、MemoCall、记忆星图 Memory Constellations、Midas、Mind Map、Mnemo Cortex、Mnemosyne（OpenClaw/Hermes 版）、Ombre Brain、草履虫 Paramecium、爪迹 Pawwake、Personal Understanding、Remnic、taOSmd、TeleMem、TencentDB Agent Memory
+- **多模态记忆**（19 个）：能记住图片、语音、视频等非文字内容。
+  AI Pocket Chat、Bitterbot、EverOS、Facthouse、Graphiti（Zep）、HMS、imprint-memory、Memex、memo、MemOS、mnemostack、Neotoma、Omnigraph、Prism Coder、Tessera、Sapphire、Supermemory、TeleMem、TokenMizer
+- **时间感**（54 个）：记忆带时间线或时间戳，知道过了多久、事实何时有效。
+  AgentRecall、AI Pocket Chat、Aura Memory、Celiums Memory、claude-handoff、Claude-Mem、Claude Soul、Companion Emergence、Compartment、Context-Keeper、ContextLattice、fable、Facthouse、GENOME、Graph Memory、Graphiti（Zep）、imprint-memory、KI-CO 小屋、lean-memory、notebook.py、LocalKeep、Longhand、Mem0、Memex、MemHeaven、memo、Memobase、Memora、memory-mcp-1file、MemoryBear、MemTether、Midas、Mímir、MIRA OS、mneme、mnemo、mnemostack、墨知 MoRead、OMEGA、LongMemory（原 OpenMemory）、people-context、Personal Understanding、Piia Engram、Tessera、Psycheros、Remembra Relay、Remnic、Sapphire、ShadowGraph、Statewave、Talamus、Engram（tstockham96）、Utsuwa、Yuralume Core
+- **梦境／离线整理**（81 个）：在夜间、空闲或定期自动整理、合并、反思记忆。
+  Aelios、afair、agent-memory（g1itchbot）、agentic-recall、AgentRecall、Alaya、archon-memory-core、LivingMemory、Aura Memory、Being、Bitterbot、causal-memory、Celiums Memory、Claude Soul、Cometline、Companion Emergence、Compartment、CRBRO、DreamVault、Drivesoid、Echo Mistik、engram-rs、EverOS、Facthouse、Engram（FBISiri）、FluctlightDB、GBrain、GENOME、Graph Memory、Engram（HBarefoot）、Hindsight、Hipocampo、IAI 个人记忆引擎、imprint-memory、KI-CO 小屋、kiwi-mem、LangMem、lean-memory、L.I.F.E.、mcp-agent-memory、mcp-memory-service、Memex、memkeeper、memo、Memora、memory-lancedb-pro、MemoryBear、记忆星图 Memory Constellations、MemoryOS、Midas、Mímir、Mind Map、Mnemo Cortex、mnemo、mnemos（vishalbanwari26）、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Nocturne Memory、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、OpenViking、爪迹 Pawwake、Tessera、Psycheros、ReMe、Remnic、Resonant Mind、RetainDB、Sapphire、Shodh-Memory、SAME、Synthetic Heart、taOSmd、Tree Ring Memory、Engram（tstockham96）、weighted-compact、心潮念、YourMemory、Yuralume Core、ZenBrain
+- **情绪记忆**（28 个）：记录情绪、心境，或用情感强度给记忆加权。
+  AI Pocket Chat、AstrBot 自主学习、Being、Bitterbot、Celiums Memory、Companion Emergence、Drivesoid、Echo Mistik、InternalBeyond 移动版、KI-CO 小屋、kiwi-mem、L.I.F.E.、机的独立工作室 Machine Studio、记忆星图 Memory Constellations、Mímir、Ombre Brain、OmniDimen Emotion、OpenHer、爪迹 Pawwake、Resonant Mind、Resonant、Sapphire、Synthetic Heart、Utsuwa、心潮念、Yoji、Yuralume Core、ZenBrain
+- **主动性**（13 个）：AI 会主动联系或提起（主动消息、定时问候、心跳任务）。
+  AI Pocket Chat、InternalBeyond 移动版、kimi-core、MochiBot、OpenHer、Psycheros、Resonant、Sapphire、Synthetic Heart、三天没睡、Utsuwa、Yoji、Yuralume Core
+- **钉选重要记忆**（21 个）：可把重要记忆标为核心、永不衰减或锁定。
+  vMem、Aelios、archon-memory-core、Aura Memory、birkin-mnemosyne、Bitterbot、Companion Emergence、EchoVault、IAI 个人记忆引擎、imprint-memory、kiwi-mem、Mind Map、Mnemo Cortex、mnemory、Nocturne Memory、Ombre Brain、爪迹 Pawwake、SAME、widemem、心潮念、ZenBrain
+- **记错防护**（78 个）：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。
+  Aelios、afair、agent-memory（g1itchbot）、agentic-recall、AgentRecall、Alaya、archon-memory-core、AstrBot 自主学习、AtMem、birkin-mnemosyne、Bitterbot、Central Intelligence、Claude Soul、Claudex、Compartment、ContextLattice、CRBRO、DreamVault、Facthouse、FluctlightDB、GBrain、Graph Memory、Graphiti（Zep）、Engram（HBarefoot）、Hipocampo、HMS、IAI 个人记忆引擎、imprint-memory、洞察捕捉 Insight、inspeximus、Jarvis Orb、kimi-core、kiwi-mem、lean-memory、notebook.py、mem0-mcp-selfhosted、memgres、memo、Memora、记忆星图 Memory Constellations、MemoryMesh、MemOS、MemTether、Midas、Mímir、Mnemo Cortex、mnemo、mnemory、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、草履虫 Paramecium、爪迹 Pawwake、people-context、Personal Understanding、Piia Engram、Tessera、Remembra Relay、Remnic、RetainDB、ShadowGraph、Shodh-Memory、SAME、Statewave、Supermemory、Synapse、Talamus、taOSmd、TeleMem、TokenMizer、Tree Ring Memory、Engram（tstockham96）、widemem、YourMemory
+- **迁入旧记录**（21 个）：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。
+  agentic-recall、Alaya、Basic Memory、Central Intelligence、claude-handoff、HoneyOS、inspeximus、InternalBeyond 移动版、KI-CO 小屋、Mengram、Midas、Mind Map、MochiBot、Neotoma、爪迹 Pawwake、people-context、Tessera、Psycheros、Remnic、RetainDB、Synapse
 
 ## `access`（3 处）
 
@@ -348,7 +389,7 @@
 | cosmos-mcp（`cosmos-mcp`） | （见理由） | — | README 没提遗忘或删除 |
 | CRBRO（`crbro-memory`） | （见理由） | manual_only | README 只提到删除：“able** — Knowledge can be superseded or retracted, not just piled up — facts, and since”，没提自动衰减，建议值 manual_only |
 | 守护猴 Daemonkey（`daemonkey-agent`） | README 未描述 | — | 原表：README 未描述；— |
-| DreamVault（`dreamvault`） | 不适用 | — | 原表：不适用；梦库永久封存，不回流检索 |
+| DreamVault（`dreamvault`） | 不适用 | archive | 原表：不适用；梦库永久封存，不回流检索；有归档：“梦库永久封存，不回流检索；不适用；移入物理隔离的梦库” |
 | Echo Mistik（`echo-mistik`） | 无 | none | 原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认 |
 | EverOS（`everos`） | （见理由） | — | README 没提遗忘或删除 |
 | fable（`fable`） | （见理由） | — | README 没提遗忘或删除 |
@@ -359,7 +400,7 @@
 | Graph Memory（`graph-memory`） | （见理由） | auto_decay | README：“: - **Weighted edges with configurable decay** — frequently-confirmed knowledge stay”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Graphiti（Zep）（`graphiti`） | （见理由） | manual_only | README 只提到删除：“: - Episode management (add, retrieve, delete) - Entity management and relationship h”，没提自动衰减，建议值 manual_only |
 | Hindsight（`hindsight`） | （见理由） | — | README 没提遗忘或删除 |
-| Hipocampo（`hipocampo`） | （见理由） | auto_decay | README：“esses historical memories based on time decay, shrinking 24-hour granular details int”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
+| Hipocampo（`hipocampo`） | （见理由） | auto_decay, archive | README：“esses historical memories based on time decay, shrinking 24-hour granular details int”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ecay_hipocampo` now archives old `episodica` memorie” |
 | HMS（`hms`） | （见理由） | — | README 没提遗忘或删除 |
 | Honcho（`honcho`） | （见理由） | — | README 没提遗忘或删除 |
 | HoneyOS（`honey-os`） | README 未描述 | — | 原表：README 未描述；— |
@@ -374,7 +415,7 @@
 | Kremis（`kremis`） | （见理由） | — | README 没提遗忘或删除 |
 | Kybase（`kybase`） | （见理由） | — | README 没提遗忘或删除 |
 | LangMem（`langmem`） | （见理由） | — | README 没提遗忘或删除 |
-| lean-memory（`lean-memory`） | （见理由） | auto_decay | README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
+| lean-memory（`lean-memory`） | （见理由） | auto_decay, archive | README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“s), or demotes to a cold tier, so your full histo” |
 | Letta（原 MemGPT）（`letta`） | （见理由） | — | README 没提遗忘或删除 |
 | notebook.py（`llmcompressor`） | （见理由） | — | README 没提遗忘或删除 |
 | LocalKeep（`localkeep`） | （见理由） | manual_only | README 只提到删除：“restarting `localkeep-hub` does **not** delete your banks — only removing the database”，没提自动衰减，建议值 manual_only |
@@ -389,7 +430,7 @@
 | Mem0（`mem0`） | （见理由） | manual_only | README 只提到删除：“extraction** -- one LLM call, no UPDATE/DELETE. Memories accumulate; nothing is overwr”，没提自动衰减，建议值 manual_only |
 | mem9（`mem9`） | （见理由） | manual_only | README 只提到删除：“AI Agents.</strong><br/> Your agents forget everything between sessions. mem9 fixes”，没提自动衰减，建议值 manual_only |
 | MemEngine（`memengine`） | （见理由） | — | README 没提遗忘或删除 |
-| Memex（`memex-lab-memex`） | README 未描述 | — | 原表：README 未描述；— |
+| Memex（`memex-lab-memex`） | README 未描述 | archive | 原表：README 未描述；—；有归档：“子 Agent；按 P.A.R.A 方法归档；生成知识洞察” |
 | memgres（`memgres`） | （见理由） | manual_only | README 只提到删除：“mper-evident history that you can still delete when the law says you must. --- ## Wh”，没提自动衰减，建议值 manual_only |
 | MemHeaven（`memheaven`） | （见理由） | manual_only | README 只提到删除：“re useful in the moment, but they often forget project context across chats, sessions,”，没提自动衰减，建议值 manual_only |
 | memkeeper（`memkeeper`） | （见理由） | manual_only | README 只提到删除：“worth reviewing. - `document-prune` — delete the specific chunks you choose (support”，没提自动衰减，建议值 manual_only |
@@ -400,9 +441,9 @@
 | Memora（`memora`） | （见理由） | manual_only | README 只提到删除：“Integrity** - Guards against accidental delete/merge/absorb of document fragments - 🔍”，没提自动衰减，建议值 manual_only |
 | Memori（`memori`） | （见理由） | manual_only | README 只提到删除：“r Gateway) By default, OpenClaw agents forget everything between sessions. The Memori”，没提自动衰减，建议值 manual_only |
 | memory-mcp-1file（`memory-mcp-1file`） | （见理由） | auto_decay | README：“from 5 code choices). ### 2. Temporal Decay & "Presence" * **Problem:** Old memor”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
-| Memory MCP（michael-denyer）（`memory-mcp`） | （见理由） | auto_decay | README：“s ／ ／ **Trust scoring** ／ Outdated info decays and sinks ／ All memories equal ／ ／ **S”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
+| Memory MCP（michael-denyer）（`memory-mcp`） | （见理由） | auto_decay, archive | README：“s ／ ／ **Trust scoring** ／ Outdated info decays and sinks ／ All memories equal ／ ／ **S”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“all is needed. 2. **Cold storage (~50ms)** — Everyth” |
 | MemoryBear（`memorybear`） | （见理由） | auto_decay | README：“nsion model of memory strength and time decay: - Each knowledge item is assigned an”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
-| 记忆星图 Memory Constellations（`memoryconstellations`） | 14 天无访问转冷却；被召回自动恢复活跃 | — | 原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档 |
+| 记忆星图 Memory Constellations（`memoryconstellations`） | 14 天无访问转冷却；被召回自动恢复活跃 | archive | 原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档；有归档：“正文（真正删除）；叙事片段 12 个月后归档；14 天无访问转冷却；被召回自动恢复活” |
 | MemoryMesh（`memorymesh`） | （见理由） | manual_only | README 只提到删除：“l, providing context for the AI. *(The `delete` and `update` tools have a generic desc”，没提自动衰减，建议值 manual_only |
 | MemoryOS（`memoryos`） | （见理由） | — | README 没提遗忘或删除 |
 | MemOS（`memos`） | README 未描述 | — | 原表：README 未描述；— |
@@ -415,7 +456,7 @@
 | mnemory（`mnemory`） | （见理由） | — | README 没提遗忘或删除 |
 | mnemos（vishalbanwari26）（`mnemos`） | （见理由） | auto_decay | README：“ments (via real LLM tool-use calls) and decayed stale facts' confidence; a low-value”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | mnemostack（`mnemostack`） | （见理由） | auto_decay | README：“default, reached at 10 accesses) which fades back toward 1.0 as the access ages and”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
-| Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | （见理由） | auto_decay | README：“·hitFreq + 0.05·layerW` ／ 42→18ms ／ ／ 时间衰减 Time Decay ／ time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
+| Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | （见理由） | auto_decay, archive | README：“·hitFreq + 0.05·layerW` ／ 42→18ms ／ ／ 时间衰减 Time Decay ／ time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ns/questions ／ ／ 中期·归档 Medium ／ `medium/YY” |
 | MochiBot（`mochibot`） | 无 | none | 原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认 |
 | 墨知 MoRead（`moread`） | 无 | none | 原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认 |
 | Myco（`myco`） | （见理由） | — | README 没提遗忘或删除 |
@@ -427,7 +468,7 @@
 | Omnigraph（`omnigraph`） | （见理由） | — | README 没提遗忘或删除 |
 | LongMemory（原 OpenMemory）（`openmemory`） | （见理由） | auto_decay | README：“ovenance are not rewritten by recall or decay. - **Executable graph:** typed relation”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | OpenViking（`openviking`） | （见理由） | — | README 没提遗忘或删除 |
-| 草履虫 Paramecium（`paramecium`） | 明确不做遗忘曲线（作者已把热度衰减代码封存） | none | 原表：明确不做遗忘曲线（作者已把热度衰减代码封存）；原文永不删除；被取代的条目退出排名（明确不做遗忘，但可能仍能手动删除，建议值 none） |
+| 草履虫 Paramecium（`paramecium`） | 明确不做遗忘曲线（作者已把热度衰减代码封存） | none, archive | 原表：明确不做遗忘曲线（作者已把热度衰减代码封存）；原文永不删除；被取代的条目退出排名（明确不做遗忘，但可能仍能手动删除，建议值 none）；有归档：“；明确不做遗忘曲线（作者已把热度衰减代码封存）；新旧记忆高置信矛盾时，旧条目标记 s” |
 | people-context（`people-context`） | （见理由） | manual_only | README 只提到删除：“nated about trust: writes are audited, `forget` is a real delete, sensitive records si”，没提自动衰减，建议值 manual_only |
 | Personal Understanding（`personal-understanding`） | （见理由） | auto_decay | README：“几轮实测事故磨出来的**——分类器曾把「我堵得慌」锁在档案外、缺日期记录曾被时间衰减无声埋掉、整句口语查询曾被假切片霸榜，每一版修补都在 [CHANGELOG](C”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Piia Engram（`piia-engram`） | （见理由） | manual_only | README 只提到删除：“that architecture decision last month — erased This happens because AI memory today”，没提自动衰减，建议值 manual_only |
@@ -437,7 +478,7 @@
 | ReMe（`reme`） | （见理由） | — | README 没提遗忘或删除 |
 | Remembra Relay（`remembra`） | （见理由） | auto_decay | README：“untested ⏱️ **Temporal Memory** — TTL, decay curves, historical queries 🔍 **Hybrid”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Remnic（`remnic`） | （见理由） | — | README 没提遗忘或删除 |
-| Resonant Mind（`resonant-mind`） | 守护进程处理保留与孤儿检测 | — | 原表：守护进程处理保留与孤儿检测；归档（Surgery 区） |
+| Resonant Mind（`resonant-mind`） | 守护进程处理保留与孤儿检测 | archive | 原表：守护进程处理保留与孤儿检测；归档（Surgery 区）；有归档：“归档（Surgery 区）；守护进程处理保留” |
 | Resonant（`resonant`） | 无 | none | 原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认 |
 | roampal-core（`roampal-core`） | （见理由） | auto_decay | README：“Yes — 5 collections, promotion/demotion/decay ／ CLAUDE.md unbounded, auto memory firs”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Sapphire（`sapphire`） | README 未描述 | — | 原表：README 未描述；— |

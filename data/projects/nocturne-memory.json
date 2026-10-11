@@ -192,7 +192,9 @@
       "basis": "原表写入方式：AI 自己决定写什么、存在哪个路径；AI 写入之后，审核接受或回滚；每次修改留快照，可对比、接受或回滚；删除只切断路径"
     },
     "forgetting": {
-      "value": "none",
+      "value": [
+        "none"
+      ],
       "status": "needs_review",
       "basis": "原表写“无自动遗忘”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
@@ -221,6 +223,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“身份、关系、共同经历存进独立记忆库，换窗口换模型不丢；改动可回滚；用户事实＋AI 身份／关”"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“关系；MCP；MCP 客户端；Docker 版可供多设备远程连接；治理靠版本：每次修改留快照，人在面板对比”"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“details> <summary><strong>🧹 记忆维护：让 AI 学会反思与成长</strong></summary> ### 记忆维护 (Memory”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“你来验收。 ``` ### 用例 3：情绪陪伴（用户只说了一句\"没力气\"） >”经核对不算：只是使用示例"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“理旧版本需人确认；启动时按 Boot URI 加载核心记忆；条件触发；搜索；治理靠版本：每次修改留快照，人在”"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“；治理靠版本：每次修改留快照，人在面板对比后接受或回滚；“删除”只切断访问路径；身份、关系、共同经历存进”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（带版本）",

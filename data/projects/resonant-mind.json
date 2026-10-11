@@ -187,9 +187,11 @@
       "basis": "原表写入方式未识别：AI 调用 write、record 等工具写入；可选：调用修订工具；Surgery 区可编辑、删除、归档；身份修改有提案机制"
     },
     "forgetting": {
-      "value": "",
+      "value": [
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "原表：守护进程处理保留与孤儿检测；归档（Surgery 区）"
+      "basis": "原表：守护进程处理保留与孤儿检测；归档（Surgery 区）；有归档：“归档（Surgery 区）；守护进程处理保留”"
     },
     "human_review": {
       "value": [
@@ -214,6 +216,66 @@
       "value": "source_available",
       "status": "needs_review",
       "basis": "许可证原文：Codependent AI Source-Available License（自定义）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“P 工具，Postgres 存储，后台守护进程持续整合、反思、做梦；身份连续＋情绪；MCP 服务（47”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“存储，后台守护进程持续整合、反思、做梦；身份连续＋情绪；MCP 服务（47 个工具）；MCP 客户端；M”"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“un scan:release npm audit --audit-level=moder”经核对不算：说的是依赖安全检查"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（语义记忆）",

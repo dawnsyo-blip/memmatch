@@ -21,6 +21,9 @@ from pathlib import Path
 import openpyxl
 from openpyxl.styles import Alignment, Font, PatternFill
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import feature_rules as FR  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 PROJECTS = ROOT / "data/projects"
 CACHE = ROOT / "cache/readmes"
@@ -51,7 +54,7 @@ ENUMS = {
     "memory_subject": {"user_facts": "用户本人的事实和偏好", "ai_identity": "AI 自身身份与关系", "experience": "做事经验",
                        "task_context": "当前任务上下文", "conversation_history": "历史对话原文"},
     "write_mode": {"auto": "自动记", "review_first": "先出候选再由人审核", "on_request": "由 AI 或用户主动调用时才记"},
-    "forgetting": {"auto_decay": "自动衰减", "manual_only": "只能手动删除", "none": "不遗忘"},
+    "forgetting": {"auto_decay": "自动衰减", "archive": "沉底归档（不删除）", "manual_only": "手动删除", "none": "不遗忘"},
     "human_review": {"dashboard": "网页面板／应用界面", "files": "直接看改文件", "cli": "命令行", "tools": "让 AI 调工具改"},
     "export": {"markdown": "Markdown", "json": "JSON", "sqlite": "SQLite 数据库文件", "other_file": "其它文件格式",
                "none": "无"},
@@ -59,7 +62,12 @@ ENUMS = {
     "license_category": {"permissive": "宽松", "copyleft": "要求开源衍生作品", "noncommercial": "禁止商用",
                          "source_available": "源码可见但限制使用", "no_license": "无许可证文件"},
 }
+# 用户在意的特性（定义见 feature_rules.py）
+for _key, (_name, _desc) in FR.FEATURES.items():
+    ENUMS[_key] = {"yes": "有", "not_mentioned": "未提及"}
 FIELDS = list(ENUMS)  # 输出顺序
+MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
+         "forgetting", "human_review", "export", "data_passes_through"}
 
 
 def snippet(text, m, width=60):
@@ -279,7 +287,7 @@ README_AUTO = (r"automatically captur|auto-capture|captures? every turn|captures
 def first_positive(pat, text):
     """第一个前面没有否定词（no / not / without / 不）的匹配。"""
     for m in re.finditer(pat, text, re.I):
-        if not re.search(r"\bno\b|\bnot\b|without|\bnever\b|不|无", text[max(0, m.start() - 15):m.start()], re.I):
+        if not re.search(r"\bno\b|\bnot\b|without|\bnever\b|不|无|未", text[max(0, m.start() - 15):m.start()], re.I):
             return m
     return None
 
@@ -311,31 +319,43 @@ def n_write_mode(c, access):
 
 
 def n_forgetting(c):
+    vals, status, basis = _forgetting_main(c)
+    vals = [vals] if isinstance(vals, str) and vals else (vals or [])
+    t = c.text("x:遗忘的终点", "x:遗忘怎么发生", "x:演化 Evolution（据 README）")
+    m = first_positive(r"归档|沉底|下沉|封存|冷藏", t) if c.x else \
+        first_positive(r"archiv(?:e|es|ed|ing) (?:old|stale|cold|unused|low)|sinks? (?:to|into)|cold (?:storage|tier)|沉底|归档", c.readme)
+    if m and "archive" not in vals:
+        vals.append("archive")
+        basis += f"；有归档：“{snippet(t if c.x else c.readme, m, 20)}”"
+    return res(vals, status, basis)
+
+
+def _forgetting_main(c):
     if c.x:
         t = c.text("x:遗忘怎么发生", "x:遗忘的终点")
         first = c.text("x:遗忘怎么发生")
         if re.search(r"不做遗忘|不衰减|永不删除|不删除", first):
-            return res("none", "needs_review", f"原表：{t}（明确不做遗忘，但可能仍能手动删除，建议值 none）")
+            return "none", "needs_review", f"原表：{t}（明确不做遗忘，但可能仍能手动删除，建议值 none）"
         if re.search(r"不自动衰减|无自动衰减|未描述自动衰减", first):
-            return res("manual_only", "auto", "原表：" + t)
+            return "manual_only", "auto", "原表：" + t
         if re.search(r"衰减|淡去|淡出|遗忘曲线|回落|清空|过期|退场", first) and "手动调用" not in first:
-            return res("auto_decay", "auto", "原表：" + t)
+            return "auto_decay", "auto", "原表：" + t
         if re.search(r"手动|forget|删除", first):
-            return res("manual_only", "auto", "原表：" + t)
+            return "manual_only", "auto", "原表：" + t
         if re.match(r"\s*无", first):
-            return res("none", "needs_review", f"原表写“{first}”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认")
-        return res("", "needs_review", "原表：" + (t or "（空）"))
+            return "none", "needs_review", f"原表写“{first}”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+        return "", "needs_review", "原表：" + (t or "（空）")
     m = first_positive(r"forgetting curve|Ebbinghaus|FSRS|遗忘曲线|forgets what doesn|let(?:s)? (?:the rest|noise|old noise)[^.]{0,20}fade|"
                        r"decays? naturally|what you don't use fades|cools and decays|stale weak-memory decay|confidence decay automatically", c.readme)
     if m:
-        return res("auto_decay", "auto", f"README：“{snippet(c.readme, m, 40)}”")
+        return "auto_decay", "auto", f"README：“{snippet(c.readme, m, 40)}”"
     m = first_positive(r"\bdecay|half-life|衰减|\bfades?\b", c.readme)
     if m:
-        return res("auto_decay", "needs_review", f"README：“{snippet(c.readme, m, 40)}”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay")
+        return "auto_decay", "needs_review", f"README：“{snippet(c.readme, m, 40)}”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     m = re.search(r"\bforget\b|\bdelete\b|删除|retract|purge|erase", c.readme, re.I)
     if m:
-        return res("manual_only", "needs_review", f"README 只提到删除：“{snippet(c.readme, m, 40)}”，没提自动衰减，建议值 manual_only")
-    return res("", "needs_review", "README 没提遗忘或删除")
+        return "manual_only", "needs_review", f"README 只提到删除：“{snippet(c.readme, m, 40)}”，没提自动衰减，建议值 manual_only"
+    return "", "needs_review", "README 没提遗忘或删除"
 
 
 def n_human_review(c):
@@ -428,6 +448,31 @@ def n_license(c):
     return res(value, status, basis)
 
 
+STRUCTURED_FOR_FEATURES = ["desc", "subj", "acc", "cli", "note", "x:核心特点", "x:形成 Formation（据 README）",
+                           "x:演化 Evolution（据 README）", "x:检索 Retrieval（据 README）", "x:差异要点", "x:记忆保存形式",
+                           "x:治理手段", "x:整合（合并、摘要）方式", "x:召回怎么触发", "x:记忆功能 Function", "x:主要防住哪种错误"]
+
+
+def n_feature(c, key, norm):
+    zh, en = FR.PATTERNS[key]
+    t = c.text(*STRUCTURED_FOR_FEATURES)
+    m = first_positive(zh, t)
+    if key == "persona_continuity" and "ai_identity" in norm["memory_subject"]["value"]:
+        return res("yes", "auto", "记忆对象含 AI 自身身份")
+    if m and (c.doc["id"], key) not in FR.STRUCTURED_REJECT:
+        return res("yes", "auto", f"原表／说明：“{snippet(t, m, 25)}”")
+    m = first_positive(en, c.readme)
+    if m:
+        reason = FR.README_REJECT.get((c.doc["id"], key))
+        if reason:
+            return res("not_mentioned", "auto", f"README 命中的“{snippet(c.readme, m, 20)}”经核对不算：{reason}")
+        status = "auto" if key in FR.CHECKED else "needs_review"
+        return res("yes", status, f"README：“{snippet(c.readme, m, 40)}”" + ("（已核对）" if status == "auto" else ""))
+    if key == "import_history" and "迁入" in t:
+        return res("yes", "auto", "说明里写了迁入")
+    return res("not_mentioned", "auto", "原表、说明和 README 都没提到（未提及不等于没有）")
+
+
 def paper_taxonomy(c):
     if not c.x:
         return None
@@ -454,6 +499,8 @@ def normalize(doc, overrides):
     out["export"] = n_export(c)
     out["data_passes_through"] = n_data(c, out["runs_on"]["value"])
     out["license_category"] = n_license(c)
+    for key in FR.FEATURES:
+        out[key] = n_feature(c, key, out)
     for field, value in overrides.get(doc["id"], {}).items():
         out[field] = res(value, "confirmed", "负责人确认")
     norm = {f: out[f] for f in FIELDS}
@@ -506,6 +553,8 @@ def write_review(docs):
     ]
     for f in FIELDS:
         opts = "；".join(f"`{k}` {v}" for k, v in ENUMS[f].items())
+        if f in FR.FEATURES:
+            opts = f"**{FR.FEATURES[f][0]}**：{FR.FEATURES[f][1]}。" + opts
         lines.append(f"| `{f}` | {opts} | {stats[f]['auto']} | {stats[f]['needs_review']} | {stats[f]['confirmed']} |")
     lines += ["", f"共 {len(docs)} 个项目、{len(items)} 处待审核。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。", "",
               "说明：", "",
@@ -513,6 +562,13 @@ def write_review(docs):
               "- `os`：README 没写明但用 npx、pip、Docker 等跨平台方式安装的，按 Windows/macOS/Linux 都能用处理（理由里会注明“推断”）。",
               "- `data_passes_through` 只看记忆服务本身存在哪里；用云端大模型时，对话还会发给模型提供方，网站上会统一说明。",
               "- `difficulty` 原文是区间（如“低到中”）时取较高一档。", ""]
+    lines += ["## 用户在意的特性一览", "",
+              "判定为“有”的项目。依据是原表、说明和 README；README 里的命中已由 Claude 逐条核对，误判记在 `scripts/feature_rules.py`。"
+              "“未提及”只表示文档没写，不等于没有。要更正某一项，同样在 xlsx 里填写（xlsx 另有“特性”页列出全部判定）。", ""]
+    for key, (name, desc) in FR.FEATURES.items():
+        yes = [d["name"] for d in docs if d["normalized"][key]["value"] == "yes"]
+        lines += [f"- **{name}**（{len(yes)} 个）：{desc}。", f"  {'、'.join(yes) or '—'}"]
+    lines.append("")
     for f in FIELDS:
         rows = [(d, n) for ff, d, n in items if ff == f]
         if not rows:
@@ -543,14 +599,28 @@ def write_review(docs):
         row[7].fill = PatternFill("solid", fgColor="FFF4D6")
     ws.freeze_panes = "C2"
     ws.auto_filter.ref = ws.dimensions
+
+    # 特性页：全部判定，便于负责人抽查；要更正就把该行复制到“待审核”页再填确认值
+    ws2 = wb.create_sheet("特性")
+    ws2.append(["项目 id", "项目名", "特性", "判定", "依据"])
+    for d in docs:
+        for key, (name, _) in FR.FEATURES.items():
+            n = d["normalized"][key]
+            ws2.append([d["id"], d["name"], f"{name}（{key}）", ENUMS[key][n["value"]], n["basis"]])
+    for cell in ws2[1]:
+        cell.font = Font(bold=True)
+        cell.fill = PatternFill("solid", fgColor="DDE6F0")
+    for col, w in zip("ABCDE", [22, 22, 24, 8, 90]):
+        ws2.column_dimensions[col].width = w
+    ws2.freeze_panes = "C2"
+    ws2.auto_filter.ref = ws2.dimensions
     wb.save(REVIEW_XLSX)
     return len(items)
 
 
 def parse_value(field, text):
     text = str(text).strip()
-    multi = field in {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject",
-                      "write_mode", "human_review", "export", "data_passes_through"}
+    multi = field in MULTI
     values = [v.strip() for v in re.split(r"[,，、;；\s]+", text) if v.strip()] if multi else [text]
     bad = [v for v in values if v not in ENUMS[field]]
     if bad:

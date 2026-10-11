@@ -189,9 +189,12 @@
       "basis": "原表写入方式未识别：原文机械入库；小模型摘录信息点，必须附可校验的逐字引用；不需要人；机器校验摘录的逐字引用；矛盾时旧条目标记“被取代”，不删除"
     },
     "forgetting": {
-      "value": "none",
+      "value": [
+        "none",
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "原表：明确不做遗忘曲线（作者已把热度衰减代码封存）；原文永不删除；被取代的条目退出排名（明确不做遗忘，但可能仍能手动删除，建议值 none）"
+      "basis": "原表：明确不做遗忘曲线（作者已把热度衰减代码封存）；原文永不删除；被取代的条目退出排名（明确不做遗忘，但可能仍能手动删除，建议值 none）；有归档：“；明确不做遗忘曲线（作者已把热度衰减代码封存）；新旧记忆高置信矛盾时，旧条目标记 s”"
     },
     "human_review": {
       "value": [
@@ -216,6 +219,66 @@
       "value": "no_license",
       "status": "auto",
       "basis": "许可证原文：无 LICENSE 文件；README 写 MIT（含多份许可，取限制最多的一项）（README 声明了许可证但仓库没有许可证文件，法律上默认作者保留全部权利）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“了菜单，人格连注意到它的机会都没有。recall 留了日期过滤和逐字检索的口子，人格可以自己说\"去翻翻那天的话\"，但主动联想这块还空着。 填法想好了（一顿午饭讨论”（已核对）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“，每次约一次缓存命中的 round trip，几分钱 所有对话进同一个记忆库，换窗口不丢——新窗口里 recall 照样能把上个窗口的原话一字不差翻出来。 ##”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：““原文为真源”立场最彻底：向量只负责带路、不改写记忆，规”"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“想起的东西——没人提的纪念日，一次纯粹的情感联想——上不了菜单，人格连注意到它的机会”经核对不算：在说尚未实现的功能"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“摘录信息点，必须附可校验的逐字引用；新旧记忆高置信矛盾时，旧条目标记 superseded 退出排名但不”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（逐字原文）",

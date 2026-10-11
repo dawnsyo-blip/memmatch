@@ -191,7 +191,9 @@
       "basis": "原表写入方式：监听会话文件自动捕获，入库时分类、脱敏；发生冲突时，裁决提案；权限分级：与锁定事实冲突的写入转为提案；置信度阶梯；防篡改记忆账本"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：有衰减阈值配置（README 未细述）；README 未细述"
     },
@@ -220,6 +222,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“-agent overnight synthesis. Every agent wakes up knowing what the others did. | | 📚”（已核对）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“logo with a golden M iris. Local-first, cross-agent, open source.\" width=\"540\"> </p> # ⚡ M”（已核对）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ionships — end up in the same bucket as raw conversation logs, and the logs (by sheer volume) cr”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“sion boundaries and timestamps - All compressed vi”经核对不算：只是会话时间戳"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“、脱敏；Analyst 把原始会话日志蒸馏成笔记；夜间跨 Agent 整合（Dreaming）与压缩；事”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“ming）与压缩；事实置信度三级阶梯随印证升降；与锁定事实冲突的写入转为提案，由用户裁决；语义检索＋复合”"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“可信度导向最强：每条记忆可追溯来源和置信度，冲突交人裁决；多 Agent 共享，支持”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平＋结构化事实",

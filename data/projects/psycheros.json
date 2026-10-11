@@ -194,7 +194,7 @@
       "basis": "原表写入方式：实体自己维护身份文件；对话自动进入层级摘要；可选：手动编辑身份文件；—"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "原表：README 未描述；—"
     },
@@ -222,6 +222,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：MPL-2.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“体自己维护；对记忆做检索增强生成（RAG）；跨界面共用同一身份与记忆；身份与记忆放在独立的 MCP 核心”"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ooth integration) - temporal awareness (time aware) - home automation hookups (smart plugs”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“e the system as theirs. - **Memory that consolidates.** Daily summaries roll up to weekly”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“P 核心里，换界面仍是同一个实体；日→年层级摘要；Pulse 定时自主提示；同一个 AI 跨不同“身体”和前端”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“同一个 AI 跨不同“身体”和前端保持身份一致，可迁移聊天史；AI 身份＋用户事实；桌面启动器＋MCP”"
     },
     "paper_taxonomy": {
       "form": "词元级・分层＋知识图谱",

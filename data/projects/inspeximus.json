@@ -148,7 +148,9 @@
       "basis": "README：“n Windows, live sessions on 3.16.2 show hook captures in the store, the recall block on each”"
     },
     "forgetting": {
-      "value": "manual_only",
+      "value": [
+        "manual_only"
+      ],
       "status": "needs_review",
       "basis": "README 只提到删除：“t once and the old value stays retired; erase a person and prove it; show an auditor”，没提自动衰减，建议值 manual_only"
     },
@@ -180,6 +182,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“hat edit unless the same person can also write ther”经核对不算：same person 与人格无关"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“UDE.md` editing, no re-explaining: - **SessionStart** injects the decisions still in force”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ical writes twice — same stored state? | **byte-id”经核对不算：说的是写入一致性"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ppened** | RFC 3161 timestamps, and a check whethe”经核对不算：说的是签名时间"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“d; erase a person and prove it; show an auditor what the agent knew when it acted. On”（已核对）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“b.io/inspeximus/migrate-from-mem0.html\">Migrate from mem0</a> · <a href=\"https://dancenitr”（已核对）"
     }
   }
 }

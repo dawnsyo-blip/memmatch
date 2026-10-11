@@ -184,9 +184,11 @@
       "basis": "原表写入方式未识别：你随手记录，多个 AI 助手整理成卡片；—；无专门机制"
     },
     "forgetting": {
-      "value": "",
+      "value": [
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "原表：README 未描述；—"
+      "basis": "原表：README 未描述；—；有归档：“子 Agent；按 P.A.R.A 方法归档；生成知识洞察”"
     },
     "human_review": {
       "value": [
@@ -215,6 +217,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：GPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“V2 JSON + PNG) with persona, world book, and ex”经核对不算：只是导入角色卡"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“em</em></p> </div> Every agent you create is a fir”经核对不算：说的是自建 agent"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆来源是“人的生活日志”而非聊天记录，多模态碎片→时间线，可迁移为 Markdown；用户事实”"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“忆来源是“人的生活日志”而非聊天记录，多模态碎片→时间线，可迁移为 Markdown；用户事实（生活日志）”"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“移为 Markdown；多 Agent 把碎片记录整理成结构化卡片，自动打标签、实体抽取、关联链接；专门”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（生活时间线）",

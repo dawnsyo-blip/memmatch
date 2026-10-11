@@ -146,7 +146,9 @@
       "basis": "README：“off`, `session_history`, and `forget` - Auto-capture hooks for coding-agent lifecycle events”"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "README：“duplicate cleanup, session rollups, and stale weak-memory decay - Optional local transformer embeddings”"
     },
@@ -174,6 +176,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“corrections, project facts, and session handoffs that survive across conversations. It”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“re layer around the same memory model. Core platfo”经核对不算：说的是同一数据模型"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“counts, last-access timestamps, and memory strengt”经核对不算：只是访问时间"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ccess timestamps, and memory strength - Consolidation with duplicate cleanup, session roll”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ory: decisions, preferences, workflows, corrections, project facts, and session handoffs t”（已核对）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“l --install retaindb import-jsonl # import Claude-style JSONL transcripts retaindb consol”（已核对）"
     }
   }
 }

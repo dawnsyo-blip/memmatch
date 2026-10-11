@@ -182,9 +182,11 @@
       "basis": "原表写入方式未识别：不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截；写入闸口检查事实锚点，不通过即隔离；只有 AI 本人能认领"
     },
     "forgetting": {
-      "value": "",
+      "value": [
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "原表：不适用；梦库永久封存，不回流检索"
+      "basis": "原表：不适用；梦库永久封存，不回流检索；有归档：“梦库永久封存，不回流检索；不适用；移入物理隔离的梦库”"
     },
     "human_review": {
       "value": [],
@@ -205,6 +207,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：Apache-2.0（代码）＋ CC BY 4.0（文档）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“测没有锚点的生成内容（幻觉）；移入物理隔离的梦库，原文封存，小模型写第三人称“验尸”摘要；只有本人可认领”"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“# DreamVault **[中文版 · 中文读者从这里进 →](./README.zh”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“专治错误记忆／记忆幻觉，防止错事越记越真；用户事实（纠错）；P”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平",

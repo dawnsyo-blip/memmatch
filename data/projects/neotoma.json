@@ -151,7 +151,9 @@
       "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
-      "value": "manual_only",
+      "value": [
+        "manual_only"
+      ],
       "status": "needs_review",
       "basis": "README 只提到删除：“tes, split an entity by predicate, soft-delete and restore, list potential duplicates,”，没提自动衰减，建议值 manual_only"
     },
@@ -183,6 +185,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“uaranteed capture, retrieval injection, compaction awareness) and MCP is the quality ceili”（已核对）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ministic, auditable memory layer shared across tools. The same engine serves two further gro”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“versioned history, append-only log, full provenance, s”经核对不算：存的是事实观察记录而非对话原文"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“rquet, JSON, and plain text; images and audio are stored as raw sources. Writes are i”（已核对）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“etation, agent, and timestamp. - **Self-hosted an”经核对不算：只是字段"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“member-contacts** | Consolidate contacts from emai”经核对不算：说的是合并联系人"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“版本化的事实记录：每条事实有版本、来源和归属；可导入 ChatGPT/Claude 聊天”"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“版本化的事实记录：每条事实有版本、来源和归属；可导入 ChatGPT/Claude 聊天记录；联系人、”"
     }
   }
 }

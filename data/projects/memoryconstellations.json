@@ -187,9 +187,11 @@
       "basis": "原表写入方式：你的机器人把每条消息推给它；沉默 20 分钟或积压 100 条后自动抽取；你指出记错时，AI 调用纠错工具；召回权限分级；纠错记录累积成写入指南，反过来约束抽取"
     },
     "forgetting": {
-      "value": "",
+      "value": [
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档"
+      "basis": "原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档；有归档：“正文（真正删除）；叙事片段 12 个月后归档；14 天无访问转冷却；被召回自动恢复活”"
     },
     "human_review": {
       "value": [
@@ -214,6 +216,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“- Run an AI companion with a persistent personality you maintain - Want the companion's mem”（已核对）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“person sentence with a link back to the original messages. 2. **Organize.** Archivist runs every”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“) │ ├─ Expire time-based entries (TTL-based”经核对不算：TTL 属于遗忘机制"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“；Archivist 每 2 分钟归类为主题星座、合并为叙事片段，带日期校正与矛盾检测；Libraria”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ntity aggregation. (Optional) A 5-axis emotional state engine ([jiwen](https://github.”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“把零散事实组织成“故事”，兼顾抽象与溯源，带可视化；用户事实（人物理解）；旁路管线（HTT”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・分层（事实→主题星座→叙事片段）",

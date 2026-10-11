@@ -190,9 +190,12 @@
       "basis": "原表写入方式：原文写入日记、钉选、归档三个文件夹；事后手动；归档可恢复，钉选永不衰减（依据站点介绍）"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
       "status": "auto",
-      "basis": "原表：日记重要度随时间衰减（依据站点介绍）；移入归档，可恢复"
+      "basis": "原表：日记重要度随时间衰减（依据站点介绍）；移入归档，可恢复；有归档：“移入归档，可恢复；日记重要度随时间衰减（依据站点”"
     },
     "human_review": {
       "value": [],
@@ -215,6 +218,66 @@
       "value": "no_license",
       "status": "auto",
       "basis": "许可证原文：无法核实（代码在小红书附件）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“不做摘要；（站点未提）；（站点）回看最近几天以续接新窗口；不用数据库、不调外部接口；是教程不是成品；原件在”"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“向非技术用户；（站点）Markdown 保存日记、钉选、归档，不做摘要；（站点未提）；（站点）回看最近几”"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平（Markdown 原文）",

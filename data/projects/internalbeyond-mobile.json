@@ -191,7 +191,7 @@
       "basis": "原表写入方式未识别：聊天、通话结束可一键生成记忆；每位 AI 独立档案；可选：在透视区纠正；记忆可查可纠"
     },
     "forgetting": {
-      "value": "",
+      "value": [],
       "status": "needs_review",
       "basis": "原表：README 未描述；—"
     },
@@ -222,6 +222,66 @@
       "value": "noncommercial",
       "status": "auto",
       "basis": "许可证原文：PolyForm Noncommercial 1.0.0（代码）＋ CC BY-NC（素材文档）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“low 照旧即写。always 条目随人设一起进 system 被提示缓存记住，只”经核对不算：只是系统提示里的人设"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“句话只随附播放点之前最近几条字幕、进度与前情梗概，识图的 TA 默认附一帧此刻的画面”经核对不算：前情梗概指看视频的上下文"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“& image generation, voice messages (transcription) and”经核对不算：只是能发图片、语音聊天"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“TML 文件的离线 PWA，带跨端备份；用户事实（情感记忆）；单个 HTML 文件（可装成 PWA）；自”"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“、表情包、收藏夹 - **Call** · 语音与视频通话：逐句朗读、声学语气、来电、礼物、群通话与导演模式 - **Letters** · 异步书信：TA 读过你”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“GPT / Claude exports (the zip itself or conversations.json), other JSON / JSONL logs, or plain-tex”（已核对）"
     },
     "paper_taxonomy": {
       "form": "词元级",

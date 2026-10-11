@@ -193,7 +193,9 @@
       "basis": "原表写入方式：自动：事实、技能、身份写入本地 SQLite 与 Markdown；不需要人；钱包限额自定；置信度随印证升降；钱包须自设限额"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：事实不再被用到就衰减；README 未细述"
     },
@@ -225,6 +227,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“state, and rewrite, inject context into, require prere”经核对不算：说的是工具钩子"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ly you can publish. Every agent-initiated write que”经核对不算：说的是写入审批"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“am exploring dynamic feedback loops and multi-modal integration strategies, further enhanci”（已核对）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“图谱；事实不被用到就衰减，印证升置信、矛盾降置信；Dream Engine 离线整合并改写工作记忆与自我概念；”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“val. Bitterbot closes the loop: memory, emotion, curiosity, and identity form a single”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“\"retrieve\" what it should simply know. Facts get pinned automatically as they come up in conver”（已核对）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“te＋Markdown；类型化知识图谱；技能文件；置信度随印证升降；钱包须自设限额；Dream Engin”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块“生物式记忆”）",

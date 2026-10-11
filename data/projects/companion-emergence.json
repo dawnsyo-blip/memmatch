@@ -188,7 +188,9 @@
       "basis": "原表写入方式未识别：角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆；灵魂记忆可审阅、可撤销，不会被悄悄改写"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：低显著记忆真正淡去，可被“哀悼”；淡去"
     },
@@ -218,6 +220,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“back in, the brain resumes. The app asks the”经核对不算：说的是电脑重启后服务恢复"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“er while the raw originals are archived losslessly. Recent messages stay verbatim; the d”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“age input**: send a photo, she sees it (Anthr”经核对不算：只是能看图，不存成记忆"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“桌面应用＋后台服务，只用 Claude；情绪、身体节律、梦、反射、真实遗忘；关掉窗口后仍在后台“生活”；”"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“用＋后台服务，只用 Claude；情绪、身体节律、梦、反射、真实遗忘；关掉窗口后仍在后台“生活”；只用”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“忆＋真遗忘，强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅”"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ng the replay buffer. **Soul module.** Permanent memories the persona crystallises herself when somet”（已核对）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“talk to the brain (audited, redacted by defa”经核对不算：说的是接口审计"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・平面（赫布联想网络）",

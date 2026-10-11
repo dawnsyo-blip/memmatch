@@ -193,9 +193,12 @@
       "basis": "原表写入方式：原文自动存下；夜间整理成候选事实，模型或人审核；夜间整理之后（可选）；候选审核队列：默认由模型自动审定，可改为人工批准；定下的随时可撤回"
     },
     "forgetting": {
-      "value": "manual_only",
+      "value": [
+        "manual_only",
+        "archive"
+      ],
       "status": "auto",
-      "basis": "原表：不自动衰减；用 forget 工具或面板手动遗忘；归档或删除（手动）"
+      "basis": "原表：不自动衰减；用 forget 工具或面板手动遗忘；归档或删除（手动）；有归档：“归档或删除（手动）；不自动衰减；用 forg”"
     },
     "human_review": {
       "value": [
@@ -221,6 +224,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：AGPL-3.0（封存的 v1-final 为 MIT）（含多份许可，取限制最多的一项）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“s flagged expired (pinned, identity and persona never are), and expired records are har”（已核对）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“成候选，由模型或人审核；可撤回、取代、归档、遗忘；每轮自动召回相关旧记忆；可跨多个记忆空间读取；冷启动包；覆盖面”"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“库、Vectorize 向量库）上，一套分层记忆供不同客户端共用，带可视化管理；用户事实；网关＋MCP（两种都”"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“套分层记忆供不同客户端共用，带可视化管理；每轮对话原文入库；助手可直接 remember；夜间 Drea”"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“；每轮对话原文入库；助手可直接 remember；夜间 Dream 从当天对话抽事实成候选，由模型或人审”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“n again for 180 days is flagged expired (pinned, identity and persona never are), and e”（已核对）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“间 Dream 从当天对话抽事实成候选，由模型或人审核；可撤回、取代、归档、遗忘；每轮自动召回相关旧记忆”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・分层",

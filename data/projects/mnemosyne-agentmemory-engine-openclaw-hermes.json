@@ -144,9 +144,12 @@
       "basis": "README 没提写入方式"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
       "status": "needs_review",
-      "basis": "README：“·hitFreq + 0.05·layerW` | 42→18ms | | 时间衰减 Time Decay | time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "basis": "README：“·hitFreq + 0.05·layerW` | 42→18ms | | 时间衰减 Time Decay | time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ns/questions | | 中期·归档 Medium | `medium/YY”"
     },
     "human_review": {
       "value": [
@@ -172,6 +175,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：GPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“h ``` 安装后自动注入强制协议到 SOUL.md 和 AGENTS.md。 Auto-i”经核对不算：只是往 SOUL.md 注入协议"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“/raw/YYYY-MM-DD.jsonl` | 30d→gz | 原始消息流 Raw messages | | 短期·工作台 Short·Working | `short/worki”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“all.json ↓ (every 30min / 8 high-imp) consolidate → medium summary blocks + index ↓ (n”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“15 | 动态半衰期衰减 + 冲突解决 Dynamic half-life + conflict resolution | | `refusal.js` | 107 | 拒答前置: 分数分布 + 三”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   }
 }

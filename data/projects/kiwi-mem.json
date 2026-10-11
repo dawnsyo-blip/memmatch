@@ -194,7 +194,9 @@
       "basis": "原表写入方式：网关每 N 轮自动从对话中提取；可选：在面板锁定、添加、修改；矛盾时旧记忆自动失效；用户锁定的记忆永不衰减"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：热度按半衰期衰减，被召回则升温；每晚软化老记忆细节（默认冷却 21 天）；又冷又老的记忆按热度阈值清走；锁定的永不退役"
     },
@@ -225,6 +227,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：AGPL-3.0-or-later"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“⚡ 省钱，也省上下文 所有静态内容（人设、画像、锁定记忆、日历摘要）排在 pro”经核对不算：只是系统提示里的人设"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“管理面板。 <a id=\"w2-04-handoff-cleanup\"></a> > 🧹 *”经核对不算：命中的是文档锚点"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“网关；OpenAI 兼容客户端（网关）；热度系统＋夜间软化细节＋Dream 三层整合＋日历层级摘要；默认”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“忆都有\"热度\"。时间会让它自然衰减，但如果你们反复聊到同一件事，它会重新升温。高情绪浓度的记忆衰减更慢——就像人会更容易记住那些触动过自己的瞬间。而淡忘不是一刀切的”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“m 场景＋日历层级摘要；矛盾时旧记忆自动失效；用户锁定的记忆永不衰减；Dream 三层（清理→融合成场景”"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“（清理→融合场景→推断）；日→周→月→季→年摘要；矛盾时旧记忆失效；记忆搜索；高热度全文注入、中热度注入”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・分层（日／周／月摘要）",

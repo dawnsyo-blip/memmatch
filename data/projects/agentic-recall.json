@@ -148,7 +148,9 @@
       "basis": "README：“o 1.6 — exchange names changed on disk Auto-captured exchanges used to be named by their **”"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "needs_review",
       "basis": "README：“**hot-tier boost** and a **mild recency decay**. Every result reports its `provenance”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
@@ -177,6 +179,66 @@
       "value": "permissive",
       "status": "auto",
       "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“tester's in-flight session started failing with > `r”经核对不算：说的是程序报错"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ault scope. Exactly one memory folder exists on th”经核对不算：说的是本机只有一个记忆目录"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“roximity leg** reads the body directly. Verbatim recall went from 4/6 found and 1/6 s”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“rtises by leaving a dated mark on disk; the hook r”经核对不算：说的是程序标记"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“[recall-mcp] 2026-08-18 ON MAINLINE \"dream + auto-ingest: a correction signal…\" 2”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“isn't in the corpus { \"results\": [], \"confidence\": \"low\", \"bestWeak\": [{ \"name\": \"whee”（已核对）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ves somewhere else, import it once.** A ChatGPT export `.zip`, a folder of Obsidian/Notion mar”（已核对）"
     }
   }
 }

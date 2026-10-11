@@ -155,7 +155,7 @@
     },
     "normalized": {
       "type": "object",
-      "description": "阶段 1 规范化结果。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核",
+      "description": "阶段 1 规范化结果（含用户在意的 12 个特性，定义见 scripts/feature_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核",
       "required": [
         "access",
         "compatible_clients",
@@ -170,7 +170,19 @@
         "human_review",
         "export",
         "data_passes_through",
-        "license_category"
+        "license_category",
+        "persona_continuity",
+        "window_handoff",
+        "cross_client",
+        "verbatim",
+        "multimodal",
+        "time_awareness",
+        "dream_consolidation",
+        "emotion",
+        "proactive",
+        "pinning",
+        "error_guard",
+        "import_history"
       ],
       "properties": {
         "access": {
@@ -213,6 +225,42 @@
           "$ref": "#/$defs/normalizedField"
         },
         "license_category": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "persona_continuity": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "window_handoff": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "cross_client": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "verbatim": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "multimodal": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "time_awareness": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "dream_consolidation": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "emotion": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "proactive": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "pinning": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "error_guard": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "import_history": {
           "$ref": "#/$defs/normalizedField"
         },
         "paper_taxonomy": {

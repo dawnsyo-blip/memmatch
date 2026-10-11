@@ -193,7 +193,9 @@
       "basis": "原表写入方式：缓冲的对话编译为持久状态；自动写日记；—；—"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：情绪随时间衰减；—"
     },
@@ -220,6 +222,66 @@
       "value": "copyleft",
       "status": "needs_review",
       "basis": "许可证原文：GPL-3.0＋附加条款（LICENSE_ADDENDUM）"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“into Postgres, - resume normal startup enti”经核对不算：resume 指数据库迁移后启动"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“/Telegram）；身份、记忆、人格存在数据库，跨平台延续；情绪随时间衰减；定时自省；附加许可条款限制角”"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“<img src=\"docs/res/screenshots/plugins_emotion_tog”经核对不算：只是界面截图"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“模块化数字实体：记忆、人格、意志（Will）、梦境、插件动作；AI 身份＋内部状态；完整应用（We”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“ram）；身份、记忆、人格存在数据库，跨平台延续；情绪随时间衰减；定时自省；附加许可条款限制角色用途；模”"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“编译为结构化持久状态；日记；情绪随时间衰减；定时“心跳”触发记忆整合、标签细化、自我反思；自主写成长状态”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・多模块",

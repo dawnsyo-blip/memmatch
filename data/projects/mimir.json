@@ -192,7 +192,9 @@
       "basis": "原表写入方式：程序调用 remember，带情绪、重要度和保存理由；不需要人；内容去重；可选静态加密"
     },
     "forgetting": {
-      "value": "auto_decay",
+      "value": [
+        "auto_decay"
+      ],
       "status": "auto",
       "basis": "原表：间隔重复式自然衰减；检索诱发遗忘；生动度降到底（README 未细述是否删除）"
     },
@@ -223,6 +225,66 @@
       "value": "noncommercial",
       "status": "auto",
       "basis": "许可证原文：PolyForm Noncommercial 1.0.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“---| | **Entity** | Same entity reference | 0.8 | |”经核对不算：same entity 与人格无关"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“1994)* Retrieving one memory **actively suppress”经核对不算：说的是检索抑制"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“|---------|:---:|:---:|:---:| | Memory timeline | — | Yes (VividViz) | Yes | | Emotion”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“yers │ │ │ │ flashbulb · reconsolidation · state- │ │ │ │ dependent · s”（已核对）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆；按情景、程序、社会、时间、视觉等类型写入，带情绪向量；间隔重复式自然衰减、生动度生命周期、再巩固、”"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“difiers, emotional firewall, dampening, audit logging | `pip install vividnessmem` |”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块）",

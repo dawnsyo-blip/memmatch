@@ -195,7 +195,9 @@
       "basis": "原表写入方式：Stop 钩子每轮自动记录对话；事后手动；提供衰减、钉选、找陈旧、删除等工具，由模型或人调用"
     },
     "forgetting": {
-      "value": "manual_only",
+      "value": [
+        "manual_only"
+      ],
       "status": "auto",
       "basis": "原表：手动调用 decay 工具降低重要度；手动硬删除"
     },
@@ -224,6 +226,66 @@
       "value": "copyleft",
       "status": "auto",
       "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“tures your web conversations into the same memory store. - **AI-flagged highlights** *(op”（已核对）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“和 Telegram；向量模型须在首次写入前选定；原始对话＋事件摘要；提供衰减、钉选、找陈旧、删除等工具，由”"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“动捕获每轮对话；按事件分段并生成一段摘要和关键词；图片多模态向量；提供衰减、钉选、查找陈旧、删除等工具，”"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“keyword. | | `memory_daily_log` | Add a timestamped note to today's log. | ### Graph Str”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“s high-frequency low-information tokens nightly | | Embedding backfill | A launchd job”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“并生成一段摘要和关键词；图片多模态向量；提供衰减、钉选、查找陈旧、删除等工具，需模型或人调用；事件之间自”"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“hip (`causal`, `analogy`, `evolution`, `contradiction`, etc). Linked memories show up togethe”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "paper_taxonomy": {
       "form": "词元级・扁平",
