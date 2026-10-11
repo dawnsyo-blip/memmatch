@@ -1,0 +1,10 @@
+{
+  "stale_days": 180,
+  "single_maintainer_max": 1,
+  "recommend_unreviewed": false,
+  "_说明": {
+    "stale_days": "超过多少天没有提交就加“停更”风险提示（只提示不排除），路线图暂定 180 天",
+    "single_maintainer_max": "近一年贡献人数不超过这个数，就提示“只有一人维护”",
+    "recommend_unreviewed": "社区推荐、未审核的项目是否进入推荐结果（默认否，只进目录）"
+  }
+}
