@@ -13,8 +13,10 @@
 网络故障记为 status=error（需要重试），只有确认仓库不存在／不公开才记为 unreachable。
 """
 import json
+import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import time
@@ -23,9 +25,6 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from build_candidates import license_label  # noqa: E402
-
 ROOT = Path(__file__).resolve().parent.parent
 PROJECTS = ROOT / "data/projects"
 CACHE = ROOT / "cache/repos"
@@ -33,23 +32,64 @@ SETTINGS = json.loads((ROOT / "data/settings.json").read_text(encoding="utf-8"))
 REPORT = ROOT / "docs/health-report.md"
 TODAY = date.today()
 BOT = re.compile(r"\[bot\]|bot@|github-actions|dependabot|renovate|noreply@github\.com$", re.I)
+# 检查逻辑有改动时加 1；--resume 会重跑版本更低的结果
+CHECKER_VERSION = 2
 # 记忆服务只是大仓库中一部分的项目：统计数字是整个仓库的
 MONOREPO_NOTE = {"servers": "统计的是整个 modelcontextprotocol/servers 合集仓库，记忆服务只是其中一个子目录"}
 LICENSE_FILE = re.compile(r"(?i)^(licen[cs]e|copying|unlicense)([-._ ].*)?$")
+
+
+def rmtree(path):
+    """删除克隆目录。Windows 上 git 的打包文件是只读的，要先去掉只读属性才能删。"""
+    def onexc(func, target, _exc):
+        os.chmod(target, stat.S_IWRITE)
+        func(target)
+    if path.exists():
+        shutil.rmtree(path, onexc=onexc)
 
 
 def run(cmd, cwd=None, timeout=600):
     return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout)
 
 
+# 按“限制多的优先”识别：BUSL 正文里会提到到期后转 Apache，自定义许可里常有 MIT 式的授权句
+LICENSE_SIGNS = [
+    ("BUSL-1.1", r"Business Source License"),
+    ("PolyForm-NC", r"PolyForm Noncommercial"),
+    ("CC BY-NC", r"Attribution-NonCommercial|CC BY-NC"),
+    ("源码可见（自定义许可）", r"(?i)source[- ]available"),
+    ("AGPL-3.0", r"GNU AFFERO GENERAL PUBLIC LICENSE|GNU Affero General Public License"),
+    ("LGPL", r"GNU LESSER GENERAL PUBLIC LICENSE"),
+    ("GPL-3.0", r"GNU GENERAL PUBLIC LICENSE"),
+    ("MPL-2.0", r"Mozilla Public License"),
+    ("Apache-2.0", r"Apache License"),
+    ("MIT", r"MIT License|Permission is hereby granted, free of charge"),
+    ("BSD", r"BSD (?:2|3)-Clause|Redistribution and use in source and binary forms"),
+    ("Unlicense", r"This is free and unencumbered software"),
+]
+
+
+def license_label(text):
+    """识别许可证文件：只看开头的标题部分；全文出现禁止商用的说法时单独标出。"""
+    head = text[:800]
+    label = next((name for name, pat in LICENSE_SIGNS if re.search(pat, head)), None)
+    if label is None:
+        label = "其它（见仓库）"
+    if re.search(r"(?i)non-?commercial", text) and label not in ("PolyForm-NC", "CC BY-NC"):
+        label += "（含禁止商用条款）"
+    return label
+
+
 def license_category(label):
-    if label in ("MIT", "Apache-2.0", "BSD"):
+    if "禁止商用" in label:
+        return "noncommercial"
+    if label in ("MIT", "Apache-2.0", "BSD", "Unlicense"):
         return "permissive"
-    if label in ("AGPL-3.0", "GPL-3.0", "MPL-2.0"):
+    if label in ("AGPL-3.0", "GPL-3.0", "LGPL", "MPL-2.0"):
         return "copyleft"
     if label in ("PolyForm-NC", "CC BY-NC"):
         return "noncommercial"
-    if label == "BUSL-1.1":
+    if label in ("BUSL-1.1", "源码可见（自定义许可）"):
         return "source_available"
     return "other"
 
@@ -70,8 +110,7 @@ def fetch_page(owner, name):
 
 def clone(owner, name, dest):
     """克隆近一年的提交记录；一年内没有提交时退回只取最新一次提交。"""
-    if dest.exists():
-        shutil.rmtree(dest, ignore_errors=True)
+    rmtree(dest)
     url = f"https://github.com/{owner}/{name}"
     since = (TODAY - timedelta(days=365)).isoformat()
     for attempt in range(3):
@@ -79,20 +118,20 @@ def clone(owner, name, dest):
         if p.returncode == 0:
             return None
         if "shallow" in p.stderr or "no commits" in p.stderr.lower():
-            shutil.rmtree(dest, ignore_errors=True)
+            rmtree(dest)
             p = run(["git", "clone", "-q", "--bare", "--filter=blob:none", "--depth=1", url, str(dest)])
             if p.returncode == 0:
                 return None
         if re.search(r"not found|Repository not found|could not read Username|Authentication failed", p.stderr):
             return "仓库无法访问（已删除、改名或设为私有）"
-        shutil.rmtree(dest, ignore_errors=True)
+        rmtree(dest)
         time.sleep(5 * (attempt + 1))
     return f"克隆失败：{p.stderr.strip()[-120:]}"
 
 
 def check_repo(repo_url, pid):
     """检查一个仓库，返回 health 字典。供本脚本和阶段 5 的每周处理调用。"""
-    base = {"checked_on": TODAY.isoformat(), "method": "git 克隆近一年提交记录＋读取仓库网页"}
+    base = {"checked_on": TODAY.isoformat(), "method": "git 克隆近一年提交记录＋读取仓库网页", "checker_version": CHECKER_VERSION}
     m = re.match(r"https?://github\.com/([^/]+)/([^/#?]+)", repo_url or "")
     if not m:
         return {**base, "status": "not_github", "note": "代码不在 GitHub 上，无法自动检查"}
@@ -134,16 +173,21 @@ def check_repo(repo_url, pid):
     out["contributors_1y"] = len(people)
 
     files = [f for f in run(["git", "ls-tree", "--name-only", "HEAD"], dest).stdout.split("\n") if LICENSE_FILE.match(f)]
-    labels = []
+    labels, heads = [], {}
     for f in files:
-        head = run(["git", "show", f"HEAD:{f}"], dest).stdout[:3000]
-        labels.append(license_label(head))
+        text = run(["git", "show", f"HEAD:{f}"], dest).stdout
+        if not text.strip():  # 部分克隆按需下载文件内容，网络中断时会读到空文件
+            rmtree(dest)
+            return {**base, "status": "error", "note": f"许可证文件 {f} 读取失败（网络问题）"}
+        labels.append(license_label(text))
+        heads[f] = text[:1200]  # 保存开头，以后调整识别规则时不必重新克隆
     out["license_files"] = files
+    out["license_text_head"] = heads
     out["license_label"] = " ＋ ".join(dict.fromkeys(labels)) if labels else "无许可证文件"
     cats = [license_category(x) for x in labels]
     order = ["noncommercial", "source_available", "copyleft", "other", "permissive"]
     out["license_category"] = min(cats, key=order.index) if cats else "no_license"
-    shutil.rmtree(dest, ignore_errors=True)  # 只为读提交记录，用完即删
+    rmtree(dest)  # 只为读提交记录，用完即删
     if pid in MONOREPO_NOTE:
         out["note"] = MONOREPO_NOTE[pid]
     return out
@@ -240,7 +284,8 @@ def main():
             return d["id"] in only
         if resume:  # 旧版本把网络故障也记成了 unreachable，带“读取失败／克隆失败”字样的一并重试
             h = d.get("health") or {}
-            return not h or h.get("status") == "error" or re.search(r"读取失败|克隆失败", h.get("note", "") or "")
+            return (not h or h.get("status") == "error" or h.get("checker_version", 1) < CHECKER_VERSION
+                    or re.search(r"读取失败|克隆失败", h.get("note", "") or ""))
         return True
 
     todo = [p for p in paths if needs(p)]
