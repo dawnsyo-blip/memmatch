@@ -208,7 +208,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -220,8 +220,8 @@
     },
     "license_category": {
       "value": "copyleft",
-      "status": "needs_review",
-      "basis": "许可证原文：GPL-3.0＋附加条款（LICENSE_ADDENDUM）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：许可证原文：GPL-3.0＋附加条款（LICENSE_ADDENDUM）"
     },
     "persona_continuity": {
       "value": "yes",
@@ -291,5 +291,12 @@
       "retrieval": "长期记忆语义检索",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

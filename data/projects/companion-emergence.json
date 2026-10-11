@@ -184,7 +184,7 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆；灵魂记忆可审阅、可撤销，不会被悄悄改写"
     },
     "forgetting": {
@@ -206,7 +206,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -289,5 +289,17 @@
       "retrieval": "赫布边扩散激活，浮现被遗忘的线索",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆；灵魂记忆可审阅、可撤销，不会被悄悄改写"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

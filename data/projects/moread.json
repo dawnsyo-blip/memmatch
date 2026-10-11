@@ -172,8 +172,8 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "账号原文：Android 8.0+ 手机；模型服务密钥（可选）；Android 8.0+ 手机；模型服务密钥（可选）（含“可选”，需确认是否必需）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：Android 8.0+ 手机；模型服务密钥（可选）；Android 8.0+ 手机；模型服务密钥（可选）（含“可选”，需确认是否必需）"
     },
     "memory_subject": {
       "value": [
@@ -194,8 +194,8 @@
       "value": [
         "none"
       ],
-      "status": "needs_review",
-      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
     "human_review": {
       "value": [
@@ -292,5 +292,6 @@
       "retrieval": "向量＋词法双路检索，可选重排；召回限定在已读进度和所属书籍、角色内",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": []
 }

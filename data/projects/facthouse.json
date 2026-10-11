@@ -130,8 +130,8 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "账号原文：可选 Ollama 或 Voyage（含“可选”，需确认是否必需）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：可选 Ollama 或 Voyage（含“可选”，需确认是否必需）"
     },
     "memory_subject": {
       "value": [
@@ -144,15 +144,15 @@
       "value": [
         "on_request"
       ],
-      "status": "needs_review",
-      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“ts and integrates — compaction does not delete the transcript, and the hook does not p”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ts and integrates — compaction does not delete the transcript, and the hook does not p”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -240,5 +240,6 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": []
 }

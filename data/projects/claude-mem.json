@@ -124,12 +124,12 @@
     },
     "cost": {
       "value": "",
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "费用原文未识别：本机服务；部分宿主默认用托管的 CMEM Pro；偏编程场景；Star 很多（约 9.9 万），但以编程项目为主"
     },
     "accounts_needed": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "账号原文未识别：（空）"
     },
     "memory_subject": {
@@ -148,7 +148,7 @@
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
@@ -161,7 +161,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -237,5 +237,27 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "cost",
+      "label": "费用",
+      "note": "文档写的是“本机服务；部分宿主默认用托管的 CMEM Pro；偏编程场景；Star 很多（约 9.9 万），但以编程项目为主”，归不进固定选项"
+    },
+    {
+      "field": "accounts_needed",
+      "label": "需要的账号",
+      "note": "说明文档没有写"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

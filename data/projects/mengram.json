@@ -129,7 +129,7 @@
     },
     "cost": {
       "value": "",
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "费用原文未识别：Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器"
     },
     "accounts_needed": {
@@ -155,7 +155,7 @@
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
@@ -169,7 +169,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -244,5 +244,22 @@
       "status": "auto",
       "basis": "原表／说明：“会学习的 agent 记忆，可导入 ChatGPT/Claude Code 历史；事”"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "cost",
+      "label": "费用",
+      "note": "文档写的是“Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器”，归不进固定选项"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

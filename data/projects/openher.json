@@ -175,8 +175,8 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "账号原文：Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama；Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama（含“可选”，需确认是否必需）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama；Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama（含“可选”，需确认是否必需）"
     },
     "memory_subject": {
       "value": [
@@ -209,7 +209,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -292,5 +292,12 @@
       "retrieval": "异步两阶段：每轮结束触发搜索，下一轮按 80% 相关、20% 稳定混合注入",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

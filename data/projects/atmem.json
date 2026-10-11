@@ -128,25 +128,25 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "账号原文：可选本地 Ollama 或托管模型（含“可选”，需确认是否必需）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：可选本地 Ollama 或托管模型（含“可选”，需确认是否必需）"
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：agent 记忆与证据"
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“uded from ordinary search and recall. - Forget cascades through canonical, graph, medi”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“uded from ordinary search and recall. - Forget cascades through canonical, graph, medi”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -236,5 +236,17 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“agent 记忆与证据”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    }
+  ]
 }

@@ -206,7 +206,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -289,5 +289,12 @@
       "retrieval": "embedding 向量检索（pgvector）",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

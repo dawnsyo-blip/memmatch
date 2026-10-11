@@ -194,8 +194,8 @@
       "value": [
         "none"
       ],
-      "status": "needs_review",
-      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
     "human_review": {
       "value": [
@@ -292,5 +292,6 @@
       "retrieval": "Transformers.js 本地语义检索；按上下文窗口大小调节注入量",
       "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
     }
-  }
+  },
+  "uncertainties": []
 }

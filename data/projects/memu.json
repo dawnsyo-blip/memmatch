@@ -170,8 +170,8 @@
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“an resume where you left off. Memory is erased only when you explicitly ask for it.”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“an resume where you left off. Memory is erased only when you explicitly ask for it.”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -182,7 +182,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -258,5 +258,12 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

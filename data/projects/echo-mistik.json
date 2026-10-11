@@ -193,8 +193,8 @@
       "value": [
         "none"
       ],
-      "status": "needs_review",
-      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
     "human_review": {
       "value": [
@@ -205,7 +205,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -288,5 +288,12 @@
       "retrieval": "记忆与梦境笔记全量拼进提示（未做检索筛选）",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

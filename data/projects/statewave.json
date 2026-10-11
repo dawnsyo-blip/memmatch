@@ -123,34 +123,34 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "说明里没写；README 提到“s `stub` (local heuristic, no API key) | | SDKs | [Python](https://”，建议值 model_api_key，需确认是否必需"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“s `stub` (local heuristic, no API key) | | SDKs | [Python](https://”，建议值 model_api_key，需确认是否必需"
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：情节与编译记忆"
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“ines, trace every memory to its source, delete by subject Everything is organised aro”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ines, trace every memory to its source, delete by subject Everything is organised aro”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -225,5 +225,27 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“情节与编译记忆”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

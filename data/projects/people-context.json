@@ -147,15 +147,15 @@
       "value": [
         "on_request"
       ],
-      "status": "needs_review",
-      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“nated about trust: writes are audited, `forget` is a real delete, sensitive records si”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“nated about trust: writes are audited, `forget` is a real delete, sensitive records si”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -246,5 +246,6 @@
       "status": "auto",
       "basis": "原表／说明：“：是谁、怎么认识、上次约定了什么、喜欢怎样沟通；可导入邮件、通讯录、日历；人际关系；MCP；插件；Cla”"
     }
-  }
+  },
+  "uncertainties": []
 }

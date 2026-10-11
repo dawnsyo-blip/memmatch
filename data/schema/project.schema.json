@@ -155,7 +155,7 @@
     },
     "normalized": {
       "type": "object",
-      "description": "阶段 1 规范化结果（含用户在意的 12 个特性，定义见 scripts/feature_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核",
+      "description": "阶段 1 规范化结果（含用户在意的 12 个特性，定义见 scripts/feature_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
       "required": [
         "access",
         "compatible_clients",
@@ -272,6 +272,30 @@
         }
       },
       "additionalProperties": false
+    },
+    "uncertainties": {
+      "type": "array",
+      "description": "备注：哪些字段文档没说清、为什么。网站详情页据此显示“文档未说明”",
+      "items": {
+        "type": "object",
+        "required": [
+          "field",
+          "label",
+          "note"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
   "$defs": {
@@ -317,7 +341,8 @@
           "enum": [
             "confirmed",
             "auto",
-            "needs_review"
+            "needs_review",
+            "unknown"
           ]
         },
         "basis": {

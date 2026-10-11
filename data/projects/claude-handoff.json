@@ -85,7 +85,7 @@
   "normalized": {
     "access": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "接入方式原文未识别：命令行"
     },
     "compatible_clients": {
@@ -140,12 +140,12 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
@@ -234,5 +234,22 @@
       "status": "auto",
       "basis": "README：“d of a terminal session:** ```bash chf conversations.json --list # each app's data export wo”（已核对）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "access",
+      "label": "接入方式",
+      "note": "文档写的是“命令行”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    }
+  ]
 }

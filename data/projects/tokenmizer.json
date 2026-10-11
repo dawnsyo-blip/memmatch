@@ -129,8 +129,8 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "说明里没写；README 提到“OpenAI client = OpenAI( api_key=\"your-key\", base_url=\"htt”，建议值 model_api_key，需确认是否必需"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“OpenAI client = OpenAI( api_key=\"your-key\", base_url=\"htt”，建议值 model_api_key，需确认是否必需"
     },
     "memory_subject": {
       "value": [
@@ -141,15 +141,15 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“act text it injects; the same path with DELETE and `?key=...` forgets one, without a k”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“act text it injects; the same path with DELETE and `?key=...` forgets one, without a k”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -161,7 +161,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -236,5 +236,17 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

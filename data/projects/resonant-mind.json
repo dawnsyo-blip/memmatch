@@ -183,15 +183,15 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：AI 调用 write、record 等工具写入；可选：调用修订工具；Surgery 区可编辑、删除、归档；身份修改有提案机制"
     },
     "forgetting": {
       "value": [
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "原表：守护进程处理保留与孤儿检测；归档（Surgery 区）；有归档：“归档（Surgery 区）；守护进程处理保留”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表：守护进程处理保留与孤儿检测；归档（Surgery 区）；有归档：“归档（Surgery 区）；守护进程处理保留”"
     },
     "human_review": {
       "value": [
@@ -202,7 +202,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -214,8 +214,8 @@
     },
     "license_category": {
       "value": "source_available",
-      "status": "needs_review",
-      "basis": "许可证原文：Codependent AI Source-Available License（自定义）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：许可证原文：Codependent AI Source-Available License（自定义）"
     },
     "persona_continuity": {
       "value": "yes",
@@ -285,5 +285,17 @@
       "retrieval": "pgvector 语义检索；recall、thread back",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：AI 调用 write、record 等工具写入；可选：调用修订工具；Surgery 区可编辑、删除、归档；身份修改有提案机制"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

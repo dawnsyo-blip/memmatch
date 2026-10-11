@@ -189,12 +189,12 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：README 未描述；—"
     },
     "human_review": {
@@ -207,7 +207,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -290,5 +290,22 @@
       "retrieval": "pgvector 语义检索；按角色的互动热度",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：README 未描述；—"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

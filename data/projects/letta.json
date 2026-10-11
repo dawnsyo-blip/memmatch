@@ -131,27 +131,27 @@
     },
     "cost": {
       "value": "",
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "费用原文未识别：本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta"
     },
     "accounts_needed": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "账号原文未识别：（空）"
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：agent 自身记忆"
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
@@ -163,7 +163,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -239,5 +239,37 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "cost",
+      "label": "费用",
+      "note": "文档写的是“本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta”，归不进固定选项"
+    },
+    {
+      "field": "accounts_needed",
+      "label": "需要的账号",
+      "note": "说明文档没有写"
+    },
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“agent 自身记忆”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

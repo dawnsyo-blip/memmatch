@@ -133,7 +133,7 @@
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：长期记忆"
     },
     "write_mode": {
@@ -145,7 +145,7 @@
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
@@ -159,7 +159,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -234,5 +234,22 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“长期记忆”，归不进固定选项"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

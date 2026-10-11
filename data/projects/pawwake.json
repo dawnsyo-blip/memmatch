@@ -163,8 +163,8 @@
     },
     "cost": {
       "value": "free",
-      "status": "needs_review",
-      "basis": "只需免费账号（浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）；Render 等能跑 Docker 的云平台＋PostgreSQL；分阶段搭建，可先只做转发；带分区缓存省 token；客户端需支持自定义请求头 X-Gateway-Key；浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）），但云平台免费额度有限，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）；Render 等能跑 Docker 的云平台＋PostgreSQL；分阶段搭建，可先只做转发；带分区缓存省 token；客户端需支持自定义请求头 X-Gateway-Key；浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）），但云平台免费额度有限，需确认"
     },
     "accounts_needed": {
       "value": [
@@ -294,5 +294,6 @@
       "retrieval": "关键词＋语义向量混合搜索；原始对话片段召回；按时效去重",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": []
 }

@@ -186,15 +186,15 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：AI 识别高价值时刻→暂存候选→用户确认后入库；AI 写入之前；候选层：先暂存，用户确认后才入库，可合并或丢弃"
     },
     "forgetting": {
       "value": [
         "none"
       ],
-      "status": "needs_review",
-      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
     "human_review": {
       "value": [
@@ -205,7 +205,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -289,5 +289,17 @@
       "retrieval": "search_insights 搜索；网页面板浏览",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：AI 识别高价值时刻→暂存候选→用户确认后入库；AI 写入之前；候选层：先暂存，用户确认后才入库，可合并或丢弃"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

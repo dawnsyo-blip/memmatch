@@ -245,5 +245,6 @@
       "status": "auto",
       "basis": "README 命中的“openclaw memory-pro import memories.json [--scope globa”经核对不算：只是导入自己的备份"
     }
-  }
+  },
+  "uncertainties": []
 }

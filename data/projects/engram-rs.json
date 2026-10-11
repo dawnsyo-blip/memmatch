@@ -144,8 +144,8 @@
       "value": [
         "on_request"
       ],
-      "status": "needs_review",
-      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
       "value": [
@@ -166,8 +166,8 @@
       "value": [
         "sqlite"
       ],
-      "status": "needs_review",
-      "basis": "没写导出功能，但数据在单个 SQLite 文件里：“/p> Single Rust binary, one SQLite file, zero external dependenc”，建议值 sqlite"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“/p> Single Rust binary, one SQLite file, zero external dependenc”，建议值 sqlite"
     },
     "data_passes_through": {
       "value": [
@@ -241,5 +241,6 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": []
 }

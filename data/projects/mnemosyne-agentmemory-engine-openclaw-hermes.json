@@ -140,7 +140,7 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
@@ -148,8 +148,8 @@
         "auto_decay",
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "README：“·hitFreq + 0.05·layerW` | 42→18ms | | 时间衰减 Time Decay | time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ns/questions | | 中期·归档 Medium | `medium/YY”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“·hitFreq + 0.05·layerW` | 42→18ms | | 时间衰减 Time Decay | time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ns/questions | | 中期·归档 Medium | `medium/YY”"
     },
     "human_review": {
       "value": [
@@ -161,7 +161,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -236,5 +236,17 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

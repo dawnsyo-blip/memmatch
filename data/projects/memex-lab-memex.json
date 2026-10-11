@@ -180,15 +180,15 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：你随手记录，多个 AI 助手整理成卡片；—；无专门机制"
     },
     "forgetting": {
       "value": [
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "原表：README 未描述；—；有归档：“子 Agent；按 P.A.R.A 方法归档；生成知识洞察”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表：README 未描述；—；有归档：“子 Agent；按 P.A.R.A 方法归档；生成知识洞察”"
     },
     "human_review": {
       "value": [
@@ -286,5 +286,12 @@
       "retrieval": "README 未写明检索机制（只说角色在评论和聊天中维护长期记忆）",
       "dynamics_coverage": "Ⅲ 形成＋演化：检索未写明或依赖外部"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：你随手记录，多个 AI 助手整理成卡片；—；无专门机制"
+    }
+  ]
 }

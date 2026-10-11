@@ -1,0 +1,1591 @@
+{
+  "0compactmem": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“only | recency | recency + decay| | Pin / mlock semantics | ✅”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“he store. 2. **Store** — single SQLite file (WAL mode) with FTS5 ful”，建议值 sqlite"
+    }
+  },
+  "acheron-mcp-server": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ype, tags | | `bridge_delete_context` | Forget a saved context | | `bridge_status` | O”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "aelios": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器；Cloudflare 云端（你自己的账号）；网关＋MCP 两种接法，Claude 官方网页和手机 App 也能用；覆盖面最广：第三方客户端走网关，Claude 官方网页和手机 App 走 MCP；只有登记过的主模型才有记忆；浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器），但云平台免费额度有限，需确认"
+    }
+  },
+  "afair": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "agent-memory": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“, I lose the thread. I repeat myself. I forget decisions. Most memory systems are bui”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "agentic-recall": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“**hot-tier boost** and a **mild recency decay**. Every result reports its `provenance”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "agentrecall": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“optional vector search when `OPENAI_API_KEY` is set. No inverted index or”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "akephalos": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "alaya": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“AYA_LLM_API_KEY` | *(none)* | API key for auto-consolidation (enabl”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“embeddable Rust library. One SQLite file. No external services. Y”，建议值 sqlite"
+    }
+  },
+  "archon-memory-core": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“p expansion ForgettingPolicy — salience decay + stale detection + health scoring ```”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "astrbot-plugin-livingmemory": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台；AstrBot 所在的电脑或服务器；AstrBot 插件；只服务 AstrBot；与自主学习插件配合时分工明确；正在测试 2.7.0 版；已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台），但云平台免费额度有限，需确认"
+    }
+  },
+  "atmem": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：可选本地 Ollama 或托管模型（含“可选”，需确认是否必需）"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“uded from ordinary search and recall. - Forget cascades through canonical, graph, medi”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "aurasdk": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“consistent evidence) ``` No API keys. No embeddings required. No”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“| | Lifecycle and governance | Built-in decay/promotion, provenance, contradiction co”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "ayushagrawal288-memex": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“Docker and Docker Compose. No API keys required — the entire stack”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“mory using semantic search with recency decay, so agents surface what's relevant *and”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "basic-memory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "being": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“everything else: memory consolidation, decay, recall, background reflection, and ide”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "birkin-mnemosyne": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "bitterbot-desktop": {
+    "export": {
+      "value": [
+        "markdown"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但记忆本身存成 Markdown 文件，可以直接拷走：“ives | SQLite and Markdown files on your disk”，建议值 markdown"
+    }
+  },
+  "causal-memory": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“### With local embeddings (no API key needed) ```bash cargo build”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“stage 1.7 supersession) - ✅ Vela-style half-life decay tiers (90d / 7d / legacy 0.99-per”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "celiums-memory": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“at the HTTP endpoint with the API key. Example for Claude Code / Cu”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“nce scoring, consolidation, lifecycle decay, and circadian/interoceptive modulati”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "central-intelligence": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“earch: vector + FTS5 + fuzzy + temporal decay ↓ Central Intelligence API (hosted)”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "chatnest-ui": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：许可证原文：自定义源码可用许可（禁止商用、强制署名）（含多份许可，取限制最多的一项）"
+    }
+  },
+  "claude-find": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "claude-soul": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "claudex": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "compartment": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“he host model decides what to store and forget; Compartment captures, encrypts and rec”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "context-keeper": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“=600 # 超时时间 # 云端模型API Keys（备用） DEEPSEEK_API_KEY=your-de”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "context-memory": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“by default. Use `--remove-data` to also delete the database, or `--keep-data` to skip”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "contextlattice": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "cosmos-mcp": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "crbro-memory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“able** — Knowledge can be superseded or retracted, not just piled up — facts, and since”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "dreamvault": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表：不适用；梦库永久封存，不回流检索；有归档：“梦库永久封存，不回流检索；不适用；移入物理隔离的梦库”"
+    }
+  },
+  "echo-mistik": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "engram-rs": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“/p> Single Rust binary, one SQLite file, zero external dependenc”，建议值 sqlite"
+    }
+  },
+  "fable": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "facthouse": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：可选 Ollama 或 Voyage（含“可选”，需确认是否必需）"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ts and integrates — compaction does not delete the transcript, and the hook does not p”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "fbisiri-engram": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "fluctlightdb": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "gbrain": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "genome": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“gets: **`remember`**, **`recall`**, **`forget`**, **`reset_memories`**. Memories pers”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "goodmemory": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“er ranks. It does not include API keys, query text, or memory conte”，建议值 model_api_key，需确认是否必需"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“the next turn, audit what happened, and delete it when it is wrong. GoodMemory is not”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "graph-memory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“: - **Weighted edges with configurable decay** — frequently-confirmed knowledge stay”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "graphiti": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“: - Episode management (add, retrieve, delete) - Entity management and relationship h”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "hbarefoot-engram": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "hindsight": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "hipocampo": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“Decisions > **Bring your own API key.** TypeSafe is in early acces”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“esses historical memories based on time decay, shrinking 24-hour granular details int”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ecay_hipocampo` now archives old `episodica` memorie”"
+    }
+  },
+  "honcho": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "hyperconsciousness": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“igning in. No Bun or provider API keys are needed. See [hosted acce”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "iai-personal-memory-engine": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“lustered, consolidated, reinforced, and decayed | The background process is called t”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "insight": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "inspeximus": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“eck in three seconds, with no API key Measured 2026-08-25 against”，建议值 model_api_key，需确认是否必需"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“t once and the old value stays retired; erase a person and prove it; show an auditor”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "internalbeyond-mobile": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）；手机或电脑浏览器本地；伴侣应用自带记忆；数据全在浏览器本地，与电脑版互通备份；15 个模块；仅限非商业；任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）），但云平台免费额度有限，需确认"
+    },
+    "accounts_needed": {
+      "value": [
+        "github"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）；任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）（含“可选”，需确认是否必需）"
+    }
+  },
+  "jarvis-orb": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“| | 02 | **Temporal Scoring** | 30-day half-life decay. Recent memories surface first. O”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "kimi-core": {
+    "accounts_needed": {
+      "value": [
+        "claude_subscription"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）；电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）（含“可选”，需确认是否必需）"
+    }
+  },
+  "kimi-room": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "kremis": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "kybase": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "lean-memory": {
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“s), or demotes to a cold tier, so your full histo”"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“emory(root=\"./data\") # one SQLite file per namespace, stored un”，建议值 sqlite"
+    }
+  },
+  "life": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "localkeep": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“restarting `localkeep-hub` does **not** delete your banks — only removing the database”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "longhand": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“oses | Lives until you delete the file | | **Across model versions*”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "lore": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“D-based detection). ### DB corruption Delete `~/.lore/lore.db` and re-index. Your so”，没提自动衰减，建议值 manual_only"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“the index. **Storage:** Single SQLite file at `~/.lore/lore.db` wit”，建议值 sqlite"
+    }
+  },
+  "loreroom": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（Telegram 机器人；自己的电脑），但云平台免费额度有限，需确认"
+    }
+  },
+  "machine-studio": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "magnemo": {
+    "export": {
+      "value": [
+        "markdown"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但记忆本身存成 Markdown 文件，可以直接拷走：“runs on your machine, in plain markdown files you own. The package imp”，建议值 markdown"
+    }
+  },
+  "mcp-agent-memory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“memory --daemon remove # stop and delete the plist / unit ``` `--remove` preser”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "mcp-memory-service": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "mem0-mcp-selfhosted": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“y relationships) | | **Google API Key** | Optional | Required only”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ndexes in Qdrant. | | `delete_memory` | Delete a single memory by UUID. | | `delete_al”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "mem0": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“extraction** -- one LLM call, no UPDATE/DELETE. Memories accumulate; nothing is overwr”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "mem9": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“AI Agents.</strong><br/> Your agents forget everything between sessions. mem9 fixes”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memex-lab-memex": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表：README 未描述；—；有归档：“子 Agent；按 P.A.R.A 方法归档；生成知识洞察”"
+    }
+  },
+  "memgres": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“st, unrelated: - **Embedding API key** (`MEMGRES_EMBED_API_KEY`) —”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“mper-evident history that you can still delete when the law says you must. --- ## Wh”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memheaven": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（Cloudflare 账号；自己的 Cloudflare 账号），但云平台免费额度有限，需确认"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“re useful in the moment, but they often forget project context across chats, sessions,”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memkeeper": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“worth reviewing. - `document-prune` — delete the specific chunks you choose (support”，没提自动衰减，建议值 manual_only"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“y. - **Local-first.** A single SQLite database. No server, no cloud, no”，建议值 sqlite"
+    }
+  },
+  "memmachine": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "memo": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“n, and OpenCode. No cloud, no API keys, no Ollama, no vector DB to”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“` `search` `ask` `get` `edit` `rename` `delete` `list` **Recall & Hooks:** `recall` `”，没提自动衰减，建议值 manual_only"
+    },
+    "export": {
+      "value": [
+        "markdown"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但记忆本身存成 Markdown 文件，可以直接拷走：“s/diagram-recall.svg) **Markdown is the source of truth.** Every memory is a pla”，建议值 markdown"
+    }
+  },
+  "memobase": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“t found once you flush the memory. # u.delete(bid) ``` > By default, Memobase will r”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memocall": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "memora": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“UDFLARE_API_TOKEN\":\"REPLACE\",\"OPENAI_API_KEY\":\"REPLACE\"}}}} JSON chm”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“Integrity** - Guards against accidental delete/merge/absorb of document fragments - 🔍”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memori": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“r Gateway) By default, OpenClaw agents forget everything between sessions. The Memori”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memory-mcp-1file": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ealDB is embedded) * ✅ **No API Keys, No Cloud, No Python** — Eve”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“from 5 code choices). ### 2. Temporal Decay & \"Presence\" * **Problem:** Old memor”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "memory-mcp": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“s | | **Trust scoring** | Outdated info decays and sinks | All memories equal | | **S”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“all is needed. 2. **Cold storage (~50ms)** — Everyth”"
+    }
+  },
+  "memorybear": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ies | | Service API | `/v1` | API Key | Knowledge extraction, graph”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“nsion model of memory strength and time decay: - Each knowledge item is assigned an”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "memoryconstellations": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档；有归档：“正文（真正删除）；叙事片段 12 个月后归档；14 天无访问转冷却；被召回自动恢复活”"
+    }
+  },
+  "memorymesh": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“l, providing context for the AI. *(The `delete` and `update` tools have a generic desc”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memoryos": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "memtether": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“===+ ``` ## TL;DR - **Your AI clients forget each other?** Every agent keeps its own”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memu": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“an resume where you left off. Memory is erased only when you explicitly ask for it.”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "midas": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“g, returns a deletion audit), `stats`, `forget` (chain-safe), `forget_matching` (topic”，没提自动衰减，建议值 manual_only"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“or, and your chat app at one SQLite file and they share one liv”，建议值 sqlite"
+    }
+  },
+  "mneme": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“o the database is derived state you can delete. - **Closing a session costs nothing an”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "mnemo-mcp": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“usion + cross-encoder rerank + temporal decay -- importance x recency archive policy”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "mnemory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "mnemos": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“ments (via real LLM tool-use calls) and decayed stale facts' confidence; a low-value”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "mnemostack": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“default, reached at 10 accesses) which fades back toward 1.0 as the access ages and”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "mnemosyne-agentmemory-engine-openclaw-hermes": {
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“·hitFreq + 0.05·layerW` | 42→18ms | | 时间衰减 Time Decay | time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ns/questions | | 中期·归档 Medium | `medium/YY”"
+    }
+  },
+  "mochibot": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "moread": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：Android 8.0+ 手机；模型服务密钥（可选）；Android 8.0+ 手机；模型服务密钥（可选）（含“可选”，需确认是否必需）"
+    },
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "myco": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "neotoma": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“tes, split an entity by predicate, soft-delete and restore, list potential duplicates,”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "nocturne-memory": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无自动遗忘”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "omega-memory": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“** Services like Mem0 require API keys and send your data to their”，建议值 model_api_key，需确认是否必需"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“heir cloud. - **Context loss.** Agents forget every decision, preference, and archite”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "omemo": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "omnigraph": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "openher": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama；Python 3.11+；macOS 14+（桌面客户端，可选）；任一模型服务密钥或本地 Ollama（含“可选”，需确认是否必需）"
+    }
+  },
+  "openmemory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“ovenance are not rewritten by recall or decay. - **Executable graph:** typed relation”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "openviking": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "paramecium": {
+    "forgetting": {
+      "value": [
+        "none",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表：明确不做遗忘曲线（作者已把热度衰减代码封存）；原文永不删除；被取代的条目退出排名（明确不做遗忘，但可能仍能手动删除，建议值 none）；有归档：“；明确不做遗忘曲线（作者已把热度衰减代码封存）；新旧记忆高置信矛盾时，旧条目标记 s”"
+    }
+  },
+  "pawwake": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）；Render 等能跑 Docker 的云平台＋PostgreSQL；分阶段搭建，可先只做转发；带分区缓存省 token；客户端需支持自定义请求头 X-Gateway-Key；浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）），但云平台免费额度有限，需确认"
+    }
+  },
+  "people-context": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“nated about trust: writes are audited, `forget` is a real delete, sensitive records si”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "personal-understanding": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“几轮实测事故磨出来的**——分类器曾把「我堵得慌」锁在档案外、缺日期记录曾被时间衰减无声埋掉、整句口语查询曾被假切片霸榜，每一版修补都在 [CHANGELOG](C”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "piia-engram": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“that architecture decision last month — erased This happens because AI memory today”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "prism-mcp": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ed). **No account needed. No API keys. Runs on your machine.** A”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "project-tessera": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“se saved memories | | `forget_memory` | Delete a specific memory | | `export_memories`”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "remembra": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“dings, so the server needs no API key. The first start downloads th”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“untested ⏱️ **Temporal Memory** — TTL, decay curves, historical queries 🔍 **Hybrid”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "remnic": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "resonant-mind": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表：守护进程处理保留与孤儿检测；归档（Surgery 区）；有归档：“归档（Surgery 区）；守护进程处理保留”"
+    },
+    "license_category": {
+      "value": "source_available",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：许可证原文：Codependent AI Source-Available License（自定义）"
+    }
+  },
+  "resonant": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    },
+    "export": {
+      "value": [
+        "sqlite"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“.** One Node.js process, one SQLite database, one web page you open i”，建议值 sqlite"
+    }
+  },
+  "retaindb": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“Kafka, Qdrant, Cloudflare, or API keys. ### Self-Hosted Server Us”，建议值 model_api_key，需确认是否必需"
+    }
+  },
+  "roampal-core": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“sers without a local model or API key — they route through OpenCode”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“Yes — 5 collections, promotion/demotion/decay | CLAUDE.md unbounded, auto memory firs”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "second-me": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“e individuality: AI that amplifies, not erases, **YOU**. We’re challenging that with”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "servers": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“are using a docker volume for storage, delete the old docker volume's `index.js` file”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "shadowgraph": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“d). Omitted scope means all-null scope. Purge is previewable, logical by default, and”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "statelessagent": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ecurity.md). No accounts. No API keys. Everything runs locally. ``”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "statewave": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“s `stub` (local heuristic, no API key) | | SDKs | [Python](https://”，建议值 model_api_key，需确认是否必需"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ines, trace every memory to its source, delete by subject Everything is organised aro”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "supermemory": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“t does | |---|---| | `memory` | Save or forget information. Your AI calls this automat”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "synapse": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“model and owner settings ``` Delete `synapse.db` and `synapse reindex --vau”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "synthetic-heart": {
+    "license_category": {
+      "value": "copyleft",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：许可证原文：GPL-3.0＋附加条款（LICENSE_ADDENDUM）"
+    }
+  },
+  "taosmd": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "telemem": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "three-days-no-sleep": {
+    "cost": {
+      "value": "free",
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（Cloudflare 账号；能运行 Node.js 的电脑；Cloudflare 云端；伴侣应用自带记忆；README 只有部署教程，功能未经核实；仅限非商业；Cloudflare 账号；能运行 Node.js 的电脑），但云平台免费额度有限，需确认"
+    }
+  },
+  "tokenmizer": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“OpenAI client = OpenAI( api_key=\"your-key\", base_url=\"htt”，建议值 model_api_key，需确认是否必需"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“act text it injects; the same path with DELETE and `?key=...` forgets one, without a k”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "tree-ring-memory": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ring recall \"protocol design\" tree-ring forget mem_example --mode delete --reason \"exa”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "tstockham96-engram": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“erything is present tense | Timestamps, decay, recency weighting | | **Proactive reca”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "utsuwa": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "weighted-compact": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“│ × topic-decay / REM │ │ (MCP / CLI) │ ove”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "widemem-ai": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README：“it does | |---|---| | **Importance and decay** | The LLM rates each fact 1 to 10. Se”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "yorishiro": {
+    "forgetting": {
+      "value": [
+        "none"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+    }
+  },
+  "yourmemory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "zenbrain": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ts/compare-mechanisms.sh`, no API keys and nothing to install. It p”，建议值 model_api_key，需确认是否必需"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  }
+}

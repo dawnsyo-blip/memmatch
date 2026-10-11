@@ -168,15 +168,15 @@
     },
     "cost": {
       "value": "free",
-      "status": "needs_review",
-      "basis": "只需免费账号（任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）；手机或电脑浏览器本地；伴侣应用自带记忆；数据全在浏览器本地，与电脑版互通备份；15 个模块；仅限非商业；任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）），但云平台免费额度有限，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）；手机或电脑浏览器本地；伴侣应用自带记忆；数据全在浏览器本地，与电脑版互通备份；15 个模块；仅限非商业；任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）），但云平台免费额度有限，需确认"
     },
     "accounts_needed": {
       "value": [
         "github"
       ],
-      "status": "needs_review",
-      "basis": "账号原文：任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）；任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）（含“可选”，需确认是否必需）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）；任意浏览器（推荐 Chrome）；可选免费 HTTPS 静态空间（如 GitHub Pages）（含“可选”，需确认是否必需）"
     },
     "memory_subject": {
       "value": [
@@ -187,12 +187,12 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：聊天、通话结束可一键生成记忆；每位 AI 独立档案；可选：在透视区纠正；记忆可查可纠"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：README 未描述；—"
     },
     "human_review": {
@@ -291,5 +291,17 @@
       "retrieval": "聊到才想起，每轮只给相关几条",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：聊天、通话结束可一键生成记忆；每位 AI 独立档案；可选：在透视区纠正；记忆可查可纠"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：README 未描述；—"
+    }
+  ]
 }

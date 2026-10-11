@@ -97,7 +97,7 @@
     },
     "compatible_clients": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "客户端原文：支持技能的 agent（README 未逐一列出）"
     },
     "runs_on": {
@@ -142,15 +142,15 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [
         "auto_decay"
       ],
-      "status": "needs_review",
-      "basis": "README：“几轮实测事故磨出来的**——分类器曾把「我堵得慌」锁在档案外、缺日期记录曾被时间衰减无声埋掉、整句口语查询曾被假切片霸榜，每一版修补都在 [CHANGELOG](C”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“几轮实测事故磨出来的**——分类器曾把「我堵得慌」锁在档案外、缺日期记录曾被时间衰减无声埋掉、整句口语查询曾被假切片霸榜，每一版修补都在 [CHANGELOG](C”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
     "human_review": {
       "value": [
@@ -161,7 +161,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -236,5 +236,22 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "compatible_clients",
+      "label": "能配合的助手",
+      "note": "客户端原文：支持技能的 agent（README 未逐一列出）"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

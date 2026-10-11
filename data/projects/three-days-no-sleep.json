@@ -163,8 +163,8 @@
     },
     "cost": {
       "value": "free",
-      "status": "needs_review",
-      "basis": "只需免费账号（Cloudflare 账号；能运行 Node.js 的电脑；Cloudflare 云端；伴侣应用自带记忆；README 只有部署教程，功能未经核实；仅限非商业；Cloudflare 账号；能运行 Node.js 的电脑），但云平台免费额度有限，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（Cloudflare 账号；能运行 Node.js 的电脑；Cloudflare 云端；伴侣应用自带记忆；README 只有部署教程，功能未经核实；仅限非商业；Cloudflare 账号；能运行 Node.js 的电脑），但云平台免费额度有限，需确认"
     },
     "accounts_needed": {
       "value": [
@@ -182,12 +182,12 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：README 未描述；—；—"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：README 未描述；—"
     },
     "human_review": {
@@ -200,7 +200,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -283,5 +283,22 @@
       "retrieval": "README 未描述",
       "dynamics_coverage": "Ⅵ 无法核实"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：README 未描述；—；—"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：README 未描述；—"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

@@ -137,7 +137,7 @@
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：长期记忆（Markdown 文件夹）"
     },
     "write_mode": {
@@ -151,8 +151,8 @@
       "value": [
         "auto_decay"
       ],
-      "status": "needs_review",
-      "basis": "README：“**hot-tier boost** and a **mild recency decay**. Every result reports its `provenance”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“**hot-tier boost** and a **mild recency decay**. Every result reports its `provenance”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
     "human_review": {
       "value": [
@@ -165,7 +165,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -240,5 +240,17 @@
       "status": "auto",
       "basis": "README：“ves somewhere else, import it once.** A ChatGPT export `.zip`, a folder of Obsidian/Notion mar”（已核对）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“长期记忆（Markdown 文件夹）”，归不进固定选项"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

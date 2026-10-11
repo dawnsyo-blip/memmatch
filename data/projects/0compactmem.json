@@ -144,27 +144,27 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提写入方式"
     },
     "forgetting": {
       "value": [
         "auto_decay"
       ],
-      "status": "needs_review",
-      "basis": "README：“only | recency | recency + decay| | Pin / mlock semantics | ✅”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“only | recency | recency + decay| | Pin / mlock semantics | ✅”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [
         "sqlite"
       ],
-      "status": "needs_review",
-      "basis": "没写导出功能，但数据在单个 SQLite 文件里：“he store. 2. **Store** — single SQLite file (WAL mode) with FTS5 ful”，建议值 sqlite"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“he store. 2. **Store** — single SQLite file (WAL mode) with FTS5 ful”，建议值 sqlite"
     },
     "data_passes_through": {
       "value": [
@@ -238,5 +238,17 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    }
+  ]
 }

@@ -294,5 +294,6 @@
       "retrieval": "BM25＋语义向量融合；不自主联想召回",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": []
 }

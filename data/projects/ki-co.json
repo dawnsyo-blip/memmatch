@@ -193,7 +193,7 @@
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：README 未描述；—"
     },
     "human_review": {
@@ -291,5 +291,12 @@
       "retrieval": "轻量召回判断（短句不触发）；召回顺序稳定以利缓存；旧聊天全文检索",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：README 未描述；—"
+    }
+  ]
 }

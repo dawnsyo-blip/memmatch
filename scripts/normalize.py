@@ -9,8 +9,13 @@
   python -X utf8 scripts/fetch_readmes.py           先缓存 README（只需一次）
   python -X utf8 scripts/normalize.py               生成规范化结果和待审核清单
   python -X utf8 scripts/normalize.py --apply-review
-      读回 docs/review-normalization.xlsx 里「负责人确认值」一列，存入
+      读回 docs/review-normalization.xlsx「待补充」页的「负责人确认值」，存入
       data/normalization_overrides.json，再重新生成
+  python -X utf8 scripts/normalize.py --accept-suggestions
+      把当前所有待审核项的建议值记为负责人确认（负责人 2026-10-11 决定）
+
+没有建议值、规则也判断不了的字段，状态记为 unknown（文档未说明），并写进项目的
+uncertainties 备注列表，说明哪里不确定、为什么。
 """
 import json
 import re
@@ -66,6 +71,14 @@ ENUMS = {
 for _key, (_name, _desc) in FR.FEATURES.items():
     ENUMS[_key] = {"yes": "有", "not_mentioned": "未提及"}
 FIELDS = list(ENUMS)  # 输出顺序
+FIELD_LABELS = {
+    "access": "接入方式", "compatible_clients": "能配合的助手", "runs_on": "运行位置", "os": "支持的系统",
+    "difficulty": "上手门槛", "cost": "费用", "accounts_needed": "需要的账号", "memory_subject": "主要记住什么",
+    "write_mode": "记忆怎么写入", "forgetting": "怎么遗忘", "human_review": "能否查看和修改记忆", "export": "能否导出",
+    "data_passes_through": "数据经过谁的服务器", "license_category": "许可证类别",
+    **{k: v[0] for k, v in FR.FEATURES.items()},
+}
+DECIDED_ON = "2026-10-11"
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through"}
 
@@ -501,13 +514,34 @@ def normalize(doc, overrides):
     out["license_category"] = n_license(c)
     for key in FR.FEATURES:
         out[key] = n_feature(c, key, out)
-    for field, value in overrides.get(doc["id"], {}).items():
-        out[field] = res(value, "confirmed", "负责人确认")
+    for field, ov in overrides.get(doc["id"], {}).items():
+        if isinstance(ov, dict):
+            out[field] = res(ov["value"], "confirmed", ov.get("note", "负责人确认"))
+        else:
+            out[field] = res(ov, "confirmed", "负责人确认")
+    uncertainties = []
+    for f in FIELDS:
+        n = out[f]
+        if n["status"] == "needs_review" and n["value"] in ("", []):
+            n["status"] = "unknown"
+            uncertainties.append({"field": f, "label": FIELD_LABELS[f], "note": uncertainty_note(n["basis"])})
     norm = {f: out[f] for f in FIELDS}
     tax = paper_taxonomy(c)
     if tax:
         norm["paper_taxonomy"] = tax
-    return norm
+    return norm, uncertainties
+
+
+def uncertainty_note(basis):
+    """把规则的判断依据改写成给人看的一句话。"""
+    b = basis.strip()
+    if re.search(r"原文未识别：（空）$", b):
+        return "说明文档没有写"
+    m = re.search(r"原文未识别：(.+)$", b)
+    if m:
+        text = "；".join(dict.fromkeys(x for x in m.group(1).split("；") if x))
+        return f"文档写的是“{text}”，归不进固定选项"
+    return b
 
 
 # ---------------- 待审核清单 ----------------
@@ -534,29 +568,34 @@ def write_review(docs):
         for f in FIELDS:
             n = d["normalized"][f]
             stats[f][n["status"]] += 1
-            if n["status"] == "needs_review":
+            if n["status"] in ("needs_review", "unknown"):
                 items.append((f, d, n))
 
     lines = [
-        "# 阶段 1 待审核清单：字段规范化",
+        "# 阶段 1 规范化结果与待补充清单",
         "",
-        "> 由 `scripts/normalize.py` 生成，不要手改本文件。要修改结论，请在 `docs/review-normalization.xlsx` 的「负责人确认值」一列填写，",
+        "> 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，",
         "> 然后运行 `python -X utf8 scripts/normalize.py --apply-review`。确认值存入 `data/normalization_overrides.json`，以后重新生成也会保留。",
         "> 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, gateway`）；留空表示暂不处理。",
         "",
-        "所有判断都来自说明文档（README）和原表，**没有实际安装验证**。规则拿不准的字段不猜，标为待审核列在下面，附原文、建议值和理由。",
+        "所有判断都来自说明文档（README）和原表，**没有实际安装验证**。",
+        "",
+        f"负责人 {DECIDED_ON} 决定：有建议值的待审核项一律采用建议值（状态记为“已确认”）；没有建议值的记为“文档未说明”（unknown），"
+        "并写进项目 JSON 的 `uncertainties` 备注，网站上会如实显示“文档未说明”。",
         "",
         "## 每个字段的处理情况",
         "",
-        "| 字段 | 含义与可选值 | 规则判定 | 待审核 | 已确认 |",
-        "|---|---|---|---|---|",
+        "| 字段 | 含义与可选值 | 规则判定 | 已确认 | 文档未说明 | 待审核 |",
+        "|---|---|---|---|---|---|",
     ]
     for f in FIELDS:
         opts = "；".join(f"`{k}` {v}" for k, v in ENUMS[f].items())
         if f in FR.FEATURES:
             opts = f"**{FR.FEATURES[f][0]}**：{FR.FEATURES[f][1]}。" + opts
-        lines.append(f"| `{f}` | {opts} | {stats[f]['auto']} | {stats[f]['needs_review']} | {stats[f]['confirmed']} |")
-    lines += ["", f"共 {len(docs)} 个项目、{len(items)} 处待审核。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。", "",
+        lines.append(f"| `{f}` | {opts} | {stats[f]['auto']} | {stats[f]['confirmed']} | {stats[f]['unknown']} | {stats[f]['needs_review']} |")
+    n_unknown = sum(st["unknown"] for st in stats.values())
+    n_review = sum(st["needs_review"] for st in stats.values())
+    lines += ["", f"共 {len(docs)} 个项目：文档未说明 {n_unknown} 处，待审核 {n_review} 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。", "",
               "说明：", "",
               "- 多选字段（如 `access`、`compatible_clients`）可以有多个值，用英文逗号分隔。",
               "- `os`：README 没写明但用 npx、pip、Docker 等跨平台方式安装的，按 Windows/macOS/Linux 都能用处理（理由里会注明“推断”）。",
@@ -573,34 +612,37 @@ def write_review(docs):
         rows = [(d, n) for ff, d, n in items if ff == f]
         if not rows:
             continue
-        lines += [f"## `{f}`（{len(rows)} 处）", "", "| 项目 | 原文 | 建议值 | 理由 |", "|---|---|---|---|"]
+        lines += [f"## `{f}` {FIELD_LABELS[f]}（{len(rows)} 处）", "", "| 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |", "|---|---|---|---|---|"]
         for d, n in rows:
             cell = lambda s: str(s).replace("|", "／").replace("\n", " ")
-            lines.append(f"| {d['name']}（`{d['id']}`） | {cell(original_text(d, f))} | {cell(fmt(n['value'])) or '—'} | {cell(n['basis'])} |")
+            status = "文档未说明" if n["status"] == "unknown" else "待审核"
+            lines.append(f"| {d['name']}（`{d['id']}`） | {status} | {cell(original_text(d, f))} | {cell(fmt(n['value'])) or '—'} | {cell(uncertainty_note(n['basis']))} |")
         lines.append("")
     REVIEW_MD.parent.mkdir(parents=True, exist_ok=True)
     REVIEW_MD.write_text("\n".join(lines), encoding="utf-8")
 
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.title = "待审核"
-    header = ["项目 id", "项目名", "字段", "可选值", "原文", "建议值", "理由", "负责人确认值"]
+    ws.title = "待补充"
+    header = ["项目 id", "项目名", "字段", "状态", "可选值", "原文", "建议值", "不确定的地方", "负责人确认值"]
     ws.append(header)
     for f, d, n in items:
-        ws.append([d["id"], d["name"], f, "、".join(ENUMS[f]), original_text(d, f), fmt(n["value"]), n["basis"], ""])
+        status = "文档未说明" if n["status"] == "unknown" else "待审核"
+        ws.append([d["id"], d["name"], f, status, "、".join(ENUMS[f]), original_text(d, f), fmt(n["value"]),
+                   uncertainty_note(n["basis"]), ""])
     for cell in ws[1]:
         cell.font = Font(bold=True)
         cell.fill = PatternFill("solid", fgColor="DDE6F0")
-    for col, w in zip("ABCDEFGH", [22, 22, 18, 40, 40, 20, 60, 20]):
+    for col, w in zip("ABCDEFGHI", [22, 22, 18, 10, 36, 36, 18, 56, 20]):
         ws.column_dimensions[col].width = w
     for row in ws.iter_rows(min_row=2):
         for cell in row:
             cell.alignment = Alignment(wrap_text=True, vertical="top")
-        row[7].fill = PatternFill("solid", fgColor="FFF4D6")
+        row[8].fill = PatternFill("solid", fgColor="FFF4D6")
     ws.freeze_panes = "C2"
     ws.auto_filter.ref = ws.dimensions
 
-    # 特性页：全部判定，便于负责人抽查；要更正就把该行复制到“待审核”页再填确认值
+    # 特性页：全部判定，便于负责人抽查；要更正就把该行复制到“待补充”页再填确认值
     ws2 = wb.create_sheet("特性")
     ws2.append(["项目 id", "项目名", "特性", "判定", "依据"])
     for d in docs:
@@ -614,8 +656,11 @@ def write_review(docs):
         ws2.column_dimensions[col].width = w
     ws2.freeze_panes = "C2"
     ws2.auto_filter.ref = ws2.dimensions
-    wb.save(REVIEW_XLSX)
-    return len(items)
+    try:
+        wb.save(REVIEW_XLSX)
+    except PermissionError:
+        print(f"注意：{REVIEW_XLSX.relative_to(ROOT)} 正在被 Excel 打开，没有更新；关掉后重新运行本脚本即可。")
+    return n_unknown, n_review
 
 
 def parse_value(field, text):
@@ -633,9 +678,13 @@ AGREE = {"同意", "ok", "OK", "√", "✓", "y", "Y"}
 
 def apply_review():
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8")) if OVERRIDES.exists() else {}
-    ws = openpyxl.load_workbook(REVIEW_XLSX)["待审核"]
+    wb = openpyxl.load_workbook(REVIEW_XLSX)
+    ws = wb["待补充"] if "待补充" in wb.sheetnames else wb["待审核"]
+    rows = list(ws.iter_rows(values_only=True))
+    col = {h: i for i, h in enumerate(rows[0])}
     n = 0
-    for pid, _, field, _, _, suggested, _, confirmed in ws.iter_rows(min_row=2, values_only=True):
+    for r in rows[1:]:
+        pid, field, suggested, confirmed = r[col["项目 id"]], r[col["字段"]], r[col["建议值"]], r[col["负责人确认值"]]
         if confirmed in (None, ""):
             continue
         if str(confirmed).strip() in AGREE:
@@ -648,18 +697,38 @@ def apply_review():
     print(f"读入 {n} 条负责人确认值")
 
 
+def accept_suggestions():
+    """把当前所有待审核项的建议值记为负责人确认，保留原依据。"""
+    overrides = json.loads(OVERRIDES.read_text(encoding="utf-8")) if OVERRIDES.exists() else {}
+    n = 0
+    for path in sorted(PROJECTS.glob("*.json")):
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        norm, _ = normalize(doc, overrides)
+        for f in FIELDS:
+            item = norm[f]
+            if item["status"] == "needs_review" and item["value"] not in ("", []):
+                overrides.setdefault(doc["id"], {})[f] = {
+                    "value": item["value"],
+                    "note": f"负责人同意采用建议值（{DECIDED_ON}）；原依据：{item['basis']}"}
+                n += 1
+    OVERRIDES.write_text(json.dumps(overrides, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"采用建议值 {n} 处")
+
+
 def main():
     if "--apply-review" in sys.argv:
         apply_review()
+    if "--accept-suggestions" in sys.argv:
+        accept_suggestions()
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8")) if OVERRIDES.exists() else {}
     docs = []
     for path in sorted(PROJECTS.glob("*.json")):
         doc = json.loads(path.read_text(encoding="utf-8"))
-        doc["normalized"] = normalize(doc, overrides)
+        doc["normalized"], doc["uncertainties"] = normalize(doc, overrides)
         path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         docs.append(doc)
-    n = write_review(docs)
-    print(f"已规范化 {len(docs)} 个项目；待审核 {n} 处，见 {REVIEW_MD.relative_to(ROOT)}")
+    n_unknown, n_review = write_review(docs)
+    print(f"已规范化 {len(docs)} 个项目；文档未说明 {n_unknown} 处，待审核 {n_review} 处，见 {REVIEW_MD.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

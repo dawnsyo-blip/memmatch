@@ -166,8 +166,8 @@
     },
     "cost": {
       "value": "free",
-      "status": "needs_review",
-      "basis": "只需免费账号（浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器；Cloudflare 云端（你自己的账号）；网关＋MCP 两种接法，Claude 官方网页和手机 App 也能用；覆盖面最广：第三方客户端走网关，Claude 官方网页和手机 App 走 MCP；只有登记过的主模型才有记忆；浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器），但云平台免费额度有限，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器；Cloudflare 云端（你自己的账号）；网关＋MCP 两种接法，Claude 官方网页和手机 App 也能用；覆盖面最广：第三方客户端走网关，Claude 官方网页和手机 App 走 MCP；只有登记过的主模型才有记忆；浏览器、GitHub 账号、Cloudflare 账号；不需要自己的服务器），但云平台免费额度有限，需确认"
     },
     "accounts_needed": {
       "value": [
@@ -210,7 +210,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -293,5 +293,12 @@
       "retrieval": "每轮自动召回相关旧记忆；可跨多个记忆空间读取；冷启动包",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

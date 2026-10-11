@@ -83,7 +83,7 @@
     },
     "compatible_clients": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "客户端原文："
     },
     "runs_on": {
@@ -117,27 +117,27 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "说明里没写；README 提到“ies | | Service API | `/v1` | API Key | Knowledge extraction, graph”，建议值 model_api_key，需确认是否必需"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ies | | Service API | `/v1` | API Key | Knowledge extraction, graph”，建议值 model_api_key，需确认是否必需"
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：知识"
     },
     "write_mode": {
       "value": [
         "on_request"
       ],
-      "status": "needs_review",
-      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
       "value": [
         "auto_decay"
       ],
-      "status": "needs_review",
-      "basis": "README：“nsion model of memory strength and time decay: - Each knowledge item is assigned an”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“nsion model of memory strength and time decay: - Each knowledge item is assigned an”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
     "human_review": {
       "value": [
@@ -148,7 +148,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -223,5 +223,22 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "compatible_clients",
+      "label": "能配合的助手",
+      "note": "客户端原文："
+    },
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“知识”，归不进固定选项"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

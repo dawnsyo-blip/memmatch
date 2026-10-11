@@ -152,7 +152,7 @@
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -190,8 +190,8 @@
       "value": [
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档；有归档：“正文（真正删除）；叙事片段 12 个月后归档；14 天无访问转冷却；被召回自动恢复活”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表：14 天无访问转冷却；被召回自动恢复活跃；30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档；有归档：“正文（真正删除）；叙事片段 12 个月后归档；14 天无访问转冷却；被召回自动恢复活”"
     },
     "human_review": {
       "value": [
@@ -202,7 +202,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -285,5 +285,17 @@
       "retrieval": "Librarian 跨事实、片段、实体档案三层，用关键词＋向量＋实体聚合检索",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

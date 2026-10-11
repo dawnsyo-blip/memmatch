@@ -184,12 +184,12 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：用户画像写入 AGENTS.md；长对话生成摘要；—；—"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：README 未描述；—"
     },
     "human_review": {
@@ -287,5 +287,17 @@
       "retrieval": "向量＋混合检索",
       "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：用户画像写入 AGENTS.md；长对话生成摘要；—；—"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：README 未描述；—"
+    }
+  ]
 }

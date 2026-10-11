@@ -296,5 +296,6 @@
       "retrieval": "记忆搜索；高热度全文注入、中热度注入摘要；Dream 场景带向量索引可被搜到",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": []
 }

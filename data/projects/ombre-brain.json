@@ -187,7 +187,7 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：AI 通过 MCP 工具自己写入（hold、grow），并打情感坐标；不需要人；可在面板钉选、主动遗忘、归档；删除只移入归档；trace 是唯一的元数据写入口；可验证的备份与恢复"
     },
     "forgetting": {
@@ -296,5 +296,12 @@
       "retrieval": "rapidfuzz＋BM25 关键词与向量融合；权重池让未解决、情绪强的记忆在对话开头浮现",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：AI 通过 MCP 工具自己写入（hold、grow），并打情感坐标；不需要人；可在面板钉选、主动遗忘、归档；删除只移入归档；trace 是唯一的元数据写入口；可验证的备份与恢复"
+    }
+  ]
 }

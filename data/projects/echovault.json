@@ -199,12 +199,12 @@
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -287,5 +287,17 @@
       "retrieval": "（站点）回看最近几天以续接新窗口",
       "dynamics_coverage": "Ⅵ 无法核实"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

@@ -147,15 +147,15 @@
       "value": [
         "on_request"
       ],
-      "status": "needs_review",
-      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
       "value": [
         "auto_decay"
       ],
-      "status": "needs_review",
-      "basis": "README：“earch: vector + FTS5 + fuzzy + temporal decay ↓ Central Intelligence API (hosted)”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“earch: vector + FTS5 + fuzzy + temporal decay ↓ Central Intelligence API (hosted)”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
     "human_review": {
       "value": [
@@ -245,5 +245,6 @@
       "status": "auto",
       "basis": "README：“ort from ChatGPT data export ci chatgpt-import conversations.json # Export/import memory bundles c”（已核对）"
     }
-  }
+  },
+  "uncertainties": []
 }

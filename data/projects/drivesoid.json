@@ -125,12 +125,12 @@
   "normalized": {
     "access": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "接入方式原文未识别：HTTP 旁路服务；HTTP 旁路服务"
     },
     "compatible_clients": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "客户端原文："
     },
     "runs_on": {
@@ -142,7 +142,7 @@
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -164,12 +164,12 @@
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：工作／状态记忆（快情绪、慢心境）；工作／状态记忆（快情绪、慢心境）"
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：你的桥接层上报对话事件；—；—"
     },
     "forgetting": {
@@ -189,7 +189,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -272,5 +272,37 @@
       "retrieval": "每轮读取当前情感状态",
       "dynamics_coverage": "Ⅴ 不适用：存的不是记忆内容"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "access",
+      "label": "接入方式",
+      "note": "文档写的是“HTTP 旁路服务”，归不进固定选项"
+    },
+    {
+      "field": "compatible_clients",
+      "label": "能配合的助手",
+      "note": "客户端原文："
+    },
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“工作／状态记忆（快情绪、慢心境）”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：你的桥接层上报对话事件；—；—"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

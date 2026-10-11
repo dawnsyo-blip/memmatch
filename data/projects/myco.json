@@ -110,7 +110,7 @@
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -120,12 +120,12 @@
     },
     "cost": {
       "value": "",
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "费用原文未识别：自己的电脑；偏编程场景"
     },
     "accounts_needed": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "账号原文未识别：（空）"
     },
     "memory_subject": {
@@ -139,22 +139,22 @@
       "value": [
         "on_request"
       ],
-      "status": "needs_review",
-      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -229,5 +229,37 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "cost",
+      "label": "费用",
+      "note": "文档写的是“自己的电脑；偏编程场景”，归不进固定选项"
+    },
+    {
+      "field": "accounts_needed",
+      "label": "需要的账号",
+      "note": "说明文档没有写"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

@@ -175,8 +175,8 @@
       "value": [
         "claude_subscription"
       ],
-      "status": "needs_review",
-      "basis": "账号原文：电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）；电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）（含“可选”，需确认是否必需）"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）；电脑或服务器；Node.js；Postgres＋pgvector；守护进程需 Claude 订阅令牌（可选）（含“可选”，需确认是否必需）"
     },
     "memory_subject": {
       "value": [
@@ -202,12 +202,12 @@
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -292,5 +292,17 @@
       "retrieval": "向量＋BM25／三元组词法＋时间衰减＋重要度混合检索；可选重排；图谱 1–3 跳游走",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

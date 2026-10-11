@@ -152,8 +152,8 @@
         "auto_decay",
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“s), or demotes to a cold tier, so your full histo”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“cross-encoder, and scores with salience-decay (`0.6·relevance + 0.2·recency + 0.2·imp”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“s), or demotes to a cold tier, so your full histo”"
     },
     "human_review": {
       "value": [
@@ -166,8 +166,8 @@
       "value": [
         "sqlite"
       ],
-      "status": "needs_review",
-      "basis": "没写导出功能，但数据在单个 SQLite 文件里：“emory(root=\"./data\") # one SQLite file per namespace, stored un”，建议值 sqlite"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但数据在单个 SQLite 文件里：“emory(root=\"./data\") # one SQLite file per namespace, stored un”，建议值 sqlite"
     },
     "data_passes_through": {
       "value": [
@@ -241,5 +241,6 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": []
 }

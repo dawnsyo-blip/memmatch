@@ -130,8 +130,8 @@
       "value": [
         "model_api_key"
       ],
-      "status": "needs_review",
-      "basis": "说明里没写；README 提到“eck in three seconds, with no API key Measured 2026-08-25 against”，建议值 model_api_key，需确认是否必需"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“eck in three seconds, with no API key Measured 2026-08-25 against”，建议值 model_api_key，需确认是否必需"
     },
     "memory_subject": {
       "value": [
@@ -151,8 +151,8 @@
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“t once and the old value stays retired; erase a person and prove it; show an auditor”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“t once and the old value stays retired; erase a person and prove it; show an auditor”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -243,5 +243,6 @@
       "status": "auto",
       "basis": "README：“b.io/inspeximus/migrate-from-mem0.html\">Migrate from mem0</a> · <a href=\"https://dancenitr”（已核对）"
     }
-  }
+  },
+  "uncertainties": []
 }

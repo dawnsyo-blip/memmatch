@@ -149,7 +149,7 @@
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
@@ -164,8 +164,8 @@
       "value": [
         "markdown"
       ],
-      "status": "needs_review",
-      "basis": "没写导出功能，但记忆本身存成 Markdown 文件，可以直接拷走：“runs on your machine, in plain markdown files you own. The package imp”，建议值 markdown"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：没写导出功能，但记忆本身存成 Markdown 文件，可以直接拷走：“runs on your machine, in plain markdown files you own. The package imp”，建议值 markdown"
     },
     "data_passes_through": {
       "value": [
@@ -239,5 +239,12 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    }
+  ]
 }

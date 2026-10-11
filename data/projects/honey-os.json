@@ -186,12 +186,12 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：身份、关系、用户三类记忆写入文件；关系记忆需双方确认；确认关系约定时；关系记忆需双方确认；高风险操作先确认"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：README 未描述；—"
     },
     "human_review": {
@@ -203,7 +203,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -286,5 +286,22 @@
       "retrieval": "历史搜索；短期连续记忆；换窗口、换入口续接",
       "dynamics_coverage": "Ⅱ 形成＋检索：无记忆演化"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：身份、关系、用户三类记忆写入文件；关系记忆需双方确认；确认关系约定时；关系记忆需双方确认；高风险操作先确认"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：README 未描述；—"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

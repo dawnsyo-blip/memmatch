@@ -153,7 +153,7 @@
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -182,15 +182,15 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：换窗时把旧窗口总结存入浏览器；整理时；记忆回顾页人工整理"
     },
     "forgetting": {
       "value": [
         "none"
       ],
-      "status": "needs_review",
-      "basis": "原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
     },
     "human_review": {
       "value": [
@@ -201,7 +201,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -285,5 +285,22 @@
       "retrieval": "自身存储未写明召回；接 kimi-core 后每轮注入分层上下文",
       "dynamics_coverage": "Ⅲ 形成＋演化：检索未写明或依赖外部"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：换窗时把旧窗口总结存入浏览器；整理时；记忆回顾页人工整理"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

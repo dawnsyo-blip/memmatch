@@ -152,7 +152,7 @@
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -162,8 +162,8 @@
     },
     "cost": {
       "value": "free",
-      "status": "needs_review",
-      "basis": "只需免费账号（已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台；AstrBot 所在的电脑或服务器；AstrBot 插件；只服务 AstrBot；与自主学习插件配合时分工明确；正在测试 2.7.0 版；已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台），但云平台免费额度有限，需确认"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台；AstrBot 所在的电脑或服务器；AstrBot 插件；只服务 AstrBot；与自主学习插件配合时分工明确；正在测试 2.7.0 版；已运行的 AstrBot（4.24.2 以上才有管理页）及其接入的 QQ、微信、Telegram 等平台），但云平台免费额度有限，需确认"
     },
     "accounts_needed": {
       "value": [
@@ -203,7 +203,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -286,5 +286,17 @@
       "retrieval": "文档与图谱均支持关键词＋向量检索，融合排序后按会话、人格、生命周期筛选",
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

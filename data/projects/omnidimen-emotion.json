@@ -125,12 +125,12 @@
   "normalized": {
     "access": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "接入方式原文未识别：模型权重；模型权重"
     },
     "compatible_clients": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "客户端原文："
     },
     "runs_on": {
@@ -143,7 +143,7 @@
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -165,27 +165,27 @@
     },
     "memory_subject": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "记忆对象原文未识别：情绪识别与生成能力；情绪识别与生成能力"
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：训练期通过微调内化；—；—"
     },
     "forgetting": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表：不适用；—"
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -268,5 +268,47 @@
       "retrieval": "—",
       "dynamics_coverage": "Ⅴ 不适用：存的不是记忆内容"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "access",
+      "label": "接入方式",
+      "note": "文档写的是“模型权重”，归不进固定选项"
+    },
+    {
+      "field": "compatible_clients",
+      "label": "能配合的助手",
+      "note": "客户端原文："
+    },
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“情绪识别与生成能力”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：训练期通过微调内化；—；—"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "原表：不适用；—"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }

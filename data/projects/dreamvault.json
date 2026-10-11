@@ -144,12 +144,12 @@
     },
     "runs_on": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "运行位置原文未识别：嵌入你自己的记忆系统所在机器；嵌入你自己的记忆系统所在机器"
     },
     "os": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "README 和原表都没提到系统"
     },
     "difficulty": {
@@ -178,29 +178,29 @@
     },
     "write_mode": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "原表写入方式未识别：不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截；写入闸口检查事实锚点，不通过即隔离；只有 AI 本人能认领"
     },
     "forgetting": {
       "value": [
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "原表：不适用；梦库永久封存，不回流检索；有归档：“梦库永久封存，不回流检索；不适用；移入物理隔离的梦库”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表：不适用；梦库永久封存，不回流检索；有归档：“梦库永久封存，不回流检索；不适用；移入物理隔离的梦库”"
     },
     "human_review": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "运行位置未识别"
     },
     "license_category": {
@@ -276,5 +276,37 @@
       "retrieval": "梦库刻意不提供搜索，永不回流检索；只有专门窗口可读",
       "dynamics_coverage": "Ⅳ 只做演化：记忆治理组件"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "runs_on",
+      "label": "运行位置",
+      "note": "文档写的是“嵌入你自己的记忆系统所在机器”，归不进固定选项"
+    },
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "原表写入方式未识别：不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截；写入闸口检查事实锚点，不通过即隔离；只有 AI 本人能认领"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    },
+    {
+      "field": "data_passes_through",
+      "label": "数据经过谁的服务器",
+      "note": "运行位置未识别"
+    }
+  ]
 }

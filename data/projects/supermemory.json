@@ -133,7 +133,7 @@
     },
     "cost": {
       "value": "",
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "费用原文未识别：Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署"
     },
     "accounts_needed": {
@@ -161,8 +161,8 @@
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“t does | |---|---| | `memory` | Save or forget information. Your AI calls this automat”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“t does | |---|---| | `memory` | Save or forget information. Your AI calls this automat”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -174,7 +174,7 @@
     },
     "export": {
       "value": [],
-      "status": "needs_review",
+      "status": "unknown",
       "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
@@ -249,5 +249,17 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
-  }
+  },
+  "uncertainties": [
+    {
+      "field": "cost",
+      "label": "费用",
+      "note": "文档写的是“Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署”，归不进固定选项"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ]
 }
