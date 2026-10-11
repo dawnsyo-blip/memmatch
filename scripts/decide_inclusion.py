@@ -48,6 +48,12 @@ def decide(doc):
 
     # 风险提示（只提示不排除）
     flags += [f for f in h.get("flags", []) if f != "无法自动检查"]
+    # 仓库许可证文件没体现、但原表或 README 记录了使用限制的（如含非商业约束的子模块），照样提示
+    old = n["license_category"]["value"]
+    if old == "noncommercial" and "许可证禁止商用" not in flags:
+        flags.append("许可证禁止商用（据原表／README，部分内容）")
+    if old == "source_available" and not any("限制使用" in f for f in flags):
+        flags.append("许可证限制使用（据原表／README）")
     data = n["data_passes_through"]["value"] or []
     if "third_party" in data:
         if data == ["third_party"] or "默认经第三方" in doc["info"].get("notes", {}).get("value", ""):

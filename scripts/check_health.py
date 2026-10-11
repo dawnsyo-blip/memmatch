@@ -10,6 +10,7 @@
   python -X utf8 scripts/check_health.py               检查全部项目
   python -X utf8 scripts/check_health.py --resume      只检查还没检查过的、以及上次因网络失败的项目
   python -X utf8 scripts/check_health.py --only a,b    只检查指定项目
+  python -X utf8 scripts/check_health.py --refresh-license  只用已保存的结果重算许可证标签与风险提示
 网络故障记为 status=error（需要重试），只有确认仓库不存在／不公开才记为 unreachable。
 """
 import json
@@ -31,9 +32,10 @@ CACHE = ROOT / "cache/repos"
 SETTINGS = json.loads((ROOT / "data/settings.json").read_text(encoding="utf-8"))
 REPORT = ROOT / "docs/health-report.md"
 TODAY = date.today()
-BOT = re.compile(r"\[bot\]|bot@|github-actions|dependabot|renovate|noreply@github\.com$", re.I)
+# 只按作者邮箱判断机器人账号；不能用 “bot@” 这类宽泛写法，会误伤名字里带 bot 的真人或 agent 账号
+BOT = re.compile(r"\[bot\]|^(?:noreply@github\.com|github-actions@github\.com|actions@github\.com)$|dependabot|renovate", re.I)
 # 检查逻辑有改动时加 1；--resume 会重跑版本更低的结果
-CHECKER_VERSION = 2
+CHECKER_VERSION = 3
 # 记忆服务只是大仓库中一部分的项目：统计数字是整个仓库的
 MONOREPO_NOTE = {"servers": "统计的是整个 modelcontextprotocol/servers 合集仓库，记忆服务只是其中一个子目录"}
 LICENSE_FILE = re.compile(r"(?i)^(licen[cs]e|copying|unlicense)([-._ ].*)?$")
@@ -75,9 +77,29 @@ def license_label(text):
     label = next((name for name, pat in LICENSE_SIGNS if re.search(pat, head)), None)
     if label is None:
         label = "其它（见仓库）"
-    if re.search(r"(?i)non-?commercial", text) and label not in ("PolyForm-NC", "CC BY-NC"):
-        label += "（含禁止商用条款）"
+    if re.search(r"(?i)non-?commercial", text) and label not in STANDARD_NO_NC_CHECK + ("PolyForm-NC", "CC BY-NC"):
+        label += NC_SUFFIX
     return label
+
+
+# 标准许可证正文本身就含 noncommercial 一类字样（如 GPL 的“偶尔以非商业方式分发”），不据此判禁止商用
+STANDARD_NO_NC_CHECK = ("AGPL-3.0", "GPL-3.0", "LGPL", "MPL-2.0", "BUSL-1.1")
+NC_SUFFIX = "（含禁止商用条款）"
+
+
+def refresh_license(h):
+    """用已保存的识别结果重新计算标签、类别和风险提示，不必重新克隆。"""
+    if h.get("status") != "ok" or not h.get("license_label") or h["license_label"] == "无许可证文件":
+        return h
+    parts = []
+    for part in h["license_label"].split(" ＋ "):
+        base = part.removesuffix(NC_SUFFIX)
+        parts.append(base if base in STANDARD_NO_NC_CHECK else part)
+    h["license_label"] = " ＋ ".join(dict.fromkeys(parts))
+    order = ["noncommercial", "source_available", "other", "copyleft", "permissive"]
+    h["license_category"] = min((license_category(x) for x in parts), key=order.index)
+    h["flags"] = flags(h)
+    return h
 
 
 def license_category(label):
@@ -168,7 +190,7 @@ def check_repo(repo_url, pid):
     out["days_since_commit"] = (TODAY - datetime.fromisoformat(last).astimezone(timezone.utc).date()).days if last else None
     since = (TODAY - timedelta(days=365)).isoformat()
     log = run(["git", "log", f"--since={since}", "--format=%aE\t%aN"], dest).stdout.split("\n")
-    people = {line.split("\t")[0].lower() for line in log if line.strip() and not BOT.search(line)}
+    people = {line.split("\t")[0].lower() for line in log if line.strip() and not BOT.search(line.split("\t")[0])}
     out["commits_1y"] = sum(1 for line in log if line.strip())
     out["contributors_1y"] = len(people)
 
@@ -185,7 +207,7 @@ def check_repo(repo_url, pid):
     out["license_text_head"] = heads
     out["license_label"] = " ＋ ".join(dict.fromkeys(labels)) if labels else "无许可证文件"
     cats = [license_category(x) for x in labels]
-    order = ["noncommercial", "source_available", "copyleft", "other", "permissive"]
+    order = ["noncommercial", "source_available", "other", "copyleft", "permissive"]
     out["license_category"] = min(cats, key=order.index) if cats else "no_license"
     rmtree(dest)  # 只为读提交记录，用完即删
     if pid in MONOREPO_NOTE:
@@ -215,6 +237,8 @@ def flags(h):
         f.append("许可证禁止商用")
     if h.get("license_category") == "source_available":
         f.append("许可证限制使用（源码可见）")
+    if h.get("license_category") == "other":
+        f.append("许可证非标准，需看原文")
     return f
 
 
@@ -274,6 +298,17 @@ def main():
     if "--only" in sys.argv:
         only = set(sys.argv[sys.argv.index("--only") + 1].split(","))
     resume = "--resume" in sys.argv
+    if "--refresh-license" in sys.argv:
+        docs = []
+        for p in sorted(PROJECTS.glob("*.json")):
+            d = json.loads(p.read_text(encoding="utf-8"))
+            if "health" in d:
+                d["health"] = refresh_license(d["health"])
+                p.write_text(json.dumps(d, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+                docs.append(d)
+        write_report(docs)
+        print(f"已按新规则重算 {len(docs)} 个项目的许可证结果")
+        return
     CACHE.mkdir(parents=True, exist_ok=True)
     paths = sorted(PROJECTS.glob("*.json"))
     docs = {p: json.loads(p.read_text(encoding="utf-8")) for p in paths}
