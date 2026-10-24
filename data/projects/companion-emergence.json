@@ -379,6 +379,49 @@
       "status": "auto",
       "basis": "config_file：README：“aults. Set the `KINDLED_HOME` environment variable to override the root on any p”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅 Claude）”"
+    },
     "paper_taxonomy": {
       "form": "词元级・平面（赫布联想网络）",
       "function": "AI 身份＋情绪／身体状态",

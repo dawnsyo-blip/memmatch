@@ -346,6 +346,52 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“简体中文”）；zh_retrieval：README：“\"previously\", \"last time\") - CJK-aware thresholds (Chinese: 6”"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“ed 6-category extraction with L0/L1/L2 layered storage and two-stage dedup |”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank",
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“full-text search, fused with cross-encoder reranking | | **Context Injec”；threshold：README：“anchor: 500 chars) | | **Hard Min Score** | Removes irrelevant result”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：README：“**AI Memory Assistant** — it automatically captures what matters, lets noise na”；chat_agent：README：“Need semantic recall? → Use `memory_store` or let auto-capture do it -”"
     }
   },
   "uncertainties": [],

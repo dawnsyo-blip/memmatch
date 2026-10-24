@@ -383,6 +383,49 @@
       "status": "auto",
       "basis": "settings_ui：README：“are available from the WebUI Settings tab and write compressed dumps in”；config_file：README：“ow). 2. **[OPTIONAL]** Copy `.env.example` to `.env` to customi”；plugin_api：README：“l game/virtual worlds through pluggable connectors, while identity, m”"
     },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：写入方式含自动记或先出候选（推断）"
+    },
     "paper_taxonomy": {
       "form": "词元级・多模块",
       "function": "AI 身份＋内部状态",

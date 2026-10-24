@@ -339,6 +339,49 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“Roaming/Claude/claude_desktop_config.json`): ```json { \"mcpServers\":”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“laude 桌面版可双击安装；用户事实＋工作记忆；MCP；Claude Code 钩子；”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "threshold：README：“value as current (it warns or abstains), but it still does not open”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：README：“in 1,500 characters at most. No model call *(v2.7+)* - **📌 Open items in”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

@@ -372,6 +372,49 @@
       "status": "auto",
       "basis": "plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 58%"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“桌面伴侣：三层记忆＋激素情绪＋Live2D＋可操作电脑；用”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“应用自带记忆；能操作电脑、接 MCP、建子 Agent；可整体打包导出带走；桌面伴侣：三层记忆”"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（三层）",
       "function": "用户事实＋情绪状态",

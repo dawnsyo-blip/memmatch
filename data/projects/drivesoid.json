@@ -368,6 +368,49 @@
       "status": "auto",
       "basis": "config_file：README：“onfig.example.json` → `drives.config.json` and fill in: | Field | Desc”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“中文说明”）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
     "paper_taxonomy": {
       "form": "数值状态（16 个心理维度），不属论文三种形态",
       "function": "工作／状态记忆（快情绪、慢心境）",

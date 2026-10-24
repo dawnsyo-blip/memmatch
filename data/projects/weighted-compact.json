@@ -336,6 +336,49 @@
       ],
       "status": "auto",
       "basis": "plugin_api：README：“redictor you plug in (see the pluggable table). A vendor's one-model-”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：README：“strate plus markdown render — no LLM in the loop. The Ollama models (”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

@@ -338,6 +338,50 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“and [extras/pgvector_backend/.env.example](extras/pgvector_back”"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“简体中文”）；zh_retrieval：README：“odenames, quoted phrases, and CJK terms. It prevents a weak vec”"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“相似度 替事实判断背锅，它没那个脑子，别给它升职。 ## Three-Tier Recall Cascade The production recal”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“nchronous Add/Search API, JEV reranking bridge, budget ledger, dep”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：README：“ou wire and schedule them**. `add_memory(...)` is not a background dae”"
     }
   },
   "uncertainties": [

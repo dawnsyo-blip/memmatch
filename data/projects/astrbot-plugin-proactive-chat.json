@@ -336,6 +336,49 @@
       ],
       "status": "auto",
       "basis": "settings_ui：说明：“文和当下情绪主动开口，有免打扰时段和网页控制台；会话状态与情绪；AstrBot 插件；”；config_file：README：“一条 `/sid` 的指令（如果你修改了 AstrBot 的配置文件 → 平台配置 → 唤醒词，请把 `/` 改为你自定义的唤醒”；plugin_api：README：“# 功能装配：默认功能与可插拔扩展点 │ │ ├─ context/”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 56%"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   },
   "uncertainties": [

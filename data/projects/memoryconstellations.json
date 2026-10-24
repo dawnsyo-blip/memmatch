@@ -384,6 +384,49 @@
       "status": "auto",
       "basis": "settings_ui：README：“ividually via the companion's settings UI or the `user_settings` databa”；config_file：README：“Edit these three files: nano .env # API keys,”"
     },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "threshold：README：“tes. Results below a combined score floor (0.005) are silently dropped”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：写入方式含自动记或先出候选（推断）"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（事实→主题星座→叙事片段）",
       "function": "用户事实（人物理解）",

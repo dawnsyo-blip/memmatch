@@ -341,6 +341,49 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“Support/Claude/claude_desktop_config.json`: ```json { \"mcpServers\":”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "budget：README：“l` / `json` / `plain`) with a token budget for system-prompt injection.”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：README：“lama; rule-based default) | ❌ LLM-free read/write | ✅ Built-in | ✅ B”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [],

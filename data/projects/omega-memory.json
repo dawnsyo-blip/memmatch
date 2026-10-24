@@ -345,6 +345,49 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“session hooks into `~/.claude/settings.json` 5. Add an OMEGA block to `~/”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“mall-en-v1.5 (~130 MB), and a reranker (~90 MB) to `~/.cache/omega”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：README：“bmit | all | `auto_capture` | Auto-capture lessons/decisions | | PostTo”"
     }
   },
   "uncertainties": [

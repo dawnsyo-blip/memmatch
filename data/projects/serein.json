@@ -345,6 +345,51 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 59%"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank",
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“旧记忆。 ![自动召回过程：当前消息先形成有界候选，候选经重排准入，再检查状态与冷却；网关直接带入，Hook 则由宿主确认”；threshold：README：“一步。** 候选扩展与最终准入门槛可在“设置 → 配置 → 召回门槛”分别调整，保存后下一轮生效，不用重建向量。 模型也可以主”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话留档可核对；带网页”；chat_agent：说明：“可自行部署的个人记忆服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话”"
     }
   },
   "uncertainties": [],

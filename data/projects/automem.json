@@ -341,6 +341,49 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“tor database configuration - [Environment variables](docs/ENVIRONMENT_VARIABLES.m”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“he `RECALL_RECENCY_BIAS=auto` re-rank helps temporal-intent queries”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：说明：“图＋向量的记忆服务，召回时不调用大模型；本地 MCP 接桌面客户端，远程 MC”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

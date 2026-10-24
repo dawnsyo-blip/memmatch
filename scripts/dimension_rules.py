@@ -38,7 +38,22 @@ ENUMS = {
         "plain_data": "记忆是可以直接编辑的普通文件", "plugin_api": "留了插件或扩展接口",
         "small_code": "代码小巧（单文件、零依赖），方便自己改", **NM},
 }
+# 2026-10-24 第二批：问卷 v2 用到、原来数据里没有的 7 项
+ENUMS.update({
+    "chinese_support": {"zh_docs": "有中文说明文档", "zh_retrieval": "中文检索做过优化（分词、中文向量模型等）", **NM},
+    "memory_layers": {"layered": "分层记忆（短期／长期、碎片／事件／核心等）", "flat": "单层，没有分层", **NM},
+    "retrieval_postprocess": {"rerank": "召回后重排", "dedup": "去重、避免反复浮现", "budget": "按 token 预算裁剪",
+                              "threshold": "相关度不够就不注入", **NM},
+    "recall_uses_llm": {"no_llm": "召回时不调用大模型（更快更省）", "llm": "召回时会调用大模型（重排、改写或让 AI 自己翻找）", **NM},
+    "sensitive_suppression": {"yes": "能压住不该再提的记忆（用户拒绝过、标记回避或未解决的）", **NM},
+    "write_receipt": {"yes": "写入后能明确告诉你记没记上（回执、返回编号、可回读）", **NM},
+    "memory_writer": {"chat_agent": "聊天的 AI 自己调用工具记", "background": "后台的模型或规则自动整理",
+                      "user": "用户自己手动记", **NM},
+})
 LABELS = {
+    "chinese_support": "中文支持", "memory_layers": "记忆是否分层", "retrieval_postprocess": "检索后处理",
+    "recall_uses_llm": "召回时是否调用大模型", "sensitive_suppression": "敏感记忆抑制", "write_receipt": "写入回执",
+    "memory_writer": "谁来记",
     "ranking_signals": "排序时考虑的因素", "scoring_stages": "在哪一步打分", "multi_factor": "多维还是单一打分",
     "emotion_handling": "情绪怎么处理", "project_role": "项目定位", "lifecycle": "覆盖的记忆环节",
     "lifecycle_complete": "记忆流程是否完整", "pairing": "能否和其它项目搭配", "customization": "便于自己改的地方",
@@ -116,6 +131,61 @@ CUSTOM_PATS = {
                    r"plugin (?:system|API|architecture|hooks?|engine|hub)|extension (?:API|points?)|pluggable|插件系统|插件接口|可插拔"),
     "small_code": (r"单文件|零依赖|几百行|只用 Python 标准库|一个脚本",
                    r"single[- ]file|zero[- ]dependenc|no (?:external )?dependencies|~?\d{3} lines|单文件|零依赖|只用 Python 标准库"),
+}
+
+ZH_RETRIEVAL = (r"jieba|中文分词|分词|中文检索|中文向量|bge-m3|bge-zh|中英双语|中文优化|CJK",
+                r"\bjieba\b|\bCJK\b|Chinese (?:tokeni[sz]|segmentation|search|retrieval|embedding)|bge-m3|bge-(?:large|base|small)-zh|"
+                r"text2vec|中文分词|中英双语|双语检索")
+ZH_DOCS_LINK = r"README[._-]?(?:zh|cn|ZH|CN)|简体中文|中文版|中文说明|\[中文\]|中文 \|"
+LAYER_PATS = (r"(?:两|二|三|四|五|六|多)层(?:记忆|存储|滚动记忆|摘要|衰减|持久记忆)|分层(?:记忆|存储|摘要|递归摘要)|"
+              r"短期[^。；]{0,10}长期|长期[^。；]{0,10}短期|工作记忆|热层|冷层|碎片[^。；]{0,6}事件[^。；]{0,6}核心|日历层级|记忆分层",
+              r"(?:two|three|four|five|six|multi)[- ](?:tier|layer|level)(?:ed)? (?:memory|memories|storage|store|recall|cascade|retrieval)|"
+              r"memor(?:y|ies) (?:flow through|move through|live in) (?:two|three|four|\d) (?:tiers|layers)|"
+              r"hierarchical (?:memory|summar|consolidation)|short-term[^.\n]{0,40}long-term|long-term[^.\n]{0,40}short-term|"
+              r"working memory[^.\n]{0,40}(?:long-term|episodic|archiv|overf)|episodic[^.\n]{0,30}semantic|"
+              r"hot[^.\n]{0,6}warm[^.\n]{0,6}cold|L0/L1/L2 layered|abstracts \(L0\)|分层记忆|三层记忆")
+FLAT_PATS = (r"单层|不分层", r"single[- ](?:layer|tier)|flat (?:memory|store|list)|no tiers")
+POST_PATS = {
+    "rerank": (r"重排|重新排序|精排",
+               r"\brerank|re-rank|cross-encoder|reranker|重排"),
+    # 只算检索、注入时的去重；写入时去重不算
+    "dedup": (r"反复浮现|召回[^。；]{0,10}去重|去重[^。；]{0,10}(?:召回|注入|结果)|注入去重",
+              r"(?:recall|retriev|search|result|inject)\w*[^.\n]{0,30}(?:dedup|de-dup|deduplicat)|"
+              r"(?:dedup|de-dup|deduplicat)\w*[^.\n]{0,30}(?:results|recall|retriev|inject)|recall ledger|"
+              r"cooldown[^.\n]{0,30}(?:recall|memor|resurfac)|avoid (?:repeating|resurfacing)|反复浮现"),
+    "budget": (r"token 预算|按预算|预算内|篇幅上限",
+               r"token[- ]budget|budget(?:ed)? (?:of|in) tokens|within (?:a|the) (?:token )?budget|fits? (?:in|within) (?:the )?(?:context|budget)|"
+               r"max(?:imum)?[_ ]tokens? (?:for|of) (?:recall|context|memor)|token 预算"),
+    "threshold": (r"(?:相关度|相似度|召回)[^。；]{0,8}(?:门槛|阈值)|准入门槛|门槛制召回|相关性过了门槛|宁可不答|宁缺毋滥|最低分",
+                  r"(?:relevance|similarity|score) (?:threshold|floor|cutoff|gate)|min(?:imum)?[_ ]score|below (?:a|the) (?:threshold|cutoff)|"
+                  r"calibrated floor|abstain|says? (?:it )?(?:doesn't|does not|don't) know|相关性过了门槛|召回门槛"),
+}
+NO_LLM_PATS = (r"不调用大模型|不调大模型|无需大模型|不用大模型|不依赖大模型|零 LLM|无需 LLM|不调用 LLM",
+               r"no LLM (?:call|in|at|during|needed|required)|without (?:an? |calling (?:an? )?)?LLM|zero[- ]LLM|LLM[- ]free|"
+               r"no generative[- ]LLM|no model calls?|不调用大模型|不调用 LLM")
+LLM_RECALL_PATS = (r"大模型重排|LLM 重排|让 AI 自己(?:查|翻)|工具自己查|多轮检索|查询改写|智能体检索",
+                   r"LLM[- ](?:rerank|re-rank|judge(?:s|d)? relevance|based retrieval|powered retrieval|query rewrit)|"
+                   r"agentic (?:retrieval|recall|search|timeline fill)|query (?:rewriting|expansion) (?:with|via|using) (?:an? )?LLM|"
+                   r"multi-round (?:retrieval|recall)|让 AI 用工具自己查")
+SUPPRESS_PATS = (r"不再提|别再提|不想再提|拒绝过的|被拒绝的记忆|被你拒绝的记忆|禁止召回|不会被重新写回|抑制召回",
+                 r"(?:rejected|dismissed) (?:memories|facts|items) (?:stay|remain|are never|never)|never (?:resurface|bring (?:it |them )?up)|"
+                 r"do(?:n't| not) bring (?:it |this |them )?up|suppress(?:ed|ion)? (?:list|memor|recall|topics)|forbidden recall|"
+                 r"blocked (?:topics|memories)|do-not-recall|不再提|禁止召回")
+RECEIPT_PATS = (r"写入回执|写入确认|已保存确认|返回记忆编号",
+                r"write confirmation|confirms? (?:the )?(?:memory|write|save) (?:was )?(?:saved|stored|persisted|succeeded)|"
+                r"returns? (?:the )?(?:new )?memory[_ ]?id|read[- ]back (?:check|verification|after (?:the )?write)|"
+                r"verif(?:y|ies) (?:that )?(?:the )?(?:write|memory) (?:landed|persisted|was saved)|写入回执|写入确认")
+WRITER_PATS = {
+    "background": (r"后台|异步|子 agent|子模型|小模型|自动摘要任务|钩子自动|自动采集|自动捕获",
+                   r"background (?:extraction|worker|process|job|pass|summari|consolidation)|asynchronous(?:ly)? (?:extract|process|summari)|"
+                   r"cheaper model|small(?:er)? model (?:extracts|summari)|auto-captur|automatically captur|capture hook|"
+                   r"hooks? captures?|extraction (?:model|pipeline|worker)"),
+    "chat_agent": (r"主窗口[^。；]{0,10}(?:写|调用)|AI 主动写|模型自己决定(?:何时|什么时候)记|调用 write",
+                   r"(?:the )?(?:agent|model|assistant|Claude) (?:decides|chooses) (?:when|what) to (?:remember|save|store)|"
+                   r"calls? (?:the )?(?:save|remember|store|write)_?\w* tool|memory_(?:add|save|store|write)\b|remember\(|save_memory|add_memory"),
+    "user": (r"亲手撰写|手动添加|手写|你亲手|由你决定记什么|人工录入",
+             r"(?:you|users?) (?:write|curate|add) (?:the |your )?memor(?:y|ies) (?:yourself|by hand|manually)|manually add (?:a )?memor|"
+             r"you decide what(?:'s| is)? (?:important|to remember)|hand-written"),
 }
 
 # 项目定位：按收录类别给默认值；“可接入已有助手”里不是完整记忆系统的，在这里逐个指定
@@ -244,6 +314,72 @@ REJECT = {
     ("0compactmem", "pairing", "designed_to_pair"): "“旁路服务”指挂在 Claude Code 旁运行",
     ("engram-rs", "ranking_signals", "keyword"): "在描述别的方案",
     ("iai-personal-memory-engine", "ranking_signals", "semantic"): "说的是它不是向量库的包装",
+    # 第二批字段
+    ("atmem", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("inspeximus", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("lightmem", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("memoryos", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("midas", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("mimir", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("tstockham96-engram", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("python-sdk", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("goodmemory", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
+    ("everos", "memory_writer", "background"): "在描述别的方案",
+    ("eros-engine", "memory_writer", "background"): "后台生成的是回复",
+    ("ocean", "memory_writer", "background"): "泛指后台任务",
+    ("mem9", "memory_writer", "background"): "泛指后台任务",
+    ("moread", "memory_writer", "background"): "泛指后台任务",
+    ("memory-mcp-1file", "memory_writer", "background"): "是改进提议，还没做",
+    ("agentic-recall", "memory_writer", "user"): "说的是手写的规则",
+    ("claude-handoff", "memory_writer", "user"): "说的是手写的段落",
+    ("llmcompressor", "memory_writer", "user"): "说的是手写规则对比",
+    ("tokenmizer", "memory_writer", "user"): "说的是手写的测试会话",
+    ("fbisiri-engram", "retrieval_postprocess", "dedup"): "评测用例的名称",
+    ("hipocampo", "retrieval_postprocess", "dedup"): "函数列表",
+    ("lmc-5", "retrieval_postprocess", "dedup"): "说的是去重是另外的后台任务",
+    ("memkeeper", "retrieval_postprocess", "dedup"): "功能列表，没说是检索时",
+    ("memos", "retrieval_postprocess", "dedup"): "插件功能列表，没说是检索时",
+    ("lmc-5", "retrieval_postprocess", "threshold"): "说的是融合后不设分数下限",
+    ("mem0-mcp-selfhosted", "retrieval_postprocess", "threshold"): "说的是建图时的节点匹配",
+    ("memora", "retrieval_postprocess", "threshold"): "说的是聚类参数",
+    ("connectome-host", "retrieval_postprocess", "budget"): "说的是对话流的预算",
+    ("facthouse", "retrieval_postprocess", "budget"): "说的是命令行的预算",
+    ("genome", "retrieval_postprocess", "budget"): "评测条件",
+    ("longhand", "retrieval_postprocess", "budget"): "说的是费用对比",
+    ("memoryconstellations", "retrieval_postprocess", "budget"): "说的是模型思考 token",
+    ("mnemo-cortex", "retrieval_postprocess", "budget"): "说的是压缩时分块",
+    ("mnemostack", "retrieval_postprocess", "budget"): "说的是模型思考 token",
+    ("vecthare", "retrieval_postprocess", "budget"): "在描述问题",
+    ("pawwake", "retrieval_postprocess", "rerank"): "“重排”指重新编号",
+    ("context-memory", "memory_layers", "layered"): "两级指检索步骤，不是记忆分层",
+    ("lightmem", "memory_layers", "layered"): "是另一篇论文的新闻",
+    ("basic-memory", "memory_layers", "flat"): "说的是收费方案没有档位",
+    ("connectome-host", "sensitive_suppression", "yes"): "说的是配置过滤列表",
+    ("swap-tutorial", "sensitive_suppression", "yes"): "是作者自家系统的部件，不在教程范围",
+    ("birkin-mnemosyne", "chinese_support", "zh_retrieval"): "说的是没测过中文",
+    ("celiums-memory", "chinese_support", "zh_retrieval"): "只是可选的模型之一",
+    ("forge-reload", "chinese_support", "zh_retrieval"): "说的是 token 估算",
+    ("goodmemory", "chinese_support", "zh_retrieval"): "只是可选的模型之一",
+    ("lore", "chinese_support", "zh_retrieval"): "说的是 token 估算",
+    ("memora", "chinese_support", "zh_retrieval"): "只是可选的模型之一",
+    ("memory-mcp-1file", "chinese_support", "zh_retrieval"): "只是可选的模型之一",
+    ("memoryos", "chinese_support", "zh_retrieval"): "只是新增支持的模型之一",
+    ("weighted-compact", "chinese_support", "zh_retrieval"): "只是可选的模型之一",
+    ("yuralume-core", "chinese_support", "zh_retrieval"): "说的是 token 估算",
+    ("alaya", "recall_uses_llm", "no_llm"): "说的是整合时不用大模型",
+    ("extension-summaryception", "recall_uses_llm", "no_llm"): "说的是摘要晋升",
+    ("gbrain", "recall_uses_llm", "no_llm"): "说的是自动建链接",
+    ("memora", "recall_uses_llm", "no_llm"): "说的是生成摘要",
+    ("memoryconstellations", "recall_uses_llm", "no_llm"): "说的是后台轻量模式",
+    ("midas", "recall_uses_llm", "no_llm"): "说的是写入时",
+    ("mindmap-mcp-server", "recall_uses_llm", "no_llm"): "说的是生成建议",
+    ("mnemo-cortex", "recall_uses_llm", "no_llm"): "说的是写入分层",
+    ("mnemos", "recall_uses_llm", "no_llm"): "说的是对比脚本",
+    ("reme", "recall_uses_llm", "no_llm"): "说的是主动话题",
+    ("synapse", "recall_uses_llm", "no_llm"): "说的是建索引",
+    ("telemem", "recall_uses_llm", "no_llm"): "说的是存原文",
+    ("text2mem", "recall_uses_llm", "no_llm"): "说的是测试用的模拟模式",
+    ("mempalace", "recall_uses_llm", "llm"): "评测表里的一种配置",
     # customization
     ("0compactmem", "customization", "small_code"): "只是某个部件或文件小，不是整个项目",
     ("agentic-recall", "customization", "small_code"): "只是某个部件或文件小，不是整个项目",

@@ -382,6 +382,49 @@
       "status": "auto",
       "basis": "config_file：README：“l refresh ~2. Secrets (keys, `.env` files, credentials) are excl”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“.......... OK (12 sessions (3 hot, 4 warm, 5 cold)) Compaction model ........”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“Agent 共享，支持加密 U 盘迁移；自动捕获、入库时分类、脱敏；Analyst 把原”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平＋结构化事实",
       "function": "用户事实",

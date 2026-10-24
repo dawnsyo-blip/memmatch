@@ -331,6 +331,49 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“onfig (`~/.claude/claude_code_config.json`): ```json { \"mcpServers\":”；small_code：README：“Hebbian co-activation — in a zero-dependency embeddable Rust library. **”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“ion) and **SYNAPSE** (unified episodic-semantic graph, lateral inhibition).”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“BM25 + vector + graph → RRF → rerank learn(facts, session_id?)”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：README：“ing Alaya: ``` Agent: [calls remember(content=\"User prefers dark mod”"
     }
   },
   "uncertainties": [],

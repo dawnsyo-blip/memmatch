@@ -391,6 +391,49 @@
       "status": "auto",
       "basis": "settings_ui：说明：“＋AI 自我概念；桌面 Agent（自带控制台网页）；自带；桌面 Agent 自带控制”；config_file：README：“ateway.auth.token`. (`desktop/.env` is only a development-mode o”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“Dream Engine 离线整合并改写工作记忆与自我概念；成败经验转候选技能；把相关记”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：README：“are injected every turn with zero LLM cost. - **Canonical Facts Led”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：写入方式含自动记或先出候选（推断）"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块“生物式记忆”）",
       "function": "经验（技能结晶）＋AI 自我概念",

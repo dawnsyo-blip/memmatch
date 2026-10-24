@@ -338,6 +338,50 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“your-key-here\"}' > ~/.mengram/config.json # 2. Install the plugin (hoo”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“ere multilingual embeddings + rerank). --- ## Install in one pro”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：README：“uto-recall before every turn, auto-capture after. 12 tools, slash comma”；chat_agent：README：“.com/hook\", event_types=[\"memory_add\", \"memory_update\"], ) ``` ##”"
     }
   },
   "uncertainties": [

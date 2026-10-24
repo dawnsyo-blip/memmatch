@@ -54,6 +54,13 @@
 | `lifecycle_complete` | `complete` 五个环节都有；`partial` 只覆盖部分环节 | 234 | 0 | 0 | 0 |
 | `pairing` | `designed_to_pair` 明确说明可和其它记忆库搭配（旁路、叠加）；`standard_interface` 走 MCP、OpenAI 兼容接口或宿主插件，可和别的工具并用；`replaces_builtin` 会替换宿主自带的记忆或压缩；`self_contained` 自带完整界面，记忆不拿出来和别的项目共用；`depends_on` 要先有另一个项目才能用；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 | `customization` | `settings_ui` 在界面里改设置；`config_file` 改配置文件或环境变量；`prompts` 可以改提示词；`plain_data` 记忆是可以直接编辑的普通文件；`plugin_api` 留了插件或扩展接口；`small_code` 代码小巧（单文件、零依赖），方便自己改；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `chinese_support` | `zh_docs` 有中文说明文档；`zh_retrieval` 中文检索做过优化（分词、中文向量模型等）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `memory_layers` | `layered` 分层记忆（短期／长期、碎片／事件／核心等）；`flat` 单层，没有分层；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `retrieval_postprocess` | `rerank` 召回后重排；`dedup` 去重、避免反复浮现；`budget` 按 token 预算裁剪；`threshold` 相关度不够就不注入；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `recall_uses_llm` | `no_llm` 召回时不调用大模型（更快更省）；`llm` 召回时会调用大模型（重排、改写或让 AI 自己翻找）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `sensitive_suppression` | `yes` 能压住不该再提的记忆（用户拒绝过、标记回避或未解决的）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `write_receipt` | `yes` 写入后能明确告诉你记没记上（回执、返回编号、可回读）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `memory_writer` | `chat_agent` 聊天的 AI 自己调用工具记；`background` 后台的模型或规则自动整理；`user` 用户自己手动记；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 
 共 234 个项目：文档未说明 471 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 

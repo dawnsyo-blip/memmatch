@@ -349,6 +349,49 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“### Hooks Add to `~/.claude/settings.json` (replace `/path/to/claude-im”；prompts：README：“solidation. Customizable cron prompt templates. - **Heartbeat agent** — Wake”；plugin_api：README：“lready knows the context. - **Pluggable channels** — The system auto-”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_retrieval：README：“d search** — FTS5 full-text + bge-m3 vector embeddings + exact-mat”"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：README：“aily journals. Pre-compaction hooks capture context before it's compresse”"
     }
   },
   "uncertainties": [

@@ -346,6 +346,49 @@
       ],
       "status": "auto",
       "basis": "small_code：README：“M, ...).<br/>Pure TypeScript. Zero dependencies. 822 tests. Extracted from”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“启发的 7 层记忆库，另有 MCP 包；多层记忆；TypeScript 库＋MCP 包；”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "dedup"
+      ],
+      "status": "auto",
+      "basis": "dedup：README：“e: 'auto' }); // Cross-layer search with ranked, deduplicated results const results”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

@@ -306,6 +306,49 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 55%"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“一套自建 AI 伴侣系统的完整架构文档（三层记忆、门槛制召回、欲望与唤醒），没有代码；伴”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "threshold：说明：“AI 伴侣系统的完整架构文档（三层记忆、门槛制召回、欲望与唤醒），没有代码；伴侣系统整体设”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   },
   "uncertainties": [

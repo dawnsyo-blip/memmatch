@@ -393,6 +393,50 @@
       "status": "auto",
       "basis": "config_file：README：“mory store. Add to `~/.claude/settings.json`: ```json { \"hooks\": {”"
     },
+    "chinese_support": {
+      "value": [
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_retrieval：README：“. - **Speaks Chinese** — full CJK search, time expressions like”"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“的对话自动收进同一层本地记忆；Hook 自动捕获每轮对话；按事件分段并生成一段摘要和关键”；chat_agent：README：“these)\"] rem[\"memory_remember(content)<br/>flag highlight fa”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实",

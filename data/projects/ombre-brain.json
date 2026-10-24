@@ -397,6 +397,50 @@
       "status": "auto",
       "basis": "settings_ui：README：“各自默认关闭、各有一个独立开关； 只有在人类从 Ombre 设置页打开之后，主连接器 `/mcp` 才额外暴露对应的工具。两者”；config_file：README：“Key」，立即热更新生效，无需重启。 > 也可以提前在 `.env` 文件里写好 Key： > ```bash > echo”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 41%；zh_retrieval：README：“费额度（OpenAI 兼容 + > 免费 `BAAI/bge-m3`），或用本地 Ollama bge-m3（见「本地向量模型”"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“消化；grow 把长内容拆成独立记忆桶；后台自动建桶间关系；对话开头 breath”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（Markdown 为真源）",
       "function": "用户事实（带情绪坐标）",

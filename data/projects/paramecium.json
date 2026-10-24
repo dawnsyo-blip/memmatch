@@ -384,6 +384,51 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 62%；zh_retrieval：README：“1. **语义搜索** — ChromaDB 向量 + jieba BM25 双路召回（两个固定权重的 attention h”"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“exec** — 在服务器上跑 shell 命令 ### 三层记忆 | 层 | 是什么 | 类比 | |---|---|--”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank",
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“AG 优势在哪\"这个问题没法答。拿这套去做企业知识库，没有 rerank 没有评估集，会被打得很惨；拿标准 RAG 来存一段关系，它”；threshold：README：“记忆摊开（那是付不起的 full attention），而是相关性过了门槛才取回——sparse attention 才是 API 计”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“L0 原文机械切窗向量化，零改写；L1 小模型摘录信息点，必须附可校验的逐字引用；新旧”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（逐字原文）",
       "function": "用户事实",

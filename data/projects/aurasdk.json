@@ -330,6 +330,50 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“`hooks` block into `~/.claude/settings.json` (all projects) or `.claude/s”；plugin_api：README：“ible to production recall - **Pluggable Embeddings** - Optional embed”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“ptional embedding support - **Two-Tier Memory** — Cognitive (ephemeral) + C”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank",
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“ed correction, bounded recall reranking, and bounded self-adaptati”；budget：README：“er model's answer. The normal token-budget truncation can still apply to”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：README：“urse prefixes before packing, without calling an LLM or changing stored records. A”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

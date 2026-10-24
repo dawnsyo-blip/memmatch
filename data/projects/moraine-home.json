@@ -335,6 +335,50 @@
       ],
       "status": "auto",
       "basis": "settings_ui：README：“external adviser model. The Settings view can store an optional Jev adv”；config_file：README：“e-home.git cd moraine-home cp .env.example .env scripts/run-beta”"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“中文说明”）；zh_retrieval：README：“dings via FastEmbed and `BAAI/bge-small-zh-v1.5`; - JSON-file and authen”"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

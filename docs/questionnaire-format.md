@@ -43,7 +43,7 @@
 
 ## 偏好题怎么写
 
-偏好题 `kind` 写 `preference`，选项用 `score`。可以对 `normalized` 里的任何字段加分，包括用户在意的 19 个特性（值为 `yes` 表示有），以及 2026-10-24 追加的 9 个字段：
+偏好题 `kind` 写 `preference`，选项用 `score`。可以对 `normalized` 里的任何字段加分，包括用户在意的 19 个特性（值为 `yes` 表示有），以及 2026-10-24 追加的 16 个字段：
 
 | 字段 | 含义 | 可选值 |
 |---|---|---|
@@ -56,6 +56,15 @@
 | `lifecycle_complete` | 流程是否完整 | `complete`（五个环节都有）、`partial` |
 | `pairing` | 能否和其它项目搭配 | `designed_to_pair`、`standard_interface`、`replaces_builtin`、`self_contained`、`depends_on` |
 | `customization` | 便于自己改的地方 | `settings_ui`、`config_file`、`prompts`、`plain_data`、`plugin_api`、`small_code` |
+| `chinese_support` | 中文支持 | `zh_docs` 有中文说明、`zh_retrieval` 中文检索优化（分词、中文向量模型） |
+| `memory_layers` | 记忆是否分层 | `layered`、`flat` |
+| `retrieval_postprocess` | 检索后处理 | `rerank` 重排、`dedup` 检索时去重／避免反复浮现、`budget` 按 token 预算裁剪、`threshold` 相关度不够就不注入 |
+| `recall_uses_llm` | 召回时是否调用大模型 | `no_llm`（更快更省）、`llm`（重排、改写或让 AI 自己翻找） |
+| `sensitive_suppression` | 能否压住不该再提的记忆 | `yes` |
+| `write_receipt` | 写入后能否明确告诉你记没记上 | `yes` |
+| `memory_writer` | 谁来记 | `chat_agent` 聊天的 AI 自己记、`background` 后台模型或规则整理、`user` 用户手动记 |
+
+后两项（`sensitive_suppression`、`write_receipt`）几乎没有项目在文档里写，目前各只有 1 个项目判为“有”，只适合作加分项，不适合作筛选条件。
 
 多选字段里没找到任何依据时值为 `not_mentioned`（未提及）。例如：
 

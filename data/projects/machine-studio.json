@@ -378,6 +378,50 @@
       "status": "auto",
       "basis": "config_file：README：“t ``` ### 2. 配置（可选，但建议） 复制 `.env.example` 为 `tech_memory.env`，”；small_code：说明：“bre Brain 配合；SQLite 单文件，按项目分条；真删除；Bearer 令牌”"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 45%；zh_retrieval：README：“EL` | 向量模型名（开启向量检索时用） | `BAAI/bge-small-zh-v1.5` | | `TECH_MEMORY_EMBED_”"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（按项目）",
       "function": "环境事实（技术记忆）",

@@ -395,6 +395,50 @@
       "status": "auto",
       "basis": "config_file：README：“kiwi-mem.git cd kiwi-mem # 创建配置文件 cp .env.example .env ``` > 💡”"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 52%；zh_retrieval：README：“**自动提取**：每 N 轮对话自动提取记忆碎片 - **jieba 中文分词**：自定义领域词汇 - **同义词扩展**：搜\"”"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“按日历层级逐步压缩，用“热度”决定哪些记忆留在前台”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：写入方式含自动记或先出候选（推断）"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（日／周／月摘要）",
       "function": "用户事实",

@@ -392,6 +392,50 @@
       "status": "auto",
       "basis": "settings_ui：README：“I 支持调用方传入 session 与片段排除集合 - **设置面板** — 在 Dashboard 中直接管理所有运行时配置，”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 48%；zh_retrieval：README：“量搜索：** 当前版本支持可选的记忆向量搜索功能。默认使用 jieba 中文分词 + 关键词匹配（ILIKE），适合大多数场景。如”"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“存、Dashboard 面板；用户事实＋工作记忆（对话线）；网关；任意 OpenAI 兼”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "threshold"
+      ],
+      "status": "auto",
+      "basis": "threshold：README：“证据时跳过对应的一层碎片记忆 | `false` | | `MIN_SCORE_THRESHOLD` | 记忆搜索最低分数阈值，低于此分数”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：写入方式含自动记或先出候选（推断）"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（三层）",
       "function": "用户事实＋工作记忆（对话线）",

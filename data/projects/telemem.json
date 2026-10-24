@@ -385,6 +385,49 @@
       "status": "auto",
       "basis": "config_file：README：“S configuration, load `config/config.yaml` explicitly: ```python from”"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“README-ZH”）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“\"] --> S[\"Vector search<br/>+ rerank\"] F --> S S --> R[\"re”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "llm"
+      ],
+      "status": "auto",
+      "basis": "llm：README：“crosoft/DeepVideoDiscovery)'s Agentic Search and Tool Use approach, we imp”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：README：“server exposes eight tools: `add_memory`, `search_memories`, `get_mem”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（含视频多模态）",
       "function": "用户事实＋角色建模",

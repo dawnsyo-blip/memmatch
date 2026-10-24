@@ -336,6 +336,49 @@
       ],
       "status": "auto",
       "basis": "plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“[中文]”）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“ng></td> <td>Hypergraph-based hierarchical memory for coarse-to-fine long-term”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“llm` is `true`; embedding and rerank remain `false` until you conf”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "llm"
+      ],
+      "status": "auto",
+      "basis": "llm：README：“tion | | Add `[rerank]` too | Agentic search, default agent hybrid search,”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：写入方式含自动记或先出候选（推断）"
     }
   },
   "uncertainties": [

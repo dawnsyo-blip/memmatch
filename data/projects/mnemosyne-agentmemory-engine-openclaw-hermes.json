@@ -336,6 +336,50 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“recalibrate --apply # 写入 config.json，下次搜索生效 ``` 500条评分实测: 旧权重(imp”；plugin_api：README：“heory）构建。单次评分替代多路 merge，配备 5 个可插拔模块。默认路径无需 LLM API、无需 embedding”；small_code：README：“快 · 缓存命中率随使用自动提升 · RAM 0MB · 零依赖 · 默认零 API key --- ## 🏆 Mnem”"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs",
+        "zh_retrieval"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 20%；zh_retrieval：说明：“中英双语的记忆引擎：全量存储，按重要度、时效和关”"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“s → MEMORY.md ``` ### 四层记忆 · Four-Layer Memory | 层 Layer | 路径 Path | 保留 Ret”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   },
   "uncertainties": [

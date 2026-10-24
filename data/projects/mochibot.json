@@ -379,6 +379,49 @@
       "status": "auto",
       "basis": "config_file：README：“库、Core、Diary、个人资料、扩展和运行数据。 - `.env`：Bot Token、管理后台和基础配置，请勿提交或分享。”；small_code：README：“支持文本、代码、CSV、PDF 和 Word（.docx），单文件 20 MB 以内，最多提取前 20,000 字；不支持扫描”"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 56%"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“托管伴侣（Telegram、微信）＋管理后台；自带；Telegram、微信；伴侣应用”"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋习惯／待办",

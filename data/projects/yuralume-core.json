@@ -378,6 +378,49 @@
       "status": "auto",
       "basis": "config_file：README：“rs): ```powershell Copy-Item .env.container.example .env.contai”；plain_data：记忆存成可以直接看改的文件"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“README.zh”）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "budget：README：“_MESSAGES` under an estimated-token budget, and the newest three turns a”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：README：“orms or bypassing the persona extraction pipeline. | | `KOKORO_PROMPT_MATERIAL_”"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋角色日程",

@@ -337,6 +337,50 @@
       ],
       "status": "auto",
       "basis": "config_file：README：“/details> <details> <summary>Environment variables</summary> ```bash SHODH_ZENO”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“tiation) ``` Under the hood, memories flow through three tiers: ``` Working Memory ──overfl”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“ice semantic search - **Local reranking** — a cross-encoder (ms-ma”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：说明：“不用大模型的认知记忆：常用的更容易想起，旧的自动淡”"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：README：“/docs/claude-code/hooks) that automatically capture context from every session —”；chat_agent：README：“rage_path=\"./my_data\") memory.remember(\"User prefers dark mode\", memo”"
     }
   },
   "uncertainties": [

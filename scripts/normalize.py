@@ -87,7 +87,8 @@ FIELD_LABELS = {
 DECIDED_ON = "2026-10-11"
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through",
-         "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization"}
+         "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization",
+         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer"}
 
 
 def snippet(text, m, width=60):
@@ -614,6 +615,49 @@ def n_dimensions(c, out):
         vals.append("plain_data")
         basis.append("plain_data：记忆存成可以直接看改的文件")
     d["customization"] = _dim(vals, basis)
+
+    # ---- 第二批（问卷 v2 用到）----
+    vals, basis = [], []
+    body = re.sub(r"```.*?```|<[^>]+>|https?://\S+", "", c.readme, flags=re.S)
+    cjk = len(re.findall(r"[一-鿿]", body))
+    ratio = cjk / max(1, len(re.sub(r"\s", "", body)))
+    link = re.search(DR.ZH_DOCS_LINK, c.readme)
+    if (pid, "chinese_support", "zh_docs") not in DR.REJECT and (ratio > 0.15 or link):
+        vals.append("zh_docs")
+        basis.append(f"zh_docs：README 汉字占 {ratio:.0%}" if ratio > 0.15 else f"zh_docs：README 有中文版链接（“{link.group(0)}”）")
+    zh = dim_hits(c, "chinese_support", {"zh_retrieval": DR.ZH_RETRIEVAL})
+    vals += [v for v, _ in zh]
+    basis += [f"{v}：{b}" for v, b in zh]
+    d["chinese_support"] = _dim(vals, basis)
+
+    lay = dim_hits(c, "memory_layers", {"layered": DR.LAYER_PATS, "flat": DR.FLAT_PATS})
+    if lay:
+        v, b = lay[0]
+        d["memory_layers"] = res(v, "auto", b)
+    else:
+        d["memory_layers"] = res("not_mentioned", "auto", "原表、说明和 README 都没提到（未提及不等于没有）")
+
+    post = dim_hits(c, "retrieval_postprocess", DR.POST_PATS)
+    d["retrieval_postprocess"] = _dim([v for v, _ in post], [f"{v}：{b}" for v, b in post])
+
+    llm = dim_hits(c, "recall_uses_llm", {"no_llm": DR.NO_LLM_PATS, "llm": DR.LLM_RECALL_PATS})
+    d["recall_uses_llm"] = _dim([v for v, _ in llm], [f"{v}：{b}" for v, b in llm])
+
+    for field, pats in (("sensitive_suppression", DR.SUPPRESS_PATS), ("write_receipt", DR.RECEIPT_PATS)):
+        hit = dim_hits(c, field, {"yes": pats})
+        d[field] = res("yes", "auto", hit[0][1]) if hit else \
+            res("not_mentioned", "auto", "原表、说明和 README 都没提到（未提及不等于没有）")
+
+    who = dim_hits(c, "memory_writer", DR.WRITER_PATS)
+    vals, basis = [v for v, _ in who], [f"{v}：{b}" for v, b in who]
+    wm = val("write_mode")
+    if "on_request" in wm and "chat_agent" not in vals:
+        vals.append("chat_agent")
+        basis.append("chat_agent：写入方式含“由 AI 或用户主动调用”（推断）")
+    if ("auto" in wm or "review_first" in wm) and "background" not in vals:
+        vals.append("background")
+        basis.append("background：写入方式含自动记或先出候选（推断）")
+    d["memory_writer"] = _dim(vals, basis)
     return d
 
 

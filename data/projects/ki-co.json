@@ -381,6 +381,49 @@
       "status": "auto",
       "basis": "settings_ui：README：“/ 记忆回廊 * Cinema room / 观影室 * Settings page / 系统设置 * Time Bridge / 时间桥 *”；config_file：README：“hing your own fork, check: .env API keys private chat logs”"
     },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 56%"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“人格核＋分层记忆＋生活线，本地优先；AI 身份（人格核）”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“DME 称可只拆模块用，但需开发；聊天与后台整理可用不同模型；可导入 ChatGPT”"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层",
       "function": "AI 身份（人格核）＋用户事实",

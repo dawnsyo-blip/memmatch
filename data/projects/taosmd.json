@@ -342,6 +342,50 @@
       ],
       "status": "auto",
       "basis": "settings_ui：README：“ols three ways: the dashboard Settings panel (presets plus an Advanced exp”；config_file：README：“en `server_url` in `~/.taosmd/config.json`, then local mode. ### Check”；plugin_api：README：“Backend Abstraction pluggable interface for platforms (taOS”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“Ebbinghaus decay with hot/warm/cold tiers Retrieval: ├── Paralle”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank",
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“g CPU-friendly fusion; MaxSim+rerank (bge-v2-m3) leads on a GPU bo”；budget：README：“core/archival split, token-budgeted L0-L3 Integration: ├── Bac”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [

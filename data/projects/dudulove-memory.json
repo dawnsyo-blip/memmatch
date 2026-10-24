@@ -331,6 +331,50 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 汉字占 58%"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "dedup",
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "dedup：README：“ation**：围绕当前话题自然联想相关经历，并结合会话级 Recall Ledger，减少同一条记忆在短时间内反复浮现。 - **Evidenc”；budget：README：“ntext Assembler 按身份、权限、模式、话题和 token 预算组合，再交给当前模型。 ## 记忆也需要治理 长期记忆不”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "说明：“同一个 AI 身份跨客户端、跨模型延续；被你拒绝的记忆不会被重新写回，同一条记忆不会反复浮现；”"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     }
   },
   "uncertainties": [
