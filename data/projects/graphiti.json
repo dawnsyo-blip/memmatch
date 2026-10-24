@@ -12,7 +12,8 @@
   },
   "origins": [
     "论文表 9（Zep）",
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -56,7 +57,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "社区版已停止维护，代码移入 legacy/ 目录；可自部署核心为 Graphiti（https://github.com/getzep/graphiti，Apache-2.0，最后提交 2026-10-09）",
+      "value": "社区版已停止维护，代码移入 legacy/ 目录；可自部署核心为 Graphiti（https://github.com/getzep/graphiti，Apache-2.0，最后提交 2026-10-09）；评测：LongMemEval-S 90.2、LoCoMo 94.7（Zep 自报，旧成绩常被引用为 71.2）；MemOS 评测 PersonaMem 57.8",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -95,7 +96,8 @@
       "name": "Zep (powered by Graphiti)",
       "url": "https://github.com/getzep/graphiti",
       "desc": "Real-time temporal knowledge graphs for AI agents."
-    }
+    },
+    "评测榜单": "LongMemEval-S 90.2、LoCoMo 94.7（Zep 自报，旧成绩常被引用为 71.2）；MemOS 评测 PersonaMem 57.8"
   },
   "normalized": {
     "access": {
@@ -128,7 +130,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：；用跨平台运行时安装（Python 3.10），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "high",
@@ -324,6 +326,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

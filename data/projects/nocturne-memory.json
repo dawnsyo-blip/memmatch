@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 10 项，②类）"
+    "AI Companion Atlas（原表第 10 项，②类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "无自动遗忘",
       "遗忘的终点": "删除只切断访问路径，正文和历史版本保留",
       "整合（合并、摘要）方式": "无自动整合；诊断入口可找出过时、拥挤、孤儿节点"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "nocturne_memory",
+      "url": "https://github.com/Dataojitori/nocturne_memory",
+      "desc": "Rollbackable, visual long-term memory server for MCP agents: graph-like structured memory instead of vector RAG, works across models and sessions, drop-in for OpenClaw. MIT. `Python` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -156,7 +162,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：windows（ckend/mcp_wrapper.py`（解决 Windows CRLF 问题）。 - 其他客户端：指向）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：windows（ckend/mcp_wrapper.py`（解决 Windows CRLF 问题）。 - 其他客户端：指向）；用跨平台运行时安装（Python 3.10），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "medium",
@@ -362,6 +368,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

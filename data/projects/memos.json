@@ -13,7 +13,8 @@
   "origins": [
     "AI Companion Atlas（原表第 18 项，④类）",
     "论文表 9（MemOS）",
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -57,7 +58,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "也在论文表 9 中；面向任务型 Agent，不是陪伴应用；经验分层为轨迹→策略→世界模型→技能；有托管云服务，基准成绩为项目自报",
+      "value": "也在论文表 9 中；面向任务型 Agent，不是陪伴应用；经验分层为轨迹→策略→世界模型→技能；有托管云服务，基准成绩为项目自报；评测：LongMemEval-S 89.2、LoCoMo 88.8、BEAM 10M 56.8、PersonaMem 61.2（MemTensor 自己的评测）",
       "source": "负责人原表「记忆项目总表」，据各仓库 README",
       "read_date": "2026-10-10"
     }
@@ -141,7 +142,8 @@
       "name": "MemOS (by MemTensor)",
       "url": "https://github.com/MemTensor/MemOS",
       "desc": "Memory OS for LLM agents with hybrid retrieval and cross-task skill reuse."
-    }
+    },
+    "评测榜单": "LongMemEval-S 89.2、LoCoMo 88.8、BEAM 10M 56.8、PersonaMem 61.2（MemTensor 自己的评测）"
   },
   "normalized": {
     "access": {
@@ -217,7 +219,7 @@
         "dashboard"
       ],
       "status": "auto",
-      "basis": "dashboard：and a full Memory Viewer dashboard. ## 📊 Performance MemO"
+      "basis": "dashboard：d retrieval, and a local Memory Viewer to DeepSeek Harness—powe"
     },
     "export": {
       "value": [],
@@ -382,6 +384,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -55,7 +56,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "火山引擎出品",
+      "value": "火山引擎出品；评测：MemTensor 统一评测：BEAM 100K 70.8、BEAM 10M 58.1",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -85,7 +86,8 @@
       "diff": "中到高",
       "need": "模型 API 密钥",
       "note": "火山引擎出品"
-    }
+    },
+    "评测榜单": "MemTensor 统一评测：BEAM 100K 70.8、BEAM 10M 58.1"
   },
   "normalized": {
     "access": {
@@ -320,6 +322,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

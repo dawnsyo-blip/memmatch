@@ -112,7 +112,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：macos（'t captured. - Tested on macOS with Node 26 and the plu）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：macos（'t captured. - Tested on macOS with Node 26 and the plu）；用跨平台运行时安装（Node.js 20），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "medium",
@@ -318,6 +318,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

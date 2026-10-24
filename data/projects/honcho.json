@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -53,6 +54,11 @@
       "value": "AGPL-3.0",
       "source": "仓库 LICENSE 文件开头自动识别",
       "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "评测：LongMemEval-S 90.4、LoCoMo 89.9、BEAM 10M 40.9（厂商自报）",
+      "source": "Claude 据各评测榜单与厂商公布的成绩整理（多为自报）",
+      "read_date": "2026-10-10"
     }
   },
   "repo_health": {
@@ -80,7 +86,8 @@
       "diff": "中",
       "need": "托管需账号；自托管需模型密钥",
       "note": ""
-    }
+    },
+    "评测榜单": "LongMemEval-S 90.4、LoCoMo 89.9、BEAM 10M 40.9（厂商自报）"
   },
   "normalized": {
     "access": {
@@ -318,6 +325,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

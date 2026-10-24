@@ -51,12 +51,13 @@ def make_ids(rows):
 
 
 def to_json(pid, r):
+    meta = r["meta"]
+    read_date = meta.get("read_date") or B.READ_DATE  # 2026-10-24 补读的仓库元数据里带读取日期
     info = {}
     for src_field, dst in FIELD_MAP:
         value = str(r.get(src_field) or "").strip()
         if value:
-            info[dst] = {"value": value, "source": r["prov"][src_field], "read_date": B.READ_DATE}
-    meta = r["meta"]
+            info[dst] = {"value": value, "source": r["prov"][src_field], "read_date": read_date}
     return {
         "id": pid,
         "name": r["name"],
@@ -64,7 +65,7 @@ def to_json(pid, r):
         "source": "initial",
         "review_status": "reviewed",
         "candidate": {"category": r["cat"], "group_code": r["c"], "group_meaning": R.CODES.get(r["c"], ""),
-                      "decided_on": DECIDED_ON},
+                      "decided_on": meta.get("read_date") or DECIDED_ON},
         "origins": r["src"],
         "info": info,
         "repo_health": {
@@ -72,7 +73,7 @@ def to_json(pid, r):
             "stars": r["stars"],
             "archived": meta.get("archived"),
             "source": B.PROV_META if meta else "无法自动读取（不在 GitHub 上或仓库无法访问）",
-            "read_date": B.READ_DATE,
+            "read_date": read_date,
         },
         "raw": r["raw"],
     }

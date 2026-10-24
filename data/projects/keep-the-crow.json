@@ -1,0 +1,335 @@
+{
+  "id": "keep-the-crow",
+  "name": "把乌鸦留在身边",
+  "repo_url": "https://github.com/sunmoon-orbit/Keep-the-crow",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "教程与搭建指南",
+    "group_code": "G",
+    "group_meaning": "教程、搭建指南或设计文档：本身不是可直接安装的软件，照着做能实现记忆、换窗或伴侣功能",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "30 章搭建日志：让服务器上的 Claude Code 成为能用手机联系、有 SQLite 记忆、会推送的伴侣",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "对话记忆＋推送",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "教程",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "Claude Code（手机网页）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "Claude 付费套餐",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "其它（见仓库）",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "CC BY-NC 4.0；面向成年人",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-19",
+    "stars": 75,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "Keep the Crow (把乌鸦留在身边)",
+      "url": "https://github.com/sunmoon-orbit/Keep-the-crow",
+      "desc": "30-chapter build log (Chinese) for a Claude Code companion living on your own server: phone PWA chat, SQLite memory, push, TTS, health data, shared reading, security. CC BY-NC 4.0. `Guide` · `Claude Code` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "把乌鸦留在身边",
+      "v": "待定",
+      "c": "G",
+      "desc": "30 章搭建日志：让服务器上的 Claude Code 成为能用手机联系、有 SQLite 记忆、会推送的伴侣",
+      "subj": "对话记忆＋推送",
+      "acc": "教程",
+      "cli": "Claude Code（手机网页）",
+      "run": "自己的服务器",
+      "diff": "高",
+      "need": "Claude 付费套餐",
+      "note": "CC BY-NC 4.0；面向成年人"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "guide"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：教程"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code（手机网页）"
+    },
+    "runs_on": {
+      "value": [
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的服务器"
+    },
+    "os": {
+      "value": [
+        "android",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：linux（## 前置条件 - 一台能 24 小时运行的 Linux 服务器（VPS 即可） - Node.js 18）；android（务端接口 + Tasker Widget v2，零安卓代码（含四个配置坑）| | [18-idle-li）；用跨平台运行时安装（Node.js 18），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：Claude 付费套餐"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Claude 付费套餐"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：对话记忆＋推送"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“线：worktree 隔离、SQLite 一致性备份、云构建、生成物冲突、可恢复删除与主动联系联调 | | [27-chatgpt-mcp.md](27-chatg”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：)（CC BY-NC-SA 4.0）：贴图与颜文字面板的交互启发；本文仅借鉴思路，代码独立实现 - [l；cli：ode.js 18+ - Claude Code CLI（`npm i -g @anthropic/cla"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "",
+      "status": "unknown",
+      "basis": "许可证原文：其它（见仓库）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“/chunked-continuity-compaction](https://github.com”经核对不算：只是相关项目链接"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“on.md) | Electron 桌面版打包与分发 | | [09-push-dream.md](09-push-dream.md) | 主动推送语料 & 做梦系统 &”（已核对）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“07-yanji.md) | 言叽 AI 聊天界面（多模型/工具调用/记忆注入/情绪系统/来电与语音留言/双语通话/主题调优）| | [08-electron.md”（已核对）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“nji.md) | 言叽 AI 聊天界面（多模型/工具调用/记忆注入/情绪系统/来电与语音留言/双语通话/主题调优）| | [08-electron.md](08-”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“- 支持推送通知：AI 可以主动给你发消息到手机锁屏 - 支持语音朗读：接入 ElevenLabs 或 MiniMax TTS，AI 消息可以朗读出来 - 通过 Tailscal”（已核对）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    },
+    {
+      "field": "license_category",
+      "label": "许可证类别",
+      "note": "许可证原文：其它（见仓库）"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 75,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-10-19",
+    "days_since_commit": 5,
+    "commits_1y": 35,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE.md"
+    ],
+    "license_text_head": {
+      "LICENSE.md": "# License / 许可\n\n## 教程正文 — CC BY-NC 4.0\n\n本仓库的教程文字内容采用 **[知识共享 署名-非商业性使用 4.0 国际许可协议（CC BY-NC 4.0）](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans)** 授权。\n\n你可以自由地：\n- **分享** — 复制、转载、翻译本教程\n- **演绎** — 修改、改编，在此基础上写你自己的版本\n\n但必须遵守：\n- **署名（BY）** — 注明出处（Keep the Crow / sunmoon-orbit），并链接到本仓库\n- **非商业（NC）** — 不得用于商业目的：不能拿去卖课、出书盈利、放进付费专栏\n\nThe tutorial text in this repository is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may share and adapt it with attribution, for non-commercial purposes only.\n\n## 代码示例 — MIT License\n\n本仓库由 Keep the Crow 原作者创作的**代码片段、配置示例和命令行**采用 MIT License。它们不受上面的 CC BY-NC 条款限制，可用于商业或非商业项目；MIT 的免责声明仍然适用。\n\nCopyright (c) 2026 sunmoon-orbit\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof the code snippets, configuration examples, and command-line examples in\nthis repository (the \"Software\"), to deal in the Software without\nrestriction, including without limitation the rights to use, copy, modify,\nmerge, publish, distribute, sublicense, and/or sell copies of the Software,\nand to permit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notic"
+    },
+    "license_label": "CC BY-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：教程与搭建指南"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

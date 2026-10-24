@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 50 项，⑧类）"
+    "AI Companion Atlas（原表第 50 项，⑧类）",
+    "awesome-ai-companion（Affect & Drives）"
   ],
   "info": {
     "summary": {
@@ -120,6 +121,11 @@
       "遗忘怎么发生": "不适用",
       "遗忘的终点": "—",
       "整合（合并、摘要）方式": "—"
+    },
+    "awesome-ai-companion（Affect & Drives）": {
+      "name": "OmniDimen-Emotion",
+      "url": "https://github.com/OmniDimen/OmniDimen-Emotion",
+      "desc": "Emotion-specialized Qwen model releases and GGUF weights for emotion recognition and emotionally aware text generation on edge runtimes. `Model` · `Any` · `infra`."
     }
   },
   "normalized": {
@@ -381,6 +387,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -157,7 +157,7 @@
         "dashboard"
       ],
       "status": "auto",
-      "basis": "dashboard：ally via a localhost Hub UI. When a conversation req"
+      "basis": "dashboard：ou curate titled, dated, editable memory banks directly on your"
     },
     "export": {
       "value": [],
@@ -310,6 +310,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -1,0 +1,329 @@
+{
+  "id": "dylan-heartbeat",
+  "name": "Dylan Heartbeat",
+  "repo_url": "https://github.com/callie0313/dylan-heartbeat",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "Kelivo 的常驻网关：定时唤醒伴侣、维护带时间的对话时间线，让它自己决定要不要给你推送消息",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "对话时间线与主动行为",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "网关（Kelivo 的接口地址指向它）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "Kelivo",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（也可云部署）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中：先 Fork 再部署",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥；Bark 或 ntfy 推送",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "PolyForm-NC",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "PolyForm 禁止商用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-10",
+    "stars": 464,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "dylan-heartbeat",
+      "url": "https://github.com/callie0313/dylan-heartbeat",
+      "desc": "Kelivo plugin that periodically wakes the companion, injects proactive context, preserves timeline continuity, and sends Bark push messages when the AI chooses to reach out. `JavaScript` · `Kelivo` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "Dylan Heartbeat",
+      "v": "纳入",
+      "c": "",
+      "desc": "Kelivo 的常驻网关：定时唤醒伴侣、维护带时间的对话时间线，让它自己决定要不要给你推送消息",
+      "subj": "对话时间线与主动行为",
+      "acc": "网关（Kelivo 的接口地址指向它）",
+      "cli": "Kelivo",
+      "run": "自己的电脑或服务器（也可云部署）",
+      "diff": "中：先 Fork 再部署",
+      "need": "模型 API 密钥；Bark 或 ntfy 推送",
+      "note": "PolyForm 禁止商用"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：网关（Kelivo 的接口地址指向它）"
+    },
+    "compatible_clients": {
+      "value": [
+        "kelivo"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Kelivo"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器（也可云部署）"
+    },
+    "os": {
+      "value": [
+        "android",
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（--- ## 🐧 跨平台与云部署 ### 在 Windows 上运行 1. 安装 [Node.js](htt）；android（`PUSH_PROVIDER=ntfy` 时可用 Android / 桌面 / 自建 ntfy 服务接收主动消息。）；ios（格式的中转站或官方） - 一个推送渠道：Bark（iOS）或 ntfy（Android / 桌面 / 自建）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：先 Fork 再部署"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥；Bark 或 ntfy 推送"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "experience"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：对话时间线与主动行为"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“ervice；如果旧部署曾手动填写 Custom Start Command，请删除覆盖值，或直接改成 `npm run start:railway`。 3. 若希”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：开始教程) - [管理页面](#-管理页面web-控制台) - [自动唤醒策略](#-自动唤醒策略) -；files：- 带时间戳前缀的完整内容 - 去掉时间戳前缀的纯文本内容 这样无论 Kelivo 如何裁剪时间，记忆"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：PolyForm-NC"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“的夜晚，都会被 AI 记住 - 🎭 **人格不变** – 完全保留 Kelivo 的”经核对不算：沿用 Kelivo 的角色设定，不另存"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“↓ 原封不动转发 + 已注入的主动行为上下文 LLM API ↑ wake_up.js ← 定时自动唤醒，通过 Gateway 接口注入事件 ↓”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“- 🖼️ 多模态默认改为视觉透传：`MULTIMODAL_MODE` 默认使用 `passthr”经核对不算：只是把图片转发给模型"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“ivo 的常驻网关：定时唤醒伴侣、维护带时间的对话时间线，让它自己决定要不要给你推送消息；对话时间线与主动”"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“] 多 Agent 协作 - [ ] 情绪状态 / 休眠状态 - [ ] Dock”经核对不算：路线图里还没做"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“驻插件。** 它会自动唤醒 Kelivo 的AI伴侣，并让伴侣自己判断是否要主动联系你。 > [!IMPORTANT] > **严禁付费代部署及任何商业用途。**”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 464,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-08-10",
+    "days_since_commit": 75,
+    "commits_1y": 72,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "PolyForm Noncommercial License 1.0.0\n\nhttps://polyformproject.org/licenses/noncommercial/1.0.0\n\nRequired Notice: Copyright 2026 Callie (callie0313).\nRequired Notice: Dylan Heartbeat — https://github.com/callie0313/dylan-heartbeat\n\nAcceptance\n\nIn order to get any license under these terms, you must agree to them as\nboth strict obligations and conditions to all your licenses.\n\nCopyright License\n\nThe licensor grants you a copyright license for the software to do\neverything you might do with the software that would otherwise infringe\nthe licensor's copyright in it for any permitted purpose. However, you\nmay only distribute the software according to Distribution License and\nmake changes or new works based on the software according to Changes\nand New Works License.\n\nDistribution License\n\nThe licensor grants you an additional copyright license to distribute\ncopies of the software. Your license to distribute covers distributing\nthe software with changes and new works permitted by Changes and New\nWorks License.\n\nNotices\n\nYou must ensure that anyone who gets a copy of any part of the software\nfrom you also gets a copy of these terms or the URL for them above, as\nwell as copies of any plain-t"
+    },
+    "license_label": "PolyForm-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

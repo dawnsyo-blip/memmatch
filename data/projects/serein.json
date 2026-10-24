@@ -1,0 +1,322 @@
+{
+  "id": "serein",
+  "name": "Serein",
+  "repo_url": "https://github.com/Yinglianchun/Serein",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Memory & Identity）"
+  ],
+  "info": {
+    "summary": {
+      "value": "可自行部署的个人记忆服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话留档可核对；带网页、换窗页和叙事卷",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "对话片段与事件（绑定原话）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "MCP；聊天 API 网关；钩子；网页",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "任意 MCP 客户端、OpenAI 兼容客户端（网关）、Claude Code（钩子）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（Docker 或 Python＋Node）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中：有一键脚本",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "Haven-Ombre 的后继项目",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-23",
+    "stars": 201,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "Serein",
+      "url": "https://github.com/Yinglianchun/Serein",
+      "desc": "Successor to Haven-Ombre: self-hosted memory where the chat model writes Scenes and a summarizer writes Events, both bound to verbatim evidence, with rerank-gated recall and Arc narratives. MIT. `Python` · `Self-host` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "Serein",
+      "v": "纳入",
+      "c": "",
+      "desc": "可自行部署的个人记忆服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话留档可核对；带网页、换窗页和叙事卷",
+      "subj": "对话片段与事件（绑定原话）",
+      "acc": "MCP；聊天 API 网关；钩子；网页",
+      "cli": "任意 MCP 客户端、OpenAI 兼容客户端（网关）、Claude Code（钩子）",
+      "run": "自己的电脑或服务器（Docker 或 Python＋Node）",
+      "diff": "中：有一键脚本",
+      "need": "模型 API 密钥",
+      "note": "Haven-Ombre 的后继项目"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway",
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；聊天 API 网关；钩子；网页"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "openai_compatible"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：任意 MCP 客户端、OpenAI 兼容客户端（网关）、Claude Code（钩子）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器（Docker 或 Python＋Node）"
+    },
+    "os": {
+      "value": [
+        "android",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（先下载并解压发行目录，再在该目录运行： **Windows · PowerShell** ```power）；linux（pts\\one_click.ps1 ``` **Linux / Termux** ```sh bash s）；android（click.ps1 ``` **Linux / Termux** ```sh bash scripts/on）；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：有一键脚本"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：对话片段与事件（绑定原话）"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“与版本 | Scene、Event、叙事卷各有自己的 ID；修改保留版本，归档与删除有各自状态 | | 原话档案与证据绑定 | 保存已接入或导入的原始消息，并记录哪”，没提自动衰减，建议值 manual_only；有归档：“（最多 250 条一批）。历史聊天默认只归档，按需再做摘要；聊天条数不等于需要生成向”"
+    },
+    "human_review": {
+      "value": [
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "cli：处理尚未成功的条目，不重复打标已完成内容。直接使用命令行向导时，可在 options JSON 中设置 `"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“的资料 | 网页阅读、编辑、收藏、归档；导入旧库、导出正文和下载数据库备份 | | 接着上一窗聊 | 在“换窗”页选择资料，”；“erein 的机器上的旧库路径，预览后在浏览器一键导出所选旧库 ZIP。先预览再确认，后台进度可暂停、续跑；旧边只用程序”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“段，后台把原话整理成事件，原话留档可核对；带网页、换窗页和叙事卷；对话片段与事件（绑定原话）；MCP；聊”"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“记忆服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话留档可核对；带网页、换窗页和叙事卷”"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话留档可核对；带网页、换窗页和叙事卷；对”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“二十分钟回应窗口；使用者回复前连续到达的主动消息先合为一个待回应包，不按消息数增加轮次。”经核对不算：说的是宿主发来的主动消息怎么计轮"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 201,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-10-23",
+    "days_since_commit": 1,
+    "commits_1y": 285,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 ChiYouyu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": [
+      "没有正式发布版本"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有正式发布版本"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

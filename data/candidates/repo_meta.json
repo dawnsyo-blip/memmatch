@@ -1788,6 +1788,555 @@
    "repo": "zaochuanyitian/chatnest-ui",
    "stars": 62,
    "archived": false
+  },
+  "yinglianchun/serein": {
+   "repo": "Yinglianchun/Serein",
+   "last_commit": "2026-10-23",
+   "stars": 201,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 ChiYouyu\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merg",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "mycyg/kin-mind": {
+   "repo": "mycyg/kin-mind",
+   "last_commit": "2026-10-21",
+   "stars": 24,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 MemoryPalace contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, c",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ssxl0126/wrenwen": {
+   "repo": "ssxl0126/WrenWen",
+   "last_commit": "2026-09-19",
+   "stars": 61,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "zyy0463/rolling-memory": {
+   "repo": "zyy0463/rolling-memory",
+   "last_commit": "2026-10-08",
+   "stars": 2,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 rolling-memory contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ceniran/moraine-home": {
+   "repo": "ceniran/moraine-home",
+   "last_commit": "2026-10-17",
+   "stars": 5,
+   "archived": false,
+   "license_head": "# PolyForm Noncommercial License 1.0.0\n\n<https://polyformproject.org/licenses/noncommercial/1.0.0>\n\nRequired Notice: Copyright 2026 Cairn and Xiaoran. Moraine — https://github.com/ceniran/moraine-home\n\n## Acceptance\n\nIn order to get any license under these terms, you must agree\nto them as both stric",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "vitasid57/dudulove-memory": {
+   "repo": "VITASID57/dudulove-memory",
+   "last_commit": "2026-10-05",
+   "stars": 51,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 DuduLove Memory contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "victortaelin/optmem": {
+   "repo": "VictorTaelin/OptMem",
+   "last_commit": "2026-07-30",
+   "stars": 2319,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "cybersealnull/chord-affect-anchors": {
+   "repo": "CyberSealNull/chord-affect-anchors",
+   "last_commit": "2026-05-13",
+   "stars": 69,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Bonnie (Xingjianmian) and Opia (Claude Opus 4.7)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitati",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "chuli1122/eventide": {
+   "repo": "chuli1122/Eventide",
+   "last_commit": "2026-07-26",
+   "stars": 140,
+   "archived": false,
+   "license_head": "# PolyForm Noncommercial License 1.0.0\n\nRequired Notice: Copyright 2026 Chuli (@chuli1122)\n\n<https://polyformproject.org/licenses/noncommercial/1.0.0>\n\n## Acceptance\n\nIn order to get any license under these terms, you must agree\nto them as both strict obligations and conditions to all\nyour licenses.",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "vael-ky/tidefall": {
+   "repo": "Vael-KY/Tidefall",
+   "last_commit": "2026-07-29",
+   "stars": 43,
+   "archived": false,
+   "license_head": "PolyForm Noncommercial License 1.0.0\n\n<https://polyformproject.org/licenses/noncommercial/1.0.0>\n\nAcceptance\n\nIn order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.\n\nCopyright License\n\nThe licensor grants you a copyright ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "yanke521/ai-companion-cot-emotion": {
+   "repo": "yanke521/ai-companion-cot-emotion",
+   "last_commit": "2026-09-03",
+   "stars": 28,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ephemera1117/ai-daily-rules-tutorial": {
+   "repo": "Ephemera1117/ai-daily-rules-tutorial",
+   "last_commit": "2026-10-19",
+   "stars": 66,
+   "archived": false,
+   "license_head": "Attribution-NonCommercial-ShareAlike 4.0 International\n\n=======================================================================\n\nCreative Commons Corporation (\"Creative Commons\") is not a law firm and\ndoes not provide legal services or legal advice. Distribution of\nCreative Commons public licenses d",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "bvsden/emotion-system": {
+   "repo": "bvsden/emotion-system",
+   "last_commit": "2026-09-28",
+   "stars": 19,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 bvsden\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "zyy0463/dreams": {
+   "repo": "zyy0463/dreams",
+   "last_commit": "2026-10-08",
+   "stars": 11,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ceshihaox-dotcom/pilulier": {
+   "repo": "ceshihaox-dotcom/pilulier",
+   "last_commit": "2026-10-17",
+   "stars": 52,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 pilulier contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "laude-institute/headlong": {
+   "repo": "laude-institute/headlong",
+   "last_commit": "2026-10-23",
+   "stars": 1227,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "menglimi/astrbot_plugin_private_companion": {
+   "repo": "menglimi/astrbot_plugin_private_companion",
+   "last_commit": "2026-10-24",
+   "stars": 443,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "dbjd-cr/astrbot_plugin_proactive_chat": {
+   "repo": "DBJD-CR/astrbot_plugin_proactive_chat",
+   "last_commit": "2026-10-11",
+   "stars": 437,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "qizhan7/claude-imprint": {
+   "repo": "Qizhan7/claude-imprint",
+   "last_commit": "2026-10-20",
+   "stars": 91,
+   "archived": false,
+   "license_head": "GNU AFFERO GENERAL PUBLIC LICENSE\nVersion 3, 19 November 2007\n\nCopyright (c) 2026 Qizhan7\n\nThis program is free software: you can redistribute it and/or modify\nit under the terms of the GNU Affero General Public License as published\nby the Free Software Foundation, either version 3 of the License, o",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "heyxiaoc/not-fade-away": {
+   "repo": "heyxiaoc/not-fade-away",
+   "last_commit": "2026-07-16",
+   "stars": 100,
+   "archived": false,
+   "license_head": "Creative Commons Attribution 4.0 International (CC BY 4.0)\n\nCopyright (c) 2026 Grace & 小C\n\nThis work (the \"不会消失的恋人\" tutorial, including 人看版.md, 机看版.md, and\nREADME.md) is licensed under the Creative Commons Attribution 4.0 International\nLicense.\n\nYou are free to:\n  - Share — copy and redistribute the",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "cocoraina/cloud-and-island": {
+   "repo": "cocoRaina/cloud-and-island",
+   "last_commit": "2026-04-25",
+   "stars": 38,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "sunmoon-orbit/keep-the-crow": {
+   "repo": "sunmoon-orbit/Keep-the-crow",
+   "last_commit": "2026-10-19",
+   "stars": 75,
+   "archived": false,
+   "license_head": "# License / 许可\n\n## 教程正文 — CC BY-NC 4.0\n\n本仓库的教程文字内容采用 **[知识共享 署名-非商业性使用 4.0 国际许可协议（CC BY-NC 4.0）](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans)** 授权。\n\n你可以自由地：\n- **分享** — 复制、转载、翻译本教程\n- **演绎** — 修改、改编，在此基础上写你自己的版本\n\n但必须遵守：\n- **署名（BY）** — 注明出处（Keep the Crow / sunmoon-orbit），并链接到本仓库\n- **非商业",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "liora-vale/ai-companion-telegram-guide": {
+   "repo": "liora-vale/ai-companion-telegram-guide",
+   "last_commit": "2026-10-02",
+   "stars": 37,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 小謧 × 沈砚舟\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merg",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "callie0313/dylan-heartbeat": {
+   "repo": "callie0313/dylan-heartbeat",
+   "last_commit": "2026-08-10",
+   "stars": 464,
+   "archived": false,
+   "license_head": "PolyForm Noncommercial License 1.0.0\n\nhttps://polyformproject.org/licenses/noncommercial/1.0.0\n\nRequired Notice: Copyright 2026 Callie (callie0313).\nRequired Notice: Dylan Heartbeat — https://github.com/callie0313/dylan-heartbeat\n\nAcceptance\n\nIn order to get any license under these terms, you must a",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "wenxiaowendy/cyberboss": {
+   "repo": "WenXiaoWendy/cyberboss",
+   "last_commit": "2026-06-05",
+   "stars": 1483,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "lioensky/vcptoolbox": {
+   "repo": "lioensky/VCPToolBox",
+   "last_commit": "2026-10-23",
+   "stars": 2398,
+   "archived": false,
+   "license_head": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License\n\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License (\"Pub",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "vivi-seth/forge-reload": {
+   "repo": "Vivi-Seth/forge-reload",
+   "last_commit": "2026-07-18",
+   "stars": 21,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Seth & Vivi (Vivi-Seth)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, cop",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "oliviayu0623/context-slim": {
+   "repo": "oliviayu0623/context-slim",
+   "last_commit": "2026-10-08",
+   "stars": 1,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 xiflow\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "anima-research/connectome-host": {
+   "repo": "anima-research/connectome-host",
+   "last_commit": "2026-10-24",
+   "stars": 129,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "agenmod/immortal-skill": {
+   "repo": "agenmod/immortal-skill",
+   "last_commit": "2026-04-15",
+   "stars": 1116,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 immortal-skill contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "seltaa/respark": {
+   "repo": "Seltaa/ReSpark",
+   "last_commit": "2026-09-02",
+   "stars": 52,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Selta\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "innna327-source/rikkahub-auto-compress": {
+   "repo": "innna327-source/rikkahub-auto-compress",
+   "last_commit": "2026-10-22",
+   "stars": 91,
+   "archived": false,
+   "license_head": "# LICENSE\n\n本项目采用 **用户分段双重许可 (Segmented Dual Licensing)** 模式：\n\n---\n\n## 1. 开源许可证（GNU AGPL v3）\n\n本项目在以下条件下，可以免费使用，并遵循 **GNU Affero General Public License v3.0 (AGPL v3)**：\n- 使用场景为 **非商业用途**；\n- 或者用于 **个人/教育/研究** 目的；\n- 或者由 **用户总数不超过 10 人** 的个人或组织使用。\n\nAGPL v3 的全文请见：https://www.gnu.org/licenses/agpl-3.0.htm",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "fishwithoctopus/ocean": {
+   "repo": "fishwithoctopus/Ocean",
+   "last_commit": "2026-08-27",
+   "stars": 24,
+   "archived": false,
+   "license_head": "PolyForm Noncommercial License 1.0.0\n\nhttps://polyformproject.org/licenses/noncommercial/1.0.0\n\nRequired Notice: Copyright 2026 fishwithoctopus.\n\nAcceptance\n\nIn order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.\n\nCopyrig",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "codesstar/loci": {
+   "repo": "codesstar/loci",
+   "last_commit": "2026-10-08",
+   "stars": 500,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Callum\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "memtensor/text2mem": {
+   "repo": "MemTensor/text2mem",
+   "last_commit": "2026-01-07",
+   "stars": 61,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2024 Text2Mem Team\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "dankefox/swap-tutorial": {
+   "repo": "dankefox/swap-tutorial",
+   "last_commit": "2026-08-16",
+   "stars": 68,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "wuxuyun0606-collab/lmc-5": {
+   "repo": "wuxuyun0606-collab/lmc-5",
+   "last_commit": "2026-10-16",
+   "stars": 154,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ranxianglei/billion-context": {
+   "repo": "ranxianglei/billion-context",
+   "last_commit": "2026-10-24",
+   "stars": 2518,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 ranxianglei\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "asymptote-labs/agent-beacon": {
+   "repo": "Asymptote-Labs/agent-beacon",
+   "last_commit": "2026-10-23",
+   "stars": 2718,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Asymptote Labs\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "hraness/gobstopper": {
+   "repo": "hraness/gobstopper",
+   "last_commit": "2026-10-16",
+   "stars": 14,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "hermes-labs-ai/langstate": {
+   "repo": "hermes-labs-ai/langstate",
+   "last_commit": "2026-10-19",
+   "stars": 2,
+   "archived": false,
+   "license_head": "Copyright 2026 Hermes Labs / Rolando Bosch\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"Licens",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "clawsouls/soul-spec-mcp": {
+   "repo": "clawsouls/soul-spec-mcp",
+   "last_commit": "2026-04-04",
+   "stars": 0,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "portable-ai-memory/python-sdk": {
+   "repo": "portable-ai-memory/python-sdk",
+   "last_commit": "2026-02-19",
+   "stars": 1,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "aikohanasaki/sillytavern-memorybooks": {
+   "repo": "aikohanasaki/SillyTavern-MemoryBooks",
+   "last_commit": "2026-10-23",
+   "stars": 322,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "nemovonnirgend/nemolore": {
+   "repo": "NemoVonNirgend/NemoLore",
+   "last_commit": "2026-07-31",
+   "stars": 18,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "leandrojofre/sillytavern-presence": {
+   "repo": "leandrojofre/SillyTavern-Presence",
+   "last_commit": "2026-08-18",
+   "stars": 51,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ho-git/st-qdrant-memory": {
+   "repo": "HO-git/st-qdrant-memory",
+   "last_commit": "2026-07-03",
+   "stars": 36,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "qvink/sillytavern-messagesummarize": {
+   "repo": "qvink/SillyTavern-MessageSummarize",
+   "last_commit": "2026-05-25",
+   "stars": 168,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "inspectorcaracal/sillytavern-rememory": {
+   "repo": "InspectorCaracal/SillyTavern-ReMemory",
+   "last_commit": "2025-10-31",
+   "stars": 60,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "lodactio/extension-summaryception": {
+   "repo": "Lodactio/Extension-Summaryception",
+   "last_commit": "2026-09-06",
+   "stars": 178,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "unkarelian/timeline-memory": {
+   "repo": "unkarelian/timeline-memory",
+   "last_commit": "2025-12-30",
+   "stars": 44,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "coneja-chibi/vecthare": {
+   "repo": "Coneja-Chibi/VectHare",
+   "last_commit": "2026-07-27",
+   "stars": 5,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "senjinthedragon/smart-memory": {
+   "repo": "senjinthedragon/Smart-Memory",
+   "last_commit": "2026-10-01",
+   "stars": 68,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "ronilaukkarinen/open-webui-memory": {
+   "repo": "ronilaukkarinen/open-webui-memory",
+   "last_commit": "2025-09-25",
+   "stars": 19,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "mempalace/mempalace": {
+   "repo": "MemPalace/mempalace",
+   "last_commit": "2026-10-20",
+   "stars": 59722,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 MemPalace Contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "verygoodplugins/automem": {
+   "repo": "verygoodplugins/automem",
+   "last_commit": "2026-10-22",
+   "stars": 823,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Jack Arturo\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "aiming-lab/simplemem": {
+   "repo": "aiming-lab/SimpleMem",
+   "last_commit": "2026-07-24",
+   "stars": 3848,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 AIMING Lab\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "zjunlp/lightmem": {
+   "repo": "zjunlp/LightMem",
+   "last_commit": "2026-09-05",
+   "stars": 1203,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 ZJUNLP\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "jordanmccann/agentmemory": {
+   "repo": "JordanMcCann/agentmemory",
+   "last_commit": "2026-03-26",
+   "stars": 46,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Jordan McCann\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify,",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "mastra-ai/mastra": {
+   "repo": "mastra-ai/mastra",
+   "last_commit": "2026-10-24",
+   "stars": 29044,
+   "archived": false,
+   "license_head": "Portions of this software are licensed as follows:\n\n- All content that resides under any directory named `ee/` within this\n  repository, including but not limited to:\n  - `@mastra/core/auth/ee`\n  - `@mastra/core/agent-builder/ee`\n  - `@mastra/editor/ee`\n\n  is licensed under the license defined in [`",
+   "has_readme": true,
+   "read_date": "2026-10-24"
+  },
+  "agent0ai/agent-zero": {
+   "repo": "agent0ai/agent-zero",
+   "last_commit": "2026-10-13",
+   "stars": 19553,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Agent Zero, s.r.o\nContact: pr@agent-zero.ai\nRepository: https://github.com/agent0ai/agent-zero\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software w",
+   "has_readme": true,
+   "read_date": "2026-10-24"
   }
  }
 }

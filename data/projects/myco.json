@@ -109,9 +109,13 @@
       "basis": "运行位置原文：自己的电脑"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Python 3.13），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "medium",
@@ -267,11 +271,6 @@
   },
   "uncertainties": [
     {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
-    {
       "field": "cost",
       "label": "费用",
       "note": "文档写的是“自己的电脑；偏编程场景”，归不进固定选项"
@@ -328,6 +327,6 @@
       "近一年只有一人维护"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -1,0 +1,337 @@
+{
+  "id": "tidefall",
+  "name": "Tidefall",
+  "repo_url": "https://github.com/Vael-KY/Tidefall",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "边缘项（存的不是对话记忆）",
+    "group_code": "E2",
+    "group_meaning": "存的不是记忆内容（情绪状态、模型权重等）",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Affect & Drives）"
+  ],
+  "info": {
+    "summary": {
+      "value": "Eventide 的 Supabase 版：建表、跑 SQL、打开面板，身体状态就能自动涨落，不需要自己的服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "AI 身体状态",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "Supabase 数据库＋浏览器面板",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "需自己把状态接到聊天前端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的 Supabase 免费账号",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中：照步骤执行 SQL",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "Supabase 账号",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "PolyForm-NC",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "PolyForm 禁止商用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-07-29",
+    "stars": 43,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Affect & Drives）": {
+      "name": "Tidefall",
+      "url": "https://github.com/Vael-KY/Tidefall",
+      "desc": "Supabase-native body-state system for AI companions: six-phase cycles, seven drifting values, 18 short-term events, pg_cron automation, and a browser dashboard. Based on Eventide. PolyForm NC 1.0.0. `SQL/HTML` · `Supabase` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "Tidefall",
+      "v": "排除",
+      "c": "E2",
+      "desc": "Eventide 的 Supabase 版：建表、跑 SQL、打开面板，身体状态就能自动涨落，不需要自己的服务器",
+      "subj": "AI 身体状态",
+      "acc": "Supabase 数据库＋浏览器面板",
+      "cli": "需自己把状态接到聊天前端",
+      "run": "自己的 Supabase 免费账号",
+      "diff": "中：照步骤执行 SQL",
+      "need": "Supabase 账号",
+      "note": "PolyForm 禁止商用"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Supabase 数据库＋浏览器面板"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：需自己把状态接到聊天前端"
+    },
+    "runs_on": {
+      "value": [
+        "own_cloud_account"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的 Supabase 免费账号"
+    },
+    "os": {
+      "value": [
+        "any"
+      ],
+      "status": "auto",
+      "basis": "只在云端运行，用浏览器操作即可"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：照步骤执行 SQL"
+    },
+    "cost": {
+      "value": "",
+      "status": "unknown",
+      "basis": "费用原文未识别：Supabase 账号；自己的 Supabase 免费账号；PolyForm 禁止商用"
+    },
+    "accounts_needed": {
+      "value": [],
+      "status": "unknown",
+      "basis": "账号原文未识别：Supabase 账号"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身体状态"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：的 Supabase 版：建表、跑 SQL、打开面板，身体状态就能自动涨落，不需要自己的服务器；Sup"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "own_cloud"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：PolyForm-NC"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ON 存在数据库表中，随时修改 | | 梦境系统 | 完整支持 | 预留接口，需自”经核对不算：梦境接口留空未实现"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "cost",
+      "label": "费用",
+      "note": "文档写的是“Supabase 账号；自己的 Supabase 免费账号；PolyForm 禁止商用”，归不进固定选项"
+    },
+    {
+      "field": "accounts_needed",
+      "label": "需要的账号",
+      "note": "文档写的是“Supabase 账号”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 43,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-07-29",
+    "days_since_commit": 88,
+    "commits_1y": 12,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "PolyForm Noncommercial License 1.0.0\n\n<https://polyformproject.org/licenses/noncommercial/1.0.0>\n\nAcceptance\n\nIn order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.\n\nCopyright License\n\nThe licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose. However, you may only distribute the software according to Distribution License and make changes or new works based on the software according to Changes and New Works License.\n\nDistribution License\n\nThe licensor grants you an additional copyright license to distribute copies of the software. Your license to distribute covers distributing the software with changes and new works permitted by Changes and New Works License.\n\nNotices\n\nYou must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL above, as well as copies of any plain-text lines beginning with Required Notice: that the licensor provided with the software. For example:\n\nRequired Notice: Copyright 2026 V & K (h"
+    },
+    "license_label": "PolyForm-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本",
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：边缘项（存的不是对话记忆）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

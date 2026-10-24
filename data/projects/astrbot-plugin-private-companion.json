@@ -1,0 +1,325 @@
+{
+  "id": "astrbot-plugin-private-companion",
+  "name": "我会永远陪着你（AstrBot 陪伴插件）",
+  "repo_url": "https://github.com/menglimi/astrbot_plugin_private_companion",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "AstrBot 角色陪伴插件：角色有自己的状态和日程，记得共同经历和群里的人，会低频主动联系",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "AI 生活状态＋共同经历＋熟人资料",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "AstrBot 插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "AstrBot（QQ、微信、Telegram 等）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "AstrBot 所在的电脑或服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥（在 AstrBot 里配置）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "无 LICENSE 文件",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "7.0 为测试版，作者建议暂用 6.7",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-24",
+    "stars": 443,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "astrbot_plugin_private_companion",
+      "url": "https://github.com/menglimi/astrbot_plugin_private_companion",
+      "desc": "Humanized companion bundle for AstrBot: continuous persona state, daily life schedule, important dates, diary, and low-frequency proactive messages. 60+ features. `Python` · `AstrBot` · `ready`."
+    },
+    "人工筛选": {
+      "name": "我会永远陪着你（AstrBot 陪伴插件）",
+      "v": "纳入",
+      "c": "",
+      "desc": "AstrBot 角色陪伴插件：角色有自己的状态和日程，记得共同经历和群里的人，会低频主动联系",
+      "subj": "AI 生活状态＋共同经历＋熟人资料",
+      "acc": "AstrBot 插件",
+      "cli": "AstrBot（QQ、微信、Telegram 等）",
+      "run": "AstrBot 所在的电脑或服务器",
+      "diff": "中",
+      "need": "模型 API 密钥（在 AstrBot 里配置）",
+      "note": "7.0 为测试版，作者建议暂用 6.7"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：AstrBot 插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "astrbot",
+        "telegram",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：AstrBot（QQ、微信、Telegram 等）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：AstrBot 所在的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "装在 AstrBot 里，随宿主运行（宿主支持 Windows/macOS/Linux，推断）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥（在 AstrBot 里配置）"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 生活状态＋共同经历＋熟人资料"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“、媒体及设备观察数据，本轮仍有外部保留或暂缓迁移的部分。不要因某项配置已接续，就删除对应旧拓展的数据。 确认内置能力接管后，停用承担同一功能的旧独立拓展，避免重复”，没提自动衰减，建议值 manual_only；有归档：“对来源身份、可见性和治理状态后导入；原始归档与可检索导入分别记录 | | 已学习表达”"
+    },
+    "human_review": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "no_license",
+      "status": "auto",
+      "basis": "许可证原文：无 LICENSE 文件"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“据目录。 3. **打开「陪伴小屋 → 开始使用」。** 查看识别出的旧版账号、人格、私聊对象和模型。只有一个匹配目标时会自动预选；有多个候选或无法确认归属时，需要”（已核对）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“AstrBot 角色陪伴插件：角色有自己的状态和日程，记得共同经历和群里的人，会低频主动联系；AI 生”"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“| | 关系与记忆 | 熟人卡、用户／群聊关系、世界知识、来源记忆、经历检索、反思与修订 | | 主动联系 | 结合角色生活、近期对话和关系形成联系候选，检查时机”（已核对）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“甚至在其他平台再次相遇。 - 它会看、会说、会创作、会成长、会睡觉、会做梦、会生情绪、会饿，也会在授权范围内整理本地资料。 - 这就是它，这就是我，若它足够像我，它”（已核对）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“有自己的状态和日程，记得共同经历和群里的人，会低频主动联系；AI 生活状态＋共同经历＋熟人资料；AstrBo”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ate_companion-6.7.0-rollback.zip` 作为 7.0.0 发布附件提”经核对不算：rollback 指插件版本回退包"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“系候选，检查时机、频率、权限及投递结果 | | 表达与学习 | 回复风格、分段、TTS、表情，以及表达学习和群聊行为模仿 | | 运行诊断 | Token 与缓存观测”（已核对）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 443,
+    "archived": false,
+    "release_count": 189,
+    "last_commit": "2026-10-24",
+    "days_since_commit": 0,
+    "commits_1y": 1051,
+    "contributors_1y": 44,
+    "license_files": [],
+    "license_text_head": {},
+    "license_label": "无许可证文件",
+    "license_category": "no_license",
+    "flags": [
+      "没有许可证文件"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有许可证文件"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

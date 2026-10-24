@@ -1,0 +1,324 @@
+{
+  "id": "optmem",
+  "name": "OptMem",
+  "repo_url": "https://github.com/VictorTaelin/OptMem",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Memory & Identity）"
+  ],
+  "info": {
+    "summary": {
+      "value": "极简的 agent 永久记忆：一段 426 token 的提示加一个脚本，记录只追加，旧记录自动折叠成可展开的摘要树",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "AI 自己记的笔记（事实、决定）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "命令行脚本＋指令文件（AGENTS.md / CLAUDE.md）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex 等命令行 agent",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中：一条命令安装，再把提示贴进指令文件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "无 LICENSE 文件",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "无许可证文件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-07-30",
+    "stars": 2319,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "OptMem",
+      "url": "https://github.com/VictorTaelin/OptMem",
+      "desc": "Memory for CLI agents: an append-only note log plus a binary tree of one-line summaries the agent writes itself; wake reads a fixed-size view, zoom opens a line down to raw notes. No license. `Python` · `Any` · `infra`."
+    },
+    "人工筛选": {
+      "name": "OptMem",
+      "v": "纳入",
+      "c": "",
+      "desc": "极简的 agent 永久记忆：一段 426 token 的提示加一个脚本，记录只追加，旧记录自动折叠成可展开的摘要树",
+      "subj": "AI 自己记的笔记（事实、决定）",
+      "acc": "命令行脚本＋指令文件（AGENTS.md / CLAUDE.md）",
+      "cli": "Claude Code、Codex 等命令行 agent",
+      "run": "自己的电脑",
+      "diff": "中：一条命令安装，再把提示贴进指令文件",
+      "need": "无",
+      "note": "无许可证文件"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "cli_tool"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：命令行脚本＋指令文件（AGENTS.md / CLAUDE.md）"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Codex 等命令行 agent"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 和原表都没提到系统"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：一条命令安装，再把提示贴进指令文件"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 自己记的笔记（事实、决定）"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“tree node into its two halves | | `memo forget <lo>-<hi>` | drop a bad summary; the ne”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "cli：脚本，记录只追加，旧记录自动折叠成可展开的摘要树；命令行脚本＋指令文件（AGENTS.md / CLAUD；tools：its two halves | | `memo forget <lo>-<hi>` | drop a bad"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "no_license",
+      "status": "auto",
+      "basis": "许可证原文：无 LICENSE 文件"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“. ## Commands | | | |---|---| | `memo wake` | read the memory — the first command”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ote \"...\"` | record one memory: one line, up to 28”经核对不算：命中的是命令表格"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 2319,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-07-30",
+    "days_since_commit": 85,
+    "commits_1y": 42,
+    "contributors_1y": 3,
+    "license_files": [],
+    "license_text_head": {},
+    "license_label": "无许可证文件",
+    "license_category": "no_license",
+    "flags": [
+      "没有正式发布版本",
+      "没有许可证文件"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有正式发布版本",
+      "没有许可证文件"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "id": "vcptoolbox",
+  "name": "VCPToolBox",
+  "repo_url": "https://github.com/lioensky/VCPToolBox",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "介于聊天前端和模型接口之间的中间件：多层持久记忆，时间、环境等信息主动注入，插件引擎",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "多层对话记忆＋环境感知",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "网关（中间件）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "OpenAI 兼容前端（作者推荐 VCPChat）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高：作者提醒非专业用户谨慎部署",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "CC BY-NC",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "专有许可、禁止商用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-23",
+    "stars": 2398,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "VCPToolBox",
+      "url": "https://github.com/lioensky/VCPToolBox",
+      "desc": "Industrial middleware between LLM APIs and frontends: unified command protocol, persistent multi-level memory, distributed plugin engine, and multi-agent collaboration. Proprietary, non-commercial. `Python` · `Self-host` · `verify`."
+    },
+    "人工筛选": {
+      "name": "VCPToolBox",
+      "v": "待定",
+      "c": "P4",
+      "desc": "介于聊天前端和模型接口之间的中间件：多层持久记忆，时间、环境等信息主动注入，插件引擎",
+      "subj": "多层对话记忆＋环境感知",
+      "acc": "网关（中间件）",
+      "cli": "OpenAI 兼容前端（作者推荐 VCPChat）",
+      "run": "自己的电脑或服务器",
+      "diff": "高：作者提醒非专业用户谨慎部署",
+      "need": "模型 API 密钥",
+      "note": "专有许可、禁止商用"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway",
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：网关（中间件）"
+    },
+    "compatible_clients": {
+      "value": [
+        "openai_compatible"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：OpenAI 兼容前端（作者推荐 VCPChat）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：作者提醒非专业用户谨慎部署"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：多层对话记忆＋环境感知"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：量 | |:---:|:---:| | ![服务器面板](docs/image/示例1服务器面板.jpg；files：预处理 / 混合），全部支持分布式部署。工具调用走纯文本标记协议，任何能输出文本的模型都能用，不依赖原生"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：CC BY-NC"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“博社会基础设施。 让 AI 拥有真正的灵魂。这句话听起来浪漫，但它背后是一整套冷静”经核对不算：宣传口号"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“检索，而是像直觉一样的浮现。 它的联想不走\"找相似文本\"的老路，而是沿着逻辑、情感、因果的脉络流动——想到下雨，会联想到上次淋雨感冒，想到那天有人来照顾自己，想到”（已核对）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“。它处在一个\"什么都不知道\"的默认状态，世界对它而言是黑的。想知道任何事，它必须主动发起一次查询——查时间、查天气、查记忆、查日程。信息靠 AI 去\"拉\"。 但这里藏”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 2398,
+    "archived": false,
+    "release_count": 3,
+    "last_commit": "2026-10-23",
+    "days_since_commit": 1,
+    "commits_1y": 2327,
+    "contributors_1y": 63,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License\n\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License (\"Public License\"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\n\nSection 1 – Definitions.\n\na. Adapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is sync"
+    },
+    "license_label": "CC BY-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

@@ -36,6 +36,10 @@ def job(doc):
     m = re.match(r"https?://github\.com/([^/]+)/([^/#?]+)", doc["repo_url"])
     if not m:
         return doc["id"], "不在 GitHub 上，跳过"
+    local = ROOT / "cache/candidate_readmes" / f"{m.group(1)}__{m.group(2)}.md"  # fetch_repo_meta.py 已读过的
+    if local.exists() and doc["id"] not in README_PATH:
+        (CACHE / f"{doc['id']}.md").write_text(local.read_text(encoding="utf-8"), encoding="utf-8")
+        return doc["id"], "ok"
     base = f"https://raw.githubusercontent.com/{m.group(1)}/{m.group(2)}/HEAD/"
     for name in ([README_PATH[doc["id"]]] if doc["id"] in README_PATH else CANDIDATES):
         try:

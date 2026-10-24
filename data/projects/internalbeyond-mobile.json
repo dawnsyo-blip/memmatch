@@ -201,7 +201,7 @@
         "files"
       ],
       "status": "auto",
-      "basis": "dashboard：mary> **Home**：伪 iOS 主屏三面板：Desk 分页桌面（应用矩阵 + 月历 / 便笺；files：er JSON / JSONL logs, or plain-text transcripts with an appr"
+      "basis": "dashboard：与 `apps/` 文件夹在同一目录，用手机或电脑浏览器打开 `index.html`（推荐 Chrome）；files：er JSON / JSONL logs, or plain-text transcripts with an appr"
     },
     "export": {
       "value": [
@@ -376,6 +376,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

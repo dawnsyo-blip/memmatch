@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "论文表 9（SuperMemory）"
+    "论文表 9（SuperMemory）",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -55,7 +56,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署",
+      "value": "插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署；评测：LongMemEval-S 85.2（厂商自报）",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -89,7 +90,8 @@
       "diff": "低到中（托管）",
       "need": "Supermemory 账号",
       "note": "插件调用托管 API，数据经第三方；论文表 9 已列"
-    }
+    },
+    "评测榜单": "LongMemEval-S 85.2（厂商自报）"
   },
   "normalized": {
     "access": {
@@ -134,7 +136,7 @@
     "cost": {
       "value": "",
       "status": "unknown",
-      "basis": "费用原文未识别：Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署"
+      "basis": "费用原文未识别：Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署；评测：LongMemEval-S 85.2（厂商自报）"
     },
     "accounts_needed": {
       "value": [
@@ -289,7 +291,7 @@
     {
       "field": "cost",
       "label": "费用",
-      "note": "文档写的是“Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署”，归不进固定选项"
+      "note": "文档写的是“Supermemory 账号；默认托管 API；可自托管；插件调用托管 API，数据经第三方；论文表 9 已列；支持自部署；评测：LongMemEval-S 85.2（厂商自报）”，归不进固定选项"
     },
     {
       "field": "export",
@@ -326,6 +328,6 @@
       "对话内容默认经过第三方服务器"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

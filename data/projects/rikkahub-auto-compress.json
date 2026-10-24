@@ -1,0 +1,313 @@
+{
+  "id": "rikkahub-auto-compress",
+  "name": "RikkaHub Jude",
+  "repo_url": "https://github.com/innna327-source/rikkahub-auto-compress",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "P1",
+    "group_meaning": "自带助手的完整应用：记忆不能单独接到用户已有的助手上，愿意换助手才适用",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Companion Clients & Workspaces）"
+  ],
+  "info": {
+    "summary": {
+      "value": "非官方 RikkaHub 安卓客户端：长对话自动滚动摘要和上下文压缩，摘要可查看编辑，可定时自主唤醒",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "长对话摘要",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "独立应用（安卓）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "自带",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "手机（安卓）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "低：安装 APK",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-22",
+    "stars": 91,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Companion Clients & Workspaces）": {
+      "name": "rikkahub-auto-compress",
+      "url": "https://github.com/innna327-source/rikkahub-auto-compress",
+      "desc": "Unofficial RikkaHub fork for automatic rolling summaries and context compression, based on the RikkaHub 2.2.5 code line. `Kotlin` · `Android` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "RikkaHub Jude",
+      "v": "待定",
+      "c": "P1",
+      "desc": "非官方 RikkaHub 安卓客户端：长对话自动滚动摘要和上下文压缩，摘要可查看编辑，可定时自主唤醒",
+      "subj": "长对话摘要",
+      "acc": "独立应用（安卓）",
+      "cli": "自带",
+      "run": "手机（安卓）",
+      "diff": "低：安装 APK",
+      "need": "模型 API 密钥",
+      "note": ""
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：独立应用（安卓）"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带"
+    },
+    "runs_on": {
+      "value": [
+        "phone"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：手机（安卓）"
+    },
+    "os": {
+      "value": [
+        "android"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：android（手机（安卓）；低：安装 APK；<div align=\"ce）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：安装 APK"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：长对话摘要"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“圈按助手隔离，每个助手拥有自己的动态时间线。 - 支持 AI 发布、点赞、评论、删除、日期筛选和刷新诊断。 - 匿名提问箱支持延迟回答、用户一次性回答和 AI 后续”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": ""
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“onses API。 - 支持单独配置 OCR 接口和模型，不影响普通聊天使用的供应商”经核对不算：OCR 用于识别聊天图片，不是记忆"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“iniMax Speech 2.8 整体情绪模式。 - 通话中的提示词、文本清洗、标”经核对不算：指语音合成的情绪模式"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“长对话自动滚动摘要和上下文压缩，摘要可查看编辑，可定时自主唤醒；长对话摘要；独立应用（安卓）；自带”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“。 - 支持主动语音通话、通话记录、通话时长、翻译和已保存音频回放。 - 支持 ElevenLabs v3 语音标签和 MiniMax Speech 2.8 整体情绪模式。 - 通”（已核对）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 91,
+    "archived": false,
+    "release_count": 22,
+    "last_commit": "2026-10-22",
+    "days_since_commit": 2,
+    "commits_1y": 93,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "# LICENSE\n\n本项目采用 **用户分段双重许可 (Segmented Dual Licensing)** 模式：\n\n---\n\n## 1. 开源许可证（GNU AGPL v3）\n\n本项目在以下条件下，可以免费使用，并遵循 **GNU Affero General Public License v3.0 (AGPL v3)**：\n- 使用场景为 **非商业用途**；\n- 或者用于 **个人/教育/研究** 目的；\n- 或者由 **用户总数不超过 10 人** 的个人或组织使用。\n\nAGPL v3 的全文请见：https://www.gnu.org/licenses/agpl-3.0.html\n\n> 注意：即便在 AGPL v3 下，您仍然需要遵守协议条款，例如公开源代码等义务。\n\n---\n\n## 2. 商业许可证（Commercial License）\n\n如果您的使用场景不符合上述条件，例如：\n- 用于 **商业用途**（直接或间接产生商业利益的服务或产品）；\n- 或者 **用户总数超过 10 人**；\n- 或者您希望避免 AGPL v3 的源代码开源义务；\n\n那么您必须事先与项目维护者签署 **商业许可证 (Commercial License)**。\n\n申请商业授权请联系：\n- 邮箱：re_dev@qq.com\n\n---\n\n## 3. 许可政策更新\n\n项目维护者保留更新许可政策的权利。更新将通过官方渠道（如代码仓库、官方网站）进行通知。\n\n---\n\n# LICENSE (English)\n\nThis project adopts a **Segmented Dual Licensing** model:\n\n---\n\n## 1. Open Source License (GNU AGPL v3)\n\nYou may use this project under the **GNU Affero General Public License v3.0 (AGPL v3)** if one of the following applies:\n- Your usage is strictly **non-commercial**;\n- Your usage is for **personal, educational, or research** purposes;\n- You are an individual or organization with **no more than 10 total users**.\n\nFull text of AGPL v3: https://www.gnu.org/licenses/agpl-3.0.html\n\n> Note: Even under AGPL v3, you must comply with its ob"
+    },
+    "license_label": "AGPL-3.0",
+    "license_category": "copyleft",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

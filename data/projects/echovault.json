@@ -130,6 +130,7 @@
   "normalized": {
     "access": {
       "value": [
+        "guide",
         "library",
         "mcp"
       ],
@@ -352,6 +353,6 @@
     "reasons": [
       "代码不在 GitHub 上，无法自动检查"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

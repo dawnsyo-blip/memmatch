@@ -16,6 +16,12 @@
 
 两个脚本共用 `build_candidates.collect_rows()`，改筛选结论后两条命令都要跑。
 
+补充新候选（2026-10-24 起的做法）：
+- `python -X utf8 scripts/fetch_repo_meta.py owner/repo ...`（或 `--missing`）补读仓库的最新提交、Star、许可证，写进 `repo_meta.json`，README 存到 `cache/candidate_readmes/`，读 README 写筛选结论用
+- 结论写进 `candidate_review.py` 的 `NEW`；不在快照清单里的条目，来源写进 `EXTRA_SOURCES`；评测成绩写进 `BENCH`
+- awesome-ai-companion 由快照解析：四个记忆相关栏目整栏收入，不收的写进 `COMPANION_SKIP`；其它栏目只取 `COMPANION_PICK`
+- 然后 build_candidates → import_projects → fetch_readmes（会直接复用 candidate_readmes）→ normalize → 核对新项目的特性命中 → check_health --resume → decide_inclusion
+
 阶段 1（字段规范化）：
 - `python -X utf8 scripts/fetch_readmes.py` 把 README 缓存到 `cache/readmes/`（不进仓库）
 - `python -X utf8 scripts/normalize.py` 写入各项目的 `normalized`，生成 `docs/review-normalization.md/.xlsx`
@@ -33,6 +39,7 @@
 ## 踩过的坑
 
 - **Windows 控制台是 GBK**：打印中文或 emoji 会 `UnicodeEncodeError`。用 `python -X utf8`。注意 `python -I`（隔离模式）会忽略 `PYTHONIOENCODING` 环境变量，只能靠 `-X utf8`。
+- **代理只设了 `HTTP_PROXY`**：curl 和 Python 的 urllib 对 https 地址只认 `HTTPS_PROXY`，于是直连 raw.githubusercontent.com 一直超时。curl 加 `-x http://127.0.0.1:1080`，跑脚本前加 `HTTPS_PROXY=$HTTP_PROXY`（`fetch_repo_meta.py` 已自动补上）。
 - **GitHub 网络不稳**：这台机器经本地代理（127.0.0.1:1080）上网，github.com 和 raw.githubusercontent.com 时常整段时间连不上，脚本要带重试，并发别超过 2～3。
 - **GitHub API 未登录每小时只有 60 次**，没装 `gh`。批量读仓库改用 `git clone --depth 1 --filter=blob:none --no-checkout`，再 `git show HEAD:README.md`；Star 和归档状态从仓库网页 HTML 里的 `"stargazerCount"`、`"isArchived"` 取。
 - **contents/readme 接口会截断大文件**：awesome-mcp-servers 的 README 有 1.4MB，接口只给了 512000 字节。改用 `git/blobs/{sha}` 接口或 raw 地址。
@@ -48,3 +55,7 @@
 - **GPL/AGPL 标准条款正文里就有 noncommercially 字样**，不能据此判“禁止商用”；只对自定义许可检查。
 - **机器人账号只按作者邮箱精确匹配**，`bot@` 会误伤名字带 bot 的作者（g1itchbot），导致“近一年没有人提交”的误报。
 - 下载的第三方仓库一律放在 scratchpad 里，只读 README/LICENSE，不运行其中任何代码。
+- **新项目的特性命中要单独核对**：`CHECKED` 里的特性对新项目也直接判“有”，但新 README 带来新的误伤（截图标题算多模态、`wake` 算换窗、示例提示词里的“情绪”“人设”、`pinned versions`、`follow your dreams`）。补充项目后用 scratchpad 脚本导出新项目的 README 命中逐条看，误判写进 `README_REJECT`；我们自己写的说明文字也会误伤（“按项目隔离”算记错防护、“合并”算离线整理），写进 `STRUCTURED_REJECT`。
+- **评测成绩写进备注会被特性规则扫到**：目前没有误伤，但改 `BENCH` 文案时注意别写进“时间线”“原话”这类特性关键词。
+- **检索工程（RAG）合集对本项目几乎没用**：全是文档问答框架、向量库和论文；上下文工程合集也以编程 agent 工具为主。面向聊天用户的上下文/记忆工具集中在酒馆（SillyTavern）、Open WebUI、AstrBot、Kelivo 这类前端的插件生态里。
+- **MemBench、REALTALK、DuLeMon 没有系统排行**，只是数据集论文；LongMemEval、BEAM、LoCoMo 的成绩多为厂商自报，口径不一（MemPalace 的 96.6% 只测检索）。

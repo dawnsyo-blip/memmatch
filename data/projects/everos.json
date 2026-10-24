@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -53,6 +54,11 @@
       "value": "Apache-2.0",
       "source": "仓库 LICENSE 文件开头自动识别",
       "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "评测：MemTensor 统一评测：LoCoMo 82.8、LongMemEval-S 80.4",
+      "source": "Claude 据各评测榜单与厂商公布的成绩整理（多为自报）",
+      "read_date": "2026-10-10"
     }
   },
   "repo_health": {
@@ -80,7 +86,8 @@
       "diff": "高",
       "need": "OpenRouter API 密钥",
       "note": ""
-    }
+    },
+    "评测榜单": "MemTensor 统一评测：LoCoMo 82.8、LongMemEval-S 80.4"
   },
   "normalized": {
     "access": {
@@ -112,7 +119,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：macos（fice documents: ```bash brew install --cask libreoffice）；linux（y libreoffice # Debian / Ubuntu ``` ### For Co）；ios（Agent NPC Experience An iOS sci-fi mystery game wher）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：macos（fice documents: ```bash brew install --cask libreoffice）；linux（y libreoffice # Debian / Ubuntu ``` ### For Co）；ios（Agent NPC Experience An iOS sci-fi mystery game wher）；用跨平台运行时安装（Python 3.12），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "high",
@@ -316,6 +323,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

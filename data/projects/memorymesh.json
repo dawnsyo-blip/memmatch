@@ -151,9 +151,11 @@
       "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“l, providing context for the AI. *(The `delete` and `update` tools have a generic desc”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没找到查看或修改记忆的方式"
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：data/memory.json`. #### Memory Viewer The Memory Viewer is a"
     },
     "export": {
       "value": [],
@@ -275,11 +277,6 @@
       "note": "文档写的是“故事世界与角色”，归不进固定选项"
     },
     {
-      "field": "human_review",
-      "label": "能否查看和修改记忆",
-      "note": "没找到查看或修改记忆的方式"
-    },
-    {
       "field": "export",
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
@@ -318,6 +315,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

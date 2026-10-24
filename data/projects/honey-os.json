@@ -199,7 +199,7 @@
         "dashboard"
       ],
       "status": "auto",
-      "basis": ""
+      "basis": "dashboard：s ``` 你可以直接用 Finder、编辑器或浏览器打开。 对用户来说，这不是“配置了一个 MCP”，而"
     },
     "export": {
       "value": [],
@@ -372,6 +372,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

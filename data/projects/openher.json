@@ -159,7 +159,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：macos（b；中：一键脚本＋改 .env＋下载客户端；后端＋macOS 客户端，可接微信；人格从驱力与记忆中涌现，不靠固）；android（都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · **同在** — *走）；ios（她读懂你自己都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · *）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：macos（b；中：一键脚本＋改 .env＋下载客户端；后端＋macOS 客户端，可接微信；人格从驱力与记忆中涌现，不靠固）；android（都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · **同在** — *走）；ios（她读懂你自己都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · *）；用跨平台运行时安装（Python 3.11），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "medium",
@@ -368,6 +368,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

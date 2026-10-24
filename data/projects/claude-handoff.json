@@ -84,9 +84,11 @@
   },
   "normalized": {
     "access": {
-      "value": [],
-      "status": "unknown",
-      "basis": "接入方式原文未识别：命令行"
+      "value": [
+        "cli_tool"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：命令行"
     },
     "compatible_clients": {
       "value": [
@@ -272,11 +274,6 @@
   },
   "uncertainties": [
     {
-      "field": "access",
-      "label": "接入方式",
-      "note": "文档写的是“命令行”，归不进固定选项"
-    },
-    {
       "field": "write_mode",
       "label": "记忆怎么写入",
       "note": "README 没提写入方式"
@@ -318,6 +315,6 @@
       "近一年只有一人维护"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

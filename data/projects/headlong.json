@@ -1,0 +1,326 @@
+{
+  "id": "headlong",
+  "name": "Headlong",
+  "repo_url": "https://github.com/laude-institute/headlong",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "P1",
+    "group_meaning": "自带助手的完整应用：记忆不能单独接到用户已有的助手上，愿意换助手才适用",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "持续思考的 agent：两次对话之间也在自我独白，有自己的兴趣和项目，有话说时主动找你；可接 Slack、Telegram",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "AI 自身思绪与记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "独立 agent（带面板）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "自带面板；Slack、Telegram",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑（建议 Docker 沙盒）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中：一行命令安装",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥（或本地模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "alpha 研究软件，agent 会执行系统命令；偏团队共享",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-23",
+    "stars": 1227,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "Headlong",
+      "url": "https://github.com/laude-institute/headlong",
+      "desc": "Open-source agent microharness with persistent agency and inner monologue loops via recursive LLMs (`shellm`), keeping continuous thought streams, memory, and proactive outreach. Apache-2.0. `Bash` · `Self-host` · `ready`."
+    },
+    "人工筛选": {
+      "name": "Headlong",
+      "v": "待定",
+      "c": "P1",
+      "desc": "持续思考的 agent：两次对话之间也在自我独白，有自己的兴趣和项目，有话说时主动找你；可接 Slack、Telegram",
+      "subj": "AI 自身思绪与记忆",
+      "acc": "独立 agent（带面板）",
+      "cli": "自带面板；Slack、Telegram",
+      "run": "自己的电脑（建议 Docker 沙盒）",
+      "diff": "中：一行命令安装",
+      "need": "模型 API 密钥（或本地模型）",
+      "note": "alpha 研究软件，agent 会执行系统命令；偏团队共享"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：独立 agent（带面板）"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained",
+        "telegram"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带面板；Slack、Telegram"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（建议 Docker 沙盒）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：linux（on the Docker host. On Linux, the model server must l）；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：一行命令安装"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥（或本地模型）"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 自身思绪与记忆"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "status": "needs_review",
+      "basis": "README：“ory stays in context at exponentially decaying resolution. Recent entries appear ve”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：Slack、Telegram；独立 agent（带面板）；alpha 研究软件，agent 会执行系统命；cli：m** | Multi-provider LLM CLI. Anthropic, OpenAI, Gemi"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ada start # pause / resume its mind ada dash”经核对不算：resume 是暂停／恢复 agent"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“cent entries appear verbatim, and older entrie”经核对不算：只说最近的日志条目显示原文，旧的会压缩"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“all of its conversations in a single timeline and decides who to reply to and when. T”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“对话之间也在自我独白，有自己的兴趣和项目，有话说时主动找你；可接 Slack、Telegram；AI 自身”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 1227,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-10-23",
+    "days_since_commit": 1,
+    "commits_1y": 890,
+    "contributors_1y": 33,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for ma"
+    },
+    "license_label": "Apache-2.0",
+    "license_category": "permissive",
+    "flags": [
+      "没有正式发布版本"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有正式发布版本"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

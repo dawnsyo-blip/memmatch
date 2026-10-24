@@ -35,7 +35,7 @@
           "id": "mcp_client",
           "label": "支持 MCP 的第三方聊天软件（如 Cherry Studio、Kelivo、ChatBox）",
           "help": "MCP（模型上下文协议）是让 AI 调用外部工具的通用接口。软件设置里有“MCP 服务器”一项的就算。",
-          "effect": {"require": {"compatible_clients": ["any_mcp_client"]}}
+          "effect": {"require": {"compatible_clients": ["any_mcp_client", "kelivo"]}}
         },
         {
           "id": "custom_endpoint",

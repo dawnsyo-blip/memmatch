@@ -111,7 +111,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：windows（s/server.py\"] ``` Or on Windows: ```json \"args\": [\"C:/Us）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：windows（s/server.py\"] ``` Or on Windows: ```json \"args\": [\"C:/Us）；用跨平台运行时安装（Python 3.8），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "high",
@@ -313,6 +313,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

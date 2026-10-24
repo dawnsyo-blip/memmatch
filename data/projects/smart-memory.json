@@ -1,0 +1,323 @@
+{
+  "id": "smart-memory",
+  "name": "Smart Memory",
+  "repo_url": "https://github.com/senjinthedragon/Smart-Memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "网络检索（酒馆记忆扩展）"
+  ],
+  "info": {
+    "summary": {
+      "value": "后台自动运行的记忆：长篇故事不跑偏、记得本次会话、跨聊天记住学到的事实；群聊里每个角色各有记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "会话记忆＋长期事实",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "SillyTavern 扩展",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "SillyTavern",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "SillyTavern 所在的电脑或服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "低",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "无（用酒馆已连接的模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "AGPL",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-01",
+    "stars": 68,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "Smart Memory",
+      "v": "纳入",
+      "c": "",
+      "desc": "后台自动运行的记忆：长篇故事不跑偏、记得本次会话、跨聊天记住学到的事实；群聊里每个角色各有记忆",
+      "subj": "会话记忆＋长期事实",
+      "acc": "SillyTavern 扩展",
+      "cli": "SillyTavern",
+      "run": "SillyTavern 所在的电脑或服务器",
+      "diff": "低",
+      "need": "无（用酒馆已连接的模型）",
+      "note": "AGPL"
+    },
+    "来源": "网络检索（酒馆记忆扩展）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：SillyTavern 扩展"
+    },
+    "compatible_clients": {
+      "value": [
+        "sillytavern"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：SillyTavern"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：SillyTavern 所在的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "装在 SillyTavern 里，随宿主运行（宿主支持 Windows/macOS/Linux，推断）"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无（用酒馆已连接的模型）"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：会话记忆＋长期事实"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "status": "needs_review",
+      "basis": "README：“n the settings panel header: **clean** (fades after a few seconds) or **N conflicts**”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ate entries for the same person under different nam”经核对不算：说的是合并重复的人物条目"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“hat-scoped and do not carry over when a new chat begins. Cards can also be filled in or edited”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ference them. Where one memory has replaced anothe”经核对不算：说的是记忆之间的取代关系"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“meaning rather than exact wording, which catches far”经核对不算：说的是按意思而非原文比对"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“entity - Last seen message index - A **timeline button** that expands a vertical timeli”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“Over time, memories are automatically consolidated so the same information does not pile”（已核对）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“tiers: - **Character state** - current emotional state, active goals, relationship pos”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“han left alongside the newer truth as a contradiction. Each memory is assigned a set of **ac”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 68,
+    "archived": false,
+    "release_count": 41,
+    "last_commit": "2026-10-01",
+    "days_since_commit": 23,
+    "commits_1y": 755,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of i"
+    },
+    "license_label": "AGPL-3.0",
+    "license_category": "copyleft",
+    "flags": [
+      "近一年只有一人维护"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

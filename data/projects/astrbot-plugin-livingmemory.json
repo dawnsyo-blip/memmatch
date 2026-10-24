@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 16 项，③类）"
+    "AI Companion Atlas（原表第 16 项，③类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "衰减，访问会强化",
       "遗忘的终点": "归档",
       "整合（合并、摘要）方式": "达到轮数后总结成长期记忆（README 未细述合并方式）"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "astrbot_plugin_livingmemory",
+      "url": "https://github.com/lxfight-s-Astrbot-Plugins/astrbot_plugin_livingmemory",
+      "desc": "Long-term memory plugin for AstrBot with dynamic memory lifecycle. `Python` · `AstrBot` · `ready`."
     }
   },
   "normalized": {
@@ -151,9 +157,13 @@
       "basis": "运行位置原文：AstrBot 所在的电脑或服务器；AstrBot 所在的电脑或服务器"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "装在 AstrBot 里，随宿主运行（宿主支持 Windows/macOS/Linux，推断）"
     },
     "difficulty": {
       "value": "low",
@@ -324,11 +334,6 @@
   },
   "uncertainties": [
     {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
-    {
       "field": "export",
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
@@ -361,6 +366,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

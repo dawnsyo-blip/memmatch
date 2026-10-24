@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 6 项，①类）"
+    "AI Companion Atlas（原表第 6 项，①类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "明确不做遗忘曲线（作者已把热度衰减代码封存）",
       "遗忘的终点": "原文永不删除；被取代的条目退出排名",
       "整合（合并、摘要）方式": "无自动整合；只做带引用的摘录"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "Paramecium",
+      "url": "https://github.com/Shitsuten/paramecium",
+      "desc": "Gateway memory architecture that keeps verbatim chat as the source of truth, uses vectors only as indexes, and retrieves original text instead of replacing it with summaries. `JavaScript` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -157,7 +163,7 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：linux（自有 Linux 服务器（VPS）；自有 Linux 服务器（VP）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：linux（自有 Linux 服务器（VPS）；自有 Linux 服务器（VP）；用跨平台运行时安装（Node.js 18），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "high",
@@ -367,6 +373,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

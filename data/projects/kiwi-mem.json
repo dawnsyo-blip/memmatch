@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 15 项，③类）"
+    "AI Companion Atlas（原表第 15 项，③类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "热度按半衰期衰减，被召回则升温；每晚软化老记忆细节（默认冷却 21 天）",
       "遗忘的终点": "又冷又老的记忆按热度阈值清走；锁定的永不退役",
       "整合（合并、摘要）方式": "Dream 三层（清理→融合成场景→前瞻推断）；日→周→月→季→年层级摘要"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "kiwi-mem",
+      "url": "https://github.com/LucieEveille/kiwi-mem",
+      "desc": "AI companion memory system: vector search, memory heat ranking, dream/sleep consolidation, calendar hierarchical summaries. Built for companion scenarios. `Python` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -362,6 +368,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

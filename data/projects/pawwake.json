@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 2 项，①类）"
+    "AI Companion Atlas（原表第 2 项，①类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "README 未描述自动衰减",
       "遗忘的终点": "手动删除",
       "整合（合并、摘要）方式": "碎片→事件→核心的整理合并；分区缓存轮转时摘要压缩"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "Pawwake (爪迹, formerly ai-memory-gateway)",
+      "url": "https://github.com/garan0613/pawwake",
+      "desc": "OpenAI-compatible memory gateway: fragment/event/core memory tiers with reviewable AI merge drafts, hybrid keyword+vector recall, raw chat recall, prompt-cache partitioning, and a dashboard. AGPLv3. `Python` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -358,6 +364,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

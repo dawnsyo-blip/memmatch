@@ -12,7 +12,8 @@
   },
   "origins": [
     "论文表 9（Mem0）",
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -56,7 +57,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "免代码用法默认经第三方服务器；README 称基准成绩来自托管平台，含开源版没有的优化；开源核心模式：README 说明其基准成绩基于托管平台，含开源版没有的专有优化",
+      "value": "免代码用法默认经第三方服务器；README 称基准成绩来自托管平台，含开源版没有的优化；开源核心模式：README 说明其基准成绩基于托管平台，含开源版没有的专有优化；评测：LongMemEval-S 94.4、LoCoMo 92.5、BEAM 10M 48.6（厂商自报，托管平台）；MemOS 评测 PersonaMem 43.1；有独立测试称开源版 LongMemEval 只有 32.4",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -95,7 +96,8 @@
       "name": "Mem0",
       "url": "https://github.com/mem0ai/mem0",
       "desc": "Universal memory layer for AI agents."
-    }
+    },
+    "评测榜单": "LongMemEval-S 94.4、LoCoMo 92.5、BEAM 10M 48.6（厂商自报，托管平台）；MemOS 评测 PersonaMem 43.1；有独立测试称开源版 LongMemEval 只有 32.4"
   },
   "normalized": {
     "access": {
@@ -328,6 +330,6 @@
       "对话内容默认经过第三方服务器"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 17 项，③类）"
+    "AI Companion Atlas（原表第 17 项，③类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "14 天无访问转冷却；被召回自动恢复活跃",
       "遗忘的终点": "30 天删向量，90 天清空正文（真正删除）；叙事片段 12 个月后归档",
       "整合（合并、摘要）方式": "碎片按实体归入星座，合并成叙事片段，再聚成故事弧（实验）"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "Memory Constellations (记忆星图)",
+      "url": "https://github.com/ClaraShafiq/MemoryConstellations",
+      "desc": "Self-organizing companion memory system that extracts facts from chat, groups them into topic constellations, merges them into narrative episodes, and retrieves across layers. `JavaScript` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -368,6 +374,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 49 项，⑧类）"
+    "AI Companion Atlas（原表第 49 项，⑧类）",
+    "awesome-ai-companion（Affect & Drives）"
   ],
   "info": {
     "summary": {
@@ -120,6 +121,11 @@
       "遗忘怎么发生": "快情绪衰减向慢心境；心境按天回归性情锚点",
       "遗忘的终点": "回到基线",
       "整合（合并、摘要）方式": "—"
+    },
+    "awesome-ai-companion（Affect & Drives）": {
+      "name": "Drivesoid",
+      "url": "https://github.com/A1batr055/Drivesoid",
+      "desc": "HTTP sidecar for AI personas that tracks emotional drives such as fatigue, longing, anxiety, play, protectiveness, and intimacy from conversation and sleep-cycle events. `JavaScript` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -375,6 +381,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

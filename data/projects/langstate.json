@@ -1,0 +1,315 @@
+{
+  "id": "langstate",
+  "name": "langstate",
+  "repo_url": "https://github.com/hermes-labs-ai/langstate",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "上下文工程合集（yzfly/awesome-context-engineering）"
+  ],
+  "info": {
+    "summary": {
+      "value": "把长对话压成可查看的状态消息的实验性 Python 库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "长对话的压缩状态",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "Python 库",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "开发者自建（OpenAI 格式消息列表）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的程序",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "压缩时调用模型",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-19",
+    "stars": 2,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "langstate",
+      "v": "排除",
+      "c": "A",
+      "desc": "把长对话压成可查看的状态消息的实验性 Python 库",
+      "subj": "长对话的压缩状态",
+      "acc": "Python 库",
+      "cli": "开发者自建（OpenAI 格式消息列表）",
+      "run": "自己的程序",
+      "diff": "高",
+      "need": "压缩时调用模型",
+      "note": ""
+    },
+    "来源": "上下文工程合集（yzfly/awesome-context-engineering）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Python 库"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建（OpenAI 格式消息列表）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的程序（Docker/数据库可在自己电脑或服务器上跑）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：macos（LI from the [Hermes Labs Homebrew tap](https://github.com/）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：压缩时调用模型"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：长对话的压缩状态"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "cli：demo ``` Or install the CLI from the [Hermes Labs Ho"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“es and recent turns verbatim, summarizes older h”经核对不算：只保留最近几轮原文，不存档"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“chat client, or keep the scaffold as an auditable intermediate artifact. The library”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 2,
+    "archived": false,
+    "release_count": 3,
+    "last_commit": "2026-10-19",
+    "days_since_commit": 5,
+    "commits_1y": 53,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Copyright 2026 Hermes Labs / Rolando Bosch\n\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source"
+    },
+    "license_label": "Apache-2.0",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

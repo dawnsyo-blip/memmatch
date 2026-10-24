@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 4 项，①类）"
+    "AI Companion Atlas（原表第 4 项，①类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "无",
       "遗忘的终点": "手动删除",
       "整合（合并、摘要）方式": "外接模式下每 N 轮总结一次"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "omemo",
+      "url": "https://github.com/OmniDimen/omemo",
+      "desc": "OpenAI-compatible memory proxy that sits between an app and upstream LLM APIs, stores memories through built-in or external summarization modes, and injects them by full prompt or RAG. `Python` · `Self-host` · `infra`."
     }
   },
   "normalized": {
@@ -359,6 +365,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

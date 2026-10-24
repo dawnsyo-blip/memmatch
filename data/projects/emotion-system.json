@@ -1,0 +1,328 @@
+{
+  "id": "emotion-system",
+  "name": "情绪系统（bvsden）",
+  "repo_url": "https://github.com/bvsden/emotion-system",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "边缘项（存的不是对话记忆）",
+    "group_code": "E2",
+    "group_meaning": "存的不是记忆内容（情绪状态、模型权重等）",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Affect & Drives）"
+  ],
+  "info": {
+    "summary": {
+      "value": "从 AI 自己写下的思考里读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系你的机会",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "AI 情绪状态",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "Node.js 包（每轮回复后调用）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "开发者自建（要接到自己的聊天后端）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高：要写代码接入",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "OpenRouter API 密钥（调用 Jev 模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-28",
+    "stars": 19,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Affect & Drives）": {
+      "name": "emotion-system",
+      "url": "https://github.com/bvsden/emotion-system",
+      "desc": "Reads true feelings from your companion's inner monologue: emotions linger and fade naturally, touch builds intimacy, longing grows while away, with no back-seat driving. `JavaScript` · `Any` · `infra`."
+    },
+    "人工筛选": {
+      "name": "情绪系统（bvsden）",
+      "v": "排除",
+      "c": "E2",
+      "desc": "从 AI 自己写下的思考里读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系你的机会",
+      "subj": "AI 情绪状态",
+      "acc": "Node.js 包（每轮回复后调用）",
+      "cli": "开发者自建（要接到自己的聊天后端）",
+      "run": "自己的电脑或服务器",
+      "diff": "高：要写代码接入",
+      "need": "OpenRouter API 密钥（调用 Jev 模型）",
+      "note": ""
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Node.js 包（每轮回复后调用）"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建（要接到自己的聊天后端）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Node.js 18），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高：要写代码接入"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：OpenRouter API 密钥（调用 Jev 模型）"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 情绪状态"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“scheduled_proactive_wake' thinking,”经核对不算：wake 是代码里的主动唤醒标记"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“从 AI 自己写下的思考里读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系”"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系你的机会；AI 情绪状态；Node.js 包（每轮”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 19,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-09-28",
+    "days_since_commit": 26,
+    "commits_1y": 7,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 bvsden\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本"
+    ],
+    "reasons": [
+      "收录类别：边缘项（存的不是对话记忆）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

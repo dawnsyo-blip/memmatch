@@ -1,0 +1,320 @@
+{
+  "id": "automem",
+  "name": "AutoMem",
+  "repo_url": "https://github.com/verygoodplugins/automem",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "评测榜单（LongMemEval、BEAM 等）"
+  ],
+  "info": {
+    "summary": {
+      "value": "图＋向量的记忆服务，召回时不调用大模型；本地 MCP 接桌面客户端，远程 MCP 可给 ChatGPT、claude.ai 网页用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "决定、偏好、笔记",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "MCP（本地＋远程）；REST",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Cursor、Codex、ChatGPT（开发者模式）、claude.ai 网页",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑（Docker）或自己的 Railway 账号",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "嵌入模型（Voyage、OpenAI 或本地）；Railway 部署需 Railway 账号",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "评测：LoCoMo 84.7（作者自建评委）；BEAM 各档高于 Honcho，10M 57.4（作者自报）",
+      "source": "Claude 据各评测榜单与厂商公布的成绩整理（多为自报）",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-22",
+    "stars": 823,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "AutoMem",
+      "v": "纳入",
+      "c": "",
+      "desc": "图＋向量的记忆服务，召回时不调用大模型；本地 MCP 接桌面客户端，远程 MCP 可给 ChatGPT、claude.ai 网页用",
+      "subj": "决定、偏好、笔记",
+      "acc": "MCP（本地＋远程）；REST",
+      "cli": "Claude Desktop、Claude Code、Cursor、Codex、ChatGPT（开发者模式）、claude.ai 网页",
+      "run": "自己的电脑（Docker）或自己的 Railway 账号",
+      "diff": "中到高",
+      "need": "嵌入模型（Voyage、OpenAI 或本地）；Railway 部署需 Railway 账号",
+      "note": ""
+    },
+    "来源": "评测榜单（LongMemEval、BEAM 等）",
+    "评测榜单": "LoCoMo 84.7（作者自建评委）；BEAM 各档高于 Honcho，10M 57.4（作者自报）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP（本地＋远程）；REST"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "chatgpt",
+        "claude_code",
+        "claude_desktop",
+        "claude_web_mobile",
+        "codex",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor、Codex、ChatGPT（开发者模式）、claude.ai 网页；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（Docker）或自己的 Railway 账号"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：中到高（区间取较高一档）"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：嵌入模型（Voyage、OpenAI 或本地）；Railway 部署需 Railway 账号"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：决定、偏好、笔记"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "status": "needs_review",
+      "basis": "README：“ticles/PMC4648295/). Wrong rabbit holes fade naturally. Important memories with stro”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“| Off by default | Archives low-relevance memories”"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：the API), `automem-graph-viewer` (the standalone UI), `f"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“*, not only the words it recognizes. **One memory across your tools.** Use the local MCP”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“9, }, ) ``` ## Screenshots <!-- CAPTURE CHECK”经核对不算：Screenshots 是文档标题"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ground Enrichment<br/>Pipeline] Consolidation[Consolidation<br/>Engine] Ba”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ode, Claude.ai, and ElevenLabs over HTTPS. Your me”经核对不算：指可接 ElevenLabs 的 agent 平台"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 823,
+    "archived": false,
+    "release_count": 13,
+    "last_commit": "2026-10-22",
+    "days_since_commit": 2,
+    "commits_1y": 405,
+    "contributors_1y": 15,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2025 Jack Arturo\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

@@ -1,0 +1,318 @@
+{
+  "id": "lmc-5",
+  "name": "LMC-5",
+  "repo_url": "https://github.com/wuxuyun0606-collab/lmc-5",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "P4",
+    "group_meaning": "偏开发者：以代码库/服务为主，或部署门槛很高",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "负责人指定（swap-tutorial 依赖的上游项目）"
+  ],
+  "info": {
+    "summary": {
+      "value": "可恢复的记忆层：原始事件、整理后的记忆、事实演化和关系分开存，附精炼续窗与快照回滚",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "事件、事实与关系",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "Python 库；Claude Code 钩子（生产版）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑（精简版）；VPS＋PostgreSQL（生产版）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "生产版需嵌入模型密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "swap-tutorial 依赖的上游项目",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-16",
+    "stars": 154,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "LMC-5",
+      "v": "待定",
+      "c": "P4",
+      "desc": "可恢复的记忆层：原始事件、整理后的记忆、事实演化和关系分开存，附精炼续窗与快照回滚",
+      "subj": "事件、事实与关系",
+      "acc": "Python 库；Claude Code 钩子（生产版）",
+      "cli": "Claude Code、Codex 等",
+      "run": "自己的电脑（精简版）；VPS＋PostgreSQL（生产版）",
+      "diff": "高",
+      "need": "生产版需嵌入模型密钥",
+      "note": "swap-tutorial 依赖的上游项目"
+    },
+    "来源": "负责人指定（swap-tutorial 依赖的上游项目）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：Python 库；Claude Code 钩子（生产版）"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Codex 等"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（精简版）；VPS＋PostgreSQL（生产版）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：生产版需嵌入模型密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：事件、事实与关系"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "status": "needs_review",
+      "basis": "README：“e gates are computed at retrieval time; decay/dedup jobs are separate. | Archive/dele”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "dashboard：hypothesis.md) for the reviewer-facing argument, falsifi；cli：assistant agents, local CLI workflows, and other lon；tools：what I remember, what I forget, and what still makes my"
+    },
+    "export": {
+      "value": [
+        "json"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“and embedding input. - **JSONL import/export** for simple portability”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ectors, offline | VPS 7×24 deployments, persona-class agents, multi-month continuity |”（已核对）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“es only after creation | | Hooks | — | `SessionStart` / `UserPromptSubmit` / `SessionEnd` fo”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“omething that was only ever said in a raw conversation turn. Stage 3 digs into the raw event j”（已核对）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“i Embedding 2** for multimodal or Google-stack dep”经核对不算：只是可选的嵌入模型"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ection | — | Weekly / monthly narrative timeline | | E axis | Primary-authored fields |”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“可恢复的记忆层：原始事件、整理后的记忆、事实演化和关系分开存，附精炼续窗与快照回”"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ndent channels (Y-graph 2-hop / Russell emotion / spontaneous) + optional rerank | | Hi”（已核对）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“理后的记忆、事实演化和关系分开存，附精炼续窗与快照回滚；事件、事实与关系；Python 库；Claude”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“tes + safety gates + semantic dedup | | Reflection | — | Weekly / monthly narrative timeli”（已核对）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“fact evolution, relations, vectors, and redaction. > Not another vector DB. **Recoverabl”（已核对）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 154,
+    "archived": false,
+    "release_count": 2,
+    "last_commit": "2026-10-16",
+    "days_since_commit": 8,
+    "commits_1y": 74,
+    "contributors_1y": 3,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of i"
+    },
+    "license_label": "AGPL-3.0",
+    "license_category": "copyleft",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

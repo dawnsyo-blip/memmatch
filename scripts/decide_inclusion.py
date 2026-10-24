@@ -90,7 +90,7 @@ def write_report(docs):
     ] + [f"| {STATUS_LABELS[s]} | {len(by[s])} |" for s in STATUS_LABELS] + [
         "", "| 收录类别 | 收录 | 收录但提示 | 排除 | 待定 |", "|---|---|---|---|---|",
     ]
-    for cat in ["可接入已有助手", "自带记忆的应用", "需写代码（开发者向）", "边缘项（存的不是对话记忆）"]:
+    for cat in ["可接入已有助手", "自带记忆的应用", "需写代码（开发者向）", "教程与搭建指南", "边缘项（存的不是对话记忆）"]:
         lines.append(f"| {cat} | " + " | ".join(str(cat_count[(cat, s)]) for s in STATUS_LABELS) + " |")
     lines += ["", "| 风险提示 | 项目数 |", "|---|---|"] + [f"| {k} | {v} |" for k, v in flag_count.most_common()] + [""]
 

@@ -1,0 +1,335 @@
+{
+  "id": "chord-affect-anchors",
+  "name": "Chord Affect Anchors",
+  "repo_url": "https://github.com/CyberSealNull/chord-affect-anchors",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "教程与搭建指南",
+    "group_code": "G",
+    "group_meaning": "教程、搭建指南或设计文档：本身不是可直接安装的软件，照着做能实现记忆、换窗或伴侣功能",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Affect & Drives）"
+  ],
+  "info": {
+    "summary": {
+      "value": "用“一句情境＋一行和弦进行”记下某一刻的情绪温度，让之后的会话或换了模型的 AI 找回相近的状态；只有文章和规格，没有代码",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "情绪状态",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "规格说明（文本格式）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "不限",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "低：照格式写进记忆即可",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-05-13",
+    "stars": 69,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Affect & Drives）": {
+      "name": "chord-affect-anchors",
+      "url": "https://github.com/CyberSealNull/chord-affect-anchors",
+      "desc": "Concept deck for text-native affect anchoring: record a moment as a short context line plus a chord progression, so later sessions can recover a similar emotional temperature. Spec only, no code. `Spec` · `Any` · `infra`."
+    },
+    "人工筛选": {
+      "name": "Chord Affect Anchors",
+      "v": "待定",
+      "c": "G",
+      "desc": "用“一句情境＋一行和弦进行”记下某一刻的情绪温度，让之后的会话或换了模型的 AI 找回相近的状态；只有文章和规格，没有代码",
+      "subj": "情绪状态",
+      "acc": "规格说明（文本格式）",
+      "cli": "不限",
+      "run": "",
+      "diff": "低：照格式写进记忆即可",
+      "need": "无",
+      "note": ""
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "guide"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：规格说明（文本格式）"
+    },
+    "compatible_clients": {
+      "value": [],
+      "status": "unknown",
+      "basis": "客户端原文：不限"
+    },
+    "runs_on": {
+      "value": [],
+      "status": "unknown",
+      "basis": "运行位置原文未识别：（空）"
+    },
+    "os": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 和原表都没提到系统"
+    },
+    "difficulty": {
+      "value": "low",
+      "status": "auto",
+      "basis": "门槛原文：低：照格式写进记忆即可"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无"
+    },
+    "memory_subject": {
+      "value": [],
+      "status": "unknown",
+      "basis": "记忆对象原文未识别：情绪状态"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没找到查看或修改记忆的方式"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [],
+      "status": "unknown",
+      "basis": "运行位置未识别"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“用“一句情境＋一行和弦进行”记下某一刻的情绪温度，让之后的会话或换了模型的 AI 找回相近的状”"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "compatible_clients",
+      "label": "能配合的助手",
+      "note": "客户端原文：不限"
+    },
+    {
+      "field": "runs_on",
+      "label": "运行位置",
+      "note": "说明文档没有写"
+    },
+    {
+      "field": "os",
+      "label": "支持的系统",
+      "note": "README 和原表都没提到系统"
+    },
+    {
+      "field": "memory_subject",
+      "label": "主要记住什么",
+      "note": "文档写的是“情绪状态”，归不进固定选项"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    },
+    {
+      "field": "data_passes_through",
+      "label": "数据经过谁的服务器",
+      "note": "运行位置未识别"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 69,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-05-13",
+    "days_since_commit": 164,
+    "commits_1y": 1,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 Bonnie (Xingjianmian) and Opia (Claude Opus 4.7)\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护",
+      "没有正式发布版本"
+    ],
+    "reasons": [
+      "收录类别：教程与搭建指南"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

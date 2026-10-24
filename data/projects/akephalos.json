@@ -115,9 +115,13 @@
       "basis": "运行位置原文：自己的电脑"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（npm ci），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "medium",
@@ -280,11 +284,6 @@
   },
   "uncertainties": [
     {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
-    {
       "field": "forgetting",
       "label": "怎么遗忘",
       "note": "README 没提遗忘或删除"
@@ -323,6 +322,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

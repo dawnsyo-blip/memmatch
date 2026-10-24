@@ -1,0 +1,327 @@
+{
+  "id": "astrbot-plugin-proactive-chat",
+  "name": "AstrBot 主动消息插件",
+  "repo_url": "https://github.com/DBJD-CR/astrbot_plugin_proactive_chat",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "会话沉默一段时间后，带着上下文和当下情绪主动开口，有免打扰时段和网页控制台",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "会话状态与情绪",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "AstrBot 插件",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "AstrBot（QQ、微信、Telegram 等）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "AstrBot 所在的电脑或服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥（在 AstrBot 里配置）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "以主动消息为主，记忆只是辅助",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-11",
+    "stars": 437,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "astrbot_plugin_proactive_chat",
+      "url": "https://github.com/DBJD-CR/astrbot_plugin_proactive_chat",
+      "desc": "AstrBot plugin for proactive messaging in DMs and groups: context awareness, persistent state, dynamic mood, do-not-disturb hours, TTS, standalone WebUI. `Python` · `AstrBot` · `ready`."
+    },
+    "人工筛选": {
+      "name": "AstrBot 主动消息插件",
+      "v": "纳入",
+      "c": "",
+      "desc": "会话沉默一段时间后，带着上下文和当下情绪主动开口，有免打扰时段和网页控制台",
+      "subj": "会话状态与情绪",
+      "acc": "AstrBot 插件",
+      "cli": "AstrBot（QQ、微信、Telegram 等）",
+      "run": "AstrBot 所在的电脑或服务器",
+      "diff": "中",
+      "need": "模型 API 密钥（在 AstrBot 里配置）",
+      "note": "以主动消息为主，记忆只是辅助"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：AstrBot 插件"
+    },
+    "compatible_clients": {
+      "value": [
+        "astrbot",
+        "telegram",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：AstrBot（QQ、微信、Telegram 等）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：AstrBot 所在的电脑或服务器"
+    },
+    "os": {
+      "value": [
+        "android",
+        "ios",
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（个问题在不同 AstrBot 版本、不同部署方式（Windows/Docker）、不同网络环境下表现不一，无法稳定）；android（到最新的手机微信版本：iOS >= 8.0.70，Android >= 8.0.69，并确保微信中包含 ClawB）；ios（> > 使用个人微信需要升级到最新的手机微信版本：iOS >= 8.0.70，Android >= 8.0）；用跨平台运行时安装（Python 3.10），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥（在 AstrBot 里配置）"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：会话状态与情绪"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "dashboard：，带着上下文和当下情绪主动开口，有免打扰时段和网页控制台；AstrBot 插件；以主动消息为主，记忆只是辅；files：，即使全局启用了 TTS，这里的主动消息也只会发送纯文本。 - **发送语音后是否附带原文 (`alwa"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“间间隔，主动发起一次拥有上下文感知、符合人设且包含动态情绪的对话。 如果你对”经核对不算：沿用 AstrBot 的人设，不另存身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“体化**：配置编辑、通知阅读、文档浏览被整合进同一管理端，不需要在 AstrBot”经核对不算：整合指管理界面合并"
+    },
+    "emotion": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“会话沉默一段时间后，带着上下文和当下情绪主动开口，有免打扰时段和网页控制台；会话状态与情绪”"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“trBot（QQ、微信、Telegram 等）；以主动消息为主，记忆只是辅助”"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“期间 Bot 不会主动打扰用户。 - **TTS 集成**: 支持调用你配置的 TTS 服务生成语音。 - **分段回复**: 支持将长文本回复切分为多条短消息发送，”（已核对）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 437,
+    "archived": false,
+    "release_count": 27,
+    "last_commit": "2026-10-11",
+    "days_since_commit": 13,
+    "commits_1y": 483,
+    "contributors_1y": 8,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of i"
+    },
+    "license_label": "AGPL-3.0",
+    "license_category": "copyleft",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

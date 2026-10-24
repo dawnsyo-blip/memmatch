@@ -1,0 +1,325 @@
+{
+  "id": "ocean",
+  "name": "Ocean",
+  "repo_url": "https://github.com/fishwithoctopus/Ocean",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "自带记忆的应用",
+    "group_code": "P1",
+    "group_meaning": "自带助手的完整应用：记忆不能单独接到用户已有的助手上，愿意换助手才适用",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Companion Clients & Workspaces）"
+  ],
+  "info": {
+    "summary": {
+      "value": "自托管的手机网页应用：服务端网关管理多家模型，按范围组织对话，换会话时保持连续，可选长期记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "对话＋可选长期记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "独立应用（PWA＋网关）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "自带",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的服务器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "PolyForm-NC",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "PolyForm 禁止商用",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-27",
+    "stars": 24,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Companion Clients & Workspaces）": {
+      "name": "Ocean",
+      "url": "https://github.com/fishwithoctopus/Ocean",
+      "desc": "Provider-neutral self-hosted PWA gateway for long-term companionship: scoped conversations, continuity-preserving session rotation, co-reading, and multi-model meetings. PolyForm NC 1.0.0. `TypeScript` · `Self-host` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "Ocean",
+      "v": "待定",
+      "c": "P1",
+      "desc": "自托管的手机网页应用：服务端网关管理多家模型，按范围组织对话，换会话时保持连续，可选长期记忆",
+      "subj": "对话＋可选长期记忆",
+      "acc": "独立应用（PWA＋网关）",
+      "cli": "自带",
+      "run": "自己的服务器",
+      "diff": "高",
+      "need": "模型 API 密钥",
+      "note": "PolyForm 禁止商用"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "gateway",
+        "standalone_app"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：独立应用（PWA＋网关）"
+    },
+    "compatible_clients": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：自带"
+    },
+    "runs_on": {
+      "value": [
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的服务器"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Node.js 20），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：对话＋可选长期记忆"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“ample: > Remove Poetry from this fork. Delete its navigation and UI, poetry data stor”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：avigation entry, routes, UI components, persistent s"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "noncommercial",
+      "status": "auto",
+      "basis": "许可证原文：PolyForm-NC"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“summary and recent original turns. - Project workspac”经核对不算：只保留最近几轮原文"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“y 3.0 migration and rollback guide](https://gith”经核对不算：rollback 指版本迁移回退"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 24,
+    "archived": false,
+    "release_count": 1,
+    "last_commit": "2026-08-27",
+    "days_since_commit": 58,
+    "commits_1y": 14,
+    "contributors_1y": 2,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "PolyForm Noncommercial License 1.0.0\n\nhttps://polyformproject.org/licenses/noncommercial/1.0.0\n\nRequired Notice: Copyright 2026 fishwithoctopus.\n\nAcceptance\n\nIn order to get any license under these terms, you must agree to them as both strict obligations and conditions to all your licenses.\n\nCopyright License\n\nThe licensor grants you a copyright license for the software to do everything you might do with the software that would otherwise infringe the licensor's copyright in it for any permitted purpose. However, you may only distribute the software according to Distribution License and make changes or new works based on the software according to Changes and New Works License.\n\nDistribution License\n\nThe licensor grants you an additional copyright license to distribute copies of the software. Your license to distribute covers distributing the software with changes and new works permitted by Changes and New Works License.\n\nNotices\n\nYou must ensure that anyone who gets a copy of any part of the software from you also gets a copy of these terms or the URL for them above, as well as copies of any plain-text lines beginning with `Required Notice:` that the licensor provided with the softw"
+    },
+    "license_label": "PolyForm-NC",
+    "license_category": "noncommercial",
+    "flags": [
+      "许可证禁止商用"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "许可证禁止商用"
+    ],
+    "reasons": [
+      "收录类别：自带记忆的应用"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

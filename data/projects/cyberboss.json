@@ -1,0 +1,328 @@
+{
+  "id": "cyberboss",
+  "name": "Cyberboss",
+  "repo_url": "https://github.com/WenXiaoWendy/cyberboss",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）"
+  ],
+  "info": {
+    "summary": {
+      "value": "把 Codex 或 Claude Code 接进微信：有时间感、记得上下文、会在你消失时找你、自动写日记",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "日程、承诺与对话上下文",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "桥接程序＋MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex（通过微信聊天）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "Claude 付费套餐或 Codex",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "AGPL-3.0",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "AGPL；面向需要外部督促的人（如 ADHD）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-06-05",
+    "stars": 1483,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Background Heartbeats & Proactive Messaging）": {
+      "name": "cyberboss",
+      "url": "https://github.com/WenXiaoWendy/cyberboss",
+      "desc": "Local life agent bridge with WeChat integration, giving Claude Code/Codex time sense, location awareness, proactive wake-up, auto diary, and MCP tool calling. AGPLv3. `JavaScript` · `Claude Code` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "Cyberboss",
+      "v": "纳入",
+      "c": "",
+      "desc": "把 Codex 或 Claude Code 接进微信：有时间感、记得上下文、会在你消失时找你、自动写日记",
+      "subj": "日程、承诺与对话上下文",
+      "acc": "桥接程序＋MCP",
+      "cli": "Claude Code、Codex（通过微信聊天）",
+      "run": "自己的电脑",
+      "diff": "中到高",
+      "need": "Claude 付费套餐或 Codex",
+      "note": "AGPL；面向需要外部督促的人（如 ADHD）"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "cli_tool",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：桥接程序＋MCP"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "codex",
+        "wechat"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、Codex（通过微信聊天）；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Node >=22），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：中到高（区间取较高一档）"
+    },
+    "cost": {
+      "value": "paid_service",
+      "status": "auto",
+      "basis": "账号原文：Claude 付费套餐或 Codex"
+    },
+    "accounts_needed": {
+      "value": [
+        "claude_subscription"
+      ],
+      "status": "auto",
+      "basis": "账号原文：Claude 付费套餐或 Codex"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：日程、承诺与对话上下文"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "tools"
+      ],
+      "status": "auto",
+      "basis": "cli：S` Append extra Claude CLI arguments as a comma-sep；tools：end` - `cyberboss_sticker_delete` - `cyberboss_sticker_sa"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "copyleft",
+      "status": "auto",
+      "basis": "许可证原文：AGPL-3.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ing, that generated persona file may start from”经核对不算：说的是生成人设文件的配置"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“tervals, the system wakes the agent up and l”经核对不算：Pulse 是定时唤醒（已算主动性）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ggers, and timeline screenshot jobs. - **Capabilit”经核对不算：截图是生成时间线图片的任务"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“odex 或 Claude Code 接进微信：有时间感、记得上下文、会在你消失时找你、自动写日记；日程、”"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“t token - `checkin-config.json` saved proactive check-in range - `timeline-screenshot-queue.json”（已核对）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 1483,
+    "archived": false,
+    "release_count": 0,
+    "last_commit": "2026-06-05",
+    "days_since_commit": 142,
+    "commits_1y": 111,
+    "contributors_1y": 2,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n                            Preamble\n\n  The GNU Affero General Public License is a free, copyleft license for\nsoftware and other kinds of works, specifically designed to ensure\ncooperation with the community in the case of network server software.\n\n  The licenses for most software and other practical works are designed\nto take away your freedom to share and change the works.  By contrast,\nour General Public Licenses are intended to guarantee your freedom to\nshare and change all versions of a program--to make sure it remains free\nsoftware for all its users.\n\n  When we speak of free software, we are referring to freedom, not\nprice.  Our General Public Licenses are designed to make sure that you\nhave the freedom to distribute copies of free software (and charge for\nthem if you wish), that you receive source code or can get it if you\nwant it, that you can change the software or use pieces of i"
+    },
+    "license_label": "AGPL-3.0",
+    "license_category": "copyleft",
+    "flags": [
+      "没有正式发布版本"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "没有正式发布版本"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

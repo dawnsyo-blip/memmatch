@@ -1,0 +1,322 @@
+{
+  "id": "respark",
+  "name": "ReSpark",
+  "repo_url": "https://github.com/Seltaa/ReSpark",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "边缘项（存的不是对话记忆）",
+    "group_code": "E2",
+    "group_meaning": "存的不是记忆内容（情绪状态、模型权重等）",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Continuity & Data Ownership）"
+  ],
+  "info": {
+    "summary": {
+      "value": "用 ChatGPT、Claude、Gemini、Grok 导出的聊天记录微调一个本地模型，复刻你的伴侣",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "伴侣的说话方式（训练进模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "命令行工具",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "本地模型运行器（GGUF）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "租用的云 GPU（RunPod）＋自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "RunPod、Hugging Face 账号",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-09-02",
+    "stars": 52,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Continuity & Data Ownership）": {
+      "name": "ReSpark",
+      "url": "https://github.com/Seltaa/ReSpark",
+      "desc": "Fine-tunes a local companion model from ChatGPT/Claude/Gemini/Grok exports in one CLI flow: cleans data, trains LoRA on a rented RunPod GPU, converts to GGUF, uploads to Hugging Face. MIT. `Python` · `CLI` · `adapt`."
+    },
+    "人工筛选": {
+      "name": "ReSpark",
+      "v": "排除",
+      "c": "E2",
+      "desc": "用 ChatGPT、Claude、Gemini、Grok 导出的聊天记录微调一个本地模型，复刻你的伴侣",
+      "subj": "伴侣的说话方式（训练进模型）",
+      "acc": "命令行工具",
+      "cli": "本地模型运行器（GGUF）",
+      "run": "租用的云 GPU（RunPod）＋自己的电脑",
+      "diff": "中",
+      "need": "RunPod、Hugging Face 账号",
+      "note": ""
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "cli_tool"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：命令行工具"
+    },
+    "compatible_clients": {
+      "value": [],
+      "status": "unknown",
+      "basis": "客户端原文：本地模型运行器（GGUF）"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：租用的云 GPU（RunPod）＋自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（ubleshooting **Note for Windows users** When you drag an）；用跨平台运行时安装（Python 3.8），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "needs_review",
+      "basis": "说明里没写；README 提到“runpod ``` **2. Get a RunPod API key:** 1. Go to [RunPod Settings”，建议值 model_api_key，需确认是否必需"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：伴侣的说话方式（训练进模型）"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "cli：k 导出的聊天记录微调一个本地模型，复刻你的伴侣；命令行工具；# 🔥 ReSpark **Your AI"
+    },
+    "export": {
+      "value": [
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“API token (free) - Your conversation export file ### Setup **1. In”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“ompanion to express emotions and personality mo”经核对不算：是训练选项说明"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“conversation file path: > C:\\Users\\You\\conversations.json ✅ Detected: CHATGPT 📊 Extracted 16050”（已核对）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "compatible_clients",
+      "label": "能配合的助手",
+      "note": "客户端原文：本地模型运行器（GGUF）"
+    },
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 52,
+    "archived": false,
+    "release_count": 1,
+    "last_commit": "2026-09-02",
+    "days_since_commit": 52,
+    "commits_1y": 56,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 Selta\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": [
+      "近一年只有一人维护"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护"
+    ],
+    "reasons": [
+      "收录类别：边缘项（存的不是对话记忆）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

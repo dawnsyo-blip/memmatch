@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 32 项，⑤类）"
+    "AI Companion Atlas（原表第 32 项，⑤类）",
+    "awesome-ai-companion（Affect & Drives）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "经 Ombre Brain 遗忘曲线；和好或气消后自动忘掉“在气什么”",
       "遗忘的终点": "Ombre Brain 归档",
       "整合（合并、摘要）方式": "Ombre Brain dream 消化；梦 2.0"
+    },
+    "awesome-ai-companion（Affect & Drives）": {
+      "name": "Xinchao·Nian (心潮·念)",
+      "url": "https://github.com/tianyupaipai-cmd/xinchao-nian",
+      "desc": "Chinese drive engine fused with Ombre-Brain memory: eleven longing/curiosity-style drives, two-layer emotions, slow-moving temperament, dreams, one-command Docker deploy. AGPL, non-commercial. `Python` · `Self-host` · `adapt`."
     }
   },
   "normalized": {
@@ -363,6 +369,6 @@
       "许可证禁止商用（据原表／README，部分内容）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

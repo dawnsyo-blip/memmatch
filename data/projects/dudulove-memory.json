@@ -1,0 +1,316 @@
+{
+  "id": "dudulove-memory",
+  "name": "DuduLove Memory",
+  "repo_url": "https://github.com/VITASID57/dudulove-memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "awesome-ai-companion（Memory & Identity）"
+  ],
+  "info": {
+    "summary": {
+      "value": "可自托管的长期记忆，让同一个 AI 身份跨客户端、跨模型延续；被你拒绝的记忆不会被重新写回，同一条记忆不会反复浮现",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "AI 身份＋共享事实＋私人经历",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "MCP；HTTP；网页",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "任意 MCP 客户端、HTTP 客户端、个人 agent",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（Node.js 22）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "基础功能不需要；语义检索需 OpenAI 兼容模型服务",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-05",
+    "stars": 51,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "DuduLove Memory",
+      "url": "https://github.com/VITASID57/dudulove-memory",
+      "desc": "Self-hosted memory for multiple companions that keep one identity across clients and models: shared world facts vs per-companion private memories, identity bound server-side to the connection token, rejected memories that stay rejected, and a recall ledger that stops the same memory resurfacing. Keyword search and management work without a model; semantic search is optional. MIT. `JavaScript` · `Self-host` · `infra`."
+    },
+    "人工筛选": {
+      "name": "DuduLove Memory",
+      "v": "纳入",
+      "c": "",
+      "desc": "可自托管的长期记忆，让同一个 AI 身份跨客户端、跨模型延续；被你拒绝的记忆不会被重新写回，同一条记忆不会反复浮现",
+      "subj": "AI 身份＋共享事实＋私人经历",
+      "acc": "MCP；HTTP；网页",
+      "cli": "任意 MCP 客户端、HTTP 客户端、个人 agent",
+      "run": "自己的电脑或服务器（Node.js 22）",
+      "diff": "中",
+      "need": "基础功能不需要；语义检索需 OpenAI 兼容模型服务",
+      "note": ""
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；HTTP；网页"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：任意 MCP 客户端、HTTP 客户端、个人 agent"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器（Node.js 22）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Node.js 22），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：基础功能不需要；语义检索需 OpenAI 兼容模型服务"
+    },
+    "memory_subject": {
+      "value": [
+        "ai_identity",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：AI 身份＋共享事实＋私人经历"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "needs_review",
+      "basis": "README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "needs_review",
+      "basis": "README 只提到删除：“以在完全不配置模型服务的情况下完成： - 身份与权限管理 - 记忆保存、编辑、删除和恢复 - 关键词搜索 - 上下文组装 - 活动记录与基础近期简报 语义检索和”，没提自动衰减，建议值 manual_only"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：cripts npm start ``` 1. 浏览器打开终端显示的地址，默认是 `http://127.0"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "记忆对象含 AI 自身身份"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“可自托管的长期记忆，让同一个 AI 身份跨客户端、跨模型延续；被你拒绝的记忆不会被重新写回，同一条”"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 51,
+    "archived": false,
+    "release_count": 1,
+    "last_commit": "2026-10-05",
+    "days_since_commit": 19,
+    "commits_1y": 7,
+    "contributors_1y": 1,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 DuduLove Memory contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": [
+      "近一年只有一人维护"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "近一年只有一人维护"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-24"
+  }
+}

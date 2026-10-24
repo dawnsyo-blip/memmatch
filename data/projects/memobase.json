@@ -12,7 +12,8 @@
   },
   "origins": [
     "论文表 9（Memobase）",
-    "Awesome-Agent-Memory"
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -54,6 +55,11 @@
       "value": "Apache-2.0",
       "source": "负责人原表「框架开源情况」（论文表 9）",
       "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "评测：MemOS 评测 PersonaMem 58.9",
+      "source": "Claude 据各评测榜单与厂商公布的成绩整理（多为自报）",
+      "read_date": "2026-10-10"
     }
   },
   "repo_health": {
@@ -90,7 +96,8 @@
       "name": "Memobase",
       "url": "https://github.com/memodb-io/memobase",
       "desc": "User profile-based long-term memory for AI chatbot applications."
-    }
+    },
+    "评测榜单": "MemOS 评测 PersonaMem 58.9"
   },
   "normalized": {
     "access": {
@@ -212,7 +219,7 @@
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“像记忆 SDK，适合虚拟伴侣等应用；用户画像＋事件时间线；服务＋SDK；开发者自建”"
+      "basis": "原表／说明：“像记忆 SDK，适合虚拟伴侣等应用；用户画像＋事件时间线；服务＋SDK；开发者自建；评测：MemOS 评测”"
     },
     "dream_consolidation": {
       "value": "not_mentioned",
@@ -327,6 +334,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

@@ -1,0 +1,328 @@
+{
+  "id": "mastra",
+  "name": "Mastra",
+  "repo_url": "https://github.com/mastra-ai/mastra",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-24"
+  },
+  "origins": [
+    "评测榜单（LongMemEval、BEAM 等）"
+  ],
+  "info": {
+    "summary": {
+      "value": "TypeScript 的 AI 应用开发框架，内置记忆模块",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "memory_subject": {
+      "value": "对话历史与工作记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "access": {
+      "value": "TypeScript 框架",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "compatible_clients": {
+      "value": "开发者自建",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "runs_on": {
+      "value": "自己的程序",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "difficulty": {
+      "value": "高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-24"
+    },
+    "license": {
+      "value": "其它（见仓库）",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-24"
+    },
+    "notes": {
+      "value": "评测：LongMemEval 94.87%（第三方论文引用）",
+      "source": "Claude 据各评测榜单与厂商公布的成绩整理（多为自报）",
+      "read_date": "2026-10-24"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-24",
+    "stars": 29044,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-24"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "Mastra",
+      "v": "排除",
+      "c": "A",
+      "desc": "TypeScript 的 AI 应用开发框架，内置记忆模块",
+      "subj": "对话历史与工作记忆",
+      "acc": "TypeScript 框架",
+      "cli": "开发者自建",
+      "run": "自己的程序",
+      "diff": "高",
+      "need": "模型 API 密钥",
+      "note": ""
+    },
+    "来源": "评测榜单（LongMemEval、BEAM 等）",
+    "评测榜单": "LongMemEval 94.87%（第三方论文引用）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：TypeScript 框架"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：开发者自建"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的程序（Docker/数据库可在自己电脑或服务器上跑）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（npx），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "auto",
+      "basis": "门槛原文：高"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：对话历史与工作记忆"
+    },
+    "write_mode": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提写入方式"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ies like Vercel's AI SDK UI and CopilotKit to bring；cli：p-by-step setup with the CLI or a manual install. If"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "",
+      "status": "unknown",
+      "basis": "许可证原文：其它（见仓库）"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“rkflows/suspend-and-resume): Suspend an agent”经核对不算：说的是工作流暂停与恢复"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "write_mode",
+      "label": "记忆怎么写入",
+      "note": "README 没提写入方式"
+    },
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    },
+    {
+      "field": "license_category",
+      "label": "许可证类别",
+      "note": "许可证原文：其它（见仓库）"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-24",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 29044,
+    "archived": false,
+    "release_count": 130,
+    "last_commit": "2026-10-24",
+    "days_since_commit": 0,
+    "commits_1y": 11322,
+    "contributors_1y": 496,
+    "license_files": [
+      "LICENSE.md"
+    ],
+    "license_text_head": {
+      "LICENSE.md": "Portions of this software are licensed as follows:\n\n- All content that resides under any directory named `ee/` within this\n  repository, including but not limited to:\n  - `@mastra/core/auth/ee`\n  - `@mastra/core/agent-builder/ee`\n  - `@mastra/editor/ee`\n\n  is licensed under the license defined in [`ee/LICENSE`](https://github.com/mastra-ai/mastra/blob/main/ee/LICENSE).\n\n- All third-party components incorporated into the Mastra Software are\n  licensed under the original license provided by the owner of the\n  applicable component.\n\n- Content outside of the above-mentioned directories or restrictions is\n  available under the \"Apache License 2.0\" as defined below.\n\n# Apache License 2.0\n\nCopyright (c) 2025 Kepler Software, Inc.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language"
+    },
+    "license_label": "Apache-2.0",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-24"
+  }
+}

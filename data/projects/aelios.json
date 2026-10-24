@@ -11,7 +11,8 @@
     "decided_on": "2026-10-10"
   },
   "origins": [
-    "AI Companion Atlas（原表第 1 项，①类）"
+    "AI Companion Atlas（原表第 1 项，①类）",
+    "awesome-ai-companion（Memory & Identity）"
   ],
   "info": {
     "summary": {
@@ -125,6 +126,11 @@
       "遗忘怎么发生": "不自动衰减；用 forget 工具或面板手动遗忘",
       "遗忘的终点": "归档或删除（手动）",
       "整合（合并、摘要）方式": "夜间 Dream 从当天对话抽事实成候选；周期汇总（rollup）"
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "Aelios",
+      "url": "https://github.com/wusaki0723/Aelios",
+      "desc": "Layered long-term memory kernel on Cloudflare Workers + D1 + Vectorize: tiered write cycle, six memory layers, and a visual curation dashboard. AGPLv3. `TypeScript` · `Cloudflare` · `infra`."
     }
   },
   "normalized": {
@@ -363,6 +369,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }

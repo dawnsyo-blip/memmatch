@@ -39,13 +39,14 @@ REVIEW_XLSX = ROOT / "docs/review-normalization.xlsx"
 # 字段 -> 可选值（中文说明）。schema 与审核清单都引用这里。
 ENUMS = {
     "access": {"mcp": "MCP（让 AI 调用外部工具的通用接口）", "gateway": "网关／代理（挂在助手和模型之间）",
-               "host_plugin": "宿主插件（含钩子、技能）", "library": "代码库（要写代码调用）", "standalone_app": "独立应用"},
+               "host_plugin": "宿主插件（含钩子、技能）", "library": "代码库（要写代码调用）", "standalone_app": "独立应用",
+               "cli_tool": "命令行小工具（需要时自己运行）", "guide": "教程或设计文档（照着搭）"},
     "compatible_clients": {
         "claude_desktop": "Claude 桌面版", "claude_web_mobile": "Claude 网页／手机版", "claude_code": "Claude Code",
         "chatgpt": "ChatGPT", "openai_compatible": "任意 OpenAI 兼容客户端", "any_mcp_client": "任意 MCP 客户端",
         "cursor": "Cursor", "codex": "Codex", "gemini_cli": "Gemini CLI", "opencode": "OpenCode",
         "openclaw": "OpenClaw", "hermes": "Hermes", "astrbot": "AstrBot", "sillytavern": "SillyTavern",
-        "open_webui": "Open WebUI", "telegram": "Telegram", "wechat": "微信", "feishu": "飞书", "discord": "Discord",
+        "open_webui": "Open WebUI", "kelivo": "Kelivo", "telegram": "Telegram", "wechat": "微信", "feishu": "飞书", "discord": "Discord",
         "self_contained": "自带界面（不接其它助手）", "developer_built": "开发者自建的应用"},
     "runs_on": {"own_computer": "自己的电脑", "own_server": "自己的服务器", "own_cloud_account": "自己的云账号",
                 "phone": "手机", "third_party_hosted": "别人的服务器（托管）"},
@@ -132,11 +133,16 @@ def n_access(c):
     found = hits(t, {
         "mcp": r"MCP",
         "gateway": r"网关|代理|proxy",
-        "host_plugin": r"插件|钩子|技能|Skill|hook",
-        "library": r"代码库|Python 库|TypeScript 库|Rust 库|\bSDK\b|库＋|可嵌入|单个 Python 脚本|数据库＋|服务＋SDK",
+        "host_plugin": r"插件|钩子|技能|Skill|hook|SillyTavern 扩展|Open WebUI 函数",
+        "library": r"代码库|Python 库|TypeScript 库|Rust 库|\bSDK\b|库＋|可嵌入|单个 Python 脚本|数据库＋|服务＋SDK|"
+                   r"Node\.js (?:模块|包)|前端组件",
         "standalone_app": r"应用|App|桌面|网页工作台|阅读器|单个 HTML|伴侣|Agent（",
+        "cli_tool": r"命令行工具|命令行脚本|桥接程序|^命令行$",
+        "guide": r"教程|设计文档|规格说明",
     })
     vals = [v for v, _ in found]
+    if c.cat == "教程与搭建指南" and "guide" not in vals:
+        vals.append("guide")
     if c.cat == "自带记忆的应用" and "standalone_app" not in vals:
         vals.append("standalone_app")
     if c.cat == "需写代码（开发者向）" and not ({"library", "standalone_app"} & set(vals)):
@@ -155,8 +161,8 @@ CLIENT_PATS = {
     "any_mcp_client": r"MCP 客户端|任意 MCP|any MCP",
     "cursor": r"Cursor", "codex": r"Codex", "gemini_cli": r"Gemini CLI", "opencode": r"OpenCode",
     "openclaw": r"OpenClaw", "hermes": r"Hermes", "astrbot": r"AstrBot", "sillytavern": r"SillyTavern|酒馆",
-    "open_webui": r"Open ?WebUI", "telegram": r"Telegram", "wechat": r"微信", "feishu": r"飞书", "discord": r"Discord",
-    "developer_built": r"开发者自建|自建聊天机器人|需自行|需自备|LangGraph 应用",
+    "open_webui": r"Open ?WebUI", "kelivo": r"Kelivo", "telegram": r"Telegram", "wechat": r"微信", "feishu": r"飞书", "discord": r"Discord",
+    "developer_built": r"开发者自建|自建聊天机器人|自建聊天应用|自建网页聊天|需自己把|需自行|需自备|LangGraph 应用",
 }
 
 
@@ -208,8 +214,13 @@ def n_os(c, runs_on):
     })
     vals = [v for v, _ in found]
     basis = "README／原表提到：" + "；".join(f"{v}（{s}）" for v, s in found[:3])
-    cross = re.search(r"\bnpx\b|\buvx\b|pip install|pipx|npm i|npm install|docker|Docker|go install|cargo install", c.readme + t)
-    if cross and not {"windows", "macos", "linux"} <= set(vals):
+    cross = re.search(r"\bnpx\b|\buvx\b|pip install|pipx|npm i|npm install|npm ci|docker|Docker|go install|cargo install|"
+                      r"Node\.js \d+|Node >= ?\d+|Python 3\.\d+", c.readme + t)
+    host = re.search(r"SillyTavern|Open WebUI|AstrBot", c.text("cli"))
+    if host and not vals:
+        vals += ["windows", "macos", "linux"]
+        basis = f"装在 {host.group(0)} 里，随宿主运行（宿主支持 Windows/macOS/Linux，推断）"
+    elif cross and not {"windows", "macos", "linux"} <= set(vals):
         vals += ["windows", "macos", "linux"]
         basis += f"；用跨平台运行时安装（{cross.group(0)}），按 Windows/macOS/Linux 都能用推断"
     if not vals:
@@ -275,7 +286,7 @@ def n_subject(c):
     t = c.text("subj", "x:记忆功能 Function")
     found = hits(t, {
         "user_facts": r"用户|偏好|事实|个人|人际|画像|你|本人|生活",
-        "ai_identity": r"AI 自身|AI 自我|身份|人格|自我",
+        "ai_identity": r"AI 自身|AI 自我|身份|人格|自我|自传|AI 情绪|AI 身体|AI 的梦|伴侣的说话",
         "experience": r"经验|技能|策略|教训|更正|决策|行为",
         "task_context": r"工作记忆|任务|上下文|项目|决定",
         "conversation_history": r"对话|会话|聊天",
@@ -374,7 +385,8 @@ def _forgetting_main(c):
 def n_human_review(c):
     t = c.text("x:治理手段", "x:记忆保存形式", "desc", "acc", "note") + "；" + c.readme
     found = hits(t, {
-        "dashboard": r"面板|控制台|网页界面|管理界面|Dashboard|dashboard|[Ww]eb ?UI|viewer|网页工作台|桌面应用|[Ii]nspector|\bUI\b",
+        "dashboard": r"面板|控制台|网页界面|管理界面|Dashboard|dashboard|[Ww]eb ?UI|viewer|网页工作台|桌面应用|[Ii]nspector|\bUI\b|"
+                     r"[Mm]emory [Vv]iewer|editable (?:lorebook|entries|memor)|lorebook entr|浏览器打开",
         "files": r"Markdown 文件|Markdown files?|markdown files?|plain[ -]text|plain files|纯文本|每条记忆是一个 Markdown|Markdown 笔记|Markdown vault|YAML frontmatter|\.md files",
         "cli": r"命令行|\bCLI\b",
         "tools": r"forget 工具|delete tool|\bforget\b|update_memory|memory_delete|delete_memory|_delete\b",

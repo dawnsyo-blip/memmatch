@@ -13,7 +13,9 @@
   "origins": [
     "论文表 9（HindSight）",
     "Awesome-Agent-Memory",
-    "awesome-mcp-servers"
+    "awesome-mcp-servers",
+    "awesome-ai-companion（Memory & Identity）",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
@@ -57,7 +59,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "论文表 9 已列",
+      "value": "论文表 9 已列；评测：LongMemEval-S 94.6、LoCoMo 92、BEAM 10M 64.1、PersonaMem 32K 86.6（厂商自报）；MemTensor 统一评测 BEAM 10M 59.75，为参评系统最高",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -101,7 +103,13 @@
       "name": "vectorize-io/hindsight",
       "url": "https://github.com/vectorize-io/hindsight",
       "desc": "Hindsight: long-term memory for AI agents modeled on human memory."
-    }
+    },
+    "awesome-ai-companion（Memory & Identity）": {
+      "name": "Hindsight",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "desc": "General agent memory server: LLM fact extraction, four-way recall (vector, BM25, entity graph, time), evidence-backed observations refined over time, per-bank MCP. MIT; paid Cloud optional. `Python` · `Self-host` · `infra`."
+    },
+    "评测榜单": "LongMemEval-S 94.6、LoCoMo 92、BEAM 10M 64.1、PersonaMem 32K 86.6（厂商自报）；MemTensor 统一评测 BEAM 10M 59.75，为参评系统最高"
   },
   "normalized": {
     "access": {
@@ -333,6 +341,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-11"
+    "decided_on": "2026-10-24"
   }
 }
