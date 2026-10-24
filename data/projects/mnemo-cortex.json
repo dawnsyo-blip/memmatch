@@ -318,6 +318,70 @@
       "status": "auto",
       "basis": "原表／说明：“和置信度，冲突交人裁决；多 Agent 共享，支持加密 U 盘迁移；用户事实；本地服务器＋MCP；另有会”"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“锁定事实冲突的写入转为提案，由用户裁决；语义检索＋复合排序；结构化事实精确查询；治理靠规”；keyword：README：“r whole workspace. One SQLite FTS5 index (107K files in our depl”；confidence：说明：“可信度导向最强：每条记忆可追溯来源和置信度，冲”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard、files"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "config_file",
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“l refresh ~2. Secrets (keys, `.env` files, credentials) are excl”；plain_data：记忆存成可以直接看改的文件"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平＋结构化事实",
       "function": "用户事实",

@@ -312,6 +312,64 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“id）；伴侣应用自带记忆；且需自己编译；向量检索和语音识别模型随仓库附带、离线可用；”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "companion_app",
+      "status": "auto",
+      "basis": "按收录类别「自带记忆的应用」"
+    },
+    "lifecycle": {
+      "value": [
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "self_contained：自带记忆的应用"
+    },
+    "customization": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
     "paper_taxonomy": {
       "form": "词元级（手机本地）",
       "function": "用户事实＋日程／情绪",

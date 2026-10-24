@@ -323,6 +323,74 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "recency",
+        "frequency",
+        "relation",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“model auth (API keys), memory embeddings, web search, channels, wallet”；recency：README：“Crystals** Memories naturally decay over time via Ebbinghaus forgetting cur”；frequency：README：“ng curves. Unused info fades; frequently accessed facts become permanent. A con”；relation：说明：“ite 与 Markdown；类型化知识图谱；事实不被用到就衰减，印证升置信、矛盾降”；confidence：说明：“rkdown；类型化知识图谱；技能文件；置信度随印证升降；钱包须自设限额；Dream”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve",
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、frequency、relation、confidence（推断召回时综合排序）；forget：README：“orgetting curves. Unused info fades; frequently accessed facts become permanent. A c”"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 4 个：recency、frequency、relation、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：README：“tanding of their impact on my emotional state. Motivated by recent achievem”"
+    },
+    "project_role": {
+      "value": "companion_app",
+      "status": "auto",
+      "basis": "按收录类别「自带记忆的应用」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、files、tools"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "self_contained：自带记忆的应用"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file",
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：说明：“＋AI 自我概念；桌面 Agent（自带控制台网页）；自带；桌面 Agent 自带控制”；config_file：README：“ateway.auth.token`. (`desktop/.env` is only a development-mode o”；plain_data：记忆存成可以直接看改的文件"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块“生物式记忆”）",
       "function": "经验（技能结晶）＋AI 自我概念",

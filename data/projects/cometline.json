@@ -319,6 +319,67 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“；自动或手动压缩：合并、清理陈旧条目；换向量模型后台重建；每轮前自动注入相关记忆；按”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto、on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard、tools"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：说明：“隔离的事实与偏好＋LLM Wiki；可在设置里浏览、编辑、压缩；自动或手动压缩（com”；config_file：README：“p` in `~/.cometmind/cometline-settings.json`. - Supported transports: `s”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（按项目分区）",
       "function": "工作记忆＋环境事实（工作区上下文）",

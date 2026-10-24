@@ -276,6 +276,76 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "importance",
+        "frequency",
+        "emotion",
+        "relation",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“stgreSQL that you operate; an embedding model or an LLM is optional a”；keyword：README：“ng-based aggregate F1 favours lexical retrieval (BM25) by metric design, and”；recency：README：“gging, Hebbian strengthening, forgetting curves, sleep replay) as tested func”；importance：README：“assigns arousal, valence, and significance scores using a 400+ keyword lexicon”；frequency：README：“ms memory research describes (spaced repetition, emotional tagging, Hebbian s”；emotion：README：“ntent becomes a procedure, an emotional weight above 0.5 an episode, a confi”；relation：README：“ield-stm`** · **`personalized-pagerank`** · **`surprise-gradient-mem”；confidence：README：“runed } } ``` ### RAG with Confidence Scoring ```typescript import { propa”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve",
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、importance、frequency、emotion、relation、confidence（推断召回时综合排序）；forget：README：“describes (spaced repetition, emotional tagging, Hebbian strengthening, forgetting curves, sleep replay) as”"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 6 个：recency、importance、frequency、emotion、relation、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "tags",
+        "weighting"
+      ],
+      "status": "auto",
+      "basis": "tags：README：“bbian learning, sleep replay, emotional tagging, plus 10 advanced researc”；weighting：README：“ntent becomes a procedure, an emotional weight above 0.5 an episode, a confi”"
+    },
+    "project_role": {
+      "value": "dev_framework",
+      "status": "auto",
+      "basis": "按收录类别「需写代码（开发者向）」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：tools"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "small_code"
+      ],
+      "status": "auto",
+      "basis": "small_code：README：“M, ...).<br/>Pure TypeScript. Zero dependencies. 822 tests. Extracted from”"
     }
   },
   "uncertainties": [

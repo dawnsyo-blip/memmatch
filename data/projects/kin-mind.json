@@ -153,8 +153,8 @@
         "manual_only",
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“原生容量策略。这些是宿主接入选项，安装库本身不会自动接管一个会话。 通用记忆库删除来源时，也会清除相关作业恢复历史中的正文副本。备份收录数据库快照、快照引用的附件”，没提自动衰减，建议值 manual_only；有归档：“人设策略、自我认知、配置与人设版本、历史归档），不含凭据、缓存和向量；恢复先在暂存目”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“原生容量策略。这些是宿主接入选项，安装库本身不会自动接管一个会话。 通用记忆库删除来源时，也会清除相关作业恢复历史中的正文副本。备份收录数据库快照、快照引用的附件”，没提自动衰减，建议值 manual_only；有归档：“人设策略、自我认知、配置与人设版本、历史归档），不含凭据、缓存和向量；恢复先在暂存目”"
     },
     "human_review": {
       "value": [
@@ -274,6 +274,68 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "relation",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“先在暂存目录验证数据库再发布目标，之后重建文本索引、重新生成向量。无效的维护设置在保存前被拒绝。 情绪与愿望的几个常用接口”；relation：README：“我把事件、人物、作品版本、发现和分享连成可以追查的脉络。打开图谱，可以看见谁提起了一件事、谁做过什么、哪条发现已经讲过，以及”；confidence：README：“事有来源，也有缓解、解决与重新出现的记录；我对事情的理解保留置信度和更正的余地。 状态会形成当轮的表达倾向：想念时可以逗她，”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 relation、confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 2 个：relation、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：说明：“伴侣的记忆、情绪与愿望系统：事件有来源，情绪会自然回落，安静时”"
+    },
+    "project_role": {
+      "value": "dev_framework",
+      "status": "auto",
+      "basis": "按收录类别「需写代码（开发者向）」"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：archive；查看修改：cli"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“需配置已有数据库、独立范围、配置版本、DeepSeek 凭据环境变量，以及 codex CLI 探索执行器。主会话评估需启用 `”"
     }
   },
   "uncertainties": [

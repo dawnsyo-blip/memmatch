@@ -276,6 +276,66 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没找到排序方式"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：Claude 据说明补充：主动消息带“动态情绪”"
+    },
+    "project_role": {
+      "value": "memory_component",
+      "status": "auto",
+      "basis": "Claude 据说明判断：只做主动消息，记忆只是辅助"
+    },
+    "lifecycle": {
+      "value": [
+        "review"
+      ],
+      "status": "auto",
+      "basis": "查看修改：dashboard、files"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 1/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file",
+        "plugin_api",
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：说明：“文和当下情绪主动开口，有免打扰时段和网页控制台；会话状态与情绪；AstrBot 插件；”；config_file：README：“一条 `/sid` 的指令（如果你修改了 AstrBot 的配置文件 → 平台配置 → 唤醒词，请把 `/` 改为你自定义的唤醒”；plugin_api：README：“# 功能装配：默认功能与可插拔扩展点 │ │ ├─ context/”；plain_data：记忆存成可以直接看改的文件"
     }
   },
   "uncertainties": [

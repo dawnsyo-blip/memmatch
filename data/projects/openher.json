@@ -319,6 +319,66 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "keyword：README：“**本地事实** | 用户偏好、个人信息 | SQLite FTS5 | | **长期记忆** | 跨对话画像、叙事摘要、预感”"
+    },
+    "scoring_stages": {
+      "value": [
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "forget：说明：“摘要交给 EverMemOS；风格记忆按衰减公式淡去，重要的加深；异步两阶段：每轮结束触发搜索，下”"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：说明：“端＋macOS 客户端，可接微信；人格从驱力与记忆中涌现，不靠固定提示词；并非所有模”"
+    },
+    "project_role": {
+      "value": "companion_app",
+      "status": "auto",
+      "basis": "按收录类别「自带记忆的应用」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "self_contained：自带记忆的应用"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“nstall -r requirements.txt cp .env.example .env ``` ### 二、配置环境变”"
+    },
     "paper_taxonomy": {
       "form": "词元级＋驱力状态",
       "function": "AI 身份（纵贯性自我）＋关系",

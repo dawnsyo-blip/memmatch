@@ -1599,5 +1599,345 @@
       ],
       "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     }
+  },
+  "ai-companion-cot-emotion": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“— 当前值 - `residuals[k]` —— 残留（强刺激留下的余味，独立衰减） **最重要的一行：分数不是当前值。** ```python def sc”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "ai-companion-telegram-guide": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“与 Telegram 实际回复。 6. 遇到登录、扫码、验证码、密钥输入或高风险删除时暂停，让我接手。 7. 完成后给我一份变更清单、备份位置、服务状态和下一步测试”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "ai-daily-rules-tutorial": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提遗忘或删除；有归档：“MemoDAO + 工具定义 + 过期归档逻辑） - 完整的工具描述提示词（实际在”"
+    }
+  },
+  "astrbot-plugin-private-companion": {
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“、媒体及设备观察数据，本轮仍有外部保留或暂缓迁移的部分。不要因某项配置已接续，就删除对应旧拓展的数据。 确认内置能力接管后，停用承担同一功能的旧独立拓展，避免重复”，没提自动衰减，建议值 manual_only；有归档：“对来源身份、可见性和治理状态后导入；原始归档与可检索导入分别记录 | | 已学习表达”"
+    }
+  },
+  "automem": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“ticles/PMC4648295/). Wrong rabbit holes fade naturally. Important memories with stro”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“| Off by default | Archives low-relevance memories”"
+    }
+  },
+  "claude-imprint": {
+    "accounts_needed": {
+      "value": [
+        "claude_subscription",
+        "telegram"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：账号原文：Claude 付费套餐（Pro/Max）；Telegram 机器人（可选）（含“可选”，需确认是否必需）"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“eyword, fused with RRF ranking and time-decay scoring. Replaces Claude Code's built-i”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "cloud-and-island": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“果需要）— 经期追踪、预测 - **待办** — 简单的待办事项，可添加、打勾、删除 Mini App 的所有数据都从你已经搭好的 API 接口读取，不需要额外的”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "connectome-host": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“udePrivateTools: false` — and `/session delete` does not remove the remote index - *”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "context-slim": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提遗忘或删除；有归档：“这只是刀。完整的方法还有三步——按天归档原文、交给另一个模型挖每日摘要 （不经自”"
+    }
+  },
+  "cyberboss": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "dreams": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“交仓库。 4. 想清空某天的梦：直接编辑 `data/dreams.json` 删除条目，并删对应 `corpus/dreams/dream_{day}.”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "dudulove-memory": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“以在完全不配置模型服务的情况下完成： - 身份与权限管理 - 记忆保存、编辑、删除和恢复 - 关键词搜索 - 上下文组装 - 活动记录与基础近期简报 语义检索和”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "dylan-heartbeat": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“ervice；如果旧部署曾手动填写 Custom Start Command，请删除覆盖值，或直接改成 `npm run start:railway`。 3. 若希”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "extension-summaryception": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“owser** — Browse, edit, regenerate, and delete individual snippets across all layers -”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "forge-reload": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“化）。 **Q: 会不会弄坏我的 session？** A: 脚本从不修改、不删除旧文件，只新建文件；写入前有三重自检，任何一步失败都会中止并清理。但军规第一条依”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "headlong": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“ory stays in context at exponentially decaying resolution. Recent entries appear ve”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "keep-the-crow": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“线：worktree 隔离、SQLite 一致性备份、云构建、生成物冲突、可恢复删除与主动联系联调 | | [27-chatgpt-mcp.md](27-chatg”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "kin-mind": {
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“原生容量策略。这些是宿主接入选项，安装库本身不会自动接管一个会话。 通用记忆库删除来源时，也会清除相关作业恢复历史中的正文副本。备份收录数据库快照、快照引用的附件”，没提自动衰减，建议值 manual_only；有归档：“人设策略、自我认知、配置与人设版本、历史归档），不含凭据、缓存和向量；恢复先在暂存目”"
+    }
+  },
+  "lightmem": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "lmc-5": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“e gates are computed at retrieval time; decay/dedup jobs are separate. | Archive/dele”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "mempalace": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "moraine-home": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“weighting, down-weighting, core locks, decay, archive, restore, and audit trails; -”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "not-fade-away": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提遗忘或删除；有归档：“- **轮换兜底**：剪完仍超限才归档换新会话，断档从常态变罕见； > -”"
+    }
+  },
+  "ocean": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“ample: > Remove Poetry from this fork. Delete its navigation and UI, poetry data stor”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "optmem": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“tree node into its two halves | | `memo forget <lo>-<hi>` | drop a bad summary; the ne”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "respark": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：说明里没写；README 提到“runpod ``` **2. Get a RunPod API key:** 1. Go to [RunPod Settings”，建议值 model_api_key，需确认是否必需"
+    }
+  },
+  "rikkahub-auto-compress": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“圈按助手隔离，每个助手拥有自己的动态时间线。 - 支持 AI 发布、点赞、评论、删除、日期筛选和刷新诊断。 - 匿名提问箱支持延迟回答、用户一次性回答和 AI 后续”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "rolling-memory": {
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“，它们由 T1 超限时的机械摘行滚进 T2。 并且 close 走的是**删除且不留档**这条路，所以 v1.8 起另有代码护栏：销售后 T1 不得低于”，没提自动衰减，建议值 manual_only；有归档：“膨胀。解析失败会先原地重试一次，仍失败才归档。 7. **静默降级**：配置缺失、接”"
+    }
+  },
+  "serein": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“与版本 | Scene、Event、叙事卷各有自己的 ID；修改保留版本，归档与删除有各自状态 | | 原话档案与证据绑定 | 保存已接入或导入的原始消息，并记录哪”，没提自动衰减，建议值 manual_only；有归档：“（最多 250 条一批）。历史聊天默认只归档，按需再做摘要；聊天条数不等于需要生成向”"
+    }
+  },
+  "sillytavern-presence": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“ce name=<char_name> replace=<char_name> forget=<true|false>? forceName=<true|false>? <”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "sillytavern-rememory": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“. These pop-up memories can optionally fade over time, becoming less likely to trig”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "simplemem": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "smart-memory": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“n the settings panel header: **clean** (fades after a few seconds) or **N conflicts**”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "st-qdrant-memory": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“y Viewer**: Browse collection stats and delete memories per character - **Non-Invasive”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "swap-tutorial": {
+    "forgetting": {
+      "value": [
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 没提遗忘或删除；有归档：“旧 transcript ├─ 完整原文归档 ───────────────→ 冷仓”"
+    }
+  },
+  "text2mem": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“, Label, Promote, Demote, Merge, Split, Delete, Lock, Expire | | **Clarify (UX utility”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "timeline-memory": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“te**: Overwrite the selected preset - **Delete**: Remove the selected preset - **Expor”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "vecthare": {
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“retrieval to SillyTavern with temporal decay, conditional activation, and multiple v”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
   }
 }

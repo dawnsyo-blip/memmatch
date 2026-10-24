@@ -321,6 +321,69 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "frequency",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：““原文为真源”立场最彻底：向量只负责带路、不改写记忆，规避摘要失真；用”；keyword：README：“奶绿了它还能复活。 另外每天凌晨有个第三工人重建逐字索引（FTS5），管\"原话里有没有出现过这四个字\"这种查询。L2 画像层没”；recency：说明：“模型摘录信息点，必须附可校验的逐字引用；新旧记忆高置信矛盾时，旧条目标记 super”；frequency：README：“时 +1：上了菜单不算被想起。（坦白：这个计数加成本质上还是热度的残党，一个触发条件更老实的计数器而已。它的退役方案在下面。”；confidence：README：“得记就交白卷（它经常交白卷）。存完还有一步：新记忆跟旧记忆高置信度矛盾时（你以前那条「最喜欢茉莉奶绿」），旧条目被标记 sup”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、frequency、confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 3 个：recency、frequency、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "dev_framework",
+      "status": "auto",
+      "basis": "按收录类别「需写代码（开发者向）」"
+    },
+    "lifecycle": {
+      "value": [
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有检索方式或换窗续接，或是完整记忆系统；遗忘：archive；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 gateway"
+    },
+    "customization": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（逐字原文）",
       "function": "用户事实",

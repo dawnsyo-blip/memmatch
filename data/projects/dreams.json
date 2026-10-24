@@ -147,8 +147,8 @@
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“交仓库。 4. 想清空某天的梦：直接编辑 `data/dreams.json` 删除条目，并删对应 `corpus/dreams/dream_{day}.”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“交仓库。 4. 想清空某天的梦：直接编辑 `data/dreams.json` 删除条目，并删对应 `corpus/dreams/dream_{day}.”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -268,6 +268,67 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“。 ``` > 机：如果你的宿主有记忆检索系统（全文检索/向量库），把 `corpusDir` 指向它 > 的收录目录”；keyword：README：“是自己的梦。 ``` > 机：如果你的宿主有记忆检索系统（全文检索/向量库），把 `corpusDir` 指向它 > 的收”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "state_engine",
+      "status": "auto",
+      "basis": "按收录类别「边缘项（存的不是对话记忆）」"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "designed_to_pair"
+      ],
+      "status": "auto",
+      "basis": "designed_to_pair：状态引擎本身不存对话记忆，设计上和记忆库搭配使用"
+    },
+    "customization": {
+      "value": [
+        "config_file",
+        "small_code"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“eams`，放哪都行）。 2. **配置**（宿主入口顶部，环境变量优先，代码配置可省略）： ```js const drea”；small_code：README：“验证命令。人类读者也可以直接照做。 ## 这是什么 一个零依赖的 Node 模块（`Node >= 18`，需要原生 `f”"
     }
   },
   "uncertainties": [

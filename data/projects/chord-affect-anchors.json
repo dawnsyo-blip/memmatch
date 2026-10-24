@@ -246,6 +246,61 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没找到排序方式"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：说明：“回相近的状态；只有文章和规格，没有代码；情绪状态；规格说明（文本格式）；不限”"
+    },
+    "project_role": {
+      "value": "guide",
+      "status": "auto",
+      "basis": "按收录类别「教程与搭建指南」"
+    },
+    "lifecycle": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有可推出的环节"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 0/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "small_code"
+      ],
+      "status": "auto",
+      "basis": "small_code：README：“rty model required. A small, zero-dependency, text-native prototype for h”"
     }
   },
   "uncertainties": [

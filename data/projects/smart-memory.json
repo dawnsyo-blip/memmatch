@@ -149,8 +149,8 @@
       "value": [
         "auto_decay"
       ],
-      "status": "needs_review",
-      "basis": "README：“n the settings panel header: **clean** (fades after a few seconds) or **N conflicts**”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README：“n the settings panel header: **clean** (fades after a few seconds) or **N conflicts**”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     },
     "human_review": {
       "value": [],
@@ -268,6 +268,68 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "importance",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“ally. ### 2. Set up semantic embeddings (optional but recommended) E”；keyword：README：“p, Smart Memory falls back to keyword matching automatically. It works, b”；importance：README：“Extraction also assigns: - **Importance (1-3)** - how impactful the m”；confidence：README：“mmary per named entity with a confidence score Profiles are regenerated aft”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 importance、confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 2 个：importance、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：README：“**Character state** - current emotional state, active goals, relationship p”"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin"
+    },
+    "customization": {
+      "value": [
+        "settings_ui"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：README：“. A character selector in the settings panel lets you switch between group”"
     }
   },
   "uncertainties": [

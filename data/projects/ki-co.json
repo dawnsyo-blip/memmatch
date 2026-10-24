@@ -318,6 +318,69 @@
       "status": "auto",
       "basis": "原表／说明：“人格核＋分层记忆＋生活线，本地优先；AI 身份（人格核）＋用户事实；网页、桌面或 P”"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“当初 / 某个旧锚点”等线索时更积极召回；新日记和新记忆会在向量/混合检索时按需补索引，不必每次手动重建全库。 * 缓存命中”；keyword：说明：“句不触发）；召回顺序稳定以利缓存；旧聊天全文检索；聊天与后台整理可用不同模型；可导入”；recency：README：“Obsidian 中都有记录时，会尽量通过标题、语义、来源和新鲜度排序控制冗余，而不是简单堆满上下文。 * 召回排序更重视“标”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：recency"
+    },
+    "emotion_handling": {
+      "value": [
+        "tags"
+      ],
+      "status": "auto",
+      "basis": "tags：Claude 据说明补充：日记记忆里记录情绪"
+    },
+    "project_role": {
+      "value": "companion_app",
+      "status": "auto",
+      "basis": "按收录类别「自带记忆的应用」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "self_contained：自带记忆的应用"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：README：“/ 记忆回廊 * Cinema room / 观影室 * Settings page / 系统设置 * Time Bridge / 时间桥 *”；config_file：README：“hing your own fork, check: .env API keys private chat logs”"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层",
       "function": "AI 身份（人格核）＋用户事实",

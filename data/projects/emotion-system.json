@@ -264,6 +264,64 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“接触）：本系统用的是规则；如果你的记忆库已经有本地模型（例如向量模型），可以直接复用来做这一步 4. 明确的亲密互动开启流程”；confidence：README：“*。比如一道选择题，会得到每个选项各占多少概率，再加一个整体置信度。 - 同一次请求里的各道题**互相独立**判断； - *”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：说明：“值，累计思念并适时给它主动联系你的机会；AI 情绪状态；Node.js 包（每轮回复后调用”"
+    },
+    "project_role": {
+      "value": "state_engine",
+      "status": "auto",
+      "basis": "按收录类别「边缘项（存的不是对话记忆）」"
+    },
+    "lifecycle": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "有检索方式或换窗续接，或是完整记忆系统"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 1/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "designed_to_pair"
+      ],
+      "status": "auto",
+      "basis": "designed_to_pair：状态引擎本身不存对话记忆，设计上和记忆库搭配使用"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“n({ state, apiKey: process.env.OPENROUTER_API_KEY, turn: {”"
     }
   },
   "uncertainties": [

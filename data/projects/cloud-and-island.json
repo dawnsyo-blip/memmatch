@@ -148,8 +148,8 @@
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“果需要）— 经期追踪、预测 - **待办** — 简单的待办事项，可添加、打勾、删除 Mini App 的所有数据都从你已经搭好的 API 接口读取，不需要额外的”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“果需要）— 经期追踪、预测 - **待办** — 简单的待办事项，可添加、打勾、删除 Mini App 的所有数据都从你已经搭好的 API 接口读取，不需要额外的”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -270,6 +270,65 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“库 init_db() ``` --- ### 1.3 向量搜索（推荐） 关键词搜索只能匹配字面相同的词，但记忆经常需”；keyword：README：“) ``` --- ### 1.3 向量搜索（推荐） 关键词搜索只能匹配字面相同的词，但记忆经常需要\"语义搜索\"——比如”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "guide",
+      "status": "auto",
+      "basis": "按收录类别「教程与搭建指南」"
+    },
+    "lifecycle": {
+      "value": [
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“配置 MCP 服务器 在项目目录创建 `.claude/settings.json`（或全局 `~/.claude/settings.json”"
     }
   },
   "uncertainties": [

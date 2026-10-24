@@ -272,6 +272,72 @@
       "value": "yes",
       "status": "auto",
       "basis": "README：“ct is the serialized control plane, and encrypted checkpoint artifacts are stored in R2.”（已核对）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "importance",
+        "emotion",
+        "relation"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“caller-provided or Workers AI embeddings ``` The pieces: - **Memory*”；keyword：README：“th exact Q15 retrieval, BM25F lexical search, typed abstentions, dimensi”；importance：README：“t + affective/PAD resonance), importance scoring, consolidation, lifecycle d”；emotion：README：“er circadian rhythm modulates arousal and recall; the engine has”；relation：README：“ims, contradiction detection, entity graph, hierarchical consolidation”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 importance、emotion、relation（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 3 个：importance、emotion、relation"
+    },
+    "emotion_handling": {
+      "value": [
+        "tags",
+        "weighting"
+      ],
+      "status": "auto",
+      "basis": "tags：README：“er circadian rhythm modulates arousal and recall; the engine has”；weighting：排序因素含情感强度"
+    },
+    "project_role": {
+      "value": "dev_framework",
+      "status": "auto",
+      "basis": "按收录类别「需写代码（开发者向）」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、tools"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     }
   },
   "uncertainties": [

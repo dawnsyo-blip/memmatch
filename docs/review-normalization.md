@@ -18,10 +18,10 @@
 | `os` | `windows` Windows；`macos` macOS；`linux` Linux；`android` 安卓；`ios` iOS；`any` 任何系统（浏览器即可） | 219 | 0 | 15 | 0 |
 | `difficulty` | `low` 低：应用商店或一键安装；`medium` 中：几条命令或按向导填设置；`high` 高：要写代码或改较多配置 | 234 | 0 | 0 | 0 |
 | `cost` | `free` 免费；`model_fees_only` 只需模型调用费；`paid_service` 需付费服务或订阅 | 204 | 7 | 23 | 0 |
-| `accounts_needed` | `none` 不需要；`github` GitHub；`cloudflare` Cloudflare；`render` Render；`model_api_key` 模型接口密钥；`vendor_account` 项目方账号；`telegram` Telegram 机器人；`claude_subscription` Claude 付费套餐 | 178 | 34 | 20 | 2 |
+| `accounts_needed` | `none` 不需要；`github` GitHub；`cloudflare` Cloudflare；`render` Render；`model_api_key` 模型接口密钥；`vendor_account` 项目方账号；`telegram` Telegram 机器人；`claude_subscription` Claude 付费套餐 | 178 | 36 | 20 | 0 |
 | `memory_subject` | `user_facts` 用户本人的事实和偏好；`ai_identity` AI 自身身份与关系；`experience` 做事经验；`task_context` 当前任务上下文；`conversation_history` 历史对话原文 | 205 | 0 | 29 | 0 |
-| `write_mode` | `auto` 自动记；`review_first` 先出候选再由人审核；`on_request` 由 AI 或用户主动调用时才记 | 58 | 79 | 89 | 8 |
-| `forgetting` | `auto_decay` 自动衰减；`archive` 沉底归档（不删除）；`manual_only` 手动删除；`none` 不遗忘 | 35 | 89 | 77 | 33 |
+| `write_mode` | `auto` 自动记；`review_first` 先出候选再由人审核；`on_request` 由 AI 或用户主动调用时才记 | 58 | 87 | 89 | 0 |
+| `forgetting` | `auto_decay` 自动衰减；`archive` 沉底归档（不删除）；`manual_only` 手动删除；`none` 不遗忘 | 35 | 122 | 77 | 0 |
 | `human_review` | `dashboard` 网页面板／应用界面；`files` 直接看改文件；`cli` 命令行；`tools` 让 AI 调工具改 | 209 | 0 | 25 | 0 |
 | `export` | `markdown` Markdown；`json` JSON；`sqlite` SQLite 数据库文件；`other_file` 其它文件格式；`none` 无 | 56 | 11 | 167 | 0 |
 | `data_passes_through` | `local_only` 仅本机或自己的服务器；`own_cloud` 用户自己的云账号；`third_party` 第三方服务器 | 228 | 0 | 6 | 0 |
@@ -45,8 +45,17 @@
 | `visual_presence` | **视觉形象**：有 Live2D、3D 角色、桌宠等形象，或用画面表现情绪。`yes` 有；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 | `voice_interaction` | **语音交互**：支持语音对话、朗读，或从声音里识别情绪。`yes` 有；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 | `privacy_protection` | **隐私保护**：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。`yes` 有；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `ranking_signals` | `semantic` 语义相似（向量）；`keyword` 关键词／全文；`recency` 新旧／时间衰减；`importance` 重要性评分；`frequency` 使用频率／被想起的次数；`emotion` 情感强度；`relation` 关联扩散（图谱、链接）；`confidence` 置信度／来源可信度；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `scoring_stages` | `write` 写入时打分或筛选；`retrieve` 召回时综合排序；`forget` 遗忘时按分数决定；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `multi_factor` | `multi` 多维（相似度之外至少综合两个因素）；`single` 单一（只看相似度，或只多一个因素）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `emotion_handling` | `tags` 给记忆打情绪标签（如效价、唤醒度）；`weighting` 情绪强度影响记忆的保留或召回；`ai_state` AI 自己有会随时间变化的情绪、驱力或身体状态；`user_mood` 记录用户的心情和状态；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `project_role` | `full_memory` 完整记忆系统；`context_tool` 上下文延续工具（压缩、摘要、换窗）；`memory_component` 记忆部件（只做其中一环）；`state_engine` 状态引擎（情绪、身体、梦）；`companion_app` 自带记忆的应用或 agent；`dev_framework` 开发框架或代码库；`guide` 教程或设计文档 | 234 | 0 | 0 | 0 |
+| `lifecycle` | `capture` 写入；`consolidate` 整理（合并、摘要、反思）；`retrieve` 召回；`forget` 自动遗忘或归档；`review` 人工查看和修改 | 234 | 0 | 0 | 0 |
+| `lifecycle_complete` | `complete` 五个环节都有；`partial` 只覆盖部分环节 | 234 | 0 | 0 | 0 |
+| `pairing` | `designed_to_pair` 明确说明可和其它记忆库搭配（旁路、叠加）；`standard_interface` 走 MCP、OpenAI 兼容接口或宿主插件，可和别的工具并用；`replaces_builtin` 会替换宿主自带的记忆或压缩；`self_contained` 自带完整界面，记忆不拿出来和别的项目共用；`depends_on` 要先有另一个项目才能用；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `customization` | `settings_ui` 在界面里改设置；`config_file` 改配置文件或环境变量；`prompts` 可以改提示词；`plain_data` 记忆是可以直接编辑的普通文件；`plugin_api` 留了插件或扩展接口；`small_code` 代码小巧（单文件、零依赖），方便自己改；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 
-共 234 个项目：文档未说明 471 处，待审核 43 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
+共 234 个项目：文档未说明 471 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 
 说明：
 
@@ -178,14 +187,13 @@
 | Tree Ring Memory（`tree-ring-memory`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
 | WrenWen（`wrenwen`） | 文档未说明 | — | — | 文档写的是“代码不开源”，归不进固定选项 |
 
-## `accounts_needed` 需要的账号（22 处）
+## `accounts_needed` 需要的账号（20 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
 | 给 AI 伴侣装思考链和情绪（`ai-companion-cot-emotion`） | 文档未说明 | — | — | 说明文档没有写 |
 | AI 日常规则教程（`ai-daily-rules-tutorial`） | 文档未说明 | — | — | 说明文档没有写 |
 | alethech（`alethech`） | 文档未说明 | — | — | 说明文档没有写 |
-| Claude Imprint（`claude-imprint`） | 待审核 | Claude 付费套餐（Pro/Max）；Telegram 机器人（可选） | claude_subscription, telegram | 账号原文：Claude 付费套餐（Pro/Max）；Telegram 机器人（可选）（含“可选”，需确认是否必需） |
 | Claude-Mem（`claude-mem`） | 文档未说明 | — | — | 说明文档没有写 |
 | ContextLattice（`contextlattice`） | 文档未说明 | — | — | 说明文档没有写 |
 | Eventide（`eventide`） | 文档未说明 | — | — | 说明文档没有写 |
@@ -197,7 +205,6 @@
 | Omnigraph（`omnigraph`） | 文档未说明 | — | — | 说明文档没有写 |
 | 药盒 pilulier（`pilulier`） | 文档未说明 | — | — | 说明文档没有写 |
 | Portable AI Memory SDK（`python-sdk`） | 文档未说明 | — | — | 说明文档没有写 |
-| ReSpark（`respark`） | 待审核 | RunPod、Hugging Face 账号 | model_api_key | 说明里没写；README 提到“runpod ``` **2. Get a RunPod API key:** 1. Go to [RunPod Settings”，建议值 model_api_key，需确认是否必需 |
 | Second Me（`second-me`） | 文档未说明 | — | — | 说明文档没有写 |
 | ShadowGraph（`shadowgraph`） | 文档未说明 | — | — | 说明文档没有写 |
 | Talamus（`talamus`） | 文档未说明 | — | — | 说明文档没有写 |
@@ -239,7 +246,7 @@
 | WrenWen（`wrenwen`） | 文档未说明 | 伴侣系统整体设计 | — | 文档写的是“伴侣系统整体设计”，归不进固定选项 |
 | ZenBrain（`zenbrain`） | 文档未说明 | 多层记忆 | — | 文档写的是“多层记忆”，归不进固定选项 |
 
-## `write_mode` 记忆怎么写入（97 处）
+## `write_mode` 记忆怎么写入（89 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
@@ -255,7 +262,6 @@
 | 我会永远陪着你（AstrBot 陪伴插件）（`astrbot-plugin-private-companion`） | 文档未说明 | — | — | README 没提写入方式 |
 | AstrBot 主动消息插件（`astrbot-plugin-proactive-chat`） | 文档未说明 | — | — | README 没提写入方式 |
 | AtMem（`atmem`） | 文档未说明 | — | — | README 没提写入方式 |
-| AutoMem（`automem`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | 和机的另一个家 ChatNest UI（`chatnest-ui`） | 文档未说明 | 模型通过接口写记忆，后端去重；去重时 | — | 原表写入方式未识别：模型通过接口写记忆，后端去重；去重时；近似去重，前端标红、人来定夺 |
 | Chord Affect Anchors（`chord-affect-anchors`） | 文档未说明 | — | — | README 没提写入方式 |
 | claude-handoff（`claude-handoff`） | 文档未说明 | — | — | README 没提写入方式 |
@@ -263,11 +269,9 @@
 | Companion Emergence（`companion-emergence`） | 文档未说明 | 角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆 | — | 原表写入方式未识别：角色自己把多轮验证过的记忆结晶为“灵魂”；可选：审阅灵魂记忆；灵魂记忆可审阅、可撤销，不会被悄悄改写 |
 | connectome-host（`connectome-host`） | 文档未说明 | — | — | README 没提写入方式 |
 | context-slim（`context-slim`） | 文档未说明 | — | — | README 没提写入方式 |
-| Cyberboss（`cyberboss`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | dreams.js（`dreams`） | 文档未说明 | — | — | README 没提写入方式 |
 | DreamVault（`dreamvault`） | 文档未说明 | 不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截 | — | 原表写入方式未识别：不负责写入；在写入闸口检查记忆有没有事实锚点；不由人介入，机器闸口拦截；写入闸口检查事实锚点，不通过即隔离；只有 AI 本人能认领 |
 | Drivesoid（`drivesoid`） | 文档未说明 | 你的桥接层上报对话事件；— | — | 原表写入方式未识别：你的桥接层上报对话事件；—；— |
-| DuduLove Memory（`dudulove-memory`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | Dylan Heartbeat（`dylan-heartbeat`） | 文档未说明 | — | — | README 没提写入方式 |
 | 情绪系统（bvsden）（`emotion-system`） | 文档未说明 | — | — | README 没提写入方式 |
 | Eventide（`eventide`） | 文档未说明 | — | — | README 没提写入方式 |
@@ -284,7 +288,6 @@
 | LangMem（`langmem`） | 文档未说明 | — | — | README 没提写入方式 |
 | langstate（`langstate`） | 文档未说明 | — | — | README 没提写入方式 |
 | Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | README 没提写入方式 |
-| LightMem（`lightmem`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | notebook.py（`llmcompressor`） | 文档未说明 | — | — | README 没提写入方式 |
 | LMC-5（`lmc-5`） | 文档未说明 | — | — | README 没提写入方式 |
 | Loci（`loci`） | 文档未说明 | — | — | README 没提写入方式 |
@@ -294,11 +297,9 @@
 | MemEngine（`memengine`） | 文档未说明 | — | — | README 没提写入方式 |
 | Memex（`memex-lab-memex`） | 文档未说明 | 你随手记录，多个 AI 助手整理成卡片；— | — | 原表写入方式未识别：你随手记录，多个 AI 助手整理成卡片；—；无专门机制 |
 | Memobase（`memobase`） | 文档未说明 | — | — | README 没提写入方式 |
-| MemPalace（`mempalace`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | mneme（`mneme`） | 文档未说明 | — | — | README 没提写入方式 |
 | mnemos（vishalbanwari26）（`mnemos`） | 文档未说明 | — | — | README 没提写入方式 |
 | Mnemosyne（OpenClaw/Hermes 版）（`mnemosyne-agentmemory-engine-openclaw-hermes`） | 文档未说明 | — | — | README 没提写入方式 |
-| Moraine（`moraine-home`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | NemoLore（`nemolore`） | 文档未说明 | — | — | README 没提写入方式 |
 | 不会消失的恋人（`not-fade-away`） | 文档未说明 | — | — | README 没提写入方式 |
 | Ocean（`ocean`） | 文档未说明 | — | — | README 没提写入方式 |
@@ -317,13 +318,11 @@
 | rolling-memory（`rolling-memory`） | 文档未说明 | — | — | README 没提写入方式 |
 | Sapphire（`sapphire`） | 文档未说明 | 带标签的记忆条目；Librarian 每晚整理；— | — | 原表写入方式未识别：带标签的记忆条目；Librarian 每晚整理；—；Librarian 改动记入人格账本 |
 | Second Me（`second-me`） | 文档未说明 | — | — | README 没提写入方式 |
-| Serein（`serein`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | ShadowGraph（`shadowgraph`） | 文档未说明 | — | — | README 没提写入方式 |
 | Memory Books（`sillytavern-memorybooks`） | 文档未说明 | — | — | README 没提写入方式 |
 | Qvink Memory（`sillytavern-messagesummarize`） | 文档未说明 | — | — | README 没提写入方式 |
 | Presence（`sillytavern-presence`） | 文档未说明 | — | — | README 没提写入方式 |
 | ReMemory（`sillytavern-rememory`） | 文档未说明 | — | — | README 没提写入方式 |
-| SimpleMem（`simplemem`） | 待审核 | — | on_request | README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request |
 | Smart Memory（`smart-memory`） | 文档未说明 | — | — | README 没提写入方式 |
 | Statewave（`statewave`） | 文档未说明 | — | — | README 没提写入方式 |
 | Claude Code 换窗教程（精炼续窗）（`swap-tutorial`） | 文档未说明 | — | — | README 没提写入方式 |
@@ -341,58 +340,41 @@
 | Yorishiro（`yorishiro`） | 文档未说明 | 角色按人格写日记，要点累积进 memories.md；— | — | 原表写入方式未识别：角色按人格写日记，要点累积进 memories.md；—；— |
 | Yuralume Core（`yuralume-core`） | 文档未说明 | 五层人设模型；日程活动成为情节记忆；共享经历入库前 | — | 原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆 |
 
-## `forgetting` 怎么遗忘（110 处）
+## `forgetting` 怎么遗忘（77 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
 | Acontext（`acontext`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Agent Zero（`agent-zero`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| 给 AI 伴侣装思考链和情绪（`ai-companion-cot-emotion`） | 待审核 | — | auto_decay | README：“— 当前值 - `residuals[k]` —— 残留（强刺激留下的余味，独立衰减） **最重要的一行：分数不是当前值。** ```python def sc”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
-| 把 AI 伴侣搬进 Telegram（`ai-companion-telegram-guide`） | 待审核 | — | manual_only | README 只提到删除：“与 Telegram 实际回复。 6. 遇到登录、扫码、验证码、密钥输入或高风险删除时暂停，让我接手。 7. 完成后给我一份变更清单、备份位置、服务状态和下一步测试”，没提自动衰减，建议值 manual_only |
-| AI 日常规则教程（`ai-daily-rules-tutorial`） | 待审核 | — | archive | README 没提遗忘或删除；有归档：“MemoDAO + 工具定义 + 过期归档逻辑） - 完整的工具描述提示词（实际在” |
 | AI Pocket Chat（`ai-pocket-chat`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Akephalos（`akephalos`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | alethech（`alethech`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| 我会永远陪着你（AstrBot 陪伴插件）（`astrbot-plugin-private-companion`） | 待审核 | — | manual_only, archive | README 只提到删除：“、媒体及设备观察数据，本轮仍有外部保留或暂缓迁移的部分。不要因某项配置已接续，就删除对应旧拓展的数据。 确认内置能力接管后，停用承担同一功能的旧独立拓展，避免重复”，没提自动衰减，建议值 manual_only；有归档：“对来源身份、可见性和治理状态后导入；原始归档与可检索导入分别记录 ／ ／ 已学习表达” |
 | AstrBot 主动消息插件（`astrbot-plugin-proactive-chat`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | AstrBot 自主学习（`astrbot-plugin-self-learning`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| AutoMem（`automem`） | 待审核 | — | auto_decay, archive | README：“ticles/PMC4648295/). Wrong rabbit holes fade naturally. Important memories with stro”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“／ Off by default ／ Archives low-relevance memories” |
 | Basic Memory（`basic-memory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Chord Affect Anchors（`chord-affect-anchors`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | claude-find（`claude-find`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | claude-handoff（`claude-handoff`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Claude Imprint（`claude-imprint`） | 待审核 | — | auto_decay | README：“eyword, fused with RRF ranking and time-decay scoring. Replaces Claude Code's built-i”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Claude-Mem（`claude-mem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Claude Soul（`claude-soul`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Claudex（`claudex`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| 云与岛（`cloud-and-island`） | 待审核 | — | manual_only | README 只提到删除：“果需要）— 经期追踪、预测 - **待办** — 简单的待办事项，可添加、打勾、删除 Mini App 的所有数据都从你已经搭好的 API 接口读取，不需要额外的”，没提自动衰减，建议值 manual_only |
-| connectome-host（`connectome-host`） | 待审核 | — | manual_only | README 只提到删除：“udePrivateTools: false` — and `/session delete` does not remove the remote index - *”，没提自动衰减，建议值 manual_only |
 | Context-Keeper（`context-keeper`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| context-slim（`context-slim`） | 待审核 | — | archive | README 没提遗忘或删除；有归档：“这只是刀。完整的方法还有三步——按天归档原文、交给另一个模型挖每日摘要 （不经自” |
 | ContextLattice（`contextlattice`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | cosmos-mcp（`cosmos-mcp`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Cyberboss（`cyberboss`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | 守护猴 Daemonkey（`daemonkey-agent`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| dreams.js（`dreams`） | 待审核 | — | manual_only | README 只提到删除：“交仓库。 4. 想清空某天的梦：直接编辑 `data/dreams.json` 删除条目，并删对应 `corpus/dreams/dream_{day}.”，没提自动衰减，建议值 manual_only |
-| DuduLove Memory（`dudulove-memory`） | 待审核 | — | manual_only | README 只提到删除：“以在完全不配置模型服务的情况下完成： - 身份与权限管理 - 记忆保存、编辑、删除和恢复 - 关键词搜索 - 上下文组装 - 活动记录与基础近期简报 语义检索和”，没提自动衰减，建议值 manual_only |
-| Dylan Heartbeat（`dylan-heartbeat`） | 待审核 | — | manual_only | README 只提到删除：“ervice；如果旧部署曾手动填写 Custom Start Command，请删除覆盖值，或直接改成 `npm run start:railway`。 3. 若希”，没提自动衰减，建议值 manual_only |
 | 情绪系统（bvsden）（`emotion-system`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Eventide（`eventide`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | EverOS（`everos`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Summaryception（`extension-summaryception`） | 待审核 | — | manual_only | README 只提到删除：“owser** — Browse, edit, regenerate, and delete individual snippets across all layers -”，没提自动衰减，建议值 manual_only |
 | fable（`fable`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| forge-reload（`forge-reload`） | 待审核 | — | manual_only | README 只提到删除：“化）。 **Q: 会不会弄坏我的 session？** A: 脚本从不修改、不删除旧文件，只新建文件；写入前有三重自检，任何一步失败都会中止并清理。但军规第一条依”，没提自动衰减，建议值 manual_only |
 | GBrain（`gbrain`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Headlong（`headlong`） | 待审核 | — | auto_decay | README：“ory stays in context at exponentially decaying resolution. Recent entries appear ve”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Hindsight（`hindsight`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | HMS（`hms`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Honcho（`honcho`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | HoneyOS（`honey-os`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Hyperconsciousness（`hyperconsciousness`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | InternalBeyond 移动版（`internalbeyond-mobile`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| 把乌鸦留在身边（`keep-the-crow`） | 待审核 | — | manual_only | README 只提到删除：“线：worktree 隔离、SQLite 一致性备份、云构建、生成物冲突、可恢复删除与主动联系联调 ／ ／ [27-chatgpt-mcp.md](27-chatg”，没提自动衰减，建议值 manual_only |
 | KI-CO 小屋（`ki-co`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Kin 的小脑瓜（Kin Mind）（`kin-mind`） | 待审核 | — | manual_only, archive | README 只提到删除：“原生容量策略。这些是宿主接入选项，安装库本身不会自动接管一个会话。 通用记忆库删除来源时，也会清除相关作业恢复历史中的正文副本。备份收录数据库快照、快照引用的附件”，没提自动衰减，建议值 manual_only；有归档：“人设策略、自我认知、配置与人设版本、历史归档），不含凭据、缓存和向量；恢复先在暂存目” |
 | Kremis（`kremis`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Kybase（`kybase`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | LangMem（`langmem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
@@ -400,7 +382,6 @@
 | Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | LightMem（`lightmem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | notebook.py（`llmcompressor`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| LMC-5（`lmc-5`） | 待审核 | — | auto_decay | README：“e gates are computed at retrieval time; decay/dedup jobs are separate. ／ Archive/dele”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Loci（`loci`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | LoreRoom（`loreroom`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Magnemo（`magnemo`） | 文档未说明 | — | — | README 没提遗忘或删除 |
@@ -414,16 +395,12 @@
 | MemPalace（`mempalace`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Mengram（`mengram`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | mnemory（`mnemory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Moraine（`moraine-home`） | 待审核 | — | auto_decay | README：“weighting, down-weighting, core locks, decay, archive, restore, and audit trails; -”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | Myco（`myco`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | NemoLore（`nemolore`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| 不会消失的恋人（`not-fade-away`） | 待审核 | — | archive | README 没提遗忘或删除；有归档：“- **轮换兜底**：剪完仍超限才归档换新会话，断档从常态变罕见； > -” |
-| Ocean（`ocean`） | 待审核 | — | manual_only | README 只提到删除：“ample: > Remove Poetry from this fork. Delete its navigation and UI, poetry data stor”，没提自动衰减，建议值 manual_only |
 | OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | 不适用 | — | 原表：不适用；— |
 | Omnigraph（`omnigraph`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Open WebUI Memory（`open-webui-memory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | OpenViking（`openviking`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| OptMem（`optmem`） | 待审核 | — | manual_only | README 只提到删除：“tree node into its two halves ／ ／ `memo forget <lo>-<hi>` ／ drop a bad summary; the ne”，没提自动衰减，建议值 manual_only |
 | 药盒 pilulier（`pilulier`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Prism Coder（`prism-mcp`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Psycheros（`psycheros`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
@@ -431,27 +408,16 @@
 | ReMe（`reme`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Remnic（`remnic`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | ReSpark（`respark`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| RikkaHub Jude（`rikkahub-auto-compress`） | 待审核 | — | manual_only | README 只提到删除：“圈按助手隔离，每个助手拥有自己的动态时间线。 - 支持 AI 发布、点赞、评论、删除、日期筛选和刷新诊断。 - 匿名提问箱支持延迟回答、用户一次性回答和 AI 后续”，没提自动衰减，建议值 manual_only |
-| rolling-memory（`rolling-memory`） | 待审核 | — | manual_only, archive | README 只提到删除：“，它们由 T1 超限时的机械摘行滚进 T2。 并且 close 走的是**删除且不留档**这条路，所以 v1.8 起另有代码护栏：销售后 T1 不得低于”，没提自动衰减，建议值 manual_only；有归档：“膨胀。解析失败会先原地重试一次，仍失败才归档。 7. **静默降级**：配置缺失、接” |
 | Sapphire（`sapphire`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
-| Serein（`serein`） | 待审核 | — | manual_only, archive | README 只提到删除：“与版本 ／ Scene、Event、叙事卷各有自己的 ID；修改保留版本，归档与删除有各自状态 ／ ／ 原话档案与证据绑定 ／ 保存已接入或导入的原始消息，并记录哪”，没提自动衰减，建议值 manual_only；有归档：“（最多 250 条一批）。历史聊天默认只归档，按需再做摘要；聊天条数不等于需要生成向” |
 | Memory Books（`sillytavern-memorybooks`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Qvink Memory（`sillytavern-messagesummarize`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Presence（`sillytavern-presence`） | 待审核 | — | manual_only | README 只提到删除：“ce name=<char_name> replace=<char_name> forget=<true／false>? forceName=<true／false>? <”，没提自动衰减，建议值 manual_only |
-| ReMemory（`sillytavern-rememory`） | 待审核 | — | auto_decay | README：“. These pop-up memories can optionally fade over time, becoming less likely to trig”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | SimpleMem（`simplemem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Smart Memory（`smart-memory`） | 待审核 | — | auto_decay | README：“n the settings panel header: **clean** (fades after a few seconds) or **N conflicts**”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
-| Qdrant Memory（`st-qdrant-memory`） | 待审核 | — | manual_only | README 只提到删除：“y Viewer**: Browse collection stats and delete memories per character - **Non-Invasive”，没提自动衰减，建议值 manual_only |
 | SAME（`statelessagent`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Claude Code 换窗教程（精炼续窗）（`swap-tutorial`） | 待审核 | — | archive | README 没提遗忘或删除；有归档：“旧 transcript ├─ 完整原文归档 ───────────────→ 冷仓” |
 | Talamus（`talamus`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Text2Mem（`text2mem`） | 待审核 | — | manual_only | README 只提到删除：“, Label, Promote, Demote, Merge, Split, Delete, Lock, Expire ／ ／ **Clarify (UX utility”，没提自动衰减，建议值 manual_only |
 | 三天没睡（`three-days-no-sleep`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Tidefall（`tidefall`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Timeline Memory（`timeline-memory`） | 待审核 | — | manual_only | README 只提到删除：“te**: Overwrite the selected preset - **Delete**: Remove the selected preset - **Expor”，没提自动衰减，建议值 manual_only |
 | VCPToolBox（`vcptoolbox`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| VectHare（`vecthare`） | 待审核 | — | auto_decay | README：“retrieval to SillyTavern with temporal decay, conditional activation, and multiple v”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay |
 | WrenWen（`wrenwen`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Yoji（`yoji`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Yuralume Core（`yuralume-core`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |

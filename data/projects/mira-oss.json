@@ -317,6 +317,66 @@
       "status": "auto",
       "basis": "README：“ows Mira & You to collaborate on stable encrypted documents that do not decay. Domaindocs”（已核对）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“to the context window through semantic similarity, entity hubs, memory traversa”"
+    },
+    "scoring_stages": {
+      "value": [
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "forget：说明：“落收拢时生成第一人称记忆摘要；记忆按公式衰减，除非靠被访问、引用、链接“挣到”保留；超长对话压缩成”"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "companion_app",
+      "status": "auto",
+      "basis": "按收录类别「自带记忆的应用」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、tools"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "self_contained"
+      ],
+      "status": "auto",
+      "basis": "self_contained：自带记忆的应用"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“| bash -s -- --config deploy-config.yml --loud ``` The script handle”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（第一人称叙事）",
       "function": "工作记忆＋AI 身份",

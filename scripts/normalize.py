@@ -21,12 +21,14 @@ import json
 import re
 import sys
 from collections import Counter
+from datetime import date
 from pathlib import Path
 
 import openpyxl
 from openpyxl.styles import Alignment, Font, PatternFill
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dimension_rules as DR  # noqa: E402
 import feature_rules as FR  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -71,6 +73,8 @@ ENUMS = {
 # 用户在意的特性（定义见 feature_rules.py）
 for _key, (_name, _desc) in FR.FEATURES.items():
     ENUMS[_key] = {"yes": "有", "not_mentioned": "未提及"}
+# 打分维度、情绪处理、项目定位与搭配（定义见 dimension_rules.py）
+ENUMS.update(DR.ENUMS)
 FIELDS = list(ENUMS)  # 输出顺序
 FIELD_LABELS = {
     "access": "接入方式", "compatible_clients": "能配合的助手", "runs_on": "运行位置", "os": "支持的系统",
@@ -78,10 +82,12 @@ FIELD_LABELS = {
     "write_mode": "记忆怎么写入", "forgetting": "怎么遗忘", "human_review": "能否查看和修改记忆", "export": "能否导出",
     "data_passes_through": "数据经过谁的服务器", "license_category": "许可证类别",
     **{k: v[0] for k, v in FR.FEATURES.items()},
+    **DR.LABELS,
 }
 DECIDED_ON = "2026-10-11"
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
-         "forgetting", "human_review", "export", "data_passes_through"}
+         "forgetting", "human_review", "export", "data_passes_through",
+         "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization"}
 
 
 def snippet(text, m, width=60):
@@ -498,6 +504,119 @@ def n_feature(c, key, norm):
     return res("not_mentioned", "auto", "原表、说明和 README 都没提到（未提及不等于没有）")
 
 
+def dim_hits(c, field, table):
+    """按 (中文模式, README 模式) 表找命中：先看原表和说明，再看 README；README 误判记在 DR.REJECT。"""
+    t = c.text(*STRUCTURED_FOR_FEATURES)
+    found = []
+    for value, (zh, en) in table.items():
+        if (c.doc["id"], field, value) in DR.REJECT:
+            continue
+        m = first_positive(zh, t)
+        if m:
+            found.append((value, f"说明：“{snippet(t, m, 20)}”"))
+            continue
+        m = first_positive(en, c.readme)
+        if m:
+            found.append((value, f"README：“{snippet(c.readme, m, 30)}”"))
+    return found
+
+
+def _dim(vals, basis, empty_basis="原表、说明和 README 都没提到（未提及不等于没有）"):
+    vals = list(dict.fromkeys(vals))
+    return res(vals or ["not_mentioned"], "auto", "；".join(basis) or empty_basis)
+
+
+def n_dimensions(c, out):
+    """打分维度、情绪处理、项目定位、记忆环节、搭配和可改性（规则见 dimension_rules.py）。"""
+    pid, val = c.doc["id"], (lambda f: out[f]["value"] or [])
+    d = {}
+
+    sig = dim_hits(c, "ranking_signals", DR.SIGNAL_PATS)
+    d["ranking_signals"] = _dim([v for v, _ in sig], [f"{v}：{b}" for v, b in sig])
+    extra = [v for v, _ in sig if v in DR.EXTRA_SIGNALS]
+
+    stages = dim_hits(c, "scoring_stages", {"write": DR.STAGE_PATS["write"]})
+    vals, basis = [v for v, _ in stages], [f"{v}：{b}" for v, b in stages]
+    if extra:
+        vals.append("retrieve")
+        basis.append("retrieve：排序因素含 " + "、".join(extra) + "（推断召回时综合排序）")
+    if "auto_decay" in val("forgetting"):
+        f = dim_hits(c, "scoring_stages", {"forget": DR.STAGE_PATS["forget"]})
+        if f:
+            vals.append("forget")
+            basis.append(f"forget：{f[0][1]}")
+    d["scoring_stages"] = _dim(vals, basis)
+
+    if not sig:
+        d["multi_factor"] = res("not_mentioned", "auto", "没找到排序方式")
+    else:
+        d["multi_factor"] = res("multi" if len(extra) >= 2 else "single", "auto",
+                                f"相似度之外的因素 {len(extra)} 个：" + ("、".join(extra) or "无"))
+
+    emo = dim_hits(c, "emotion_handling", DR.EMOTION_PATS)
+    vals, basis = [v for v, _ in emo], [f"{v}：{b}" for v, b in emo]
+    if "emotion" in extra and "weighting" not in vals:
+        vals.append("weighting")
+        basis.append("weighting：排序因素含情感强度")
+    if pid in DR.EMOTION_MANUAL:
+        add, why = DR.EMOTION_MANUAL[pid]
+        vals += add
+        basis.append("、".join(add) + "：Claude 据说明补充：" + why)
+    d["emotion_handling"] = _dim(vals, basis)
+
+    role = DR.ROLE_OVERRIDE.get(pid)
+    if role:
+        d["project_role"] = res(role[0], "auto", "Claude 据说明判断：" + role[1])
+    else:
+        role = DR.ROLE_BY_CATEGORY.get(c.cat, "full_memory")
+        d["project_role"] = res(role, "auto", f"按收录类别「{c.cat}」")
+
+    steps = []
+    if val("write_mode"):
+        steps.append(("capture", "写入方式：" + "、".join(val("write_mode"))))
+    cons = [k for k in ("dream_consolidation", "reflection") if out[k]["value"] == "yes"]
+    if cons:
+        steps.append(("consolidate", "有" + "、".join(FIELD_LABELS[k] for k in cons)))
+    if sig or out["window_handoff"]["value"] == "yes" or d["project_role"]["value"] in ("full_memory", "companion_app"):
+        steps.append(("retrieve", "有检索方式或换窗续接，或是完整记忆系统"))
+    forget = [v for v in val("forgetting") if v in ("auto_decay", "archive")]
+    if forget:
+        steps.append(("forget", "遗忘：" + "、".join(forget)))
+    if val("human_review"):
+        steps.append(("review", "查看修改：" + "、".join(val("human_review"))))
+    d["lifecycle"] = res([v for v, _ in steps], "auto", "；".join(b for _, b in steps) or "没有可推出的环节")
+    d["lifecycle_complete"] = res("complete" if len(steps) == 5 else "partial", "auto",
+                                  f"覆盖 {len(steps)}/5 个环节（由写入、整理、遗忘、查看修改等字段推出）")
+
+    pair = dim_hits(c, "pairing", DR.PAIR_PATS)
+    vals, basis = [v for v, _ in pair], [f"{v}：{b}" for v, b in pair]
+    std = [a for a in val("access") if a in ("mcp", "gateway", "host_plugin")]
+    if std:
+        vals.append("standard_interface")
+        basis.append("standard_interface：接入方式 " + "、".join(std))
+    if pid in DR.PAIRS and "designed_to_pair" not in vals:
+        vals.append("designed_to_pair")
+        basis.append("designed_to_pair：" + DR.PAIRS[pid])
+    if d["project_role"]["value"] == "state_engine" and "designed_to_pair" not in vals:
+        vals.append("designed_to_pair")
+        basis.append("designed_to_pair：状态引擎本身不存对话记忆，设计上和记忆库搭配使用")
+    if c.cat == "自带记忆的应用":
+        vals.append("self_contained")
+        basis.append("self_contained：自带记忆的应用")
+    if pid in DR.DEPENDS:
+        vals.append("depends_on")
+        basis.append("depends_on：" + DR.DEPENDS[pid])
+    d["pairing"] = _dim(vals, basis)
+
+    cus = dim_hits(c, "customization", DR.CUSTOM_PATS)
+    vals, basis = [v for v, _ in cus], [f"{v}：{b}" for v, b in cus]
+    if "files" in val("human_review"):
+        vals.append("plain_data")
+        basis.append("plain_data：记忆存成可以直接看改的文件")
+    d["customization"] = _dim(vals, basis)
+    return d
+
+
 def paper_taxonomy(c):
     if not c.x:
         return None
@@ -531,6 +650,10 @@ def normalize(doc, overrides):
             out[field] = res(ov["value"], "confirmed", ov.get("note", "负责人确认"))
         else:
             out[field] = res(ov, "confirmed", "负责人确认")
+    # 打分、情绪、定位、搭配等字段部分由上面的结果推出，所以在套用确认值之后再算；有确认值的不覆盖
+    for field, item in n_dimensions(c, out).items():
+        if field not in overrides.get(doc["id"], {}):
+            out[field] = item
     uncertainties = []
     for f in FIELDS:
         n = out[f]
@@ -721,7 +844,7 @@ def accept_suggestions():
             if item["status"] == "needs_review" and item["value"] not in ("", []):
                 overrides.setdefault(doc["id"], {})[f] = {
                     "value": item["value"],
-                    "note": f"负责人同意采用建议值（{DECIDED_ON}）；原依据：{item['basis']}"}
+                    "note": f"负责人同意采用建议值（{date.today().isoformat()}）；原依据：{item['basis']}"}
                 n += 1
     OVERRIDES.write_text(json.dumps(overrides, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"采用建议值 {n} 处")

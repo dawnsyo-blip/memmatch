@@ -327,6 +327,71 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "importance"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“区缓存轮转时摘要压缩旧对话；关键词＋语义向量混合搜索；原始对话片段召回；按时效去重；”；keyword：说明：“标记核心；分区缓存轮转时摘要压缩旧对话；关键词＋语义向量混合搜索；原始对话片段召回；按”；recency：说明：“＋语义向量混合搜索；原始对话片段召回；按时效去重；分阶段搭建，可先只做转发；带分区缓”；importance：README：“忆」页面选择「纯文本导入」上传文件，系统会自动评估每条记忆的重要程度并导入。也可以勾选\"跳过自动评分\"节省 API 额度，之后在”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、importance（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 2 个：recency、importance"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto、review_first；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、files"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 gateway"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file",
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：README：“I 支持调用方传入 session 与片段排除集合 - **设置面板** — 在 Dashboard 中直接管理所有运行时配置，”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”；plain_data：记忆存成可以直接看改的文件"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（三层）",
       "function": "用户事实＋工作记忆（对话线）",

@@ -150,8 +150,8 @@
         "manual_only",
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“，它们由 T1 超限时的机械摘行滚进 T2。 并且 close 走的是**删除且不留档**这条路，所以 v1.8 起另有代码护栏：销售后 T1 不得低于”，没提自动衰减，建议值 manual_only；有归档：“膨胀。解析失败会先原地重试一次，仍失败才归档。 7. **静默降级**：配置缺失、接”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“，它们由 T1 超限时的机械摘行滚进 T2。 并且 close 走的是**删除且不留档**这条路，所以 v1.8 起另有代码护栏：销售后 T1 不得低于”，没提自动衰减，建议值 manual_only；有归档：“膨胀。解析失败会先原地重试一次，仍失败才归档。 7. **静默降级**：配置缺失、接”"
     },
     "human_review": {
       "value": [
@@ -271,6 +271,66 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没找到排序方式"
+    },
+    "emotion_handling": {
+      "value": [
+        "user_mood"
+      ],
+      "status": "auto",
+      "basis": "user_mood：README：“行数）。 state ：第 2 节「<userLabel>的状态和心情」整体重写，只留最新（体力/情绪/在忙什么），”"
+    },
+    "project_role": {
+      "value": "context_tool",
+      "status": "auto",
+      "basis": "Claude 据说明判断：滑出窗口的消息结算成摘要注回"
+    },
+    "lifecycle": {
+      "value": [
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "遗忘：archive；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "designed_to_pair",
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "designed_to_pair：README：“谁说了算？（v1.6） 有使用者反馈过这个现象： > 「配合 LMC5 的外置记忆库一起用，结果 rolling-memory 一开直接把它的记”；standard_interface：接入方式 gateway"
+    },
+    "customization": {
+      "value": [
+        "config_file",
+        "small_code"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“rolling.init(); // 网关启动时调用一次，读环境变量 // 网关每次收到请求、转发给 LLM 之前： roll”；small_code：README：“接口挂了、文件损坏——只打日志，主对话链路照常。 8. **零依赖**：原生 Node（≥18，内置 `fetch`），单文件”"
     }
   },
   "uncertainties": [

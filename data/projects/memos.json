@@ -334,6 +334,66 @@
       "status": "auto",
       "basis": "README：“l evolution, multi-agent collaboration. 100% local, zero cloud dependency. - **2026-03-08”（已核对）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“智能去重；任务开始前自动召回；FTS5＋向量混合检索；反馈驱动；面向任务型 Agen”；keyword：说明：“替换记忆；智能去重；任务开始前自动召回；FTS5＋向量混合检索；反馈驱动；面向任务型”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“/MemOS.git cd MemOS cp docker/.env.example .env # fill”"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（轨迹→策略→世界模型→技能）",
       "function": "经验（策略＋技能）",

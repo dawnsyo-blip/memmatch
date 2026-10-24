@@ -276,6 +276,71 @@
       "value": "yes",
       "status": "auto",
       "basis": "原表／说明：“本地优先的记忆层：抽取事实、按重要性与时效排序、一次调用解”"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "recency",
+        "importance",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“LM, sentence-transformers for embeddings, FAISS and SQLite for storage”；recency：说明：“本地优先的记忆层：抽取事实、按重要性与时效排序、一次调用解决矛盾，回答前给出置信度”；importance：说明：“本地优先的记忆层：抽取事实、按重要性与时效排序、一次调用解决矛盾，回答前给出”；confidence：说明：“与时效排序、一次调用解决矛盾，回答前给出置信度；用户事实；MCP；REST；Pytho”"
+    },
+    "scoring_stages": {
+      "value": [
+        "write",
+        "retrieve",
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "write：README：“ortance and decay** | The LLM rates each fact 1 to 10. Search blends simila”；retrieve：排序因素含 recency、importance、confidence（推断召回时综合排序）；forget：README：“What it does | |---|---| | **Importance and decay** | The LLM rates each fact 1”"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 3 个：recency、importance、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard、tools"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“, `widemem_health`. Setup and environment variables: [docs/mcp.md](https://github”"
     }
   },
   "uncertainties": [],

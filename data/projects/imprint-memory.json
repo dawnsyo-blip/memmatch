@@ -328,6 +328,71 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "importance",
+        "frequency",
+        "relation"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“e.ai 网页聊天和 Telegram；向量模型须在首次写入前选定；重点在“采集端””；keyword：说明：“捕获每轮对话；按事件分段并生成一段摘要和关键词；图片多模态向量；提供衰减、钉选、查找陈”；recency：README：“ned — bypasses any importance/recency decay | | `memory_add_tags(id”；importance：README：“old/low-recall entries, decay importance scores, hard-delete rows you no lon”；frequency：README：“onversation context 7. Update recall counters (frequently recalled memor”；relation：README：“ce[\"chunk_edges<br/>(Top-K 相似度图谱)\"] log --> fts[\"FTS5”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、importance、frequency、relation（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 4 个：recency、importance、frequency、relation"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto、on_request；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard、tools"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin、mcp"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“mory store. Add to `~/.claude/settings.json`: ```json { \"hooks\": {”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实",

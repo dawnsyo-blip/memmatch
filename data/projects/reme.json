@@ -276,6 +276,66 @@
       "value": "yes",
       "status": "auto",
       "basis": "原表／说明：“本地优先、会自我进化的个人知识库，把对话变成可读可改的记忆”"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“ntext-aware.** BM25, optional embeddings, and wikilink expansion retri”；keyword：README：“precise and context-aware.** BM25, optional embeddings, and wik”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“ed images, and upgrades. ### Environment Variables Configure environment variab”"
     }
   },
   "uncertainties": [

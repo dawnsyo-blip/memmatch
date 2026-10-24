@@ -305,6 +305,69 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "keyword",
+        "emotion"
+      ],
+      "status": "auto",
+      "basis": "keyword：说明：“站点仅在关键词中标“记忆”；记的是情感状态而非内容；工”；emotion：README：“onsolidates intense episodes (arousal-gated) and drifts back to the”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 emotion（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：emotion"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state",
+        "weighting"
+      ],
+      "status": "auto",
+      "basis": "ai_state：说明：“绪、慢心境）；HTTP 旁路服务；存的是情绪状态；不存记忆内容，只维护 16 维情感状态”；weighting：排序因素含情感强度"
+    },
+    "project_role": {
+      "value": "state_engine",
+      "status": "auto",
+      "basis": "按收录类别「边缘项（存的不是对话记忆）」"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、files"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "designed_to_pair"
+      ],
+      "status": "auto",
+      "basis": "designed_to_pair：说明：“／状态记忆（快情绪、慢心境）；HTTP 旁路服务；存的是情绪状态；不存记忆内容，只维”"
+    },
+    "customization": {
+      "value": [
+        "config_file",
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“onfig.example.json` → `drives.config.json` and fill in: | Field | Desc”；plain_data：记忆存成可以直接看改的文件"
+    },
     "paper_taxonomy": {
       "form": "数值状态（16 个心理维度），不属论文三种形态",
       "function": "工作／状态记忆（快情绪、慢心境）",

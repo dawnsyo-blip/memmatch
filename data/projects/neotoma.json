@@ -280,6 +280,66 @@
       "value": "yes",
       "status": "auto",
       "basis": "README：“trol, with optional AES-256-GCM at-rest encryption. Nothing is used for training, and you”（已核对）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“l graph neighborhood. When an embedding key is configured, semantic v”；confidence：README：“ty from multiple signals with confidence scoring, list observations, retrieve”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard、files"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin、mcp"
+    },
+    "customization": {
+      "value": [
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "plain_data：记忆存成可以直接看改的文件"
     }
   },
   "uncertainties": [],

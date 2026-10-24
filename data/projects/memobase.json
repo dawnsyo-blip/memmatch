@@ -285,6 +285,64 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“500~1000ms (depending on the embedding API you're using). Also, you”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "dev_framework",
+      "status": "auto",
+      "basis": "按收录类别「需写代码（开发者向）」"
+    },
+    "lifecycle": {
+      "value": [
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "prompts"
+      ],
+      "status": "auto",
+      "basis": "prompts：README：“using). Also, you can [pass a prompt template](https://docs.memobase.io/api”"
     }
   },
   "uncertainties": [

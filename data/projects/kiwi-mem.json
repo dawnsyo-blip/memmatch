@@ -329,6 +329,72 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "importance",
+        "frequency",
+        "emotion"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“注入、中热度注入摘要；Dream 场景带向量索引可被搜到；热度系统＋夜间软化细节＋D”；keyword：说明：“摘要；矛盾时旧记忆失效；记忆搜索；高热度全文注入、中热度注入摘要；Dream 场景带”；recency：说明：“前台；网关从每轮回复中提取新记忆；热度随时间衰减、反复提及升温；每晚模糊旧记忆细节；Dr”；importance：README：“则有退场机制：如果 90 天无人问津，它会从\"永久\"降级回高重要度的普通记忆（可逆、不删除），把宝贵的注入空间让给真正活跃的内”；frequency：说明：“按日历层级逐步压缩，用“热度”决定哪些记忆留在前台；用户事实；网关；”；emotion：README：“会让它自然衰减，但如果你们反复聊到同一件事，它会重新升温。高情绪浓度的记忆衰减更慢——就像人会更容易记住那些触动过自己的瞬间。而”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、importance、frequency、emotion（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 4 个：recency、importance、frequency、emotion"
+    },
+    "emotion_handling": {
+      "value": [
+        "weighting"
+      ],
+      "status": "auto",
+      "basis": "weighting：README：“会让它自然衰减，但如果你们反复聊到同一件事，它会重新升温。高情绪浓度的记忆衰减更慢——就像人会更容易记住那些触动过自己的瞬间。而”"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 gateway"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“kiwi-mem.git cd kiwi-mem # 创建配置文件 cp .env.example .env ``` > 💡”"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（日／周／月摘要）",
       "function": "用户事实",

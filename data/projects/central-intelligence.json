@@ -279,6 +279,68 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "README 命中的“asswords, API keys, PII, large binary files”经核对不算：只是使用建议"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“to Fly.io\" | | **`recall`** | Semantic search across past memories | \"What”；keyword：README：“↓ Hybrid search: vector + FTS5 + fuzzy + temporal decay”；recency：README：“arch: vector + FTS5 + fuzzy + temporal decay ↓ Central Intelligence AP”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：recency"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard、tools"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“laude Code Add to `~/.claude/settings.json` under `mcpServers`: ```json”"
     }
   },
   "uncertainties": [],

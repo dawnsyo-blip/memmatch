@@ -155,8 +155,8 @@
         "manual_only",
         "archive"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“、媒体及设备观察数据，本轮仍有外部保留或暂缓迁移的部分。不要因某项配置已接续，就删除对应旧拓展的数据。 确认内置能力接管后，停用承担同一功能的旧独立拓展，避免重复”，没提自动衰减，建议值 manual_only；有归档：“对来源身份、可见性和治理状态后导入；原始归档与可检索导入分别记录 | | 已学习表达”"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“、媒体及设备观察数据，本轮仍有外部保留或暂缓迁移的部分。不要因某项配置已接续，就删除对应旧拓展的数据。 确认内置能力接管后，停用承担同一功能的旧独立拓展，避免重复”，没提自动衰减，建议值 manual_only；有归档：“对来源身份、可见性和治理状态后导入；原始归档与可检索导入分别记录 | | 已学习表达”"
     },
     "human_review": {
       "value": [],
@@ -274,6 +274,65 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没找到排序方式"
+    },
+    "emotion_handling": {
+      "value": [
+        "ai_state"
+      ],
+      "status": "auto",
+      "basis": "ai_state：Claude 据说明补充：README：角色“会生情绪”，有持续的角色状态"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：archive"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“升级步骤 1. **先准备可验证的回退材料。** 保存插件配置文件和原数据目录；使用过独立记忆或其他伴侣拓展的，也备份它们的配”"
     }
   },
   "uncertainties": [

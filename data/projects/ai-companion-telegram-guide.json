@@ -147,8 +147,8 @@
       "value": [
         "manual_only"
       ],
-      "status": "needs_review",
-      "basis": "README 只提到删除：“与 Telegram 实际回复。 6. 遇到登录、扫码、验证码、密钥输入或高风险删除时暂停，让我接手。 7. 完成后给我一份变更清单、备份位置、服务状态和下一步测试”，没提自动衰减，建议值 manual_only"
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“与 Telegram 实际回复。 6. 遇到登录、扫码、验证码、密钥输入或高风险删除时暂停，让我接手。 7. 完成后给我一份变更清单、备份位置、服务状态和下一步测试”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
       "value": [
@@ -268,6 +268,66 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“断规则； - 本地 SQLite 聊天记录、长期记忆与可选的向量召回； - Reminder、Habit、Diary、Hea”；keyword：README：“） MochiBot 不配置 Embedding 也能使用全文检索。向量记忆的价值是：用户没有复述原词时，也能召回语义相近的旧”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "guide",
+      "status": "auto",
+      "basis": "按收录类别「教程与搭建指南」"
+    },
+    "lifecycle": {
+      "value": [
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "depends_on"
+      ],
+      "status": "auto",
+      "basis": "depends_on：MochiBot"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：README：“张报错截图发给 AI。更高效的方式是： 1. 你登录云厂商控制台； 2. 打开实例的 Web 终端或授权的远程终端； 3.”；config_file：README：“Key、VPS 密码和验证码都由你自己在安全页面或服务器 `.env` 中输入。 2. **不要公开 `.env`、`data/”"
     }
   },
   "uncertainties": [

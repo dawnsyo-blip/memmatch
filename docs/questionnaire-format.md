@@ -43,7 +43,21 @@
 
 ## 偏好题怎么写
 
-偏好题 `kind` 写 `preference`，选项用 `score`。可以对 `normalized` 里的任何字段加分，包括用户在意的 19 个特性（值为 `yes` 表示有）。例如：
+偏好题 `kind` 写 `preference`，选项用 `score`。可以对 `normalized` 里的任何字段加分，包括用户在意的 19 个特性（值为 `yes` 表示有），以及 2026-10-24 追加的 9 个字段：
+
+| 字段 | 含义 | 可选值 |
+|---|---|---|
+| `ranking_signals` | 排序、取舍记忆时考虑的因素 | `semantic` 语义相似、`keyword` 关键词、`recency` 新旧、`importance` 重要性、`frequency` 使用频率、`emotion` 情感强度、`relation` 关联扩散、`confidence` 置信度 |
+| `scoring_stages` | 在哪一步打分 | `write` 写入、`retrieve` 召回、`forget` 遗忘 |
+| `multi_factor` | 多维还是单一打分 | `multi`（相似度之外至少两个因素）、`single` |
+| `emotion_handling` | 情绪怎么处理 | `tags` 情绪标签、`weighting` 情绪影响保留或召回、`ai_state` AI 自己的情绪或身体状态、`user_mood` 记录用户心情 |
+| `project_role` | 项目定位 | `full_memory` 完整记忆系统、`context_tool` 上下文延续工具、`memory_component` 记忆部件、`state_engine` 状态引擎、`companion_app` 自带记忆的应用、`dev_framework` 开发框架、`guide` 教程 |
+| `lifecycle` | 覆盖的记忆环节 | `capture` 写入、`consolidate` 整理、`retrieve` 召回、`forget` 遗忘、`review` 人工查看修改 |
+| `lifecycle_complete` | 流程是否完整 | `complete`（五个环节都有）、`partial` |
+| `pairing` | 能否和其它项目搭配 | `designed_to_pair`、`standard_interface`、`replaces_builtin`、`self_contained`、`depends_on` |
+| `customization` | 便于自己改的地方 | `settings_ui`、`config_file`、`prompts`、`plain_data`、`plugin_api`、`small_code` |
+
+多选字段里没找到任何依据时值为 `not_mentioned`（未提及）。例如：
 
 ```json
 {

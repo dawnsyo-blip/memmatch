@@ -316,6 +316,66 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "ranking_signals": {
+      "value": [
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "confidence：说明：“宁少勿滥；AI 暂存候选洞察（带触发句和置信度），经用户确认才入库；确认时可保留、合并”"
+    },
+    "scoring_stages": {
+      "value": [
+        "write",
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "write：说明：“在写入端做“同意＋筛选”，宁少勿滥；用户事实（重要时刻）；MC”；retrieve：排序因素含 confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "memory_component",
+      "status": "auto",
+      "basis": "Claude 据说明判断：只管写入端的同意和筛选"
+    },
+    "lifecycle": {
+      "value": [
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "有反思推断；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "config_file"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“localport=3456` --- ## 怎么填 .env 复制 `.env.example` 为 `.env`，改”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实（重要时刻）",

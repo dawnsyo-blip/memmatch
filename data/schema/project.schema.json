@@ -156,7 +156,7 @@
     },
     "normalized": {
       "type": "object",
-      "description": "阶段 1 规范化结果（含用户在意的 19 个特性，定义见 scripts/feature_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
+      "description": "阶段 1 规范化结果（含用户在意的 19 个特性，定义见 scripts/feature_rules.py；打分、情绪、定位、搭配等 9 个字段见 scripts/dimension_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
       "required": [
         "access",
         "compatible_clients",
@@ -190,7 +190,16 @@
         "independent_life",
         "visual_presence",
         "voice_interaction",
-        "privacy_protection"
+        "privacy_protection",
+        "ranking_signals",
+        "scoring_stages",
+        "multi_factor",
+        "emotion_handling",
+        "project_role",
+        "lifecycle",
+        "lifecycle_complete",
+        "pairing",
+        "customization"
       ],
       "properties": {
         "access": {
@@ -290,6 +299,33 @@
           "$ref": "#/$defs/normalizedField"
         },
         "privacy_protection": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "ranking_signals": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "scoring_stages": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "multi_factor": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "emotion_handling": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "project_role": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "lifecycle": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "lifecycle_complete": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "pairing": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "customization": {
           "$ref": "#/$defs/normalizedField"
         },
         "paper_taxonomy": {
