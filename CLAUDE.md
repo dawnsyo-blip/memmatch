@@ -6,7 +6,7 @@
 
 - `data/candidates/` 候选项目筛选（阶段 0 之前加的一步）：`个人记忆库候选表.xlsx` 由脚本生成，不要手改
 - `scripts/candidate_review.py` 人工筛选结论（改结论改这里）；负责人对各分组的决定写在其中的 `GROUP_POLICY`；`scripts/build_candidates.py` 生成候选表
-- `sources/snapshots/` 三个来源清单的 README 快照（2026-10-10），生成脚本从这里解析
+- `sources/snapshots/` 来源清单的 README 快照（2026-10-10；2026-10-24 补充 awesome-ai-companion、上下文工程、RAG、酒馆插件合集），生成脚本从这里解析
 - `记忆框架开源情况.xlsx` 负责人原始整理表，只读
 
 - `data/projects/<id>.json` 每个项目一个文件，结构见 `data/schema/project.schema.json`；`raw` 保存各来源原文，不要改
@@ -32,7 +32,21 @@
 - 用户在意的 19 个特性（12 个据社区讨论，7 个据 Emotion Machine 文章）定义和匹配规则在 `scripts/feature_rules.py`；README 命中逐条核对过，误判写进 `README_REJECT`／`STRUCTURED_REJECT`。改了规则后要重新导出命中摘录再核对一遍；新增特性先不要放进 `CHECKED`，核对完再加
 - 2026-10-24 追加的 9 个字段（排序因素、打分环节、多维还是单一、情绪怎么处理、项目定位、覆盖的记忆环节、流程是否完整、能否搭配、便于自己改）规则在 `scripts/dimension_rules.py`：README 误判记在 `REJECT`（键是 (id, 字段, 值)），项目定位、依赖、搭配、情绪的人工判断分别在 `ROLE_OVERRIDE`、`DEPENDS`、`PAIRS`、`EMOTION_MANUAL`。其中覆盖环节、流程完整、多维与否由其它字段推出，所以在套用负责人确认值之后才计算
 - 同一天又按问卷 v2 补了 7 个字段（中文支持、记忆分层、检索后处理、召回是否调用大模型、敏感记忆抑制、写入回执、谁来记），规则也在 `dimension_rules.py`。“分层”“去重”“门槛”“回执”“unresolved”这类词极易误伤，模式已收紧到记忆语境；写入回执和敏感记忆抑制几乎没有项目写，只能作加分项
+- 2026-10-25 为问卷 v4 又补了 3 个字段（手机能否连上 `phone_access`、能否用本地模型 `local_model`、是否绑定某家模型 `model_lock`），并新增客户端 `deepseek_harness`（README 写明 DSH 插件或指南的才算）。至此 `normalized` 共 14 个基础字段＋19 个特性＋19 个维度字段，schema 里逐个列出，加字段时要同步改 `data/schema/project.schema.json`
 - 负责人 2026-10-24 同意：新项目的待审核项照旧采用建议值（`--accept-suggestions` 记录的日期是执行当天）
+
+问卷与推荐（阶段 4）：
+- 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a 题追问），只改说明和规则时先问负责人；`data/questionnaire/questions.json` 还是早期的硬条件草稿，阶段 4 要按 v4 重写
+- 问卷配置格式和字段含义见 `docs/questionnaire-format.md`；能托管又能自己部署的项目，`vendor_account` 只算托管模式的要求
+- `scripts/prototype/engine_v4.py` 是按 v4 规则写的引擎原型（硬筛选＋加分），`personas_v4.py` 跑 8 类典型用户；模拟记录和推荐示例在 `docs/推荐结果示例.md`。正式引擎要读 questions.json、不写死题目、接口可替换（见 ROADMAP 阶段 4）
+- 推荐原则：硬条件只排除确定用不了的，文档没写的保留并标“需自行确认”；结果为空时给“放宽哪一条就有几个”的建议；用户答案优先于推荐偏好
+- 各家官方 App 能否接记忆库（2026-10 核实）：
+  - Claude App 能用远程 MCP 连接器（要先在网页端添加，付费套餐）
+  - ChatGPT 的自定义 MCP 只限网页端，应用目录里上架的应用手机才能用
+  - Gemini App 能加自定义 MCP（限美国个人账号）
+  - DeepSeek、智谱官方 App 不能
+  - 手机遥控电脑上的 Agent 是另一条路：Claude App 的 Remote Control 连 Claude Code，ChatGPT App 的 Remote 连 Codex，DeepSeek Harness 只有社区远程插件。这时记忆库装在电脑上即可
+  - Codex 的非交互用法是 `codex exec`，`-p` 是 Claude Code 和 Gemini CLI 的
 
 阶段 2、3：
 - `python -X utf8 scripts/check_health.py [--resume|--only a,b]` 写入各项目 `health`，生成 `docs/health-report.md`；网络故障记 `status=error`，用 `--resume` 续跑；检查逻辑改动时把 `CHECKER_VERSION` 加 1
@@ -63,4 +77,9 @@
 - **中文短词同样会误伤**：“也可嵌入自建中转”的“嵌入”被当成嵌入向量；英文 `sidecar` 多指附属进程或文件，不是“和别的记忆库搭配”；`salience`、`trust level`、`recency baseline` 常出现在注入位置、权限、评测对照里。
 - **评测成绩写进备注会被特性规则扫到**：目前没有误伤，但改 `BENCH` 文案时注意别写进“时间线”“原话”这类特性关键词。
 - **检索工程（RAG）合集对本项目几乎没用**：全是文档问答框架、向量库和论文；上下文工程合集也以编程 agent 工具为主。面向聊天用户的上下文/记忆工具集中在酒馆（SillyTavern）、Open WebUI、AstrBot、Kelivo 这类前端的插件生态里。
-- **MemBench、REALTALK、DuLeMon 没有系统排行**，只是数据集论文；LongMemEval、BEAM、LoCoMo 的成绩多为厂商自报，口径不一（MemPalace 的 96.6% 只测检索）。
+- **MemBench、REALTALK、DuLeMon、MemoryArena、MemoryAgentBench 没有系统排行**，只是论文或数据集；LongMemEval、BEAM、LoCoMo 的成绩多为厂商自报，口径不一（MemPalace 的 96.6% 只测检索）。
+- **`base_url` 会命中 `SUPABASE_URL`、`DATABASE_URL`**，SDK 示例里的 `base_url` 也多指记忆服务自己的地址，不能据此判断“能用本地模型”；“HTTP transport”也不等于手机能连上（有的写着默认不开）。
+- **“文档没写”不能当成“不能”**：模拟填写时把“多端共用”做成要求文档写明，结果误排除了一批 MCP 记忆服务（它们天生能同时服务几个客户端）。硬条件只排除明确用不了的。
+- **问卷选项不能太笼统**：“程序化接入”涵盖十几种 Agent、“API 客户端”混着 Kelivo 和酒馆，引擎就会给 Codex 用户推荐 OpenClaw 插件、给 Kelivo 用户推荐酒馆扩展。改问卷后用原型引擎跑一遍典型用户再交付。
+- **网上的入口能力说法常互相矛盾**（如 `-p` 计费改动有报道说已暂停、ChatGPT 手机端能否用 MCP），以官方帮助文档为准，并区分“应用目录里的应用”和“自己添加的自定义 MCP”。
+- **用 heredoc 写含反斜杠的正则会被吃掉转义**，2026-10-24 又把 dimension_rules.py 写坏一次。含 `\n`、`\d` 的改动一律用 Edit 工具。
