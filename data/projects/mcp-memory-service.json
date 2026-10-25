@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网页版用",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "自托管的记忆服务：本地向量＋关键词检索、知识图谱、定期整合与衰减归档，带八个标签页的网页面板；可用 OAuth 做远程连接器给 claude.ai、ChatGPT 网页用（要自己打通公网）",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋决定",
@@ -92,22 +92,27 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "chatgpt",
         "claude_desktop",
+        "claude_code",
         "claude_web_mobile",
-        "opencode"
+        "chatgpt",
+        "codex",
+        "gemini_cli",
+        "cursor",
+        "opencode",
+        "openclaw",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Desktop、claude.ai 网页、ChatGPT、OpenCode；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：README 的“Works With”列表"
     },
     "runs_on": {
       "value": [
-        "own_cloud_account",
-        "own_computer"
+        "own_computer",
+        "own_server"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑；远程需 Cloudflare Tunnel 等"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：服务装在自己电脑或服务器上；Cloudflare 只是可选的存储后端，原判的“自己的云账号”指这个"
     },
     "os": {
       "value": [
@@ -145,28 +150,36 @@
     },
     "write_mode": {
       "value": [
-        "on_request"
+        "on_request",
+        "auto"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：AI 调工具存；另有 Claude Code 钩子按规则自动捕获（claude-hooks/README-AUTO-CAPTURE.md）"
     },
     "forgetting": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提遗忘或删除"
+      "value": [
+        "auto_decay",
+        "archive",
+        "manual_only"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：代码 consolidation/decay.py 按重要性、关联、访问次数和时间算分；forgetting.py 压缩并归档而不是直接删；面板可手动删"
     },
     "human_review": {
       "value": [
+        "dashboard",
         "cli",
-        "dashboard"
+        "tools"
       ],
-      "status": "auto",
-      "basis": "dashboard：自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网页版用；MCP（本地＋远程；cli：**REST API, MCP, OAuth, CLI, dashboard**. One self-h"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：网页面板（浏览、管理、质量）、memory 命令行、AI 工具"
     },
     "export": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没写导出功能，也看不出数据格式"
+      "value": [
+        "json"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：代码 health/integrity.py 有 export_memories"
     },
     "data_passes_through": {
       "value": [
@@ -232,9 +245,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：知识图谱有 contradicts 类型的边；整合模块有 contradictions.py"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -247,9 +260,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "reflection": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：整合时生成 Insight Cards：模式、趋势和知识空白"
     },
     "relationship_stage": {
       "value": "not_mentioned",
@@ -279,22 +292,28 @@
     "ranking_signals": {
       "value": [
         "semantic",
+        "keyword",
+        "importance",
+        "recency",
+        "frequency",
         "relation"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网”；relation：README：“store decisions, share causal knowledge graphs, and retrieve context in 5ms”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：检索：BM25＋向量混合，可选质量分加权；整合：重要性、关联、访问次数、时间衰减"
     },
     "scoring_stages": {
       "value": [
-        "retrieve"
+        "write",
+        "retrieve",
+        "forget"
       ],
-      "status": "auto",
-      "basis": "retrieve：排序因素含 relation（推断召回时综合排序）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：写入后异步打质量分；检索可按质量加权（默认关）；整合时按衰减分归档"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：relation"
+      "basis": "相似度之外的因素 4 个：importance、recency、frequency、relation"
     },
     "emotion_handling": {
       "value": [
@@ -313,15 +332,16 @@
         "capture",
         "consolidate",
         "retrieve",
+        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
+      "basis": "写入方式：on_request、auto；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：dashboard、cli、tools"
     },
     "lifecycle_complete": {
-      "value": "partial",
+      "value": "complete",
       "status": "auto",
-      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -358,10 +378,10 @@
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "no_llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：本地 ONNX 嵌入，检索不调用大模型"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",
@@ -375,29 +395,34 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "chat_agent",
+        "background"
       ],
-      "status": "auto",
-      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：AI 调工具；钩子按模式自动记"
     },
     "phone_access": {
       "value": [
         "remote_mcp",
-        "cloud",
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 claude_web_mobile、chatgpt；cloud：运行位置含 own_cloud_account；needs_tunnel：README：“onnect to the same endpoint. Cloudflare Tunnel quick start, Let's Encrypt, n”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：远程 MCP 走 OAuth，要自己用 Cloudflare Tunnel、nginx 等暴露到公网"
     },
     "local_model": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“ring** – Point scoring at any OpenAI-compatible endpoint (Ollama, LiteLLM, vLLM) 🔗 **E”"
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：嵌入在本地 ONNX 跑，不需要密钥；质量打分可选接 Ollama"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：pip 安装或 Docker，远程要配隧道"
     },
     "pairs_with": {
       "value": [],
@@ -405,18 +430,7 @@
       "basis": "没有记录设计上搭配使用的项目"
     }
   },
-  "uncertainties": [
-    {
-      "field": "forgetting",
-      "label": "怎么遗忘",
-      "note": "README 没提遗忘或删除"
-    },
-    {
-      "field": "export",
-      "label": "能否导出",
-      "note": "没写导出功能，也看不出数据格式"
-    }
-  ],
+  "uncertainties": [],
   "health": {
     "checked_on": "2026-10-11",
     "method": "git 克隆近一年提交记录＋读取仓库网页",

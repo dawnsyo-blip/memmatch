@@ -1,0 +1,2445 @@
+{
+ "aelios": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "部署在你自己 Cloudflare 账号上的记忆网关：第三方客户端走网关自动记和召回，Claude 网页和手机 App 走 MCP 连接器；每晚把对话整理成候选记忆，可审核、撤回；部署全程在浏览器里完成",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "openai_compatible",
+     "claude_web_mobile",
+     "claude_code",
+     "codex",
+     "any_mcp_client"
+    ],
+    "note": "Chatbox、Cherry Studio 等走网关；Claude App（网页添加后手机可用）、Claude Code、Codex 走 MCP"
+   },
+   "setup_device": {
+    "value": "phone_ok",
+    "note": "Fork 仓库、在 Cloudflare 控制台导入、填密钥，全程网页操作"
+   },
+   "write_mode": {
+    "value": [
+     "auto",
+     "review_first",
+     "on_request"
+    ],
+    "note": "原话先存；每晚抽成候选，默认由 Cloudflare 的模型审定，可改为人工批准；AI 也可直接 remember"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "chat_agent"
+    ],
+    "note": "夜间整理；AI 调 remember"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "manual_only",
+     "archive"
+    ],
+    "note": "180 天没被改写、召回或再次提到的记忆标为过期，30 天后删除（钉选、身份、人设除外）；也可手动遗忘、归档"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "rerank",
+     "threshold",
+     "budget"
+    ],
+    "note": "原文段落批量重排；分数低的不凑数；普通一轮最多注入一条"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "写日记、周记、月记"
+   }
+  }
+ },
+ "astrbot-plugin-livingmemory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "AstrBot 长期记忆插件：按对话轮次自动整理偏好、人物关系、计划和约定，关键词＋向量＋图谱召回，记忆会衰减、归档，被想起会加深；带管理页，手机上也能管理",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "auto",
+     "on_request"
+    ],
+    "note": "达到轮数自动总结；Agent 可调 memorize_long_term_memory 主动写"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "chat_agent"
+    ],
+    "note": "自动总结；Agent 主动写"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "relation",
+     "recency",
+     "frequency"
+    ],
+    "note": "文档和图谱的关键词＋向量融合排序；衰减和访问强化"
+   },
+   "local_model": {
+    "value": "yes",
+    "note": "用 AstrBot 里配置的嵌入和模型服务，可以是本地模型"
+   },
+   "persona_continuity": {
+    "value": "not_mentioned",
+    "note": "按人格筛选记忆，不是保存 AI 自身身份"
+   }
+  }
+ },
+ "astrbot-plugin-self-learning": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "AstrBot 插件：从群聊里学 Bot 的说话风格、群里的黑话、群友关系和好感度，学到的人格变化先进审查队列，可批准、回滚；作者建议和 LivingMemory 搭配",
+  "fields": {
+   "cost": {
+    "value": "model_fees_only",
+    "note": "学习时会调用在 AstrBot 里配置的筛选、提炼、强化模型"
+   },
+   "local_model": {
+    "value": "yes",
+    "note": "用 AstrBot 里配置的模型服务，可以是本地模型；原判“本身不调用模型”不对"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "面板里可删除、回滚，没有自动遗忘"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "user"
+    ],
+    "note": "后台从群聊学习；管理员可用 /remember 手动记"
+   },
+   "emotion_handling": {
+    "value": [
+     "ai_state",
+     "user_mood"
+    ],
+    "note": "Bot 有情绪状态（/set_mood）；记录群友的好感度和心理状态"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "要在 AstrBot 所在机器的插件目录里 git clone"
+   }
+  }
+ },
+ "basic-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AGPL）；云版每月约 15 美元，可在 Claude、ChatGPT 自定义 GPT 里从网页一键连接",
+  "fields": {
+   "cost": {
+    "value": "free",
+    "note": "本地版免费；云版 15 美元／月（7 天试用）"
+   },
+   "compatible_clients": {
+    "value": [
+     "claude_desktop",
+     "claude_code",
+     "codex",
+     "cursor",
+     "claude_web_mobile",
+     "chatgpt_gpt",
+     "any_mcp_client"
+    ],
+    "note": "本地走 MCP；云版可连 Claude 网页／App 和 ChatGPT 自定义 GPT"
+   },
+   "phone_access": {
+    "value": [
+     "cloud"
+    ],
+    "note": "只有付费云版能让手机上的 Claude、ChatGPT 连上"
+   }
+  }
+ },
+ "bitterbot-desktop": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "self_contained",
+     "telegram",
+     "discord"
+    ],
+    "note": "自带控制台网页；可接你已经在用的聊天软件频道"
+   },
+   "phone_access": {
+    "value": [
+     "native",
+     "cloud",
+     "needs_tunnel"
+    ],
+    "note": "接聊天软件频道后手机直接聊；可用 Fly.io、VPS 模板常驻"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "按问题偏向新或旧的事实，不同层的记忆有不同半衰期"
+   },
+   "reflection": {
+    "value": "yes",
+    "note": "做梦时更新自我概念和对你的心智理论"
+   }
+  }
+ },
+ "celiums-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "有带鉴权的 Streamable HTTP，要自己部署到能访问的地方"
+   }
+  }
+ },
+ "central-intelligence": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "持久记忆服务：一条命令注册拿到 API Key 并自动配置编程工具（默认用项目方托管）；也可装纯本地版带面板，或自己部署服务端",
+  "fields": {
+   "accounts_needed": {
+    "value": [
+     "vendor_account",
+     "model_api_key"
+    ],
+    "note": "托管版要注册拿 CI API Key；纯本地版不需要；自己部署服务端要 OpenAI Key 做嵌入"
+   },
+   "cost": {
+    "value": "free",
+    "note": "本地版免费；托管版、自部署的费用 README 没写清"
+   },
+   "local_model": {
+    "value": "not_mentioned",
+    "note": "本地版用本地 ONNX 重排；嵌入是否可本地 README 没说清"
+   }
+  }
+ },
+ "claude-mem": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "Claude Code 等编程 Agent 的自动记忆：后台观察每次工具调用，压缩成可搜索的记录，下次会话自动带入；安装时会请你注册项目方账号用托管的“观察者”（30 天免费试用），也可以跳过、只用本机",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "codex",
+     "cursor",
+     "opencode",
+     "openclaw",
+     "deepseek_harness"
+    ],
+    "note": "README 的安装命令覆盖这些宿主"
+   },
+   "accounts_needed": {
+    "value": [
+     "vendor_account"
+    ],
+    "note": "默认登录 claude-mem 账号（邮箱链接，不用绑卡）；可用 --provider 跳过，改用宿主自己的模型额度"
+   },
+   "cost": {
+    "value": "free",
+    "note": "托管观察者 30 天免费试用，到期后自动改用你自己的 Anthropic 套餐额度，除非订阅"
+   },
+   "privacy_protection": {
+    "value": "yes",
+    "note": "用 <private> 标签排除敏感内容"
+   }
+  }
+ },
+ "compartment": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "加密、完全离线的本地记忆库：每条记忆是一句话、带来源和日期，偏好变了自动取代旧的，可设到期日；一条命令接入 Claude Code、Codex 等，带桌面面板",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "auto",
+     "on_request"
+    ],
+    "note": "AI 调工具存；integrate claude 会装钩子，把 Claude Code 保存的记忆文件自动写入"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "可手动删除；设了 expires 的记忆到期自动删除（不是渐进衰减）"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "retrieve"
+    ],
+    "note": "写入时按类型定重要性档位（决定 0.90、个人事实 0.80……闲聊 0.20），检索时乘到匹配分上"
+   },
+   "dream_consolidation": {
+    "value": "not_mentioned",
+    "note": "README 没有离线整理；atomize、opinions audit 要手动运行"
+   },
+   "local_model": {
+    "value": "no_model_needed",
+    "note": "嵌入模型随包附带，不调用大模型；原判来自“Add to LM Studio”（LM Studio 在这里是 MCP 客户端）"
+   }
+  }
+ },
+ "crbro-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地 MCP 记忆：知识按“神经元、突触”组织，事实有保质期、可被新事实取代，专门记下犯过的错和刻意没做的事，会话压缩前存检查点；主要面向编程 Agent，Claude 桌面版可双击安装",
+  "fields": {
+   "memory_subject": {
+    "value": [
+     "task_context",
+     "experience",
+     "user_facts"
+    ],
+    "note": "事实、决定、模式、偏好、错误和技术债"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "recency",
+     "frequency",
+     "relation"
+    ],
+    "note": "热度＝访问频率 35%＋新近 40%＋连接数 25%；关键词＋本地多语言向量"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only",
+     "archive"
+    ],
+    "note": "过时的事实被取代或撤回后留在文件里可恢复；crbro_forget 真删前先放隔离区；保质期到了只提示，不自动删"
+   }
+  }
+ },
+ "drivesoid": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒、焦虑……）随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务供你的桥接层或 Claude Code 钩子读取，不存对话内容",
+  "fields": {
+   "access": {
+    "value": [
+     "host_plugin"
+    ],
+    "note": "旁路 HTTP 服务，提供 Claude Code 钩子；你的桥接层上报对话事件、读取状态块"
+   },
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "developer_built"
+    ],
+    "note": "Claude Code 钩子，或自己写的桥接层"
+   },
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "Node 18＋Python 3"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "npm start 后在网页向导里填设置；接入要改桥接层或装钩子"
+   },
+   "memory_subject": {
+    "value": [],
+    "note": "只维护情绪状态，不存记忆内容"
+   },
+   "dream_consolidation": {
+    "value": "not_mentioned",
+    "note": "“consolidates”指强烈情绪沉淀进心境，不是记忆整理"
+   },
+   "window_handoff": {
+    "value": "not_mentioned",
+    "note": "没有换窗续接"
+   },
+   "ranking_signals": {
+    "value": [
+     "not_mentioned"
+    ],
+    "note": "不做检索"
+   },
+   "emotion_handling": {
+    "value": [
+     "ai_state"
+    ],
+    "note": "AI 自己的 16 维情绪状态，双时间尺度"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "装在电脑上"
+   }
+  }
+ },
+ "dylan-heartbeat": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "runs_on": {
+    "value": [
+     "own_computer",
+     "own_server",
+     "own_cloud_account"
+    ],
+    "note": "README 有“跨平台与云部署”一节"
+   },
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "Node 网关，跨平台；原判的安卓、iOS 来自“推送到手机”"
+   },
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "网关自动维护时间线；AI 主动输出 [DIARY] 时追加日记"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "chat_agent"
+    ],
+    "note": "网关记录；AI 自己决定写日记、推送还是沉默"
+   }
+  }
+ },
+ "echo-mistik": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地运行的简易 AI 伴侣网页（完整版 Mistik 的公开子集）：长期记忆、滚动摘要、心情状态和反思笔记，核心是“共享价值观”对行为的约束；需要 Groq API Key，禁止商用",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "后台进程写长期记忆和滚动摘要；“改记忆要用户批准”说的是私有的完整版 Mistik"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "装 Python、建虚拟环境、装依赖再启动"
+   },
+   "local_model": {
+    "value": "not_mentioned",
+    "note": "README 只写了 Groq API"
+   }
+  }
+ },
+ "iai-personal-memory-engine": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "os": {
+    "value": [
+     "macos",
+     "linux",
+     "windows"
+    ],
+    "note": "macOS、Linux 正式支持，Windows 是测试版"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "recency",
+     "relation"
+    ],
+    "note": "语义相似、图谱证据、新近度等综合；嵌入在本地跑"
+   }
+  }
+ },
+ "imprint-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "每轮对话自动原文入库并切成事件，提问前自动浮现相关记忆；主要配合 Claude Code（自动记录靠它的钩子），可同步 claude.ai 网页聊天；中文分词和“昨天”“上个月”这类时间说法支持得好",
+  "fields": {
+   "os": {
+    "value": [
+     "macos",
+     "linux"
+    ],
+    "note": "原表写 Mac 或 Linux；安装脚本是 curl | bash，补漏任务用 launchd"
+   },
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "any_mcp_client"
+    ],
+    "note": "自动记录靠 Claude Code 的 Stop 钩子；claude.ai 网页聊天只能经 Chrome 扩展同步进来，网页端读不到记忆；Telegram 指的是采集渠道，仓库里没有机器人"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "有 HTTP 模式（IMPRINT_HTTP_HOST），README 没写远程连接和鉴权；原判的“手机可用”来自 Telegram 采集渠道"
+   },
+   "accounts_needed": {
+    "value": [
+     "model_api_key"
+    ],
+    "note": "嵌入模型必需：免费 Google AI Studio 密钥，或本机 Ollama"
+   },
+   "cost": {
+    "value": "free",
+    "note": "默认配置在 Google、Cloudflare 免费额度内"
+   },
+   "human_review": {
+    "value": [
+     "tools",
+     "files"
+    ],
+    "note": "AI 调工具改、删；每日日志和经验库是 Markdown 文件。README 没有网页面板"
+   },
+   "export": {
+    "value": [
+     "sqlite"
+    ],
+    "note": "~/.imprint/memory.db"
+   },
+   "reflection": {
+    "value": "not_mentioned",
+    "note": "insights 只是一类由 AI 写入的记忆，系统不做归纳推断"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "dedup",
+     "budget"
+    ],
+    "note": "MMR 去重；自动浮现约 6 条相关事件"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "向量＋BM25＋RRF 融合；可选的查询扩展才调用 Cloudflare 上的模型"
+   },
+   "chinese_support": {
+    "value": [
+     "zh_docs",
+     "zh_retrieval"
+    ],
+    "note": "README 有完整中文版；jieba 分词，JioNLP 解析中文时间表达"
+   },
+   "scoring_stages": {
+    "value": [
+     "retrieve"
+    ],
+    "note": "检索时给钉选、新近、重要度高的加分"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "装在电脑上"
+   }
+  }
+ },
+ "insight": {
+  "checked": "2026-10-25",
+  "by": "README＋代码",
+  "summary": "让 AI 在深聊中抓住值得留下的洞察，拿不准的先暂存，经你确认才入库；网页面板可翻看",
+  "fields": {
+   "runs_on": {
+    "value": [
+     "own_computer"
+    ],
+    "note": "服务跑在本机；Supabase 只是可选的云端存储。原判的“手机”来自“同一 WiFi 下手机可连”，指手机连电脑"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "README 只写了同一 WiFi 下把 localhost 换成电脑局域网 IP；出门在外要自己做内网穿透"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "要 git clone、npm install、npm start，再在客户端里填 MCP 地址"
+   },
+   "write_mode": {
+    "value": [
+     "review_first",
+     "on_request"
+    ],
+    "note": "capture_insight 直接入库；拿不准的用 capture_pending 暂存，review_pending 展示给用户，confirm_pending 决定保留、合并或丢弃"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent"
+    ],
+    "note": "聊天的 AI 调 MCP 工具记"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "有 delete_insight，没有自动遗忘"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "tools"
+    ],
+    "note": "网页面板浏览搜索；AI 可调 update、delete 工具"
+   },
+   "export": {
+    "value": [
+     "sqlite"
+    ],
+    "note": "默认存 data/ 下的 SQLite"
+   },
+   "error_guard": {
+    "value": "not_mentioned",
+    "note": "候选层是防止记太多，不是纠错或冲突检测"
+   },
+   "reflection": {
+    "value": "not_mentioned",
+    "note": "没有归纳推断"
+   },
+   "ranking_signals": {
+    "value": [
+     "keyword"
+    ],
+    "note": "代码：storage.search 用 SQL LIKE 匹配标题、结论、金句；confidence 只是候选的自评分，不参与检索排序"
+   },
+   "scoring_stages": {
+    "value": [
+     "write"
+    ],
+    "note": "候选带 AI 自评的 confidence"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "关键词查询"
+   },
+   "local_model": {
+    "value": "no_model_needed",
+    "note": "本身不调用模型"
+   }
+  }
+ },
+ "internalbeyond-mobile": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "一个 HTML 文件就能在手机浏览器里跑的 AI 陪伴小世界：聊天、通话、书信、日历、共读等 15 个模块，记忆按情绪坐标可视化、可查可纠；数据只存在本机浏览器，需自备 API Key；禁止商用",
+  "fields": {
+   "accounts_needed": {
+    "value": [
+     "model_api_key"
+    ],
+    "note": "第一步就是在 API 页填 AI 的 API 密钥；GitHub Pages 只是可选的 PWA 托管方式"
+   },
+   "cost": {
+    "value": "model_fees_only",
+    "note": "应用免费，模型按用量付费"
+   },
+   "local_model": {
+    "value": "not_mentioned",
+    "note": "要调用 AI 服务商或中转站的接口"
+   },
+   "write_mode": {
+    "value": [
+     "review_first",
+     "on_request"
+    ],
+    "note": "聊天、通话结束后一键生成记忆，写好可改，确认后才写入"
+   },
+   "memory_writer": {
+    "value": [
+     "user",
+     "chat_agent"
+    ],
+    "note": "用户点按钮触发，AI 生成；每位 AI 维护自己的记忆档案"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "日历记得纪念日、计划和生理期"
+   }
+  }
+ },
+ "ki-co": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地优先的 AI 伴侣小屋：人格核、分层记忆、日记和“回忆种子”（候选，确认后才转为长期记忆），可导入 ChatGPT 导出的旧记录；网页、PWA、桌面版都能用，手机网页也行；禁止商用",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "self_contained"
+    ],
+    "note": "原判的 ChatGPT 来自“可导入 ChatGPT 聊天记录”，不是接入 ChatGPT"
+   },
+   "runs_on": {
+    "value": [
+     "own_computer",
+     "own_cloud_account",
+     "phone"
+    ],
+    "note": "本机运行，或部署到自己的 Netlify；手机浏览器可用，数据在浏览器本地"
+   },
+   "phone_access": {
+    "value": [
+     "native",
+     "cloud"
+    ],
+    "note": "PWA／手机网页；原判的“远程 MCP”来自 ChatGPT 误判"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "要装 Node.js、npm install、npm run dev，或自己部署到 Netlify"
+   },
+   "write_mode": {
+    "value": [
+     "review_first"
+    ],
+    "note": "回忆种子只是候选，不会自动写入长期记忆，确认转正后才写"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "user"
+    ],
+    "note": "后台从日记和对话提炼候选；记忆档案由用户管理"
+   }
+  }
+ },
+ "kiwi-mem": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "装在服务器上的记忆网关：记忆有“热度”，常聊的越记越牢、冷的慢慢模糊；每晚“做梦”整理，按日、周、月层级摘要；手机客户端填网关地址即可用，可部署在 VPS 或 Zeabur",
+  "fields": {
+   "runs_on": {
+    "value": [
+     "own_server",
+     "own_cloud_account"
+    ],
+    "note": "VPS，或在 Zeabur 上部署自己的实例；没有项目方托管服务，原判的“托管”不对"
+   },
+   "data_passes_through": {
+    "value": [
+     "local_only",
+     "own_cloud"
+    ],
+    "note": "数据在自己的服务器或自己的 Zeabur 项目里"
+   },
+   "accounts_needed": {
+    "value": [
+     "model_api_key"
+    ],
+    "note": "模型中转站或官方 API Key；VPS 方案还要域名和 HTTPS（README 推荐 Cloudflare，但不是唯一办法），Zeabur 自带域名"
+   },
+   "compatible_clients": {
+    "value": [
+     "openai_compatible",
+     "kelivo",
+     "sillytavern"
+    ],
+    "note": "README 点名 ChatBox、Kelivo、NextChat、SillyTavern"
+   },
+   "phone_access": {
+    "value": [
+     "http_endpoint",
+     "cloud"
+    ],
+    "note": "手机客户端填 https 网关地址；iOS 必须 HTTPS"
+   },
+   "setup_device": {
+    "value": "phone_ok",
+    "note": "Zeabur 导入仓库可在浏览器完成；VPS 方案 README 也给了手机 SSH 工具 Termius"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "日历系统按日、周、月、季、年压缩，越近越清楚"
+   },
+   "window_handoff": {
+    "value": "yes",
+    "note": "“无缝换窗”会在新对话里放衔接卡"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "budget"
+    ],
+    "note": "高热度全文注入、中热度只给摘要、冷记忆不注入"
+   }
+  }
+ },
+ "lean-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "嵌入式本地记忆：自动抽取事实，新事实取代旧的，旧的仍可按时间点查回；离线“睡眠整理”去重、摘要、降级，需要判断的都排进审核队列等你批准；首次要下载约 2GB 本地模型",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "on_request"
+    ],
+    "note": "AI 调 memory_add 写入，立即生效；要审核的是整理时的合并、摘要、淘汰提议，不是日常写入"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent"
+    ],
+    "note": "AI 调工具；抽取流水线在写入时自动跑"
+   },
+   "forgetting": {
+    "value": [
+     "archive"
+    ],
+    "note": "从不删除：旧事实被取代、低价值的降到冷层，仍可查回"
+   },
+   "human_review": {
+    "value": [
+     "cli",
+     "dashboard",
+     "tools"
+    ],
+    "note": "命令行、网页控制台的 Review 页、在 Claude Code 里用 /review-memory 逐条审"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "向量＋BM25＋交叉编码器重排，不调用生成式大模型"
+   }
+  }
+ },
+ "lmc-5": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "主 Agent 写入并定初始优先级；钩子把事件写进原始日志，夜间任务要自己接好调度后才自动跑"
+   },
+   "local_model": {
+    "value": "yes",
+    "note": "README 写可以用全本地栈"
+   }
+  }
+ },
+ "machine-studio": {
+  "checked": "2026-10-25",
+  "by": "README＋代码",
+  "summary": "专存会过期的技术记忆（项目进度、部署参数、踩坑），能真删除，按项目看时间线；和 Ombre Brain 的情感记忆分开放",
+  "fields": {
+   "emotion": {
+    "value": "not_mentioned",
+    "note": "README 反复提到情感记忆，是为了说明它只存技术记忆、不存情感"
+   },
+   "memory_subject": {
+    "value": [
+     "task_context",
+     "experience"
+    ],
+    "note": "项目进度、结论、部署参数、踩坑"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "pip install、运行脚本，常驻要配 systemd"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "delete、project_delete 是真删除，没有自动遗忘"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "tools"
+    ],
+    "note": "网页工作室（要输 token）可读、搜、增、改、删；AI 也可调工具改"
+   },
+   "export": {
+    "value": [
+     "sqlite"
+    ],
+    "note": "SQLite 单文件 tech_memory.db"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "project_log 看某个项目的完整时间线"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "threshold",
+     "budget"
+    ],
+    "note": "向量相似度低于阈值不返回；默认只返回 5 条省 token"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "关键词＋可选的本地小向量模型"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "streamable-http＋Bearer；放在有公网 IP 的服务器上可直连，放在家里电脑要做穿透。注意 Claude App 的连接器要 OAuth，这个项目只支持固定 Token，更适合 Kelivo 这类能填请求头的客户端"
+   }
+  }
+ },
+ "mcp-memory-service": {
+  "checked": "2026-10-25",
+  "by": "README＋代码",
+  "summary": "自托管的记忆服务：本地向量＋关键词检索、知识图谱、定期整合与衰减归档，带八个标签页的网页面板；可用 OAuth 做远程连接器给 claude.ai、ChatGPT 网页用（要自己打通公网）",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_desktop",
+     "claude_code",
+     "claude_web_mobile",
+     "chatgpt",
+     "codex",
+     "gemini_cli",
+     "cursor",
+     "opencode",
+     "openclaw",
+     "any_mcp_client"
+    ],
+    "note": "README 的“Works With”列表"
+   },
+   "runs_on": {
+    "value": [
+     "own_computer",
+     "own_server"
+    ],
+    "note": "服务装在自己电脑或服务器上；Cloudflare 只是可选的存储后端，原判的“自己的云账号”指这个"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "远程 MCP 走 OAuth，要自己用 Cloudflare Tunnel、nginx 等暴露到公网"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "AI 调工具存；另有 Claude Code 钩子按规则自动捕获（claude-hooks/README-AUTO-CAPTURE.md）"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "AI 调工具；钩子按模式自动记"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "archive",
+     "manual_only"
+    ],
+    "note": "代码 consolidation/decay.py 按重要性、关联、访问次数和时间算分；forgetting.py 压缩并归档而不是直接删；面板可手动删"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "cli",
+     "tools"
+    ],
+    "note": "网页面板（浏览、管理、质量）、memory 命令行、AI 工具"
+   },
+   "export": {
+    "value": [
+     "json"
+    ],
+    "note": "代码 health/integrity.py 有 export_memories"
+   },
+   "reflection": {
+    "value": "yes",
+    "note": "整合时生成 Insight Cards：模式、趋势和知识空白"
+   },
+   "error_guard": {
+    "value": "yes",
+    "note": "知识图谱有 contradicts 类型的边；整合模块有 contradictions.py"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "importance",
+     "recency",
+     "frequency",
+     "relation"
+    ],
+    "note": "检索：BM25＋向量混合，可选质量分加权；整合：重要性、关联、访问次数、时间衰减"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "retrieve",
+     "forget"
+    ],
+    "note": "写入后异步打质量分；检索可按质量加权（默认关）；整合时按衰减分归档"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "本地 ONNX 嵌入，检索不调用大模型"
+   },
+   "local_model": {
+    "value": "no_model_needed",
+    "note": "嵌入在本地 ONNX 跑，不需要密钥；质量打分可选接 Ollama"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "pip 安装或 Docker，远程要配隧道"
+   }
+  }
+ },
+ "memheaven": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "部署在你自己 Cloudflare 免费账号上的远程 MCP 记忆（MemPalace 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，部署要在电脑上敲 npm 和 wrangler 命令",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "chatgpt",
+     "claude_web_mobile",
+     "any_mcp_client"
+    ],
+    "note": "ChatGPT 已端到端验证；Claude.ai 连接器的回调已放行但作者还没验证；能带 Bearer 的客户端也可"
+   },
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "运行在 Cloudflare 上，但部署要在电脑上用 Node.js 20+ 和 wrangler"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "要在电脑上跑 npm install、wrangler deploy 等命令，不能全程浏览器"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "delete_drawer 软删除；知识图谱事实可 invalidate"
+   },
+   "human_review": {
+    "value": [
+     "tools"
+    ],
+    "note": "只能通过 AI 调工具查看、修改，没有面板"
+   },
+   "error_guard": {
+    "value": "yes",
+    "note": "kg_check 检查冲突和过期事实，kg_invalidate 作废旧事实，写入前查重"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "budget"
+    ],
+    "note": "wake_context 给出有上限的启动上下文"
+   },
+   "chinese_support": {
+    "value": "not_mentioned",
+    "note": "嵌入模型是 bge-small-en（英文），中文语义检索效果存疑；关键词检索可用"
+   }
+  }
+ },
+ "memora": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "runs_on": {
+    "value": [
+     "own_computer"
+    ],
+    "note": "服务跑在本机；Cloudflare D1、R2 只是可选的云端存储和图谱页面"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "有 HTTP 传输，但服务在本机"
+   }
+  }
+ },
+ "mengram": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {}
+ },
+ "midas": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地记忆层：入库和召回都不调用大模型、0 成本；召回返回原话可追溯，新事实自动取代旧的，按重要性和新旧淘汰低价值记忆；带本地网页检查器，主要面向编程 Agent",
+  "fields": {
+   "memory_subject": {
+    "value": [
+     "task_context",
+     "user_facts"
+    ],
+    "note": "决定、约定、bug、偏好、约束"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "AI 调 remember、capture；可装 Claude Code 钩子自动送入，由 Midas 的规则决定留不留"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "AI 调工具；钩子自动送入后由无模型的规则筛选"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "manual_only"
+    ],
+    "note": "按重要性×新旧淘汰低价值记忆、按类型设保留期；也可手动 forget"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "importance",
+     "recency"
+    ],
+    "note": "召回以向量为主（README 说混合检索、重排实测没帮助）；淘汰按重要性×新旧"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "forget"
+    ],
+    "note": "写入时无模型打重要性分、丢掉闲聊；淘汰时按分数"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "budget",
+     "dedup"
+    ],
+    "note": "assemble 按 token 预算组装；maintain 去重"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "入库和召回都不调用大模型"
+   },
+   "local_model": {
+    "value": "no_model_needed",
+    "note": "不调用大模型，嵌入在本地跑"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "midas serve --http 可带 Bearer 令牌，默认只监听本机"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "装在电脑上"
+   }
+  }
+ },
+ "mindmap-mcp-server": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地共享记忆＋会话交接：在一个工具里记下、换个工具接着聊；不用的记忆按热、温、冷慢慢淡化成一行痕迹，从不悄悄删除；带面板，只服务本机的 MCP 客户端",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "auto",
+     "on_request"
+    ],
+    "note": "Claude Code 的 SessionEnd 钩子自动记；其它客户端靠 AI 调 mindmap_capture"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "AI 调工具；钩子自动提炼"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "archive"
+    ],
+    "note": "后台把不用的记忆从热降到冷，冷的折叠成可搜索的一行痕迹，不删除"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "recency",
+     "frequency"
+    ],
+    "note": "热度分层；再次使用才升级为可信记忆；语义检索可选"
+   },
+   "phone_access": {
+    "value": [
+     "not_mentioned"
+    ],
+    "note": "README 明确说只服务本机客户端，ChatGPT 等云端客户端不在范围内"
+   }
+  }
+ },
+ "mnemo-cortex": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "重可信度的本地记忆：自动监听会话入库，事实分可信等级、与锁定事实冲突的写入变成提案由你裁决，每晚“做梦”整合多个 Agent 的记忆；推荐配本地 Ollama，ChatGPT 可经自定义 GPT 网关接入",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "claude_desktop",
+     "codex",
+     "openclaw",
+     "hermes",
+     "open_webui",
+     "chatgpt_gpt",
+     "any_mcp_client"
+    ],
+    "note": "README 列出的 MCP 客户端；ChatGPT 通过加固过的自定义 GPT Actions 网关"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "ChatGPT 网关需要公网 HTTPS；其余是本机 stdio"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "confidence",
+     "recency"
+    ],
+    "note": "复合排序；事实有三档可信度"
+   }
+  }
+ },
+ "mnemo-mcp": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地持久记忆：关键词＋向量混合检索再重排，按重要性和新旧自动归档，带时间知识图谱；内置本地嵌入模型，不需要 API Key，以命令行为主",
+  "fields": {
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "recency",
+     "importance",
+     "relation"
+    ],
+    "note": "RRF 融合后重排，叠加时间衰减、重要性加分和图谱邻近加分"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "retrieve",
+     "forget"
+    ],
+    "note": "写入时可由模型打重要性分；检索加权；按新旧×(1−重要性) 自动归档"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "archive"
+    ],
+    "note": "每写入 100 条后台扫描一次，按公式软归档，可恢复"
+   },
+   "local_model": {
+    "value": "yes",
+    "note": "默认用本地 ONNX 嵌入和重排模型；压缩、打分可接 OpenRouter 等，原判“本身不调用模型”不准"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "有 HTTP 远程模式"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "交叉编码器重排，不是生成式大模型"
+   }
+  }
+ },
+ "mnemory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "claude_desktop",
+     "chatgpt",
+     "hermes",
+     "open_webui",
+     "opencode",
+     "openclaw",
+     "cursor",
+     "codex",
+     "any_mcp_client"
+    ],
+    "note": "README 的客户端表"
+   },
+   "write_mode": {
+    "value": [
+     "auto",
+     "on_request"
+    ],
+    "note": "Claude Code、Open WebUI、OpenClaw 等有插件自动记；其它客户端靠 AI 调工具"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "插件自动抽取；AI 调工具"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "manual_only"
+    ],
+    "note": "按类型设保留期（上下文 7 天、经历 90 天），常被想起的会续命；面板可删"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "recency",
+     "importance",
+     "frequency"
+    ],
+    "note": "多查询语义检索后重排，带时间感知；写入时分类并打重要性"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "retrieve",
+     "forget"
+    ],
+    "note": "写入时打重要性；检索重排；到期淘汰"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "llm"
+    ],
+    "note": "“AI 驱动的搜索”会让模型生成多个查询"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "rerank",
+     "dedup"
+    ],
+    "note": "重排；写入时去重"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "能回答“上周我对数据库做了什么决定”"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "streamable-http＋API Key；放在服务器上可远程连"
+   }
+  }
+ },
+ "mnemostack": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "基于 Qdrant 的混合检索记忆层：向量＋BM25＋知识图谱，多段排序，可标记过时事实；带 MCP 和 HTTP 接口，要自己跑 Qdrant，偏开发者",
+  "fields": {
+   "forgetting": {
+    "value": [
+     "manual_only",
+     "archive"
+    ],
+    "note": "过时事实可标为失效但不删；DELETE 接口真删。README 特别说明访问次数是加分不是衰减，原采用的“自动衰减”不对"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "有带鉴权的 HTTP 接口，要自己暴露；原判来自“能配合 ChatGPT”"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "rerank",
+     "threshold",
+     "budget"
+    ],
+    "note": "可传 token_budget 硬性裁剪"
+   }
+  }
+ },
+ "moraine-home": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "伴侣的本地记忆工作台：新材料先进候选区，由你和 AI 一起决定保留、合并或修改；本地中文向量＋关键词检索，带时间线和手机网页工作台；测试版，禁止商用",
+  "fields": {
+   "memory_subject": {
+    "value": [
+     "conversation_history",
+     "user_facts",
+     "ai_identity"
+    ],
+    "note": "对话事件、单独的用户画像、很小的 self-core（身份连续）"
+   },
+   "write_mode": {
+    "value": [
+     "review_first",
+     "on_request"
+    ],
+    "note": "新材料先进候选收件箱，人和 AI 决定保留、合并、修改还是暂存"
+   },
+   "forgetting": {
+    "value": [
+     "archive"
+    ],
+    "note": "可降权、归档、恢复；公开版没有自动衰减"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "tools"
+    ],
+    "note": "手机 PWA 工作台；本地 MCP 适配器给 AI 同样的管理能力"
+   },
+   "export": {
+    "value": [
+     "other_file"
+    ],
+    "note": "可导入导出可迁移的数据包、做快照"
+   },
+   "memory_layers": {
+    "value": "layered",
+    "note": "候选、长期、self-core 分层召回"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "默认只监听本机，对外要自己加鉴权和反向代理；手机网页工作台在同一服务上"
+   },
+   "local_model": {
+    "value": "no_model_needed",
+    "note": "只用本地 CPU 嵌入模型，不需要大模型；顾问密钥可选"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "本地关键词＋向量"
+   },
+   "persona_continuity": {
+    "value": "yes",
+    "note": "self-core 专门保存身份连续所需的最小内容"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "要在电脑或服务器上运行 Python 脚本"
+   }
+  }
+ },
+ "nocturne-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "把 AI 的身份、关系和共同经历存成树状记忆：新对话自动载入你指定的核心设定，其余按触发条件调取；每次改动留版本，可在面板对比、回滚",
+  "fields": {
+   "ranking_signals": {
+    "value": [
+     "keyword",
+     "importance",
+     "relation"
+    ],
+    "note": "README 明确说 search_memory 是全文检索、不是语义搜索；记忆带 priority 权重；触发词生成跨节点链接"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "llm"
+    ],
+    "note": "主要靠 AI 按路径、触发条件自己翻找（read_memory）"
+   },
+   "runs_on": {
+    "value": [
+     "own_computer",
+     "own_server"
+    ],
+    "note": "本机 stdio，或 Docker Compose 部署完整服务栈供多设备连接"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "SSE、Streamable HTTP 可远程连接；README 没写 OAuth，Claude App 连接器能否直接用要自行确认"
+   },
+   "write_mode": {
+    "value": [
+     "on_request"
+    ],
+    "note": "AI 自己决定写什么；改动立即生效，人事后在面板审查、回滚，不是先审后记"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "delete_memory 只切断访问路径，正文还在；清理旧版本要人确认"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "tools"
+    ],
+    "note": "可视化面板：树状浏览、编辑、diff 审查"
+   },
+   "export": {
+    "value": [
+     "sqlite"
+    ],
+    "note": "默认 SQLite，Docker 版用 PostgreSQL"
+   },
+   "dream_consolidation": {
+    "value": "not_mentioned",
+    "note": "README 没有离线整理；有一套让 AI 自查冗余、矛盾的审计技能，要手动触发"
+   }
+  }
+ },
+ "ombre-brain": {
+  "checked": "2026-10-25",
+  "by": "README＋代码",
+  "summary": "带情感坐标的长期记忆：情绪越强、越常被想起就忘得越慢，遗忘是沉底归档而非删除；记忆存成 Markdown 文件，带网页面板，可做远程连接器给 Claude App 用",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "on_request"
+    ],
+    "note": "AI 调 hold、grow 工具写入（原表写的就是这个，旧规则没认出来）"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent"
+    ],
+    "note": "聊天的 AI 自己调工具记；后台模型只负责打标、拆分和做梦整理"
+   },
+   "memory_subject": {
+    "value": [
+     "user_facts",
+     "ai_identity"
+    ],
+    "note": "以模型第一人称记共同经历、情绪、承诺和感受；I 工具记自我认知，可选 You／them 记对用户和他人的认识"
+   },
+   "persona_continuity": {
+    "value": "yes",
+    "note": "设计上记忆的主人是模型自己，I 工具沉淀自我认知，每次对话开头自动附最近 3 条"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "files",
+     "tools"
+    ],
+    "note": "网页面板、可直接在 Obsidian 改 Markdown、AI 用 trace 改；原判的 cli 来自“无需命令行”"
+   },
+   "export": {
+    "value": [
+     "markdown",
+     "other_file"
+    ],
+    "note": "记忆桶本身是 Markdown；本地导出 ZIP 带 SHA-256 清单；可同步到 GitHub"
+   },
+   "import_history": {
+    "value": "yes",
+    "note": "批量导入 Claude、ChatGPT、DeepSeek 历史对话，支持断点续传"
+   },
+   "retrieval_weighting": {
+    "value": "yes",
+    "note": "权重池：未解决、情绪强烈的记忆权重更高，对话开头自动浮现"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "recency",
+     "importance",
+     "frequency",
+     "emotion"
+    ],
+    "note": "代码 decay_engine：分数 = 重要性 × 被想起次数^0.3 × 时间衰减 × 情感权重（唤醒度越高越慢）；检索融合 BM25、模糊匹配和向量"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "retrieve",
+     "forget"
+    ],
+    "note": "写入时由模型打重要性和情感坐标（dehydrator.analyze），召回和归档都用衰减分"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "threshold",
+     "budget"
+    ],
+    "note": "feel 相似度 ≥0.65 才算命中、不凑数；breath_advanced 可设 max_tokens"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "代码：breath 正文直接逐字渲染，不经过脱水模型；模型只在写入、拆分、做梦时调用"
+   },
+   "sensitive_suppression": {
+    "value": "yes",
+    "note": "标记 resolved、digested 的记忆不再被动浮现，仍可按关键词找回"
+   }
+  }
+ },
+ "omnidimen-emotion": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "情绪向微调的 Qwen 本地模型（4B–14B）：擅长识别情绪、写有共情的回复；要换掉聊天模型来用，不是记忆库，也不是能和记忆库搭配的插件",
+  "fields": {
+   "project_role": {
+    "value": "dev_framework",
+    "note": "是模型权重，要用 Ollama、LM Studio、vLLM 加载后当聊天模型；原判的“状态引擎”会让它被当成可搭配的情绪插件推荐，不对"
+   },
+   "pairing": {
+    "value": [
+     "not_mentioned"
+    ],
+    "note": "不存在和记忆库搭配的接口"
+   },
+   "access": {
+    "value": [
+     "library"
+    ],
+    "note": "模型权重"
+   },
+   "compatible_clients": {
+    "value": [
+     "openai_compatible"
+    ],
+    "note": "用 vLLM、SGLang、Ollama 起 OpenAI 兼容接口后，任何能填自定义地址的客户端都能用"
+   },
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux",
+     "android",
+     "ios"
+    ],
+    "note": "电脑上用 LM Studio、Ollama；README 也提到手机上的 PocketPal 可以跑 GGUF"
+   },
+   "memory_subject": {
+    "value": [],
+    "note": "不保存任何记忆"
+   },
+   "emotion": {
+    "value": "not_mentioned",
+    "note": "情绪是模型的说话能力，不是记忆或状态"
+   }
+  }
+ },
+ "openmemory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "面向开发者的时序记忆引擎：本地 SQLite，内容不可变、可追溯来源、能按时间判断事实是否还成立，带网页面板和 VS Code 扩展；可导入 Claude Code、Codex 的会话记录",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "codex",
+     "opencode",
+     "gemini_cli",
+     "openclaw",
+     "any_mcp_client"
+    ],
+    "note": "Claude Code 插件、Codex 插件、OpenClaw 插件包；ChatGPT 只有桌面版插件，手机用不上，已去掉"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "可作为 HTTP 服务自托管，README 没写远程连接；原判来自“能配合 ChatGPT”"
+   },
+   "import_history": {
+    "value": "yes",
+    "note": "会话搬运工可导入 Claude Code、Codex、OpenCode、Gemini CLI 的记录"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "relation",
+     "recency"
+    ],
+    "note": "严格、历史、联想几种召回模式；有时间维度"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "AI 或程序调用 ingest；可从会话日志批量导入"
+   }
+  }
+ },
+ "pawwake": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层（要 GitHub、Render 账号）",
+  "fields": {
+   "accounts_needed": {
+    "value": [
+     "github",
+     "render",
+     "model_api_key"
+    ],
+    "note": "网关转发和抽取、评分、整理都要模型服务商的 Key"
+   },
+   "cost": {
+    "value": "model_fees_only",
+    "note": "Render 免费层可跑（免费 PostgreSQL 90 天，可换 Neon、Supabase）；模型按用量付费"
+   },
+   "runs_on": {
+    "value": [
+     "own_cloud_account",
+     "own_server"
+    ],
+    "note": "Render、Zeabur 等，或任何能跑 Docker 的服务器"
+   },
+   "compatible_clients": {
+    "value": [
+     "openai_compatible",
+     "kelivo"
+    ],
+    "note": "README 以 Kelivo 为例；客户端要能加自定义请求头 X-Gateway-Key"
+   },
+   "setup_device": {
+    "value": "phone_ok",
+    "note": "Fork、在 Render 网页上建服务和数据库、填环境变量，全程浏览器"
+   },
+   "emotion": {
+    "value": "not_mentioned",
+    "note": "只提到整理时保留原文里的情绪表达，没有情绪机制"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only",
+     "archive"
+    ],
+    "note": "删除默认可恢复；合并后来源归档；没有自动衰减"
+   },
+   "human_review": {
+    "value": [
+     "dashboard"
+    ],
+    "note": "面板里搜索、编辑、调权重、删除、导入导出、确认整理草稿"
+   }
+  }
+ },
+ "piia-engram": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "装在本地的“AI 工作身份”：你是谁、怎么做事、踩过的坑存成本地文件，几个编程工具共用；AI 提议的高风险内容要你审核，还能预览 AI 实际会看到什么",
+  "fields": {
+   "memory_subject": {
+    "value": [
+     "user_facts",
+     "experience"
+    ],
+    "note": "身份、偏好、质量标准，以及经验教训、决定、操作手册"
+   },
+   "compatible_clients": {
+    "value": [
+     "claude_code",
+     "claude_desktop",
+     "codex",
+     "cursor",
+     "hermes",
+     "openclaw",
+     "any_mcp_client"
+    ],
+    "note": "MCP 工具都可接；ChatGPT、Gemini、Kimi 只能手动粘贴导出的身份卡，不算接上记忆，已去掉"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "review_first"
+    ],
+    "note": "AI 写入；高风险内容（凭据、命令、权限）要你用 engram review 批准，ENGRAM_APPROVAL=strict 时每条都要批"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "有 SSE 远程模式（带令牌），要自己配 HTTPS；原判来自“能配合 ChatGPT”"
+   },
+   "human_review": {
+    "value": [
+     "cli",
+     "files",
+     "dashboard"
+    ],
+    "note": "命令行、本地文件、本地审核窗口和 Memory Lens 预览页"
+   },
+   "import_history": {
+    "value": "yes",
+    "note": "可导入 CLAUDE.md、.cursorrules 和其它 AI 工具的记忆文件，进审核队列"
+   },
+   "sensitive_suppression": {
+    "value": "yes",
+    "note": "未审核的草稿、含凭据的内容不会发给 AI，Memory Lens 里能看到被扣下的"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "budget"
+    ],
+    "note": "按预算裁剪 AI 收到的上下文"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "默认关键词检索，可选向量"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "装在电脑上"
+   }
+  }
+ },
+ "project-tessera": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "给 Claude 桌面版用的本地知识库：自动从对话里收集决定、偏好和事实，可查看撤销；另有 58 个 HTTP 接口，经隧道可做成 ChatGPT 自定义 GPT 的动作",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_desktop",
+     "chatgpt_gpt",
+     "any_mcp_client"
+    ],
+    "note": "Claude 桌面版走 MCP；ChatGPT 走自定义 GPT 的 Actions（要 ngrok、Cloudflare Tunnel 暴露本机接口），不是 MCP"
+   },
+   "write_mode": {
+    "value": [
+     "auto",
+     "on_request"
+    ],
+    "note": "auto_learn 自动收集，review_learned 查看收了什么；也可主动 remember"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "chat_agent"
+    ],
+    "note": "自动学习；AI 调工具"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel"
+    ],
+    "note": "ChatGPT 自定义 GPT 能在手机 App 用，但要先用隧道把本机接口暴露出去"
+   }
+  }
+ },
+ "psycheros": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "陪伴型 Agent 外壳：AI 的身份文件和日→年层级记忆放在独立的 MCP 核心里，换界面（自带网页、酒馆、Claude Code）还是同一个它；有定时自主行动、Discord 私聊、看图和语音；桌面安装包加向导，需自备模型 API",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "self_contained",
+     "any_mcp_client",
+     "sillytavern",
+     "open_webui",
+     "claude_code",
+     "openclaw",
+     "hermes",
+     "discord"
+    ],
+    "note": "自带网页界面；身份核心 entity-core 可被酒馆、Open WebUI、Claude Code、OpenClaw、Hermes 接入；可做 Discord 机器人"
+   },
+   "phone_access": {
+    "value": [
+     "needs_tunnel",
+     "native"
+    ],
+    "note": "网页界面适配手机，README 建议用 Tailscale 连；Discord 私聊可直接在手机上用"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "安装包或 Docker 装在电脑上"
+   },
+   "multimodal": {
+    "value": "yes",
+    "note": "能看图、生成图片"
+   },
+   "voice_interaction": {
+    "value": "yes",
+    "note": "有语音聊天接入"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "relation"
+    ],
+    "note": "对聊天史、资料库、世界书、知识图谱做检索"
+   }
+  }
+ },
+ "remnic": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "auto",
+     "on_request"
+    ],
+    "note": "自动从对话里提炼、需要时注回；AI 也可主动写"
+   },
+   "accounts_needed": {
+    "value": [
+     "model_api_key"
+    ],
+    "note": "自动提炼要一个模型：本地模型、兼容接口或 OpenAI 都行；README 强调不必用 OpenAI Key，手写卡片不需要模型"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "needs_tunnel"
+    ],
+    "note": "有 HTTP 接入；ChatGPT 开发者模式只在网页端，手机要自己打通"
+   }
+  }
+ },
+ "rolling-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "原生 Node 18+，零依赖"
+   },
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "滑出窗口的消息攒够一批自动结算成摘要"
+   },
+   "memory_writer": {
+    "value": [
+     "background"
+    ],
+    "note": "后台调用模型结算"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay"
+    ],
+    "note": "远期梗概按 7 天和字数双淘汰，最旧的直接丢"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "files"
+    ],
+    "note": "本机迷你查看器可就地编辑；也可直接改 summaries.json"
+   },
+   "export": {
+    "value": [
+     "json"
+    ],
+    "note": "summaries.json"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "要在电脑或服务器上跑 Node 代理"
+   }
+  }
+ },
+ "sapphire": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "本地运行的语音 AI 伴侣框架：十万级语义记忆、可选的分层“记忆宫殿”每晚由“图书管理员”整理，有目标、联系人、智能家居、电话和心跳自主模式；Windows、Linux 有图形安装器，需要较好的电脑",
+  "fields": {
+   "accounts_needed": {
+    "value": [
+     "model_api_key"
+    ],
+    "note": "要接一个模型：云端 Claude、GPT、Gemini 等的 Key，或本地 Ollama、LM Studio"
+   },
+   "cost": {
+    "value": "model_fees_only",
+    "note": "软件免费；云端模型按用量付费，本地模型免费但吃内存显卡"
+   },
+   "difficulty": {
+    "value": "low",
+    "note": "Sapphire Launcher 图形安装器，自动装 git、conda 和本体，不用终端"
+   },
+   "compatible_clients": {
+    "value": [
+     "self_contained",
+     "telegram",
+     "discord"
+    ],
+    "note": "自带网页界面；可接 Telegram、Discord 机器人"
+   },
+   "phone_access": {
+    "value": [
+     "native",
+     "needs_tunnel"
+    ],
+    "note": "Telegram、Discord 可在手机上聊；网页界面同一局域网可在手机打开，外网要自己打通"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "装在 Windows、Linux 电脑上（Mac 只能 Docker）"
+   },
+   "write_mode": {
+    "value": [
+     "on_request"
+    ],
+    "note": "AI 用工具写带标签的记忆条目"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "AI 写入；图书管理员每晚整理并记入人格账本"
+   },
+   "privacy_protection": {
+    "value": "yes",
+    "note": "隐私模式下聊天加密，并强制只用标记为私有的模型"
+   }
+  }
+ },
+ "serein": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "Docker 或 Python＋Node"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "聊天的 AI 主动写 Scene；自动摘要任务把已入库原话整理成 Event"
+   },
+   "human_review": {
+    "value": [
+     "dashboard",
+     "tools"
+    ],
+    "note": "网页阅读、编辑、收藏、归档；原判的 cli 不对"
+   },
+   "import_history": {
+    "value": "yes",
+    "note": "可导入历史聊天和旧库"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "relation"
+    ],
+    "note": "向量、关键词、实体线索混合成候选，可再带一条关系相连的 Scene"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "rerank",
+     "threshold",
+     "dedup",
+     "budget"
+    ],
+    "note": "重排模型决定准入；有门槛；已交付的有冷却不反复浮现；默认最多带两条"
+   },
+   "phone_access": {
+    "value": [
+     "remote_mcp",
+     "http_endpoint",
+     "needs_tunnel"
+    ],
+    "note": "远程 MCP（OAuth）或聊天网关；放在家里电脑上要自己打通公网"
+   }
+  }
+ },
+ "sillytavern-presence": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {}
+ },
+ "smart-memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "后台自动抽取事实、关系、事件，自动写会话摘要"
+   },
+   "human_review": {
+    "value": [
+     "dashboard"
+    ],
+    "note": "扩展面板里按角色查看、管理记忆，有实体关系图"
+   },
+   "forgetting": {
+    "value": [
+     "archive"
+    ],
+    "note": "新事实描述了变化时旧事实自动退役；已了结的剧情线移到“已解决”区，不删除。原采用的建议值来自界面提示“几秒后淡出”，不是记忆遗忘"
+   },
+   "relationship_stage": {
+    "value": "yes",
+    "note": "记录每对关系的当前情感描述（温暖、戒备、脆弱……）和关系史"
+   },
+   "pinning": {
+    "value": "yes",
+    "note": "可钉选跨聊天延续的剧情线"
+   }
+  }
+ },
+ "supermemory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "记忆与上下文引擎：自动抽取事实、维护用户画像、处理新旧矛盾、过期信息自动遗忘；默认用官方托管服务（数据存在对方服务器），也有能装在自己电脑上的单文件版",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_desktop",
+     "claude_code",
+     "cursor",
+     "codex",
+     "opencode",
+     "openclaw",
+     "hermes",
+     "any_mcp_client"
+    ],
+    "note": "官方插件覆盖 Claude Code、Cursor、Codex、OpenCode、OpenClaw、Hermes；托管 MCP 地址可给任意 MCP 客户端"
+   },
+   "accounts_needed": {
+    "value": [
+     "vendor_account",
+     "model_api_key"
+    ],
+    "note": "托管版要 Supermemory 账号；本地版要配一个模型（或 Ollama）"
+   },
+   "cost": {
+    "value": "model_fees_only",
+    "note": "本地版免费，只需模型费用；托管版有免费档和付费套餐"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "manual_only"
+    ],
+    "note": "过期的临时事实到期自动遗忘，矛盾自动解决；也可让 AI 删除"
+   },
+   "memory_writer": {
+    "value": [
+     "background",
+     "chat_agent"
+    ],
+    "note": "后台自动抽取；AI 也会调 memory 工具"
+   },
+   "time_awareness": {
+    "value": "yes",
+    "note": "处理随时间变化的事实，临时事实到期失效"
+   },
+   "window_handoff": {
+    "value": "yes",
+    "note": "context 工具在对话开始时注入完整画像"
+   },
+   "privacy_protection": {
+    "value": "not_mentioned",
+    "note": "默认托管、数据经第三方；本地版可离线，但 README 没有专门的隐私机制"
+   }
+  }
+ },
+ "synthetic-heart": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {}
+ },
+ "tstockham96-engram": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {}
+ },
+ "utsuwa": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "带 3D VRM 形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化的心情、本地语义记忆；网页版打开即用，数据存在浏览器本地，要自备模型 API Key（或电脑上的本地模型）",
+  "fields": {
+   "accounts_needed": {
+    "value": [
+     "model_api_key"
+    ],
+    "note": "聊天要配一个模型服务商的 API Key（OpenAI、Anthropic、DeepSeek 等），或本地 Ollama、LM Studio；原判“不需要账号”不对"
+   },
+   "cost": {
+    "value": "model_fees_only",
+    "note": "应用免费，模型按用量付费；本地模型免费但要电脑"
+   },
+   "runs_on": {
+    "value": [
+     "phone",
+     "own_computer"
+    ],
+    "note": "网页版 app.utsuwa.ai 在手机浏览器可用（移动端有专门布局），也有桌面版、可自托管；数据存在浏览器 IndexedDB"
+   },
+   "os": {
+    "value": [
+     "any",
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "网页版任何浏览器；桌面版三个系统"
+   },
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "聊天模型的回复被解析出事实自动保存；记忆检查器里可手动增删"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "user"
+    ],
+    "note": "聊天模型输出里解析出事实；用户可手动添加"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "记忆检查器里可删除；随时间衰减的是心情和关系值，不是记忆"
+   },
+   "multimodal": {
+    "value": "yes",
+    "note": "能看你发的照片并记住这一刻，留在剪贴簿"
+   },
+   "retrieval_postprocess": {
+    "value": [
+     "budget"
+    ],
+    "note": "按模型上下文窗口大小调节注入的记忆量"
+   },
+   "recall_uses_llm": {
+    "value": [
+     "no_llm"
+    ],
+    "note": "Transformers.js 在本地做语义检索"
+   },
+   "setup_device": {
+    "value": "phone_ok",
+    "note": "手机浏览器打开网页版即可"
+   }
+  }
+ },
+ "weighted-compact": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "只读 Claude Code 本地会话记录，生成可核验的分任务会话回顾和纠错资料库；只服务 Claude Code，偏技术",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_code"
+    ],
+    "note": "读的是 ~/.claude/projects/ 下的 Claude Code 记录"
+   },
+   "model_lock": {
+    "value": "claude_only",
+    "note": "只处理 Claude Code 的会话记录"
+   },
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "直接读取会话记录生成，不需要 AI 写入"
+   },
+   "memory_writer": {
+    "value": [
+     "background"
+    ],
+    "note": "离线处理"
+   },
+   "forgetting": {
+    "value": [
+     "none"
+    ],
+    "note": "它不存新记忆；REM 衰减只是排序时的时间权重"
+   },
+   "human_review": {
+    "value": [
+     "cli",
+     "tools"
+    ],
+    "note": "命令行和 MCP 工具"
+   }
+  }
+ },
+ "xinchao-nian": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等驱力和两层情绪随时间变化，和 Ombre Brain 记忆库合并部署、互相影响；可作 Claude.ai 连接器；18+，整体不可商用",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "claude_web_mobile",
+     "any_mcp_client"
+    ],
+    "note": "自带 OAuth 2.1 MCP 端点，可加为 Claude.ai 连接器，也可接 ChatGPT、IDE"
+   },
+   "write_mode": {
+    "value": [
+     "on_request"
+    ],
+    "note": "记忆经 Ombre Brain 由 AI 调工具写入；驱力和情绪自动变化（那是状态，不是记忆）"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "AI 调 OB 工具；心潮自己判断互动类型、更新状态"
+   },
+   "ranking_signals": {
+    "value": [
+     "semantic",
+     "keyword",
+     "recency",
+     "importance",
+     "frequency",
+     "emotion"
+    ],
+    "note": "沿用 Ombre Brain 的检索和衰减；心潮的情绪坐标参与浮现排序"
+   },
+   "scoring_stages": {
+    "value": [
+     "write",
+     "retrieve",
+     "forget"
+    ],
+    "note": "沿用 Ombre Brain"
+   },
+   "proactive": {
+    "value": "yes",
+    "note": "驱力冲顶、挂念等“自身信号”递到 AI 窗口；梦醒推送"
+   },
+   "import_history": {
+    "value": "yes",
+    "note": "保留 Ombre Brain 的历史对话导入"
+   },
+   "local_model": {
+    "value": "yes",
+    "note": "Ombre Brain 部分可用本地模型"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "Docker Compose 部署两个服务"
+   }
+  }
+ },
+ "yuralume-core": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "summary": "自托管的 AI 伴侣平台：角色有自己的日程和社交动态，会在合适的时候主动发消息；同一个角色在网页、Telegram、Discord、LINE、WhatsApp 共用一份记忆；需要 Docker 和模型 API Key",
+  "fields": {
+   "os": {
+    "value": [
+     "windows",
+     "macos",
+     "linux"
+    ],
+    "note": "用 Docker 装在电脑或服务器上；手机通过网页或聊天软件访问"
+   },
+   "phone_access": {
+    "value": [
+     "native",
+     "needs_tunnel"
+    ],
+    "note": "绑定 Telegram、Discord、LINE、WhatsApp 后手机直接聊；网页界面要自己暴露到公网"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "要在电脑或服务器上装 Docker"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "一条安装命令，但要先装 Docker、改 .env、在管理页配模型"
+   },
+   "write_mode": {
+    "value": [
+     "auto"
+    ],
+    "note": "模型抽取记忆；共同活动要用户同意才成为共同记忆"
+   },
+   "human_review": {
+    "value": [
+     "dashboard"
+    ],
+    "note": "网页里可看角色关于你的回忆录"
+   },
+   "multimodal": {
+    "value": "yes",
+    "note": "网页和各聊天软件都能发图"
+   },
+   "memory_layers": {
+    "value": "layered",
+    "note": "五层人设模型：身份、生活、情感、互动、信任"
+   }
+  }
+ }
+}

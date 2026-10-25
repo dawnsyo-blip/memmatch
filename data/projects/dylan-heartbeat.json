@@ -105,21 +105,20 @@
     "runs_on": {
       "value": [
         "own_computer",
-        "own_server"
+        "own_server",
+        "own_cloud_account"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑或服务器（也可云部署）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 有“跨平台与云部署”一节"
     },
     "os": {
       "value": [
-        "android",
-        "ios",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（--- ## 🐧 跨平台与云部署 ### 在 Windows 上运行 1. 安装 [Node.js](htt）；android（`PUSH_PROVIDER=ntfy` 时可用 Android / 桌面 / 自建 ntfy 服务接收主动消息。）；ios（格式的中转站或官方） - 一个推送渠道：Bark（iOS）或 ntfy（Android / 桌面 / 自建）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Node 网关，跨平台；原判的安卓、iOS 来自“推送到手机”"
     },
     "difficulty": {
       "value": "medium",
@@ -147,9 +146,11 @@
       "basis": "记忆对象原文：对话时间线与主动行为"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网关自动维护时间线；AI 主动输出 [DIARY] 时追加日记"
     },
     "forgetting": {
       "value": [
@@ -311,16 +312,17 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "retrieve",
         "review"
       ],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、files"
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、files"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -376,17 +378,19 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "background",
+        "chat_agent"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网关记录；AI 自己决定写日记、推送还是沉默"
     },
     "phone_access": {
       "value": [
-        "http_endpoint"
+        "http_endpoint",
+        "cloud"
       ],
       "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_server"
+      "basis": "http_endpoint：网关可以放在 own_server、own_cloud_account；cloud：运行位置含 own_cloud_account"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -398,6 +402,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -405,11 +414,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
     {
       "field": "export",
       "label": "能否导出",

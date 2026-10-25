@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "记忆与角色“自己的日程和生活”结合，多通道",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "自托管的 AI 伴侣平台：角色有自己的日程和社交动态，会在合适的时候主动发消息；同一个角色在网页、Telegram、Discord、LINE、WhatsApp 共用一份记忆；需要 Docker 和模型 API Key",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋角色日程",
@@ -154,19 +154,17 @@
     },
     "os": {
       "value": [
-        "android",
-        "ios",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（install.sh | bash ``` **Windows (PowerShell)** ```power）；macos（s the whole stack up: **macOS / Linux** ```bash curl）；linux（ole stack up: **macOS / Linux** ```bash curl -fsSL ht）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用 Docker 装在电脑或服务器上；手机通过网页或聊天软件访问"
     },
     "difficulty": {
-      "value": "low",
-      "status": "auto",
-      "basis": "门槛原文：低：一条安装命令；低：一条安装命令"
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：一条安装命令，但要先装 Docker、改 .env、在管理页配模型"
     },
     "cost": {
       "value": "model_fees_only",
@@ -188,9 +186,11 @@
       "basis": "记忆对象原文：用户事实＋角色日程；用户事实＋角色日程"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆"
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：模型抽取记忆；共同活动要用户同意才成为共同记忆"
     },
     "forgetting": {
       "value": [],
@@ -199,11 +199,10 @@
     },
     "human_review": {
       "value": [
-        "dashboard",
-        "files"
+        "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：tus first; otherwise the UI steers you to phone-styl；files：e, and never returned in plain text from the API. You can k"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页里可看角色关于你的回忆录"
     },
     "export": {
       "value": [],
@@ -243,9 +242,9 @@
       "basis": "README 命中的“ee turns are always verbatim. Off, the chat prom”经核对不算：说的是提示词里保留最近三轮"
     },
     "multimodal": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“rn emotion / state, multimodal user input (drag im”经核对不算：只是能发图片聊天"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页和各聊天软件都能发图"
     },
     "time_awareness": {
       "value": "yes",
@@ -351,17 +350,18 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "consolidate",
         "retrieve",
         "review"
       ],
       "status": "auto",
-      "basis": "有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、files"
+      "basis": "写入方式：auto；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -372,11 +372,10 @@
     },
     "customization": {
       "value": [
-        "config_file",
-        "plain_data"
+        "config_file"
       ],
       "status": "auto",
-      "basis": "config_file：README：“rs): ```powershell Copy-Item .env.container.example .env.contai”；plain_data：记忆存成可以直接看改的文件"
+      "basis": "config_file：README：“rs): ```powershell Copy-Item .env.container.example .env.contai”"
     },
     "chinese_support": {
       "value": [
@@ -386,9 +385,9 @@
       "basis": "zh_docs：README 有中文版链接（“README.zh”）"
     },
     "memory_layers": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "layered",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：五层人设模型：身份、生活、情感、互动、信任"
     },
     "retrieval_postprocess": {
       "value": [
@@ -423,10 +422,11 @@
     },
     "phone_access": {
       "value": [
-        "native"
+        "native",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "native：本身能在手机上运行"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：绑定 Telegram、Discord、LINE、WhatsApp 后手机直接聊；网页界面要自己暴露到公网"
     },
     "local_model": {
       "value": "yes",
@@ -437,6 +437,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要在电脑或服务器上装 Docker"
     },
     "pairs_with": {
       "value": [],
@@ -453,11 +458,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "原表写入方式未识别：五层人设模型；日程活动成为情节记忆；共享经历入库前；共享活动须用户同意才成为共同记忆"
-    },
     {
       "field": "forgetting",
       "label": "怎么遗忘",

@@ -35,6 +35,8 @@ ROOT = Path(__file__).resolve().parent.parent
 PROJECTS = ROOT / "data/projects"
 CACHE = ROOT / "cache/readmes"
 OVERRIDES = ROOT / "data/normalization_overrides.json"
+# Claude 逐个项目对照 README（高频推荐的还看了代码）核实的结果，优先于规则判定和负责人采用的建议值
+VERIFICATION = ROOT / "data/readme_verification.json"
 REVIEW_MD = ROOT / "docs/review-normalization.md"
 REVIEW_XLSX = ROOT / "docs/review-normalization.xlsx"
 
@@ -45,7 +47,7 @@ ENUMS = {
                "cli_tool": "命令行小工具（需要时自己运行）", "guide": "教程或设计文档（照着搭）"},
     "compatible_clients": {
         "claude_desktop": "Claude 桌面版", "claude_web_mobile": "Claude 网页／手机版", "claude_code": "Claude Code",
-        "chatgpt": "ChatGPT", "openai_compatible": "任意 OpenAI 兼容客户端", "any_mcp_client": "任意 MCP 客户端",
+        "chatgpt": "ChatGPT", "chatgpt_gpt": "ChatGPT 自定义 GPT（Actions 调接口，手机 App 也能用）", "openai_compatible": "任意 OpenAI 兼容客户端", "any_mcp_client": "任意 MCP 客户端",
         "cursor": "Cursor", "codex": "Codex", "gemini_cli": "Gemini CLI", "opencode": "OpenCode",
         "openclaw": "OpenClaw", "hermes": "Hermes", "astrbot": "AstrBot", "sillytavern": "SillyTavern",
         "open_webui": "Open WebUI", "kelivo": "Kelivo", "deepseek_harness": "DeepSeek Harness", "telegram": "Telegram", "wechat": "微信", "feishu": "飞书", "discord": "Discord",
@@ -539,13 +541,16 @@ def _dim(vals, basis, empty_basis="原表、说明和 README 都没提到（未�
     return res(vals or ["not_mentioned"], "auto", "；".join(basis) or empty_basis)
 
 
-def n_dimensions(c, out):
-    """打分维度、情绪处理、项目定位、记忆环节、搭配和可改性（规则见 dimension_rules.py）。"""
+def n_dimensions(c, out, fixed=()):
+    """打分维度、情绪处理、项目定位、记忆环节、搭配和可改性（规则见 dimension_rules.py）。
+    fixed：已有确认值或核实值的字段（已写进 out），推导别的字段时用它们的值。"""
     pid, val = c.doc["id"], (lambda f: out[f]["value"] or [])
     d = {}
 
     sig = dim_hits(c, "ranking_signals", DR.SIGNAL_PATS)
     d["ranking_signals"] = _dim([v for v, _ in sig], [f"{v}：{b}" for v, b in sig])
+    if "ranking_signals" in fixed:
+        sig = [(v, "") for v in val("ranking_signals") if v != "not_mentioned"]
     extra = [v for v, _ in sig if v in DR.EXTRA_SIGNALS]
 
     stages = dim_hits(c, "scoring_stages", {"write": DR.STAGE_PATS["write"]})
@@ -583,6 +588,8 @@ def n_dimensions(c, out):
     else:
         role = DR.ROLE_BY_CATEGORY.get(c.cat, "full_memory")
         d["project_role"] = res(role, "auto", f"按收录类别「{c.cat}」")
+    if "project_role" in fixed:
+        d["project_role"] = out["project_role"]
 
     steps = []
     if val("write_mode"):
@@ -725,6 +732,13 @@ def n_dimensions(c, out):
         d["model_lock"] = res("openai_only", "auto", "只写了 ChatGPT（推断）")
     else:
         d["model_lock"] = res("not_mentioned", "auto", "没发现只能配合某一家模型的说法")
+
+    if "native" in (out if "phone_access" in fixed else d)["phone_access"]["value"]:
+        d["setup_device"] = res("phone_ok", "auto", "手机入口直接可用（推断）")
+    elif runs and set(runs) <= {"own_computer"}:
+        d["setup_device"] = res("needs_computer", "auto", "只能装在自己的电脑上")
+    else:
+        d["setup_device"] = res("not_mentioned", "auto", "部署在服务器或云上的，要看部署步骤，逐项核实时填写")
     return d
 
 
@@ -736,7 +750,7 @@ def paper_taxonomy(c):
     return {k: str(c.x.get(v) or "") for k, v in keys.items()}
 
 
-def normalize(doc, overrides):
+def normalize(doc, overrides, verification=None):
     c = Ctx(doc)
     out = {}
     out["access"] = n_access(c)
@@ -761,9 +775,13 @@ def normalize(doc, overrides):
             out[field] = res(ov["value"], "confirmed", ov.get("note", "负责人确认"))
         else:
             out[field] = res(ov, "confirmed", "负责人确认")
-    # 打分、情绪、定位、搭配等字段部分由上面的结果推出，所以在套用确认值之后再算；有确认值的不覆盖
-    for field, item in n_dimensions(c, out).items():
-        if field not in overrides.get(doc["id"], {}):
+    ver = (verification or {}).get(doc["id"], {})
+    for field, ov in ver.get("fields", {}).items():
+        out[field] = res(ov["value"], "verified", f"Claude 核实（{ver['checked']}，{ver['by']}）：{ov['note']}")
+    fixed = set(overrides.get(doc["id"], {})) | set(ver.get("fields", {}))
+    # 打分、情绪、定位、搭配等字段部分由上面的结果推出，所以在套用确认值、核实值之后再算；有这两种值的不覆盖
+    for field, item in n_dimensions(c, out, fixed).items():
+        if field not in fixed:
             out[field] = item
     uncertainties = []
     for f in FIELDS:
@@ -970,10 +988,15 @@ def main():
     if "--accept-suggestions" in sys.argv:
         accept_suggestions()
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8")) if OVERRIDES.exists() else {}
+    verification = json.loads(VERIFICATION.read_text(encoding="utf-8")) if VERIFICATION.exists() else {}
     docs = []
     for path in sorted(PROJECTS.glob("*.json")):
         doc = json.loads(path.read_text(encoding="utf-8"))
-        doc["normalized"], doc["uncertainties"] = normalize(doc, overrides)
+        doc["normalized"], doc["uncertainties"] = normalize(doc, overrides, verification)
+        ver = verification.get(doc["id"], {})
+        if ver.get("summary"):  # 核实时顺带改写的一句话简介（原简介有的是早期内部备注）
+            doc["info"]["summary"] = {"value": ver["summary"], "source": "Claude 据仓库 README 改写",
+                                      "read_date": ver["checked"]}
         path.write_text(json.dumps(doc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         docs.append(doc)
     n_unknown, n_review = write_review(docs)

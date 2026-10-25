@@ -384,6 +384,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+    },
     "pairs_with": {
       "value": [
         "tidefall"

@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "以网关形式挂在任何 OpenAI 兼容客户端前面，不改客户端即可加记忆；独有“对话线”与 A/B 分区缓存、Dashboard 面板",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层（要 GitHub、Render 账号）",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋工作记忆（对话线）",
@@ -143,17 +143,19 @@
     },
     "compatible_clients": {
       "value": [
-        "openai_compatible"
+        "openai_compatible",
+        "kelivo"
       ],
-      "status": "auto",
-      "basis": "客户端原文：任意 OpenAI 兼容客户端（需支持自定义请求头）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 以 Kelivo 为例；客户端要能加自定义请求头 X-Gateway-Key"
     },
     "runs_on": {
       "value": [
-        "own_cloud_account"
+        "own_cloud_account",
+        "own_server"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：Render 等能跑 Docker 的云平台＋PostgreSQL；Render 等能跑 Docker 的云平台＋PostgreSQL"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Render、Zeabur 等，或任何能跑 Docker 的服务器"
     },
     "os": {
       "value": [
@@ -168,17 +170,18 @@
       "basis": "门槛原文：中：按四个阶段填环境变量；中：按四个阶段填环境变量"
     },
     "cost": {
-      "value": "free",
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）；Render 等能跑 Docker 的云平台＋PostgreSQL；分阶段搭建，可先只做转发；带分区缓存省 token；客户端需支持自定义请求头 X-Gateway-Key；浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）），但云平台免费额度有限，需确认"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Render 免费层可跑（免费 PostgreSQL 90 天，可换 Neon、Supabase）；模型按用量付费"
     },
     "accounts_needed": {
       "value": [
         "github",
-        "render"
+        "render",
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）；浏览器、GitHub 账号、Render 账号、免费 PostgreSQL（Render 免费库 90 天有效）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网关转发和抽取、评分、整理都要模型服务商的 Key"
     },
     "memory_subject": {
       "value": [
@@ -199,18 +202,18 @@
     },
     "forgetting": {
       "value": [
-        "manual_only"
+        "manual_only",
+        "archive"
       ],
-      "status": "auto",
-      "basis": "原表：README 未描述自动衰减；手动删除"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：删除默认可恢复；合并后来源归档；没有自动衰减"
     },
     "human_review": {
       "value": [
-        "dashboard",
-        "files"
+        "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：端即可加记忆；独有“对话线”与 A/B 分区缓存、Dashboard 面板；网关；分阶段搭建，可先只做转发；带分区缓存；files：址/dashboard`，在「导入记忆」页面选择「纯文本导入」上传文件，系统会自动评估每条记忆的重要程度并"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：面板里搜索、编辑、调权重、删除、导入导出、确认整理草稿"
     },
     "export": {
       "value": [
@@ -268,9 +271,9 @@
       "basis": "原表／说明：“提取碎片记忆并评分；可批量导入预置记忆；碎片→事件整理合并（AI 生成可编辑草稿，可撤回合并）→手动标记”"
     },
     "emotion": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“AI 将碎片合并为事件记忆。异步执行，整理 prompt 保留原文中的主观感受和情绪表达。JSON 解析三层容错（strict=False → 去控制字符 → AI”（已核对）"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只提到整理时保留原文里的情绪表达，没有情绪机制"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -366,15 +369,16 @@
         "capture",
         "consolidate",
         "retrieve",
+        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto、review_first；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、files"
+      "basis": "写入方式：auto、review_first；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：archive；查看修改：dashboard"
     },
     "lifecycle_complete": {
-      "value": "partial",
+      "value": "complete",
       "status": "auto",
-      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -386,11 +390,10 @@
     "customization": {
       "value": [
         "settings_ui",
-        "config_file",
-        "plain_data"
+        "config_file"
       ],
       "status": "auto",
-      "basis": "settings_ui：README：“I 支持调用方传入 session 与片段排除集合 - **设置面板** — 在 Dashboard 中直接管理所有运行时配置，”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”；plain_data：记忆存成可以直接看改的文件"
+      "basis": "settings_ui：README：“I 支持调用方传入 session 与片段排除集合 - **设置面板** — 在 Dashboard 中直接管理所有运行时配置，”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”"
     },
     "chinese_support": {
       "value": [
@@ -442,7 +445,7 @@
         "cloud"
       ],
       "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_cloud_account；cloud：运行位置含 own_cloud_account"
+      "basis": "http_endpoint：网关可以放在 own_cloud_account、own_server；cloud：运行位置含 own_cloud_account"
     },
     "local_model": {
       "value": "yes",
@@ -453,6 +456,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Fork、在 Render 网页上建服务和数据库、填环境变量，全程浏览器"
     },
     "pairs_with": {
       "value": [],

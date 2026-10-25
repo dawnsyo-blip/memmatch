@@ -443,6 +443,11 @@
       "status": "auto",
       "basis": "说明：“＋身份持续；自托管网页应用；自带网页端（仅 Claude）；自托管网页应用，基于 Claude”"
     },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

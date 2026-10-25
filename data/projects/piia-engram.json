@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "本地文件形式的“AI 工作身份”：你是谁、怎么做事，可查看、编辑、覆盖",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "装在本地的“AI 工作身份”：你是谁、怎么做事、踩过的坑存成本地文件，几个编程工具共用；AI 提议的高风险内容要你审核，还能预览 AI 实际会看到什么",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户偏好与工作方式",
@@ -92,17 +92,16 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "chatgpt",
         "claude_code",
         "claude_desktop",
         "codex",
         "cursor",
         "hermes",
-        "openclaw"
+        "openclaw",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code、Claude Desktop、Codex、Cursor、Hermes；与 OpenClaw 文件互通；ChatGPT 等可粘贴身份卡；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：MCP 工具都可接；ChatGPT、Gemini、Kimi 只能手动粘贴导出的身份卡，不算接上记忆，已去掉"
     },
     "runs_on": {
       "value": [
@@ -139,17 +138,19 @@
     },
     "memory_subject": {
       "value": [
-        "user_facts"
+        "user_facts",
+        "experience"
       ],
-      "status": "auto",
-      "basis": "记忆对象原文：用户偏好与工作方式"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：身份、偏好、质量标准，以及经验教训、决定、操作手册"
     },
     "write_mode": {
       "value": [
+        "on_request",
         "review_first"
       ],
-      "status": "auto",
-      "basis": "README：“d=\"preferences\", ...)`; it takes effect only after you approve it locally with `engram review`. Defaul”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 写入；高风险内容（凭据、命令、权限）要你用 engram review 批准，ENGRAM_APPROVAL=strict 时每条都要批"
     },
     "forgetting": {
       "value": [
@@ -161,10 +162,11 @@
     "human_review": {
       "value": [
         "cli",
-        "files"
+        "files",
+        "dashboard"
       ],
-      "status": "auto",
-      "basis": "files：gram/` as plain JSON and Markdown files you can open, edit, back；cli：nt instructions and the [CLI and JSON contract](docs/"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：命令行、本地文件、本地审核窗口和 Memory Lens 预览页"
     },
     "export": {
       "value": [
@@ -242,9 +244,9 @@
       "basis": "README：“dium writes are auto-absorbed but fully auditable and reversible. Set `ENGRAM_APPROVA”（已核对）"
     },
     "import_history": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可导入 CLAUDE.md、.cursorrules 和其它 AI 工具的记忆文件，进审核队列"
     },
     "retrieval_weighting": {
       "value": "not_mentioned",
@@ -321,7 +323,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：review_first；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、files"
+      "basis": "写入方式：on_request、review_first；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、files、dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -357,22 +359,22 @@
     },
     "retrieval_postprocess": {
       "value": [
-        "not_mentioned"
+        "budget"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：按预算裁剪 AI 收到的上下文"
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "no_llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认关键词检索，可选向量"
     },
     "sensitive_suppression": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：未审核的草稿、含凭据的内容不会发给 AI，Memory Lens 里能看到被扣下的"
     },
     "write_receipt": {
       "value": "not_mentioned",
@@ -389,10 +391,11 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 chatgpt"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：有 SSE 远程模式（带令牌），要自己配 HTTPS；原判来自“能配合 ChatGPT”"
     },
     "local_model": {
       "value": "no_model_needed",
@@ -403,6 +406,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在电脑上"
     },
     "pairs_with": {
       "value": [],

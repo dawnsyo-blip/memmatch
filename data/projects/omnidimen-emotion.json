@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "名单里唯一的“参数化”形态，但内化的是通用情绪能力，而非对特定用户的记忆",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "情绪向微调的 Qwen 本地模型（4B–14B）：擅长识别情绪、写有共情的回复；要换掉聊天模型来用，不是记忆库，也不是能和记忆库搭配的插件",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "情绪识别与生成能力",
@@ -130,14 +130,18 @@
   },
   "normalized": {
     "access": {
-      "value": [],
-      "status": "unknown",
-      "basis": "接入方式原文未识别：模型权重；模型权重"
+      "value": [
+        "library"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：模型权重"
     },
     "compatible_clients": {
-      "value": [],
-      "status": "unknown",
-      "basis": "客户端原文："
+      "value": [
+        "openai_compatible"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用 vLLM、SGLang、Ollama 起 OpenAI 兼容接口后，任何能填自定义地址的客户端都能用"
     },
     "runs_on": {
       "value": [
@@ -148,9 +152,15 @@
       "basis": "运行位置原文：自己的电脑或显卡服务器；自己的电脑或显卡服务器"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "windows",
+        "macos",
+        "linux",
+        "android",
+        "ios"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：电脑上用 LM Studio、Ollama；README 也提到手机上的 PocketPal 可以跑 GGUF"
     },
     "difficulty": {
       "value": "medium",
@@ -171,8 +181,8 @@
     },
     "memory_subject": {
       "value": [],
-      "status": "unknown",
-      "basis": "记忆对象原文未识别：情绪识别与生成能力；情绪识别与生成能力"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不保存任何记忆"
     },
     "write_mode": {
       "value": [],
@@ -242,9 +252,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "emotion": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“# OmniDimen-Emotion This model is a fine-tuned version of”（已核对）"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：情绪是模型的说话能力，不是记忆或状态"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -328,9 +338,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "project_role": {
-      "value": "state_engine",
-      "status": "auto",
-      "basis": "按收录类别「边缘项（存的不是对话记忆）」"
+      "value": "dev_framework",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：是模型权重，要用 Ollama、LM Studio、vLLM 加载后当聊天模型；原判的“状态引擎”会让它被当成可搭配的情绪插件推荐，不对"
     },
     "lifecycle": {
       "value": [],
@@ -344,10 +354,10 @@
     },
     "pairing": {
       "value": [
-        "designed_to_pair"
+        "not_mentioned"
       ],
-      "status": "auto",
-      "basis": "designed_to_pair：状态引擎本身不存对话记忆，设计上和记忆库搭配使用"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不存在和记忆库搭配的接口"
     },
     "customization": {
       "value": [
@@ -416,6 +426,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -431,26 +446,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "access",
-      "label": "接入方式",
-      "note": "文档写的是“模型权重”，归不进固定选项"
-    },
-    {
-      "field": "compatible_clients",
-      "label": "能配合的助手",
-      "note": "客户端原文："
-    },
-    {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
-    {
-      "field": "memory_subject",
-      "label": "主要记住什么",
-      "note": "文档写的是“情绪识别与生成能力”，归不进固定选项"
-    },
     {
       "field": "write_mode",
       "label": "记忆怎么写入",

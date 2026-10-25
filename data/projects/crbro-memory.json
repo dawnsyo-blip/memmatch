@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "本地 MCP 记忆，用类神经网络结构自动连接和检索；Claude 桌面版可双击安装",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "本地 MCP 记忆：知识按“神经元、突触”组织，事实有保质期、可被新事实取代，专门记下犯过的错和刻意没做的事，会话压缩前存检查点；主要面向编程 Agent，Claude 桌面版可双击安装",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋工作记忆",
@@ -137,10 +137,11 @@
     "memory_subject": {
       "value": [
         "task_context",
+        "experience",
         "user_facts"
       ],
-      "status": "auto",
-      "basis": "记忆对象原文：用户事实＋工作记忆"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：事实、决定、模式、偏好、错误和技术债"
     },
     "write_mode": {
       "value": [
@@ -151,10 +152,11 @@
     },
     "forgetting": {
       "value": [
-        "manual_only"
+        "manual_only",
+        "archive"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“able** — Knowledge can be superseded or retracted, not just piled up — facts, and since”，没提自动衰减，建议值 manual_only"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：过时的事实被取代或撤回后留在文件里可恢复；crbro_forget 真删前先放隔离区；保质期到了只提示，不自动删"
     },
     "human_review": {
       "value": [
@@ -281,22 +283,24 @@
       "value": [
         "semantic",
         "keyword",
-        "recency"
+        "recency",
+        "frequency",
+        "relation"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“table below *(v1.15+)* - **🧭 Semantic recall** — `npx crbro-memory init` i”；keyword：README：“l-e5-small` (int8) fused with BM25 by reciprocal rank. On this s”；recency：README：“tracking based on frequency, recency, and connectivity. Topics wri”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：热度＝访问频率 35%＋新近 40%＋连接数 25%；关键词＋本地多语言向量"
     },
     "scoring_stages": {
       "value": [
         "retrieve"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
+      "basis": "retrieve：排序因素含 recency、frequency、relation（推断召回时综合排序）"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：recency"
+      "basis": "相似度之外的因素 3 个：recency、frequency、relation"
     },
     "emotion_handling": {
       "value": [
@@ -315,15 +319,16 @@
         "capture",
         "consolidate",
         "retrieve",
+        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、files、tools"
+      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：archive；查看修改：cli、files、tools"
     },
     "lifecycle_complete": {
-      "value": "partial",
+      "value": "complete",
       "status": "auto",
-      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -399,6 +404,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],

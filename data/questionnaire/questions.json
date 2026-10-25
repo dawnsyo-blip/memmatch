@@ -6,7 +6,7 @@
   "result": {"top_n": 8, "min_results": 3, "unknown_penalty": 1},
   "field_labels": {
     "compatible_clients": "能配合哪些入口", "runs_on": "运行位置", "os": "支持的系统", "difficulty": "上手门槛",
-    "cost": "费用", "accounts_needed": "需要的账号", "phone_access": "手机能否连上", "data_passes_through": "数据经过谁的服务器",
+    "cost": "费用", "accounts_needed": "需要的账号", "phone_access": "手机能否连上", "setup_device": "只用手机能否装好", "data_passes_through": "数据经过谁的服务器",
     "model_api_key": "大模型接口密钥", "claude_subscription": "Claude 付费套餐", "github": "GitHub 账号",
     "vendor_account": "项目方账号", "cloudflare": "Cloudflare 账号", "render": "Render 账号", "telegram": "Telegram 机器人",
     "difficulty:low": "低（下载安装或一键安装）", "difficulty:medium": "中（照着教程敲几条命令）", "difficulty:high": "高（要改较多配置或写代码）",
@@ -49,6 +49,10 @@
         {"id": "linux", "label": "Linux 电脑", "values": {"os": ["linux"]}},
         {"id": "server", "label": "自己的服务器、VPS 或 NAS", "values": {"os": ["linux"]}},
         {"id": "other", "label": "其它", "free_text": true}
+      ],
+      "rules": [
+        {"when": {"question": "q2", "selected_none": ["windows", "mac", "linux", "server"]},
+         "exclude_any": {"setup_device": ["needs_computer"]}, "reason": "安装或部署时要用电脑"}
       ]
     },
     {
@@ -359,6 +363,7 @@
       ],
       "relax": [
         {"label": "准备一个大模型 API Key", "add": ["api_key"]},
+        {"label": "注册一个 GitHub 账号（免费）", "add": ["github"]},
         {"label": "注册记忆库项目方的账号", "add": ["vendor"]}
       ]
     },

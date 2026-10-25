@@ -61,9 +61,13 @@ ENUMS.update({
     "local_model": {"yes": "可以用本地模型（Ollama、LM Studio 等）代替付费接口", "no_model_needed": "本身不调用模型", **NM},
     "model_lock": {"claude_only": "只能配合 Claude（官方客户端或付费套餐）", "openai_only": "只能配合 ChatGPT／OpenAI",
                    "not_mentioned": "没发现限制"},
+    # 2026-10-25 逐项核实时加：部署在云上的项目，有的全程浏览器就能装好，有的要在电脑上敲命令部署
+    "setup_device": {"phone_ok": "只用手机就能装好（手机 App、宿主插件，或全程浏览器部署）",
+                     "needs_computer": "安装或部署时要用电脑", **NM},
 })
 LABELS = {
     "phone_access": "手机能否连上", "local_model": "能否用本地模型", "model_lock": "是否绑定某家模型",
+    "setup_device": "只用手机能否装好",
     "chinese_support": "中文支持", "memory_layers": "记忆是否分层", "retrieval_postprocess": "检索后处理",
     "recall_uses_llm": "召回时是否调用大模型", "sensitive_suppression": "敏感记忆抑制", "write_receipt": "写入回执",
     "memory_writer": "谁来记",

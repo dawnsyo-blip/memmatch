@@ -156,7 +156,7 @@
     },
     "normalized": {
       "type": "object",
-      "description": "阶段 1 规范化结果（含用户在意的 19 个特性，定义见 scripts/feature_rules.py；打分、情绪、定位、搭配、中文支持等 19 个字段见 scripts/dimension_rules.py）。status：confirmed 负责人确认／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
+      "description": "阶段 1 规范化结果（含用户在意的 19 个特性，定义见 scripts/feature_rules.py；打分、情绪、定位、搭配、中文支持等 19 个字段见 scripts/dimension_rules.py）。status：confirmed 负责人确认／verified Claude 逐项对照 README 核实（data/readme_verification.json）／auto 规则判定／needs_review 待审核／unknown 文档未说明（值为空，原因见 uncertainties）",
       "required": [
         "access",
         "compatible_clients",
@@ -209,7 +209,8 @@
         "memory_writer",
         "phone_access",
         "local_model",
-        "model_lock"
+        "model_lock",
+        "setup_device"
       ],
       "properties": {
         "access": {
@@ -368,6 +369,9 @@
         "model_lock": {
           "$ref": "#/$defs/normalizedField"
         },
+        "setup_device": {
+          "$ref": "#/$defs/normalizedField"
+        },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",
           "description": "设计上搭配使用的项目 id 列表（推荐引擎做组合推荐用），关系写在 scripts/dimension_rules.py 的 RELATED"
@@ -449,6 +453,7 @@
         "status": {
           "enum": [
             "confirmed",
+            "verified",
             "auto",
             "needs_review",
             "unknown"

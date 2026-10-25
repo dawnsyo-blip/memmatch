@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "在写入端做“同意＋筛选”，宁少勿滥",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "让 AI 在深聊中抓住值得留下的洞察，拿不准的先暂存，经你确认才入库；网页面板可翻看",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实（重要时刻）",
@@ -144,12 +144,10 @@
     },
     "runs_on": {
       "value": [
-        "own_cloud_account",
-        "own_computer",
-        "phone"
+        "own_computer"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：本机；同一 WiFi 下手机可连；可选 Supabase 云同步；本机；同一 WiFi 下手机可连；可选 Supabase 云同步"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：服务跑在本机；Supabase 只是可选的云端存储。原判的“手机”来自“同一 WiFi 下手机可连”，指手机连电脑"
     },
     "os": {
       "value": [
@@ -161,9 +159,9 @@
       "basis": "README／原表提到：windows（网 IP（`192.168.x.x`）。 > Windows 需要放行防火墙端口：`netsh advfire）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
-      "value": "low",
-      "status": "auto",
-      "basis": "门槛原文：低：npm install、npm start；低：npm install、npm start"
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：要 git clone、npm install、npm start，再在客户端里填 MCP 地址"
     },
     "cost": {
       "value": "free",
@@ -185,28 +183,34 @@
       "basis": "记忆对象原文：用户事实（重要时刻）；用户事实（重要时刻）"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "原表写入方式未识别：AI 识别高价值时刻→暂存候选→用户确认后入库；AI 写入之前；候选层：先暂存，用户确认后才入库，可合并或丢弃"
+      "value": [
+        "review_first",
+        "on_request"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：capture_insight 直接入库；拿不准的用 capture_pending 暂存，review_pending 展示给用户，confirm_pending 决定保留、合并或丢弃"
     },
     "forgetting": {
       "value": [
-        "none"
+        "manual_only"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：有 delete_insight，没有自动遗忘"
     },
     "human_review": {
       "value": [
-        "dashboard"
+        "dashboard",
+        "tools"
       ],
-      "status": "auto",
-      "basis": "dashboard：做“同意＋筛选”，宁少勿滥；MCP（SSE）＋网页面板；根目录无 LICENSE 文件；治理靠同意：写入"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：网页面板浏览搜索；AI 可调 update、delete 工具"
     },
     "export": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没写导出功能，也看不出数据格式"
+      "value": [
+        "sqlite"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：默认存 data/ 下的 SQLite"
     },
     "data_passes_through": {
       "value": [
@@ -272,9 +276,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "原表／说明：“＋筛选”，宁少勿滥；AI 暂存候选洞察（带触发句和置信度），经用户确认才入库；确认时可保留、合并或丢弃；可”"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：候选层是防止记太多，不是纠错或冲突检测"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -287,9 +291,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "reflection": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "原表／说明：“在写入端做“同意＋筛选”，宁少勿滥；AI 暂存候选洞察（带触发句和置信度），经用户确认才入库；确认时可保”"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：没有归纳推断"
     },
     "relationship_stage": {
       "value": "not_mentioned",
@@ -318,23 +322,22 @@
     },
     "ranking_signals": {
       "value": [
-        "confidence"
+        "keyword"
       ],
-      "status": "auto",
-      "basis": "confidence：说明：“宁少勿滥；AI 暂存候选洞察（带触发句和置信度），经用户确认才入库；确认时可保留、合并”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：代码：storage.search 用 SQL LIKE 匹配标题、结论、金句；confidence 只是候选的自评分，不参与检索排序"
     },
     "scoring_stages": {
       "value": [
-        "write",
-        "retrieve"
+        "write"
       ],
-      "status": "auto",
-      "basis": "write：说明：“在写入端做“同意＋筛选”，宁少勿滥；用户事实（重要时刻）；MC”；retrieve：排序因素含 confidence（推断召回时综合排序）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：候选带 AI 自评的 confidence"
     },
     "multi_factor": {
       "value": "single",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：confidence"
+      "basis": "相似度之外的因素 0 个：无"
     },
     "emotion_handling": {
       "value": [
@@ -350,12 +353,12 @@
     },
     "lifecycle": {
       "value": [
-        "consolidate",
+        "capture",
         "retrieve",
         "review"
       ],
       "status": "auto",
-      "basis": "有反思推断；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：review_first、on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、tools"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -397,10 +400,10 @@
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "no_llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：关键词查询"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",
@@ -414,28 +417,32 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "chat_agent"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：聊天的 AI 调 MCP 工具记"
     },
     "phone_access": {
       "value": [
-        "native",
-        "cloud"
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "native：本身能在手机上运行；cloud：运行位置含 own_cloud_account"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：README 只写了同一 WiFi 下把 localhost 换成电脑局域网 IP；出门在外要自己做内网穿透"
     },
     "local_model": {
       "value": "no_model_needed",
-      "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：本身不调用模型"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],
@@ -451,18 +458,7 @@
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
   },
-  "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "原表写入方式未识别：AI 识别高价值时刻→暂存候选→用户确认后入库；AI 写入之前；候选层：先暂存，用户确认后才入库，可合并或丢弃"
-    },
-    {
-      "field": "export",
-      "label": "能否导出",
-      "note": "没写导出功能，也看不出数据格式"
-    }
-  ],
+  "uncertainties": [],
   "health": {
     "checked_on": "2026-10-11",
     "method": "git 克隆近一年提交记录＋读取仓库网页",

@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "持久记忆服务，默认需 API 密钥",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "持久记忆服务：一条命令注册拿到 API Key 并自动配置编程工具（默认用项目方托管）；也可装纯本地版带面板，或自己部署服务端",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "事实",
@@ -128,17 +128,17 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地版免费；托管版、自部署的费用 README 没写清"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key",
-        "vendor_account"
+        "vendor_account",
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：CI API 密钥"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：托管版要注册拿 CI API Key；纯本地版不需要；自己部署服务端要 OpenAI Key 做嵌入"
     },
     "memory_subject": {
       "value": [
@@ -399,13 +399,18 @@
     },
     "local_model": {
       "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地版用本地 ONNX 重排；嵌入是否可本地 README 没说清"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
     "pairs_with": {
       "value": [],

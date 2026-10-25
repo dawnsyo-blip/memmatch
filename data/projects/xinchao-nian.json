@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "动态驱力引擎与 Ombre Brain 合并发行，记忆服务于“主动惦记”",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等驱力和两层情绪随时间变化，和 Ombre Brain 记忆库合并部署、互相影响；可作 Claude.ai 连接器；18+，整体不可商用",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋欲望驱力状态",
@@ -143,10 +143,11 @@
     },
     "compatible_clients": {
       "value": [
+        "claude_web_mobile",
         "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：MCP 客户端（OAuth）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带 OAuth 2.1 MCP 端点，可加为 Claude.ai 连接器，也可接 ChatGPT、IDE"
     },
     "runs_on": {
       "value": [
@@ -191,10 +192,10 @@
     },
     "write_mode": {
       "value": [
-        "auto"
+        "on_request"
       ],
-      "status": "auto",
-      "basis": "原表写入方式：经 Ombre Brain 写入；驱力与情绪状态自动变化；主动回应或转成便签后才进桥；梦境不冒充真实记忆；状态不自动注入窗口"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记忆经 Ombre Brain 由 AI 调工具写入；驱力和情绪自动变化（那是状态，不是记忆）"
     },
     "forgetting": {
       "value": [
@@ -270,9 +271,9 @@
       "basis": "原表／说明：“+、含非商业约束；会“惦记”你：12 维驱力＋两层情绪＋记得在为什么生气；18+；整体不可商用；动态驱力”"
     },
     "proactive": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：驱力冲顶、挂念等“自身信号”递到 AI 窗口；梦醒推送"
     },
     "pinning": {
       "value": "yes",
@@ -285,9 +286,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "import_history": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：保留 Ombre Brain 的历史对话导入"
     },
     "retrieval_weighting": {
       "value": "not_mentioned",
@@ -326,23 +327,29 @@
     },
     "ranking_signals": {
       "value": [
+        "semantic",
+        "keyword",
         "recency",
+        "importance",
+        "frequency",
         "emotion"
       ],
-      "status": "auto",
-      "basis": "recency：说明：“re Brain 的 dream 消化与遗忘曲线；梦境不冒充真实记忆；breath 浮现”；emotion：README：“把这些递到 AI 窗口里的两条通道。 - **情绪层**：valence / arousal 两轴，和 OB 记忆桶同一套坐标；事件”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：沿用 Ombre Brain 的检索和衰减；心潮的情绪坐标参与浮现排序"
     },
     "scoring_stages": {
       "value": [
-        "retrieve"
+        "write",
+        "retrieve",
+        "forget"
       ],
-      "status": "auto",
-      "basis": "retrieve：排序因素含 recency、emotion（推断召回时综合排序）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：沿用 Ombre Brain"
     },
     "multi_factor": {
       "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 2 个：recency、emotion"
+      "basis": "相似度之外的因素 4 个：recency、importance、frequency、emotion"
     },
     "emotion_handling": {
       "value": [
@@ -367,7 +374,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：dashboard、tools"
+      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：dashboard、tools"
     },
     "lifecycle_complete": {
       "value": "complete",
@@ -426,10 +433,11 @@
     },
     "memory_writer": {
       "value": [
+        "chat_agent",
         "background"
       ],
-      "status": "auto",
-      "basis": "background：写入方式含自动记或先出候选（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 调 OB 工具；心潮自己判断互动类型、更新状态"
     },
     "phone_access": {
       "value": [
@@ -437,17 +445,22 @@
         "needs_tunnel"
       ],
       "status": "auto",
-      "basis": "remote_mcp：README：“连接 Claude.ai MCP 连接器 心潮·念自带 OAuth 2.1 MCP 端点，可直接作为 Claude.ai 的 MC”；needs_tunnel：README：“100**：先用 Cloudflare Tunnel、Tailscale Funnel 或自己的反向代理给心潮配置公网 HTTPS”"
+      "basis": "remote_mcp：能配合 claude_web_mobile；needs_tunnel：README：“100**：先用 Cloudflare Tunnel、Tailscale Funnel 或自己的反向代理给心潮配置公网 HTTPS”"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Ombre Brain 部分可用本地模型"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Docker Compose 部署两个服务"
     },
     "pairs_with": {
       "value": [

@@ -19,14 +19,21 @@ export const PERSONAS = [
     title: "只用 Claude 手机 App，能照着教程操作，愿意注册免费云平台",
     answers: { q1: ["anthropic"], q2: ["iphone"], q3: ["official"], q4: "single", q5: ["phone", "cloud_free"],
                q16: "medium", q17: ["subscription"], q18: "ten" },
-    expect: "推荐部署在自己 Cloudflare 免费账号上、能被 Claude App 远程连接的记忆库（如 MemHeaven）",
+    expect: "没有电脑，要用电脑敲命令部署的 MemHeaven 不推荐；没勾 GitHub 账号时结果为空，放宽建议里有“注册 GitHub 账号”（可得全程浏览器部署的 Aelios）",
+  },
+  {
+    id: "claude_app_github",
+    title: "只用 Claude 手机 App，能照着教程操作，愿意注册免费云平台和 GitHub",
+    answers: { q1: ["anthropic"], q2: ["iphone"], q3: ["official"], q4: "single", q5: ["phone", "cloud_free"],
+               q16: "medium", q17: ["subscription", "github"], q18: "ten" },
+    expect: "推荐全程在浏览器里部署到自己 Cloudflare 账号、能被 Claude App 连上的 Aelios",
   },
   {
     id: "deepseek_official",
     title: "只用 DeepSeek 官方 App",
     answers: { q1: ["deepseek"], q2: ["android"], q3: ["official"], q4: "single", q5: ["phone"],
                q16: "low", q17: ["none"], q18: "zero" },
-    expect: "官方 App 接不了外部记忆：没有推荐，提醒原因，并建议改用遥控电脑上的 Agent、Kelivo 这类客户端或自带记忆的应用",
+    expect: "官方 App 接不了外部记忆：没有推荐，提醒原因；用户没有电脑，放宽建议不该是“遥控电脑”，而是换自带记忆的应用并准备 API Key 这类",
   },
   {
     id: "claude_code_remote",

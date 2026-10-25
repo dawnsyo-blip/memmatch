@@ -18,9 +18,15 @@ test("只用 Claude App、只想点几下：结果为空，给出放宽建议", 
   assert.ok(r.relax.some((x) => x.label.includes("照着教程")), "应建议放宽安装门槛");
 });
 
-test("只用 Claude App、能照教程操作：推荐能被 Claude App 远程连上的记忆库", () => {
+test("只用 Claude App、能照教程操作、没勾 GitHub：不推荐要用电脑部署的，放宽建议里有 GitHub", () => {
   const r = run("claude_app_tutorial");
-  assert.ok(ids(r.results).includes("memheaven"));
+  assert.ok(!ids(r.results).includes("memheaven"), "MemHeaven 要在电脑上部署");
+  assert.ok(r.relax.some((x) => x.label.includes("GitHub")));
+});
+
+test("只用 Claude App、能照教程操作、有 GitHub：推荐能被 Claude App 远程连上的记忆库", () => {
+  const r = run("claude_app_github");
+  assert.ok(ids(r.results).includes("aelios"));
   for (const x of r.results) {
     const ok = vals(x.id, "compatible_clients").includes("claude_web_mobile") || vals(x.id, "phone_access").includes("remote_mcp");
     assert.ok(ok, `${x.name} 不能被 Claude App 连上`);
@@ -32,7 +38,8 @@ test("只用 DeepSeek 官方 App：没有推荐，提醒原因并建议换入口
   assert.equal(r.total_kept, 0);
   assert.equal(r.notices.length, 1);
   assert.match(r.notices[0], /DeepSeek/);
-  assert.ok(r.relax.some((x) => x.label.includes("遥控电脑")));
+  assert.ok(r.relax.length > 0);
+  assert.ok(!r.relax.some((x) => x.label.includes("遥控电脑")), "用户没有电脑");
 });
 
 test("遥控电脑上的 Claude Code：选择多，都能配合 Claude Code 并装在电脑上", () => {

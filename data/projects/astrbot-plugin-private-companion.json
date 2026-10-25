@@ -394,6 +394,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "auto",
+      "basis": "手机入口直接可用（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

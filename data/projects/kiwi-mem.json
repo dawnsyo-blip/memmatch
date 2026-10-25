@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "按日历层级逐步压缩，用“热度”决定哪些记忆留在前台",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "装在服务器上的记忆网关：记忆有“热度”，常聊的越记越牢、冷的慢慢模糊；每晚“做梦”整理，按日、周、月层级摘要；手机客户端填网关地址即可用，可部署在 VPS 或 Zeabur",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实",
@@ -143,19 +143,20 @@
     },
     "compatible_clients": {
       "value": [
-        "openai_compatible"
+        "openai_compatible",
+        "kelivo",
+        "sillytavern"
       ],
-      "status": "auto",
-      "basis": "客户端原文：OpenAI 兼容客户端（网关）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 点名 ChatBox、Kelivo、NextChat、SillyTavern"
     },
     "runs_on": {
       "value": [
-        "own_cloud_account",
         "own_server",
-        "third_party_hosted"
+        "own_cloud_account"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：云服务器（VPS，1 核 1G 即可）或 Zeabur 等托管平台；云服务器（VPS，1 核 1G 即可）或 Zeabur 等托管平台"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：VPS，或在 Zeabur 上部署自己的实例；没有项目方托管服务，原判的“托管”不对"
     },
     "os": {
       "value": [
@@ -179,11 +180,10 @@
     },
     "accounts_needed": {
       "value": [
-        "cloudflare",
         "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：VPS＋域名＋Cloudflare（手机端必须 HTTPS）；一个模型中转站密钥；VPS＋域名＋Cloudflare（手机端必须 HTTPS）；一个模型中转站密钥"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：模型中转站或官方 API Key；VPS 方案还要域名和 HTTPS（README 推荐 Cloudflare，但不是唯一办法），Zeabur 自带域名"
     },
     "memory_subject": {
       "value": [
@@ -223,11 +223,10 @@
     "data_passes_through": {
       "value": [
         "local_only",
-        "own_cloud",
-        "third_party"
+        "own_cloud"
       ],
-      "status": "auto",
-      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：数据在自己的服务器或自己的 Zeabur 项目里"
     },
     "license_category": {
       "value": "copyleft",
@@ -240,9 +239,9 @@
       "basis": "README 命中的“⚡ 省钱，也省上下文 所有静态内容（人设、画像、锁定记忆、日历摘要）排在 pro”经核对不算：只是系统提示里的人设"
     },
     "window_handoff": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“管理面板。 <a id=\"w2-04-handoff-cleanup\"></a> > 🧹 *”经核对不算：命中的是文档锚点"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：“无缝换窗”会在新对话里放衔接卡"
     },
     "cross_client": {
       "value": "not_mentioned",
@@ -260,9 +259,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "time_awareness": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：日历系统按日、周、月、季、年压缩，越近越清楚"
     },
     "dream_consolidation": {
       "value": "yes",
@@ -410,10 +409,10 @@
     },
     "retrieval_postprocess": {
       "value": [
-        "not_mentioned"
+        "budget"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：高热度全文注入、中热度只给摘要、冷记忆不注入"
     },
     "recall_uses_llm": {
       "value": [
@@ -442,11 +441,10 @@
     "phone_access": {
       "value": [
         "http_endpoint",
-        "cloud",
-        "needs_tunnel"
+        "cloud"
       ],
-      "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_cloud_account、own_server、third_party_hosted；cloud：运行位置含 own_cloud_account、third_party_hosted；needs_tunnel：README：“请选择下方域名方案或平台域名。 ```bash # 安装 Cloudflare Tunnel curl -L https://github.com/cl”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：手机客户端填 https 网关地址；iOS 必须 HTTPS"
     },
     "local_model": {
       "value": "yes",
@@ -457,6 +455,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Zeabur 导入仓库可在浏览器完成；VPS 方案 README 也给了手机 SSH 工具 Termius"
     },
     "pairs_with": {
       "value": [],

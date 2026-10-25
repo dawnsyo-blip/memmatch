@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "把项目进度、部署参数等技术记忆从情感记忆中剥离，可与 Ombre Brain 配合",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "专存会过期的技术记忆（项目进度、部署参数、踩坑），能真删除，按项目看时间线；和 Ombre Brain 的情感记忆分开放",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "环境事实（技术记忆）",
@@ -160,9 +160,9 @@
       "basis": "README／原表提到：；用跨平台运行时安装（Python 3.10），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
-      "value": "low",
-      "status": "auto",
-      "basis": "门槛原文：低：三条命令；低：三条命令"
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：pip install、运行脚本，常驻要配 systemd"
     },
     "cost": {
       "value": "free",
@@ -178,10 +178,11 @@
     },
     "memory_subject": {
       "value": [
-        "user_facts"
+        "task_context",
+        "experience"
       ],
-      "status": "auto",
-      "basis": "记忆对象原文：环境事实（技术记忆）；环境事实（技术记忆）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：项目进度、结论、部署参数、踩坑"
     },
     "write_mode": {
       "value": [
@@ -192,22 +193,25 @@
     },
     "forgetting": {
       "value": [
-        "none"
+        "manual_only"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：delete、project_delete 是真删除，没有自动遗忘"
     },
     "human_review": {
       "value": [
+        "dashboard",
         "tools"
       ],
-      "status": "auto",
-      "basis": "tools：| 真删某条（不可恢复） | | `project_delete` | 真删整个项目及其所有条目 | | `lis"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：网页工作室（要输 token）可读、搜、增、改、删；AI 也可调工具改"
     },
     "export": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没写导出功能，也看不出数据格式"
+      "value": [
+        "sqlite"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：SQLite 单文件 tech_memory.db"
     },
     "data_passes_through": {
       "value": [
@@ -247,9 +251,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "time_awareness": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：project_log 看某个项目的完整时间线"
     },
     "dream_consolidation": {
       "value": "not_mentioned",
@@ -257,9 +261,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "emotion": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“# 机的独立工作室 > 一个 AI 给自己搭的技术记忆库。技术归技术，情感归情感。 --- ## 我是谁，为什么需要它 我用 [OmbreBrain”（已核对）"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：README 反复提到情感记忆，是为了说明它只存技术记忆、不存情感"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -355,7 +359,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：tools"
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、tools"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -393,17 +397,18 @@
     },
     "retrieval_postprocess": {
       "value": [
-        "not_mentioned"
+        "threshold",
+        "budget"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：向量相似度低于阈值不返回；默认只返回 5 条省 token"
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "no_llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：关键词＋可选的本地小向量模型"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",
@@ -427,8 +432,8 @@
         "remote_mcp",
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“端（比如 Kelivo）里新增一个 MCP： - 类型：`streamable-http` - URL：`http://你的服务器地址:8899/m”；needs_tunnel：README：“安全。 2. **更安全**：如果你本来就用内网组网（比如 Tailscale、ZeroTier），就只放行内网网段，让公网连不上。 3.”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README＋代码）：streamable-http＋Bearer；放在有公网 IP 的服务器上可直连，放在家里电脑要做穿透。注意 Claude App 的连接器要 OAuth，这个项目只支持固定 Token，更适合 Kelivo 这类能填请求头的客户端"
     },
     "local_model": {
       "value": "no_model_needed",
@@ -439,6 +444,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
     "pairs_with": {
       "value": [
@@ -456,13 +466,7 @@
       "dynamics_coverage": "Ⅰ 完整闭环：形成＋演化＋检索"
     }
   },
-  "uncertainties": [
-    {
-      "field": "export",
-      "label": "能否导出",
-      "note": "没写导出功能，也看不出数据格式"
-    }
-  ],
+  "uncertainties": [],
   "health": {
     "checked_on": "2026-10-11",
     "method": "git 克隆近一年提交记录＋读取仓库网页",

@@ -439,6 +439,11 @@
       "status": "auto",
       "basis": "说明：“态；桌面应用＋后台常驻服务；自带桌面端（仅 Claude）；桌面应用＋后台服务，只用 Claud”"
     },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -387,6 +387,11 @@
       "status": "auto",
       "basis": "README：“Room 👇 > **Scope:** LoreRoom only works with Claude Code + the official Telegram”"
     },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "auto",
+      "basis": "手机入口直接可用（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

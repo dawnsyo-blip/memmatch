@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "记忆规模最大一档，带层级目标系统与定时自主任务",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "本地运行的语音 AI 伴侣框架：十万级语义记忆、可选的分层“记忆宫殿”每晚由“图书管理员”整理，有目标、联系人、智能家居、电话和心跳自主模式；Windows、Linux 有图形安装器，需要较好的电脑",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "AI 身份＋目标＋联系人",
@@ -137,10 +137,12 @@
     },
     "compatible_clients": {
       "value": [
-        "self_contained"
+        "self_contained",
+        "telegram",
+        "discord"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带网页端"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带网页界面；可接 Telegram、Discord 机器人"
     },
     "runs_on": {
       "value": [
@@ -159,21 +161,21 @@
       "basis": "README／原表提到：windows（linux&logoColor=black) ![Windows 11+](https://img.shields）；macos（自己的电脑（Mac 只能用 Docker）；自己的电脑（Mac 只能）；linux（width=\"100%\"></video> ![Linux](https://img.shields.io/）"
     },
     "difficulty": {
-      "value": "medium",
-      "status": "auto",
-      "basis": "门槛原文：低到中：图形启动器一键安装；低到中：图形启动器一键安装（区间取较高一档）"
+      "value": "low",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Sapphire Launcher 图形安装器，自动装 git、conda 和本体，不用终端"
     },
     "cost": {
-      "value": "free",
-      "status": "auto",
-      "basis": "不需要账号或密钥"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：软件免费；云端模型按用量付费，本地模型免费但吃内存显卡"
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：Ubuntu 22.04+ 或 Windows 11+；建议 16GB 内存、Nvidia 显卡（语音）；Ubuntu 22.04+ 或 Windows 11+；建议 16GB 内存、Nvidia 显卡（语音）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要接一个模型：云端 Claude、GPT、Gemini 等的 Key，或本地 Ollama、LM Studio"
     },
     "memory_subject": {
       "value": [
@@ -183,9 +185,11 @@
       "basis": "记忆对象原文：AI 身份＋目标＋联系人；AI 身份＋目标＋联系人"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "原表写入方式未识别：带标签的记忆条目；Librarian 每晚整理；—；Librarian 改动记入人格账本"
+      "value": [
+        "on_request"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 用工具写带标签的记忆条目"
     },
     "forgetting": {
       "value": [],
@@ -307,9 +311,9 @@
       "basis": "原表／说明：“务；AI 身份＋目标＋联系人；完整应用（网页界面＋语音唤醒）；自带网页端；完整应用（网页界面＋语音唤醒）”"
     },
     "privacy_protection": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“ulti-account inbox, privacy-first sending, daemon aut”经核对不算：说的是邮件插件"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：隐私模式下聊天加密，并强制只用标记为私有的模型"
     },
     "ranking_signals": {
       "value": [
@@ -344,17 +348,18 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "consolidate",
         "retrieve",
         "review"
       ],
       "status": "auto",
-      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -409,17 +414,19 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "chat_agent",
+        "background"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 写入；图书管理员每晚整理并记入人格账本"
     },
     "phone_access": {
       "value": [
-        "not_mentioned"
+        "native",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Telegram、Discord 可在手机上聊；网页界面同一局域网可在手机打开，外网要自己打通"
     },
     "local_model": {
       "value": "yes",
@@ -430,6 +437,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在 Windows、Linux 电脑上（Mac 只能 Docker）"
     },
     "pairs_with": {
       "value": [],
@@ -446,11 +458,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "原表写入方式未识别：带标签的记忆条目；Librarian 每晚整理；—；Librarian 改动记入人格账本"
-    },
     {
       "field": "forgetting",
       "label": "怎么遗忘",

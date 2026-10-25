@@ -384,10 +384,11 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“MCP stdio, authenticated MCP Streamable HTTP, REST v1, OpenAPI, tenant-sco”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：有带鉴权的 Streamable HTTP，要自己部署到能访问的地方"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -398,6 +399,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
     "pairs_with": {
       "value": [],

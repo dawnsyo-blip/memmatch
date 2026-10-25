@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "混合检索的持久记忆，内置本地嵌入模型，可用 rclone 跨机器同步",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "本地持久记忆：关键词＋向量混合检索再重排，按重要性和新旧自动归档，带时间知识图谱；内置本地嵌入模型，不需要 API Key，以命令行为主",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实",
@@ -151,10 +151,11 @@
     },
     "forgetting": {
       "value": [
-        "auto_decay"
+        "auto_decay",
+        "archive"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“usion + cross-encoder rerank + temporal decay -- importance x recency archive policy”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：每写入 100 条后台扫描一次，按公式软归档，可恢复"
     },
     "human_review": {
       "value": [
@@ -283,23 +284,25 @@
         "semantic",
         "keyword",
         "recency",
-        "importance"
+        "importance",
+        "relation"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“混合检索的持久记忆，内置本地嵌入模型，可用 rclone 跨机器同步；用户事”；keyword：README：“es - **Hybrid retrieval** -- FTS5 + vector search (sqlite-vec),”；recency：README：“sion + cross-encoder rerank + temporal decay -- importance x recency archi”；importance：README：“els.chat]`-cell compression + importance scoring - **Knowledge graph** -- Auto”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：RRF 融合后重排，叠加时间衰减、重要性加分和图谱邻近加分"
     },
     "scoring_stages": {
       "value": [
+        "write",
         "retrieve",
         "forget"
       ],
-      "status": "auto",
-      "basis": "retrieve：排序因素含 recency、importance（推断召回时综合排序）；forget：README：“oss-encoder rerank + temporal decay -- importance x recency archive policy + re”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：写入时可由模型打重要性分；检索加权；按新旧×(1−重要性) 自动归档"
     },
     "multi_factor": {
       "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 2 个：recency、importance"
+      "basis": "相似度之外的因素 3 个：recency、importance、relation"
     },
     "emotion_handling": {
       "value": [
@@ -322,7 +325,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、tools"
+      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：cli、tools"
     },
     "lifecycle_complete": {
       "value": "complete",
@@ -364,10 +367,10 @@
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "no_llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：交叉编码器重排，不是生成式大模型"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",
@@ -388,20 +391,26 @@
     },
     "phone_access": {
       "value": [
-        "not_mentioned"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：有 HTTP 远程模式"
     },
     "local_model": {
-      "value": "no_model_needed",
-      "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认用本地 ONNX 嵌入和重排模型；压缩、打分可接 OpenRouter 等，原判“本身不调用模型”不准"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],

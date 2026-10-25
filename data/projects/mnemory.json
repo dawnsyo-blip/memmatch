@@ -93,15 +93,19 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "chatgpt",
         "claude_code",
-        "cursor",
+        "claude_desktop",
+        "chatgpt",
+        "hermes",
         "open_webui",
-        "openclaw"
+        "opencode",
+        "openclaw",
+        "cursor",
+        "codex",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code、ChatGPT、Open WebUI、OpenClaw、Cursor 等；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 的客户端表"
     },
     "runs_on": {
       "value": [
@@ -146,15 +150,19 @@
     },
     "write_mode": {
       "value": [
+        "auto",
         "on_request"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Claude Code、Open WebUI、OpenClaw 等有插件自动记；其它客户端靠 AI 调工具"
     },
     "forgetting": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提遗忘或删除"
+      "value": [
+        "auto_decay",
+        "manual_only"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：按类型设保留期（上下文 7 天、经历 90 天），常被想起的会续命；面板可删"
     },
     "human_review": {
       "value": [
@@ -207,9 +215,9 @@
       "basis": "README 命中的“ts and options. ## Screenshots <p align=\"center\">”经核对不算：只是界面截图"
     },
     "time_awareness": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：能回答“上周我对数据库做了什么决定”"
     },
     "dream_consolidation": {
       "value": "not_mentioned",
@@ -279,22 +287,26 @@
     "ranking_signals": {
       "value": [
         "semantic",
+        "recency",
+        "importance",
         "frequency"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“ast searchable summaries in a vector store + detailed artifact storage (”；frequency：README：“ays, episodic memories in 90. Frequently accessed memories stay alive (reinforc”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：多查询语义检索后重排，带时间感知；写入时分类并打重要性"
     },
     "scoring_stages": {
       "value": [
-        "retrieve"
+        "write",
+        "retrieve",
+        "forget"
       ],
-      "status": "auto",
-      "basis": "retrieve：排序因素含 frequency（推断召回时综合排序）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：写入时打重要性；检索重排；到期淘汰"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：frequency"
+      "basis": "相似度之外的因素 3 个：recency、importance、frequency"
     },
     "emotion_handling": {
       "value": [
@@ -312,15 +324,16 @@
       "value": [
         "capture",
         "retrieve",
+        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
+      "basis": "写入方式：auto、on_request；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -350,17 +363,18 @@
     },
     "retrieval_postprocess": {
       "value": [
-        "rerank"
+        "rerank",
+        "dedup"
       ],
-      "status": "auto",
-      "basis": "rerank：README：“s, runs them in parallel, and reranks results by relevance. Tempor”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：重排；写入时去重"
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：“AI 驱动的搜索”会让模型生成多个查询"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",
@@ -374,17 +388,19 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "chat_agent",
+        "background"
       ],
-      "status": "auto",
-      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：插件自动抽取；AI 调工具"
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 chatgpt"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：streamable-http＋API Key；放在服务器上可远程连"
     },
     "local_model": {
       "value": "yes",
@@ -396,6 +412,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -403,11 +424,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "forgetting",
-      "label": "怎么遗忘",
-      "note": "README 没提遗忘或删除"
-    },
     {
       "field": "export",
       "label": "能否导出",

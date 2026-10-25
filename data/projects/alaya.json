@@ -392,6 +392,11 @@
       "status": "auto",
       "basis": "只写了 Claude 官方客户端（推断）"
     },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

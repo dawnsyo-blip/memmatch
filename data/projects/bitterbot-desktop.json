@@ -137,10 +137,12 @@
     },
     "compatible_clients": {
       "value": [
-        "self_contained"
+        "self_contained",
+        "telegram",
+        "discord"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带控制台网页；可接你已经在用的聊天软件频道"
     },
     "runs_on": {
       "value": [
@@ -254,9 +256,9 @@
       "basis": "README：“am exploring dynamic feedback loops and multi-modal integration strategies, further enhanci”（已核对）"
     },
     "time_awareness": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：按问题偏向新或旧的事实，不同层的记忆有不同半衰期"
     },
     "dream_consolidation": {
       "value": "yes",
@@ -294,9 +296,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "reflection": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“sights and personal reflections, enriching our col”经核对不算：宣传文字"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：做梦时更新自我概念和对你的心智理论"
     },
     "relationship_stage": {
       "value": "not_mentioned",
@@ -368,7 +370,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、files、tools"
+      "basis": "写入方式：auto；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、files、tools"
     },
     "lifecycle_complete": {
       "value": "complete",
@@ -436,11 +438,12 @@
     },
     "phone_access": {
       "value": [
+        "native",
         "cloud",
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "cloud：运行位置含 own_cloud_account；needs_tunnel：README：“| [DM Policies, Sandboxing, Tailscale](docs/gateway/security/)”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：接聊天软件频道后手机直接聊；可用 Fly.io、VPS 模板常驻"
     },
     "local_model": {
       "value": "yes",
@@ -451,6 +454,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "auto",
+      "basis": "手机入口直接可用（推断）"
     },
     "pairs_with": {
       "value": [],

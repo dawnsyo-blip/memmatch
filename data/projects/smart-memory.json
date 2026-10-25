@@ -141,21 +141,25 @@
       "basis": "记忆对象原文：会话记忆＋长期事实"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：后台自动抽取事实、关系、事件，自动写会话摘要"
     },
     "forgetting": {
       "value": [
-        "auto_decay"
+        "archive"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README：“n the settings panel header: **clean** (fades after a few seconds) or **N conflicts**”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：新事实描述了变化时旧事实自动退役；已了结的剧情线移到“已解决”区，不删除。原采用的建议值来自界面提示“几秒后淡出”，不是记忆遗忘"
     },
     "human_review": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没找到查看或修改记忆的方式"
+      "value": [
+        "dashboard"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：扩展面板里按角色查看、管理记忆，有实体关系图"
     },
     "export": {
       "value": [],
@@ -220,9 +224,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "pinning": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可钉选跨聊天延续的剧情线"
     },
     "error_guard": {
       "value": "yes",
@@ -245,9 +249,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "relationship_stage": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记录每对关系的当前情感描述（温暖、戒备、脆弱……）和关系史"
     },
     "independent_life": {
       "value": "not_mentioned",
@@ -305,17 +309,19 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "consolidate",
         "retrieve",
-        "forget"
+        "forget",
+        "review"
       ],
       "status": "auto",
-      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay"
+      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：archive；查看修改：dashboard"
     },
     "lifecycle_complete": {
-      "value": "partial",
+      "value": "complete",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -391,6 +397,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "auto",
+      "basis": "手机入口直接可用（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -398,16 +409,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
-    {
-      "field": "human_review",
-      "label": "能否查看和修改记忆",
-      "note": "没找到查看或修改记忆的方式"
-    },
     {
       "field": "export",
       "label": "能否导出",

@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "同一个 AI 跨不同“身体”和前端保持身份一致，可迁移聊天史",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "陪伴型 Agent 外壳：AI 的身份文件和日→年层级记忆放在独立的 MCP 核心里，换界面（自带网页、酒馆、Claude Code）还是同一个它；有定时自主行动、Discord 私聊、看图和语音；桌面安装包加向导，需自备模型 API",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "AI 身份＋用户事实",
@@ -138,11 +138,17 @@
     },
     "compatible_clients": {
       "value": [
+        "self_contained",
         "any_mcp_client",
-        "self_contained"
+        "sillytavern",
+        "open_webui",
+        "claude_code",
+        "openclaw",
+        "hermes",
+        "discord"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带桌面端；身份核心可接 MCP 客户端"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带网页界面；身份核心 entity-core 可被酒馆、Open WebUI、Claude Code、OpenClaw、Hermes 接入；可做 Discord 机器人"
     },
     "runs_on": {
       "value": [
@@ -244,9 +250,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "multimodal": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：能看图、生成图片"
     },
     "time_awareness": {
       "value": "yes",
@@ -309,9 +315,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "voice_interaction": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“space integration - Voice Chat hookups - skills sy”经核对不算：只是待接入列表"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：有语音聊天接入"
     },
     "privacy_protection": {
       "value": "not_mentioned",
@@ -320,10 +326,11 @@
     },
     "ranking_signals": {
       "value": [
+        "semantic",
         "relation"
       ],
-      "status": "auto",
-      "basis": "relation：说明：“并抽取记忆；日→周→月→年层级摘要；知识图谱；身份文件可由实体自己维护；对记忆做检索”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：对聊天史、资料库、世界书、知识图谱做检索"
     },
     "scoring_stages": {
       "value": [
@@ -426,10 +433,11 @@
     },
     "phone_access": {
       "value": [
-        "needs_tunnel"
+        "needs_tunnel",
+        "native"
       ],
-      "status": "auto",
-      "basis": "needs_tunnel：README：“BYO API, mobile-friendly via [Tailscale](https://tailscale.com/), and”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页界面适配手机，README 建议用 Tailscale 连；Discord 私聊可直接在手机上用"
     },
     "local_model": {
       "value": "yes",
@@ -440,6 +448,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：安装包或 Docker 装在电脑上"
     },
     "pairs_with": {
       "value": [],

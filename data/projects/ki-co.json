@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "人格核＋分层记忆＋生活线，本地优先",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "本地优先的 AI 伴侣小屋：人格核、分层记忆、日记和“回忆种子”（候选，确认后才转为长期记忆），可导入 ChatGPT 导出的旧记录；网页、PWA、桌面版都能用，手机网页也行；禁止商用",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "AI 身份（人格核）＋用户事实",
@@ -137,18 +137,19 @@
     },
     "compatible_clients": {
       "value": [
-        "chatgpt",
         "self_contained"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带（网页/桌面/PWA）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：原判的 ChatGPT 来自“可导入 ChatGPT 聊天记录”，不是接入 ChatGPT"
     },
     "runs_on": {
       "value": [
-        "own_computer"
+        "own_computer",
+        "own_cloud_account",
+        "phone"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑或浏览器；自己的电脑或浏览器"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本机运行，或部署到自己的 Netlify；手机浏览器可用，数据在浏览器本地"
     },
     "os": {
       "value": [
@@ -160,9 +161,9 @@
       "basis": "README／原表提到：windows（览器；自己的电脑或浏览器；Web / PWA / Windows；低：npm install、npm run de）；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
-      "value": "low",
-      "status": "auto",
-      "basis": "门槛原文：低：npm install、npm run dev；低：npm install、npm run dev"
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要装 Node.js、npm install、npm run dev，或自己部署到 Netlify"
     },
     "cost": {
       "value": "model_fees_only",
@@ -186,10 +187,10 @@
     },
     "write_mode": {
       "value": [
-        "auto"
+        "review_first"
       ],
-      "status": "auto",
-      "basis": "原表写入方式：记忆档案由用户管理；回忆种子是候选；种子转正时；回忆种子不自动写入；记忆是路标不是命令"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：回忆种子只是候选，不会自动写入长期记忆，确认转正后才写"
     },
     "forgetting": {
       "value": [],
@@ -359,7 +360,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：review_first；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -419,17 +420,19 @@
     },
     "memory_writer": {
       "value": [
-        "background"
+        "background",
+        "user"
       ],
-      "status": "auto",
-      "basis": "background：说明：“DME 称可只拆模块用，但需开发；聊天与后台整理可用不同模型；可导入 ChatGPT”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：后台从日记和对话提炼候选；记忆档案由用户管理"
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "native",
+        "cloud"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 chatgpt"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：PWA／手机网页；原判的“远程 MCP”来自 ChatGPT 误判"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -440,6 +443,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "auto",
+      "basis": "手机入口直接可用（推断）"
     },
     "pairs_with": {
       "value": [],

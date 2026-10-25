@@ -112,9 +112,13 @@
       "basis": "运行位置原文：自己的电脑或服务器（Node.js）"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：原生 Node 18+，零依赖"
     },
     "difficulty": {
       "value": "medium",
@@ -141,29 +145,33 @@
       "basis": "记忆对象原文：近期对话摘要"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：滑出窗口的消息攒够一批自动结算成摘要"
     },
     "forgetting": {
       "value": [
-        "manual_only",
-        "archive"
+        "auto_decay"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README 只提到删除：“，它们由 T1 超限时的机械摘行滚进 T2。 并且 close 走的是**删除且不留档**这条路，所以 v1.8 起另有代码护栏：销售后 T1 不得低于”，没提自动衰减，建议值 manual_only；有归档：“膨胀。解析失败会先原地重试一次，仍失败才归档。 7. **静默降级**：配置缺失、接”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：远期梗概按 7 天和字数双淘汰，最旧的直接丢"
     },
     "human_review": {
       "value": [
-        "dashboard"
+        "dashboard",
+        "files"
       ],
-      "status": "auto",
-      "basis": "dashboard：``bash npm run view ``` 浏览器打开 http://127.0.0.1:8788 ，展"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本机迷你查看器可就地编辑；也可直接改 summaries.json"
     },
     "export": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没写导出功能，也看不出数据格式"
+      "value": [
+        "json"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：summaries.json"
     },
     "data_passes_through": {
       "value": [
@@ -305,16 +313,17 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "遗忘：archive；查看修改：dashboard"
+      "basis": "写入方式：auto；遗忘：auto_decay；查看修改：dashboard、files"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -327,10 +336,11 @@
     "customization": {
       "value": [
         "config_file",
-        "small_code"
+        "small_code",
+        "plain_data"
       ],
       "status": "auto",
-      "basis": "config_file：README：“rolling.init(); // 网关启动时调用一次，读环境变量 // 网关每次收到请求、转发给 LLM 之前： roll”；small_code：README：“接口挂了、文件损坏——只打日志，主对话链路照常。 8. **零依赖**：原生 Node（≥18，内置 `fetch`），单文件”"
+      "basis": "config_file：README：“rolling.init(); // 网关启动时调用一次，读环境变量 // 网关每次收到请求、转发给 LLM 之前： roll”；small_code：README：“接口挂了、文件损坏——只打日志，主对话链路照常。 8. **零依赖**：原生 Node（≥18，内置 `fetch`），单文件”；plain_data：记忆存成可以直接看改的文件"
     },
     "chinese_support": {
       "value": [
@@ -370,10 +380,10 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "background"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：后台调用模型结算"
     },
     "phone_access": {
       "value": [
@@ -392,6 +402,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要在电脑或服务器上跑 Node 代理"
+    },
     "pairs_with": {
       "value": [
         "lmc-5"
@@ -400,23 +415,7 @@
       "basis": "lmc-5：作者说明可和 LMC-5 这类外置记忆库一起用，负责紧接着的对话衔接"
     }
   },
-  "uncertainties": [
-    {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
-    {
-      "field": "export",
-      "label": "能否导出",
-      "note": "没写导出功能，也看不出数据格式"
-    }
-  ],
+  "uncertainties": [],
   "health": {
     "checked_on": "2026-10-24",
     "method": "git 克隆近一年提交记录＋读取仓库网页",

@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "可信度导向最强：每条记忆可追溯来源和置信度，冲突交人裁决；多 Agent 共享，支持加密 U 盘迁移",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "重可信度的本地记忆：自动监听会话入库，事实分可信等级、与锁定事实冲突的写入变成提案由你裁决，每晚“做梦”整合多个 Agent 的记忆；推荐配本地 Ollama，ChatGPT 可经自定义 GPT 网关接入",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实",
@@ -137,11 +137,17 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "claude_desktop"
+        "claude_code",
+        "claude_desktop",
+        "codex",
+        "openclaw",
+        "hermes",
+        "open_webui",
+        "chatgpt_gpt",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Desktop（.mcpb 安装包）及其它 MCP 客户端"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 列出的 MCP 客户端；ChatGPT 通过加固过的自定义 GPT Actions 网关"
     },
     "runs_on": {
       "value": [
@@ -322,22 +328,23 @@
       "value": [
         "semantic",
         "keyword",
-        "confidence"
+        "confidence",
+        "recency"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“锁定事实冲突的写入转为提案，由用户裁决；语义检索＋复合排序；结构化事实精确查询；治理靠规”；keyword：README：“r whole workspace. One SQLite FTS5 index (107K files in our depl”；confidence：说明：“可信度导向最强：每条记忆可追溯来源和置信度，冲”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：复合排序；事实有三档可信度"
     },
     "scoring_stages": {
       "value": [
         "retrieve"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 confidence（推断召回时综合排序）"
+      "basis": "retrieve：排序因素含 confidence、recency（推断召回时综合排序）"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：confidence"
+      "basis": "相似度之外的因素 2 个：confidence、recency"
     },
     "emotion_handling": {
       "value": [
@@ -427,10 +434,10 @@
     },
     "phone_access": {
       "value": [
-        "not_mentioned"
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：ChatGPT 网关需要公网 HTTPS；其余是本机 stdio"
     },
     "local_model": {
       "value": "yes",
@@ -441,6 +448,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],

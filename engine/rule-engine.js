@@ -328,20 +328,36 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     }
     const guides = scored.filter((r) => r.role === "guide").slice(0, 3);
 
-    // 结果太少时，试着放宽每道硬条件题，看能多出几个
+    // 结果太少时，试着放宽每道硬条件题，看能多出几个；单独放宽哪一条都不够时，再试两条一起放宽
     const relax = [];
     if (results.length < (questionnaire.result?.min_results || 3)) {
+      const steps = [];
       for (const q of Q) {
         for (const step of q.relax || []) {
-          const a = { ...answers };
-          if (step.set !== undefined) a[q.id] = step.set;
-          if (step.add) a[q.id] = [...new Set([...selected(answers, q.id), ...step.add])];
-          if (JSON.stringify(a[q.id]) === JSON.stringify(answers[q.id])) continue;
-          const n = filter(a, projects).kept.filter((k) => isMain(present(k))).length;
-          if (n > results.length) relax.push({ question: q.id, label: step.label, count: n });
+          const v = step.set !== undefined ? step.set : [...new Set([...selected(answers, q.id), ...(step.add || [])])];
+          if (JSON.stringify(v) !== JSON.stringify(answers[q.id])) steps.push({ question: q.id, label: step.label, value: v });
+        }
+      }
+      const count = (list) => {
+        const a = { ...answers };
+        for (const s of list) a[s.question] = s.value;
+        return filter(a, projects).kept.filter((k) => isMain(present(k))).length;
+      };
+      for (const s of steps) {
+        const n = count([s]);
+        if (n > results.length) relax.push({ question: s.question, label: s.label, count: n });
+      }
+      if (!relax.length) {
+        for (let i = 0; i < steps.length; i++) {
+          for (let j = i + 1; j < steps.length; j++) {
+            if (steps[i].question === steps[j].question) continue;
+            const n = count([steps[i], steps[j]]);
+            if (n > results.length) relax.push({ question: `${steps[i].question}+${steps[j].question}`, label: `${steps[i].label}，同时${steps[j].label}`, count: n });
+          }
         }
       }
       relax.sort((x, y) => y.count - x.count);
+      relax.splice(6);
     }
 
     return {

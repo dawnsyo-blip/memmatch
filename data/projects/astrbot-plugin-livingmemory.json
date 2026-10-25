@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "给 AstrBot 加上会生长、衰减、整理的完整记忆生命周期",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "AstrBot 长期记忆插件：按对话轮次自动整理偏好、人物关系、计划和约定，关键词＋向量＋图谱召回，记忆会衰减、归档，被想起会加深；带管理页，手机上也能管理",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实",
@@ -191,10 +191,11 @@
     },
     "write_mode": {
       "value": [
-        "auto"
+        "auto",
+        "on_request"
       ],
-      "status": "auto",
-      "basis": "原表写入方式：达到配置轮数后自动总结；Agent 也可主动写入；可选：在管理页编辑；生命周期管理；面板可编辑、测试召回"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：达到轮数自动总结；Agent 可调 memorize_long_term_memory 主动写"
     },
     "forgetting": {
       "value": [
@@ -229,9 +230,9 @@
       "basis": "许可证原文：AGPL-3.0"
     },
     "persona_continuity": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“**按上下文召回** — 文档与图谱都支持关键词和向量检索，融合排序后结合会话、人格和生命周期筛选。 - **主动回忆与写入** — Agent 可调用 `reca”（已核对）"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：按人格筛选记忆，不是保存 AI 自身身份"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -327,10 +328,12 @@
       "value": [
         "semantic",
         "keyword",
-        "relation"
+        "relation",
+        "recency",
+        "frequency"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“衰减、访问强化；文档与图谱均支持关键词＋向量检索，融合排序后按会话、人格、生命周期筛”；keyword：说明：“；归档、衰减、访问强化；文档与图谱均支持关键词＋向量检索，融合排序后按会话、人格、生命”；relation：说明：“可主动写入；归档、衰减、访问强化；文档与图谱均支持关键词＋向量检索，融合排序后按会话”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：文档和图谱的关键词＋向量融合排序；衰减和访问强化"
     },
     "scoring_stages": {
       "value": [
@@ -338,12 +341,12 @@
         "forget"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 relation（推断召回时综合排序）；forget：说明：“保留原文；Agent 可主动写入；归档、衰减、访问强化；文档与图谱均支持关键词＋向量检索，”"
+      "basis": "retrieve：排序因素含 relation、recency、frequency（推断召回时综合排序）；forget：说明：“保留原文；Agent 可主动写入；归档、衰减、访问强化；文档与图谱均支持关键词＋向量检索，”"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：relation"
+      "basis": "相似度之外的因素 3 个：relation、recency、frequency"
     },
     "emotion_handling": {
       "value": [
@@ -366,7 +369,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：dashboard"
+      "basis": "写入方式：auto、on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "complete",
@@ -425,10 +428,11 @@
     },
     "memory_writer": {
       "value": [
-        "background"
+        "background",
+        "chat_agent"
       ],
-      "status": "auto",
-      "basis": "background：写入方式含自动记或先出候选（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自动总结；Agent 主动写"
     },
     "phone_access": {
       "value": [
@@ -438,14 +442,19 @@
       "basis": "native：装在手机可用的宿主里（astrbot）"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用 AstrBot 里配置的嵌入和模型服务，可以是本地模型"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "auto",
+      "basis": "手机入口直接可用（推断）"
     },
     "pairs_with": {
       "value": [

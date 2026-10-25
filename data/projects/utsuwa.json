@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "Grok Companion 的开源替代，可选恋爱模拟机制",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "带 3D VRM 形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化的心情、本地语义记忆；网页版打开即用，数据存在浏览器本地，要自备模型 API Key（或电脑上的本地模型）",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋角色成长",
@@ -144,20 +144,21 @@
     },
     "runs_on": {
       "value": [
+        "phone",
         "own_computer"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：浏览器或自己的电脑；浏览器或自己的电脑"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页版 app.utsuwa.ai 在手机浏览器可用（移动端有专门布局），也有桌面版、可自托管；数据存在浏览器 IndexedDB"
     },
     "os": {
       "value": [
-        "android",
-        "linux",
+        "any",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（<img alt=\"Download for Windows\" src=\"static/brand-asset）；macos（<img alt=\"Download for macOS\" src=\"static/brand-asset）；linux（<img alt=\"Download for Linux\" src=\"static/brand-asset）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页版任何浏览器；桌面版三个系统"
     },
     "difficulty": {
       "value": "low",
@@ -165,16 +166,16 @@
       "basis": "门槛原文：低：网页版免安装；低：网页版免安装"
     },
     "cost": {
-      "value": "free",
-      "status": "auto",
-      "basis": "不需要账号或密钥"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：应用免费，模型按用量付费；本地模型免费但要电脑"
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：任意浏览器（app.utsuwa.ai）；或桌面安装包（未签名）；自托管需 Node.js 22+；任意浏览器（app.utsuwa.ai）；或桌面安装包（未签名）；自托管需 Node.js 22+"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：聊天要配一个模型服务商的 API Key（OpenAI、Anthropic、DeepSeek 等），或本地 Ollama、LM Studio；原判“不需要账号”不对"
     },
     "memory_subject": {
       "value": [
@@ -185,17 +186,17 @@
     },
     "write_mode": {
       "value": [
-        "on_request"
+        "auto"
       ],
-      "status": "auto",
-      "basis": "原表写入方式：保存事实与会话摘要；可选：手动增删；记忆检查器可查看、添加、删除"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：聊天模型的回复被解析出事实自动保存；记忆检查器里可手动增删"
     },
     "forgetting": {
       "value": [
-        "none"
+        "manual_only"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：原表写“无”，可能是不遗忘，也可能只是没有自动机制但能手动删，需确认"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记忆检查器里可删除；随时间衰减的是心情和关系值，不是记忆"
     },
     "human_review": {
       "value": [
@@ -245,9 +246,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "multimodal": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“pinch to resize - **Photo Mode**: Pose her fr”经核对不算：说的是拍照模式"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：能看你发的照片并记住这一刻，留在剪贴簿"
     },
     "time_awareness": {
       "value": "yes",
@@ -357,7 +358,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -392,17 +393,17 @@
     },
     "retrieval_postprocess": {
       "value": [
-        "not_mentioned"
+        "budget"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：按模型上下文窗口大小调节注入的记忆量"
     },
     "recall_uses_llm": {
       "value": [
-        "not_mentioned"
+        "no_llm"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Transformers.js 在本地做语义检索"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",
@@ -416,10 +417,11 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "chat_agent",
+        "user"
       ],
-      "status": "auto",
-      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：聊天模型输出里解析出事实；用户可手动添加"
     },
     "phone_access": {
       "value": [
@@ -437,6 +439,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "phone_ok",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：手机浏览器打开网页版即可"
     },
     "pairs_with": {
       "value": [],

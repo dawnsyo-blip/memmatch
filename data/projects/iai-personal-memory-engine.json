@@ -113,12 +113,12 @@
     },
     "os": {
       "value": [
-        "linux",
         "macos",
+        "linux",
         "windows"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（s://img.shields.io/badge/Windows-beta-dbab09?style=flat-s）；macos（s://img.shields.io/badge/macOS%20%7C%20Linux-supported-）；linux（s.io/badge/macOS%20%7C%20Linux-supported-555?style=flat）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：macOS、Linux 正式支持，Windows 是测试版"
     },
     "difficulty": {
       "value": "medium",
@@ -281,23 +281,25 @@
     },
     "ranking_signals": {
       "value": [
+        "semantic",
         "keyword",
-        "recency"
+        "recency",
+        "relation"
       ],
-      "status": "auto",
-      "basis": "keyword：说明：“agent 合适的上下文，带面板；对话全文＋个人地图；MCP＋钩子；Claude”；recency：README：“c similarity, graph evidence, recency, temporal validity, and lexic”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：语义相似、图谱证据、新近度等综合；嵌入在本地跑"
     },
     "scoring_stages": {
       "value": [
         "retrieve"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
+      "basis": "retrieve：排序因素含 recency、relation（推断召回时综合排序）"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：recency"
+      "basis": "相似度之外的因素 2 个：recency、relation"
     },
     "emotion_handling": {
       "value": [
@@ -400,6 +402,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],

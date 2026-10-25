@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "群聊场景：学的是“怎么说话”和“谁和谁什么关系”",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "AstrBot 插件：从群聊里学 Bot 的说话风格、群里的黑话、群友关系和好感度，学到的人格变化先进审查队列，可批准、回滚；作者建议和 LivingMemory 搭配",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "经验（说话风格、群黑话）＋用户事实（关系、好感度）",
@@ -171,9 +171,9 @@
       "basis": "门槛原文：中：手动克隆、在 WebUI 里手动装依赖、按顺序配置；中：手动克隆、在 WebUI 里手动装依赖、按顺序配置"
     },
     "cost": {
-      "value": "free",
-      "status": "auto",
-      "basis": "不需要账号或密钥"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：学习时会调用在 AstrBot 里配置的筛选、提炼、强化模型"
     },
     "accounts_needed": {
       "value": [
@@ -199,9 +199,11 @@
       "basis": "原表写入方式：从群聊的 user→bot 对话对自动学习；人格变化生效之前（审查）；学习结果先进审查链，可批准、拒绝、回滚"
     },
     "forgetting": {
-      "value": [],
-      "status": "unknown",
-      "basis": "原表：README 未描述；—"
+      "value": [
+        "manual_only"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：面板里可删除、回滚，没有自动遗忘"
     },
     "human_review": {
       "value": [
@@ -343,10 +345,11 @@
     },
     "emotion_handling": {
       "value": [
-        "ai_state"
+        "ai_state",
+        "user_mood"
       ],
-      "status": "auto",
-      "basis": "ai_state：Claude 据说明补充：有 Bot 情绪和好感度状态（/set_mood）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Bot 有情绪状态（/set_mood）；记录群友的好感度和心理状态"
     },
     "project_role": {
       "value": "memory_component",
@@ -420,10 +423,11 @@
     },
     "memory_writer": {
       "value": [
-        "background"
+        "background",
+        "user"
       ],
-      "status": "auto",
-      "basis": "background：写入方式含自动记或先出候选（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：后台从群聊学习；管理员可用 /remember 手动记"
     },
     "phone_access": {
       "value": [
@@ -433,14 +437,19 @@
       "basis": "native：装在手机可用的宿主里（astrbot）"
     },
     "local_model": {
-      "value": "no_model_needed",
-      "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用 AstrBot 里配置的模型服务，可以是本地模型；原判“本身不调用模型”不对"
     },
     "model_lock": {
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要在 AstrBot 所在机器的插件目录里 git clone"
     },
     "pairs_with": {
       "value": [
@@ -459,11 +468,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "forgetting",
-      "label": "怎么遗忘",
-      "note": "原表：README 未描述；—"
-    },
     {
       "field": "export",
       "label": "能否导出",

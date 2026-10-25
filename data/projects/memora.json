@@ -100,11 +100,10 @@
     },
     "runs_on": {
       "value": [
-        "own_cloud_account",
         "own_computer"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑或 Cloudflare"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：服务跑在本机；Cloudflare D1、R2 只是可选的云端存储和图谱页面"
     },
     "os": {
       "value": [
@@ -382,11 +381,10 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp",
-        "cloud"
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“a-server --graph-port 8765 # HTTP transport (alternative to stdio) memora”；cloud：运行位置含 own_cloud_account"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：有 HTTP 传输，但服务在本机"
     },
     "local_model": {
       "value": "yes",
@@ -397,6 +395,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],
