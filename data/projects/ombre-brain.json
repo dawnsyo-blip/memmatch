@@ -460,6 +460,14 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [
+        "machine-studio",
+        "xinchao-nian"
+      ],
+      "status": "auto",
+      "basis": "machine-studio：技术记忆单独放 Machine Studio，情感和日常记忆放 Ombre Brain（作者就是为配合它写的）；xinchao-nian：心潮·念的驱力引擎和 Ombre Brain 的记忆合并发行"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（Markdown 为真源）",
       "function": "用户事实（带情绪坐标）",

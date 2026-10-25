@@ -399,6 +399,14 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "pairs_with": {
+      "value": [
+        "rolling-memory",
+        "swap-tutorial"
+      ],
+      "status": "auto",
+      "basis": "rolling-memory：作者说明可和 LMC-5 这类外置记忆库一起用，负责紧接着的对话衔接；swap-tutorial：教程用的是 LMC-5 的精炼续窗脚本"
     }
   },
   "uncertainties": [

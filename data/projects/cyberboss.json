@@ -397,6 +397,11 @@
       "value": "claude_only",
       "status": "auto",
       "basis": "需要 Claude 付费套餐"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
     }
   },
   "uncertainties": [

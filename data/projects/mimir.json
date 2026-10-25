@@ -452,6 +452,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块）",
       "function": "事实（情景、社会印象）＋经验（程序、教训）＋前瞻（未来）",

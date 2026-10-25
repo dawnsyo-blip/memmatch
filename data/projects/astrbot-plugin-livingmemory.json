@@ -447,6 +447,13 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [
+        "astrbot-plugin-self-learning"
+      ],
+      "status": "auto",
+      "basis": "astrbot-plugin-self-learning：作者推荐搭配 LivingMemory 长期记忆插件"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实",

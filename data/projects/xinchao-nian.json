@@ -449,6 +449,13 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [
+        "ombre-brain"
+      ],
+      "status": "auto",
+      "basis": "ombre-brain：心潮·念的驱力引擎和 Ombre Brain 的记忆合并发行"
+    },
     "paper_taxonomy": {
       "form": "词元级（复用 Ombre Brain）＋驱力状态",
       "function": "用户事实＋欲望驱力状态",

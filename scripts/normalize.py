@@ -85,6 +85,12 @@ FIELD_LABELS = {
     **DR.LABELS,
 }
 DECIDED_ON = "2026-10-11"
+# 设计上搭配使用的项目（双向）：id -> [(另一个 id, 说明)]
+RELATED = {}
+for _a, _pairs in DR.RELATED.items():
+    for _b, _note in _pairs:
+        RELATED.setdefault(_a, []).append((_b, _note))
+        RELATED.setdefault(_b, []).append((_a, _note))
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through",
          "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization",
@@ -766,6 +772,9 @@ def normalize(doc, overrides):
             n["status"] = "unknown"
             uncertainties.append({"field": f, "label": FIELD_LABELS[f], "note": uncertainty_note(n["basis"])})
     norm = {f: out[f] for f in FIELDS}
+    rel = RELATED.get(doc["id"], [])
+    norm["pairs_with"] = res([i for i, _ in rel], "auto",
+                             "；".join(f"{i}：{n}" for i, n in rel) or "没有记录设计上搭配使用的项目")
     tax = paper_taxonomy(c)
     if tax:
         norm["paper_taxonomy"] = tax

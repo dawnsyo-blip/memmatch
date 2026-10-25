@@ -445,6 +445,11 @@
       "status": "auto",
       "basis": "需要 Claude 付费套餐"
     },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实＋关切／驱力状态",

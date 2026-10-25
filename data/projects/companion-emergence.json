@@ -439,6 +439,11 @@
       "status": "auto",
       "basis": "说明：“态；桌面应用＋后台常驻服务；自带桌面端（仅 Claude）；桌面应用＋后台服务，只用 Claud”"
     },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    },
     "paper_taxonomy": {
       "form": "词元级・平面（赫布联想网络）",
       "function": "AI 身份＋情绪／身体状态",

@@ -442,6 +442,13 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [
+        "astrbot-plugin-livingmemory"
+      ],
+      "status": "auto",
+      "basis": "astrbot-plugin-livingmemory：作者推荐搭配 LivingMemory 长期记忆插件"
+    },
     "paper_taxonomy": {
       "form": "词元级・平面（社交关系网）",
       "function": "经验（说话风格、群黑话）＋用户事实（关系、好感度）",

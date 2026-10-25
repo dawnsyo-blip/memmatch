@@ -377,6 +377,13 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "pairs_with": {
+      "value": [
+        "lmc-5"
+      ],
+      "status": "auto",
+      "basis": "lmc-5：教程用的是 LMC-5 的精炼续窗脚本"
     }
   },
   "uncertainties": [

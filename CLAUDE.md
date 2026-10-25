@@ -36,9 +36,13 @@
 - 负责人 2026-10-24 同意：新项目的待审核项照旧采用建议值（`--accept-suggestions` 记录的日期是执行当天）
 
 问卷与推荐（阶段 4）：
-- 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a 题追问），只改说明和规则时先问负责人；`data/questionnaire/questions.json` 还是早期的硬条件草稿，阶段 4 要按 v4 重写
-- 问卷配置格式和字段含义见 `docs/questionnaire-format.md`；能托管又能自己部署的项目，`vendor_account` 只算托管模式的要求
-- `scripts/prototype/engine_v4.py` 是按 v4 规则写的引擎原型（硬筛选＋加分），`personas_v4.py` 跑 8 类典型用户；模拟记录和推荐示例在 `docs/推荐结果示例.md`。正式引擎要读 questions.json、不写死题目、接口可替换（见 ROADMAP 阶段 4）
+- 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a 题追问，负责人 2026-10-25 确认）；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
+- 配置格式（条件、作用、合并方式、选项失效、放宽建议、加分、补充部件）见 `docs/questionnaire-format.md`
+- 推荐引擎在 `engine/`（JavaScript ES 模块，无依赖，浏览器和 Node 都能跑）：`rule-engine.js` 是规则实现，`index.js` 写明统一接口（换外部模型时另写一个实现即可），`load-node.js` 给测试和命令行加载数据
+- 命令：`npm test`（10 个虚构用户＋引擎测试，用户和期望在 `tests/personas.mjs`）；`npm run report` 生成 `docs/阶段4-推荐测试报告.md`；`node scripts/recommend.mjs 答卷.json` 跑单份答卷
+- 改了问卷配置、字段或规则后都要跑 `npm test`；测试失败时先判断是期望写错还是推荐变差，别为了通过而改期望
+- `scripts/prototype/` 是正式引擎之前的 Python 原型，只作参考；`docs/推荐结果示例.md` 是原型阶段的模拟记录
+- 组合推荐用的“设计上搭配使用”关系在 `dimension_rules.py` 的 `RELATED`，normalize 写进 `normalized.pairs_with`（双向）
 - 推荐原则：硬条件只排除确定用不了的，文档没写的保留并标“需自行确认”；结果为空时给“放宽哪一条就有几个”的建议；用户答案优先于推荐偏好
 - 各家官方 App 能否接记忆库（2026-10 核实）：
   - Claude App 能用远程 MCP 连接器（要先在网页端添加，付费套餐）
@@ -82,4 +86,7 @@
 - **“文档没写”不能当成“不能”**：模拟填写时把“多端共用”做成要求文档写明，结果误排除了一批 MCP 记忆服务（它们天生能同时服务几个客户端）。硬条件只排除明确用不了的。
 - **问卷选项不能太笼统**：“程序化接入”涵盖十几种 Agent、“API 客户端”混着 Kelivo 和酒馆，引擎就会给 Codex 用户推荐 OpenClaw 插件、给 Kelivo 用户推荐酒馆扩展。改问卷后用原型引擎跑一遍典型用户再交付。
 - **网上的入口能力说法常互相矛盾**（如 `-p` 计费改动有报道说已暂停、ChatGPT 手机端能否用 MCP），以官方帮助文档为准，并区分“应用目录里的应用”和“自己添加的自定义 MCP”。
+- **Node 24 的 `node --test tests/` 会把目录当成文件名**报 MODULE_NOT_FOUND，要写成 `node --test "tests/*.test.js"`；`engine/` 下的 `.js` 用 ES 模块语法，靠根目录 `package.json` 的 `"type": "module"`。
+- **“在云上”不等于手机连得上**：项目默认托管时 `phone_access` 有 `cloud`，但用户没选托管、自己部署时手机未必能连。引擎里只有用户选了托管、或项目能部署在用户自己的云账号上时才把它算数（见问卷配置第 3 题的规则）。
+- **项目简介有的是早期内部备注**（如 Drivesoid“站点仅在关键词中标‘记忆’”），阶段 5 上页面前要统一润色 `info.summary`。
 - **用 heredoc 写含反斜杠的正则会被吃掉转义**，2026-10-24 又把 dimension_rules.py 写坏一次。含 `\n`、`\d` 的改动一律用 Edit 工具。

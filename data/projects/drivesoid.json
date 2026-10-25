@@ -428,6 +428,11 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    },
     "paper_taxonomy": {
       "form": "数值状态（16 个心理维度），不属论文三种形态",
       "function": "工作／状态记忆（快情绪、慢心境）",

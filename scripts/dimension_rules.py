@@ -274,6 +274,16 @@ PAIRS = {
     "machine-studio": "说明里写可与 Ombre Brain 配合",
     "ombre-brain": "被心潮·念等项目复用",
 }
+# 推荐引擎做组合推荐用：项目 id -> [(搭配的项目 id, 说明)]。双向关系只写一边，normalize 会补另一边
+RELATED = {
+    "machine-studio": [("ombre-brain", "技术记忆单独放 Machine Studio，情感和日常记忆放 Ombre Brain（作者就是为配合它写的）")],
+    "xinchao-nian": [("ombre-brain", "心潮·念的驱力引擎和 Ombre Brain 的记忆合并发行")],
+    "astrbot-plugin-self-learning": [("astrbot-plugin-livingmemory", "作者推荐搭配 LivingMemory 长期记忆插件")],
+    "rolling-memory": [("lmc-5", "作者说明可和 LMC-5 这类外置记忆库一起用，负责紧接着的对话衔接")],
+    "tidefall": [("eventide", "Tidefall 的周期和事件设定来自 Eventide")],
+    "swap-tutorial": [("lmc-5", "教程用的是 LMC-5 的精炼续窗脚本")],
+    "ai-companion-telegram-guide": [("mochibot", "教程基于 MochiBot")],
+}
 
 # 命中经核对不算的（README 和说明文字都适用）：(id, 字段, 值) -> 原因
 REJECT = {

@@ -388,6 +388,13 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "pairs_with": {
+      "value": [
+        "mochibot"
+      ],
+      "status": "auto",
+      "basis": "mochibot：教程基于 MochiBot"
     }
   },
   "uncertainties": [

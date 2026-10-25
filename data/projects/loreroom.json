@@ -386,6 +386,11 @@
       "value": "claude_only",
       "status": "auto",
       "basis": "README：“Room 👇 > **Scope:** LoreRoom only works with Claude Code + the official Telegram”"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
     }
   },
   "uncertainties": [

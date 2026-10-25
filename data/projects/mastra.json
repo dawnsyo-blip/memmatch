@@ -387,6 +387,11 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
     }
   },
   "uncertainties": [

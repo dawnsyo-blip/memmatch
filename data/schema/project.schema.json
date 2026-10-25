@@ -368,6 +368,10 @@
         "model_lock": {
           "$ref": "#/$defs/normalizedField"
         },
+        "pairs_with": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "设计上搭配使用的项目 id 列表（推荐引擎做组合推荐用），关系写在 scripts/dimension_rules.py 的 RELATED"
+        },
         "paper_taxonomy": {
           "type": "object",
           "description": "论文分类（形态、功能、形成、演化、检索），沿用原表，仅用于详情页",

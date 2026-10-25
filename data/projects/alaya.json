@@ -391,6 +391,11 @@
       "value": "claude_only",
       "status": "auto",
       "basis": "只写了 Claude 官方客户端（推断）"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
     }
   },
   "uncertainties": [],

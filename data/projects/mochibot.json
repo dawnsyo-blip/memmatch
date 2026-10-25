@@ -440,6 +440,13 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [
+        "ai-companion-telegram-guide"
+      ],
+      "status": "auto",
+      "basis": "ai-companion-telegram-guide：教程基于 MochiBot"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋习惯／待办",

@@ -440,6 +440,13 @@
       "status": "auto",
       "basis": "没发现只能配合某一家模型的说法"
     },
+    "pairs_with": {
+      "value": [
+        "ombre-brain"
+      ],
+      "status": "auto",
+      "basis": "ombre-brain：技术记忆单独放 Machine Studio，情感和日常记忆放 Ombre Brain（作者就是为配合它写的）"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（按项目）",
       "function": "环境事实（技术记忆）",
