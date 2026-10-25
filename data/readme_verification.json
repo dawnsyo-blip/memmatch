@@ -302,6 +302,16 @@
    }
   }
  },
+ "aigne-framework": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "license_category": {
+    "value": "source_available",
+    "note": "Elastic License 2.0：源码可见，但不能拿去做托管服务"
+   }
+  }
+ },
  "akephalos": {
   "checked": "2026-10-25",
   "by": "README",
@@ -1024,6 +1034,11 @@
   }
  },
  "context-keeper": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {}
+ },
+ "context-manager": {
   "checked": "2026-10-25",
   "by": "README",
   "fields": {}
@@ -2140,8 +2155,95 @@
  },
  "letta": {
   "checked": "2026-10-25",
-  "by": "README",
-  "fields": {}
+  "by": "README（letta-ai/letta-code，含 MemFS 文档）",
+  "summary": "Letta Code：会自己改写记忆、技能和提示词的有状态 Agent；记忆用 MemFS 存成 git 管理的 Markdown，可看可改可同步到自己的 GitHub 仓库；可在终端、网页（含手机 chat.letta.com）、Telegram 里和同一个 Agent 聊；默认存 Letta Cloud，也可本地模式",
+  "fields": {
+   "compatible_clients": {
+    "value": [
+     "self_contained",
+     "telegram",
+     "discord"
+    ],
+    "note": "终端、chat.letta.com 网页（含手机）、Telegram、Slack、Discord 等频道"
+   },
+   "phone_access": {
+    "value": [
+     "native",
+     "cloud"
+    ],
+    "note": "手机浏览器打开 chat.letta.com，或用 Telegram"
+   },
+   "accounts_needed": {
+    "value": [
+     "vendor_account",
+     "model_api_key"
+    ],
+    "note": "默认登录 Letta 账号用 Letta Cloud；也可本地模式，用 /connect 填自己的模型 Key"
+   },
+   "cost": {
+    "value": "model_fees_only",
+    "note": "本地模式只付模型费用；Letta Cloud 另有套餐"
+   },
+   "memory_subject": {
+    "value": [
+     "ai_identity",
+     "user_facts",
+     "experience"
+    ],
+    "note": "记忆块、身份、技能"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "Agent 自己改写记忆；可设定期“做梦”整理"
+   },
+   "memory_writer": {
+    "value": [
+     "chat_agent",
+     "background"
+    ],
+    "note": "Agent 自己写；后台做梦"
+   },
+   "human_review": {
+    "value": [
+     "files",
+     "dashboard"
+    ],
+    "note": "MemFS 是 git 仓库里的 Markdown，可直接编辑；/palace 查看记忆"
+   },
+   "export": {
+    "value": [
+     "markdown"
+    ],
+    "note": "MemFS 可同步到自己的 GitHub 仓库"
+   },
+   "dream_consolidation": {
+    "value": "yes",
+    "note": "/sleeptime 设定期做梦，/dream、/reflect 手动触发"
+   },
+   "persona_continuity": {
+    "value": "yes",
+    "note": "Agent 有身份和随时间积累的经验"
+   },
+   "proactive": {
+    "value": "yes",
+    "note": "可配置心跳和定时任务，让 Agent 自己安排时间工作"
+   },
+   "error_guard": {
+    "value": "yes",
+    "note": "MemFS 用 git 记录全部版本，可回看、解决冲突"
+   },
+   "setup_device": {
+    "value": "needs_computer",
+    "note": "npm、uv 或 pipx 安装命令行"
+   },
+   "difficulty": {
+    "value": "medium",
+    "note": "一条安装命令，首次启动选云端或本地"
+   }
+  }
  },
  "life": {
   "checked": "2026-10-25",
@@ -2555,6 +2657,23 @@
    }
   }
  },
+ "memforge": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "difficulty": {
+    "value": "medium",
+    "note": "Docker 单容器一条命令启动（自带 PostgreSQL），再给客户端配 MCP"
+   },
+   "write_mode": {
+    "value": [
+     "on_request",
+     "auto"
+    ],
+    "note": "智能体经提示 API 主动写入；后台自动整合、修订"
+   }
+  }
+ },
  "memgres": {
   "checked": "2026-10-25",
   "by": "README",
@@ -2705,6 +2824,41 @@
   "by": "README",
   "fields": {}
  },
+ "memory": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "os": {
+    "value": [
+     "macos",
+     "linux"
+    ],
+    "note": "钩子是 shell 脚本，写在 ~/.zshrc 或 ~/.bashrc；Obsidian 本身跨平台"
+   },
+   "ranking_signals": {
+    "value": [
+     "keyword",
+     "recency"
+    ],
+    "note": "README 明说不用向量：热层常驻、温层按需载入、冷层在 Obsidian 里搜索"
+   },
+   "forgetting": {
+    "value": [
+     "auto_decay",
+     "archive"
+    ],
+    "note": "温层事实会过期；做梦周期清理旧条目、检查过期，长期内容沉到冷层"
+   },
+   "error_guard": {
+    "value": "not_mentioned",
+    "note": "README 没有纠错或冲突检测机制"
+   },
+   "local_model": {
+    "value": "no_model_needed",
+    "note": "不需要嵌入和云服务"
+   }
+  }
+ },
  "memory-lancedb-pro": {
   "checked": "2026-10-25",
   "by": "README",
@@ -2849,6 +3003,42 @@
   "checked": "2026-10-25",
   "by": "README",
   "fields": {}
+ },
+ "memoryz": {
+  "checked": "2026-10-25",
+  "by": "README",
+  "fields": {
+   "runs_on": {
+    "value": [
+     "own_computer",
+     "own_server"
+    ],
+    "note": "自托管要 Deno＋Turso Cloud 数据库；一行配置命令连的是作者的服务（要令牌）"
+   },
+   "accounts_needed": {
+    "value": [
+     "model_api_key",
+     "vendor_account"
+    ],
+    "note": "Gemini API Key 做向量化；自托管还要 Turso Cloud 数据库账号，或用作者服务的令牌"
+   },
+   "forgetting": {
+    "value": [
+     "manual_only"
+    ],
+    "note": "时间衰减只用于检索排序；任务、记忆可删除"
+   },
+   "write_mode": {
+    "value": [
+     "on_request"
+    ],
+    "note": "AI 或命令行调用 store 写入"
+   },
+   "local_model": {
+    "value": "not_mentioned",
+    "note": "向量化固定用 Gemini"
+   }
+  }
  },
  "memos": {
   "checked": "2026-10-25",

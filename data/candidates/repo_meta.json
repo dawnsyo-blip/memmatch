@@ -2337,6 +2337,69 @@
    "license_head": "MIT License\n\nCopyright (c) 2025 Agent Zero, s.r.o\nContact: pr@agent-zero.ai\nRepository: https://github.com/agent0ai/agent-zero\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software w",
    "has_readme": true,
    "read_date": "2026-10-24"
+  },
+  "maxtechera/memory": {
+   "repo": "maxtechera/memory",
+   "last_commit": "2026-04-15",
+   "stars": 2,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 maxtechera\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true,
+   "read_date": "2026-10-25"
+  },
+  "zizwar/memoryz": {
+   "repo": "Zizwar/memoryz",
+   "last_commit": "2026-10-25",
+   "stars": 1,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Zizwar\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true,
+   "read_date": "2026-10-25"
+  },
+  "codeinedark77/engram-trace": {
+   "repo": "codeinedark77/Engram-Trace",
+   "last_commit": "2026-10-15",
+   "stars": 0,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-25"
+  },
+  "salishforge/memforge": {
+   "repo": "salishforge/memforge",
+   "last_commit": "2026-07-29",
+   "stars": 14,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 SalishForge\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true,
+   "read_date": "2026-10-25"
+  },
+  "anima-research/context-manager": {
+   "repo": "anima-research/context-manager",
+   "last_commit": "2026-10-24",
+   "stars": 12,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-25"
+  },
+  "letta-ai/letta-code": {
+   "repo": "letta-ai/letta-code",
+   "last_commit": "2026-10-24",
+   "stars": 3708,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true,
+   "read_date": "2026-10-25"
+  },
+  "aigne-io/aigne-framework": {
+   "repo": "aigne-io/aigne-framework",
+   "last_commit": "2026-01-20",
+   "stars": 369,
+   "archived": false,
+   "license_head": "Elastic License 2.0\n\nURL: https://www.elastic.co/licensing/elastic-license\n\n## Acceptance\n\nBy using the software, you agree to all of the terms and conditions below.\n\n## Copyright License\n\nThe licensor grants you a non-exclusive, royalty-free, worldwide,\nnon-sublicensable, non-transferable license t",
+   "has_readme": true,
+   "read_date": "2026-10-25"
   }
  }
 }

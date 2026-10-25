@@ -242,7 +242,7 @@
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“；记忆驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；Android 原生应用；自带（Andro”"
+      "basis": "原表／说明：“数据全存手机的原生安卓 AI 陪伴应用：角色有日程、情绪、长短期记忆和关系阶梯，会主动发朋友圈、写日”"
     },
     "dream_consolidation": {
       "value": "not_mentioned",
@@ -252,12 +252,12 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；Android 原生应用；自带（Android）”"
+      "basis": "原表／说明：“据全存手机的原生安卓 AI 陪伴应用：角色有日程、情绪、长短期记忆和关系阶梯，会主动发朋友圈、写日记、打”"
     },
     "proactive": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“数据全存手机；记忆驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；And”"
+      "basis": "原表／说明：“陪伴应用：角色有日程、情绪、长短期记忆和关系阶梯，会主动发朋友圈、写日记、打语音电话；仓库不提供安装包，要”"
     },
     "pinning": {
       "value": "not_mentioned",
@@ -292,7 +292,7 @@
     "independent_life": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“数据全存手机；记忆驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；Android 原生”"
+      "basis": "原表／说明：“：角色有日程、情绪、长短期记忆和关系阶梯，会主动发朋友圈、写日记、打语音电话；仓库不提供安装包，要自己用”"
     },
     "visual_presence": {
       "value": "not_mentioned",
@@ -302,7 +302,7 @@
     "voice_interaction": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“数据全存手机；记忆驱动主动消息、日记、朋友圈、来电；用户事实＋日程／情绪；Android 原生应用；”"
+      "basis": "原表／说明：“、长短期记忆和关系阶梯，会主动发朋友圈、写日记、打语音电话；仓库不提供安装包，要自己用 Android”"
     },
     "privacy_protection": {
       "value": "not_mentioned",
@@ -499,6 +499,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-24"
+    "decided_on": "2026-10-25"
   }
 }

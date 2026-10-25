@@ -762,6 +762,24 @@ NEW.update({
         "项目记忆", "独立应用（网页界面）", "自带", "自己的电脑（Docker）", "中", "模型 API 密钥", "偏工作任务"),
 })
 
+# 第 5 批（2026-10-25，负责人指定的上下文工程项目）
+NEW.update({
+    "maxtechera/memory": _e("/memory（maxtechera）", "纳入", "", "三层（热、温、冷）记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需载入、冷层存进 Obsidian 供搜索",
+        "用户偏好＋决定＋项目上下文", "宿主插件＋钩子", "Claude Code、OpenClaw、Gemini CLI", "自己的电脑",
+        "中：一条安装命令＋/memory setup", "无（长期存储要装 Obsidian 和 Obsidian CLI）"),
+    "zizwar/memoryz": _e("MemoryZ", "纳入", "P2", "编程助手共用的记忆层：语义检索加时间衰减、按 token 预算打包上下文、多层任务树和加密的密钥保险箱",
+        "环境事实、偏好、技能、任务", "MCP＋命令行", "Cursor、Claude Desktop、Claude Code、Windsurf", "自托管服务（另有作者的服务）",
+        "中到高", "Gemini API 密钥（向量化）", "Star 很少"),
+    "salishforge/memforge": _e("MemForge", "纳入", "", "热、温、冷三层的智能体记忆：后台“睡眠周期”用大模型复核、改写低置信度记忆，常用的记忆加强、不用的衰减；Docker 单容器或 PostgreSQL 部署，带 MCP",
+        "智能体记忆（事实、经验、规则）", "MCP；REST；Python SDK", "Claude Desktop、Claude Code、Cursor 等 MCP 客户端", "自己的电脑或服务器（Docker）",
+        "中到高", "模型 API 密钥（睡眠周期复核用；嵌入可本地）", "作者撤回了之前自报的 LongMemEval 成绩"),
+    "anima-research/context-manager": _e("context-manager（Connectome）", "排除", "A", "按 token 预算把对话历史编译成每次请求的消息，旧内容可按自传式策略压缩；Connectome 生态的 TypeScript 库",
+        "对话历史", "TypeScript 库", "开发者自建", "自己的程序", "高", "模型 API 密钥（压缩时）"),
+    "aigne-io/aigne-framework": _e("AIGNE AFS（Agentic File System）", "排除", "A", "AIGNE 框架里的智能体虚拟文件系统：把本地文件、对话历史、用户画像挂成统一的文件目录供智能体读写",
+        "对话历史、用户画像、文件", "TypeScript 框架", "开发者自建", "自己的程序", "高", "模型 API 密钥"),
+    "codeinedark77/engram-trace": _e("Engram-Trace（Chronicle）", "排除", "F5", "多智能体系统的决策留痕记录器：每个动作哈希成链、防篡改，不是对话记忆"),
+})
+
 # 上面这些条目来自哪个来源（awesome-ai-companion 的由快照解析，不在这里列）
 _CTX = "上下文工程合集（yzfly/awesome-context-engineering）"
 _ST = "酒馆插件合集（Min3Mast3r4653/SillyTavern-Extensions-and-Themes）"
@@ -778,6 +796,9 @@ EXTRA_SOURCES = {
                         "lodactio/extension-summaryception", "unkarelian/timeline-memory", "coneja-chibi/vecthare"]},
     "senjinthedragon/smart-memory": "网络检索（酒馆记忆扩展）", "7n1m4/vault": "网络检索（酒馆记忆扩展）",
     "ronilaukkarinen/open-webui-memory": "网络检索（Open WebUI 记忆函数）",
+    **{k: "负责人指定（上下文工程，2026-10-25）" for k in ["maxtechera/memory", "zizwar/memoryz", "salishforge/memforge",
+                                                     "anima-research/context-manager", "aigne-io/aigne-framework",
+                                                     "codeinedark77/engram-trace"]},
     **{k: _BENCH for k in ["mempalace/mempalace", "verygoodplugins/automem", "aiming-lab/simplemem", "zjunlp/lightmem",
                            "jordanmccann/agentmemory", "mastra-ai/mastra", "agent0ai/agent-zero"]},
 }

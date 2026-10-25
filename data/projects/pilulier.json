@@ -202,9 +202,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "not_mentioned",
+      "value": "yes",
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "原表／说明：“的“药盒”：手动给自己的一句话挂一颗行为提示（如“冲突在场”“主动哄回”），只影响下一次回复，用完即从历”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -441,6 +441,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-24"
+    "decided_on": "2026-10-25"
   }
 }

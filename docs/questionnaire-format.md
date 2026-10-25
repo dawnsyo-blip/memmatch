@@ -104,7 +104,7 @@
 
 选了这项（如预算 0 元），别的题的这些选项就不算数；`unless_project` 写明对哪些项目仍然算数。
 
-**放宽建议 `relax`**：结果太少时，引擎逐条尝试，只把能多出结果的那几条告诉用户：
+**放宽建议 `relax`**：结果太少时，引擎逐条尝试，只把能多出结果的那几条告诉用户；单独放宽哪一条都不够时，再试两条一起放宽（最多列 6 条）：
 
 ```json
 "relax": [{"label": "能照着教程敲几条命令", "set": "medium"}, {"label": "接受托管", "add": ["hosted"]}]
@@ -166,3 +166,5 @@
 - `scripts/dimension_rules.py`：打分、情绪、定位、搭配、中文、手机可达等维度字段
 
 能托管又能自己部署的项目，`vendor_account` 只算托管模式的要求（见账号题的 `hosting_only`）。
+
+字段值大多经过逐项核实（`data/readme_verification.json`，状态 `verified`）。`setup_device` 表示只用手机能否装好（`phone_ok`／`needs_computer`），第 2 题用它排除没有电脑的用户装不了的项目。

@@ -1,0 +1,459 @@
+{
+  "id": "memforge",
+  "name": "MemForge",
+  "repo_url": "https://github.com/salishforge/memforge",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-25"
+  },
+  "origins": [
+    "负责人指定（上下文工程，2026-10-25）"
+  ],
+  "info": {
+    "summary": {
+      "value": "热、温、冷三层的智能体记忆：后台“睡眠周期”用大模型复核、改写低置信度记忆，常用的记忆加强、不用的衰减；Docker 单容器或 PostgreSQL 部署，带 MCP",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "memory_subject": {
+      "value": "智能体记忆（事实、经验、规则）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "access": {
+      "value": "MCP；REST；Python SDK",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "compatible_clients": {
+      "value": "Claude Desktop、Claude Code、Cursor 等 MCP 客户端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "runs_on": {
+      "value": "自己的电脑或服务器（Docker）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥（睡眠周期复核用；嵌入可本地）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-25"
+    },
+    "notes": {
+      "value": "作者撤回了之前自报的 LongMemEval 成绩",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-07-29",
+    "stars": 14,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-25"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "MemForge",
+      "v": "纳入",
+      "c": "",
+      "desc": "热、温、冷三层的智能体记忆：后台“睡眠周期”用大模型复核、改写低置信度记忆，常用的记忆加强、不用的衰减；Docker 单容器或 PostgreSQL 部署，带 MCP",
+      "subj": "智能体记忆（事实、经验、规则）",
+      "acc": "MCP；REST；Python SDK",
+      "cli": "Claude Desktop、Claude Code、Cursor 等 MCP 客户端",
+      "run": "自己的电脑或服务器（Docker）",
+      "diff": "中到高",
+      "need": "模型 API 密钥（睡眠周期复核用；嵌入可本地）",
+      "note": "作者撤回了之前自报的 LongMemEval 成绩"
+    },
+    "来源": "负责人指定（上下文工程，2026-10-25）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP；REST；Python SDK"
+    },
+    "compatible_clients": {
+      "value": [
+        "any_mcp_client",
+        "claude_code",
+        "claude_desktop",
+        "cursor"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor 等 MCP 客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "own_server"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑或服务器（Docker）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Docker 单容器一条命令启动（自带 PostgreSQL），再给客户端配 MCP"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "auto",
+      "basis": "账号原文：模型 API 密钥（睡眠周期复核用；嵌入可本地）"
+    },
+    "memory_subject": {
+      "value": [
+        "experience",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：智能体记忆（事实、经验、规则）"
+    },
+    "write_mode": {
+      "value": [
+        "on_request",
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：智能体经提示 API 主动写入；后台自动整合、修订"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "status": "auto",
+      "basis": "README：“tcomes become stronger. Unused memories decay naturally. - **One database does everything.** Po”；有归档：“chive all memory to cold tier | | POST | `/memory”"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：| | GET | `/admin/cache/dashboard` | Live cache monitoring"
+    },
+    "export": {
+      "value": [
+        "json"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“emporal event chains - **Export / Import** — Full JSONL export and bulk import”；“GET | `/memory/:agentId/export` | Export all memories as JSONL | | POST | `/memory/:ag”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“: 'hybrid' }); const ctx = await memory.resume('agent-1'); // warm-start context bund”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“— Time-bounded queries, decay scoring, timeline view, temporal event chains - **Export”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“热、温、冷三层的智能体记忆：后台“睡眠周期”用大模型复核、改写低置信度记忆，常用的记忆加”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“的智能体记忆：后台“睡眠周期”用大模型复核、改写低置信度记忆，常用的记忆加强、不用的衰减；Docker 单”"
+    },
+    "import_history": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“POST | `/memory/:agentId/import` | Bulk import memories from JSONL | | GET | `/memory/:agentId/”（已核对）"
+    },
+    "retrieval_weighting": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“**Scoring** — Composite importance from recency, frequency, centrality, reflection coun”（已核对）"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“r search, a knowledge graph, LLM-driven reflection, procedural learning, and a memory revi”（已核对）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "importance",
+        "frequency",
+        "relation",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“iers (hot → warm → cold) with vector search, a knowledge graph, LLM-drive”；keyword：README：“* PostgreSQL handles storage, full-text search, vector similarity, and graph”；recency：README：“) with keyword overlap boost, temporal proximity scoring, result deduplication”；importance：README：“s scores Phase 1: Score importance (SQL, weight adaptation)”；frequency：README：“s memory.** Memories that are frequently accessed and lead to good outcomes bec”；relation：README：“→ cold) with vector search, a knowledge graph, LLM-driven reflection, proce”；confidence：说明：“忆：后台“睡眠周期”用大模型复核、改写低置信度记忆，常用的记忆加强、不用的衰减；Doc”"
+    },
+    "scoring_stages": {
+      "value": [
+        "write",
+        "retrieve",
+        "forget"
+      ],
+      "status": "auto",
+      "basis": "write：README：“iage** — Evict memories below importance threshold to cold tier; flag low-confid”；retrieve：排序因素含 recency、importance、frequency、relation、confidence（推断召回时综合排序）；forget：说明：“眠周期”用大模型复核、改写低置信度记忆，常用的记忆加强、不用的衰减；Docker 单容器或 Postgre”"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 5 个：recency、importance、frequency、relation、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request、auto；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 mcp"
+    },
+    "customization": {
+      "value": [
+        "config_file",
+        "plugin_api",
+        "small_code"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“alhost:3333', token: process.env.MEMFORGE_TOKEN, }); await me”；plugin_api：README：“veloper setup, testing guide, extension points | | [CLAUDE.md](CLAUDE.md) |”；small_code：README：“tools - **TypeScript SDK** — Zero-dependency HTTP client for any JS runti”"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“nt memory across three tiers (hot → warm → cold) with vector search, a knowle”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "rerank",
+        "dedup",
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "rerank：README：“LLM Opt-In** — Post-retrieval reranking and LLM-assisted ingest av”；dedup：README：“, temporal proximity scoring, result deduplication, quality threshold, a”；budget：README：“_gaps` Each phase respects a token budget to control LLM costs. ## MCP”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“热、温、冷三层的智能体记忆：后台“睡眠周期”用大模型复核、改写低置信度记”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“`none` | `local`, `openai`, `ollama`, or `none`. `local` runs in-”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    }
+  },
+  "uncertainties": [],
+  "health": {
+    "checked_on": "2026-10-25",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 14,
+    "archived": false,
+    "release_count": 5,
+    "last_commit": "2026-07-29",
+    "days_since_commit": 88,
+    "commits_1y": 221,
+    "contributors_1y": 5,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 SalishForge\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [],
+    "decided_on": "2026-10-25"
+  }
+}

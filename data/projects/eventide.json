@@ -199,9 +199,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "dream_consolidation": {
-      "value": "not_mentioned",
+      "value": "yes",
       "status": "auto",
-      "basis": "README 命中的“世界观下的身体周期，用时间、互动、等待、梦境和结算结果推进身体状态，并生成可插入模”经核对不算：梦境是推进身体状态的输入，不是整理记忆"
+      "basis": "原表／说明：“Python 库）：身体周期、驱力数值、短时事件和梦境，生成隐藏的状态提示插进对话；要写代码接进自己的”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -287,7 +287,7 @@
         "ai_state"
       ],
       "status": "auto",
-      "basis": "ai_state：说明：“给 AI 伴侣的生理状态引擎：身体周期、驱力数值和短时事件，生成”"
+      "basis": "ai_state：说明：“给 AI 伴侣的身体状态引擎（Python 库）：身体周期、驱力”"
     },
     "project_role": {
       "value": "state_engine",
@@ -295,14 +295,16 @@
       "basis": "按收录类别「边缘项（存的不是对话记忆）」"
     },
     "lifecycle": {
-      "value": [],
+      "value": [
+        "consolidate"
+      ],
       "status": "auto",
-      "basis": "没有可推出的环节"
+      "basis": "有梦境／离线整理"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 0/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 1/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -446,6 +448,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-24"
+    "decided_on": "2026-10-25"
   }
 }

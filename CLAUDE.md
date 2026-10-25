@@ -34,6 +34,8 @@
 - 同一天又按问卷 v2 补了 7 个字段（中文支持、记忆分层、检索后处理、召回是否调用大模型、敏感记忆抑制、写入回执、谁来记），规则也在 `dimension_rules.py`。“分层”“去重”“门槛”“回执”“unresolved”这类词极易误伤，模式已收紧到记忆语境；写入回执和敏感记忆抑制几乎没有项目写，只能作加分项
 - 2026-10-25 为问卷 v4 又补了 3 个字段（手机能否连上 `phone_access`、能否用本地模型 `local_model`、是否绑定某家模型 `model_lock`），并新增客户端 `deepseek_harness`（README 写明 DSH 插件或指南的才算）。至此 `normalized` 共 14 个基础字段＋19 个特性＋19 个维度字段，schema 里逐个列出，加字段时要同步改 `data/schema/project.schema.json`
 - 负责人 2026-10-24 同意：新项目的待审核项照旧采用建议值（`--accept-suggestions` 记录的日期是执行当天）
+- **逐项核实（2026-10-25，负责人要求）**：全部参与推荐的项目逐个对照 README 核过字段（最常推荐的十几个还看了代码），结果在 `data/readme_verification.json`（每个项目：核实日期、依据、可选的改写简介、改过的字段及理由；没列的字段＝核过无误）。normalize 以 `verified` 状态套用，优先级：核实值 > 负责人确认值 > 规则判定；排序因素、项目定位改了以后，多维与否、覆盖环节等推导字段按核实值重算；有改写简介的会写进 `info.summary`。以后新增项目也要这样核一遍再上线
+- 同日新增字段 `setup_device`（只用手机能否装好：`phone_ok`／`needs_computer`）和客户端值 `chatgpt_gpt`（ChatGPT 自定义 GPT 的 Actions，手机 App 可用，不同于只限网页端的自定义 MCP）
 
 问卷与推荐（阶段 4）：
 - 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a 题追问，负责人 2026-10-25 确认）；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
@@ -43,6 +45,8 @@
 - 改了问卷配置、字段或规则后都要跑 `npm test`；测试失败时先判断是期望写错还是推荐变差，别为了通过而改期望
 - `scripts/prototype/` 是正式引擎之前的 Python 原型，只作参考；`docs/推荐结果示例.md` 是原型阶段的模拟记录
 - 组合推荐用的“设计上搭配使用”关系在 `dimension_rules.py` 的 `RELATED`，normalize 写进 `normalized.pairs_with`（双向）
+- 2026-10-25 配置里新增的规则（未改题目文字，待负责人确认后同步到问卷 v4.md）：第 2 题没有电脑也没有服务器时排除 `setup_device` = `needs_computer`；第 3a 题选了某个 Agent 时，它的原生插件加分（AstrBot 插件加 5 分）；第 17 题放宽建议加“注册 GitHub 账号”；引擎在单独放宽哪条都不够时，试两条一起放宽
+- `node scripts/recommend_frequency.mjs [份数]` 用随机答卷统计各项目被推荐的次数，用来决定先核哪些项目、发现某个项目异常地常被推荐
 - 推荐原则：硬条件只排除确定用不了的，文档没写的保留并标“需自行确认”；结果为空时给“放宽哪一条就有几个”的建议；用户答案优先于推荐偏好
 - 各家官方 App 能否接记忆库（2026-10 核实）：
   - Claude App 能用远程 MCP 连接器（要先在网页端添加，付费套餐）
@@ -89,4 +93,7 @@
 - **Node 24 的 `node --test tests/` 会把目录当成文件名**报 MODULE_NOT_FOUND，要写成 `node --test "tests/*.test.js"`；`engine/` 下的 `.js` 用 ES 模块语法，靠根目录 `package.json` 的 `"type": "module"`。
 - **“在云上”不等于手机连得上**：项目默认托管时 `phone_access` 有 `cloud`，但用户没选托管、自己部署时手机未必能连。引擎里只有用户选了托管、或项目能部署在用户自己的云账号上时才把它算数（见问卷配置第 3 题的规则）。
 - **项目简介有的是早期内部备注**（如 Drivesoid“站点仅在关键词中标‘记忆’”），阶段 5 上页面前要统一润色 `info.summary`。
+- **自动解析留下的典型误判**（2026-10-25 逐项核实时发现，规则判定的结果不能直接上线）：“同一 WiFi 下手机可连”被当成能装在手机上；“可导入 ChatGPT 导出记录”被当成能接 ChatGPT；“Add to LM Studio”（LM Studio 是 MCP 客户端）被当成能用本地模型；“推送到手机”被当成支持安卓、iOS；Cloudflare、Supabase、Zeabur 只当存储或隧道时被当成“跑在自己的云账号上”；云端运行的项目其实要在电脑上敲命令部署；只处理 Claude Code 记录的工具没标“只能配合 Claude”；界面提示“几秒后淡出”被采用成了“自动衰减”
+- **Python 在 Windows 上写的文本文件是 CRLF**，bash 的 `while read u` 读到的每行末尾带 `\r`，`git clone "$u.git"` 全部失败却看不出原因；要先 `tr -d '\r'`
+- **后台运行的 Bash 命令没有代理环境变量**，git clone 立即失败；需要联网的命令放前台跑
 - **用 heredoc 写含反斜杠的正则会被吃掉转义**，2026-10-24 又把 dimension_rules.py 写坏一次。含 `\n`、`\d` 的改动一律用 Edit 工具。

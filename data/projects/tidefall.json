@@ -153,7 +153,7 @@
         "dashboard"
       ],
       "status": "auto",
-      "basis": "dashboard：的 Supabase 版：建表、跑 SQL、打开面板，身体状态就能自动涨落，不需要自己的服务器；Sup"
+      "basis": "dashboard：统的 Supabase 版：建表、跑 SQL、打开面板，6 个周期和 7 项身体数值就能自动涨落，不需要"
     },
     "export": {
       "value": [],
@@ -291,7 +291,7 @@
         "ai_state"
       ],
       "status": "auto",
-      "basis": "ai_state：说明：“ase 版：建表、跑 SQL、打开面板，身体状态就能自动涨落，不需要自己的服务器；AI”"
+      "basis": "ai_state：说明：“Eventide 身体状态系统的 Supabase 版：建表、跑”"
     },
     "project_role": {
       "value": "state_engine",
@@ -452,6 +452,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-24"
+    "decided_on": "2026-10-25"
   }
 }

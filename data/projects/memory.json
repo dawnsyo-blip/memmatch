@@ -1,0 +1,447 @@
+{
+  "id": "memory",
+  "name": "/memory（maxtechera）",
+  "repo_url": "https://github.com/maxtechera/memory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-25"
+  },
+  "origins": [
+    "负责人指定（上下文工程，2026-10-25）"
+  ],
+  "info": {
+    "summary": {
+      "value": "三层（热、温、冷）记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需载入、冷层存进 Obsidian 供搜索",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "memory_subject": {
+      "value": "用户偏好＋决定＋项目上下文",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "access": {
+      "value": "宿主插件＋钩子",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、OpenClaw、Gemini CLI",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "difficulty": {
+      "value": "中：一条安装命令＋/memory setup",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "accounts_needed": {
+      "value": "无（长期存储要装 Obsidian 和 Obsidian CLI）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-25"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-25"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-04-15",
+    "stars": 2,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-25"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "/memory（maxtechera）",
+      "v": "纳入",
+      "c": "",
+      "desc": "三层（热、温、冷）记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需载入、冷层存进 Obsidian 供搜索",
+      "subj": "用户偏好＋决定＋项目上下文",
+      "acc": "宿主插件＋钩子",
+      "cli": "Claude Code、OpenClaw、Gemini CLI",
+      "run": "自己的电脑",
+      "diff": "中：一条安装命令＋/memory setup",
+      "need": "无（长期存储要装 Obsidian 和 Obsidian CLI）",
+      "note": ""
+    },
+    "来源": "负责人指定（上下文工程，2026-10-25）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：宿主插件＋钩子"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "gemini_cli",
+        "openclaw"
+      ],
+      "status": "auto",
+      "basis": "客户端原文：Claude Code、OpenClaw、Gemini CLI"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "macos",
+        "linux"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：钩子是 shell 脚本，写在 ~/.zshrc 或 ~/.bashrc；Obsidian 本身跨平台"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中：一条安装命令＋/memory setup"
+    },
+    "cost": {
+      "value": "free",
+      "status": "auto",
+      "basis": "不需要账号或密钥"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "账号原文：无（长期存储要装 Obsidian 和 Obsidian CLI）"
+    },
+    "memory_subject": {
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：用户偏好＋决定＋项目上下文"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“backed by your Obsidian vault. Session hooks capture what your agent learns automatically. Y”"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：温层事实会过期；做梦周期清理旧条目、检查过期，长期内容沉到冷层"
+    },
+    "human_review": {
+      "value": [
+        "cli",
+        "files"
+      ],
+      "status": "auto",
+      "basis": "files：No ongoing cost.** Just markdown files and your existing Obsidi；cli：de, OpenClaw, and Gemini CLI — a 3-tier persistent me"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“md) **Your AI agent has amnesia. Every session starts from zero. This fixes it.** Context e”（已核对）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“w journals automatically. ### Level 3: Dream (Analyze & Evolve) The dream cycle ana”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 没有纠错或冲突检测机制"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“API | Infrastructure cost | | Privacy | 100% local | Cloud | Cloud | | Cross-platform | Cl”（已核对）"
+    },
+    "ranking_signals": {
+      "value": [
+        "keyword",
+        "recency"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 明说不用向量：热层常驻、温层按需载入、冷层在 Obsidian 里搜索"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：recency"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：cli、files"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin"
+    },
+    "customization": {
+      "value": [
+        "config_file",
+        "plain_data"
+      ],
+      "status": "auto",
+      "basis": "config_file：README：“e `\"hooks\"` key in `~/.claude/settings.json`. If a `hooks` key already ex”；plain_data：记忆存成可以直接看改的文件"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "说明：“第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需载入、冷层存进 Ob”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "auto",
+      "basis": "background：说明：“记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不需要嵌入和云服务"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-25",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 2,
+    "archived": false,
+    "release_count": 1,
+    "last_commit": "2026-04-15",
+    "days_since_commit": 193,
+    "commits_1y": 29,
+    "contributors_1y": 2,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "MIT License\n\nCopyright (c) 2026 maxtechera\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": [
+      "超过 180 天没有提交"
+    ]
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "超过 180 天没有提交"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-25"
+  }
+}

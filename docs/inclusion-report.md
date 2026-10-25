@@ -1,6 +1,6 @@
 # 阶段 3 收录状态报告
 
-> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-24。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
+> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-25。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
 
 ## 判定规则
 
@@ -14,32 +14,32 @@
 
 | 状态 | 数量 |
 |---|---|
-| 收录 | 92 |
-| 收录但加风险提示 | 139 |
+| 收录 | 95 |
+| 收录但加风险提示 | 141 |
 | 排除 | 3 |
 | 待定（证据不足） | 0 |
 
 | 收录类别 | 收录 | 收录但提示 | 排除 | 待定 |
 |---|---|---|---|---|
-| 可接入已有助手 | 62 | 81 | 1 | 0 |
-| 自带记忆的应用 | 12 | 16 | 1 | 0 |
-| 需写代码（开发者向） | 18 | 25 | 1 | 0 |
+| 可接入已有助手 | 64 | 82 | 1 | 0 |
+| 自带记忆的应用 | 13 | 15 | 1 | 0 |
+| 需写代码（开发者向） | 18 | 27 | 1 | 0 |
 | 教程与搭建指南 | 0 | 9 | 0 | 0 |
 | 边缘项（存的不是对话记忆） | 0 | 8 | 0 | 0 |
 
 | 风险提示 | 项目数 |
 |---|---|
-| 没有正式发布版本 | 72 |
-| 近一年只有一人维护 | 70 |
-| 超过 180 天没有提交 | 19 |
-| 没有许可证文件 | 18 |
+| 没有正式发布版本 | 73 |
+| 近一年只有一人维护 | 71 |
+| 超过 180 天没有提交 | 21 |
+| 没有许可证文件 | 19 |
 | 许可证禁止商用 | 17 |
-| 对话内容默认经过第三方服务器 | 9 |
-| 托管模式下对话内容经过第三方服务器（也可自己部署） | 9 |
-| 许可证非标准，需看原文 | 3 |
+| 托管模式下对话内容经过第三方服务器（也可自己部署） | 11 |
+| 对话内容默认经过第三方服务器 | 6 |
+| 许可证非标准，需看原文 | 4 |
 | 近一年没有人提交 | 3 |
+| 许可证限制使用（据原表／README） | 2 |
 | 许可证限制使用（源码可见） | 2 |
-| 许可证限制使用（据原表／README） | 1 |
 | 许可证禁止商用（据原表／README，部分内容） | 1 |
 
 ## 排除（3 个）
@@ -50,10 +50,11 @@
 | kimi-core（`kimi-core`） | N | 仓库无法访问（已删除、改名或设为私有） |
 | kimi-room（`kimi-room`） | N | 仓库无法访问（已删除、改名或设为私有） |
 
-## 收录但加风险提示（139 个）
+## 收录但加风险提示（141 个）
 
 | 项目 | 收录类别 | 风险提示 |
 |---|---|---|
+| /memory（maxtechera）（`memory`） | 可接入已有助手 | 超过 180 天没有提交 |
 | Acheron（`acheron-mcp-server`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
 | agent-memory（g1itchbot）（`agent-memory`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
 | agentic-recall（`agentic-recall`） | 可接入已有助手 | 近一年只有一人维护 |
@@ -79,7 +80,6 @@
 | Graph Memory（`graph-memory`） | 可接入已有助手 | 近一年只有一人维护 |
 | Honcho（`honcho`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | imprint-memory（`imprint-memory`） | 可接入已有助手 | 近一年只有一人维护、没有正式发布版本 |
-| kiwi-mem（`kiwi-mem`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | Kybase（`kybase`） | 可接入已有助手 | 近一年只有一人维护 |
 | L.I.F.E.（`life`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
 | lean-memory（`lean-memory`） | 可接入已有助手 | 近一年只有一人维护 |
@@ -89,7 +89,7 @@
 | Magnemo（`magnemo`） | 可接入已有助手 | 近一年只有一人维护 |
 | Mem0（`mem0`） | 可接入已有助手 | 对话内容默认经过第三方服务器 |
 | mem0-mcp-selfhosted（`mem0-mcp-selfhosted`） | 可接入已有助手 | 超过 180 天没有提交 |
-| mem9（`mem9`） | 可接入已有助手 | 没有正式发布版本、对话内容默认经过第三方服务器 |
+| mem9（`mem9`） | 可接入已有助手 | 没有正式发布版本、托管模式下对话内容经过第三方服务器（也可自己部署） |
 | MemHeaven（`memheaven`） | 可接入已有助手 | 没有正式发布版本 |
 | MemMachine（`memmachine`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | memo（`memo`） | 可接入已有助手 | 近一年只有一人维护 |
@@ -98,6 +98,7 @@
 | Memory Books（`sillytavern-memorybooks`） | 可接入已有助手 | 没有正式发布版本 |
 | memory-lancedb-pro（`memory-lancedb-pro`） | 可接入已有助手 | 没有许可证文件 |
 | MemoryMesh（`memorymesh`） | 可接入已有助手 | 超过 180 天没有提交、没有正式发布版本 |
+| MemoryZ（`memoryz`） | 可接入已有助手 | 近一年只有一人维护、没有正式发布版本 |
 | MemOS（`memos`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | memU（`memu`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | Mengram（`mengram`） | 可接入已有助手 | 对话内容默认经过第三方服务器 |
@@ -124,7 +125,7 @@
 | SimpleMem（`simplemem`） | 可接入已有助手 | 对话内容默认经过第三方服务器 |
 | Smart Memory（`smart-memory`） | 可接入已有助手 | 近一年只有一人维护 |
 | Summaryception（`extension-summaryception`） | 可接入已有助手 | 没有正式发布版本 |
-| Supermemory（`supermemory`） | 可接入已有助手 | 对话内容默认经过第三方服务器 |
+| Supermemory（`supermemory`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | taOSmd（`taosmd`） | 可接入已有助手 | 近一年只有一人维护 |
 | Tessera（`project-tessera`） | 可接入已有助手 | 超过 180 天没有提交 |
 | Timeline Memory（`timeline-memory`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
@@ -152,7 +153,6 @@
 | InternalBeyond 移动版（`internalbeyond-mobile`） | 自带记忆的应用 | 近一年只有一人维护、没有正式发布版本、许可证禁止商用 |
 | KI-CO 小屋（`ki-co`） | 自带记忆的应用 | 许可证禁止商用 |
 | Letta（原 MemGPT）（`letta`） | 自带记忆的应用 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
-| Memex（`memex-lab-memex`） | 自带记忆的应用 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | Ocean（`ocean`） | 自带记忆的应用 | 许可证禁止商用 |
 | OpenHer（`openher`） | 自带记忆的应用 | 近一年只有一人维护 |
 | Second Me（`second-me`） | 自带记忆的应用 | 超过 180 天没有提交、近一年没有人提交 |
@@ -168,9 +168,11 @@
 | Tidefall（`tidefall`） | 边缘项（存的不是对话记忆） | 近一年只有一人维护、没有正式发布版本、许可证禁止商用 |
 | 情绪系统（bvsden）（`emotion-system`） | 边缘项（存的不是对话记忆） | 近一年只有一人维护、没有正式发布版本 |
 | 药盒 pilulier（`pilulier`） | 边缘项（存的不是对话记忆） | 近一年只有一人维护、没有正式发布版本 |
-| Acontext（`acontext`） | 需写代码（开发者向） | 对话内容默认经过第三方服务器 |
-| Being（`being`） | 需写代码（开发者向） | 没有正式发布版本、没有许可证文件 |
+| Acontext（`acontext`） | 需写代码（开发者向） | 托管模式下对话内容经过第三方服务器（也可自己部署） |
+| AIGNE AFS（Agentic File System）（`aigne-framework`） | 需写代码（开发者向） | 超过 180 天没有提交、许可证非标准，需看原文、许可证限制使用（据原表／README） |
+| Being（`being`） | 需写代码（开发者向） | 没有正式发布版本、没有许可证文件、托管模式下对话内容经过第三方服务器（也可自己部署） |
 | Celiums Memory（`celiums-memory`） | 需写代码（开发者向） | 近一年只有一人维护 |
+| context-manager（Connectome）（`context-manager`） | 需写代码（开发者向） | 没有许可证文件 |
 | DreamVault（`dreamvault`） | 需写代码（开发者向） | 近一年只有一人维护、没有正式发布版本 |
 | Eros Engine（`eros-engine`） | 需写代码（开发者向） | 近一年只有一人维护 |
 | FluctlightDB（`fluctlightdb`） | 需写代码（开发者向） | 近一年只有一人维护 |
@@ -194,7 +196,7 @@
 | 草履虫 Paramecium（`paramecium`） | 需写代码（开发者向） | 没有正式发布版本、没有许可证文件 |
 | 记忆星图 Memory Constellations（`memoryconstellations`） | 需写代码（开发者向） | 近一年只有一人维护、没有正式发布版本 |
 
-## 收录（92 个）
+## 收录（95 个）
 
 | 项目 | 收录类别 | 风险提示 |
 |---|---|---|
@@ -220,12 +222,14 @@
 | Hindsight（`hindsight`） | 可接入已有助手 | — |
 | IAI 个人记忆引擎（`iai-personal-memory-engine`） | 可接入已有助手 | — |
 | Jarvis Orb（`jarvis-orb`） | 可接入已有助手 | — |
+| kiwi-mem（`kiwi-mem`） | 可接入已有助手 | — |
 | Knowledge Graph Memory Server（MCP 官方）（`servers`） | 可接入已有助手 | — |
 | LivingMemory（`astrbot-plugin-livingmemory`） | 可接入已有助手 | — |
 | Loci（`loci`） | 可接入已有助手 | — |
 | Longhand（`longhand`） | 可接入已有助手 | — |
 | LongMemory（原 OpenMemory）（`openmemory`） | 可接入已有助手 | — |
 | mcp-memory-service（`mcp-memory-service`） | 可接入已有助手 | — |
+| MemForge（`memforge`） | 可接入已有助手 | — |
 | memkeeper（`memkeeper`） | 可接入已有助手 | — |
 | Memory MCP（michael-denyer）（`memory-mcp`） | 可接入已有助手 | — |
 | memory-mcp-1file（`memory-mcp-1file`） | 可接入已有助手 | — |
@@ -263,6 +267,7 @@
 | Agent Zero（`agent-zero`） | 自带记忆的应用 | — |
 | Bitterbot（`bitterbot-desktop`） | 自带记忆的应用 | — |
 | Companion Emergence（`companion-emergence`） | 自带记忆的应用 | — |
+| Memex（`memex-lab-memex`） | 自带记忆的应用 | — |
 | MIRA OS（`mira-oss`） | 自带记忆的应用 | — |
 | MochiBot（`mochibot`） | 自带记忆的应用 | — |
 | Resonant（`resonant`） | 自带记忆的应用 | — |

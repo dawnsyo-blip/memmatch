@@ -112,6 +112,14 @@
         {"id": "hermes", "label": "Hermes", "values": {"compatible_clients": ["hermes"]}},
         {"id": "bot_framework", "label": "AstrBot 等聊天机器人框架", "values": {"compatible_clients": ["astrbot", "telegram", "wechat", "feishu", "discord"]}},
         {"id": "other", "label": "其它", "free_text": true, "values": {"compatible_clients": ["any_mcp_client", "openai_compatible"]}}
+      ],
+      "rules": [
+        {"when": {"question": "q3a", "selected_any": ["claude_code"]}, "score": [{"if": {"access": ["host_plugin"], "compatible_clients": ["claude_code"]}, "points": 2, "reason": "是能直接装进 Claude Code 的插件"}]},
+        {"when": {"question": "q3a", "selected_any": ["codex"]}, "score": [{"if": {"access": ["host_plugin"], "compatible_clients": ["codex"]}, "points": 2, "reason": "是能直接装进 Codex 的插件"}]},
+        {"when": {"question": "q3a", "selected_any": ["openclaw"]}, "score": [{"if": {"access": ["host_plugin"], "compatible_clients": ["openclaw"]}, "points": 2, "reason": "是 OpenClaw 的插件"}]},
+        {"when": {"question": "q3a", "selected_any": ["hermes"]}, "score": [{"if": {"access": ["host_plugin"], "compatible_clients": ["hermes"]}, "points": 2, "reason": "是 Hermes 的插件"}]},
+        {"when": {"question": "q3a", "selected_any": ["deepseek_harness"]}, "score": [{"if": {"compatible_clients": ["deepseek_harness"]}, "points": 2, "reason": "有 DeepSeek Harness 插件或指南"}]},
+        {"when": {"question": "q3a", "selected_any": ["bot_framework"]}, "score": [{"if": {"access": ["host_plugin"], "compatible_clients": ["astrbot"]}, "points": 5, "reason": "是 AstrBot 插件，装上就能用"}]}
       ]
     },
     {

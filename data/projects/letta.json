@@ -17,9 +17,9 @@
   ],
   "info": {
     "summary": {
-      "value": "有状态 agent 平台，现为 Letta Code（桌面、网页、Telegram 等）",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "Letta Code：会自己改写记忆、技能和提示词的有状态 Agent；记忆用 MemFS 存成 git 管理的 Markdown，可看可改可同步到自己的 GitHub 仓库；可在终端、网页（含手机 chat.letta.com）、Telegram 里和同一个 Agent 聊；默认存 Letta Cloud，也可本地模式",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "agent 自身记忆",
@@ -104,10 +104,12 @@
     },
     "compatible_clients": {
       "value": [
-        "self_contained"
+        "self_contained",
+        "telegram",
+        "discord"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：终端、chat.letta.com 网页（含手机）、Telegram、Slack、Discord 等频道"
     },
     "runs_on": {
       "value": [
@@ -128,28 +130,38 @@
     },
     "difficulty": {
       "value": "medium",
-      "status": "auto",
-      "basis": "门槛原文：低到中（区间取较高一档）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：一条安装命令，首次启动选云端或本地"
     },
     "cost": {
-      "value": "",
-      "status": "unknown",
-      "basis": "费用原文未识别：本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta；评测：MemTensor 统一评测：LoCoMo 77.1、LongMemEval-S 77.7、BEAM 10M 52.3"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：本地模式只付模型费用；Letta Cloud 另有套餐"
     },
     "accounts_needed": {
-      "value": [],
-      "status": "unknown",
-      "basis": "账号原文未识别：（空）"
+      "value": [
+        "vendor_account",
+        "model_api_key"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：默认登录 Letta 账号用 Letta Cloud；也可本地模式，用 /connect 填自己的模型 Key"
     },
     "memory_subject": {
-      "value": [],
-      "status": "unknown",
-      "basis": "记忆对象原文未识别：agent 自身记忆"
+      "value": [
+        "ai_identity",
+        "user_facts",
+        "experience"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：记忆块、身份、技能"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "on_request",
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：Agent 自己改写记忆；可设定期“做梦”整理"
     },
     "forgetting": {
       "value": [],
@@ -158,15 +170,18 @@
     },
     "human_review": {
       "value": [
+        "files",
         "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：ss, interactive terminal UI, App Server, channels, a"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：MemFS 是 git 仓库里的 Markdown，可直接编辑；/palace 查看记忆"
     },
     "export": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没写导出功能，也看不出数据格式"
+      "value": [
+        "markdown"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：MemFS 可同步到自己的 GitHub 仓库"
     },
     "data_passes_through": {
       "value": [
@@ -182,9 +197,9 @@
       "basis": "许可证原文：Apache-2.0"
     },
     "persona_continuity": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：Agent 有身份和随时间积累的经验"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -212,9 +227,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "dream_consolidation": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：/sleeptime 设定期做梦，/dream、/reflect 手动触发"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -222,9 +237,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "proactive": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：可配置心跳和定时任务，让 Agent 自己安排时间工作"
     },
     "pinning": {
       "value": "not_mentioned",
@@ -232,9 +247,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：MemFS 用 git 记录全部版本，可回看、解决冲突"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -309,16 +324,18 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
+        "consolidate",
         "retrieve",
         "review"
       ],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：on_request、auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：files、dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -329,10 +346,10 @@
     },
     "customization": {
       "value": [
-        "not_mentioned"
+        "plain_data"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "plain_data：记忆存成可以直接看改的文件"
     },
     "chinese_support": {
       "value": [
@@ -372,17 +389,19 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "chat_agent",
+        "background"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：Agent 自己写；后台做梦"
     },
     "phone_access": {
       "value": [
+        "native",
         "cloud"
       ],
-      "status": "auto",
-      "basis": "cloud：运行位置含 third_party_hosted"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：手机浏览器打开 chat.letta.com，或用 Telegram"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -395,9 +414,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README（letta-ai/letta-code，含 MemFS 文档））：npm、uv 或 pipx 安装命令行"
     },
     "pairs_with": {
       "value": [],
@@ -407,34 +426,9 @@
   },
   "uncertainties": [
     {
-      "field": "cost",
-      "label": "费用",
-      "note": "文档写的是“本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta；评测：MemTensor 统一评测：LoCoMo 77.1、LongMemEval-S 77.7、BEAM 10M 52.3”，归不进固定选项"
-    },
-    {
-      "field": "accounts_needed",
-      "label": "需要的账号",
-      "note": "说明文档没有写"
-    },
-    {
-      "field": "memory_subject",
-      "label": "主要记住什么",
-      "note": "文档写的是“agent 自身记忆”，归不进固定选项"
-    },
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
-    {
       "field": "forgetting",
       "label": "怎么遗忘",
       "note": "README 没提遗忘或删除"
-    },
-    {
-      "field": "export",
-      "label": "能否导出",
-      "note": "没写导出功能，也看不出数据格式"
     }
   ],
   "health": {
@@ -468,6 +462,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-24"
+    "decided_on": "2026-10-25"
   }
 }
