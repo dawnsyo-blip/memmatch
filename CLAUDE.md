@@ -45,7 +45,7 @@
 - 改了问卷配置、字段或规则后都要跑 `npm test`；测试失败时先判断是期望写错还是推荐变差，别为了通过而改期望
 - `scripts/prototype/` 是正式引擎之前的 Python 原型，只作参考；`docs/推荐结果示例.md` 是原型阶段的模拟记录
 - 组合推荐用的“设计上搭配使用”关系在 `dimension_rules.py` 的 `RELATED`，normalize 写进 `normalized.pairs_with`（双向）
-- 2026-10-25 配置里新增的规则（未改题目文字，待负责人确认后同步到问卷 v4.md）：第 2 题没有电脑也没有服务器时排除 `setup_device` = `needs_computer`；第 3a 题选了某个 Agent 时，它的原生插件加分（AstrBot 插件加 5 分）；第 17 题放宽建议加“注册 GitHub 账号”；引擎在单独放宽哪条都不够时，试两条一起放宽
+- 2026-10-25 配置里新增的规则（未改题目文字，负责人同意，已同步到问卷 v4.md）：第 2 题没有电脑也没有服务器时排除 `setup_device` = `needs_computer`；第 3a 题选了某个 Agent 时，它的原生插件加分（AstrBot 插件加 5 分）；第 17 题放宽建议加“注册 GitHub 账号”；引擎在单独放宽哪条都不够时，试两条一起放宽
 - `node scripts/recommend_frequency.mjs [份数]` 用随机答卷统计各项目被推荐的次数，用来决定先核哪些项目、发现某个项目异常地常被推荐
 - 推荐原则：硬条件只排除确定用不了的，文档没写的保留并标“需自行确认”；结果为空时给“放宽哪一条就有几个”的建议；用户答案优先于推荐偏好
 - 各家官方 App 能否接记忆库（2026-10 核实）：
@@ -55,6 +55,7 @@
   - DeepSeek、智谱官方 App 不能
   - 手机遥控电脑上的 Agent 是另一条路：Claude App 的 Remote Control 连 Claude Code，ChatGPT App 的 Remote 连 Codex，DeepSeek Harness 只有社区远程插件。这时记忆库装在电脑上即可
   - Codex 的非交互用法是 `codex exec`，`-p` 是 Claude Code 和 Gemini CLI 的
+  - ChatGPT 自定义 GPT（Actions）：手机 App 能用已有的 GPT，但个人账号（Free、Go、Plus、Pro）已不能新建，OpenAI 计划 2026-12-11 前后让自定义 GPT 退役、改为 Plugins（据 OpenAI 帮助页搜索摘要和多家二手报道，官方页面无法直接抓取）。所以不作为问卷入口；数据里的 `chatgpt_gpt` 只作记录
 
 阶段 2、3：
 - `python -X utf8 scripts/check_health.py [--resume|--only a,b]` 写入各项目 `health`，生成 `docs/health-report.md`；网络故障记 `status=error`，用 `--resume` 续跑；检查逻辑改动时把 `CHECKER_VERSION` 加 1

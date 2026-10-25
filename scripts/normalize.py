@@ -47,7 +47,7 @@ ENUMS = {
                "cli_tool": "命令行小工具（需要时自己运行）", "guide": "教程或设计文档（照着搭）"},
     "compatible_clients": {
         "claude_desktop": "Claude 桌面版", "claude_web_mobile": "Claude 网页／手机版", "claude_code": "Claude Code",
-        "chatgpt": "ChatGPT", "chatgpt_gpt": "ChatGPT 自定义 GPT（Actions 调接口，手机 App 也能用）", "openai_compatible": "任意 OpenAI 兼容客户端", "any_mcp_client": "任意 MCP 客户端",
+        "chatgpt": "ChatGPT", "chatgpt_gpt": "ChatGPT 自定义 GPT（Actions 调接口；个人账号已不能新建，计划 2026-12 退役）", "openai_compatible": "任意 OpenAI 兼容客户端", "any_mcp_client": "任意 MCP 客户端",
         "cursor": "Cursor", "codex": "Codex", "gemini_cli": "Gemini CLI", "opencode": "OpenCode",
         "openclaw": "OpenClaw", "hermes": "Hermes", "astrbot": "AstrBot", "sillytavern": "SillyTavern",
         "open_webui": "Open WebUI", "kelivo": "Kelivo", "deepseek_harness": "DeepSeek Harness", "telegram": "Telegram", "wechat": "微信", "feishu": "飞书", "discord": "Discord",
