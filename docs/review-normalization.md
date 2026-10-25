@@ -17,7 +17,7 @@
 | `runs_on` | `own_computer` 自己的电脑；`own_server` 自己的服务器；`own_cloud_account` 自己的云账号；`phone` 手机；`third_party_hosted` 别人的服务器（托管） | 228 | 0 | 6 | 0 |
 | `os` | `windows` Windows；`macos` macOS；`linux` Linux；`android` 安卓；`ios` iOS；`any` 任何系统（浏览器即可） | 219 | 0 | 15 | 0 |
 | `difficulty` | `low` 低：应用商店或一键安装；`medium` 中：几条命令或按向导填设置；`high` 高：要写代码或改较多配置 | 234 | 0 | 0 | 0 |
-| `cost` | `free` 免费；`model_fees_only` 只需模型调用费；`paid_service` 需付费服务或订阅 | 204 | 7 | 23 | 0 |
+| `cost` | `free` 免费；`model_fees_only` 只需模型调用费；`paid_service` 需付费服务或订阅 | 205 | 7 | 22 | 0 |
 | `accounts_needed` | `none` 不需要；`github` GitHub；`cloudflare` Cloudflare；`render` Render；`model_api_key` 模型接口密钥；`vendor_account` 项目方账号；`telegram` Telegram 机器人；`claude_subscription` Claude 付费套餐 | 178 | 36 | 20 | 0 |
 | `memory_subject` | `user_facts` 用户本人的事实和偏好；`ai_identity` AI 自身身份与关系；`experience` 做事经验；`task_context` 当前任务上下文；`conversation_history` 历史对话原文 | 205 | 0 | 29 | 0 |
 | `write_mode` | `auto` 自动记；`review_first` 先出候选再由人审核；`on_request` 由 AI 或用户主动调用时才记 | 58 | 87 | 89 | 0 |
@@ -62,7 +62,7 @@
 | `write_receipt` | `yes` 写入后能明确告诉你记没记上（回执、返回编号、可回读）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 | `memory_writer` | `chat_agent` 聊天的 AI 自己调用工具记；`background` 后台的模型或规则自动整理；`user` 用户自己手动记；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 
-共 234 个项目：文档未说明 471 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
+共 234 个项目：文档未说明 470 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 
 说明：
 
@@ -166,7 +166,7 @@
 | rolling-memory（`rolling-memory`） | 文档未说明 | — | — | README 和原表都没提到系统 |
 | TencentDB Agent Memory（`tencentdb-agent-memory`） | 文档未说明 | — | — | README 和原表都没提到系统 |
 
-## `cost` 费用（23 处）
+## `cost` 费用（22 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
@@ -181,7 +181,6 @@
 | Kremis（`kremis`） | 文档未说明 | — | — | 文档写的是“自己的电脑（需 Rust 编译）；alpha 版”，归不进固定选项 |
 | Letta（原 MemGPT）（`letta`） | 文档未说明 | — | — | 文档写的是“本地或 Letta Cloud；已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）；源码已迁至 letta-ai/letta-code；项目已更名为 Letta；评测：MemTensor 统一评测：LoCoMo 77.1、LongMemEval-S 77.7、BEAM 10M 52.3”，归不进固定选项 |
 | Memory MCP（michael-denyer）（`memory-mcp`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
-| Mengram（`mengram`） | 文档未说明 | Mengram 账号 | — | 文档写的是“Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器”，归不进固定选项 |
 | Myco（`myco`） | 文档未说明 | — | — | 文档写的是“自己的电脑；偏编程场景”，归不进固定选项 |
 | Omnigraph（`omnigraph`） | 文档未说明 | — | — | 文档写的是“自己的电脑或对象存储”，归不进固定选项 |
 | 药盒 pilulier（`pilulier`） | 文档未说明 | — | — | 说明文档没有写 |

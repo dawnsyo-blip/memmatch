@@ -120,6 +120,8 @@
     },
     "runs_on": {
       "value": [
+        "own_computer",
+        "own_server",
         "third_party_hosted"
       ],
       "status": "auto",
@@ -127,10 +129,12 @@
     },
     "os": {
       "value": [
-        "any"
+        "linux",
+        "macos",
+        "windows"
       ],
       "status": "auto",
-      "basis": "只在云端运行，用浏览器操作即可"
+      "basis": "README／原表提到：；用跨平台运行时安装（npm i），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "high",
@@ -183,10 +187,11 @@
     },
     "data_passes_through": {
       "value": [
+        "local_only",
         "third_party"
       ],
       "status": "auto",
-      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
     },
     "license_category": {
       "value": "permissive",

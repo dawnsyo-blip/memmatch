@@ -190,11 +190,11 @@ def n_clients(c, access):
 def n_runs_on(c):
     t = c.text("run", "x:运行位置")
     found = hits(t, {
-        "own_computer": r"电脑|本机|本地|Mac|桌面|树莓派|小型设备",
-        "own_server": r"服务器|VPS|NAS",
+        "own_computer": r"电脑|本机|本地|Mac|桌面|树莓派|小型设备|自托管|自部署|self-host",
+        "own_server": r"服务器|VPS|NAS|自托管|自部署|自己部署|self-host",
         "own_cloud_account": r"Cloudflare|Render|Zeabur|Vercel|Fly\.io|Supabase|Neon|Hugging Face|R2",
         "phone": r"手机|Android|安卓|iOS|iPhone|Termux",
-        "third_party_hosted": r"托管|memu\.so|Cloud\b|云版|mengram|Cosmos 服务|MemOS Cloud|Letta Cloud|免费云",
+        "third_party_hosted": r"(?<!自)托管|memu\.so|Cloud\b|云版|mengram|Cosmos 服务|MemOS Cloud|Letta Cloud|免费云",
     })
     vals = [v for v, _ in found]
     if not vals and re.search(r"Docker|Postgres|Qdrant|二进制|自己的程序", t):

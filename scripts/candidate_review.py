@@ -411,7 +411,8 @@ NEW = {
     "alekseimarchenko/central-intelligence": _e("Central Intelligence", "待定", "P3", "持久记忆服务，默认需 API 密钥", "事实", "MCP",
         "Claude Code、Cursor", "托管；可自托管", "中", "CI API 密钥"),
     "alibaizhanov/mengram": _e("Mengram", "待定", "P3", "会学习的 agent 记忆，可导入 ChatGPT/Claude Code 历史", "事实、经历、流程", "MCP＋钩子",
-        "Claude Desktop、Claude Code、Cursor、Codex、OpenClaw", "托管（mengram.io）", "低到中", "Mengram 账号"),
+        "Claude Desktop、Claude Code、Cursor、Codex、OpenClaw", "托管（mengram.io）；也可在自己电脑上本地运行（mengram local）", "低到中",
+        "托管版需 Mengram 账号；本地模式需模型 API 密钥或 Ollama", "2026-10-25 补：README 有完全本地运行的模式，原筛选只写了托管"),
     "ayushagrawal288/memex": _e("memex（ayushagrawal288）", "待定", "P4", "生产级记忆服务，带监控", "对话记忆", "MCP",
         "Claude Desktop、Claude Code", "Docker", "高"),
     "terrizoaguimor/celiums-memory": _e("Celiums Memory", "待定", "P4", "认知记忆引擎，无界面", "多类记忆", "MCP；HTTP",
@@ -461,7 +462,8 @@ NEW = {
     "mnemosyne-os/mnemosyne-neural-os": _e("Mnemosyne OS", "排除", "B", "“主权 AI 操作系统”桌面应用，带 MCP 连接", "个人记忆", "桌面应用＋MCP",
         "Claude Code、Cursor、Claude Desktop", "自己的电脑", "中", "", "核心私有，授权依赖 Web3 钱包"),
     "memorilabs/memori": _e("Memori", "待定", "P3", "从 agent 行为中提取记忆", "事实与行为", "OpenClaw/Hermes 插件",
-        "OpenClaw、Hermes", "Memori Cloud", "低到中", "Memori Cloud API 密钥", "论文表 9 已列"),
+        "OpenClaw、Hermes", "Memori Cloud", "低到中", "Memori Cloud API 密钥",
+        "论文表 9 已列；可把记忆存进自己的数据库（BYODB），但仍需 Memori API 密钥，处理是否经过对方服务器 README 没写清"),
 
     # ---------- 第二轮补读（初筛时被关键词误归为排除的通用记忆项目）----------
     "kyrzin/kybase": _e("Kybase", "纳入", "", "一个 Markdown 知识库兼长期记忆，所有 agent 都能读写，你也能在浏览器里手动编辑",

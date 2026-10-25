@@ -55,7 +55,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "免代码用法默认经第三方服务器；论文表 9 已列；原仓库 GibsonAI/memori",
+      "value": "免代码用法默认经第三方服务器；论文表 9 已列；可把记忆存进自己的数据库（BYODB），但仍需 Memori API 密钥，处理是否经过对方服务器 README 没写清；原仓库 GibsonAI/memori",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -88,7 +88,7 @@
       "run": "Memori Cloud",
       "diff": "低到中",
       "need": "Memori Cloud API 密钥",
-      "note": "论文表 9 已列"
+      "note": "论文表 9 已列；可把记忆存进自己的数据库（BYODB），但仍需 Memori API 密钥，处理是否经过对方服务器 README 没写清"
     }
   },
   "normalized": {

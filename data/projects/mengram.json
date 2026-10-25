@@ -35,7 +35,7 @@
       "read_date": "2026-10-10"
     },
     "runs_on": {
-      "value": "托管（mengram.io）",
+      "value": "托管（mengram.io）；也可在自己电脑上本地运行（mengram local）",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     },
@@ -45,7 +45,7 @@
       "read_date": "2026-10-10"
     },
     "accounts_needed": {
-      "value": "Mengram 账号",
+      "value": "托管版需 Mengram 账号；本地模式需模型 API 密钥或 Ollama",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     },
@@ -55,7 +55,7 @@
       "read_date": "2026-10-10"
     },
     "notes": {
-      "value": "免代码用法默认经第三方服务器",
+      "value": "免代码用法默认经第三方服务器；2026-10-25 补：README 有完全本地运行的模式，原筛选只写了托管",
       "source": "Claude 据仓库 README 判断",
       "read_date": "2026-10-10"
     }
@@ -81,10 +81,10 @@
       "subj": "事实、经历、流程",
       "acc": "MCP＋钩子",
       "cli": "Claude Desktop、Claude Code、Cursor、Codex、OpenClaw",
-      "run": "托管（mengram.io）",
+      "run": "托管（mengram.io）；也可在自己电脑上本地运行（mengram local）",
       "diff": "低到中",
-      "need": "Mengram 账号",
-      "note": ""
+      "need": "托管版需 Mengram 账号；本地模式需模型 API 密钥或 Ollama",
+      "note": "2026-10-25 补：README 有完全本地运行的模式，原筛选只写了托管"
     }
   },
   "normalized": {
@@ -110,17 +110,20 @@
     },
     "runs_on": {
       "value": [
+        "own_computer",
         "third_party_hosted"
       ],
       "status": "auto",
-      "basis": "运行位置原文：托管（mengram.io）"
+      "basis": "运行位置原文：托管（mengram.io）；也可在自己电脑上本地运行（mengram local）"
     },
     "os": {
       "value": [
-        "any"
+        "linux",
+        "macos",
+        "windows"
       ],
       "status": "auto",
-      "basis": "只在云端运行，用浏览器操作即可"
+      "basis": "README／原表提到：macos（ce path recorded on your Mac never reaches a Claude C）；linux（Claude Code session on a Linux box, and a Cursor settin）；用跨平台运行时安装（pip install），按 Windows/macOS/Linux 都能用推断"
     },
     "difficulty": {
       "value": "medium",
@@ -128,16 +131,17 @@
       "basis": "门槛原文：低到中（区间取较高一档）"
     },
     "cost": {
-      "value": "",
-      "status": "unknown",
-      "basis": "费用原文未识别：Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器"
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
     },
     "accounts_needed": {
       "value": [
+        "model_api_key",
         "vendor_account"
       ],
       "status": "auto",
-      "basis": "账号原文：Mengram 账号"
+      "basis": "账号原文：托管版需 Mengram 账号；本地模式需模型 API 密钥或 Ollama"
     },
     "memory_subject": {
       "value": [
@@ -174,10 +178,11 @@
     },
     "data_passes_through": {
       "value": [
+        "local_only",
         "third_party"
       ],
       "status": "auto",
-      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
     },
     "license_category": {
       "value": "permissive",
@@ -385,11 +390,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "cost",
-      "label": "费用",
-      "note": "文档写的是“Mengram 账号；托管（mengram.io）；免代码用法默认经第三方服务器”，归不进固定选项"
-    },
     {
       "field": "forgetting",
       "label": "怎么遗忘",

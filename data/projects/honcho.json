@@ -112,6 +112,7 @@
     "runs_on": {
       "value": [
         "own_computer",
+        "own_server",
         "third_party_hosted"
       ],
       "status": "auto",
