@@ -102,10 +102,12 @@
     },
     "os": {
       "value": [
+        "windows",
+        "macos",
         "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：linux（l | sort -nr | head ``` Linux 上的 `stat` 参数不同，可以用： ```）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只要能跑 Claude Code 和 Python 脚本"
     },
     "difficulty": {
       "value": "medium",
@@ -374,9 +376,9 @@
       "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
     },
     "model_lock": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "value": "claude_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：处理 Claude Code 的会话"
     },
     "setup_device": {
       "value": "needs_computer",

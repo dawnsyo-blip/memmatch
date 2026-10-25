@@ -122,16 +122,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地 SQLite"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“eck in three seconds, with no API key Measured 2026-08-25 against”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：离线运行，演示和校验都不需要 API Key"
     },
     "memory_subject": {
       "value": [
@@ -389,9 +389,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不依赖模型"
     },
     "model_lock": {
       "value": "not_mentioned",

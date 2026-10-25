@@ -151,10 +151,11 @@
     },
     "runs_on": {
       "value": [
-        "own_computer"
+        "own_computer",
+        "own_server"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：本机（Windows／Mac／Linux）；本机（Windows／Mac／Linux）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Python 代理服务，可放在电脑或服务器上"
     },
     "os": {
       "value": [
@@ -171,16 +172,16 @@
       "basis": "门槛原文：低到中：三条命令＋网页设置向导；低到中：三条命令＋网页设置向导（区间取较高一档）"
     },
     "cost": {
-      "value": "free",
-      "status": "auto",
-      "basis": "不需要账号或密钥"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：模型按用量付费"
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：装了 Python 的电脑；装了 Python 的电脑"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：代理要配置上游模型的 API Key；外接整理模型另需 Key"
     },
     "memory_subject": {
       "value": [
@@ -191,10 +192,10 @@
     },
     "write_mode": {
       "value": [
-        "on_request"
+        "auto"
       ],
-      "status": "auto",
-      "basis": "原表写入方式：主模型在回复末尾写记忆标签，或另一模型每 5 轮总结；事后手动；无专门机制，只能在网页手动增删改"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：内置模式下模型在回复里加记忆标签由代理解析；外接模式由独立模型定期总结"
     },
     "forgetting": {
       "value": [
@@ -207,8 +208,8 @@
       "value": [
         "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：localhost:8080/` 可使用 Web 管理界面查看和管理记忆。 ## 数据存储 记忆数据存储"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页管理界面"
     },
     "export": {
       "value": [],
@@ -360,7 +361,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -419,22 +420,22 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "background"
       ],
       "status": "auto",
-      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "basis": "background：写入方式含自动记或先出候选（推断）"
     },
     "phone_access": {
       "value": [
-        "needs_tunnel"
+        "http_endpoint"
       ],
-      "status": "auto",
-      "basis": "needs_tunnel：说明：“文件；默认只在本机，手机用需自行部署或内网穿透；OpenAI 兼容代理，现有客户端零改”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：放在服务器上后，手机客户端把接口地址改成代理地址即可"
     },
     "local_model": {
-      "value": "no_model_needed",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -442,9 +443,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "needs_computer",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "只能装在自己的电脑上"
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
     "pairs_with": {
       "value": [],

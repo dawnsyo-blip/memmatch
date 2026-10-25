@@ -97,11 +97,10 @@
     },
     "os": {
       "value": [
-        "android",
-        "ios"
+        "any"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：android（、桌面机器人、触摸设备怎么成为可信输入与真实动作；安卓端 | | [10. 外部行动通道](archit）；ios（itecture/03-前端十个面板.md) | iPhone PWA 的十个面板各管什么、各有什么作用 | |）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只有文档，在任何设备上都能读"
     },
     "difficulty": {
       "value": "high",
@@ -134,11 +133,9 @@
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
-      "value": [
-        "dashboard"
-      ],
-      "status": "auto",
-      "basis": "dashboard：望、唤醒三个系统的闭环 | | [3. 前端：十个面板](architecture/03-前端十个面板."
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只有文档，没有界面"
     },
     "export": {
       "value": [],
@@ -282,16 +279,14 @@
       "basis": "按收录类别「教程与搭建指南」"
     },
     "lifecycle": {
-      "value": [
-        "review"
-      ],
+      "value": [],
       "status": "auto",
-      "basis": "查看修改：dashboard"
+      "basis": "没有可推出的环节"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 1/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 0/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [

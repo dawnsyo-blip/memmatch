@@ -325,8 +325,8 @@
         "recency",
         "emotion"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“跨事实、片段、实体档案三层，用关键词＋向量＋实体聚合检索；召回结果按新旧和命中情况”；keyword：说明：“rian 跨事实、片段、实体档案三层，用关键词＋向量＋实体聚合检索；召回结果按新旧和命”；recency：说明：“TP 接口，接近“要写代码”；召回结果按新旧和命中情况标“可引用／需谨慎／仅联想”；”；emotion：README：“ness dominates; after 3 days, emotional intensity dominates. Results below a co”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：分段衰减：3 天内看新鲜度，3 天后看情感强度"
     },
     "scoring_stages": {
       "value": [
@@ -342,11 +342,10 @@
     },
     "emotion_handling": {
       "value": [
-        "weighting",
-        "ai_state"
+        "weighting"
       ],
-      "status": "auto",
-      "basis": "weighting：README：“ness dominates; after 3 days, emotional intensity dominates. Results below a co”；ai_state：README：“egation. (Optional) A 5-axis emotional state engine ([jiwen](https://githu”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：情感强度参与排序；可选的情绪引擎 jiwen 是另一个项目"
     },
     "project_role": {
       "value": "dev_framework",

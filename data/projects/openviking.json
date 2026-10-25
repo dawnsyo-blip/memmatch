@@ -111,10 +111,11 @@
     "runs_on": {
       "value": [
         "own_computer",
-        "own_server"
+        "own_server",
+        "third_party_hosted"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑或服务器；有网页版 Studio 可先试"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可自托管；火山引擎也提供托管版（前 50 个文件免费）"
     },
     "os": {
       "value": [
@@ -387,10 +388,10 @@
     },
     "phone_access": {
       "value": [
-        "not_mentioned"
+        "cloud"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "cloud：运行位置含 third_party_hosted"
     },
     "local_model": {
       "value": "yes",

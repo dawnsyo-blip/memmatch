@@ -140,8 +140,8 @@
       "value": [
         "on_request"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 用按 schema 自动生成的工具增删改"
     },
     "forgetting": {
       "value": [

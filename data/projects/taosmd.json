@@ -111,11 +111,10 @@
     "os": {
       "value": [
         "linux",
-        "macos",
-        "windows"
+        "macos"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（pts/install-server.ps1` (PowerShell) automate the install, h）；macos（top, an Intel mini PC, a Mac mini, or a 16 GB Orange）；linux（Option A (default): any Linux/macOS box with or withou）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：安装脚本面向 Linux、macOS（含树莓派）"
     },
     "difficulty": {
       "value": "high",
@@ -123,16 +122,16 @@
       "basis": "门槛原文：高"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地运行"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "auto",
-      "basis": "账号原文：无需 API 密钥"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：零云依赖、零 API Key，用本地 Ollama 的 Qwen3-4B"
     },
     "memory_subject": {
       "value": [

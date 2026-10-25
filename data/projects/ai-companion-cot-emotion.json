@@ -113,11 +113,9 @@
       "basis": "账号原文未识别：（空）"
     },
     "memory_subject": {
-      "value": [
-        "ai_identity"
-      ],
-      "status": "auto",
-      "basis": "记忆对象原文：AI 情绪与思考链"
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 明说不做长期记忆，讲的是思考链和分钟到小时尺度的情绪状态"
     },
     "write_mode": {
       "value": [],
@@ -125,18 +123,14 @@
       "basis": "README 没提写入方式"
     },
     "forgetting": {
-      "value": [
-        "auto_decay"
-      ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README：“— 当前值 - `residuals[k]` —— 残留（强刺激留下的余味，独立衰减） **最重要的一行：分数不是当前值。** ```python def sc”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：情绪数值会衰减，但这不是记忆遗忘；原采用的建议值不适用"
     },
     "human_review": {
-      "value": [
-        "cli"
-      ],
-      "status": "auto",
-      "basis": "cli：`claude -p`（Claude Code 的命令行）， 把它的 stream-json 输出解析"
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：教程本身没有查看界面"
     },
     "export": {
       "value": [],
@@ -154,9 +148,9 @@
       "basis": "许可证原文：无 LICENSE 文件"
     },
     "persona_continuity": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "记忆对象含 AI 自身身份"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不涉及身份保存"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -250,11 +244,10 @@
     },
     "ranking_signals": {
       "value": [
-        "semantic",
-        "keyword"
+        "not_mentioned"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“8 秒不能接受\"。 换模型之后延迟变成 0.89 秒，跟语义检索那条 embedding 的 420ms 同一量级， **藏”；keyword：README：“推委屈）。 ## 2.5 情绪从哪来 - 她说的话（**关键词表 + 一个小模型打分**，见 2.6）+ 消息密度 - 心”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不做检索"
     },
     "scoring_stages": {
       "value": [
@@ -264,9 +257,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "相似度之外的因素 0 个：无"
+      "basis": "没找到排序方式"
     },
     "emotion_handling": {
       "value": [
@@ -281,18 +274,14 @@
       "basis": "按收录类别「教程与搭建指南」"
     },
     "lifecycle": {
-      "value": [
-        "retrieve",
-        "forget",
-        "review"
-      ],
+      "value": [],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli"
+      "basis": "没有可推出的环节"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 0/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [

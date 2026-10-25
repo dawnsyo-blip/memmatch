@@ -92,11 +92,10 @@
     },
     "compatible_clients": {
       "value": [
-        "claude_code",
-        "claude_web_mobile"
+        "claude_code"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code；交接文件可给 claude.ai、GPT 等"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：读取 Claude Code 本地会话；生成的交接文件可手动粘贴给 claude.ai、GPT 等，但不算接入"
     },
     "runs_on": {
       "value": [
@@ -120,17 +119,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "paid_service",
-      "status": "auto",
-      "basis": "账号原文：Claude Pro/Max 或自己的 API 密钥"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认不调用任何 API；可选 --llm 用自己的 Key 或 Claude Code 套餐"
     },
     "accounts_needed": {
       "value": [
-        "claude_subscription",
-        "model_api_key"
+        "none"
       ],
-      "status": "auto",
-      "basis": "账号原文：Claude Pro/Max 或自己的 API 密钥"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认离线运行"
     },
     "memory_subject": {
       "value": [
@@ -375,10 +373,10 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "not_mentioned"
       ],
       "status": "auto",
-      "basis": "remote_mcp：能配合 claude_web_mobile"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
       "value": "yes",
@@ -387,8 +385,8 @@
     },
     "model_lock": {
       "value": "claude_only",
-      "status": "auto",
-      "basis": "需要 Claude 付费套餐"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：处理的是 Claude Code 的会话记录"
     },
     "setup_device": {
       "value": "needs_computer",

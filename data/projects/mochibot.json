@@ -137,13 +137,12 @@
     },
     "compatible_clients": {
       "value": [
-        "chatgpt",
         "self_contained",
         "telegram",
         "wechat"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带；Telegram、微信"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：原判的 ChatGPT 来自“可从 ChatGPT 导出记录迁入”"
     },
     "runs_on": {
       "value": [
@@ -424,11 +423,10 @@
     },
     "phone_access": {
       "value": [
-        "native",
-        "remote_mcp"
+        "native"
       ],
-      "status": "auto",
-      "basis": "native：装在手机可用的宿主里（telegram、wechat）；remote_mcp：能配合 chatgpt"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：在 Telegram 或微信里聊"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -441,9 +439,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：在电脑或服务器上运行 setup 脚本"
     },
     "pairs_with": {
       "value": [

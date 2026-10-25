@@ -88,10 +88,12 @@
     },
     "compatible_clients": {
       "value": [
-        "claude_desktop"
+        "any_mcp_client",
+        "claude_desktop",
+        "claude_code"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Desktop 等"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可嵌入的 Rust 库＋MCP 服务，能导入 Claude Code 记录"
     },
     "runs_on": {
       "value": [
@@ -388,9 +390,9 @@
       "basis": "README：“ctionProvider` that calls any OpenAI-compatible API: ```rust use alaya::LlmExtra”"
     },
     "model_lock": {
-      "value": "claude_only",
-      "status": "auto",
-      "basis": "只写了 Claude 官方客户端（推断）"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：原判来自客户端只写了 Claude 桌面版；MCP 服务不限客户端"
     },
     "setup_device": {
       "value": "needs_computer",

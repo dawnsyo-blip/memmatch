@@ -114,19 +114,17 @@
     },
     "os": {
       "value": [
-        "android",
-        "ios",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（个问题在不同 AstrBot 版本、不同部署方式（Windows/Docker）、不同网络环境下表现不一，无法稳定）；android（到最新的手机微信版本：iOS >= 8.0.70，Android >= 8.0.69，并确保微信中包含 ClawB）；ios（> > 使用个人微信需要升级到最新的手机微信版本：iOS >= 8.0.70，Android >= 8.0）；用跨平台运行时安装（Python 3.10），按 Windows/macOS/Linux 都能用推断"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在 AstrBot 所在机器；原判的安卓、iOS 不对"
     },
     "difficulty": {
-      "value": "medium",
-      "status": "auto",
-      "basis": "门槛原文：中"
+      "value": "low",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AstrBot 插件市场下载，或在 WebUI 里从文件安装"
     },
     "cost": {
       "value": "model_fees_only",
@@ -388,9 +386,9 @@
       "basis": "native：装在手机可用的宿主里（astrbot、telegram、wechat）"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用 AstrBot 里配置的模型服务"
     },
     "model_lock": {
       "value": "not_mentioned",

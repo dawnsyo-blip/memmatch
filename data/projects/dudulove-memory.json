@@ -155,10 +155,11 @@
     },
     "human_review": {
       "value": [
-        "dashboard"
+        "dashboard",
+        "tools"
       ],
-      "status": "auto",
-      "basis": "dashboard：cripts npm start ``` 1. 浏览器打开终端显示的地址，默认是 `http://127.0"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带管理网页：保存、编辑、删除、恢复"
     },
     "export": {
       "value": [],
@@ -311,7 +312,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、tools"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -349,8 +350,8 @@
         "dedup",
         "budget"
       ],
-      "status": "auto",
-      "basis": "dedup：README：“ation**：围绕当前话题自然联想相关经历，并结合会话级 Recall Ledger，减少同一条记忆在短时间内反复浮现。 - **Evidenc”；budget：README：“ntext Assembler 按身份、权限、模式、话题和 token 预算组合，再交给当前模型。 ## 记忆也需要治理 长期记忆不”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：会话级召回账本避免同一条反复浮现；按 token 预算组装上下文"
     },
     "recall_uses_llm": {
       "value": [
@@ -378,15 +379,16 @@
     },
     "phone_access": {
       "value": [
-        "not_mentioned"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：跨设备要按部署说明配 HTTPS 地址"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：基础记录、关键词搜索不依赖模型；语义检索用自配的 OpenAI 兼容接口，可指向本地模型"
     },
     "model_lock": {
       "value": "not_mentioned",

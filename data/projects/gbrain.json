@@ -391,8 +391,8 @@
         "remote_mcp",
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 chatgpt；needs_tunnel：说明：“t 共用；用户事实＋技能；MCP；可经 Tailscale 从其它设备访问；Claude Desk”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：gbrain mcp expose 通过 Tailscale（可加 funnel 公开）把本机记忆发布成 MCP"
     },
     "local_model": {
       "value": "yes",

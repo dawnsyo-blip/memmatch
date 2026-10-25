@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "记忆来源是“人的生活日志”而非聊天记录，多模态碎片→时间线，可迁移为 Markdown",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "本地优先的 AI 生活日志 App（iOS、安卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Key 或用 ChatGPT、Gemini 账号登录",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实（生活日志）",
@@ -139,12 +139,10 @@
     },
     "runs_on": {
       "value": [
-        "own_computer",
-        "phone",
-        "third_party_hosted"
+        "phone"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：手机本地（可存 iCloud Drive）；手机本地（可存 iCloud Drive）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：手机 App，没有 Memex 服务器"
     },
     "os": {
       "value": [
@@ -156,8 +154,8 @@
     },
     "difficulty": {
       "value": "low",
-      "status": "auto",
-      "basis": "门槛原文：低：应用商店安装；低：应用商店安装"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：App Store、Google Play 直接下载"
     },
     "cost": {
       "value": "model_fees_only",
@@ -207,11 +205,10 @@
     },
     "data_passes_through": {
       "value": [
-        "local_only",
-        "third_party"
+        "local_only"
       ],
-      "status": "auto",
-      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记录都存在设备上；调用模型时内容会发给你选的模型服务商"
     },
     "license_category": {
       "value": "copyleft",
@@ -420,11 +417,10 @@
     },
     "phone_access": {
       "value": [
-        "native",
-        "cloud"
+        "native"
       ],
-      "status": "auto",
-      "basis": "native：本身能在手机上运行；cloud：运行位置含 third_party_hosted"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：手机 App"
     },
     "local_model": {
       "value": "yes",
@@ -438,8 +434,8 @@
     },
     "setup_device": {
       "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：应用商店安装"
     },
     "pairs_with": {
       "value": [],

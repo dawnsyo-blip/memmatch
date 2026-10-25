@@ -168,10 +168,10 @@
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "claude_subscription"
       ],
-      "status": "auto",
-      "basis": "原表「所需设备与账号」只列了设备和软件，没有账号：macOS；Claude Code 或 Codex 的官方登录；macOS；Claude Code 或 Codex 的官方登录"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：终端里跑的是 Claude Code 或 Codex，用你自己的账号登录（Codex 走 ChatGPT 账号）"
     },
     "memory_subject": {
       "value": [
@@ -427,9 +427,9 @@
       "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
     },
     "model_lock": {
-      "value": "not_mentioned",
+      "value": "claude_only",
       "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "basis": "需要 Claude 付费套餐"
     },
     "setup_device": {
       "value": "needs_computer",

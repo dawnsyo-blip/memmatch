@@ -93,11 +93,10 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
         "claude_code"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Claude Code 的技能、钩子；MCP 只是可选"
     },
     "runs_on": {
       "value": [
@@ -141,25 +140,26 @@
     },
     "write_mode": {
       "value": [
-        "auto"
+        "auto",
+        "on_request"
       ],
-      "status": "auto",
-      "basis": "README：“d **Hooks:** - **Auto-save on exit** - Stop hook captures session context automatically when Clau”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：退出和压缩前钩子自动保存；也可手动 /remember"
     },
     "forgetting": {
       "value": [
         "manual_only"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“by default. Use `--remove-data` to also delete the database, or `--keep-data` to skip”，没提自动衰减，建议值 manual_only"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可按时间或数量清理旧会话"
     },
     "human_review": {
       "value": [
-        "cli",
-        "dashboard"
+        "dashboard",
+        "cli"
       ],
-      "status": "auto",
-      "basis": "dashboard：Code 会话保存可搜索的上下文和会话摘要，带网页面板；技能＋钩子＋MCP（可选）；# context-；cli：oard](#web-dashboard) - [CLI Tools](#cli-tools) - [Da"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页面板可增删改查，另有命令行工具"
     },
     "export": {
       "value": [
@@ -313,7 +313,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
+      "basis": "写入方式：auto、on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard、cli"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -372,10 +372,11 @@
     },
     "memory_writer": {
       "value": [
-        "background"
+        "background",
+        "chat_agent"
       ],
       "status": "auto",
-      "basis": "background：README：“**Auto-save on exit** - Stop hook captures session context automatically”"
+      "basis": "background：README：“**Auto-save on exit** - Stop hook captures session context automatically”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     },
     "phone_access": {
       "value": [
@@ -390,9 +391,9 @@
       "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
     },
     "model_lock": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "value": "claude_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只服务 Claude Code"
     },
     "setup_device": {
       "value": "needs_computer",

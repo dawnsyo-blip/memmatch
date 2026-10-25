@@ -111,9 +111,12 @@
       "basis": "运行位置原文：自己的电脑"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "macos",
+        "linux"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：sh 安装脚本"
     },
     "difficulty": {
       "value": "medium",
@@ -402,11 +405,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
     {
       "field": "write_mode",
       "label": "记忆怎么写入",

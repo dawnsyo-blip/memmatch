@@ -137,12 +137,11 @@
     },
     "compatible_clients": {
       "value": [
-        "claude_code",
-        "codex",
-        "self_contained"
+        "self_contained",
+        "discord"
       ],
-      "status": "auto",
-      "basis": "客户端原文：自带 Mac 应用；调度 Claude Code、Codex"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带桌面聊天界面，可做 Discord 机器人；Claude Code、Codex 是它委派任务的对象，不是接它记忆的入口"
     },
     "runs_on": {
       "value": [
@@ -426,10 +425,10 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "native"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“rotocol servers over stdio or streamable HTTP, including OAuth-protected re”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Discord 机器人可在手机上聊"
     },
     "local_model": {
       "value": "yes",
@@ -442,9 +441,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "needs_computer",
+      "value": "phone_ok",
       "status": "auto",
-      "basis": "只能装在自己的电脑上"
+      "basis": "手机入口直接可用（推断）"
     },
     "pairs_with": {
       "value": [],

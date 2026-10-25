@@ -97,14 +97,15 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "chatgpt",
         "claude_code",
         "codex",
-        "cursor"
+        "cursor",
+        "claude_web_mobile",
+        "chatgpt",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code、Claude.ai、ChatGPT、Codex、Cursor 等（网页版需公网部署）；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地客户端直连；Claude.ai、ChatGPT 要公网 HTTPS 部署并配 OAuth"
     },
     "runs_on": {
       "value": [
@@ -150,10 +151,11 @@
     },
     "write_mode": {
       "value": [
+        "auto",
         "on_request"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：后台 Agent 读取工具记下的内容自行整理；工具也可主动写"
     },
     "forgetting": {
       "value": [
@@ -164,10 +166,11 @@
     },
     "human_review": {
       "value": [
-        "cli"
+        "cli",
+        "tools"
       ],
-      "status": "auto",
-      "basis": "cli：127.0.0.1:8765`. Point a CLI or desktop client (Claud"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可读出它相信什么、追溯来源并更正"
     },
     "export": {
       "value": [
@@ -324,7 +327,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli"
+      "basis": "写入方式：auto、on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、tools"
     },
     "lifecycle_complete": {
       "value": "complete",
@@ -391,10 +394,11 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 chatgpt"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：网页、手机端要自己做公网部署"
     },
     "local_model": {
       "value": "not_mentioned",

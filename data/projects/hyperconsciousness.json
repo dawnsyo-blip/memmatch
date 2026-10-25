@@ -93,10 +93,11 @@
     },
     "compatible_clients": {
       "value": [
-        "codex"
+        "codex",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Codex 等"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：MCP/HTTP 服务＋Codex 技能"
     },
     "runs_on": {
       "value": [
@@ -107,14 +108,11 @@
     },
     "os": {
       "value": [
-        "android",
-        "ios",
-        "linux",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（, Linux x86-64/ARM64 and Windows x86-64 builds. Linux bui）；macos（th `hc`. ## Install On macOS or Linux, install the la）；linux（## Install On macOS or Linux, install the latest publ）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：安装脚本支持 macOS、Linux；README 明说桌面、iOS、安卓应用不在本仓库"
     },
     "difficulty": {
       "value": "high",

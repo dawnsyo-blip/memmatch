@@ -164,9 +164,9 @@
       "basis": "门槛原文：高：安装器会装 PostgreSQL、Valkey、HashiCorp Vault；高：安装器会装 PostgreSQL、Valkey、HashiCorp Vault"
     },
     "cost": {
-      "value": "paid_service",
-      "status": "auto",
-      "basis": "账号原文：macOS 或 Linux；模型服务（安装器推荐付费的 LunaRoute，也可分项配置或本地模型）"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：推荐的 LunaRoute 是包月模型服务；也可填别的模型服务商的 Key"
     },
     "accounts_needed": {
       "value": [

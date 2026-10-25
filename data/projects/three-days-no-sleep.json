@@ -162,16 +162,17 @@
       "basis": "门槛原文：中：按教程在 Cloudflare 后台操作十步；中：按教程在 Cloudflare 后台操作十步"
     },
     "cost": {
-      "value": "free",
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：只需免费账号（Cloudflare 账号；能运行 Node.js 的电脑；Cloudflare 云端；伴侣应用自带记忆；README 只有部署教程，功能未经核实；仅限非商业；Cloudflare 账号；能运行 Node.js 的电脑），但云平台免费额度有限，需确认"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Cloudflare 免费额度内；模型按用量付费"
     },
     "accounts_needed": {
       "value": [
-        "cloudflare"
+        "cloudflare",
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：Cloudflare 账号；能运行 Node.js 的电脑；Cloudflare 账号；能运行 Node.js 的电脑"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：部署到 Cloudflare Pages 和 Worker；聊天要自备模型 API"
     },
     "memory_subject": {
       "value": [
@@ -420,9 +421,9 @@
       "basis": "cloud：运行位置含 own_cloud_account"
     },
     "local_model": {
-      "value": "no_model_needed",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -430,9 +431,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：第七步要在电脑上装 Node.js 和 Wrangler"
     },
     "pairs_with": {
       "value": [],

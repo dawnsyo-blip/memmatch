@@ -91,9 +91,11 @@
       "basis": "接入方式原文：命令行工具"
     },
     "compatible_clients": {
-      "value": [],
-      "status": "unknown",
-      "basis": "客户端原文：本地模型运行器（GGUF）"
+      "value": [
+        "openai_compatible"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：训练出的 GGUF 模型用 Ollama 加载后，任何能填本地接口的客户端都能用"
     },
     "runs_on": {
       "value": [
@@ -117,16 +119,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "paid_service",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：训练时按时租用 RunPod 云显卡"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "vendor_account"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：说明里没写；README 提到“runpod ``` **2. Get a RunPod API key:** 1. Go to [RunPod Settings”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要 RunPod（云显卡）和 HuggingFace 账号的 Key"
     },
     "memory_subject": {
       "value": [
@@ -395,11 +397,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "compatible_clients",
-      "label": "能配合的助手",
-      "note": "客户端原文：本地模型运行器（GGUF）"
-    },
     {
       "field": "write_mode",
       "label": "记忆怎么写入",

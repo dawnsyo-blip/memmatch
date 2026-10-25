@@ -161,9 +161,9 @@
       "basis": "README／原表提到：macos（自己的电脑；自己的电脑；macOS / Linux；低：一条安装命令＋问答式配置；基）；linux（自己的电脑；自己的电脑；macOS / Linux；低：一条安装命令＋问答式配置；基于 Hermes）"
     },
     "difficulty": {
-      "value": "low",
-      "status": "auto",
-      "basis": "门槛原文：低：一条安装命令＋问答式配置；低：一条安装命令＋问答式配置"
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：在终端里运行一条安装命令，再按提示配模型"
     },
     "cost": {
       "value": "model_fees_only",
@@ -289,9 +289,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "relationship_stage": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：关系记忆：双方确认的称呼、边界、约定、仪式和关系变化"
     },
     "independent_life": {
       "value": "not_mentioned",
@@ -416,10 +416,11 @@
     },
     "phone_access": {
       "value": [
-        "native"
+        "native",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "native：装在手机可用的宿主里（wechat、feishu）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可以连微信、飞书；本地网页要自己暴露"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -432,9 +433,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：在 macOS 或 Linux 电脑上安装"
     },
     "pairs_with": {
       "value": [],

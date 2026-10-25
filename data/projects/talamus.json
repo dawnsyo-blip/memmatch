@@ -123,14 +123,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "",
-      "status": "unknown",
-      "basis": "费用原文未识别：自己的电脑；偏编程场景"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地检索免费"
     },
     "accounts_needed": {
-      "value": [],
-      "status": "unknown",
-      "basis": "账号原文未识别：（空）"
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不需要托管账号和嵌入；需要大模型的操作用你已有的 Claude/Codex CLI 或 Ollama"
     },
     "memory_subject": {
       "value": [
@@ -404,16 +406,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "cost",
-      "label": "费用",
-      "note": "文档写的是“自己的电脑；偏编程场景”，归不进固定选项"
-    },
-    {
-      "field": "accounts_needed",
-      "label": "需要的账号",
-      "note": "说明文档没有写"
-    },
     {
       "field": "forgetting",
       "label": "怎么遗忘",

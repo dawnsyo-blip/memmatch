@@ -152,14 +152,12 @@
     },
     "os": {
       "value": [
-        "android",
-        "ios",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：macos（b；中：一键脚本＋改 .env＋下载客户端；后端＋macOS 客户端，可接微信；人格从驱力与记忆中涌现，不靠固）；android（都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · **同在** — *走）；ios（她读懂你自己都没意识到的信号 - [ ] 移动端（iOS / Android） ### 阶段 Ⅲ · *）；用跨平台运行时安装（Python 3.11），按 Windows/macOS/Linux 都能用推断"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：后端服务装在电脑上；手机通过微信等入口聊"
     },
     "difficulty": {
       "value": "medium",
@@ -426,8 +424,8 @@
       "value": [
         "native"
       ],
-      "status": "auto",
-      "basis": "native：本身能在手机上运行"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可接微信"
     },
     "local_model": {
       "value": "yes",

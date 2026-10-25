@@ -54,7 +54,7 @@ export const PERSONAS = [
     title: "Windows 电脑跑酒馆做角色扮演，手机用浏览器访问",
     answers: { q1: ["deepseek", "anthropic"], q2: ["android", "windows"], q3: ["sillytavern"], q4: "single",
                q5: ["computer"], q7: ["roleplay", "companion"], q16: "medium", q17: ["api_key"], q18: "ten" },
-    expect: "酒馆的记忆扩展排在前面；同时推荐可搭配的情绪、身体状态引擎",
+    expect: "酒馆的记忆扩展排在前面；库里的情绪、身体状态引擎都要自己写代码接入，不推荐给酒馆用户（Smart Memory 自己会记角色的情绪状态）",
   },
   {
     id: "astrbot_qq",

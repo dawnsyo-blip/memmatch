@@ -128,10 +128,11 @@
     },
     "accounts_needed": {
       "value": [
+        "claude_subscription",
         "model_api_key"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：账号原文：可选 Ollama 或 Voyage（含“可选”，需确认是否必需）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：整理默认调用本机 Claude Code CLI（用现有套餐），也可换别的模型服务"
     },
     "memory_subject": {
       "value": [
@@ -393,9 +394,9 @@
       "basis": "README：“ovider` in `config.json` to `\"ollama\"` (local, no API key) or `\"vo”"
     },
     "model_lock": {
-      "value": "not_mentioned",
+      "value": "claude_only",
       "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "basis": "需要 Claude 付费套餐"
     },
     "setup_device": {
       "value": "needs_computer",

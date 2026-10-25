@@ -170,7 +170,7 @@
         "dashboard"
       ],
       "status": "auto",
-      "basis": "dashboard：本地优先的时序记忆引擎，带面板，提供多种宿主插件；MCP；HTTP；插件；仓库已；cli：cript engine across npm, CLI, HTTP, MCP, dashboard, a"
+      "basis": "dashboard：变、可追溯来源、能按时间判断事实是否还成立，带网页面板和 VS Code 扩展；可导入 Claude C；cli：cript engine across npm, CLI, HTTP, MCP, dashboard, a"
     },
     "export": {
       "value": [],
@@ -217,7 +217,7 @@
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“本地优先的时序记忆引擎，带面板，提供多种宿主插件；用户事实＋聊天”"
+      "basis": "原表／说明：“面向开发者的时序记忆引擎：本地 SQLite，内容不可变、可追溯来”"
     },
     "dream_consolidation": {
       "value": "yes",
@@ -280,9 +280,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "privacy_protection": {
-      "value": "yes",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "原表／说明：“本地优先的时序记忆引擎，带面板，提供多种宿主插件；用户事实”"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "ranking_signals": {
       "value": [

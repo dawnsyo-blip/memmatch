@@ -348,8 +348,8 @@
       "value": [
         "llm"
       ],
-      "status": "auto",
-      "basis": "llm：说明：“当前话题检索相关章节，也可以让 AI 用工具自己查；聊天章节摘要时间线；SillyTave”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：检索时由模型提出查询，或让 AI 用工具自己查章节"
     },
     "sensitive_suppression": {
       "value": "not_mentioned",

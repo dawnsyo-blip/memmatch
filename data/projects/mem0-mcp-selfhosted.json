@@ -127,10 +127,10 @@
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "claude_subscription"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“y relationships) | | **Google API Key** | Optional | Required only”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认用 Claude Code 会话令牌做事实抽取，不需要 API Key；也可全用本地 Ollama"
     },
     "memory_subject": {
       "value": [
@@ -141,10 +141,11 @@
     },
     "write_mode": {
       "value": [
+        "auto",
         "on_request"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Claude Code 钩子在会话结束时自动存摘要；AI 也可调工具"
     },
     "forgetting": {
       "value": [
@@ -312,7 +313,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、tools"
+      "basis": "写入方式：auto、on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、tools"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -371,10 +372,11 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "chat_agent",
+        "background"
       ],
       "status": "auto",
-      "basis": "chat_agent：README：“to re-explain anything. Use `add_memory` whenever you discover projec”"
+      "basis": "chat_agent：README：“to re-explain anything. Use `add_memory` whenever you discover projec”；background：写入方式含自动记或先出候选（推断）"
     },
     "phone_access": {
       "value": [
@@ -389,9 +391,9 @@
       "basis": "README：“self-hosted Qdrant + Neo4j + Ollama, with your choice of Anthropi”"
     },
     "model_lock": {
-      "value": "not_mentioned",
+      "value": "claude_only",
       "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "basis": "需要 Claude 付费套餐"
     },
     "setup_device": {
       "value": "not_mentioned",

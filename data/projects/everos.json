@@ -99,11 +99,13 @@
     },
     "compatible_clients": {
       "value": [
+        "developer_built",
         "deepseek_harness",
-        "developer_built"
+        "hermes",
+        "openclaw"
       ],
-      "status": "auto",
-      "basis": "客户端原文：开发者自建；README 有 DeepSeek Harness 插件或指南：“gins/tree/main/dsh\">DSH plugin</a> for memory-awar”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Python 库；官方插件仓库有 DeepSeek Harness、Hermes、OpenClaw 插件"
     },
     "runs_on": {
       "value": [
@@ -114,13 +116,12 @@
     },
     "os": {
       "value": [
-        "ios",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：macos（fice documents: ```bash brew install --cask libreoffice）；linux（y libreoffice # Debian / Ubuntu ``` ### For Co）；ios（Agent NPC Experience An iOS sci-fi mystery game wher）；用跨平台运行时安装（Python 3.12），按 Windows/macOS/Linux 都能用推断"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：pip 安装的 Python 库；原判的 iOS 不对"
     },
     "difficulty": {
       "value": "high",

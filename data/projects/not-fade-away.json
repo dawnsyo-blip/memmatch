@@ -107,10 +107,11 @@
     },
     "os": {
       "value": [
-        "macos"
+        "macos",
+        "linux"
       ],
-      "status": "auto",
-      "basis": "原文：自己的 Mac 或 VPS；高；# 不会消失的恋人"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自己的 Mac 或 Linux VPS"
     },
     "difficulty": {
       "value": "high",
@@ -374,8 +375,8 @@
       "value": [
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "needs_tunnel：README：“防 loop + 各自记忆人设 - **远程访问** —— Cloudflare Tunnel + 源站锁定 + 应用层鉴权 - **墙内可用** ——”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：手机通过自建网页前端访问，要自己暴露"
     },
     "local_model": {
       "value": "yes",

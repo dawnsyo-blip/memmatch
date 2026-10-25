@@ -117,16 +117,16 @@
       "basis": "门槛原文：高"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地 ONNX 嵌入"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“Docker and Docker Compose. No API keys required — the entire stack”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：不需要任何 API Key，整套本地运行"
     },
     "memory_subject": {
       "value": [
@@ -272,22 +272,23 @@
     "ranking_signals": {
       "value": [
         "semantic",
-        "recency"
+        "recency",
+        "importance"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“nks conversation memory using semantic search with recency decay, so agents”；recency：README：“ry using semantic search with recency decay, so agents surface what”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：相似度召回后按衰减公式（新近、重要性）重排"
     },
     "scoring_stages": {
       "value": [
         "retrieve"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
+      "basis": "retrieve：排序因素含 recency、importance（推断召回时综合排序）"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：recency"
+      "basis": "相似度之外的因素 2 个：recency、importance"
     },
     "emotion_handling": {
       "value": [
@@ -376,15 +377,15 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“integration. **Transport:** Streamable HTTP (MCP 2024-11-05 spec). Single”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：REST API 和本机 MCP"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地 ONNX 嵌入，不调用大模型"
     },
     "model_lock": {
       "value": "not_mentioned",

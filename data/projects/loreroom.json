@@ -374,8 +374,8 @@
       "value": [
         "native"
       ],
-      "status": "auto",
-      "basis": "native：装在手机可用的宿主里（telegram）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：在手机 Telegram 里和 Claude Code 机器人聊"
     },
     "local_model": {
       "value": "no_model_needed",
@@ -384,13 +384,13 @@
     },
     "model_lock": {
       "value": "claude_only",
-      "status": "auto",
-      "basis": "README：“Room 👇 > **Scope:** LoreRoom only works with Claude Code + the official Telegram”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：给 Claude Code 官方 Telegram 插件打补丁"
     },
     "setup_device": {
-      "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在跑 Claude Code 的电脑上"
     },
     "pairs_with": {
       "value": [],

@@ -264,7 +264,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“TML 文件的离线 PWA，带跨端备份；用户事实（情感记忆）；单个 HTML 文件（可装成 PWA）；自”"
+      "basis": "原表／说明：“天、通话、书信、日历、共读等 15 个模块，记忆按情绪坐标可视化、可查可纠；数据只存在本机浏览器，需自备”"
     },
     "proactive": {
       "value": "yes",
@@ -314,7 +314,7 @@
     "voice_interaction": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“HTML 文件的离线 PWA，带跨端备份；聊天、通话结束可一键生成第一人称记忆；每位 AI 维护独立档”"
+      "basis": "原表／说明：“件就能在手机浏览器里跑的 AI 陪伴小世界：聊天、通话、书信、日历、共读等 15 个模块，记忆按情绪坐标”"
     },
     "privacy_protection": {
       "value": "yes",

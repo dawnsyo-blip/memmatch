@@ -113,10 +113,12 @@
     },
     "os": {
       "value": [
-        "macos"
+        "windows",
+        "macos",
+        "linux"
       ],
-      "status": "auto",
-      "basis": "原文：stalled by hand — **macOS only** | The hook and t"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：npx 运行；README 专门讲了 Windows 上的 npm 垫片问题，说明 Windows 也能用"
     },
     "difficulty": {
       "value": "medium",
@@ -136,9 +138,12 @@
       "basis": "账号原文：无"
     },
     "memory_subject": {
-      "value": [],
-      "status": "unknown",
-      "basis": "记忆对象原文未识别：长期记忆（Markdown 文件夹）"
+      "value": [
+        "task_context",
+        "user_facts"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：你指定的 Markdown 记忆文件夹，加导入的资料库"
     },
     "write_mode": {
       "value": [
@@ -412,11 +417,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "memory_subject",
-      "label": "主要记住什么",
-      "note": "文档写的是“长期记忆（Markdown 文件夹）”，归不进固定选项"
-    },
     {
       "field": "export",
       "label": "能否导出",

@@ -422,8 +422,8 @@
       "value": [
         "native"
       ],
-      "status": "auto",
-      "basis": "native：装在手机可用的宿主里（wechat、feishu）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：微信、飞书可把话递进来"
     },
     "local_model": {
       "value": "yes",
@@ -436,9 +436,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在电脑上（Windows 双击 exe）"
     },
     "pairs_with": {
       "value": [],

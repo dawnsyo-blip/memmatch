@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "纯 Rust 的语义＋图记忆，会索引项目代码",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "单个 Rust 程序的本地记忆 MCP：语义＋知识图谱，还会索引项目代码；嵌入模型打包在程序里，不需要 API Key 和数据库；面向编程 Agent",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "项目记忆",
@@ -92,13 +92,16 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "claude_code",
         "claude_desktop",
-        "cursor"
+        "claude_code",
+        "gemini_cli",
+        "codex",
+        "cursor",
+        "opencode",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Desktop、Claude Code、Cursor 等；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 列出的客户端"
     },
     "runs_on": {
       "value": [
@@ -123,23 +126,23 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不调用付费服务"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ealDB is embedded) * ✅ **No API Keys, No Cloud, No Python** — Eve”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：100% 本地，嵌入模型内置"
     },
     "memory_subject": {
       "value": [
         "task_context"
       ],
-      "status": "auto",
-      "basis": "记忆对象原文：项目记忆"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：项目记忆和代码索引"
     },
     "write_mode": {
       "value": [
@@ -386,13 +389,13 @@
       "value": [
         "not_mentioned"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 说本版本没有开启 Streamable HTTP，只能本机 stdio"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：内置 ONNX 嵌入，不需要大模型"
     },
     "model_lock": {
       "value": "not_mentioned",

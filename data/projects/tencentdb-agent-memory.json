@@ -113,9 +113,13 @@
       "basis": "运行位置原文：自己的电脑（Node.js，一条命令起三个服务）"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Docker 镜像加启动脚本"
     },
     "difficulty": {
       "value": "medium",
@@ -123,16 +127,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "free",
-      "status": "auto",
-      "basis": "不需要账号或密钥"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：模型按用量付费"
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：README 称无需外部 API"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：.env 里要填两组大模型参数（记忆组和代理组）"
     },
     "memory_subject": {
       "value": [
@@ -382,9 +386,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "no_model_needed",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -403,11 +407,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
     {
       "field": "write_mode",
       "label": "记忆怎么写入",

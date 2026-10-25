@@ -91,9 +91,12 @@
       "basis": "接入方式原文：插件"
     },
     "compatible_clients": {
-      "value": [],
-      "status": "unknown",
-      "basis": "客户端原文：Claude 系列"
+      "value": [
+        "any_mcp_client",
+        "developer_built"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：提供 MCP、HTTP API 和 JavaScript API"
     },
     "runs_on": {
       "value": [
@@ -117,14 +120,16 @@
       "basis": "门槛原文：高"
     },
     "cost": {
-      "value": "",
-      "status": "unknown",
-      "basis": "费用原文未识别：自己的电脑；偏编程场景；技术预览版，npm 上没有"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地运行"
     },
     "accounts_needed": {
-      "value": [],
-      "status": "unknown",
-      "basis": "账号原文未识别：（空）"
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地优先"
     },
     "memory_subject": {
       "value": [
@@ -398,21 +403,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "compatible_clients",
-      "label": "能配合的助手",
-      "note": "客户端原文：Claude 系列"
-    },
-    {
-      "field": "cost",
-      "label": "费用",
-      "note": "文档写的是“自己的电脑；偏编程场景；技术预览版，npm 上没有”，归不进固定选项"
-    },
-    {
-      "field": "accounts_needed",
-      "label": "需要的账号",
-      "note": "说明文档没有写"
-    },
     {
       "field": "write_mode",
       "label": "记忆怎么写入",

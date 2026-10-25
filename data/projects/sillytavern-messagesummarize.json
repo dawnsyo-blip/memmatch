@@ -135,9 +135,12 @@
       "basis": "记忆对象原文：对话摘要"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "auto",
+        "on_request"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认每次 AI 回复后自动摘要；长期摘要由你手动挑选"
     },
     "forgetting": {
       "value": [],
@@ -293,14 +296,16 @@
       "basis": "Claude 据说明判断：逐条摘要注入上下文"
     },
     "lifecycle": {
-      "value": [],
+      "value": [
+        "capture"
+      ],
       "status": "auto",
-      "basis": "没有可推出的环节"
+      "basis": "写入方式：auto、on_request"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 0/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 1/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -354,10 +359,11 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "chat_agent",
+        "background"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）；background：写入方式含自动记或先出候选（推断）"
     },
     "phone_access": {
       "value": [
@@ -388,11 +394,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
     {
       "field": "forgetting",
       "label": "怎么遗忘",

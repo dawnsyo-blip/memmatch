@@ -387,9 +387,9 @@
       "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
     },
     "model_lock": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "value": "claude_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只服务 Claude Code 的会话"
     },
     "setup_device": {
       "value": "needs_computer",

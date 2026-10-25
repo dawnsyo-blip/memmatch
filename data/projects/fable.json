@@ -92,11 +92,10 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
         "claude_code"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：索引 Claude Code 自己存下的会话记录"
     },
     "runs_on": {
       "value": [
@@ -389,9 +388,9 @@
       "basis": "README：“optional local embeddings via Ollama). Hooks run before Claude Cod”"
     },
     "model_lock": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "没发现只能配合某一家模型的说法"
+      "value": "claude_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只服务 Claude Code"
     },
     "setup_device": {
       "value": "needs_computer",

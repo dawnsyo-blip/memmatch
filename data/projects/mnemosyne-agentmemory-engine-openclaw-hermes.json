@@ -145,11 +145,10 @@
     },
     "forgetting": {
       "value": [
-        "auto_decay",
-        "archive"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“·hitFreq + 0.05·layerW` | 42→18ms | | 时间衰减 Time Decay | time.js half-life integrat”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“ns/questions | | 中期·归档 Medium | `medium/YY”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：全量存储，不模拟遗忘；时间衰减只影响排序"
     },
     "human_review": {
       "value": [
@@ -273,26 +272,27 @@
     },
     "ranking_signals": {
       "value": [
-        "semantic",
-        "keyword",
-        "recency",
         "importance",
-        "relation"
+        "recency",
+        "keyword",
+        "frequency",
+        "semantic"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“.md） | | 网络依赖 | **默认零联网** — 本地语义检索用哈希向量，完全离线。仅在显式执行 `embed --ena”；keyword：说明：“语的记忆引擎：全量存储，按重要度、时效和关键词召回，带本地网页界面；对话记忆；技能＋桥”；recency：说明：“中英双语的记忆引擎：全量存储，按重要度、时效和关键词召回，带本地网页界面；对话记忆；”；importance：说明：“中英双语的记忆引擎：全量存储，按重要度、时效和关键词召回，带本地网页界面；对话”；relation：README：“lve | | `multihop.js` | 114 | 多跳推理: 分解 + 逐跳验证 Multi-hop: decom”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：复合线索评分：0.35 重要度＋0.25 时效＋0.25 关键词＋0.10 命中频率＋0.05 层级"
     },
     "scoring_stages": {
       "value": [
+        "write",
         "retrieve"
       ],
-      "status": "auto",
-      "basis": "retrieve：排序因素含 recency、importance、relation（推断召回时综合排序）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：入库时 9 维重要度评分；召回复合评分"
     },
     "multi_factor": {
       "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 3 个：recency、importance、relation"
+      "basis": "相似度之外的因素 3 个：importance、recency、frequency"
     },
     "emotion_handling": {
       "value": [
@@ -310,16 +310,15 @@
       "value": [
         "consolidate",
         "retrieve",
-        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay、archive；查看修改：cli、dashboard"
+      "basis": "有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [

@@ -134,10 +134,11 @@
     },
     "accounts_needed": {
       "value": [
-        "claude_subscription"
+        "claude_subscription",
+        "model_api_key"
       ],
-      "status": "auto",
-      "basis": "账号原文：Claude 付费套餐或 Codex"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本机要装好 Codex 或 Claude Code（用各自的套餐或 Key），也可让 Codex 走本地 Ollama"
     },
     "memory_subject": {
       "value": [
@@ -383,10 +384,10 @@
     },
     "phone_access": {
       "value": [
-        "not_mentioned"
+        "native"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：在微信里聊"
     },
     "local_model": {
       "value": "yes",
@@ -394,14 +395,14 @@
       "basis": "README：“a specific provider, such as `ollama` for local models. Leave empt”"
     },
     "model_lock": {
-      "value": "claude_only",
-      "status": "auto",
-      "basis": "需要 Claude 付费套餐"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Codex、Claude Code 都支持"
     },
     "setup_device": {
       "value": "needs_computer",
-      "status": "auto",
-      "basis": "只能装在自己的电脑上"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要在电脑上克隆、npm install，并装 Codex 或 Claude Code"
     },
     "pairs_with": {
       "value": [],

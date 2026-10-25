@@ -144,19 +144,17 @@
     },
     "runs_on": {
       "value": [
-        "own_computer",
         "phone"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：手机本地；手机本地"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：安卓阅读 App"
     },
     "os": {
       "value": [
-        "android",
-        "windows"
+        "android"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（'s Java 21 classes. - On Windows, if the checkout path co）；android（手机本地；手机本地；Android；低：下载 APK 安装；Android 阅读器）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Android 8.0 以上，Releases 提供签名 APK"
     },
     "difficulty": {
       "value": "low",
@@ -426,8 +424,8 @@
       "value": [
         "native"
       ],
-      "status": "auto",
-      "basis": "native：本身能在手机上运行"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：手机 App"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -441,8 +439,8 @@
     },
     "setup_device": {
       "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：直接装 APK"
     },
     "pairs_with": {
       "value": [],

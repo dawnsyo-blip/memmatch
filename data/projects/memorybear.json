@@ -82,9 +82,11 @@
       "basis": "接入方式原文：API/MCP"
     },
     "compatible_clients": {
-      "value": [],
-      "status": "unknown",
-      "basis": "客户端原文："
+      "value": [
+        "developer_built"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：通过 API／MCP 接入自己的系统，偏企业部署"
     },
     "runs_on": {
       "value": [
@@ -393,11 +395,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "compatible_clients",
-      "label": "能配合的助手",
-      "note": "客户端原文："
-    },
     {
       "field": "memory_subject",
       "label": "主要记住什么",

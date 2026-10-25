@@ -344,13 +344,13 @@
       "value": [
         "zh_retrieval"
       ],
-      "status": "auto",
-      "basis": "zh_retrieval：README：“gs + BM25 keyword search with CJK tokenization ([jieba](https:/”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：BM25 用 jieba 做中文分词"
     },
     "memory_layers": {
       "value": "layered",
-      "status": "auto",
-      "basis": "说明：“按时间三层衰减与晋升、按主题自组织成树的记忆引擎，带网”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：缓冲、工作、核心三层，按重要性晋升或衰减"
     },
     "retrieval_postprocess": {
       "value": [

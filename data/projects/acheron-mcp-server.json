@@ -154,9 +154,11 @@
       "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 只提到删除：“ype, tags | | `bridge_delete_context` | Forget a saved context | | `bridge_status` | O”，没提自动衰减，建议值 manual_only"
     },
     "human_review": {
-      "value": [],
-      "status": "unknown",
-      "basis": "没找到查看或修改记忆的方式"
+      "value": [
+        "tools"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只能让 AI 调工具查看、删除"
     },
     "export": {
       "value": [],
@@ -304,15 +306,16 @@
     "lifecycle": {
       "value": [
         "capture",
-        "retrieve"
+        "retrieve",
+        "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统"
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：tools"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -400,11 +403,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "human_review",
-      "label": "能否查看和修改记忆",
-      "note": "没找到查看或修改记忆的方式"
-    },
     {
       "field": "export",
       "label": "能否导出",

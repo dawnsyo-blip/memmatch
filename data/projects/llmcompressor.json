@@ -110,9 +110,13 @@
       "basis": "运行位置原文：自己的电脑"
     },
     "os": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 和原表都没提到系统"
+      "value": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：单个 Python 标准库脚本"
     },
     "difficulty": {
       "value": "medium",
@@ -139,21 +143,25 @@
       "basis": "记忆对象原文：历史对话要点"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：SessionEnd 钩子运行 sync 把会话记录折叠进笔记本"
     },
     "forgetting": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提遗忘或删除"
+      "value": [
+        "archive"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：作废的行划掉保留，从不删除"
     },
     "human_review": {
       "value": [
         "files"
       ],
-      "status": "auto",
-      "basis": "files：ong-term memory as **one markdown file you can read and correct"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：一个可以直接打开修改的 Markdown 文件"
     },
     "export": {
       "value": [],
@@ -300,16 +308,18 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "retrieve",
+        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：files"
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；遗忘：archive；查看修改：files"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -365,10 +375,10 @@
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "background"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：脚本自动提炼"
     },
     "phone_access": {
       "value": [
@@ -399,21 +409,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "os",
-      "label": "支持的系统",
-      "note": "README 和原表都没提到系统"
-    },
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
-    {
-      "field": "forgetting",
-      "label": "怎么遗忘",
-      "note": "README 没提遗忘或删除"
-    },
     {
       "field": "export",
       "label": "能否导出",

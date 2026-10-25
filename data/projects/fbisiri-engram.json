@@ -151,8 +151,8 @@
       "value": [
         "auto_decay"
       ],
-      "status": "auto",
-      "basis": "README：“y layer that remembers what matters and forgets what doesn't.** <!-- badges row — CI/Eval badges”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：身份、指令永久保留；事件约 2.9 天衰减一半，到期清除"
     },
     "human_review": {
       "value": [
@@ -280,8 +280,8 @@
         "recency",
         "importance"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“e alone cannot do. Unlike raw vector search, it applies quality gates at”；recency：README：“sed TTL) and fuses relevance, recency, and importance at retrieval,”；importance：说明：“写入时去重、按重要性筛选、按类型自动过期的记忆服务；用户事实”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：排序＝相关度×新近度×重要性"
     },
     "scoring_stages": {
       "value": [
@@ -289,8 +289,8 @@
         "retrieve",
         "forget"
       ],
-      "status": "auto",
-      "basis": "write：说明：“写入时去重、按重要性筛选、按类型自动过期的记忆服务；用户事实；M”；retrieve：排序因素含 recency、importance（推断召回时综合排序）；forget：README：“*after* the write: type sets decay rate, type × importance sets the hard-delete TTL. **0”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：写入前语义去重、打重要性分；召回融合；按类型设半衰期和 TTL"
     },
     "multi_factor": {
       "value": "multi",
@@ -353,10 +353,10 @@
     },
     "retrieval_postprocess": {
       "value": [
-        "not_mentioned"
+        "dedup"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：写入时语义去重"
     },
     "recall_uses_llm": {
       "value": [

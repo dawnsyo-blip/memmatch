@@ -430,8 +430,8 @@
       "value": [
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "needs_tunnel：README：“a real access layer — e.g. a Cloudflare Tunnel with Access, or a reverse pro”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可装成手机主屏 PWA，但服务在自己电脑上，外网要自己打通"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -440,8 +440,8 @@
     },
     "model_lock": {
       "value": "claude_only",
-      "status": "auto",
-      "basis": "说明：“＋身份持续；自托管网页应用；自带网页端（仅 Claude）；自托管网页应用，基于 Claude”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 明说专为 Claude 的 Agent SDK 构建，不支持别家模型"
     },
     "setup_device": {
       "value": "needs_computer",

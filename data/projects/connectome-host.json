@@ -126,9 +126,9 @@
       "basis": "门槛原文：高：用 JSON 配方描述 agent"
     },
     "cost": {
-      "value": "paid_service",
-      "status": "auto",
-      "basis": "账号原文：模型 API 密钥或订阅"
+      "value": "model_fees_only",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用模型 API Key，或 Claude Code 订阅生成的长效令牌"
     },
     "accounts_needed": {
       "value": [
@@ -388,8 +388,8 @@
       "value": [
         "native"
       ],
-      "status": "auto",
-      "basis": "native：装在手机可用的宿主里（discord）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：常驻在 Discord、Zulip 上"
     },
     "local_model": {
       "value": "yes",

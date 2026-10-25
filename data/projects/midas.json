@@ -205,7 +205,7 @@
     "verbatim": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“what it recalls.** Recall returns the **verbatim source turn**, not an LLM rewrite — s”（已核对）"
+      "basis": "原表／说明：“忆层：入库和召回都不调用大模型、0 成本；召回返回原话可追溯，新事实自动取代旧的，按重要性和新旧淘汰低价”"
     },
     "multimodal": {
       "value": "not_mentioned",
@@ -240,12 +240,12 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“nd get back *rewritten* facts you can't audit. Midas makes the opposite bet, and that”（已核对）"
+      "basis": "原表／说明：“用大模型、0 成本；召回返回原话可追溯，新事实自动取代旧的，按重要性和新旧淘汰低价值记忆；带本地网页检查”"
     },
     "import_history": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“事实，不依据过时记忆行动；可从 mem0、Zep 导入；用户事实；MCP；Claude Desktop、”"
+      "basis": "README：“port --from claude-md CLAUDE.md`** (or `--from cursorrules`, `--from jsonl`, `--from mem0`, `--fro”（已核对）"
     },
     "retrieval_weighting": {
       "value": "not_mentioned",

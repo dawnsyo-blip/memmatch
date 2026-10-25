@@ -102,11 +102,10 @@
     },
     "runs_on": {
       "value": [
-        "own_cloud_account",
         "own_computer"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑（Docker 两个服务）；远程需 Cloudflare"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Docker 跑 Neo4j 等；Cloudflare 只用来做隧道给手机和网页版"
     },
     "os": {
       "value": [
@@ -129,11 +128,10 @@
     },
     "accounts_needed": {
       "value": [
-        "claude_subscription",
-        "cloudflare"
+        "claude_subscription"
       ],
-      "status": "auto",
-      "basis": "账号原文：Claude 付费套餐（抽取在 Claude Code 内完成）；远程需 Cloudflare 账号"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：实体抽取在你的 Claude 会话里跑（Max 套餐），嵌入在本地，不需要别的 Key"
     },
     "memory_subject": {
       "value": [
@@ -283,12 +281,12 @@
     "ranking_signals": {
       "value": [
         "semantic",
-        "keyword",
+        "relation",
         "recency",
-        "relation"
+        "frequency"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“Built on Neo4j with semantic embeddings, OAuth-secured for use from C”；keyword：README：“. This project replaces flat keyword matching with weighted, relationshi”；recency：README：“rries: - `weight` (0.0–1.0) — decays over time on per-type half-lives - `con”；relation：说明：“基于 Neo4j 的个人知识图谱，经 OAuth 让 Claude Co”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：向量找相似实体再沿关系扩展；边的权重按类型半衰期衰减，常被确认的保持强"
     },
     "scoring_stages": {
       "value": [
@@ -296,12 +294,12 @@
         "forget"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 recency、relation（推断召回时综合排序）；forget：README：“ghted edges with configurable decay** — frequently-confirmed knowledge stays”"
+      "basis": "retrieve：排序因素含 relation、recency、frequency（推断召回时综合排序）；forget：README：“ghted edges with configurable decay** — frequently-confirmed knowledge stays”"
     },
     "multi_factor": {
       "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 2 个：recency、relation"
+      "basis": "相似度之外的因素 3 个：relation、recency、frequency"
     },
     "emotion_handling": {
       "value": [
@@ -392,11 +390,10 @@
     "phone_access": {
       "value": [
         "remote_mcp",
-        "cloud",
         "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 claude_web_mobile；cloud：运行位置含 own_cloud_account；needs_tunnel：README：“Cloudflare Tunnel”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用 cloudflared 暴露后，手机上的 Claude 可经 OAuth 连上"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -409,9 +406,9 @@
       "basis": "需要 Claude 付费套餐"
     },
     "setup_device": {
-      "value": "not_mentioned",
+      "value": "needs_computer",
       "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "basis": "只能装在自己的电脑上"
     },
     "pairs_with": {
       "value": [],

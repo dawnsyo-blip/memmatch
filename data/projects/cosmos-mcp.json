@@ -114,10 +114,10 @@
     },
     "os": {
       "value": [
-        "any"
+        "macos"
       ],
-      "status": "auto",
-      "basis": "只在云端运行，用浏览器操作即可"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：一行安装脚本针对 macOS，还会装 Cosmos Sync.app 读 iMessage、日历"
     },
     "difficulty": {
       "value": "medium",
@@ -394,9 +394,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在 Mac 上"
     },
     "pairs_with": {
       "value": [],

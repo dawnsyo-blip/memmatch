@@ -126,16 +126,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不调用付费服务"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "auto",
-      "basis": "账号原文：无需 API 密钥"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：核心零依赖，存取不需要模型或 API Key"
     },
     "memory_subject": {
       "value": [
@@ -395,9 +395,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“ompt-specified | | `local` | `ollama run <model>` | prompt-specifi”"
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：BM25 检索；可选的语义模式用本地小模型"
     },
     "model_lock": {
       "value": "not_mentioned",

@@ -111,13 +111,12 @@
     },
     "os": {
       "value": [
-        "android",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（p maps uids on macOS and Windows, so this only bites on L）；macos（errors on Debian/Ubuntu/Homebrew Pythons and to keep memp）；linux（avoid PEP 668 errors on Debian/Ubuntu/Homebrew Pythons）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 说目前不支持安卓 Termux 原生安装"
     },
     "difficulty": {
       "value": "medium",

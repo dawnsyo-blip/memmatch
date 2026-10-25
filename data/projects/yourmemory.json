@@ -134,10 +134,10 @@
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "vendor_account"
       ],
-      "status": "auto",
-      "basis": "账号原文：无"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要在项目官网用邮箱验证领取令牌；记忆本身存在本地"
     },
     "memory_subject": {
       "value": [

@@ -135,23 +135,26 @@
       "basis": "记忆对象原文：你挑选的记忆"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "on_request"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：由你决定记什么，它负责生成世界书条目"
     },
     "forgetting": {
       "value": [
-        "auto_decay"
+        "auto_decay",
+        "manual_only"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README：“. These pop-up memories can optionally fade over time, becoming less likely to trig”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：“突然想起”的记忆可设置随时间越来越难触发，直到删除"
     },
     "human_review": {
       "value": [
         "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：ink: `https://github.com/InspectorCaracal/SillyTavern-ReMem"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记忆就是世界书条目，可逐条编辑"
     },
     "export": {
       "value": [],
@@ -267,10 +270,10 @@
     },
     "ranking_signals": {
       "value": [
-        "not_mentioned"
+        "keyword"
       ],
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：世界书关键词触发，默认只有 50% 概率激活"
     },
     "scoring_stages": {
       "value": [
@@ -280,9 +283,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "multi_factor": {
-      "value": "not_mentioned",
+      "value": "single",
       "status": "auto",
-      "basis": "没找到排序方式"
+      "basis": "相似度之外的因素 0 个：无"
     },
     "emotion_handling": {
       "value": [
@@ -298,17 +301,18 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "retrieve",
         "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard"
+      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -364,8 +368,8 @@
       "value": [
         "user"
       ],
-      "status": "auto",
-      "basis": "user：说明：“由你决定记什么，它负责生成世界书记忆条目，并模拟“有时”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用户挑选"
     },
     "phone_access": {
       "value": [
@@ -396,11 +400,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
     {
       "field": "export",
       "label": "能否导出",

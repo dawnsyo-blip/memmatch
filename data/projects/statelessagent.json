@@ -123,16 +123,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地运行"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ecurity.md). No accounts. No API keys. Everything runs locally. ``”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：零依赖，默认关键词检索；可选接 Ollama 做语义检索"
     },
     "memory_subject": {
       "value": [
@@ -382,10 +382,11 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“unrelated conversation. - **Streamable HTTP transport** -- `same web --mc”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：same web --mcp 提供带 Bearer 令牌的 HTTP MCP"
     },
     "local_model": {
       "value": "yes",

@@ -144,8 +144,8 @@
       "value": [
         "review_first"
       ],
-      "status": "auto",
-      "basis": "README：“writes down what it learns as it works; nothing becomes memory until you approve it, and every memory shows”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 只能写进暂存区，你批准后才成为记忆"
     },
     "forgetting": {
       "value": [],
@@ -157,8 +157,8 @@
         "cli",
         "files"
       ],
-      "status": "auto",
-      "basis": "files：kept on your computer in plain files. Your AI writes down wha；cli：pack`, `handoff` — and a CLI for your side: review, p"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：命令行审核队列；记忆是普通文件，可用任何编辑器改"
     },
     "export": {
       "value": [
@@ -373,10 +373,10 @@
     },
     "memory_writer": {
       "value": [
-        "background"
+        "chat_agent"
       ],
-      "status": "auto",
-      "basis": "background：写入方式含自动记或先出候选（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：AI 调工具写入暂存"
     },
     "phone_access": {
       "value": [

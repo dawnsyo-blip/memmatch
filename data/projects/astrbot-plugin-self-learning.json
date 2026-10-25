@@ -232,7 +232,7 @@
     "persona_continuity": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“格与经验；学的是“怎么说话”和“谁和谁什么关系”；人格变化先进审查，可批准或回滚；WebUI 默认免密；”"
+      "basis": "原表／说明：“的说话风格、群里的黑话、群友关系和好感度，学到的人格变化先进审查队列，可批准、回滚；作者建议和 Liv”"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -282,7 +282,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“”和“谁和谁什么关系”；人格变化先进审查，可批准或回滚；WebUI 默认免密；群聊场景：学的是“怎么说话”"
+      "basis": "原表／说明：“关系和好感度，学到的人格变化先进审查队列，可批准、回滚；作者建议和 LivingMemory 搭配；经验”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -302,7 +302,7 @@
     "relationship_stage": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“关系”；经验（说话风格、群黑话）＋用户事实（关系、好感度）；AstrBot 插件；AstrBot；Astr”"
+      "basis": "原表／说明：“聊里学 Bot 的说话风格、群里的黑话、群友关系和好感度，学到的人格变化先进审查队列，可批准、回滚；作者建”"
     },
     "independent_life": {
       "value": "not_mentioned",
@@ -376,7 +376,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "designed_to_pair：README：“](CONTRIBUTING.md) --- ## 推荐搭配 [LivingMemory 长期记忆插件](https:”；standard_interface：接入方式 host_plugin"
+      "basis": "designed_to_pair：说明：“；作者建议和 LivingMemory 搭配；经验（说话风格、群黑话）＋用户事实（关”；standard_interface：接入方式 host_plugin"
     },
     "customization": {
       "value": [

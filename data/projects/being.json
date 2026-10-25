@@ -105,10 +105,11 @@
     },
     "runs_on": {
       "value": [
-        "own_server"
+        "own_server",
+        "third_party_hosted"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的服务器"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：有官方托管地址 being.ruddia.com；也可自己部署（Node＋Supabase）"
     },
     "os": {
       "value": [
@@ -169,10 +170,12 @@
     },
     "data_passes_through": {
       "value": [
-        "local_only"
+        "local_only",
+        "own_cloud",
+        "third_party"
       ],
-      "status": "auto",
-      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：托管版经项目方服务器；自部署数据在自己的 Supabase"
     },
     "license_category": {
       "value": "no_license",
@@ -380,10 +383,11 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "cloud"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“loyment, and BYOK design | | [OAuth 2.1](docs/specs/07-oauth.md) |”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：托管版直接给 MCP 地址"
     },
     "local_model": {
       "value": "not_mentioned",

@@ -60,10 +60,10 @@ test("Kelivo＋VPS：手机能连上；有 Dylan Heartbeat；没有酒馆专用�
   for (const hosted of ["supermemory", "honcho", "central-intelligence"]) assert.ok(!kept.includes(hosted), `没选托管，不该推荐 ${hosted}`);
 });
 
-test("酒馆角色扮演：酒馆扩展排在前面，并推荐情绪引擎", () => {
+test("酒馆角色扮演：酒馆扩展排在前面，不推荐要自己写代码接入的情绪引擎", () => {
   const r = run("sillytavern_roleplay");
   for (const x of r.results.slice(0, 3)) assert.ok(vals(x.id, "compatible_clients").includes("sillytavern"), `${x.name} 不是酒馆扩展`);
-  assert.ok(r.addons.state_engine, "应推荐情绪、身体状态引擎");
+  for (const x of r.addons.state_engine?.items || []) assert.ok(vals(x.id, "compatible_clients").includes("sillytavern"), `${x.name} 接不进酒馆`);
 });
 
 test("AstrBot 机器人：推荐 AstrBot 插件，不推荐 OpenClaw 专用插件", () => {

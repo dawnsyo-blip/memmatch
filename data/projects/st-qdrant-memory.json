@@ -137,8 +137,8 @@
       "value": [
         "auto"
       ],
-      "status": "auto",
-      "basis": "README：“h Qdrant vector database. The extension automatically saves conversations and retrieves semanticall”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：每条消息自动存进该角色的 Qdrant 集合"
     },
     "forgetting": {
       "value": [
@@ -151,8 +151,8 @@
       "value": [
         "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：nt as they happen 👁️ **Memory Viewer**: View and manage store"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记忆查看器"
     },
     "export": {
       "value": [],

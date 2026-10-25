@@ -191,8 +191,8 @@
       "value": [
         "auto_decay"
       ],
-      "status": "auto",
-      "basis": "原表：低显著记忆真正淡去，可被“哀悼”；淡去"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：低显著性的记忆真的会淡去，还会被“哀悼”"
     },
     "human_review": {
       "value": [
@@ -262,9 +262,9 @@
       "basis": "原表／说明：“忆＋真遗忘，强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅”"
     },
     "proactive": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：梦境、情绪阈值、研究会产生主动外发的候选消息，经审核后发出"
     },
     "pinning": {
       "value": "yes",
@@ -339,10 +339,11 @@
     },
     "emotion_handling": {
       "value": [
-        "ai_state"
+        "ai_state",
+        "weighting"
       ],
-      "status": "auto",
-      "basis": "ai_state：说明：““无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：几十种情绪的加权向量随时间衰减；未解决的沉重线索影响时间感"
     },
     "project_role": {
       "value": "companion_app",

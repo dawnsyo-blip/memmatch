@@ -142,8 +142,8 @@
       "value": [
         "on_request"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：记忆由你在本地界面里亲手撰写；Claude 只按需读取"
     },
     "forgetting": {
       "value": [
@@ -156,8 +156,8 @@
       "value": [
         "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：ou curate titled, dated, editable memory banks directly on your"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：复古风格的本地 Hub 界面"
     },
     "export": {
       "value": [],
@@ -368,11 +368,10 @@
     },
     "memory_writer": {
       "value": [
-        "user",
-        "chat_agent"
+        "user"
       ],
-      "status": "auto",
-      "basis": "user：说明：“由你亲手撰写和编辑的按日期记忆库，复古风格的本地”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：用户手写"
     },
     "phone_access": {
       "value": [

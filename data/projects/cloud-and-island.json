@@ -391,9 +391,9 @@
       "basis": "需要 Claude 付费套餐"
     },
     "setup_device": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要在 VPS 上装 Claude Code 和记忆服务器"
     },
     "pairs_with": {
       "value": [],

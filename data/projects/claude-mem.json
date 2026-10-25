@@ -377,7 +377,7 @@
         "background"
       ],
       "status": "auto",
-      "basis": "background：说明：“自动捕获会话中的工具使用并压缩成可搜索记录，下次”"
+      "basis": "background：说明：“ode 等编程 Agent 的自动记忆：后台观察每次工具调用，压缩成可搜索的记录，下”"
     },
     "phone_access": {
       "value": [

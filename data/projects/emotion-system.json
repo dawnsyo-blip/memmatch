@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "从 AI 自己写下的思考里读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系你的机会",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-24"
+      "value": "从 AI 自己写下的思考里读出情绪，换成有基线、会慢慢回落的数值，累计思念并适时给它主动联系你的机会；Node.js 包，要接进自己的聊天后端，调用 OpenRouter 上的 Jev 模型（约 2 美元／月）",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "AI 情绪状态",
@@ -132,11 +132,9 @@
       "basis": "账号原文：OpenRouter API 密钥（调用 Jev 模型）"
     },
     "memory_subject": {
-      "value": [
-        "ai_identity"
-      ],
-      "status": "auto",
-      "basis": "记忆对象原文：AI 情绪状态"
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：只维护情绪状态，不存记忆内容"
     },
     "write_mode": {
       "value": [],
@@ -171,9 +169,9 @@
       "basis": "许可证原文：MIT"
     },
     "persona_continuity": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "记忆对象含 AI 自身身份"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不保存身份"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -267,23 +265,22 @@
     },
     "ranking_signals": {
       "value": [
-        "semantic",
-        "confidence"
+        "not_mentioned"
       ],
-      "status": "auto",
-      "basis": "semantic：README：“接触）：本系统用的是规则；如果你的记忆库已经有本地模型（例如向量模型），可以直接复用来做这一步 4. 明确的亲密互动开启流程”；confidence：README：“*。比如一道选择题，会得到每个选项各占多少概率，再加一个整体置信度。 - 同一次请求里的各道题**互相独立**判断； - *”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不做检索"
     },
     "scoring_stages": {
       "value": [
-        "retrieve"
+        "not_mentioned"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 confidence（推断召回时综合排序）"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：confidence"
+      "basis": "没找到排序方式"
     },
     "emotion_handling": {
       "value": [
@@ -298,16 +295,14 @@
       "basis": "按收录类别「边缘项（存的不是对话记忆）」"
     },
     "lifecycle": {
-      "value": [
-        "retrieve"
-      ],
+      "value": [],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统"
+      "basis": "没有可推出的环节"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 1/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 0/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -374,9 +369,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“【】里读出肢体接触）：本系统用的是规则；如果你的记忆库已经有本地模型（例如向量模型），可以直接复用来做这一步 4. 明确的亲密互”"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：核心依赖 OpenRouter 上的 Jev 决策模型"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -384,9 +379,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要写代码接入"
     },
     "pairs_with": {
       "value": [],

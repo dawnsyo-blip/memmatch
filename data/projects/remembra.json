@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "agent 会话结束时保存交接记录",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "编程 Agent 的会话交接：会话结束时从 git 和会话记录生成交接摘要，下一个 Agent（换机器、换厂商也行）开始时自动读到；支持 Claude Code、Codex、Gemini CLI 等，可用免费云服务或本地 Docker 自部署",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "交接记录",
@@ -92,64 +92,69 @@
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
         "claude_code",
-        "claude_desktop",
         "codex",
-        "cursor"
+        "gemini_cli",
+        "cursor",
+        "claude_desktop",
+        "any_mcp_client"
       ],
-      "status": "auto",
-      "basis": "客户端原文：Claude Code、Codex、Cursor、Claude Desktop（仅 macOS）；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 的 Agent 表"
     },
     "runs_on": {
       "value": [
-        "own_computer"
+        "own_computer",
+        "third_party_hosted"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：本地 Docker 或付费云"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：默认连 Remembra Cloud（有免费档）；也可本地 Docker 自部署"
     },
     "os": {
       "value": [
-        "macos"
+        "macos",
+        "linux",
+        "windows"
       ],
-      "status": "auto",
-      "basis": "原文：d Claude Desktop on macOS only (the Windows config"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：pipx 安装；只有 Claude Desktop 的 Windows 配置不会自动写入"
     },
     "difficulty": {
-      "value": "high",
-      "status": "auto",
-      "basis": "门槛原文：中到高（区间取较高一档）"
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：pipx 安装加几条命令"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：交接、简报、搜索在所有套餐免费；自部署免费"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "vendor_account"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“dings, so the server needs no API key. The first start downloads th”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：云版要免费注册拿 Key；自部署不需要 API Key（带本地 Ollama 嵌入）"
     },
     "memory_subject": {
-      "value": [],
-      "status": "unknown",
-      "basis": "记忆对象原文未识别：交接记录"
+      "value": [
+        "task_context"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：会话交接：做完了什么、没做完什么、哪些测试失败"
     },
     "write_mode": {
       "value": [
+        "auto",
         "on_request"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：会话钩子在结束时自动从 git 和记录生成；Agent 也可经 MCP 自报"
     },
     "forgetting": {
-      "value": [
-        "auto_decay"
-      ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README：“untested ⏱️ **Temporal Memory** — TTL, decay curves, historical queries 🔍 **Hybrid”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 没提遗忘；原采用的建议值没有依据"
     },
     "human_review": {
       "value": [
@@ -308,16 +313,15 @@
       "value": [
         "capture",
         "retrieve",
-        "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard、tools"
+      "basis": "写入方式：auto、on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard、tools"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -371,17 +375,18 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "chat_agent",
+        "background"
       ],
       "status": "auto",
-      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）；background：写入方式含自动记或先出候选（推断）"
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "not_mentioned"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：README：“ndard MCP server (stdio, SSE, streamable HTTP), with setup guides for **Cla”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：服务电脑上的编程 Agent"
     },
     "local_model": {
       "value": "yes",
@@ -394,9 +399,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "needs_computer",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "只能装在自己的电脑上"
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
     "pairs_with": {
       "value": [],
@@ -405,11 +410,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "memory_subject",
-      "label": "主要记住什么",
-      "note": "文档写的是“交接记录”，归不进固定选项"
-    },
     {
       "field": "export",
       "label": "能否导出",

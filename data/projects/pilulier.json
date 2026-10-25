@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "手动给自己的一句话挂一颗行为提示，只影响下一次回复，用完就从历史里删掉",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-24"
+      "value": "给 AI 伴侣用的“药盒”：手动给自己的一句话挂一颗行为提示（如“冲突在场”“主动哄回”），只影响下一次回复，用完即从历史里删除；是给自建网页聊天前端用的组件",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "一次性行为提示（不存记忆）",
@@ -103,21 +103,21 @@
       "basis": "门槛原文：高：要改前后端"
     },
     "cost": {
-      "value": "",
-      "status": "unknown",
-      "basis": "费用原文未识别：（空）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：前端组件和提示词"
     },
     "accounts_needed": {
-      "value": [],
-      "status": "unknown",
-      "basis": "账号原文未识别：（空）"
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不需要"
     },
     "memory_subject": {
-      "value": [
-        "experience"
-      ],
-      "status": "auto",
-      "basis": "记忆对象原文：一次性行为提示（不存记忆）"
+      "value": [],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不存记忆"
     },
     "write_mode": {
       "value": [],
@@ -354,9 +354,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本身不调用模型"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -364,9 +364,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：要改自己前后端的代码"
     },
     "pairs_with": {
       "value": [],
@@ -384,16 +384,6 @@
       "field": "os",
       "label": "支持的系统",
       "note": "README 和原表都没提到系统"
-    },
-    {
-      "field": "cost",
-      "label": "费用",
-      "note": "说明文档没有写"
-    },
-    {
-      "field": "accounts_needed",
-      "label": "需要的账号",
-      "note": "说明文档没有写"
     },
     {
       "field": "write_mode",

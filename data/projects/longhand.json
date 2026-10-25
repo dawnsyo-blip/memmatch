@@ -109,12 +109,11 @@
     },
     "os": {
       "value": [
-        "linux",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（if you're not in UTC. - Windows users: this release fixe）；macos（30 minutes on an M-class Mac — most of that wall time）；linux（Longhand works there. **Linux (3.10–3.14) is the only）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 明说不支持 Windows，要用 WSL2"
     },
     "difficulty": {
       "value": "medium",

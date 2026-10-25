@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "数据全存手机；记忆驱动主动消息、日记、朋友圈、来电",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "数据全存手机的原生安卓 AI 陪伴应用：角色有日程、情绪、长短期记忆和关系阶梯，会主动发朋友圈、写日记、打语音电话；仓库不提供安装包，要自己用 Android Studio 编译，需自备 API Key",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "用户事实＋日程／情绪",
@@ -144,24 +144,22 @@
     },
     "runs_on": {
       "value": [
-        "own_computer",
         "phone"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：手机本地；手机本地"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：应用跑在安卓手机上"
     },
     "os": {
       "value": [
-        "android",
-        "macos"
+        "android"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：macos（s/jbr/Contents/Home\" # macOS 示例 ./gradlew :app:assemb）；android（手机本地；手机本地；Android 10+；中：仓库不提供安装包，需自己编译；伴侣应）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Android 10 以上；电脑只用来编译"
     },
     "difficulty": {
-      "value": "medium",
-      "status": "auto",
-      "basis": "门槛原文：中：仓库不提供安装包，需自己编译；中：仓库不提供安装包，需自己编译"
+      "value": "high",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不提供 APK，要装 Android Studio 自己编译安装"
     },
     "cost": {
       "value": "model_fees_only",
@@ -194,11 +192,10 @@
     },
     "human_review": {
       "value": [
-        "cli",
         "dashboard"
       ],
-      "status": "auto",
-      "basis": "dashboard：WenKai-Lite) | Kai-style UI font | SIL OFL 1.1 | ##；cli：备或启动模拟器，点 **Run ▶** 即可。 命令行构建（可选）： ```bash export J"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：应用内查看"
     },
     "export": {
       "value": [],
@@ -349,7 +346,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、dashboard"
+      "basis": "有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
     },
     "lifecycle_complete": {
       "value": "partial",
@@ -432,9 +429,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "phone_ok",
-      "status": "auto",
-      "basis": "手机入口直接可用（推断）"
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：编译要用电脑"
     },
     "pairs_with": {
       "value": [],

@@ -110,10 +110,11 @@
     },
     "os": {
       "value": [
-        "macos"
+        "macos",
+        "linux"
       ],
-      "status": "auto",
-      "basis": "原文：自己的 Mac（另有 Docker）；中；偏编程场景；"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：主力是 Apple Silicon Mac；Linux 有 CPU 后端，另有 Docker"
     },
     "difficulty": {
       "value": "medium",
@@ -121,16 +122,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地运行（首次下载约 8GB 模型）"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“n, and OpenCode. No cloud, no API keys, no Ollama, no vector DB to”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：嵌入、重排和大模型都在本机进程内跑，不需要 API Key"
     },
     "memory_subject": {
       "value": [],
@@ -386,9 +387,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自带本地模型（Apple MLX；Linux 用 CPU 后端）"
     },
     "model_lock": {
       "value": "not_mentioned",

@@ -119,16 +119,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地版免费"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“Kafka, Qdrant, Cloudflare, or API keys. ### Self-Hosted Server Us”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地版不需要云账号、数据库或 API Key"
     },
     "memory_subject": {
       "value": [
@@ -140,10 +140,11 @@
     },
     "write_mode": {
       "value": [
-        "auto"
+        "auto",
+        "on_request"
       ],
-      "status": "auto",
-      "basis": "README：“off`, `session_history`, and `forget` - Auto-capture hooks for coding-agent lifecycle events”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：编程 Agent 生命周期钩子自动捕获；也可主动 remember"
     },
     "forgetting": {
       "value": [
@@ -314,7 +315,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、tools"
+      "basis": "写入方式：auto、on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、tools"
     },
     "lifecycle_complete": {
       "value": "complete",
@@ -374,10 +375,11 @@
     },
     "memory_writer": {
       "value": [
-        "background"
+        "background",
+        "chat_agent"
       ],
       "status": "auto",
-      "basis": "background：README：“sion_history`, and `forget` - Auto-capture hooks for coding-agent lifec”"
+      "basis": "background：README：“sion_history`, and `forget` - Auto-capture hooks for coding-agent lifec”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     },
     "phone_access": {
       "value": [
@@ -387,9 +389,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "not_mentioned",
+      "value": "no_model_needed",
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
     },
     "model_lock": {
       "value": "not_mentioned",

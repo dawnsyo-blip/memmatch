@@ -96,9 +96,13 @@
       "basis": "接入方式原文：技能（SKILL.md）＋服务端"
     },
     "compatible_clients": {
-      "value": [],
-      "status": "unknown",
-      "basis": "客户端原文：支持技能的 agent（README 未逐一列出）"
+      "value": [
+        "claude_code",
+        "codex",
+        "any_mcp_client"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：装在 Claude、Codex、Pi 这类客户端里，安装脚本自动注册 MCP"
     },
     "runs_on": {
       "value": [
@@ -141,9 +145,11 @@
       "basis": "记忆对象原文：用户本人"
     },
     "write_mode": {
-      "value": [],
-      "status": "unknown",
-      "basis": "README 没提写入方式"
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：每条个人消息先预检，再逐字落盘并派生理解"
     },
     "forgetting": {
       "value": [
@@ -154,10 +160,11 @@
     },
     "human_review": {
       "value": [
-        "dashboard"
+        "dashboard",
+        "files"
       ],
-      "status": "auto",
-      "basis": "dashboard：话，再从原话派生理解，每条结论都能追回原话，带审计面板；技能（SKILL.md）＋服务端；中文项目；<d"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地静态审计面板；原话档案是文件"
     },
     "export": {
       "value": [],
@@ -305,17 +312,18 @@
     },
     "lifecycle": {
       "value": [
+        "capture",
         "retrieve",
         "forget",
         "review"
       ],
       "status": "auto",
-      "basis": "有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard"
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、files"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
@@ -326,10 +334,10 @@
     },
     "customization": {
       "value": [
-        "not_mentioned"
+        "plain_data"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "plain_data：记忆存成可以直接看改的文件"
     },
     "chinese_support": {
       "value": [
@@ -364,16 +372,16 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "write_receipt": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：每条捕获必须显式关闭，过不了硬闸门就不算“已记住”"
     },
     "memory_writer": {
       "value": [
-        "not_mentioned"
+        "background"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "background：写入方式含自动记或先出候选（推断）"
     },
     "phone_access": {
       "value": [
@@ -404,16 +412,6 @@
     }
   },
   "uncertainties": [
-    {
-      "field": "compatible_clients",
-      "label": "能配合的助手",
-      "note": "客户端原文：支持技能的 agent（README 未逐一列出）"
-    },
-    {
-      "field": "write_mode",
-      "label": "记忆怎么写入",
-      "note": "README 没提写入方式"
-    },
     {
       "field": "export",
       "label": "能否导出",

@@ -107,10 +107,12 @@
     },
     "runs_on": {
       "value": [
-        "own_computer"
+        "own_computer",
+        "own_server",
+        "own_cloud_account"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑（Docker）或自己的 Railway 账号"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地 Docker、自己的服务器，或自己的 Railway 账号"
     },
     "os": {
       "value": [
@@ -158,8 +160,8 @@
         "auto_decay",
         "archive"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README：“ticles/PMC4648295/). Wrong rabbit holes fade naturally. Important memories with stro”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“| Off by default | Archives low-relevance memories”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：每天按年龄、访问、连接、重要性重新算相关度；“遗忘”默认关闭，开启后低分归档、极低分删除"
     },
     "human_review": {
       "value": [
@@ -283,22 +285,26 @@
     "ranking_signals": {
       "value": [
         "semantic",
-        "relation"
+        "relation",
+        "recency",
+        "importance",
+        "frequency"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“图＋向量的记忆服务，召回时不调用大模型；本地 M”；relation：README：“query — semantic similarity, graph traversal, temporal alignment, tag over”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：向量相似、图谱遍历、时间对齐、标签重合、重要性混合查询"
     },
     "scoring_stages": {
       "value": [
-        "retrieve"
+        "retrieve",
+        "forget"
       ],
-      "status": "auto",
-      "basis": "retrieve：排序因素含 relation（推断召回时综合排序）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：召回混合打分；每日衰减"
     },
     "multi_factor": {
-      "value": "single",
+      "value": "multi",
       "status": "auto",
-      "basis": "相似度之外的因素 1 个：relation"
+      "basis": "相似度之外的因素 4 个：relation、recency、importance、frequency"
     },
     "emotion_handling": {
       "value": [
@@ -387,10 +393,12 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp"
+        "remote_mcp",
+        "cloud",
+        "needs_tunnel"
       ],
-      "status": "auto",
-      "basis": "remote_mcp：能配合 claude_web_mobile、chatgpt"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：部署在 Railway 上可给 ChatGPT、claude.ai 做远程 MCP；放在家里电脑要自己打通"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -403,9 +411,9 @@
       "basis": "没发现只能配合某一家模型的说法"
     },
     "setup_device": {
-      "value": "needs_computer",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "只能装在自己的电脑上"
+      "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
     "pairs_with": {
       "value": [],

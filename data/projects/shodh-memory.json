@@ -141,10 +141,11 @@
     },
     "write_mode": {
       "value": [
-        "auto"
+        "auto",
+        "on_request"
       ],
-      "status": "auto",
-      "basis": "README：“pic.com/en/docs/claude-code/hooks) that automatically capture context from every session — memories”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可装 Claude Code 钩子自动捕获；AI 也可调工具"
     },
     "forgetting": {
       "value": [
@@ -316,7 +317,7 @@
         "review"
       ],
       "status": "auto",
-      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard、files、tools"
+      "basis": "写入方式：auto、on_request；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：cli、dashboard、files、tools"
     },
     "lifecycle_complete": {
       "value": "complete",

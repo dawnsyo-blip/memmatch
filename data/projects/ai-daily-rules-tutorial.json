@@ -106,16 +106,15 @@
     },
     "os": {
       "value": [
-        "android",
-        "ios"
+        "android"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：android（手机（安卓）；低到中：思路版不需要改软件；CC BY-NC-）；ios（*：主要针对 Android（RikkaHub），iOS 用户可能需要适配 3. **Token 成本**）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：主要针对安卓的 RikkaHub，README 说 iOS 可能要自己适配"
     },
     "difficulty": {
-      "value": "medium",
-      "status": "auto",
-      "basis": "门槛原文：低到中：思路版不需要改软件（区间取较高一档）"
+      "value": "low",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：思路版不用改软件，用 RikkaHub、Kelivo 的现有功能和提示词就能做"
     },
     "cost": {
       "value": "",

@@ -108,18 +108,19 @@
     },
     "runs_on": {
       "value": [
-        "own_cloud_account",
-        "own_computer"
+        "own_computer",
+        "own_server"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：自己的电脑；网页版需 Cloudflare Tunnel"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：自己的 Mac 或小 VPS；Cloudflare 只用来做隧道"
     },
     "os": {
       "value": [
-        "macos"
+        "macos",
+        "linux"
       ],
-      "status": "auto",
-      "basis": "原文：imprint_utils` MCP. macOS only (AppleScript). ###"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 说核心功能在 Linux 云服务器上也能跑"
     },
     "difficulty": {
       "value": "high",
@@ -397,11 +398,10 @@
       "value": [
         "native",
         "remote_mcp",
-        "cloud",
         "needs_tunnel"
       ],
       "status": "auto",
-      "basis": "native：装在手机可用的宿主里（telegram）；remote_mcp：能配合 claude_web_mobile；cloud：运行位置含 own_cloud_account；needs_tunnel：README：“m `127.0.0.1` skip the token. Cloudflare Tunnel passes the real client IP, so”"
+      "basis": "native：装在手机可用的宿主里（telegram）；remote_mcp：能配合 claude_web_mobile；needs_tunnel：README：“m `127.0.0.1` skip the token. Cloudflare Tunnel passes the real client IP, so”"
     },
     "local_model": {
       "value": "yes",

@@ -157,8 +157,8 @@
       "value": [
         "json"
       ],
-      "status": "auto",
-      "basis": "明确写了导出：“ts across all layers - **Export/Import** — Save and restore memory as JSON - **Force Summarize** —”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可导出导入 JSON"
     },
     "data_passes_through": {
       "value": [

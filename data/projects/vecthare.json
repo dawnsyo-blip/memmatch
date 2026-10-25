@@ -143,8 +143,8 @@
       "value": [
         "auto_decay"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-24）；原依据：README：“retrieval to SillyTavern with temporal decay, conditional activation, and multiple v”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：可开启指数时间衰减，有最低分下限；默认关闭"
     },
     "human_review": {
       "value": [],
@@ -204,9 +204,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "emotion": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“vate memory chunks based on **character emotions** (happy, sad, angry, etc.) - Trigger”（已核对）"
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 没有情绪机制；原判可能来自条件触发里的示例"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -268,8 +268,8 @@
         "semantic",
         "recency"
       ],
-      "status": "auto",
-      "basis": "semantic：说明：“酒馆的进阶检索：把聊天历史向量化，按时间衰减和触发条件召回相关片段，支”；recency：说明：“酒馆的进阶检索：把聊天历史向量化，按时间衰减和触发条件召回相关片段，支持多种向量后端”"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：语义检索＋可选的时间衰减（默认关）"
     },
     "scoring_stages": {
       "value": [
@@ -285,10 +285,10 @@
     },
     "emotion_handling": {
       "value": [
-        "weighting"
+        "not_mentioned"
       ],
-      "status": "auto",
-      "basis": "weighting：Claude 据说明补充：可按角色情绪触发召回片段"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不处理情绪"
     },
     "project_role": {
       "value": "memory_component",

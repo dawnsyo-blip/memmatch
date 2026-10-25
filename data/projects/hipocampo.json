@@ -96,17 +96,19 @@
     },
     "runs_on": {
       "value": [
-        "own_cloud_account"
+        "own_computer",
+        "own_server"
       ],
-      "status": "auto",
-      "basis": "运行位置原文：Postgres；或作者在 Hugging Face 上的免费实例"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：安装脚本在 Linux（Windows 要 WSL2）上装 PostgreSQL＋pgvector；Hugging Face 上只是演示"
     },
     "os": {
       "value": [
-        "any"
+        "linux",
+        "windows"
       ],
-      "status": "auto",
-      "basis": "只在云端运行，用浏览器操作即可"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Linux，或 Windows 的 WSL2；纯 Windows 下安装脚本不能用"
     },
     "difficulty": {
       "value": "high",
@@ -378,11 +380,10 @@
     },
     "phone_access": {
       "value": [
-        "remote_mcp",
-        "cloud"
+        "remote_mcp"
       ],
       "status": "auto",
-      "basis": "remote_mcp：README：“03-26. > Hipocampo now uses **Streamable HTTP** (single endpoint `/mcp`) as”；cloud：运行位置含 own_cloud_account"
+      "basis": "remote_mcp：README：“03-26. > Hipocampo now uses **Streamable HTTP** (single endpoint `/mcp`) as”"
     },
     "local_model": {
       "value": "yes",

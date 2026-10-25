@@ -111,13 +111,12 @@
     },
     "os": {
       "value": [
-        "ios",
-        "linux",
+        "windows",
         "macos",
-        "windows"
+        "linux"
       ],
-      "status": "auto",
-      "basis": "README／原表提到：windows（ven when their file uses Windows line endings or mentio）；macos（ism browser` captures on macOS were silently *upscale）；linux（p on macOS, Windows, and Linux (beta), Cursor, Gemini C）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：npm 全局安装；原判的 iOS 不对"
     },
     "difficulty": {
       "value": "medium",
@@ -125,16 +124,16 @@
       "basis": "门槛原文：中"
     },
     "cost": {
-      "value": "model_fees_only",
-      "status": "auto",
-      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：本地免费，可选付费订阅"
     },
     "accounts_needed": {
       "value": [
-        "model_api_key"
+        "none"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：说明里没写；README 提到“ed). **No account needed. No API keys. Runs on your machine.** A”，建议值 model_api_key，需确认是否必需"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：不需要账号、API Key；付费订阅只加云同步和更大模型"
     },
     "memory_subject": {
       "value": [
