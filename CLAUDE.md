@@ -62,6 +62,11 @@
 - `python -X utf8 scripts/decide_inclusion.py` 写入 `inclusion`，生成 `docs/inclusion-report.md`（之后停下等负责人审核）
 - 可调设置在 `data/settings.json`（停更天数等）
 
+阶段 5（前端）：
+- 中文排版与文案参数以项目 skill `.claude/skills/zh-web-typography/SKILL.md` 为准（据 clreq、赫蹏、中文文案排版指北），英文设计 skill（impeccable、frontend-design）给的字号行高与之冲突时按它
+- 每页完成后用 web-design-guidelines 审一遍
+- 负责人 2026-10-25 定：网站称呼用户统一用“您”；全站不使用 emoji（要图形提示用 SVG 线条图标）
+
 ## 踩过的坑
 
 - **Windows 控制台是 GBK**：打印中文或 emoji 会 `UnicodeEncodeError`。用 `python -X utf8`。注意 `python -I`（隔离模式）会忽略 `PYTHONIOENCODING` 环境变量，只能靠 `-X utf8`。
