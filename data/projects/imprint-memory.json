@@ -437,6 +437,24 @@
       "status": "auto",
       "basis": "background：说明：“的对话自动收进同一层本地记忆；Hook 自动捕获每轮对话；按事件分段并生成一段摘要和关键”；chat_agent：README：“these)\"] rem[\"memory_remember(content)<br/>flag highlight fa”"
     },
+    "phone_access": {
+      "value": [
+        "native",
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "native：装在手机可用的宿主里（telegram）；remote_mcp：能配合 claude_web_mobile"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“fully local and offline with Ollama. ``` You: \"Remember I'm alle”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实",

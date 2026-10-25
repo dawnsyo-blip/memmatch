@@ -155,10 +155,11 @@
     },
     "compatible_clients": {
       "value": [
+        "deepseek_harness",
         "openclaw"
       ],
       "status": "auto",
-      "basis": "客户端原文：OpenClaw（插件）；REST 服务"
+      "basis": "客户端原文：OpenClaw（插件）；REST 服务；README 有 DeepSeek Harness 插件或指南：“> [!TIP] > **New: Connect MemOS to DeepSeek Harness (`dsh`)** > > Add a”"
     },
     "runs_on": {
       "value": [
@@ -436,6 +437,23 @@
       ],
       "status": "auto",
       "basis": "background：说明：“ent 而非伴侣；Agent 回合结束后异步沉淀新经验与对话；L1 轨迹→L2 策略”"
+    },
+    "phone_access": {
+      "value": [
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "cloud：运行位置含 third_party_hosted"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     },
     "paper_taxonomy": {
       "form": "词元级・分层（轨迹→策略→世界模型→技能）",

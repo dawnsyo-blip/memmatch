@@ -96,10 +96,11 @@
         "any_mcp_client",
         "claude_code",
         "claude_desktop",
+        "deepseek_harness",
         "hermes"
       ],
       "status": "auto",
-      "basis": "客户端原文：Claude Desktop、Claude Code、Hermes；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "basis": "客户端原文：Claude Desktop、Claude Code、Hermes；README 有 DeepSeek Harness 插件或指南：“(hermes-plugin/) [![DSH plugin](https://img.shield”；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
     },
     "runs_on": {
       "value": [
@@ -379,6 +380,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“em prompt / `AGENTS.md`. ### HTTP transport (remote agents, multi-agent s”"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

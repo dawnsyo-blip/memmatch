@@ -367,6 +367,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：README：“nning server; the model gets `memory_write`, `memory_recall`, `memory_ge”"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“n `:8080`) and an MCP server (Streamable HTTP on `:8765`), schema auto-migr”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“API (`openai`/`jina`), or any OpenAI-compatible server (LM Studio, Ollama, …) when y”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

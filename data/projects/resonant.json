@@ -426,6 +426,23 @@
       "status": "auto",
       "basis": "user：说明：“SDK，只支持 Claude；身份是你手写的 CLAUDE.md；只支持 Clau”；background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "needs_tunnel：README：“a real access layer — e.g. a Cloudflare Tunnel with Access, or a reverse pro”"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "说明：“＋身份持续；自托管网页应用；自带网页端（仅 Claude）；自托管网页应用，基于 Claude”"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "关系理解＋身份持续",

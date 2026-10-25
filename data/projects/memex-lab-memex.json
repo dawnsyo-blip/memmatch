@@ -418,6 +418,24 @@
       "status": "auto",
       "basis": "background：说明：“标签、实体抽取、关联链接；专门的记忆整理子 Agent；按 P.A.R.A 方法归档；生成知识”"
     },
+    "phone_access": {
+      "value": [
+        "native",
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "native：本身能在手机上运行；cloud：运行位置含 third_party_hosted"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ple providers via one API | | Ollama | OpenAI-compatible (local) |”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（生活时间线）",
       "function": "用户事实（生活日志）",

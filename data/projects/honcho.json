@@ -102,12 +102,13 @@
       "value": [
         "any_mcp_client",
         "claude_code",
+        "deepseek_harness",
         "hermes",
         "openclaw",
         "opencode"
       ],
       "status": "auto",
-      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、OpenCode 等；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、OpenCode 等；README 有 DeepSeek Harness 插件或指南：“DeepSeek Harness | `dsh plugin --profile <name> ad”；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
     },
     "runs_on": {
       "value": [
@@ -387,6 +388,23 @@
       ],
       "status": "auto",
       "basis": "background：说明：“侧重“理解用户”的记忆服务，后台持续推理出对人的认识；用户画像；官方插件”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "cloud：运行位置含 third_party_hosted"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

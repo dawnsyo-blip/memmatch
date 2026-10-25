@@ -374,6 +374,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：README：“ing Alaya: ``` Agent: [calls remember(content=\"User prefers dark mod”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ctionProvider` that calls any OpenAI-compatible API: ```rust use alaya::LlmExtra”"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "只写了 Claude 官方客户端（推断）"
     }
   },
   "uncertainties": [],

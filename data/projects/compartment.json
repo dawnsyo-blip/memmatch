@@ -387,6 +387,23 @@
       ],
       "status": "auto",
       "basis": "background：README：“g filter cannot find it. So a background pass gives every memory the tags i”；chat_agent：README：“on the machine uses. The host model decides what to store and forget; Compartment captu”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“install-dark.svg\" alt=\"Add to LM Studio\" height=\"32\"></a> <a href=\"ht”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [],

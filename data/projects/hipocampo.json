@@ -375,6 +375,24 @@
       ],
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“03-26. > Hipocampo now uses **Streamable HTTP** (single endpoint `/mcp`) as”；cloud：运行位置含 own_cloud_account"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“hip | ~3s | | ④ | Embeddings: Ollama local (`qwen3-embedding:0.6b`”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

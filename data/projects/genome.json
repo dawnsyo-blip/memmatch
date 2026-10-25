@@ -378,6 +378,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "no_model_needed",
+      "status": "auto",
+      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

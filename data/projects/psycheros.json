@@ -424,6 +424,23 @@
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）；background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "needs_tunnel：README：“BYO API, mobile-friendly via [Tailscale](https://tailscale.com/), and”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ity. - **Pluggable LLM.** Any OpenAI-compatible endpoint — Z.ai, OpenRouter, OpenAI,”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层＋知识图谱",
       "function": "AI 身份＋用户事实",

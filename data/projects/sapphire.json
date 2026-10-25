@@ -414,6 +414,23 @@
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“nthropic-compatible endpoint (Ollama and LM Studio plug in as loca”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（十万级语义记忆）＋知识库",
       "function": "AI 身份＋目标＋联系人",

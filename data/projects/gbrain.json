@@ -385,6 +385,24 @@
       ],
       "status": "auto",
       "basis": "background：README：“al, optional cited synthesis, background jobs, and curated agent skills.”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：能配合 chatgpt；needs_tunnel：说明：“t 共用；用户事实＋技能；MCP；可经 Tailscale 从其它设备访问；Claude Desk”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ax, Alibaba DashScope, Zhipu, Ollama (local), llama.cpp llama-serv”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

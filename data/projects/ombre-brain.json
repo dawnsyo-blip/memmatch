@@ -441,6 +441,25 @@
       "status": "auto",
       "basis": "background：说明：“消化；grow 把长内容拆成独立记忆桶；后台自动建桶间关系；对话开头 breath”"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "cloud",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“Tunnel 连接器，无需命令行即可开启公网访问 - **OAuth 2.1 远程鉴权**：通过 HTTPS 连接时自动触发 OAu”；cloud：运行位置含 own_cloud_account；needs_tunnel：说明：“情绪坐标）；MCP；MCP 客户端；经 Cloudflare Tunnel 可远程使用；情绪越强衰减越慢；遗忘是下”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“兼容 + > 免费 `BAAI/bge-m3`），或用本地 Ollama bge-m3（见「本地向量模型」），都零成本。 > > 一”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（Markdown 为真源）",
       "function": "用户事实（带情绪坐标）",

@@ -372,6 +372,23 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：能配合 claude_web_mobile"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“login — no API key chf --llm ollama # local mod”"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
     }
   },
   "uncertainties": [

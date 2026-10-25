@@ -99,12 +99,13 @@
       "value": [
         "claude_code",
         "codex",
+        "deepseek_harness",
         "hermes",
         "openclaw",
         "opencode"
       ],
       "status": "auto",
-      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、OpenCode、Codex、Dify"
+      "basis": "客户端原文：OpenClaw、Hermes、Claude Code、OpenCode、Codex、Dify；README 有 DeepSeek Harness 插件或指南：“[DeepSeek Harness](dsh-plugin/README.md) - [Di”"
     },
     "runs_on": {
       "value": [
@@ -385,6 +386,23 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "phone_access": {
+      "value": [
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "cloud：运行位置含 third_party_hosted"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“r API key. Optional for local OpenAI-compatible endpoints when `MNEMO_EMBED_BASE_URL`”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

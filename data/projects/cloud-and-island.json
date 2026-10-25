@@ -372,6 +372,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：README：“──────────────────────── def save_memory(content, tags=\"\"): \"\"\"保存一”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
     }
   },
   "uncertainties": [

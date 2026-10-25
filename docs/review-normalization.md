@@ -13,7 +13,7 @@
 | 字段 | 含义与可选值 | 规则判定 | 已确认 | 文档未说明 | 待审核 |
 |---|---|---|---|---|---|
 | `access` | `mcp` MCP（让 AI 调用外部工具的通用接口）；`gateway` 网关／代理（挂在助手和模型之间）；`host_plugin` 宿主插件（含钩子、技能）；`library` 代码库（要写代码调用）；`standalone_app` 独立应用；`cli_tool` 命令行小工具（需要时自己运行）；`guide` 教程或设计文档（照着搭） | 232 | 0 | 2 | 0 |
-| `compatible_clients` | `claude_desktop` Claude 桌面版；`claude_web_mobile` Claude 网页／手机版；`claude_code` Claude Code；`chatgpt` ChatGPT；`openai_compatible` 任意 OpenAI 兼容客户端；`any_mcp_client` 任意 MCP 客户端；`cursor` Cursor；`codex` Codex；`gemini_cli` Gemini CLI；`opencode` OpenCode；`openclaw` OpenClaw；`hermes` Hermes；`astrbot` AstrBot；`sillytavern` SillyTavern；`open_webui` Open WebUI；`kelivo` Kelivo；`telegram` Telegram；`wechat` 微信；`feishu` 飞书；`discord` Discord；`self_contained` 自带界面（不接其它助手）；`developer_built` 开发者自建的应用 | 225 | 0 | 9 | 0 |
+| `compatible_clients` | `claude_desktop` Claude 桌面版；`claude_web_mobile` Claude 网页／手机版；`claude_code` Claude Code；`chatgpt` ChatGPT；`openai_compatible` 任意 OpenAI 兼容客户端；`any_mcp_client` 任意 MCP 客户端；`cursor` Cursor；`codex` Codex；`gemini_cli` Gemini CLI；`opencode` OpenCode；`openclaw` OpenClaw；`hermes` Hermes；`astrbot` AstrBot；`sillytavern` SillyTavern；`open_webui` Open WebUI；`kelivo` Kelivo；`deepseek_harness` DeepSeek Harness；`telegram` Telegram；`wechat` 微信；`feishu` 飞书；`discord` Discord；`self_contained` 自带界面（不接其它助手）；`developer_built` 开发者自建的应用 | 225 | 0 | 9 | 0 |
 | `runs_on` | `own_computer` 自己的电脑；`own_server` 自己的服务器；`own_cloud_account` 自己的云账号；`phone` 手机；`third_party_hosted` 别人的服务器（托管） | 228 | 0 | 6 | 0 |
 | `os` | `windows` Windows；`macos` macOS；`linux` Linux；`android` 安卓；`ios` iOS；`any` 任何系统（浏览器即可） | 219 | 0 | 15 | 0 |
 | `difficulty` | `low` 低：应用商店或一键安装；`medium` 中：几条命令或按向导填设置；`high` 高：要写代码或改较多配置 | 234 | 0 | 0 | 0 |
@@ -61,6 +61,9 @@
 | `sensitive_suppression` | `yes` 能压住不该再提的记忆（用户拒绝过、标记回避或未解决的）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 | `write_receipt` | `yes` 写入后能明确告诉你记没记上（回执、返回编号、可回读）；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
 | `memory_writer` | `chat_agent` 聊天的 AI 自己调用工具记；`background` 后台的模型或规则自动整理；`user` 用户自己手动记；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `phone_access` | `native` 手机入口直接可用（本身在手机上，或装在机器人、Kelivo、酒馆等宿主里）；`remote_mcp` 提供远程 MCP（Claude App 等可添加为连接器）；`http_endpoint` 网关部署在服务器或云上，手机客户端填地址即可；`cloud` 本身跑在云上（自己的云账号或托管）；`needs_tunnel` 要自己用 Cloudflare Tunnel、Tailscale 等打通；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `local_model` | `yes` 可以用本地模型（Ollama、LM Studio 等）代替付费接口；`no_model_needed` 本身不调用模型；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
+| `model_lock` | `claude_only` 只能配合 Claude（官方客户端或付费套餐）；`openai_only` 只能配合 ChatGPT／OpenAI；`not_mentioned` 没发现限制 | 234 | 0 | 0 | 0 |
 
 共 234 个项目：文档未说明 470 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 

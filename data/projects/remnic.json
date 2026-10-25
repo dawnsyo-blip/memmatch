@@ -389,6 +389,23 @@
       ],
       "status": "auto",
       "basis": "background：README：“acts out. - **It compounds.** Background consolidation merges duplicates, promotes r”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：能配合 chatgpt"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ding an OpenClaw gateway or a local model. [Watch the narrated 102-sec”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

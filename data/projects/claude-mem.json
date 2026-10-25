@@ -95,10 +95,11 @@
         "claude_code",
         "codex",
         "cursor",
+        "deepseek_harness",
         "openclaw"
       ],
       "status": "auto",
-      "basis": "客户端原文：Claude Code、Codex、Cursor、OpenClaw、Grok Bot"
+      "basis": "客户端原文：Claude Code、Codex、Cursor、OpenClaw、Grok Bot；README 有 DeepSeek Harness 插件或指南：“ive Pi extension or DeepSeek Harness plugin: ```bash npx claud”"
     },
     "runs_on": {
       "value": [
@@ -374,6 +375,23 @@
       ],
       "status": "auto",
       "basis": "background：说明：“自动捕获会话中的工具使用并压缩成可搜索记录，下次”"
+    },
+    "phone_access": {
+      "value": [
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "cloud：运行位置含 third_party_hosted"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

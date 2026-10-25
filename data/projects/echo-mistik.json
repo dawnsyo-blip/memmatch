@@ -418,6 +418,23 @@
       "status": "auto",
       "basis": "background：说明：“值观”；Mistik 架构的简化公开版；后台认知进程把对话写成长期记忆事实与滚动会话”"
     },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“uses the Groq API through an OpenAI-compatible endpoint. ## How to get a Groq API ke”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "AI 身份＋共享价值观",

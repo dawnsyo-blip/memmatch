@@ -427,6 +427,24 @@
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：说明：“主动唤醒联动；用户事实＋关切／驱力状态；HTTP MCP 服务（33 个工具）；可作 kimi-”；cloud：运行位置含 own_cloud_account、third_party_hosted"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平",
       "function": "用户事实＋关切／驱力状态",

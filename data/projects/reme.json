@@ -101,6 +101,7 @@
     },
     "compatible_clients": {
       "value": [
+        "deepseek_harness",
         "hermes",
         "openclaw"
       ],
@@ -379,6 +380,23 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“| Start the shared streamable HTTP MCP service and install [the”"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

@@ -436,6 +436,24 @@
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "http_endpoint",
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "http_endpoint：网关可以放在 own_cloud_account；cloud：运行位置含 own_cloud_account"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“和任何 LLM 服务商（OpenRouter、OpenAI、本地 Ollama 等）。 Give your AI long-term m”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（三层）",
       "function": "用户事实＋工作记忆（对话线）",

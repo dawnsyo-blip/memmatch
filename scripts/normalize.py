@@ -48,7 +48,7 @@ ENUMS = {
         "chatgpt": "ChatGPT", "openai_compatible": "任意 OpenAI 兼容客户端", "any_mcp_client": "任意 MCP 客户端",
         "cursor": "Cursor", "codex": "Codex", "gemini_cli": "Gemini CLI", "opencode": "OpenCode",
         "openclaw": "OpenClaw", "hermes": "Hermes", "astrbot": "AstrBot", "sillytavern": "SillyTavern",
-        "open_webui": "Open WebUI", "kelivo": "Kelivo", "telegram": "Telegram", "wechat": "微信", "feishu": "飞书", "discord": "Discord",
+        "open_webui": "Open WebUI", "kelivo": "Kelivo", "deepseek_harness": "DeepSeek Harness", "telegram": "Telegram", "wechat": "微信", "feishu": "飞书", "discord": "Discord",
         "self_contained": "自带界面（不接其它助手）", "developer_built": "开发者自建的应用"},
     "runs_on": {"own_computer": "自己的电脑", "own_server": "自己的服务器", "own_cloud_account": "自己的云账号",
                 "phone": "手机", "third_party_hosted": "别人的服务器（托管）"},
@@ -88,7 +88,7 @@ DECIDED_ON = "2026-10-11"
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through",
          "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization",
-         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer"}
+         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access"}
 
 
 def snippet(text, m, width=60):
@@ -168,7 +168,7 @@ CLIENT_PATS = {
     "any_mcp_client": r"MCP 客户端|任意 MCP|any MCP",
     "cursor": r"Cursor", "codex": r"Codex", "gemini_cli": r"Gemini CLI", "opencode": r"OpenCode",
     "openclaw": r"OpenClaw", "hermes": r"Hermes", "astrbot": r"AstrBot", "sillytavern": r"SillyTavern|酒馆",
-    "open_webui": r"Open ?WebUI", "kelivo": r"Kelivo", "telegram": r"Telegram", "wechat": r"微信", "feishu": r"飞书", "discord": r"Discord",
+    "open_webui": r"Open ?WebUI", "kelivo": r"Kelivo", "deepseek_harness": r"DeepSeek Harness|\bdsh\b", "telegram": r"Telegram", "wechat": r"微信", "feishu": r"飞书", "discord": r"Discord",
     "developer_built": r"开发者自建|自建聊天机器人|自建聊天应用|自建网页聊天|需自己把|需自行|需自备|LangGraph 应用",
 }
 
@@ -179,6 +179,12 @@ def n_clients(c, access):
     basis = "客户端原文：" + c.text("cli")
     if c.cat == "自带记忆的应用" or re.search(r"^自带", c.text("cli")):
         vals.append("self_contained")
+    # DeepSeek Harness 是 2026-08 才出的，筛选表大多没写；README 写明了插件或接入指南的算支持
+    m = re.search(r"(?i)dsh plugin|dsh-plugin|dsh-\w+ plugin|DeepSeek Harness (?:\(DSH\) )?(?:native )?(?:plugin|guide|setup)|"
+                  r"(?:connect|connects) \w+ (?:to|with) DeepSeek Harness|Connect MemOS to DeepSeek Harness|for memory-aware DeepSeek Harness", c.readme)
+    if m and "deepseek_harness" not in vals:
+        vals.append("deepseek_harness")
+        basis += f"；README 有 DeepSeek Harness 插件或指南：“{snippet(c.readme, m, 20)}”"
     if "mcp" in access and "any_mcp_client" not in vals and c.cat == "可接入已有助手":
         vals.append("any_mcp_client")
         basis += "；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
@@ -658,6 +664,61 @@ def n_dimensions(c, out):
         vals.append("background")
         basis.append("background：写入方式含自动记或先出候选（推断）")
     d["memory_writer"] = _dim(vals, basis)
+
+    # ---- 第三批（问卷 v4 面向手机用户）----
+    vals, basis = [], []
+    runs, clients, acc = val("runs_on"), val("compatible_clients"), val("access")
+    hosts = [h for h in DR.PHONE_HOSTS if h in clients]
+    if "phone" in runs or (c.cat == "自带记忆的应用" and set(val("os")) & {"android", "ios"}):
+        vals.append("native")
+        basis.append("native：本身能在手机上运行")
+    elif hosts and ("host_plugin" in acc or c.cat == "自带记忆的应用"):
+        vals.append("native")
+        basis.append("native：装在手机可用的宿主里（" + "、".join(hosts) + "）")
+    web = [x for x in ("claude_web_mobile", "chatgpt") if x in clients]
+    if web:
+        vals.append("remote_mcp")
+        basis.append("remote_mcp：能配合 " + "、".join(web))
+    else:
+        hit = dim_hits(c, "phone_access", {"remote_mcp": DR.REMOTE_MCP_PATS})
+        if hit:
+            vals.append("remote_mcp")
+            basis.append(f"remote_mcp：{hit[0][1]}")
+    far = [r for r in runs if r in ("own_server", "own_cloud_account", "third_party_hosted")]
+    if "gateway" in acc and far:
+        vals.append("http_endpoint")
+        basis.append("http_endpoint：网关可以放在 " + "、".join(far))
+    cloud = [r for r in runs if r in ("own_cloud_account", "third_party_hosted")]
+    if cloud:
+        vals.append("cloud")
+        basis.append("cloud：运行位置含 " + "、".join(cloud))
+    hit = dim_hits(c, "phone_access", {"needs_tunnel": DR.TUNNEL_PATS})
+    if hit:
+        vals.append("needs_tunnel")
+        basis.append(f"needs_tunnel：{hit[0][1]}")
+    d["phone_access"] = _dim(vals, basis)
+
+    hit = dim_hits(c, "local_model", {"yes": DR.LOCAL_MODEL_PATS})
+    accs = val("accounts_needed")
+    if hit:
+        d["local_model"] = res("yes", "auto", hit[0][1])
+    elif out["accounts_needed"]["status"] != "unknown" and "model_api_key" not in accs \
+            and out["cost"]["value"] == "free":
+        d["local_model"] = res("no_model_needed", "auto", "不需要模型接口密钥，且免费（推断：本身不调用模型）")
+    else:
+        d["local_model"] = res("not_mentioned", "auto", "原表、说明和 README 都没提到（未提及不等于没有）")
+
+    hit = dim_hits(c, "model_lock", {"claude_only": DR.CLAUDE_ONLY_PATS})
+    if hit:
+        d["model_lock"] = res("claude_only", "auto", hit[0][1])
+    elif "claude_subscription" in accs:
+        d["model_lock"] = res("claude_only", "auto", "需要 Claude 付费套餐")
+    elif clients and set(clients) <= {"claude_desktop", "claude_web_mobile"}:
+        d["model_lock"] = res("claude_only", "auto", "只写了 Claude 官方客户端（推断）")
+    elif clients and set(clients) <= {"chatgpt"}:
+        d["model_lock"] = res("openai_only", "auto", "只写了 ChatGPT（推断）")
+    else:
+        d["model_lock"] = res("not_mentioned", "auto", "没发现只能配合某一家模型的说法")
     return d
 
 

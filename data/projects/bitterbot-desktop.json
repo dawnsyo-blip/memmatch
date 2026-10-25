@@ -434,6 +434,24 @@
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "cloud",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "cloud：运行位置含 own_cloud_account；needs_tunnel：README：“| [DM Policies, Sandboxing, Tailscale](docs/gateway/security/)”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“c, OpenAI, OpenRouter, local (Ollama, vLLM), and others | Muse Spa”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（多模块“生物式记忆”）",
       "function": "经验（技能结晶）＋AI 自我概念",

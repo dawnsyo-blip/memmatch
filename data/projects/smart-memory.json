@@ -373,6 +373,23 @@
       ],
       "status": "auto",
       "basis": "background：说明：“后台自动运行的记忆：长篇故事不跑偏、记得本次”"
+    },
+    "phone_access": {
+      "value": [
+        "native"
+      ],
+      "status": "auto",
+      "basis": "native：装在手机可用的宿主里（sillytavern）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“your setup. See [Recommended Local Models](#recommended-local-models) f”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

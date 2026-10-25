@@ -369,6 +369,23 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "phone_access": {
+      "value": [
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "needs_tunnel：README：“防 loop + 各自记忆人设 - **远程访问** —— Cloudflare Tunnel + 源站锁定 + 应用层鉴权 - **墙内可用** ——”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“标定 + 不取 top-1、点斜才像联想）；含 id 哈希/ollama 卸载模型等坑。 - [**长会话保养：transcript”"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
     }
   },
   "uncertainties": [

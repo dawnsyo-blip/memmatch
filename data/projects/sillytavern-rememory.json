@@ -366,6 +366,23 @@
       ],
       "status": "auto",
       "basis": "user：说明：“由你决定记什么，它负责生成世界书记忆条目，并模拟“有时”"
+    },
+    "phone_access": {
+      "value": [
+        "native"
+      ],
+      "status": "auto",
+      "basis": "native：装在手机可用的宿主里（sillytavern）"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

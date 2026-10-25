@@ -50,7 +50,20 @@ ENUMS.update({
     "memory_writer": {"chat_agent": "聊天的 AI 自己调用工具记", "background": "后台的模型或规则自动整理",
                       "user": "用户自己手动记", **NM},
 })
+# 2026-10-25 第三批：问卷 v4 面向手机用户后需要的 3 项
+ENUMS.update({
+    "phone_access": {
+        "native": "手机入口直接可用（本身在手机上，或装在机器人、Kelivo、酒馆等宿主里）",
+        "remote_mcp": "提供远程 MCP（Claude App 等可添加为连接器）",
+        "http_endpoint": "网关部署在服务器或云上，手机客户端填地址即可",
+        "cloud": "本身跑在云上（自己的云账号或托管）",
+        "needs_tunnel": "要自己用 Cloudflare Tunnel、Tailscale 等打通", **NM},
+    "local_model": {"yes": "可以用本地模型（Ollama、LM Studio 等）代替付费接口", "no_model_needed": "本身不调用模型", **NM},
+    "model_lock": {"claude_only": "只能配合 Claude（官方客户端或付费套餐）", "openai_only": "只能配合 ChatGPT／OpenAI",
+                   "not_mentioned": "没发现限制"},
+})
 LABELS = {
+    "phone_access": "手机能否连上", "local_model": "能否用本地模型", "model_lock": "是否绑定某家模型",
     "chinese_support": "中文支持", "memory_layers": "记忆是否分层", "retrieval_postprocess": "检索后处理",
     "recall_uses_llm": "召回时是否调用大模型", "sensitive_suppression": "敏感记忆抑制", "write_receipt": "写入回执",
     "memory_writer": "谁来记",
@@ -188,6 +201,19 @@ WRITER_PATS = {
              r"you decide what(?:'s| is)? (?:important|to remember)|hand-written"),
 }
 
+REMOTE_MCP_PATS = (r"远程 MCP|远程连接器|HTTP MCP|claude\.ai 网页",
+                   r"remote MCP|streamable[- ]?HTTP|custom connectors?|mcp-remote|OAuth 2|HTTP transport|--http\b|"
+                   r"remote (?:connector|server URL)|远程 MCP")
+TUNNEL_PATS = (r"Cloudflare Tunnel|Tailscale|内网穿透|ZeroTier|ngrok|frp",
+               r"Cloudflare Tunnel|cloudflared|Tailscale|ngrok|\bfrp\b|ZeroTier|内网穿透")
+LOCAL_MODEL_PATS = (r"Ollama|LM Studio|本地模型|本地向量模型|llama\.cpp|vLLM",
+                    r"\bOllama\b|LM Studio|llama\.cpp|\bvLLM\b|local (?:LLM|model)s?\b|本地模型|本地 Ollama|"
+                    r"OPENAI_BASE_URL|OpenAI[- ]compatible (?:endpoint|API|server|base URL|provider)")
+CLAUDE_ONLY_PATS = (r"只支持 Claude|仅支持 Claude|只用 Claude|仅 Claude|只接 Claude",
+                    r"only (?:supports?|works? with) Claude|Claude[- ]only|requires? (?:a )?Claude (?:Pro|Max|subscription)")
+# 手机入口直接可用的宿主
+PHONE_HOSTS = ("astrbot", "telegram", "wechat", "feishu", "discord", "kelivo", "sillytavern")
+
 # 项目定位：按收录类别给默认值；“可接入已有助手”里不是完整记忆系统的，在这里逐个指定
 ROLE_BY_CATEGORY = {"自带记忆的应用": "companion_app", "教程与搭建指南": "guide",
                     "边缘项（存的不是对话记忆）": "state_engine", "需写代码（开发者向）": "dev_framework"}
@@ -314,6 +340,24 @@ REJECT = {
     ("0compactmem", "pairing", "designed_to_pair"): "“旁路服务”指挂在 Claude Code 旁运行",
     ("engram-rs", "ranking_signals", "keyword"): "在描述别的方案",
     ("iai-personal-memory-engine", "ranking_signals", "semantic"): "说的是它不是向量库的包装",
+    # 第三批字段
+    ("moread", "local_model", "yes"): "说的是语音合成接口",
+    ("synthetic-heart", "local_model", "yes"): "说的是它自己提供兼容接口",
+    ("companion-emergence", "local_model", "yes"): "FAQ 的回答是要用 Claude",
+    ("simplemem", "local_model", "yes"): "LM Studio 在这里是聊天客户端",
+    ("langstate", "local_model", "yes"): "说的是不需要 Ollama",
+    ("memkeeper", "local_model", "yes"): "说的是改用网络服务、不加载本地模型",
+    ("mnemo-mcp", "local_model", "yes"): "base_url 是评分服务的配置",
+    ("memory-mcp-1file", "phone_access", "remote_mcp"): "说的是没开启 HTTP",
+    ("mindmap-mcp-server", "phone_access", "remote_mcp"): "说的是 HTTP 传输默认不提供",
+    ("mnemo-mcp", "phone_access", "remote_mcp"): "依赖库列表",
+    ("synthetic-heart", "phone_access", "remote_mcp"): "它是去调用别人的远程 MCP",
+    ("ocean", "phone_access", "remote_mcp"): "它是去调用别人的 MCP",
+    ("atmem", "phone_access", "remote_mcp"): "说的是 agent 之间的委托通道",
+    ("mnemo-cortex", "phone_access", "needs_tunnel"): "是一段经历描述",
+    ("omega-memory", "model_lock", "claude_only"): "在描述别的产品",
+    ("piia-engram", "model_lock", "claude_only"): "对比表里别的产品",
+    ("remembra", "model_lock", "claude_only"): "对比表里别的产品",
     # 第二批字段
     ("atmem", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",
     ("inspeximus", "memory_writer", "chat_agent"): "示例是程序代码调用接口，不是聊天的 AI 自己记",

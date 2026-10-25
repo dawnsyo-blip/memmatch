@@ -421,6 +421,23 @@
       "status": "auto",
       "basis": "background：README：“orms or bypassing the persona extraction pipeline. | | `KOKORO_PROMPT_MATERIAL_”"
     },
+    "phone_access": {
+      "value": [
+        "native"
+      ],
+      "status": "auto",
+      "basis": "native：本身能在手机上运行"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“be. The raw mode measures the vLLM endpoint directly; the Core m”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋角色日程",

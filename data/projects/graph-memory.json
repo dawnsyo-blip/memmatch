@@ -388,6 +388,25 @@
       ],
       "status": "auto",
       "basis": "background：README：“md`](docs/DREAM_PROCESS.md) — extraction pipeline, manifest format, changelog s”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "cloud",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：能配合 claude_web_mobile；cloud：运行位置含 own_cloud_account；needs_tunnel：README：“Cloudflare Tunnel”"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
     }
   },
   "uncertainties": [],

@@ -425,6 +425,23 @@
       "status": "auto",
       "basis": "background：说明：“Agent 共享，支持加密 U 盘迁移；自动捕获、入库时分类、脱敏；Analyst 把原”"
     },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“-desktop-linux.md), OpenClaw, LM Studio, and more), and [CORTEX-OS.md”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平＋结构化事实",
       "function": "用户事实",

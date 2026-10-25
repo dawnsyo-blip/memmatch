@@ -383,6 +383,23 @@
       ],
       "status": "auto",
       "basis": "background：README：“n). 2. The Claude Code `Stop` hook captures each turn from the session tr”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“o-egress neural path is the Ollama recipe below. - `createLocalE”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [],

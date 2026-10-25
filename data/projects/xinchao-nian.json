@@ -431,6 +431,24 @@
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“连接 Claude.ai MCP 连接器 心潮·念自带 OAuth 2.1 MCP 端点，可直接作为 Claude.ai 的 MC”；needs_tunnel：README：“100**：先用 Cloudflare Tunnel、Tailscale Funnel 或自己的反向代理给心潮配置公网 HTTPS”"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级（复用 Ombre Brain）＋驱力状态",
       "function": "用户事实＋欲望驱力状态",

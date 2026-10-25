@@ -388,6 +388,24 @@
       ],
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：能配合 chatgpt；needs_tunnel：README：“rt REST API on localhost:8394 ngrok http 8394 # E”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“el + Custom GPT Actions), and local LLMs read and write the same knowl”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [],

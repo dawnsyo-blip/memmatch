@@ -392,6 +392,23 @@
       ],
       "status": "auto",
       "basis": "background：README：“**AI Memory Assistant** — it automatically captures what matters, lets noise na”；chat_agent：README：“Need semantic recall? → Use `memory_store` or let auto-capture do it -”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“der** | OpenAI, Jina, Gemini, Ollama, or any OpenAI-compatible API”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [],

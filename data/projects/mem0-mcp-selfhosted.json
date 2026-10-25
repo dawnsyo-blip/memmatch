@@ -375,6 +375,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：README：“to re-explain anything. Use `add_memory` whenever you discover projec”"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“ransport: `stdio`, `sse`, or `streamable-http` | | `MEM0_HOST` | `0.0.0.0`”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“self-hosted Qdrant + Neo4j + Ollama, with your choice of Anthropi”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

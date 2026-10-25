@@ -381,6 +381,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：README：“| Does | |---|---| | `mnemos_remember(fact)` | Store a durable fact”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“supports adding OpenAI/Gemini/local models later without touching agen”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

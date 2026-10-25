@@ -428,6 +428,23 @@
       "status": "auto",
       "basis": "chat_agent：README：“server exposes eight tools: `add_memory`, `search_memories`, `get_mem”"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“ault) telemem-mcp --transport streamable-http # Streamable HTTP on”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“mem/releases/tag/v1.6.0) adds Ollama/DeepSeek/Kimi configs, LangCh”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（含视频多模态）",
       "function": "用户事实＋角色建模",

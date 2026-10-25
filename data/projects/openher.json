@@ -422,6 +422,23 @@
       "status": "auto",
       "basis": "background：说明：“S；风格记忆按衰减公式淡去，重要的加深；异步两阶段：每轮结束触发搜索，下一轮按 80”"
     },
+    "phone_access": {
+      "value": [
+        "native"
+      ],
+      "status": "auto",
+      "basis": "native：本身能在手机上运行"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“iniMax · Moonshot · StepFun · Ollama (本地) → 测试方法：[LLM 对比报告](docs/”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级＋驱力状态",
       "function": "AI 身份（纵贯性自我）＋关系",

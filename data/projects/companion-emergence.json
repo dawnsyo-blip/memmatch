@@ -422,6 +422,23 @@
       "status": "auto",
       "basis": "background：说明：“；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅 Claude）”"
     },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "说明：“态；桌面应用＋后台常驻服务；自带桌面端（仅 Claude）；桌面应用＋后台服务，只用 Claud”"
+    },
     "paper_taxonomy": {
       "form": "词元级・平面（赫布联想网络）",
       "function": "AI 身份＋情绪／身体状态",

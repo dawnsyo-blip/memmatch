@@ -431,6 +431,23 @@
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）；background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“* | MCP Server (stdio / SSE / Streamable HTTP) | AI Agent 读写记忆的接口 | | **Hum”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“今天用 Claude 对话，明天切到 Gemini，后天换成本地模型——**醒过来的都是同一个\"人\"**，带着完整的记忆、人格和”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（带版本）",
       "function": "用户事实＋AI 身份／关系",

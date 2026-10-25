@@ -424,6 +424,23 @@
       "status": "auto",
       "basis": "background：说明：“后自动抽取事实与偏好；Inbox 回复被后台内化为记忆；自动或手动压缩：合并、清理陈”；chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“rotocol servers over stdio or streamable HTTP, including OAuth-protected re”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“hips (`@` mentions) - **Local Ollama** — Optional private chat and”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・扁平（按项目分区）",
       "function": "工作记忆＋环境事实（工作区上下文）",

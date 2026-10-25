@@ -373,6 +373,23 @@
       ],
       "status": "auto",
       "basis": "chat_agent：README：“system** — 6 new MCP tools (`memory_save`, `memory_search`, `recall`,”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“Uses local SQLite + optional [Ollama](https://ollama.com) embeddin”"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
     }
   },
   "uncertainties": [

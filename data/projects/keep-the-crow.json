@@ -377,6 +377,23 @@
       ],
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "phone_access": {
+      "value": [
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "needs_tunnel：README：“MiniMax TTS，AI 消息可以朗读出来 - 通过 Tailscale 安全访问，不暴露公网端口 ## 架构总览 ``` 手机”"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "claude_only",
+      "status": "auto",
+      "basis": "需要 Claude 付费套餐"
     }
   },
   "uncertainties": [

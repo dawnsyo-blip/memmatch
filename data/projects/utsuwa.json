@@ -421,6 +421,23 @@
       "status": "auto",
       "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
     },
+    "phone_access": {
+      "value": [
+        "native"
+      ],
+      "status": "auto",
+      "basis": "native：本身能在手机上运行"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ropic, Google, xAI, DeepSeek, Ollama, LM Studio, and any OpenAI-co”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋角色成长",

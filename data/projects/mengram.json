@@ -387,6 +387,23 @@
       ],
       "status": "auto",
       "basis": "background：README：“uto-recall before every turn, auto-capture after. 12 tools, slash comma”；chat_agent：README：“.com/hook\", event_types=[\"memory_add\", \"memory_update\"], ) ``` ##”"
+    },
+    "phone_access": {
+      "value": [
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "cloud：运行位置含 third_party_hosted"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ey sk-ant-... # or openai / ollama mengram import claude-code --”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

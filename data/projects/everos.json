@@ -99,10 +99,11 @@
     },
     "compatible_clients": {
       "value": [
+        "deepseek_harness",
         "developer_built"
       ],
       "status": "auto",
-      "basis": "客户端原文：开发者自建"
+      "basis": "客户端原文：开发者自建；README 有 DeepSeek Harness 插件或指南：“gins/tree/main/dsh\">DSH plugin</a> for memory-awar”"
     },
     "runs_on": {
       "value": [
@@ -379,6 +380,23 @@
       ],
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [

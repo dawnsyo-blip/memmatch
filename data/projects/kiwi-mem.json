@@ -439,6 +439,25 @@
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "http_endpoint",
+        "cloud",
+        "needs_tunnel"
+      ],
+      "status": "auto",
+      "basis": "http_endpoint：网关可以放在 own_cloud_account、own_server、third_party_hosted；cloud：运行位置含 own_cloud_account、third_party_hosted；needs_tunnel：README：“请选择下方域名方案或平台域名。 ```bash # 安装 Cloudflare Tunnel curl -L https://github.com/cl”"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“务商（OpenRouter、OpenAI、DeepSeek、Ollama 等）用 OpenAI 兼容格式接入；Anthropic 可”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（日／周／月摘要）",
       "function": "用户事实",

@@ -415,6 +415,23 @@
       "status": "auto",
       "basis": "background：说明：“应用自带记忆；能操作电脑、接 MCP、建子 Agent；可整体打包导出带走；桌面伴侣：三层记忆”"
     },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层（三层）",
       "function": "用户事实＋情绪状态",

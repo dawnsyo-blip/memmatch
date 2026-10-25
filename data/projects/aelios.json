@@ -432,6 +432,25 @@
       "status": "auto",
       "basis": "background：写入方式含自动记或先出候选（推断）"
     },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "http_endpoint",
+        "cloud"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：能配合 claude_web_mobile；http_endpoint：网关可以放在 own_cloud_account；cloud：运行位置含 own_cloud_account"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“pstream error says so. Custom OpenAI-compatible base URLs are forwarded as-is. Config”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级・分层",
       "function": "用户事实",

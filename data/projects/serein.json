@@ -390,6 +390,24 @@
       ],
       "status": "auto",
       "basis": "background：说明：“服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话留档可核对；带网页”；chat_agent：说明：“可自行部署的个人记忆服务：聊天的 AI 主动写下想留的片段，后台把原话整理成事件，原话”"
+    },
+    "phone_access": {
+      "value": [
+        "remote_mcp",
+        "http_endpoint"
+      ],
+      "status": "auto",
+      "basis": "remote_mcp：README：“ateway Key，不加 `Bearer` 前缀 | | 远程 MCP · OAuth | 服务器 URL 填 `https://”；http_endpoint：网关可以放在 own_server"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
     }
   },
   "uncertainties": [],

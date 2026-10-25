@@ -422,6 +422,24 @@
       "status": "auto",
       "basis": "background：说明：“托管伴侣（Telegram、微信）＋管理后台；自带；Telegram、微信；伴侣应用”"
     },
+    "phone_access": {
+      "value": [
+        "native",
+        "remote_mcp"
+      ],
+      "status": "auto",
+      "basis": "native：装在手机可用的宿主里（telegram、wechat）；remote_mcp：能配合 chatgpt"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
     "paper_taxonomy": {
       "form": "词元级",
       "function": "用户事实＋习惯／待办",
