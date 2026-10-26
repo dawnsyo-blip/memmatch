@@ -126,18 +126,17 @@
   body.paper-mode .sample-switch { background: color-mix(in srgb, var(--paper) 85%, transparent); color: var(--ink); border-color: var(--rule); }
   body.paper-mode .sample-switch button[aria-pressed="true"] { color: var(--faded-plum); }
 
-  /* 色卡版：配色照《复古土星环与色彩图谱》——暖灰纸、从中心展开的场线、芥末黄的中心、黑色描线 */
-  .halo, .core-disc { display: none; }
+  /* 色卡版：只用《复古土星环与色彩图谱》里的颜色——暖灰纸底，星图用梅红系，亮光用芥末黄 */
   body.palette-mode { background-color: #d5c8b3; }
-  body.palette-mode .halo, body.palette-mode .core-disc { display: inline; }
-  body.palette-mode .halo path { stroke: var(--ink); stroke-width: .9; }
-  body.palette-mode .core-disc { fill: var(--mustard); stroke: var(--ink); stroke-width: 1.4; }
-  body.palette-mode .core-dot { display: none; }
-  body.palette-mode .core-glow { opacity: .7; }
-  body.palette-mode .bulb { fill: var(--mustard); stroke: var(--ink); stroke-width: .5; }
+  body.palette-mode .pulsar .ray { stroke: var(--faded-plum); opacity: 1; }
+  body.palette-mode .pulsar .gc { stroke: var(--mauve); opacity: .8; }
+  body.palette-mode .pulsar .bit { stroke: var(--deep-plum); }
+  body.palette-mode .bulb { fill: var(--mustard); }
+  body.palette-mode .core-dot { fill: var(--mustard); }
   body.palette-mode .subtitle { color: var(--deep-plum); }
+  body.palette-mode .callout line { stroke: var(--deep-plum); }
   body.palette-mode .callout .zh { fill: var(--deep-plum); }
-  body.palette-mode .stars circle { fill: var(--ink); opacity: .35; }
+  body.palette-mode .stars circle { fill: var(--dusty-pink); opacity: .7; }
 </style>
 </head>
 <body class="night grain">
@@ -183,11 +182,9 @@
           <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
         </radialGradient>
       </defs>
-      <g id="halo" class="halo"></g>
       <g id="rays"></g>
       <g id="bulbs"></g>
       <circle class="core-glow" r="16" fill="url(#coreGrad)"/>
-      <circle class="core-disc" r="7"/>
       <circle class="core-dot" r="1.8" fill="#fff6dc"/>
       <g class="callout">
         <a href="答题页.html" id="calloutLink">
@@ -338,15 +335,6 @@
   document.getElementById("drawerClose").addEventListener("click", () => setMenu(false));
   scrim.addEventListener("click", () => setMenu(false));
   addEventListener("keydown", (e) => { if (e.key === "Escape" && drawer.classList.contains("open")) setMenu(false); });
-
-  /* ---------- 色卡版的场线：从中心上下出发、向右展开，由外到内越来越深 ---------- */
-  const halo = document.getElementById("halo");
-  const FILLS = ["#ddcbbd", "#d0b0a7", "var(--dusty-pink)", "#b4858a", "var(--mauve)", "#a6626c", "var(--faded-plum)"];
-  FILLS.forEach((fill, i) => {
-    const k = FILLS.length - i;
-    el("path", { d: `M0 -7 C ${60 * k} ${-7 - 31 * k}, ${60 * k} ${7 + 31 * k}, 0 7 Z`, fill }, halo);
-  });
-  el("path", { d: "M0 -7 C 66 -34, 66 34, 0 7 Z", fill: "var(--cream)" }, halo); // 最里面留一圈浅色
 
   /* ---------- 样张：星空 / 纸面 / 色卡对比 ---------- */
   document.querySelectorAll(".sample-switch button").forEach((b) => b.addEventListener("click", () => {
