@@ -1,7 +1,7 @@
 """生成《个人记忆库候选表.xlsx》。
 
 输入：
-  记忆框架开源情况.xlsx                       原始整理表（记忆项目总表、框架开源情况）
+  sources/负责人材料/记忆框架开源情况.xlsx     原始整理表（记忆项目总表、框架开源情况）
   sources/snapshots/*.md                      来源清单的 README 快照（2026-10-10；2026-10-24 补充的几份）
   data/candidates/repo_meta.json              各仓库最后提交日期、Star、许可证文件开头
   scripts/candidate_review.py                 人工筛选结论
@@ -141,7 +141,7 @@ INFO_FIELDS = ["desc", "subj", "acc", "cli", "run", "diff", "need", "lic", "note
 def collect_rows():
     """合并四个来源、套用筛选结论，返回 {键: 行}。键为仓库（小写）或 name:项目名。"""
     meta = json.loads((ROOT / "data/candidates/repo_meta.json").read_text(encoding="utf-8"))["repos"]
-    wb_in = openpyxl.load_workbook(ROOT / "记忆框架开源情况.xlsx", data_only=True)
+    wb_in = openpyxl.load_workbook(ROOT / "sources/负责人材料/记忆框架开源情况.xlsx", data_only=True)
     new = {k.lower(): v for k, v in R.NEW.items()}
     desc_only = {k.lower(): v for k, v in R.DESC_ONLY.items()}
 

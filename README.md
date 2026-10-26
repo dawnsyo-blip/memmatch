@@ -2,17 +2,23 @@
 
 帮已经在用个人 AI 助手、主要通过文字交流的普通用户，从开源记忆项目里找到能接到自己助手上的那几个。
 
-开发计划见 [ROADMAP.md](ROADMAP.md)。
+开发计划见 [ROADMAP.md](ROADMAP.md)，给 Claude Code 的工作约定和踩过的坑见 [CLAUDE.md](CLAUDE.md)。当前正式问卷是 [记忆库推荐问卷 v5.md](记忆库推荐问卷%20v5.md)。
 
 | 目录 | 内容 |
 |---|---|
-| `data/candidates/` | 候选项目筛选表（当前进度） |
-| `data/projects/` | 每个项目一个 JSON 文件（阶段 0） |
+| `data/projects/` | 每个项目一个 JSON 文件 |
 | `data/schema/` | 数据结构定义 |
-| `data/questionnaire/` | 问卷配置 |
-| `scripts/` | 导入、检查、每周处理脚本 |
-| `server/` | 推荐入口的接收服务 |
-| `site/` | 网站代码 |
-| `deploy/` | 部署配置 |
-| `docs/` | 评审报告等 |
-| `sources/snapshots/` | 来源清单快照 |
+| `data/questionnaire/` | 网站读取的问卷配置 |
+| `data/candidates/` | 候选项目筛选表 |
+| `engine/` | 推荐引擎（浏览器和 Node 都能跑） |
+| `tests/` | 引擎和虚构用户的自动测试 |
+| `scripts/` | 导入、规范化、检查、推荐等脚本（`prototype/` 是早期原型，只作参考） |
+| `sources/snapshots/` | 来源清单的 README 快照 |
+| `sources/负责人材料/` | 负责人给的原始材料（只读） |
+| `docs/` | 脚本生成的各类报告、问卷配置格式说明 |
+| `docs/前端/` | 页面清单、风格简报模板，以及之后的设计规范 |
+| `docs/历史问卷/` | 问卷 v1–v4（旧版，不再修改） |
+| `site/` | 网站代码（阶段 5，待建） |
+| `server/` | 推荐入口的接收服务（待建） |
+| `deploy/` | 部署配置（待建） |
+| `cache/` | 下载的 README 和仓库缓存（不进 git，可重新生成） |
