@@ -125,6 +125,19 @@
   .sample-switch button[aria-pressed="true"] { color: var(--glow); text-decoration: underline; text-underline-offset: 3px; }
   body.paper-mode .sample-switch { background: color-mix(in srgb, var(--paper) 85%, transparent); color: var(--ink); border-color: var(--rule); }
   body.paper-mode .sample-switch button[aria-pressed="true"] { color: var(--faded-plum); }
+
+  /* 色卡版：配色照《复古土星环与色彩图谱》——暖灰纸、从中心展开的场线、芥末黄的中心、黑色描线 */
+  .halo, .core-disc { display: none; }
+  body.palette-mode { background-color: #d5c8b3; }
+  body.palette-mode .halo, body.palette-mode .core-disc { display: inline; }
+  body.palette-mode .halo path { stroke: var(--ink); stroke-width: .9; }
+  body.palette-mode .core-disc { fill: var(--mustard); stroke: var(--ink); stroke-width: 1.4; }
+  body.palette-mode .core-dot { display: none; }
+  body.palette-mode .core-glow { opacity: .7; }
+  body.palette-mode .bulb { fill: var(--mustard); stroke: var(--ink); stroke-width: .5; }
+  body.palette-mode .subtitle { color: var(--deep-plum); }
+  body.palette-mode .callout .zh { fill: var(--deep-plum); }
+  body.palette-mode .stars circle { fill: var(--ink); opacity: .35; }
 </style>
 </head>
 <body class="night grain">
@@ -170,10 +183,12 @@
           <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
         </radialGradient>
       </defs>
+      <g id="halo" class="halo"></g>
       <g id="rays"></g>
       <g id="bulbs"></g>
       <circle class="core-glow" r="16" fill="url(#coreGrad)"/>
-      <circle r="1.8" fill="#fff6dc"/>
+      <circle class="core-disc" r="7"/>
+      <circle class="core-dot" r="1.8" fill="#fff6dc"/>
       <g class="callout">
         <a href="答题页.html" id="calloutLink">
           <line x1="7" y1="-5.5" x2="124" y2="-110"/>
@@ -192,6 +207,7 @@
   <span>样张底色</span>
   <button type="button" data-mode="night" aria-pressed="true">星空</button>
   <button type="button" data-mode="paper" aria-pressed="false">纸面</button>
+  <button type="button" data-mode="palette" aria-pressed="false">色卡</button>
 </div>
 
 <div class="flash" id="flash"></div>
@@ -323,15 +339,26 @@
   scrim.addEventListener("click", () => setMenu(false));
   addEventListener("keydown", (e) => { if (e.key === "Escape" && drawer.classList.contains("open")) setMenu(false); });
 
-  /* ---------- 样张：星空 / 纸面对比 ---------- */
+  /* ---------- 色卡版的场线：从中心上下出发、向右展开，由外到内越来越深 ---------- */
+  const halo = document.getElementById("halo");
+  const FILLS = ["#ddcbbd", "#d0b0a7", "var(--dusty-pink)", "#b4858a", "var(--mauve)", "#a6626c", "var(--faded-plum)"];
+  FILLS.forEach((fill, i) => {
+    const k = FILLS.length - i;
+    el("path", { d: `M0 -7 C ${60 * k} ${-7 - 31 * k}, ${60 * k} ${7 + 31 * k}, 0 7 Z`, fill }, halo);
+  });
+  el("path", { d: "M0 -7 C 66 -34, 66 34, 0 7 Z", fill: "var(--cream)" }, halo); // 最里面留一圈浅色
+
+  /* ---------- 样张：星空 / 纸面 / 色卡对比 ---------- */
   document.querySelectorAll(".sample-switch button").forEach((b) => b.addEventListener("click", () => {
-    const paper = b.dataset.mode === "paper";
-    document.body.classList.toggle("night", !paper);
-    document.body.classList.toggle("paper-mode", paper);
-    document.body.classList.toggle("paper", paper);
+    const mode = b.dataset.mode, light = mode !== "night";
+    document.body.classList.toggle("night", !light);
+    document.body.classList.toggle("paper-mode", light);
+    document.body.classList.toggle("paper", light);
+    document.body.classList.toggle("palette-mode", mode === "palette");
     document.querySelectorAll(".sample-switch button").forEach((x) => x.setAttribute("aria-pressed", x === b));
   }));
-  if (location.hash === "#paper") document.querySelector('.sample-switch [data-mode="paper"]').click();
+  const start = { "#paper": "paper", "#night": "night" }[location.hash] || "palette";
+  document.querySelector(`.sample-switch [data-mode="${start}"]`).click();
 })();
 </script>
 </body>
