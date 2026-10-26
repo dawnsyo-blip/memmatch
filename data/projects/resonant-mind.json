@@ -437,6 +437,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：要用 npm 部署到 Cloudflare 并配 Neon"
     },
+    "media_recall": {
+      "value": [
+        "image"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片原件存进 R2，用签名链接取回；没有音频、视频"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -495,6 +502,6 @@
       "许可证限制使用（据原表／README）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

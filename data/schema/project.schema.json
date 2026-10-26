@@ -210,7 +210,8 @@
         "phone_access",
         "local_model",
         "model_lock",
-        "setup_device"
+        "setup_device",
+        "media_recall"
       ],
       "properties": {
         "access": {
@@ -372,6 +373,9 @@
         "setup_device": {
           "$ref": "#/$defs/normalizedField"
         },
+        "media_recall": {
+          "$ref": "#/$defs/normalizedField"
+        },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",
           "description": "设计上搭配使用的项目 id 列表（推荐引擎做组合推荐用），关系写在 scripts/dimension_rules.py 的 RELATED"
@@ -409,6 +413,31 @@
         },
         "additionalProperties": false
       }
+    },
+    "safety_note": {
+      "type": "object",
+      "description": "安全审查备注（data/safety_notes.json，normalize.py 写入）：推荐时应提醒用户注意的情况，不代表恶意。level：notice 需留意／info 知悉即可",
+      "required": [
+        "level",
+        "note",
+        "checked"
+      ],
+      "properties": {
+        "level": {
+          "enum": [
+            "notice",
+            "info"
+          ]
+        },
+        "note": {
+          "type": "string"
+        },
+        "checked": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "$defs": {

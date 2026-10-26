@@ -404,6 +404,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：要在电脑上克隆、npm install，并装 Codex 或 Claude Code"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -453,6 +460,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

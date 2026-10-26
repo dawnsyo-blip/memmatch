@@ -1,0 +1,488 @@
+{
+  "id": "agentmemory",
+  "name": "agentmemory（rohitg00）",
+  "repo_url": "https://github.com/rohitg00/agentmemory",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "P2",
+    "group_meaning": "主要面向编程助手，但也能接通用 MCP 客户端或个人 agent",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（AgentMemory）",
+    "Awesome-Agent-Memory",
+    "评测榜单（LongMemEval、BEAM 等）"
+  ],
+  "info": {
+    "summary": {
+      "value": "编程智能体的持久记忆，多个智能体通过租约和信号协调共享；默认无密钥模式用 BM25 关键词检索，配嵌入后加语义检索；本地运行，带实时查看面板；macOS、Linux，Windows 用 WSL2 或原生方式",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-26"
+    },
+    "memory_subject": {
+      "value": "项目决定＋经验＋会话要点",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "MCP＋REST＋钩子",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex、Cursor、Gemini CLI、OpenClaw、Hermes 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无（本地嵌入模型）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "—",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "论文所指仓库无法确认，此处收录同名的 rohitg00/agentmemory（多智能体共享记忆，2026-10-26 补收）；多智能体记忆；偏编程场景；Star 2.9 万；LongMemEval-S R@5 95.2%（作者自报，只测检索）；README 提供“让智能体读安装说明自行安装”的用法，请先看安装说明内容；论文未给出可唯一对应的仓库；同名项目如 rohitg00/agentmemory 无法证实，需到 arXiv 原文表 9 点开链接确认；评测：LongMemEval-S R@5 95.2%（作者自报，只测检索）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "—",
+    "stars": 29284,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 20,
+      "框架": "AgentMemory",
+      "仓库链接": "无法确认",
+      "许可证": "—",
+      "开源状态": "无法确认",
+      "仓库最后提交日期": "—",
+      "备注": "论文未给出可唯一对应的仓库；同名项目如 rohitg00/agentmemory 无法证实，需到 arXiv 原文表 9 点开链接确认"
+    },
+    "人工筛选": {
+      "name": "agentmemory（rohitg00）",
+      "v": "纳入",
+      "c": "P2",
+      "desc": "编程智能体的持久记忆：12 个自动钩子，54 个 MCP 工具，多个智能体通过租约和信号协调共享；本地向量，无需外部数据库",
+      "subj": "项目决定＋经验＋会话要点",
+      "acc": "MCP＋REST＋钩子",
+      "cli": "Claude Code、Codex、Cursor、Gemini CLI、OpenClaw、Hermes 等",
+      "run": "自己的电脑",
+      "diff": "中",
+      "need": "无（本地嵌入模型）",
+      "note": "多智能体记忆；偏编程场景；Star 2.9 万；LongMemEval-S R@5 95.2%（作者自报，只测检索）；README 提供“让智能体读安装说明自行安装”的用法，请先看安装说明内容"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "agentmemory",
+      "url": "https://github.com/rohitg00/agentmemory",
+      "desc": "Persistent memory for AI coding agents."
+    },
+    "评测榜单": "LongMemEval-S R@5 95.2%（作者自报，只测检索）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "host_plugin",
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "接入方式原文：MCP＋REST＋钩子"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex",
+        "cursor",
+        "gemini_cli",
+        "hermes",
+        "openclaw",
+        "deepseek_harness",
+        "any_mcp_client"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README 首段列出"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（tomatic runtime setup. - Windows users can use WSL2 or fo）；macos（pm -v`, and `npx -v`). - macOS/Linux also need `curl`,）；linux（, and `npx -v`). - macOS/Linux also need `curl`, a POSI）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：开源免费；配外部嵌入模型才有费用"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：无密钥模式即可用"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "experience",
+        "task_context"
+      ],
+      "status": "auto",
+      "basis": "记忆对象原文：项目决定＋经验＋会话要点"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "auto",
+      "basis": "README：“>N/A (grep)</td> </tr> <tr> <td><strong>Auto-capture</strong></td> <td>12 hooks (zero manual”"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "status": "auto",
+      "basis": "README：“to do it\" | Memories decay over time (Ebbinghaus curve). Frequently accessed memories st”"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "cli",
+        "tools"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：实时查看面板可浏览、编辑、导出、删除"
+    },
+    "export": {
+      "value": [
+        "json",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“ridge** | Read MEMORY.md and export project memories without”；“ad MEMORY.md or create a project export, preserving existing fil”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ve project history, lessons and session handoffs from another agent. - **Inspect:** bro”（已核对）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“My Pi, OpenCode, DeepSeek Harness, and any MCP client. </p> <p align=\"center\"> <a href=\"RE”（已核对）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“misses 1 of 2 gold on the multi-session temporal query. Lift is **recall + temporal**, not agg”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“mory lifecycle</strong></td> <td>4-tier consolidation + decay + auto-forget</td> <td>Passi”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“xtends Karpathy's LLM Wiki pattern with confidence scoring, lifecycle, knowledge graphs, a”（已核对）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“RAPH_EXTRACTION_ENABLED=true) -> Slot reflection (if AGENTMEMORY_SLOTS=true and AGENTMEM”（已核对）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“s record supported session events, with secret scrubbing and offline replay. - **Recall:** keywo”（已核对）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword",
+        "recency",
+        "frequency",
+        "relation",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：说明：“模式用 BM25 关键词检索，配嵌入后加语义检索；本地运行，带实时查看面板；macOS、”；keyword：README：“offline replay. - **Recall:** keyword search works without an API key; loc”；recency：README：“| \"How to do it\" | Memories decay over time (Ebbinghaus curve). Frequentl”；frequency：README：“over time (Ebbinghaus curve). Frequently accessed memories strengthen. Stale me”；relation：README：“onfidence scoring, lifecycle, knowledge graphs, and hybrid search: agentmem”；confidence：README：“pathy's LLM Wiki pattern with confidence scoring, lifecycle, knowledge graphs,”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 recency、frequency、relation、confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "multi",
+      "status": "auto",
+      "basis": "相似度之外的因素 4 个：recency、frequency、relation、confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理、反思推断；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、cli、tools"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "standard_interface"
+      ],
+      "status": "auto",
+      "basis": "standard_interface：接入方式 host_plugin、mcp"
+    },
+    "customization": {
+      "value": [
+        "settings_ui",
+        "config_file",
+        "plugin_api",
+        "small_code"
+      ],
+      "status": "auto",
+      "basis": "settings_ui：README：“Code** | Cline MCP settings (Settings UI → MCP Servers → Edit) | Same”；config_file：README：“DER=local` in `~/.agentmemory/.env` and restart. The first embed”；plugin_api：README：“CLI</strong><br/> <sub>MCP + plugin hooks/skills</sub> </td> <td align=”；small_code：README：“t import-jsonl # Or import a single file npx -y @agentmemory/agentmemo”"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：有简体中文 README；未见中文分词说明"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "budget"
+      ],
+      "status": "auto",
+      "basis": "budget：README：“(BM25 + vector + graph) -> Token budget (default: 2000 tokens) -> I”"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "auto",
+      "basis": "no_llm：README：“ON_ENABLED=false` if you want LLM-free operation. Graph extraction i”"
+    },
+    "sensitive_suppression": {
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：捕获时做密钥脱敏"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background",
+        "chat_agent"
+      ],
+      "status": "auto",
+      "basis": "background：README：“)</td> </tr> <tr> <td><strong>Auto-capture</strong></td> <td>12 hooks (”；chat_agent：README：“P tools (memory_smart_search, memory_save, memory_sessions, memory_gove”"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README 没写手机接入"
+    },
+    "local_model": {
+      "value": "no_model_needed",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：无密钥模式不需要模型，也可用本地嵌入"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "auto",
+      "basis": "只能装在自己的电脑上"
+    },
+    "media_recall": {
+      "value": [
+        "image"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：可用 CLIP 给图片做向量并按图片检索（memory_vision_search），默认关闭，要开 AGENTMEMORY_IMAGE_EMBEDDINGS；没有音频、视频"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    }
+  },
+  "uncertainties": [],
+  "health": {
+    "checked_on": "2026-10-26",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 29893,
+    "archived": false,
+    "release_count": 52,
+    "last_commit": "2026-10-25",
+    "days_since_commit": 1,
+    "commits_1y": 599,
+    "contributors_1y": 57,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for mak"
+    },
+    "license_label": "Apache-2.0",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [],
+    "decided_on": "2026-10-26"
+  },
+  "safety_note": {
+    "level": "info",
+    "note": "它提供“让 AI 读取远程安装说明并自行安装”的用法，装之前请先打开说明看一遍它会做什么；它会在后台钩子里记录会话事件（带密钥脱敏）。",
+    "checked": "2026-10-26"
+  }
+}

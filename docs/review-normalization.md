@@ -12,61 +12,62 @@
 
 | 字段 | 含义与可选值 | 规则判定 | 已确认 | 文档未说明 | 待审核 |
 |---|---|---|---|---|---|
-| `access` | `mcp` MCP（让 AI 调用外部工具的通用接口）；`gateway` 网关／代理（挂在助手和模型之间）；`host_plugin` 宿主插件（含钩子、技能）；`library` 代码库（要写代码调用）；`standalone_app` 独立应用；`cli_tool` 命令行小工具（需要时自己运行）；`guide` 教程或设计文档（照着搭） | 237 | 0 | 0 | 0 |
-| `compatible_clients` | `claude_desktop` Claude 桌面版；`claude_web_mobile` Claude 网页／手机版；`claude_code` Claude Code；`chatgpt` ChatGPT；`chatgpt_gpt` ChatGPT 自定义 GPT（Actions 调接口；个人账号已不能新建，计划 2026-12 退役）；`openai_compatible` 任意 OpenAI 兼容客户端；`any_mcp_client` 任意 MCP 客户端；`cursor` Cursor；`codex` Codex；`gemini_cli` Gemini CLI；`opencode` OpenCode；`openclaw` OpenClaw；`hermes` Hermes；`astrbot` AstrBot；`sillytavern` SillyTavern；`open_webui` Open WebUI；`kelivo` Kelivo；`deepseek_harness` DeepSeek Harness；`telegram` Telegram；`wechat` 微信；`feishu` 飞书；`discord` Discord；`self_contained` 自带界面（不接其它助手）；`developer_built` 开发者自建的应用 | 192 | 0 | 2 | 0 |
-| `runs_on` | `own_computer` 自己的电脑；`own_server` 自己的服务器；`own_cloud_account` 自己的云账号；`phone` 手机；`third_party_hosted` 别人的服务器（托管） | 212 | 0 | 6 | 0 |
-| `os` | `windows` Windows；`macos` macOS；`linux` Linux；`android` 安卓；`ios` iOS；`any` 任何系统（浏览器即可） | 196 | 0 | 8 | 0 |
-| `difficulty` | `low` 低：应用商店或一键安装；`medium` 中：几条命令或按向导填设置；`high` 高：要写代码或改较多配置 | 224 | 0 | 0 | 0 |
-| `cost` | `free` 免费；`model_fees_only` 只需模型调用费；`paid_service` 需付费服务或订阅 | 185 | 4 | 10 | 0 |
-| `accounts_needed` | `none` 不需要；`github` GitHub；`cloudflare` Cloudflare；`render` Render；`model_api_key` 模型接口密钥；`vendor_account` 项目方账号；`telegram` Telegram 机器人；`claude_subscription` Claude 付费套餐 | 164 | 21 | 9 | 0 |
-| `memory_subject` | `user_facts` 用户本人的事实和偏好；`ai_identity` AI 自身身份与关系；`experience` 做事经验；`task_context` 当前任务上下文；`conversation_history` 历史对话原文 | 197 | 0 | 23 | 0 |
-| `write_mode` | `auto` 自动记；`review_first` 先出候选再由人审核；`on_request` 由 AI 或用户主动调用时才记 | 41 | 67 | 73 | 0 |
-| `forgetting` | `auto_decay` 自动衰减；`archive` 沉底归档（不删除）；`manual_only` 手动删除；`none` 不遗忘 | 31 | 96 | 73 | 0 |
-| `human_review` | `dashboard` 网页面板／应用界面；`files` 直接看改文件；`cli` 命令行；`tools` 让 AI 调工具改 | 180 | 0 | 23 | 0 |
-| `export` | `markdown` Markdown；`json` JSON；`sqlite` SQLite 数据库文件；`other_file` 其它文件格式；`none` 无 | 55 | 11 | 163 | 0 |
-| `data_passes_through` | `local_only` 仅本机或自己的服务器；`own_cloud` 用户自己的云账号；`third_party` 第三方服务器 | 230 | 0 | 6 | 0 |
-| `license_category` | `permissive` 宽松；`copyleft` 要求开源衍生作品；`noncommercial` 禁止商用；`source_available` 源码可见但限制使用；`no_license` 无许可证文件 | 232 | 3 | 3 | 0 |
-| `persona_continuity` | **人格／身份连续性**：专门保存 AI 自身的人格、身份、关系，换窗、换模型后仍是同一个“TA”。`yes` 有；`not_mentioned` 未提及 | 231 | 0 | 0 | 0 |
-| `window_handoff` | **换窗续接**：新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节。`yes` 有；`not_mentioned` 未提及 | 236 | 0 | 0 | 0 |
-| `cross_client` | **跨入口共享**：同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）。`yes` 有；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
-| `verbatim` | **保留原话**：存下对话原文，结论可追溯到原话，而不只是摘要。`yes` 有；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
-| `multimodal` | **多模态记忆**：能记住图片、语音、视频等非文字内容。`yes` 有；`not_mentioned` 未提及 | 236 | 0 | 0 | 0 |
-| `time_awareness` | **时间感**：记忆带时间线或时间戳，知道过了多久、事实何时有效。`yes` 有；`not_mentioned` 未提及 | 232 | 0 | 0 | 0 |
-| `dream_consolidation` | **梦境／离线整理**：在夜间、空闲或定期自动整理、合并、反思记忆。`yes` 有；`not_mentioned` 未提及 | 235 | 0 | 0 | 0 |
-| `emotion` | **情绪记忆**：记录情绪、心境，或用情感强度给记忆加权。`yes` 有；`not_mentioned` 未提及 | 235 | 0 | 0 | 0 |
-| `proactive` | **主动性**：AI 会主动联系或提起（主动消息、定时问候、心跳任务）。`yes` 有；`not_mentioned` 未提及 | 236 | 0 | 0 | 0 |
-| `pinning` | **钉选重要记忆**：可把重要记忆标为核心、永不衰减或锁定。`yes` 有；`not_mentioned` 未提及 | 238 | 0 | 0 | 0 |
-| `error_guard` | **记错防护**：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。`yes` 有；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
-| `import_history` | **迁入旧记录**：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。`yes` 有；`not_mentioned` 未提及 | 234 | 0 | 0 | 0 |
-| `retrieval_weighting` | **召回排序**：挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似。`yes` 有；`not_mentioned` 未提及 | 238 | 0 | 0 | 0 |
-| `reflection` | **反思推断**：从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）。`yes` 有；`not_mentioned` 未提及 | 235 | 0 | 0 | 0 |
-| `relationship_stage` | **关系阶段**：记录关系进展、亲密度或信任度，刚认识和久别重逢时表现不同。`yes` 有；`not_mentioned` 未提及 | 237 | 0 | 0 | 0 |
-| `independent_life` | **独立生活**：AI 有自己的日程或生活线，能聊它“不在线时”做了什么。`yes` 有；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
-| `visual_presence` | **视觉形象**：有 Live2D、3D 角色、桌宠等形象，或用画面表现情绪。`yes` 有；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
-| `voice_interaction` | **语音交互**：支持语音对话、朗读，或从声音里识别情绪。`yes` 有；`not_mentioned` 未提及 | 238 | 0 | 0 | 0 |
-| `privacy_protection` | **隐私保护**：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。`yes` 有；`not_mentioned` 未提及 | 236 | 0 | 0 | 0 |
-| `ranking_signals` | `semantic` 语义相似（向量）；`keyword` 关键词／全文；`recency` 新旧／时间衰减；`importance` 重要性评分；`frequency` 使用频率／被想起的次数；`emotion` 情感强度；`relation` 关联扩散（图谱、链接）；`confidence` 置信度／来源可信度；`not_mentioned` 未提及 | 207 | 0 | 0 | 0 |
-| `scoring_stages` | `write` 写入时打分或筛选；`retrieve` 召回时综合排序；`forget` 遗忘时按分数决定；`not_mentioned` 未提及 | 227 | 0 | 0 | 0 |
-| `multi_factor` | `multi` 多维（相似度之外至少综合两个因素）；`single` 单一（只看相似度，或只多一个因素）；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
-| `emotion_handling` | `tags` 给记忆打情绪标签（如效价、唤醒度）；`weighting` 情绪强度影响记忆的保留或召回；`ai_state` AI 自己有会随时间变化的情绪、驱力或身体状态；`user_mood` 记录用户的心情和状态；`not_mentioned` 未提及 | 233 | 0 | 0 | 0 |
-| `project_role` | `full_memory` 完整记忆系统；`context_tool` 上下文延续工具（压缩、摘要、换窗）；`memory_component` 记忆部件（只做其中一环）；`state_engine` 状态引擎（情绪、身体、梦）；`companion_app` 自带记忆的应用或 agent；`dev_framework` 开发框架或代码库；`guide` 教程或设计文档 | 238 | 0 | 0 | 0 |
-| `lifecycle` | `capture` 写入；`consolidate` 整理（合并、摘要、反思）；`retrieve` 召回；`forget` 自动遗忘或归档；`review` 人工查看和修改 | 239 | 0 | 0 | 0 |
-| `lifecycle_complete` | `complete` 五个环节都有；`partial` 只覆盖部分环节 | 239 | 0 | 0 | 0 |
-| `pairing` | `designed_to_pair` 明确说明可和其它记忆库搭配（旁路、叠加）；`standard_interface` 走 MCP、OpenAI 兼容接口或宿主插件，可和别的工具并用；`replaces_builtin` 会替换宿主自带的记忆或压缩；`self_contained` 自带完整界面，记忆不拿出来和别的项目共用；`depends_on` 要先有另一个项目才能用；`not_mentioned` 未提及 | 238 | 0 | 0 | 0 |
-| `customization` | `settings_ui` 在界面里改设置；`config_file` 改配置文件或环境变量；`prompts` 可以改提示词；`plain_data` 记忆是可以直接编辑的普通文件；`plugin_api` 留了插件或扩展接口；`small_code` 代码小巧（单文件、零依赖），方便自己改；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
-| `chinese_support` | `zh_docs` 有中文说明文档；`zh_retrieval` 中文检索做过优化（分词、中文向量模型等）；`not_mentioned` 未提及 | 236 | 0 | 0 | 0 |
-| `memory_layers` | `layered` 分层记忆（短期／长期、碎片／事件／核心等）；`flat` 单层，没有分层；`not_mentioned` 未提及 | 235 | 0 | 0 | 0 |
-| `retrieval_postprocess` | `rerank` 召回后重排；`dedup` 去重、避免反复浮现；`budget` 按 token 预算裁剪；`threshold` 相关度不够就不注入；`not_mentioned` 未提及 | 224 | 0 | 0 | 0 |
-| `recall_uses_llm` | `no_llm` 召回时不调用大模型（更快更省）；`llm` 召回时会调用大模型（重排、改写或让 AI 自己翻找）；`not_mentioned` 未提及 | 225 | 0 | 0 | 0 |
-| `sensitive_suppression` | `yes` 能压住不该再提的记忆（用户拒绝过、标记回避或未解决的）；`not_mentioned` 未提及 | 237 | 0 | 0 | 0 |
-| `write_receipt` | `yes` 写入后能明确告诉你记没记上（回执、返回编号、可回读）；`not_mentioned` 未提及 | 238 | 0 | 0 | 0 |
-| `memory_writer` | `chat_agent` 聊天的 AI 自己调用工具记；`background` 后台的模型或规则自动整理；`user` 用户自己手动记；`not_mentioned` 未提及 | 211 | 0 | 0 | 0 |
-| `phone_access` | `native` 手机入口直接可用（本身在手机上，或装在机器人、Kelivo、酒馆等宿主里）；`remote_mcp` 提供远程 MCP（Claude App 等可添加为连接器）；`http_endpoint` 网关部署在服务器或云上，手机客户端填地址即可；`cloud` 本身跑在云上（自己的云账号或托管）；`needs_tunnel` 要自己用 Cloudflare Tunnel、Tailscale 等打通；`not_mentioned` 未提及 | 186 | 0 | 0 | 0 |
-| `local_model` | `yes` 可以用本地模型（Ollama、LM Studio 等）代替付费接口；`no_model_needed` 本身不调用模型；`not_mentioned` 未提及 | 207 | 0 | 0 | 0 |
-| `model_lock` | `claude_only` 只能配合 Claude（官方客户端或付费套餐）；`openai_only` 只能配合 ChatGPT／OpenAI；`not_mentioned` 没发现限制 | 225 | 0 | 0 | 0 |
-| `setup_device` | `phone_ok` 只用手机就能装好（手机 App、宿主插件，或全程浏览器部署）；`needs_computer` 安装或部署时要用电脑；`not_mentioned` 未提及 | 203 | 0 | 0 | 0 |
+| `access` | `mcp` MCP（让 AI 调用外部工具的通用接口）；`gateway` 网关／代理（挂在助手和模型之间）；`host_plugin` 宿主插件（含钩子、技能）；`library` 代码库（要写代码调用）；`standalone_app` 独立应用；`cli_tool` 命令行小工具（需要时自己运行）；`guide` 教程或设计文档（照着搭） | 242 | 0 | 0 | 0 |
+| `compatible_clients` | `claude_desktop` Claude 桌面版；`claude_web_mobile` Claude 网页／手机版；`claude_code` Claude Code；`chatgpt` ChatGPT；`chatgpt_gpt` ChatGPT 自定义 GPT（Actions 调接口；个人账号已不能新建，计划 2026-12 退役）；`openai_compatible` 任意 OpenAI 兼容客户端；`any_mcp_client` 任意 MCP 客户端；`cursor` Cursor；`codex` Codex；`gemini_cli` Gemini CLI；`opencode` OpenCode；`openclaw` OpenClaw；`hermes` Hermes；`astrbot` AstrBot；`sillytavern` SillyTavern；`open_webui` Open WebUI；`kelivo` Kelivo；`deepseek_harness` DeepSeek Harness；`telegram` Telegram；`wechat` 微信；`feishu` 飞书；`discord` Discord；`self_contained` 自带界面（不接其它助手）；`developer_built` 开发者自建的应用 | 194 | 0 | 2 | 0 |
+| `runs_on` | `own_computer` 自己的电脑；`own_server` 自己的服务器；`own_cloud_account` 自己的云账号；`phone` 手机；`third_party_hosted` 别人的服务器（托管） | 220 | 0 | 6 | 0 |
+| `os` | `windows` Windows；`macos` macOS；`linux` Linux；`android` 安卓；`ios` iOS；`any` 任何系统（浏览器即可） | 202 | 0 | 8 | 0 |
+| `difficulty` | `low` 低：应用商店或一键安装；`medium` 中：几条命令或按向导填设置；`high` 高：要写代码或改较多配置 | 229 | 0 | 0 | 0 |
+| `cost` | `free` 免费；`model_fees_only` 只需模型调用费；`paid_service` 需付费服务或订阅 | 189 | 4 | 10 | 0 |
+| `accounts_needed` | `none` 不需要；`github` GitHub；`cloudflare` Cloudflare；`render` Render；`model_api_key` 模型接口密钥；`vendor_account` 项目方账号；`telegram` Telegram 机器人；`claude_subscription` Claude 付费套餐 | 166 | 21 | 9 | 0 |
+| `memory_subject` | `user_facts` 用户本人的事实和偏好；`ai_identity` AI 自身身份与关系；`experience` 做事经验；`task_context` 当前任务上下文；`conversation_history` 历史对话原文 | 199 | 0 | 23 | 0 |
+| `write_mode` | `auto` 自动记；`review_first` 先出候选再由人审核；`on_request` 由 AI 或用户主动调用时才记 | 43 | 66 | 73 | 0 |
+| `forgetting` | `auto_decay` 自动衰减；`archive` 沉底归档（不删除）；`manual_only` 手动删除；`none` 不遗忘 | 32 | 97 | 74 | 0 |
+| `human_review` | `dashboard` 网页面板／应用界面；`files` 直接看改文件；`cli` 命令行；`tools` 让 AI 调工具改 | 181 | 0 | 24 | 0 |
+| `export` | `markdown` Markdown；`json` JSON；`sqlite` SQLite 数据库文件；`other_file` 其它文件格式；`none` 无 | 60 | 11 | 166 | 0 |
+| `data_passes_through` | `local_only` 仅本机或自己的服务器；`own_cloud` 用户自己的云账号；`third_party` 第三方服务器 | 238 | 0 | 6 | 0 |
+| `license_category` | `permissive` 宽松；`copyleft` 要求开源衍生作品；`noncommercial` 禁止商用；`source_available` 源码可见但限制使用；`no_license` 无许可证文件 | 239 | 3 | 3 | 0 |
+| `persona_continuity` | **人格／身份连续性**：专门保存 AI 自身的人格、身份、关系，换窗、换模型后仍是同一个“TA”。`yes` 有；`not_mentioned` 未提及 | 239 | 0 | 0 | 0 |
+| `window_handoff` | **换窗续接**：新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节。`yes` 有；`not_mentioned` 未提及 | 244 | 0 | 0 | 0 |
+| `cross_client` | **跨入口共享**：同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）。`yes` 有；`not_mentioned` 未提及 | 247 | 0 | 0 | 0 |
+| `verbatim` | **保留原话**：存下对话原文，结论可追溯到原话，而不只是摘要。`yes` 有；`not_mentioned` 未提及 | 247 | 0 | 0 | 0 |
+| `multimodal` | **多模态记忆**：能记住图片、语音、视频等非文字内容。`yes` 有；`not_mentioned` 未提及 | 244 | 0 | 0 | 0 |
+| `time_awareness` | **时间感**：记忆带时间线或时间戳，知道过了多久、事实何时有效。`yes` 有；`not_mentioned` 未提及 | 240 | 0 | 0 | 0 |
+| `dream_consolidation` | **梦境／离线整理**：在夜间、空闲或定期自动整理、合并、反思记忆。`yes` 有；`not_mentioned` 未提及 | 243 | 0 | 0 | 0 |
+| `emotion` | **情绪记忆**：记录情绪、心境，或用情感强度给记忆加权。`yes` 有；`not_mentioned` 未提及 | 243 | 0 | 0 | 0 |
+| `proactive` | **主动性**：AI 会主动联系或提起（主动消息、定时问候、心跳任务）。`yes` 有；`not_mentioned` 未提及 | 244 | 0 | 0 | 0 |
+| `pinning` | **钉选重要记忆**：可把重要记忆标为核心、永不衰减或锁定。`yes` 有；`not_mentioned` 未提及 | 246 | 0 | 0 | 0 |
+| `error_guard` | **记错防护**：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。`yes` 有；`not_mentioned` 未提及 | 242 | 0 | 0 | 0 |
+| `import_history` | **迁入旧记录**：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。`yes` 有；`not_mentioned` 未提及 | 242 | 0 | 0 | 0 |
+| `retrieval_weighting` | **召回排序**：挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似。`yes` 有；`not_mentioned` 未提及 | 246 | 0 | 0 | 0 |
+| `reflection` | **反思推断**：从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）。`yes` 有；`not_mentioned` 未提及 | 243 | 0 | 0 | 0 |
+| `relationship_stage` | **关系阶段**：记录关系进展、亲密度或信任度，刚认识和久别重逢时表现不同。`yes` 有；`not_mentioned` 未提及 | 245 | 0 | 0 | 0 |
+| `independent_life` | **独立生活**：AI 有自己的日程或生活线，能聊它“不在线时”做了什么。`yes` 有；`not_mentioned` 未提及 | 247 | 0 | 0 | 0 |
+| `visual_presence` | **视觉形象**：有 Live2D、3D 角色、桌宠等形象，或用画面表现情绪。`yes` 有；`not_mentioned` 未提及 | 247 | 0 | 0 | 0 |
+| `voice_interaction` | **语音交互**：支持语音对话、朗读，或从声音里识别情绪。`yes` 有；`not_mentioned` 未提及 | 246 | 0 | 0 | 0 |
+| `privacy_protection` | **隐私保护**：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。`yes` 有；`not_mentioned` 未提及 | 244 | 0 | 0 | 0 |
+| `ranking_signals` | `semantic` 语义相似（向量）；`keyword` 关键词／全文；`recency` 新旧／时间衰减；`importance` 重要性评分；`frequency` 使用频率／被想起的次数；`emotion` 情感强度；`relation` 关联扩散（图谱、链接）；`confidence` 置信度／来源可信度；`not_mentioned` 未提及 | 215 | 0 | 0 | 0 |
+| `scoring_stages` | `write` 写入时打分或筛选；`retrieve` 召回时综合排序；`forget` 遗忘时按分数决定；`not_mentioned` 未提及 | 235 | 0 | 0 | 0 |
+| `multi_factor` | `multi` 多维（相似度之外至少综合两个因素）；`single` 单一（只看相似度，或只多一个因素）；`not_mentioned` 未提及 | 247 | 0 | 0 | 0 |
+| `emotion_handling` | `tags` 给记忆打情绪标签（如效价、唤醒度）；`weighting` 情绪强度影响记忆的保留或召回；`ai_state` AI 自己有会随时间变化的情绪、驱力或身体状态；`user_mood` 记录用户的心情和状态；`not_mentioned` 未提及 | 241 | 0 | 0 | 0 |
+| `project_role` | `full_memory` 完整记忆系统；`context_tool` 上下文延续工具（压缩、摘要、换窗）；`memory_component` 记忆部件（只做其中一环）；`state_engine` 状态引擎（情绪、身体、梦）；`companion_app` 自带记忆的应用或 agent；`dev_framework` 开发框架或代码库；`guide` 教程或设计文档 | 243 | 0 | 0 | 0 |
+| `lifecycle` | `capture` 写入；`consolidate` 整理（合并、摘要、反思）；`retrieve` 召回；`forget` 自动遗忘或归档；`review` 人工查看和修改 | 247 | 0 | 0 | 0 |
+| `lifecycle_complete` | `complete` 五个环节都有；`partial` 只覆盖部分环节 | 247 | 0 | 0 | 0 |
+| `pairing` | `designed_to_pair` 明确说明可和其它记忆库搭配（旁路、叠加）；`standard_interface` 走 MCP、OpenAI 兼容接口或宿主插件，可和别的工具并用；`replaces_builtin` 会替换宿主自带的记忆或压缩；`self_contained` 自带完整界面，记忆不拿出来和别的项目共用；`depends_on` 要先有另一个项目才能用；`not_mentioned` 未提及 | 246 | 0 | 0 | 0 |
+| `customization` | `settings_ui` 在界面里改设置；`config_file` 改配置文件或环境变量；`prompts` 可以改提示词；`plain_data` 记忆是可以直接编辑的普通文件；`plugin_api` 留了插件或扩展接口；`small_code` 代码小巧（单文件、零依赖），方便自己改；`not_mentioned` 未提及 | 247 | 0 | 0 | 0 |
+| `chinese_support` | `zh_docs` 有中文说明文档；`zh_retrieval` 中文检索做过优化（分词、中文向量模型等）；`not_mentioned` 未提及 | 241 | 0 | 0 | 0 |
+| `memory_layers` | `layered` 分层记忆（短期／长期、碎片／事件／核心等）；`flat` 单层，没有分层；`not_mentioned` 未提及 | 243 | 0 | 0 | 0 |
+| `retrieval_postprocess` | `rerank` 召回后重排；`dedup` 去重、避免反复浮现；`budget` 按 token 预算裁剪；`threshold` 相关度不够就不注入；`not_mentioned` 未提及 | 231 | 0 | 0 | 0 |
+| `recall_uses_llm` | `no_llm` 召回时不调用大模型（更快更省）；`llm` 召回时会调用大模型（重排、改写或让 AI 自己翻找）；`not_mentioned` 未提及 | 231 | 0 | 0 | 0 |
+| `sensitive_suppression` | `yes` 能压住不该再提的记忆（用户拒绝过、标记回避或未解决的）；`not_mentioned` 未提及 | 243 | 0 | 0 | 0 |
+| `write_receipt` | `yes` 写入后能明确告诉你记没记上（回执、返回编号、可回读）；`not_mentioned` 未提及 | 246 | 0 | 0 | 0 |
+| `memory_writer` | `chat_agent` 聊天的 AI 自己调用工具记；`background` 后台的模型或规则自动整理；`user` 用户自己手动记；`not_mentioned` 未提及 | 212 | 0 | 0 | 0 |
+| `phone_access` | `native` 手机入口直接可用（本身在手机上，或装在机器人、Kelivo、酒馆等宿主里）；`remote_mcp` 提供远程 MCP（Claude App 等可添加为连接器）；`http_endpoint` 网关部署在服务器或云上，手机客户端填地址即可；`cloud` 本身跑在云上（自己的云账号或托管）；`needs_tunnel` 要自己用 Cloudflare Tunnel、Tailscale 等打通；`not_mentioned` 未提及 | 192 | 0 | 0 | 0 |
+| `local_model` | `yes` 可以用本地模型（Ollama、LM Studio 等）代替付费接口；`no_model_needed` 本身不调用模型；`not_mentioned` 未提及 | 212 | 0 | 0 | 0 |
+| `model_lock` | `claude_only` 只能配合 Claude（官方客户端或付费套餐）；`openai_only` 只能配合 ChatGPT／OpenAI；`not_mentioned` 没发现限制 | 233 | 0 | 0 | 0 |
+| `setup_device` | `phone_ok` 只用手机就能装好（手机 App、宿主插件，或全程浏览器部署）；`needs_computer` 安装或部署时要用电脑；`not_mentioned` 未提及 | 205 | 0 | 0 | 0 |
+| `media_recall` | `image` 图片：保管原图，能检索并重新召回；`audio` 音频：保管原音频，能检索并重新召回；`video` 视频：保管原视频（或关键帧），能检索并重新召回；`not_mentioned` 未提及，或只把多模态内容转成文字再存 | 221 | 0 | 0 | 0 |
 
-共 239 个项目：文档未说明 399 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
+共 247 个项目：文档未说明 404 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 
 说明：
 
@@ -81,32 +82,32 @@
 
 - **人格／身份连续性**（43 个）：专门保存 AI 自身的人格、身份、关系，换窗、换模型后仍是同一个“TA”。
   Aelios、agent-memory（g1itchbot）、把 AI 伴侣搬进 Telegram、我会永远陪着你（AstrBot 陪伴插件）、AstrBot 自主学习、Being、birkin-mnemosyne、Bitterbot、Claude Soul、Companion Emergence、connectome-host、守护猴 Daemonkey、dreams.js、Drivesoid、DuduLove Memory、Echo Mistik、Eros Engine、Headlong、HoneyOS、KI-CO 小屋、Kin 的小脑瓜（Kin Mind）、Letta（原 MemGPT）、L.I.F.E.、LMC-5、记忆星图 Memory Constellations、MIRA OS、Moraine、Nocturne Memory、Ombre Brain、OpenHer、草履虫 Paramecium、Psycheros、Resonant Mind、Resonant、ReSpark、Sapphire、Synthetic Heart、TeleMem、WrenWen、心潮念、Yoji、Yorishiro、Yuralume Core
-- **换窗续接**（87 个）：新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节。
-  vMem、Aelios、agent-memory（g1itchbot）、AgentRecall、AIGNE AFS（Agentic File System）、Basic Memory、Being、birkin-mnemosyne、causal-memory、Central Intelligence、claude-handoff、Claude Imprint、Claude-Mem、Claude Soul、云与岛、connectome-host、context-memory、context-slim、ContextLattice、CRBRO、Dylan Heartbeat、EchoVault、engram-rs、fable、Facthouse、forge-reload、Graph Memory、Hipocampo、HMS、Honcho、HoneyOS、Hyperconsciousness、IAI 个人记忆引擎、inspeximus、Jarvis Orb、kimi-room、kiwi-mem、L.I.F.E.、notebook.py、LMC-5、Magnemo、mcp-agent-memory、mcp-memory-service、mem0-mcp-selfhosted、MemForge、MemHeaven、memkeeper、memo、MemoCall、memory-lancedb-pro、memory-mcp-1file、Memory MCP（michael-denyer）、/memory（maxtechera）、MemoryZ、MemPalace、Mengram、Midas、Mind Map、MIRA OS、mneme、Mnemo Cortex、mnemo、mnemostack、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、OptMem、草履虫 Paramecium、爪迹 Pawwake、Piia Engram、Prism Coder、Remembra Relay、RetainDB、roampal-core、Serein、Smart Memory、Qdrant Memory、SAME、Supermemory、Claude Code 换窗教程（精炼续窗）、TokenMizer、Tree Ring Memory、Engram（tstockham96）、weighted-compact、YourMemory
-- **跨入口共享**（71 个）：同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）。
-  vMem、Acheron、Acontext、Aelios、afair、AIGNE AFS（Agentic File System）、Akephalos、AtMem、Aura Memory、AutoMem、Basic Memory、birkin-mnemosyne、Celiums Memory、Central Intelligence、Claude Imprint、Compartment、ContextLattice、cosmos-mcp、守护猴 Daemonkey、DuduLove Memory、EverOS、Facthouse、Engram（FBISiri）、GBrain、Graph Memory、Hindsight、Hipocampo、Honcho、Hyperconsciousness、imprint-memory、Kremis、Kybase、Loci、Longhand、lore、mcp-memory-service、mem9、memkeeper、memo、memory-lancedb-pro、MemoryZ、MemOS、MemTether、memU、Mengram、Midas、Mind Map、mneme、Mnemo Cortex、mnemo、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、Omnigraph、people-context、Piia Engram、Prism Coder、Psycheros、ReMe、Remembra Relay、Remnic、SAME、Synapse、Synthetic Heart、TeleMem、TencentDB Agent Memory、Engram（tstockham96）、YourMemory、Yuralume Core、ZenBrain
-- **保留原话**（39 个）：存下对话原文，结论可追溯到原话，而不只是摘要。
-  Aelios、agentic-recall、Alaya、LivingMemory、Aura Memory、causal-memory、Central Intelligence、claude-find、Companion Emergence、connectome-host、context-manager（Connectome）、DreamVault、Summaryception、fable、Facthouse、Hindsight、IAI 个人记忆引擎、imprint-memory、LMC-5、Longhand、LoreRoom、MemHeaven、memo、MemoCall、记忆星图 Memory Constellations、MemPalace、Midas、Mind Map、Mnemo Cortex、Mnemosyne（OpenClaw/Hermes 版）、Ombre Brain、草履虫 Paramecium、爪迹 Pawwake、Personal Understanding、Remnic、Serein、taOSmd、TeleMem、TencentDB Agent Memory
-- **多模态记忆**（23 个）：能记住图片、语音、视频等非文字内容。
-  AI Pocket Chat、Bitterbot、EverOS、Facthouse、Graphiti（Zep）、HMS、imprint-memory、Memex、memo、MemOS、mnemostack、Neotoma、Omnigraph、Prism Coder、Tessera、Psycheros、Sapphire、SimpleMem、Supermemory、TeleMem、TokenMizer、Utsuwa、Yuralume Core
-- **时间感**（76 个）：记忆带时间线或时间戳，知道过了多久、事实何时有效。
-  Aelios、AgentRecall、AI 日常规则教程、AI Pocket Chat、我会永远陪着你（AstrBot 陪伴插件）、Aura Memory、Bitterbot、Celiums Memory、claude-handoff、Claude Imprint、Claude-Mem、Claude Soul、Companion Emergence、Compartment、Context-Keeper、ContextLattice、Cyberboss、Drivesoid、Dylan Heartbeat、fable、Facthouse、GENOME、Graph Memory、Graphiti（Zep）、Headlong、imprint-memory、InternalBeyond 移动版、KI-CO 小屋、kiwi-mem、lean-memory、notebook.py、LMC-5、LocalKeep、Longhand、机的独立工作室 Machine Studio、Mem0、Memex、MemForge、MemHeaven、memo、Memobase、Memora、memory-mcp-1file、MemoryBear、MemoryZ、MemPalace、MemTether、Midas、Mímir、MIRA OS、mneme、mnemo、mnemory、mnemostack、Moraine、墨知 MoRead、OMEGA、LongMemory（原 OpenMemory）、people-context、Personal Understanding、Piia Engram、Tessera、Psycheros、Remembra Relay、Remnic、Sapphire、ShadowGraph、SimpleMem、Smart Memory、Statewave、Supermemory、Talamus、Timeline Memory、Engram（tstockham96）、Utsuwa、Yuralume Core
-- **梦境／离线整理**（93 个）：在夜间、空闲或定期自动整理、合并、反思记忆。
-  Aelios、afair、agent-memory（g1itchbot）、agentic-recall、AgentRecall、AIGNE AFS（Agentic File System）、Alaya、archon-memory-core、LivingMemory、我会永远陪着你（AstrBot 陪伴插件）、Aura Memory、AutoMem、Being、Bitterbot、causal-memory、Celiums Memory、Claude Imprint、Claude Soul、Cometline、Companion Emergence、CRBRO、dreams.js、DreamVault、Echo Mistik、engram-rs、Eventide、EverOS、Facthouse、Engram（FBISiri）、FluctlightDB、GBrain、GENOME、Graph Memory、Engram（HBarefoot）、Hindsight、Hipocampo、IAI 个人记忆引擎、imprint-memory、把乌鸦留在身边、KI-CO 小屋、Kin 的小脑瓜（Kin Mind）、kiwi-mem、LangMem、lean-memory、Letta（原 MemGPT）、L.I.F.E.、LMC-5、mcp-agent-memory、mcp-memory-service、Memex、MemForge、memkeeper、memo、Memora、memory-lancedb-pro、/memory（maxtechera）、MemoryBear、记忆星图 Memory Constellations、MemoryOS、Midas、Mímir、Mind Map、Mnemo Cortex、mnemo、mnemos（vishalbanwari26）、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Moraine、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、OpenViking、爪迹 Pawwake、Tessera、Psycheros、ReMe、Remnic、Resonant Mind、RetainDB、Sapphire、Serein、Shodh-Memory、Smart Memory、SAME、Synthetic Heart、taOSmd、Tree Ring Memory、Engram（tstockham96）、weighted-compact、心潮念、YourMemory、Yuralume Core、ZenBrain
+- **换窗续接**（91 个）：新会话自动带入上次的上下文或交接摘要，或在上下文压缩前保存，减少换窗丢细节。
+  vMem、Aelios、agent-memory（g1itchbot）、agentmemory（rohitg00）、AgentRecall、AIGNE AFS（Agentic File System）、Basic Memory、Being、birkin-mnemosyne、causal-memory、Central Intelligence、claude-handoff、Claude Imprint、Claude-Mem、Claude Soul、云与岛、connectome-host、context-memory、context-slim、ContextLattice、CRBRO、deja、Dylan Heartbeat、EchoVault、engram-rs、fable、Facthouse、forge-reload、Graph Memory、Hipocampo、HMS、Honcho、HoneyOS、Hyperconsciousness、IAI 个人记忆引擎、inspeximus、Jarvis Orb、kimi-room、kiwi-mem、L.I.F.E.、notebook.py、LMC-5、Magnemo、mcp-agent-memory、mcp-memory-service、mem0-mcp-selfhosted、MemForge、MemHeaven、memkeeper、memo、MemoCall、Memorix、memory-lancedb-pro、memory-mcp-1file、Memory MCP（michael-denyer）、/memory（maxtechera）、MemoryZ、MemPalace、Mengram、Midas、Mind Map、MIRA OS、mneme、Mnemo Cortex、mnemo、mnemostack、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、OptMem、草履虫 Paramecium、爪迹 Pawwake、Piia Engram、PowerContext（原 PowerMem）、Prism Coder、Remembra Relay、RetainDB、roampal-core、Serein、Smart Memory、Qdrant Memory、SAME、Supermemory、Claude Code 换窗教程（精炼续窗）、TokenMizer、Tree Ring Memory、Engram（tstockham96）、weighted-compact、YourMemory
+- **跨入口共享**（75 个）：同一份记忆可给多个客户端或设备用（如网页、手机、Claude Code 共用）。
+  vMem、Acheron、Acontext、Aelios、afair、agentmemory（rohitg00）、AIGNE AFS（Agentic File System）、AtMem、Aura Memory、AutoMem、Basic Memory、birkin-mnemosyne、Caura（原 MemClaw）、Celiums Memory、Central Intelligence、Claude Imprint、Compartment、ContextLattice、cosmos-mcp、守护猴 Daemonkey、deja、DuduLove Memory、EverOS、Facthouse、Engram（FBISiri）、GBrain、Graph Memory、Hindsight、Hipocampo、Honcho、Hyperconsciousness、imprint-memory、Kremis、Kybase、Loci、Longhand、lore、mcp-memory-service、mem9、Memanto、memkeeper、memo、Memorix、memory-lancedb-pro、MemoryZ、MemOS、MemTether、memU、Mengram、Midas、Mind Map、mneme、Mnemo Cortex、mnemo、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、Omnigraph、people-context、Piia Engram、Prism Coder、Psycheros、ReMe、Remembra Relay、Remnic、SAME、Synapse、Synthetic Heart、TeleMem、TencentDB Agent Memory、Engram（tstockham96）、YourMemory、Yuralume Core、ZenBrain
+- **保留原话**（40 个）：存下对话原文，结论可追溯到原话，而不只是摘要。
+  Aelios、agentic-recall、Alaya、LivingMemory、Aura Memory、causal-memory、Central Intelligence、claude-find、Companion Emergence、connectome-host、context-manager（Connectome）、deja、DreamVault、Summaryception、fable、Facthouse、Hindsight、IAI 个人记忆引擎、imprint-memory、LMC-5、Longhand、LoreRoom、MemHeaven、memo、MemoCall、记忆星图 Memory Constellations、MemPalace、Midas、Mind Map、Mnemo Cortex、Mnemosyne（OpenClaw/Hermes 版）、Ombre Brain、草履虫 Paramecium、爪迹 Pawwake、Personal Understanding、Remnic、Serein、taOSmd、TeleMem、TencentDB Agent Memory
+- **多模态记忆**（25 个）：能记住图片、语音、视频等非文字内容。
+  AI Pocket Chat、Bitterbot、EverOS、Facthouse、Graphiti（Zep）、HMS、imprint-memory、Memex、memo、Memorix、MemOS、MIRIX、mnemostack、Neotoma、Omnigraph、Prism Coder、Tessera、Psycheros、Sapphire、SimpleMem、Supermemory、TeleMem、TokenMizer、Utsuwa、Yuralume Core
+- **时间感**（81 个）：记忆带时间线或时间戳，知道过了多久、事实何时有效。
+  Aelios、agentmemory（rohitg00）、AgentRecall、AI 日常规则教程、AI Pocket Chat、我会永远陪着你（AstrBot 陪伴插件）、Aura Memory、Bitterbot、Caura（原 MemClaw）、Celiums Memory、claude-handoff、Claude Imprint、Claude-Mem、Claude Soul、Companion Emergence、Compartment、Context-Keeper、ContextLattice、Cyberboss、deja、Drivesoid、Dylan Heartbeat、fable、Facthouse、GENOME、Graph Memory、Graphiti（Zep）、Headlong、imprint-memory、InternalBeyond 移动版、KI-CO 小屋、kiwi-mem、lean-memory、notebook.py、LMC-5、LocalKeep、Longhand、机的独立工作室 Machine Studio、Mem0、Memanto、Memex、MemForge、MemHeaven、memo、Memobase、Memora、Memorix、memory-mcp-1file、MemoryBear、MemoryZ、MemPalace、MemTether、Midas、Mímir、MIRA OS、mneme、mnemo、mnemory、mnemostack、Moraine、墨知 MoRead、OMEGA、LongMemory（原 OpenMemory）、people-context、Personal Understanding、Piia Engram、Tessera、Psycheros、Remembra Relay、Remnic、Sapphire、ShadowGraph、SimpleMem、Smart Memory、Statewave、Supermemory、Talamus、Timeline Memory、Engram（tstockham96）、Utsuwa、Yuralume Core
+- **梦境／离线整理**（99 个）：在夜间、空闲或定期自动整理、合并、反思记忆。
+  Aelios、afair、agent-memory（g1itchbot）、agentic-recall、agentmemory（rohitg00）、AgentRecall、AIGNE AFS（Agentic File System）、Alaya、archon-memory-core、LivingMemory、我会永远陪着你（AstrBot 陪伴插件）、Aura Memory、AutoMem、Being、Bitterbot、Caura（原 MemClaw）、causal-memory、Celiums Memory、Claude Imprint、Claude Soul、Cometline、Companion Emergence、CRBRO、dreams.js、DreamVault、Echo Mistik、engram-rs、Eventide、EverOS、Facthouse、Engram（FBISiri）、FluctlightDB、GBrain、GENOME、Graph Memory、Engram（HBarefoot）、Hindsight、Hipocampo、IAI 个人记忆引擎、imprint-memory、把乌鸦留在身边、KI-CO 小屋、Kin 的小脑瓜（Kin Mind）、kiwi-mem、LangMem、lean-memory、Letta（原 MemGPT）、L.I.F.E.、LMC-5、mcp-agent-memory、mcp-memory-service、Memanto、Memex、MemForge、memkeeper、memo、Memora、Memorix、memory-lancedb-pro、/memory（maxtechera）、MemoryBear、记忆星图 Memory Constellations、MemoryOS、Midas、Mímir、Mind Map、MIRIX、Mnemo Cortex、mnemo、mnemos（vishalbanwari26）、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Moraine、Ombre Brain、OMEGA、LongMemory（原 OpenMemory）、OpenViking、爪迹 Pawwake、PowerContext（原 PowerMem）、Tessera、Psycheros、ReMe、Remnic、Resonant Mind、RetainDB、Sapphire、Serein、Shodh-Memory、Smart Memory、SAME、Synthetic Heart、taOSmd、Tree Ring Memory、Engram（tstockham96）、weighted-compact、心潮念、YourMemory、Yuralume Core、ZenBrain
 - **情绪记忆**（36 个）：记录情绪、心境，或用情感强度给记忆加权。
   给 AI 伴侣装思考链和情绪、AI Pocket Chat、我会永远陪着你（AstrBot 陪伴插件）、AstrBot 主动消息插件、AstrBot 自主学习、Being、Bitterbot、Celiums Memory、Chord Affect Anchors、Companion Emergence、Drivesoid、Echo Mistik、情绪系统（bvsden）、InternalBeyond 移动版、把乌鸦留在身边、KI-CO 小屋、Kin 的小脑瓜（Kin Mind）、kiwi-mem、L.I.F.E.、LMC-5、记忆星图 Memory Constellations、Mímir、Ombre Brain、OpenHer、Resonant Mind、Resonant、rolling-memory、Sapphire、Smart Memory、Synthetic Heart、Utsuwa、VCPToolBox、心潮念、Yoji、Yuralume Core、ZenBrain
 - **主动性**（27 个）：AI 会主动联系或提起（主动消息、定时问候、心跳任务）。
   把 AI 伴侣搬进 Telegram、AI Pocket Chat、我会永远陪着你（AstrBot 陪伴插件）、AstrBot 主动消息插件、云与岛、Companion Emergence、Cyberboss、Dylan Heartbeat、情绪系统（bvsden）、Headlong、InternalBeyond 移动版、把乌鸦留在身边、kimi-core、Letta（原 MemGPT）、MochiBot、OpenHer、Psycheros、Resonant、RikkaHub Jude、Sapphire、Synthetic Heart、三天没睡、Utsuwa、VCPToolBox、心潮念、Yoji、Yuralume Core
 - **钉选重要记忆**（23 个）：可把重要记忆标为核心、永不衰减或锁定。
   vMem、Aelios、archon-memory-core、Aura Memory、birkin-mnemosyne、Bitterbot、Companion Emergence、EchoVault、IAI 个人记忆引擎、imprint-memory、kiwi-mem、Mind Map、Mnemo Cortex、mnemory、Nocturne Memory、Ombre Brain、爪迹 Pawwake、Smart Memory、SAME、VectHare、widemem、心潮念、ZenBrain
-- **记错防护**（95 个）：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。
-  Aelios、afair、agent-memory（g1itchbot）、Agent Zero、agentic-recall、AgentRecall、Alaya、archon-memory-core、AstrBot 自主学习、AtMem、birkin-mnemosyne、Bitterbot、Central Intelligence、Claude Imprint、Claude Soul、Claudex、Compartment、context-manager（Connectome）、ContextLattice、CRBRO、DreamVault、Facthouse、FluctlightDB、GBrain、Graph Memory、Graphiti（Zep）、Engram（HBarefoot）、Hipocampo、HMS、IAI 个人记忆引擎、imprint-memory、inspeximus、Jarvis Orb、kimi-core、Kin 的小脑瓜（Kin Mind）、kiwi-mem、langstate、lean-memory、Letta（原 MemGPT）、notebook.py、LMC-5、mcp-memory-service、mem0-mcp-selfhosted、MemForge、memgres、MemHeaven、memo、Memora、记忆星图 Memory Constellations、MemoryMesh、MemoryZ、MemOS、MemTether、Midas、Mímir、Mnemo Cortex、mnemo、mnemory、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Moraine、NemoLore、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、Open WebUI Memory、LongMemory（原 OpenMemory）、草履虫 Paramecium、爪迹 Pawwake、people-context、Personal Understanding、Piia Engram、药盒 pilulier、Tessera、Portable AI Memory SDK、Remembra Relay、Remnic、RetainDB、ShadowGraph、Shodh-Memory、Smart Memory、SAME、Statewave、Supermemory、Synapse、Talamus、taOSmd、TeleMem、TokenMizer、Tree Ring Memory、Engram（tstockham96）、weighted-compact、widemem、YourMemory
+- **记错防护**（100 个）：能纠错、取代旧事实、检测冲突、追溯来源或回滚，防止记错越记越真。
+  Aelios、afair、agent-memory（g1itchbot）、Agent Zero、agentic-recall、agentmemory（rohitg00）、AgentRecall、Alaya、archon-memory-core、AstrBot 自主学习、AtMem、birkin-mnemosyne、Bitterbot、Caura（原 MemClaw）、Central Intelligence、Claude Imprint、Claude Soul、Claudex、Compartment、context-manager（Connectome）、ContextLattice、CRBRO、deja、DreamVault、Facthouse、FluctlightDB、GBrain、Graph Memory、Graphiti（Zep）、Engram（HBarefoot）、Hipocampo、HMS、IAI 个人记忆引擎、imprint-memory、inspeximus、Jarvis Orb、kimi-core、Kin 的小脑瓜（Kin Mind）、kiwi-mem、langstate、lean-memory、Letta（原 MemGPT）、notebook.py、LMC-5、mcp-memory-service、mem0-mcp-selfhosted、Memanto、MemForge、memgres、MemHeaven、memo、Memora、Memorix、记忆星图 Memory Constellations、MemoryMesh、MemoryZ、MemOS、MemTether、Midas、Mímir、Mnemo Cortex、mnemo、mnemory、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、Moraine、NemoLore、Neotoma、Nocturne Memory、Ombre Brain、OMEGA、Open WebUI Memory、LongMemory（原 OpenMemory）、草履虫 Paramecium、爪迹 Pawwake、people-context、Personal Understanding、Piia Engram、药盒 pilulier、Tessera、Portable AI Memory SDK、Remembra Relay、Remnic、RetainDB、ShadowGraph、Shodh-Memory、Smart Memory、SAME、Statewave、Supermemory、Synapse、Talamus、taOSmd、TeleMem、TokenMizer、Tree Ring Memory、Engram（tstockham96）、weighted-compact、widemem、YourMemory
 - **迁入旧记录**（31 个）：能导入 ChatGPT、Claude 等平台导出的聊天记录或别的记忆库数据。
   agentic-recall、把 AI 伴侣搬进 Telegram、Alaya、Basic Memory、Central Intelligence、claude-handoff、connectome-host、HoneyOS、inspeximus、InternalBeyond 移动版、KI-CO 小屋、MemForge、Mengram、Midas、Mind Map、MochiBot、Neotoma、Ombre Brain、LongMemory（原 OpenMemory）、爪迹 Pawwake、people-context、Piia Engram、Tessera、Psycheros、Portable AI Memory SDK、Remnic、ReSpark、RetainDB、Serein、Synapse、心潮念
-- **召回排序**（42 个）：挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似。
-  agent-memory（g1itchbot）、agentic-recall、AgentRecall、Alaya、archon-memory-core、Aura Memory、memex（ayushagrawal288）、causal-memory、Celiums Memory、Companion Emergence、Compartment、CRBRO、Engram（FBISiri）、FluctlightDB、GBrain、Engram（HBarefoot）、Hipocampo、IAI 个人记忆引擎、imprint-memory、Jarvis Orb、kimi-core、kiwi-mem、lean-memory、MemForge、memory-lancedb-pro、记忆星图 Memory Constellations、Mímir、mneme、mnemo、mnemos（vishalbanwari26）、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、NemoLore、Ombre Brain、Tessera、Shodh-Memory、Qdrant Memory、Engram（tstockham96）、VectHare、widemem、Yuralume Core、ZenBrain
-- **反思推断**（25 个）：从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）。
-  AIGNE AFS（Agentic File System）、Aura Memory、Being、Bitterbot、Claude Soul、Companion Emergence、Echo Mistik、Eros Engine、EverOS、Engram（FBISiri）、kiwi-mem、L.I.F.E.、LMC-5、mcp-memory-service、Memex、MemForge、memory-lancedb-pro、MemoryBear、记忆星图 Memory Constellations、Mímir、mnemos（vishalbanwari26）、Resonant Mind、Synthetic Heart、taOSmd、Yuralume Core
+- **召回排序**（43 个）：挑选要想起的记忆时综合考虑重要性、新旧、情感分量，而不只看字面相似。
+  agent-memory（g1itchbot）、agentic-recall、AgentRecall、Alaya、archon-memory-core、Aura Memory、memex（ayushagrawal288）、Caura（原 MemClaw）、causal-memory、Celiums Memory、Companion Emergence、Compartment、CRBRO、Engram（FBISiri）、FluctlightDB、GBrain、Engram（HBarefoot）、Hipocampo、IAI 个人记忆引擎、imprint-memory、Jarvis Orb、kimi-core、kiwi-mem、lean-memory、MemForge、memory-lancedb-pro、记忆星图 Memory Constellations、Mímir、mneme、mnemo、mnemos（vishalbanwari26）、mnemostack、Mnemosyne（OpenClaw/Hermes 版）、NemoLore、Ombre Brain、Tessera、Shodh-Memory、Qdrant Memory、Engram（tstockham96）、VectHare、widemem、Yuralume Core、ZenBrain
+- **反思推断**（26 个）：从零散记忆里归纳出更高层的理解或推断（如“你常聊城市话题，可能对城市规划感兴趣”）。
+  agentmemory（rohitg00）、AIGNE AFS（Agentic File System）、Aura Memory、Being、Bitterbot、Claude Soul、Companion Emergence、Echo Mistik、Eros Engine、EverOS、Engram（FBISiri）、kiwi-mem、L.I.F.E.、LMC-5、mcp-memory-service、Memex、MemForge、memory-lancedb-pro、MemoryBear、记忆星图 Memory Constellations、Mímir、mnemos（vishalbanwari26）、Resonant Mind、Synthetic Heart、taOSmd、Yuralume Core
 - **关系阶段**（7 个）：记录关系进展、亲密度或信任度，刚认识和久别重逢时表现不同。
   AI Pocket Chat、AstrBot 自主学习、Eros Engine、HoneyOS、Smart Memory、Utsuwa、Yuralume Core
 - **独立生活**（6 个）：AI 有自己的日程或生活线，能聊它“不在线时”做了什么。
@@ -115,8 +116,8 @@
   守护猴 Daemonkey、Echo Mistik、Jarvis Orb、Sapphire、Synthetic Heart、Utsuwa、Yoji、Yorishiro
 - **语音交互**（21 个）：支持语音对话、朗读，或从声音里识别情绪。
   把 AI 伴侣搬进 Telegram、AI Pocket Chat、我会永远陪着你（AstrBot 陪伴插件）、AstrBot 主动消息插件、connectome-host、Echo Mistik、InternalBeyond 移动版、把乌鸦留在身边、L.I.F.E.、墨知 MoRead、OpenHer、Psycheros、Resonant、RikkaHub Jude、Sapphire、Synthetic Heart、三天没睡、Utsuwa、Yoji、Yorishiro、Yuralume Core
-- **隐私保护**（71 个）：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。
-  Acheron、agentic-recall、AgentRecall、Akephalos、alethech、archon-memory-core、AtMem、Aura Memory、Being、Celiums Memory、claude-handoff、Claude-Mem、Companion Emergence、Compartment、ContextLattice、CRBRO、fable、GENOME、GoodMemory、Graph Memory、Engram（HBarefoot）、Hindsight、Hyperconsciousness、IAI 个人记忆引擎、inspeximus、InternalBeyond 移动版、KI-CO 小屋、lean-memory、LMC-5、Longhand、LoreRoom、Memex、MemHeaven、memo、Memora、memory-mcp-1file、/memory（maxtechera）、记忆星图 Memory Constellations、MemoryZ、MemOS、MemPalace、Mengram、Midas、Mímir、Mind Map、MIRA OS、mneme、Mnemo Cortex、Neotoma、OMEGA、people-context、Piia Engram、Prism Coder、Tessera、ReMe、Remnic、Resonant、Sapphire、ShadowGraph、Shodh-Memory、SAME、Statewave、Talamus、taOSmd、TeleMem、Tree Ring Memory、Engram（tstockham96）、Utsuwa、widemem、YourMemory、Yuralume Core
+- **隐私保护**（75 个）：加密存储、自动脱敏敏感信息，或明确承诺数据不离开本机。
+  Acheron、agentic-recall、agentmemory（rohitg00）、AgentRecall、alethech、archon-memory-core、AtMem、Aura Memory、Being、Caura（原 MemClaw）、Celiums Memory、claude-handoff、Claude-Mem、Companion Emergence、Compartment、ContextLattice、CRBRO、deja、fable、GENOME、GoodMemory、Graph Memory、Engram（HBarefoot）、Hindsight、Hyperconsciousness、IAI 个人记忆引擎、inspeximus、InternalBeyond 移动版、KI-CO 小屋、lean-memory、LMC-5、Longhand、LoreRoom、Memanto、Memex、MemHeaven、memo、Memora、memory-mcp-1file、/memory（maxtechera）、记忆星图 Memory Constellations、MemoryZ、MemOS、MemPalace、Mengram、Midas、Mímir、Mind Map、MIRA OS、MIRIX、mneme、Mnemo Cortex、Neotoma、OMEGA、people-context、Piia Engram、Prism Coder、Tessera、ReMe、Remnic、Resonant、Sapphire、ShadowGraph、Shodh-Memory、SAME、Statewave、Talamus、taOSmd、TeleMem、Tree Ring Memory、Engram（tstockham96）、Utsuwa、widemem、YourMemory、Yuralume Core
 
 ## `compatible_clients` 能配合的助手（2 处）
 
@@ -284,15 +285,15 @@
 | Yoji（`yoji`） | 文档未说明 | 用户画像写入 AGENTS.md；长对话生成摘要；— | — | 原表写入方式未识别：用户画像写入 AGENTS.md；长对话生成摘要；—；— |
 | Yorishiro（`yorishiro`） | 文档未说明 | 角色按人格写日记，要点累积进 memories.md；— | — | 原表写入方式未识别：角色按人格写日记，要点累积进 memories.md；—；— |
 
-## `forgetting` 怎么遗忘（73 处）
+## `forgetting` 怎么遗忘（74 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
+| A-MEM（`a-mem`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Acontext（`acontext`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Agent Zero（`agent-zero`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | AI Pocket Chat（`ai-pocket-chat`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | AIGNE AFS（Agentic File System）（`aigne-framework`） | 文档未说明 | — | — | README 没提遗忘或删除 |
-| Akephalos（`akephalos`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | alethech（`alethech`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | AstrBot 主动消息插件（`astrbot-plugin-proactive-chat`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Basic Memory（`basic-memory`） | 文档未说明 | — | — | README 没提遗忘或删除 |
@@ -335,6 +336,7 @@
 | MemOS（`memos`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | MemPalace（`mempalace`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Mengram（`mengram`） | 文档未说明 | — | — | README 没提遗忘或删除 |
+| MIRIX（`mirix`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | Myco（`myco`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | NemoLore（`nemolore`） | 文档未说明 | — | — | README 没提遗忘或删除 |
 | OmniDimen Emotion（`omnidimen-emotion`） | 文档未说明 | 不适用 | — | 原表：不适用；— |
@@ -362,11 +364,12 @@
 | Yoji（`yoji`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 | Yuralume Core（`yuralume-core`） | 文档未说明 | README 未描述 | — | 原表：README 未描述；— |
 
-## `human_review` 能否查看和修改记忆（23 处）
+## `human_review` 能否查看和修改记忆（24 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
 | vMem（`0compactmem`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
+| A-MEM（`a-mem`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
 | AI 日常规则教程（`ai-daily-rules-tutorial`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
 | 我会永远陪着你（AstrBot 陪伴插件）（`astrbot-plugin-private-companion`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
 | Being（`being`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
@@ -390,10 +393,11 @@
 | Claude Code 换窗教程（精炼续窗）（`swap-tutorial`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
 | VectHare（`vecthare`） | 文档未说明 | — | — | 没找到查看或修改记忆的方式 |
 
-## `export` 能否导出（163 处）
+## `export` 能否导出（166 处）
 
 | 项目 | 状态 | 原文 | 建议值 | 不确定的地方 |
 |---|---|---|---|---|
+| A-MEM（`a-mem`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Acheron（`acheron-mcp-server`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Aelios（`aelios`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | agent-memory（g1itchbot）（`agent-memory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
@@ -496,6 +500,7 @@
 | memU（`memu`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Mengram（`mengram`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | MIRA OS（`mira-oss`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| MIRIX（`mirix`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Mnemo Cortex（`mnemo-cortex`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | mnemory（`mnemory`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | mnemos（vishalbanwari26）（`mnemos`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
@@ -517,6 +522,7 @@
 | 草履虫 Paramecium（`paramecium`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Personal Understanding（`personal-understanding`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | 药盒 pilulier（`pilulier`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
+| PowerContext（原 PowerMem）（`powermem`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Psycheros（`psycheros`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | ReMe（`reme`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |
 | Remembra Relay（`remembra`） | 文档未说明 | — | — | 没写导出功能，也看不出数据格式 |

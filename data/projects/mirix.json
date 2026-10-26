@@ -1,0 +1,474 @@
+{
+  "id": "mirix",
+  "name": "MIRIX",
+  "repo_url": "https://github.com/Mirix-AI/MIRIX",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "论文表 9（MIRIX）",
+    "Awesome-Agent-Memory"
+  ],
+  "info": {
+    "summary": {
+      "value": "多智能体记忆系统：六类记忆（核心、情节、语义、程序、资源、知识库）各由专门的智能体管理；README 现在的上手方式是 Docker 起后端和面板，再用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-26"
+    },
+    "memory_subject": {
+      "value": "对话＋屏幕活动",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "Docker 后端＋面板；Python 客户端",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "开发者自建",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑（Docker）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中到高",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "模型 API 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "Apache-2.0",
+      "source": "负责人原表「框架开源情况」（论文表 9）",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "多智能体记忆（2026-10-26 负责人要求补收多智能体记忆项目）；多智能体记忆；会持续截取屏幕，隐私上要自己把关，数据存本地",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-08-20",
+    "stars": 3450,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "框架开源情况": {
+      "序号": 4,
+      "框架": "MIRIX",
+      "仓库链接": "https://github.com/Mirix-AI/MIRIX",
+      "许可证": "Apache-2.0",
+      "开源状态": "完整开源",
+      "仓库最后提交日期": "2026-08-20",
+      "备注": null
+    },
+    "人工筛选": {
+      "name": "MIRIX",
+      "v": "纳入",
+      "c": "A",
+      "desc": "多智能体记忆系统：六类记忆（核心、情节、语义、程序、资源、知识库）各由专门的智能体管理；Docker 起后端和面板，用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆",
+      "subj": "对话＋屏幕活动",
+      "acc": "Docker 后端＋面板；Python 客户端",
+      "cli": "开发者自建",
+      "run": "自己的电脑（Docker）",
+      "diff": "中到高",
+      "need": "模型 API 密钥",
+      "note": "多智能体记忆；会持续截取屏幕，隐私上要自己把关，数据存本地"
+    },
+    "Awesome-Agent-Memory": {
+      "name": "MIRIX",
+      "url": "https://github.com/Mirix-AI/MIRIX",
+      "desc": "Multi-agent personal assistant that captures on-screen activity and consolidates it into structured memory."
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "library"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：Docker 后端＋Python 客户端，没有现成的聊天入口"
+    },
+    "compatible_clients": {
+      "value": [
+        "developer_built"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：要自己用 Python 客户端对接"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：自己的电脑（Docker）"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：；用跨平台运行时安装（Docker），按 Windows/macOS/Linux 都能用推断"
+    },
+    "difficulty": {
+      "value": "high",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：Docker＋API 密钥＋写 Python"
+    },
+    "cost": {
+      "value": "model_fees_only",
+      "status": "auto",
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
+    },
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：示例用 Gemini 模型"
+    },
+    "memory_subject": {
+      "value": [
+        "conversation_history",
+        "experience"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：对话、屏幕活动、程序性记忆"
+    },
+    "write_mode": {
+      "value": [
+        "auto"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：智能体自动整理写入"
+    },
+    "forgetting": {
+      "value": [],
+      "status": "unknown",
+      "basis": "README 没提遗忘或删除"
+    },
+    "human_review": {
+      "value": [
+        "dashboard"
+      ],
+      "status": "auto",
+      "basis": "dashboard：ADME 现在的上手方式是 Docker 起后端和面板，再用 Python 客户端接入，宣传可通过屏幕截"
+    },
+    "export": {
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：Apache-2.0"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“{\"label\": \"persona\", \"value\": \"I am a”经核对不算：命中的是示例数据里的默认人设"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“板，再用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆；对话＋屏幕活动；Docker 后端”"
+    },
+    "time_awareness": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“ous visual data capture and intelligent consolidation into structured memories - **Privacy”（已核对）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“solidation into structured memories - **Privacy-First Design:** All long-term data stored loc”（已核对）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "keyword"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“ve BM25 full-text search with vector similarity support - **Multi-Modal Input”；keyword：README：“d Search:** PostgreSQL-native BM25 full-text search with vector”"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 0 个：无"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "dev_framework",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README 的快速上手是开发者接入"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：auto；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；查看修改：dashboard"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 4/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "chinese_support": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_layers": {
+      "value": "layered",
+      "status": "auto",
+      "basis": "README：“ized memory components (Core, Episodic, Semantic, Procedural, Resource, Knowle”"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "background"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：专门的记忆智能体后台管理"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "local_model": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：Docker"
+    },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：图片、屏幕截图交给模型转成文字记忆，没有保管原图的说明，不算"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "forgetting",
+      "label": "怎么遗忘",
+      "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
+    }
+  ],
+  "health": {
+    "checked_on": "2026-10-26",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 3457,
+    "archived": false,
+    "release_count": 5,
+    "last_commit": "2026-08-20",
+    "days_since_commit": 67,
+    "commits_1y": 256,
+    "contributors_1y": 10,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for mak"
+    },
+    "license_label": "Apache-2.0",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-26"
+  },
+  "safety_note": {
+    "level": "notice",
+    "note": "它会持续截取您的屏幕来积累记忆，截图内容可能含有密码、聊天等敏感信息；数据存在本机，但调用大模型时会把相关内容发给您配置的模型服务。",
+    "checked": "2026-10-26"
+  }
+}

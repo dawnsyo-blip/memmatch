@@ -457,6 +457,13 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "image"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片以 WebP 存盘，随记忆淡化变糊，召回时可取回图片（get_visual）；没有音频、视频"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -507,6 +514,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

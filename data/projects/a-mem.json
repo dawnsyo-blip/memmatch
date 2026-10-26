@@ -1,118 +1,112 @@
 {
-  "id": "akephalos",
-  "name": "Akephalos",
-  "repo_url": "https://github.com/daveinturkey15-byte/akephalos",
+  "id": "a-mem",
+  "name": "A-MEM",
+  "repo_url": "https://github.com/WujiangXu/A-mem",
   "source": "initial",
   "review_status": "reviewed",
   "candidate": {
-    "category": "可接入已有助手",
-    "group_code": "",
-    "group_meaning": "",
-    "decided_on": "2026-10-10"
+    "category": "需写代码（开发者向）",
+    "group_code": "A",
+    "group_meaning": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
+    "decided_on": "2026-10-26"
   },
   "origins": [
-    "Awesome-Agent-Memory"
+    "负责人指定（多智能体记忆，2026-10-26）",
+    "评测榜单（LongMemEval、BEAM 等）"
   ],
   "info": {
     "summary": {
-      "value": "一份 Markdown 格式的“AI 护照”：偏好、规则和长期记忆随身带到不同 agent，可用私有 Git 同步",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "NeurIPS 论文《A-MEM》的复现代码：按 Zettelkasten 笔记法让记忆自己建立链接、演化。这个仓库专为复现论文成绩（LoCoMo），不是给人接入的库；想用的话看作者的另一个仓库 WujiangXu/A-mem-sys（约 400 Star，2025-11 后无更新）",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-26"
     },
     "memory_subject": {
-      "value": "用户偏好＋规则",
+      "value": "对话记忆（笔记式）",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "access": {
-      "value": "MCP；本地文件",
+      "value": "Python 库",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "compatible_clients": {
-      "value": "Codex、Claude Code、Hermes、OpenClaw、Cursor",
+      "value": "开发者自建",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "runs_on": {
-      "value": "自己的电脑",
+      "value": "自己的程序",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "difficulty": {
-      "value": "中",
+      "value": "高",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "accounts_needed": {
-      "value": "无",
+      "value": "模型 API 密钥或本地模型",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "license": {
       "value": "MIT",
       "source": "仓库 LICENSE 文件开头自动识别",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     },
     "notes": {
-      "value": "Star 很少",
+      "value": "多智能体记忆（智能体自组织记忆）；论文成绩，研究代码；评测：LoCoMo 上优于 MemGPT、MemoryBank 等基线（NeurIPS 论文自报）",
       "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "read_date": "2026-10-26"
     }
   },
   "repo_health": {
-    "last_commit": "2026-05-13",
-    "stars": 0,
+    "last_commit": "2026-10-21",
+    "stars": 1003,
     "archived": false,
     "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
-    "read_date": "2026-10-10"
+    "read_date": "2026-10-26"
   },
   "raw": {
-    "Awesome-Agent-Memory": {
-      "name": "Akephalos",
-      "url": "https://github.com/daveinturkey15-byte/akephalos",
-      "desc": "Local-first, markdown-based portable agent profile (preferences, rules, durable memories) synced across agents via plain files and Git."
-    },
     "人工筛选": {
-      "name": "Akephalos",
+      "name": "A-MEM",
       "v": "纳入",
-      "c": "",
-      "desc": "一份 Markdown 格式的“AI 护照”：偏好、规则和长期记忆随身带到不同 agent，可用私有 Git 同步",
-      "subj": "用户偏好＋规则",
-      "acc": "MCP；本地文件",
-      "cli": "Codex、Claude Code、Hermes、OpenClaw、Cursor",
-      "run": "自己的电脑",
-      "diff": "中",
-      "need": "无",
-      "note": "Star 很少"
-    }
+      "c": "A",
+      "desc": "NeurIPS 论文的复现代码：按 Zettelkasten 笔记法让记忆自己建立链接、演化；专为复现 LoCoMo 成绩，可用的库在作者另一个仓库 A-mem-sys",
+      "subj": "对话记忆（笔记式）",
+      "acc": "Python 库",
+      "cli": "开发者自建",
+      "run": "自己的程序",
+      "diff": "高",
+      "need": "模型 API 密钥或本地模型",
+      "note": "多智能体记忆（智能体自组织记忆）；论文成绩，研究代码"
+    },
+    "来源": "负责人指定（多智能体记忆，2026-10-26）",
+    "评测榜单": "LoCoMo 上优于 MemGPT、MemoryBank 等基线（NeurIPS 论文自报）"
   },
   "normalized": {
     "access": {
       "value": [
-        "mcp"
+        "library"
       ],
-      "status": "auto",
-      "basis": "接入方式原文：MCP；本地文件"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：克隆后跑实验脚本"
     },
     "compatible_clients": {
       "value": [
-        "any_mcp_client",
-        "claude_code",
-        "codex",
-        "cursor",
-        "hermes",
-        "openclaw"
+        "developer_built"
       ],
       "status": "auto",
-      "basis": "客户端原文：Codex、Claude Code、Hermes、OpenClaw、Cursor；有 MCP 接口，按协议可接任意 MCP 客户端（推断）"
+      "basis": "客户端原文：开发者自建"
     },
     "runs_on": {
       "value": [
-        "own_computer"
+        "own_computer",
+        "own_server"
       ],
       "status": "auto",
-      "basis": "运行位置原文：自己的电脑"
+      "basis": "运行位置原文：自己的程序（Docker/数据库可在自己电脑或服务器上跑）"
     },
     "os": {
       "value": [
@@ -121,38 +115,38 @@
         "windows"
       ],
       "status": "auto",
-      "basis": "README／原表提到：；用跨平台运行时安装（npm ci），按 Windows/macOS/Linux 都能用推断"
+      "basis": "README／原表提到：windows（m\\Scripts\\activate # Windows # Install dependencies）；macos（em/bin/activate # Linux/Mac a-mem\\Scripts\\activate）；linux（ce a-mem/bin/activate # Linux/Mac a-mem\\Scripts\\activa）"
     },
     "difficulty": {
-      "value": "medium",
-      "status": "auto",
-      "basis": "门槛原文：中"
+      "value": "high",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：要配 Python 环境和数据集"
     },
     "cost": {
-      "value": "free",
+      "value": "model_fees_only",
       "status": "auto",
-      "basis": "不需要账号或密钥"
+      "basis": "需要模型接口密钥，按调用付费（本地模型可免费）"
     },
     "accounts_needed": {
       "value": [
-        "none"
+        "model_api_key"
       ],
       "status": "auto",
-      "basis": "账号原文：无"
+      "basis": "账号原文：模型 API 密钥或本地模型"
     },
     "memory_subject": {
       "value": [
-        "user_facts"
+        "conversation_history"
       ],
-      "status": "auto",
-      "basis": "记忆对象原文：用户偏好＋规则"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：LoCoMo 对话"
     },
     "write_mode": {
       "value": [
-        "on_request"
+        "auto"
       ],
-      "status": "confirmed",
-      "basis": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：新记忆写入时大模型自动生成笔记、建立链接"
     },
     "forgetting": {
       "value": [],
@@ -160,19 +154,14 @@
       "basis": "README 没提遗忘或删除"
     },
     "human_review": {
-      "value": [
-        "cli",
-        "files"
-      ],
-      "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：README 明说“不是面板”：核心是可直接编辑的 Markdown 和 JSONL"
+      "value": [],
+      "status": "unknown",
+      "basis": "没找到查看或修改记忆的方式"
     },
     "export": {
-      "value": [
-        "other_file"
-      ],
-      "status": "auto",
-      "basis": "明确写了导出：“: ```sh node dist/index.js export ``` Start the MCP serve”；“s scan akephalos compact akephalos export akephalos mcp ``` ## Ha”"
+      "value": [],
+      "status": "unknown",
+      "basis": "没写导出功能，也看不出数据格式"
     },
     "data_passes_through": {
       "value": [
@@ -197,9 +186,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "cross_client": {
-      "value": "yes",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "README：“nced through your own private Git repo. Multiple agents on different systems can share the same”（已核对）"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -277,28 +266,28 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "privacy_protection": {
-      "value": "yes",
-      "status": "auto",
-      "basis": "README：“`scan` reports file and line numbers, redacts suspected values, fails on likely real”（已核对）"
-    },
-    "ranking_signals": {
-      "value": [
-        "not_mentioned"
-      ],
-      "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：README 明说“不是向量数据库”"
-    },
-    "scoring_stages": {
-      "value": [
-        "not_mentioned"
-      ],
+      "value": "not_mentioned",
       "status": "auto",
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
-    "multi_factor": {
-      "value": "not_mentioned",
+    "ranking_signals": {
+      "value": [
+        "relation"
+      ],
       "status": "auto",
-      "basis": "没找到排序方式"
+      "basis": "relation：README：“ing categories: * Category 1: Multi-hop * Category 2: Temporal * Cate”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 relation（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：relation"
     },
     "emotion_handling": {
       "value": [
@@ -308,37 +297,36 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "project_role": {
-      "value": "full_memory",
-      "status": "auto",
-      "basis": "按收录类别「可接入已有助手」"
+      "value": "dev_framework",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：研究复现代码"
     },
     "lifecycle": {
       "value": [
         "capture",
-        "retrieve",
-        "review"
+        "retrieve"
       ],
       "status": "auto",
-      "basis": "写入方式：on_request；有检索方式或换窗续接，或是完整记忆系统；查看修改：cli、files"
+      "basis": "写入方式：auto；有检索方式或换窗续接，或是完整记忆系统"
     },
     "lifecycle_complete": {
       "value": "partial",
       "status": "auto",
-      "basis": "覆盖 3/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
     },
     "pairing": {
       "value": [
-        "standard_interface"
+        "not_mentioned"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 mcp"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "customization": {
       "value": [
-        "plain_data"
+        "not_mentioned"
       ],
       "status": "auto",
-      "basis": "plain_data：记忆存成可以直接看改的文件"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "chinese_support": {
       "value": [
@@ -378,10 +366,10 @@
     },
     "memory_writer": {
       "value": [
-        "chat_agent"
+        "background"
       ],
-      "status": "auto",
-      "basis": "chat_agent：写入方式含“由 AI 或用户主动调用”（推断）"
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：系统自动生成"
     },
     "phone_access": {
       "value": [
@@ -391,9 +379,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "local_model": {
-      "value": "no_model_needed",
+      "value": "yes",
       "status": "auto",
-      "basis": "不需要模型接口密钥，且免费（推断：本身不调用模型）"
+      "basis": "README：“ency and supports OpenAI API, vLLM, and Ollama backends. ```bas”"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -402,8 +390,15 @@
     },
     "setup_device": {
       "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：Python 环境"
+    },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
       "status": "auto",
-      "basis": "只能装在自己的电脑上"
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
     },
     "pairs_with": {
       "value": [],
@@ -416,30 +411,39 @@
       "field": "forgetting",
       "label": "怎么遗忘",
       "note": "README 没提遗忘或删除"
+    },
+    {
+      "field": "human_review",
+      "label": "能否查看和修改记忆",
+      "note": "没找到查看或修改记忆的方式"
+    },
+    {
+      "field": "export",
+      "label": "能否导出",
+      "note": "没写导出功能，也看不出数据格式"
     }
   ],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-26",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 0,
+    "stars": 1004,
     "archived": false,
     "release_count": 0,
-    "last_commit": "2026-05-13",
-    "days_since_commit": 151,
-    "commits_1y": 3,
-    "contributors_1y": 1,
+    "last_commit": "2026-10-21",
+    "days_since_commit": 4,
+    "commits_1y": 5,
+    "contributors_1y": 2,
     "license_files": [
       "LICENSE"
     ],
     "license_text_head": {
-      "LICENSE": "MIT License\n\nCopyright (c) 2026 Akephalos contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+      "LICENSE": "MIT License\n\nCopyright (c) 2025 Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, Yongfeng Zhang\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE."
     },
     "license_label": "MIT",
     "license_category": "permissive",
     "flags": [
-      "近一年只有一人维护",
       "没有正式发布版本"
     ]
   },
@@ -447,10 +451,11 @@
     "status": "flagged",
     "exclusion_code": null,
     "flags": [
-      "近一年只有一人维护",
       "没有正式发布版本"
     ],
-    "reasons": [],
-    "decided_on": "2026-10-25"
+    "reasons": [
+      "收录类别：需写代码（开发者向）"
+    ],
+    "decided_on": "2026-10-26"
   }
 }

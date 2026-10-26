@@ -450,6 +450,13 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "video"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：视频抽帧、生成描述、建向量库，检索后可按时间段查看具体画面；只有视频，没有单独的图片或音频记忆"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -505,6 +512,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

@@ -386,6 +386,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：要写代码接入"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [
         "tidefall"
@@ -448,6 +455,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

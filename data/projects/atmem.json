@@ -395,6 +395,15 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "image",
+        "audio",
+        "video"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：原件（图片、音频、视频字节）加密存进证据库，生成的描述不替代原件；检索靠派生的观察，召回可取回原件"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -440,6 +449,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

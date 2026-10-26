@@ -71,14 +71,6 @@
       "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
     }
   },
-  "akephalos": {
-    "write_mode": {
-      "value": [
-        "on_request"
-      ],
-      "note": "负责人同意采用建议值（2026-10-11）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
-    }
-  },
   "alaya": {
     "accounts_needed": {
       "value": [
@@ -1938,6 +1930,101 @@
         "auto_decay"
       ],
       "note": "负责人同意采用建议值（2026-10-24）；原依据：README：“retrieval to SillyTavern with temporal decay, conditional activation, and multiple v”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "caura": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 只提到删除：“le scheduler (nightly expiry, archival, purge and crystallization). The keyless examp”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "cognee": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 只提到删除：“-concepts/main-operations/improve) | | `forget` | Remove a specific item or dataset. |”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "deja-vu": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 只提到删除：“a still holds; `R` puts one back. - `D` erases a session from its agent and from deja”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memanto": {
+    "accounts_needed": {
+      "value": [
+        "model_api_key"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：说明里没写；README 提到“es?\" # grounded, no extra API key # what did the fleet believe”，建议值 model_api_key，需确认是否必需"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README：“| `memanto conflicts` | | **Forgets** | Decay, expiry, and deliberate deletion are po”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    }
+  },
+  "memforge": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    }
+  },
+  "memorix": {
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 只提到删除：“uninstall --yes --background --hooks --purge-data npm uninstall -g memorix ``` `mem”，没提自动衰减，建议值 manual_only"
+    }
+  },
+  "memory": {
+    "forgetting": {
+      "value": [
+        "auto_decay",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README：“hts, prunes old entries, and audits TTL decay. Trigger manually anytime: ``` /memory”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay；有归档：“tays tiny. WARM and COLD tiers load on demand. Up”"
+    }
+  },
+  "memoryz": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "note": "负责人同意采用建议值（2026-10-26）；原依据：README：“ctor-based semantic retrieval with time-decay scoring, an isolated Zero-Knowledge vau”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     }
   }
 }

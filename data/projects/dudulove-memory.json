@@ -400,6 +400,13 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -444,6 +451,6 @@
       "近一年只有一人维护"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

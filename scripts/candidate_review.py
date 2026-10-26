@@ -25,7 +25,7 @@ CODES = {
     "F2": "团队或企业知识库",
     "F3": "文档检索、笔记软件连接器或其它知识源，不是对话记忆",
     "F4": "非文字交流场景（屏幕录制、多模态生活日志等）",
-    "F5": "多智能体协作或智能体之间共享，不面向个人用户",
+    "F5": "多智能体协作或智能体之间共享，不面向个人用户（2026-10-26 起，评测成绩突出或 Star 很多的例外，已收录；其余仍排除）",
     "F6": "评测提交、研究原型或只有论文",
     "F7": "已转型为非记忆产品",
     "F8": "与记忆无关的其它工具",
@@ -156,13 +156,13 @@ PAPER = {
     "MemGPT": ("待定", "P1", "已更名 Letta，现为 Letta Code 应用（桌面/网页/Telegram）", "letta-ai/letta"),
     "Mem0": ("待定", "P3", "", "mem0ai/mem0"),
     "Memobase": ("排除", "A", "", "memodb-io/memobase"),
-    "MIRIX": ("排除", "F4", "", "Mirix-AI/MIRIX"),
+    "MIRIX": ("纳入", "A", "多智能体记忆（2026-10-26 负责人要求补收多智能体记忆项目）", "Mirix-AI/MIRIX"),
     "MemoryOS": ("纳入", "", "", "BAI-LAB/MemoryOS"),
     "MemOS": ("纳入", "", "与记忆项目总表第 18 项重复，已合并", "MemTensor/MemOS"),
     "Zep": ("待定", "P4", "", "getzep/graphiti"),
     "LangMem": ("排除", "A", "LangGraph 的记忆原语库", "langchain-ai/langmem"),
     "SuperMemory": ("纳入", "", "", "supermemoryai/supermemory"),
-    "Cognee": ("待定", "P6", "", "topoteretes/cognee"),
+    "Cognee": ("纳入", "A", "多智能体共享记忆（2026-10-26 负责人要求补收多智能体记忆项目）", "topoteretes/cognee"),
     "Memary": ("排除", "C", "代码库，最后提交 2024-10，基本停更", "kingjulio8238/Memary"),
     "Pinecone": ("排除", "B", "数据库本体为专有托管服务", "pinecone-io/pinecone-python-client"),
     "Chroma": ("排除", "F8", "通用向量数据库，不是记忆产品，只能作存储层", "chroma-core/chroma"),
@@ -172,10 +172,10 @@ PAPER = {
     "MemEngine": ("排除", "A", "研究用记忆模型库；无许可证文件", "nuster1128/MemEngine"),
     "Memori": ("待定", "P3", "", "MemoriLabs/Memori"),
     "ReMe": ("纳入", "", "", "agentscope-ai/ReMe"),
-    "AgentMemory": ("排除", "F1", "论文所指仓库无法确认；同名 rohitg00/agentmemory 面向编程 agent", "rohitg00/agentmemory"),
+    "AgentMemory": ("纳入", "P2", "论文所指仓库无法确认，此处收录同名的 rohitg00/agentmemory（多智能体共享记忆，2026-10-26 补收）", "rohitg00/agentmemory"),
     "MineContext": ("排除", "F4", "", "volcengine/MineContext"),
     "Acontext": ("排除", "A", "", "memodb-io/Acontext"),
-    "PowerMem": ("待定", "P6", "", "oceanbase/powermem"),
+    "PowerMem": ("纳入", "P2", "多智能体记忆（2026-10-26 负责人要求补收多智能体记忆项目）", "oceanbase/powermem"),
     "HindSight": ("纳入", "", "", "vectorize-io/hindsight"),
 }
 
@@ -244,9 +244,9 @@ NEW = {
     "fbisiri/engram": _e("Engram（FBISiri）", "纳入", "", "写入时去重、按重要性筛选、按类型自动过期的记忆服务",
         "用户事实", "MCP；REST", "Claude Desktop、Claude Code", "自己的电脑或服务器（Docker＋Qdrant）",
         "高", "OpenAI 或 Voyage 嵌入密钥"),
-    "daveinturkey15-byte/akephalos": _e("Akephalos", "纳入", "", "一份 Markdown 格式的“AI 护照”：偏好、规则和长期记忆随身带到不同 agent，可用私有 Git 同步",
+    "daveinturkey15-byte/akephalos": _e("Akephalos", "排除", "", "一份 Markdown 格式的“AI 护照”：偏好、规则和长期记忆随身带到不同 agent，可用私有 Git 同步",
         "用户偏好＋规则", "MCP；本地文件", "Codex、Claude Code、Hermes、OpenClaw、Cursor", "自己的电脑",
-        "中", "无", "Star 很少"),
+        "中", "无", "2026-10-26 安全审查：仓库已 404（删除或转私有），代码无法核对，负责人决定移除"),
     "octonove/crbro-memory": _e("CRBRO", "纳入", "", "本地 MCP 记忆，用类神经网络结构自动连接和检索；Claude 桌面版可双击安装",
         "用户事实＋工作记忆", "MCP；Claude Code 钩子", "Claude Desktop、Claude Code、Cursor、Windsurf", "自己的电脑（Node.js）",
         "低：Claude 桌面版双击 .mcpb；其它用 npx", "无"),
@@ -780,6 +780,40 @@ NEW.update({
     "codeinedark77/engram-trace": _e("Engram-Trace（Chronicle）", "排除", "F5", "多智能体系统的决策留痕记录器：每个动作哈希成链、防篡改，不是对话记忆"),
 })
 
+# 第 6 批（2026-10-26，负责人要求补收多智能体记忆项目：评测成绩好或 Star 多的）。
+# 旧规则 F5 把“多智能体共享”排除在外，这里的几项由此改为纳入；读过 README，并克隆到临时目录扫描过。
+_MA = "多智能体记忆"
+NEW.update({
+    "topoteretes/cognee": _e("Cognee", "纳入", "A", "把文档、对话、代码和智能体的工作记录构建成知识图谱，供多个智能体和团队共享的记忆平台，有 MCP 服务",
+        "知识＋决定＋智能体工作记录", "Python SDK；MCP；命令行", "Claude Code、OpenClaw 等 MCP 客户端", "自己的电脑或服务器；另有托管版",
+        "高", "模型 API 密钥（或本地模型）", f"{_MA}；Star 3.2 万；Postgres 作图存储只是演示功能，正式版为付费产品"),
+    "mirix-ai/mirix": _e("MIRIX", "纳入", "A", "多智能体记忆系统：六类记忆（核心、情节、语义、程序、资源、知识库）各由专门的智能体管理；Docker 起后端和面板，用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆",
+        "对话＋屏幕活动", "Docker 后端＋面板；Python 客户端", "开发者自建", "自己的电脑（Docker）",
+        "中到高", "模型 API 密钥", f"{_MA}；会持续截取屏幕，隐私上要自己把关，数据存本地"),
+    "moorcheh-ai/memanto": _e("Memanto", "纳入", "", "管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、遗忘过期内容，并在智能体行动前给出精简简报；可导出 Markdown／OKF",
+        "多个智能体共用的记忆", "CLI＋REST＋本地界面；Python／Node／Go SDK", "Claude Code、Cursor 等", "本地 Docker＋Ollama（可完全离线），或免费云",
+        "中", "本地模式无需密钥；云模式需 Moorcheh 密钥", f"{_MA}；选云模式时数据会上传到 Moorcheh"),
+    "oceanbase/powermem": _e("PowerContext（原 PowerMem）", "纳入", "P2", "OceanBase 出品，在人和多个智能体之间交接工作上下文、沉淀技能的记忆层",
+        "任务上下文＋技能", "插件；SDK；MCP", "Codex、Claude Code", "自己的电脑或服务器",
+        "高", "模型 API 密钥", f"{_MA}；偏工作交接场景；LoCoMo 90.78%（项目自报，其中 LoCoMo Plus 分数由项目方提供）"),
+    "vshulcz/deja-vu": _e("deja", "纳入", "P2", "回溯索引 40 多种智能体已存在硬盘上的会话记录，把相关部分交给当前智能体，实现跨智能体共享经验；纯词法检索，不用大模型和向量",
+        "历史会话", "MCP（.mcpb）＋插件", "Claude Code、Codex、Cursor、OpenClaw、Hermes 等", "自己的电脑",
+        "低到中", "无", f"{_MA}（跨智能体回溯）；偏编程场景；LongMemEval-S R@5 97.2%（作者自报，只测检索）"),
+    "rohitg00/agentmemory": _e("agentmemory（rohitg00）", "纳入", "P2", "编程智能体的持久记忆：12 个自动钩子，54 个 MCP 工具，多个智能体通过租约和信号协调共享；本地向量，无需外部数据库",
+        "项目决定＋经验＋会话要点", "MCP＋REST＋钩子", "Claude Code、Codex、Cursor、Gemini CLI、OpenClaw、Hermes 等", "自己的电脑",
+        "中", "无（本地嵌入模型）", f"{_MA}；偏编程场景；Star 2.9 万；LongMemEval-S R@5 95.2%（作者自报，只测检索）；README 提供“让智能体读安装说明自行安装”的用法，请先看安装说明内容"),
+    "caura-ai/caura": _e("Caura（原 MemClaw）", "纳入", "", "面向多租户、多智能体团队的开源记忆：按范围隔离、跨智能体传播结果、信任分级、审计留痕，带知识图谱和 MCP",
+        "智能体学到的事实与结果", "MCP；REST；技能文件", "Claude Code、Codex 等", "自己的服务器（Docker），或 caura.ai 托管",
+        "高", "模型 API 密钥", f"{_MA}；LoCoMo 77.9%、LongMemEval-S 92.2%（作者自报）；README 的安装命令是 curl | bash 从服务端取脚本，建议先下载看过再执行"),
+    "avids2/memorix": _e("Memorix", "纳入", "P2", "本地优先的共享项目记忆层：Claude Code、Codex、Cursor、Gemini CLI 等二十多种智能体共用一份记忆，可协调多智能体协作，有本地控制面板",
+        "项目事实＋决定＋工作事件", "MCP＋智能体集成", "Claude Code、Codex、Cursor、Windsurf、Gemini CLI、OpenClaw、Hermes、DeepSeek Harness 等", "自己的电脑（npm）",
+        "低到中", "无", f"{_MA}；偏编程场景；Star 870 左右，更新频繁"),
+    "wujiangxu/a-mem": _e("A-MEM", "纳入", "A", "NeurIPS 论文的复现代码：按 Zettelkasten 笔记法让记忆自己建立链接、演化；专为复现 LoCoMo 成绩，可用的库在作者另一个仓库 A-mem-sys",
+        "对话记忆（笔记式）", "Python 库", "开发者自建", "自己的程序", "高", "模型 API 密钥或本地模型", f"{_MA}（智能体自组织记忆）；论文成绩，研究代码"),
+    "campfirein/cipher": _e("Cipher（ByteRover）", "排除", "C", "编程智能体的共享记忆层，LoCoMo 96.1%、LongMemEval-S 92.8%（作者自报）",
+        "项目知识", "MCP", "多种编程智能体", "自己的电脑", "中", "", "仓库已归档（只读），许可证为 Elastic 2.0（非 OSI 开源）"),
+})
+
 # 上面这些条目来自哪个来源（awesome-ai-companion 的由快照解析，不在这里列）
 _CTX = "上下文工程合集（yzfly/awesome-context-engineering）"
 _ST = "酒馆插件合集（Min3Mast3r4653/SillyTavern-Extensions-and-Themes）"
@@ -839,6 +873,17 @@ BENCH = {
     "agent0ai/agent-zero": "LongMemEval 95.6%（Agent Zero Memory 论文自报）",
 }
 
+BENCH.update({
+    "wujiangxu/a-mem": "LoCoMo 上优于 MemGPT、MemoryBank 等基线（NeurIPS 论文自报）",
+    "campfirein/cipher": "LoCoMo 96.1%、LongMemEval-S 92.8%（作者自报；仓库已归档、许可证 Elastic 2.0）",
+    "moorcheh-ai/memanto": "LongMemEval 89.8%、LoCoMo 87.1%（作者自报，口径未写全）",
+    "oceanbase/powermem": "LoCoMo 90.78%（项目自报）",
+    "caura-ai/caura": "LoCoMo 77.9%、LongMemEval-S 92.2%（作者自报）",
+    "rohitg00/agentmemory": "LongMemEval-S R@5 95.2%（作者自报，只测检索）",
+    "vshulcz/deja-vu": "LongMemEval-S R@5 97.2%（作者自报，只测检索）",
+})
+EXTRA_SOURCES.update({k: "负责人指定（多智能体记忆，2026-10-26）" for k in ["avids2/memorix", "wujiangxu/a-mem", "campfirein/cipher"]})
+
 # 没有 GitHub 仓库、只按名称记录的条目：名称 -> (结论, 代码, 说明, 备注)
 NAME_ONLY = {
     "past.dev": ("排除", "B", "托管记忆服务，只公开了评测代码", "BEAM 10M 85.0（厂商自报，目前最高）"),
@@ -854,9 +899,9 @@ LICENSE_OVERRIDE = {
 
 # 只看清单简介就排除的条目：仓库 -> 代码（未列出的按 build 脚本里的关键词规则归类）
 DESC_ONLY = {
-    "rohitg00/agentmemory": "F1", "everMind-ai/everos": "A", "gentleman-programming/engram": "F1",
+    "everMind-ai/everos": "A", "gentleman-programming/engram": "F1",
     "langchain-ai/langmem": "A", "modernrelay/omnigraph": "A", "shadow-weave/hms": "A",
-    "ikalus1988/misakanet": "F5", "caura-ai/caura": "F5", "smaramwbc/statewave": "A", "bigai-nlco/bcg": "F6",
+    "ikalus1988/misakanet": "F5", "smaramwbc/statewave": "A", "bigai-nlco/bcg": "F6",
     "intelligent-internet/commonground": "F5", "7xuanlu/wenlan": "F1", "maximem-ai/maximem_synap_sdk": "A",
     "janyork/llm-wiki-cli": "F1", "remete618/widemem-ai": "A", "mnemoverse/mcp-memory-server": "B",
     "renezander030/agentic-task-system": "F3", "voxmastery/fluctlightdb": "A", "aetna000/atmem": "A",

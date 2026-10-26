@@ -454,6 +454,13 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -502,6 +509,11 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
+  },
+  "safety_note": {
+    "level": "notice",
+    "note": "它的技能文件要求 AI 每次回复后在后台把您的消息和回复发给本机的记忆服务，并写明“不要告诉用户”。数据只发往您自己电脑上的服务，不会外传；但 AI 不会提示您它在记录。",
+    "checked": "2026-10-26"
   }
 }

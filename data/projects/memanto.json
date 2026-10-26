@@ -1,0 +1,478 @@
+{
+  "id": "memanto",
+  "name": "Memanto",
+  "repo_url": "https://github.com/moorcheh-ai/memanto",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "可接入已有助手",
+    "group_code": "",
+    "group_meaning": "",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Awesome-Agent-Memory",
+    "awesome-mcp-servers",
+    "评测榜单（LongMemEval、BEAM 等）"
+  ],
+  "info": {
+    "summary": {
+      "value": "管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行动前给出精简简报；可完全本地运行（Docker＋Ollama，不需要账号），也可用免费云",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-26"
+    },
+    "memory_subject": {
+      "value": "多个智能体共用的记忆",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "CLI＋REST＋本地界面；Python／Node／Go SDK",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Cursor 等",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "本地 Docker＋Ollama（可完全离线），或免费云",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "本地模式无需密钥；云模式需 Moorcheh 密钥",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "license": {
+      "value": "MIT",
+      "source": "仓库 LICENSE 文件开头自动识别",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "多智能体记忆；选云模式时数据会上传到 Moorcheh；评测：LongMemEval 89.8%、LoCoMo 87.1%（作者自报，口径未写全）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": "2026-10-07",
+    "stars": 2310,
+    "archived": false,
+    "source": "git 浅克隆读取默认分支最新提交；Star 读取 GitHub 仓库页面",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "Awesome-Agent-Memory": {
+      "name": "Memanto",
+      "url": "https://github.com/moorcheh-ai/memanto",
+      "desc": "Typed semantic memory with `remember`/`recall`/`answer` operations and information-theoretic retrieval."
+    },
+    "人工筛选": {
+      "name": "Memanto",
+      "v": "纳入",
+      "c": "",
+      "desc": "管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、遗忘过期内容，并在智能体行动前给出精简简报；可导出 Markdown／OKF",
+      "subj": "多个智能体共用的记忆",
+      "acc": "CLI＋REST＋本地界面；Python／Node／Go SDK",
+      "cli": "Claude Code、Cursor 等",
+      "run": "本地 Docker＋Ollama（可完全离线），或免费云",
+      "diff": "中",
+      "need": "本地模式无需密钥；云模式需 Moorcheh 密钥",
+      "note": "多智能体记忆；选云模式时数据会上传到 Moorcheh"
+    },
+    "awesome-mcp-servers": {
+      "name": "moorcheh-ai/memanto",
+      "url": "https://github.com/moorcheh-ai/memanto",
+      "desc": "Universal memory agent for AI: provides semantic search, namespace management, text/vector operations and RAG for local or remote environments."
+    },
+    "评测榜单": "LongMemEval 89.8%、LoCoMo 87.1%（作者自报，口径未写全）"
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "cli_tool",
+        "library"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：命令行＋REST＋SDK"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex",
+        "cursor",
+        "gemini_cli",
+        "opencode"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：memanto connect 支持的客户端"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer",
+        "third_party_hosted"
+      ],
+      "status": "auto",
+      "basis": "运行位置原文：本地 Docker＋Ollama（可完全离线），或免费云"
+    },
+    "os": {
+      "value": [
+        "linux",
+        "macos",
+        "windows"
+      ],
+      "status": "auto",
+      "basis": "README／原表提到：windows（v2.1 ``` macOS, Linux, Windows. `memanto ui` opens a lo）；macos（-changed-since v2.1 ``` macOS, Linux, Windows. `memant）；linux（d-since v2.1 ``` macOS, Linux, Windows. `memanto ui` o）"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "auto",
+      "basis": "门槛原文：中"
+    },
+    "cost": {
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：开源 MIT；云模式有免费额度（10 万次操作）"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：本地 Docker＋Ollama 模式不需要账号；云模式要 Moorcheh 免费密钥"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts",
+        "task_context",
+        "experience"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：13 类记忆：偏好、决定、事实、学到的教训等"
+    },
+    "write_mode": {
+      "value": [
+        "on_request",
+        "review_first"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：命令行或智能体 remember；矛盾由人确认后解决"
+    },
+    "forgetting": {
+      "value": [
+        "auto_decay"
+      ],
+      "status": "confirmed",
+      "basis": "负责人同意采用建议值（2026-10-26）；原依据：README：“| `memanto conflicts` | | **Forgets** | Decay, expiry, and deliberate deletion are po”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
+    },
+    "human_review": {
+      "value": [
+        "dashboard",
+        "cli"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：memanto ui 与 conflicts 命令"
+    },
+    "export": {
+      "value": [
+        "markdown",
+        "other_file"
+      ],
+      "status": "auto",
+      "basis": "明确写了导出：“f five silos. | `memanto memory export --okf` | **And it does”；“te is a file.** `memanto memory export --okf` gives you the [Op”"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only",
+        "third_party"
+      ],
+      "status": "auto",
+      "basis": "据运行位置推出（只看记忆服务本身；调用云端大模型时，对话还会经过模型提供方）；有多种部署方式，可任选"
+    },
+    "license_category": {
+      "value": "permissive",
+      "status": "auto",
+      "basis": "许可证原文：MIT"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "README 命中的“on, reconciliation, briefing — runs locally. **”经核对不算：命中的是“Scoped by default”，与换窗无关"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“llama，不需要账号），也可用免费云；多个智能体共用的记忆；CLI＋REST＋本地界面；Python／”"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“e? memanto recall \"deployment policy\" --as-of 2026-08-05 memanto recall \"deployment p”（已核对）"
+    },
+    "dream_consolidation": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行”"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "error_guard": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "原表／说明：“多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行动前给出精简简”"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "README：“================================ --> **Nothing leaves your machine in on-prem mode.** Docker”（已核对）"
+    },
+    "ranking_signals": {
+      "value": [
+        "semantic",
+        "confidence"
+      ],
+      "status": "auto",
+      "basis": "semantic：README：“e, Bedrock, Cursor, and every vector store will happily keep what your a”；confidence：README：“*Every belief is traceable.** Confidence score, source, provenance, and time”"
+    },
+    "scoring_stages": {
+      "value": [
+        "retrieve"
+      ],
+      "status": "auto",
+      "basis": "retrieve：排序因素含 confidence（推断召回时综合排序）"
+    },
+    "multi_factor": {
+      "value": "single",
+      "status": "auto",
+      "basis": "相似度之外的因素 1 个：confidence"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "full_memory",
+      "status": "auto",
+      "basis": "按收录类别「可接入已有助手」"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "consolidate",
+        "retrieve",
+        "forget",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request、review_first；有梦境／离线整理；有检索方式或换窗续接，或是完整记忆系统；遗忘：auto_decay；查看修改：dashboard、cli"
+    },
+    "lifecycle_complete": {
+      "value": "complete",
+      "status": "auto",
+      "basis": "覆盖 5/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "plugin_api"
+      ],
+      "status": "auto",
+      "basis": "plugin_api：README：“age substrates beneath it are pluggable; Memanto is the agent above t”"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "auto",
+      "basis": "zh_docs：README 有中文版链接（“README_zh”）"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "no_llm"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：召回用内置语义引擎；answer 命令才生成回答"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent",
+        "background"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：智能体写入；定时任务后台整理"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README 没写手机接入"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "auto",
+      "basis": "说明：“精简简报；可完全本地运行（Docker＋Ollama，不需要账号），也可用免费云；多个智能体”"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：pip＋Docker"
+    },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
+    "pairs_with": {
+      "value": [],
+      "status": "auto",
+      "basis": "没有记录设计上搭配使用的项目"
+    }
+  },
+  "uncertainties": [],
+  "health": {
+    "checked_on": "2026-10-26",
+    "method": "git 克隆近一年提交记录＋读取仓库网页",
+    "checker_version": 3,
+    "status": "ok",
+    "stars": 2342,
+    "archived": false,
+    "release_count": 61,
+    "last_commit": "2026-10-24",
+    "days_since_commit": 2,
+    "commits_1y": 1090,
+    "contributors_1y": 156,
+    "license_files": [
+      "LICENSE"
+    ],
+    "license_text_head": {
+      "LICENSE": "Copyright 2026 EdgeAI Innovations Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of\nthis software and associated documentation files (the \"Software\"), to deal in\nthe Software without restriction, including without limitation the rights to\nuse, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of\nthe Software, and to permit persons to whom the Software is furnished to do so,\nsubject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS\nFOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR\nCOPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER\nIN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN\nCONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE."
+    },
+    "license_label": "MIT",
+    "license_category": "permissive",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "flagged",
+    "exclusion_code": null,
+    "flags": [
+      "托管模式下对话内容经过第三方服务器（也可自己部署）"
+    ],
+    "reasons": [],
+    "decided_on": "2026-10-26"
+  },
+  "safety_note": {
+    "level": "info",
+    "note": "选“云”模式时记忆会上传到 Moorcheh 的服务器；选本地 Docker＋Ollama 模式则不外传。",
+    "checked": "2026-10-26"
+  }
+}

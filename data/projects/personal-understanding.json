@@ -405,6 +405,15 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "image",
+        "audio",
+        "video"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片、音频、文件原件逐字节存档并登记哈希，OCR 和转写只是派生物；检索靠派生文字，原件可取回"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -445,6 +454,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

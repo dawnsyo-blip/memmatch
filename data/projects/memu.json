@@ -419,6 +419,13 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：资源按模态读取后转成文字记忆，README 已不把多模态作为卖点，不算"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -461,6 +468,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

@@ -381,6 +381,13 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片、视频先由模型转成文字再入库（默认关闭的预览功能），召回的是文字，不算"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -452,6 +459,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

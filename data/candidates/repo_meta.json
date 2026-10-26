@@ -2400,6 +2400,105 @@
    "license_head": "Elastic License 2.0\n\nURL: https://www.elastic.co/licensing/elastic-license\n\n## Acceptance\n\nBy using the software, you agree to all of the terms and conditions below.\n\n## Copyright License\n\nThe licensor grants you a non-exclusive, royalty-free, worldwide,\nnon-sublicensable, non-transferable license t",
    "has_readme": true,
    "read_date": "2026-10-25"
+  },
+  "avids2/memorix": {
+   "repo": "AVIDS2/memorix",
+   "last_commit": "2026-10-25",
+   "stars": 872,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "mehulg/memx": {
+   "repo": "MehulG/memX",
+   "last_commit": "2026-01-12",
+   "stars": 68,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Mehul Gaidhani\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "tlemmons/mcp-shared-memory": {
+   "repo": "tlemmons/mcp-shared-memory",
+   "last_commit": "2026-10-25",
+   "stars": 5,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2024-2026 Thomas Lemmons\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, m",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "wujiangxu/a-mem": {
+   "repo": "WujiangXu/A-mem",
+   "last_commit": "2026-10-21",
+   "stars": 1003,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Wujiang Xu, Zujie Liang, Kai Mei, Hang Gao, Juntao Tan, Yongfeng Zhang\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, incl",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "jayasukuv11-beep/agenthelm": {
+   "repo": "jayasukuv11-beep/agenthelm",
+   "last_commit": "2026-08-25",
+   "stars": 6,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 jayasukuv11-beep\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modi",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "campfirein/cipher": {
+   "repo": "campfirein/cipher",
+   "last_commit": "2026-06-26",
+   "stars": 4945,
+   "archived": true,
+   "license_head": "Elastic License 2.0 (ELv2)\n\nAcceptance\nBy using the software, you agree to all of the terms and conditions below.\n\nCopyright License\nThe licensor grants you a non-exclusive, royalty-free, worldwide, non-sublicensable, non-transferable license to use, copy, distribute, make available, and prepare der",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "redis/agent-memory-server": {
+   "repo": "redis/agent-memory-server",
+   "last_commit": "2026-09-15",
+   "stars": 323,
+   "archived": false,
+   "license_head": "Copyright (c) 2025 Redis, Inc. Released under the Apache License 2.0:\n\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the ter",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "memvid/memvid": {
+   "repo": "memvid/memvid",
+   "last_commit": "2026-07-14",
+   "stars": 16610,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "caura-ai/caura": {
+   "repo": "caura-ai/caura",
+   "last_commit": "2026-10-25",
+   "stars": 502,
+   "archived": false,
+   "license_head": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for ",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "holetron-lab/fleet-memory": {
+   "repo": "holetron-lab/fleet-memory",
+   "last_commit": "2026-08-28",
+   "stars": 0,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Vectorize AI, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, mo",
+   "has_readme": true,
+   "read_date": "2026-10-26"
+  },
+  "wujiangxu/a-mem-sys": {
+   "repo": "WujiangXu/A-mem-sys",
+   "last_commit": "2025-11-06",
+   "stars": 405,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 AGI Research\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true,
+   "read_date": "2026-10-26"
   }
  }
 }

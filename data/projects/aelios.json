@@ -463,6 +463,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：Fork 仓库、在 Cloudflare 控制台导入、填密钥，全程网页操作"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -511,6 +518,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

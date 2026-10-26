@@ -410,6 +410,13 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：上传文件由视觉模型抽取文字，不算"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -457,6 +464,6 @@
       "对话内容默认经过第三方服务器"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

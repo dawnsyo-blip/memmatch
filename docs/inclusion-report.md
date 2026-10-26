@@ -1,6 +1,6 @@
 # 阶段 3 收录状态报告
 
-> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-25。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
+> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-26。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
 
 ## 判定规则
 
@@ -14,27 +14,27 @@
 
 | 状态 | 数量 |
 |---|---|
-| 收录 | 95 |
-| 收录但加风险提示 | 141 |
+| 收录 | 100 |
+| 收录但加风险提示 | 144 |
 | 排除 | 3 |
 | 待定（证据不足） | 0 |
 
 | 收录类别 | 收录 | 收录但提示 | 排除 | 待定 |
 |---|---|---|---|---|
-| 可接入已有助手 | 64 | 82 | 1 | 0 |
+| 可接入已有助手 | 68 | 83 | 1 | 0 |
 | 自带记忆的应用 | 13 | 15 | 1 | 0 |
-| 需写代码（开发者向） | 18 | 27 | 1 | 0 |
+| 需写代码（开发者向） | 19 | 29 | 1 | 0 |
 | 教程与搭建指南 | 0 | 9 | 0 | 0 |
 | 边缘项（存的不是对话记忆） | 0 | 8 | 0 | 0 |
 
 | 风险提示 | 项目数 |
 |---|---|
 | 没有正式发布版本 | 73 |
-| 近一年只有一人维护 | 71 |
+| 近一年只有一人维护 | 70 |
 | 超过 180 天没有提交 | 21 |
 | 没有许可证文件 | 19 |
 | 许可证禁止商用 | 17 |
-| 托管模式下对话内容经过第三方服务器（也可自己部署） | 11 |
+| 托管模式下对话内容经过第三方服务器（也可自己部署） | 14 |
 | 对话内容默认经过第三方服务器 | 6 |
 | 许可证非标准，需看原文 | 4 |
 | 近一年没有人提交 | 3 |
@@ -50,7 +50,7 @@
 | kimi-core（`kimi-core`） | N | 仓库无法访问（已删除、改名或设为私有） |
 | kimi-room（`kimi-room`） | N | 仓库无法访问（已删除、改名或设为私有） |
 
-## 收录但加风险提示（141 个）
+## 收录但加风险提示（144 个）
 
 | 项目 | 收录类别 | 风险提示 |
 |---|---|---|
@@ -58,8 +58,8 @@
 | Acheron（`acheron-mcp-server`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
 | agent-memory（g1itchbot）（`agent-memory`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
 | agentic-recall（`agentic-recall`） | 可接入已有助手 | 近一年只有一人维护 |
-| Akephalos（`akephalos`） | 可接入已有助手 | 近一年只有一人维护、没有正式发布版本 |
 | Basic Memory（`basic-memory`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
+| Caura（原 MemClaw）（`caura`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | Central Intelligence（`central-intelligence`） | 可接入已有助手 | 对话内容默认经过第三方服务器 |
 | Claude Imprint（`claude-imprint`） | 可接入已有助手 | 近一年只有一人维护、没有正式发布版本 |
 | claude-find（`claude-find`） | 可接入已有助手 | 近一年只有一人维护、没有正式发布版本 |
@@ -90,6 +90,7 @@
 | Mem0（`mem0`） | 可接入已有助手 | 对话内容默认经过第三方服务器 |
 | mem0-mcp-selfhosted（`mem0-mcp-selfhosted`） | 可接入已有助手 | 超过 180 天没有提交 |
 | mem9（`mem9`） | 可接入已有助手 | 没有正式发布版本、托管模式下对话内容经过第三方服务器（也可自己部署） |
+| Memanto（`memanto`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | MemHeaven（`memheaven`） | 可接入已有助手 | 没有正式发布版本 |
 | MemMachine（`memmachine`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | memo（`memo`） | 可接入已有助手 | 近一年只有一人维护 |
@@ -168,10 +169,12 @@
 | Tidefall（`tidefall`） | 边缘项（存的不是对话记忆） | 近一年只有一人维护、没有正式发布版本、许可证禁止商用 |
 | 情绪系统（bvsden）（`emotion-system`） | 边缘项（存的不是对话记忆） | 近一年只有一人维护、没有正式发布版本 |
 | 药盒 pilulier（`pilulier`） | 边缘项（存的不是对话记忆） | 近一年只有一人维护、没有正式发布版本 |
+| A-MEM（`a-mem`） | 需写代码（开发者向） | 没有正式发布版本 |
 | Acontext（`acontext`） | 需写代码（开发者向） | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | AIGNE AFS（Agentic File System）（`aigne-framework`） | 需写代码（开发者向） | 超过 180 天没有提交、许可证非标准，需看原文、许可证限制使用（据原表／README） |
 | Being（`being`） | 需写代码（开发者向） | 没有正式发布版本、没有许可证文件、托管模式下对话内容经过第三方服务器（也可自己部署） |
 | Celiums Memory（`celiums-memory`） | 需写代码（开发者向） | 近一年只有一人维护 |
+| Cognee（`cognee`） | 需写代码（开发者向） | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | context-manager（Connectome）（`context-manager`） | 需写代码（开发者向） | 没有许可证文件 |
 | DreamVault（`dreamvault`） | 需写代码（开发者向） | 近一年只有一人维护、没有正式发布版本 |
 | Eros Engine（`eros-engine`） | 需写代码（开发者向） | 近一年只有一人维护 |
@@ -196,12 +199,13 @@
 | 草履虫 Paramecium（`paramecium`） | 需写代码（开发者向） | 没有正式发布版本、没有许可证文件 |
 | 记忆星图 Memory Constellations（`memoryconstellations`） | 需写代码（开发者向） | 近一年只有一人维护、没有正式发布版本 |
 
-## 收录（95 个）
+## 收录（100 个）
 
 | 项目 | 收录类别 | 风险提示 |
 |---|---|---|
 | Aelios（`aelios`） | 可接入已有助手 | — |
 | afair（`afair`） | 可接入已有助手 | — |
+| agentmemory（rohitg00）（`agentmemory`） | 可接入已有助手 | — |
 | AgentRecall（`agentrecall`） | 可接入已有助手 | — |
 | AstrBot 主动消息插件（`astrbot-plugin-proactive-chat`） | 可接入已有助手 | — |
 | AstrBot 自主学习（`astrbot-plugin-self-learning`） | 可接入已有助手 | — |
@@ -215,6 +219,7 @@
 | Compartment（`compartment`） | 可接入已有助手 | — |
 | ContextLattice（`contextlattice`） | 可接入已有助手 | — |
 | CRBRO（`crbro-memory`） | 可接入已有助手 | — |
+| deja（`deja-vu`） | 可接入已有助手 | — |
 | Engram（HBarefoot）（`hbarefoot-engram`） | 可接入已有助手 | — |
 | Facthouse（`facthouse`） | 可接入已有助手 | — |
 | GBrain（`gbrain`） | 可接入已有助手 | — |
@@ -231,6 +236,7 @@
 | mcp-memory-service（`mcp-memory-service`） | 可接入已有助手 | — |
 | MemForge（`memforge`） | 可接入已有助手 | — |
 | memkeeper（`memkeeper`） | 可接入已有助手 | — |
+| Memorix（`memorix`） | 可接入已有助手 | — |
 | Memory MCP（michael-denyer）（`memory-mcp`） | 可接入已有助手 | — |
 | memory-mcp-1file（`memory-mcp-1file`） | 可接入已有助手 | — |
 | MemoryOS（`memoryos`） | 可接入已有助手 | — |
@@ -251,6 +257,7 @@
 | people-context（`people-context`） | 可接入已有助手 | — |
 | Personal Understanding（`personal-understanding`） | 可接入已有助手 | — |
 | Piia Engram（`piia-engram`） | 可接入已有助手 | — |
+| PowerContext（原 PowerMem）（`powermem`） | 可接入已有助手 | — |
 | Prism Coder（`prism-mcp`） | 可接入已有助手 | — |
 | Psycheros（`psycheros`） | 可接入已有助手 | — |
 | ReMe（`reme`） | 可接入已有助手 | — |
@@ -291,6 +298,7 @@
 | mcp-agent-memory（`mcp-agent-memory`） | 需写代码（开发者向） | — |
 | Memora（`memora`） | 需写代码（开发者向） | — |
 | MemoryBear（`memorybear`） | 需写代码（开发者向） | — |
+| MIRIX（`mirix`） | 需写代码（开发者向） | — |
 | Omnigraph（`omnigraph`） | 需写代码（开发者向） | — |
 | Statewave（`statewave`） | 需写代码（开发者向） | — |
 | TeleMem（`telemem`） | 需写代码（开发者向） | — |

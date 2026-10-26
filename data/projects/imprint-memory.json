@@ -460,6 +460,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：装在电脑上"
     },
+    "media_recall": {
+      "value": [
+        "image"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：对话里的图片与文字一起做联合向量（需 Gemini 多模态嵌入；换纯文本嵌入模型则失去）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -508,6 +515,6 @@
       "没有正式发布版本"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

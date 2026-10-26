@@ -460,6 +460,13 @@
       "status": "auto",
       "basis": "手机入口直接可用（推断）"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -504,6 +511,11 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
+  },
+  "safety_note": {
+    "level": "notice",
+    "note": "这个项目自带钱包和支付功能，也会自动在社交站点注册账号，自主性很强。使用前请确认它被授予了哪些权限，不要给它放有资金的钱包。",
+    "checked": "2026-10-26"
   }
 }

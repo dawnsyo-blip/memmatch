@@ -37,6 +37,7 @@ CACHE = ROOT / "cache/readmes"
 OVERRIDES = ROOT / "data/normalization_overrides.json"
 # Claude 逐个项目对照 README（高频推荐的还看了代码）核实的结果，优先于规则判定和负责人采用的建议值
 VERIFICATION = ROOT / "data/readme_verification.json"
+SAFETY_NOTES = ROOT / "data/safety_notes.json"
 REVIEW_MD = ROOT / "docs/review-normalization.md"
 REVIEW_XLSX = ROOT / "docs/review-normalization.xlsx"
 
@@ -96,7 +97,7 @@ for _a, _pairs in DR.RELATED.items():
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through",
          "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization",
-         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access"}
+         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access", "media_recall"}
 
 
 def snippet(text, m, width=60):
@@ -739,6 +740,8 @@ def n_dimensions(c, out, fixed=()):
         d["setup_device"] = res("needs_computer", "auto", "只能装在自己的电脑上")
     else:
         d["setup_device"] = res("not_mentioned", "auto", "部署在服务器或云上的，要看部署步骤，逐项核实时填写")
+    # 多模态召回只靠逐项人工核实（readme_verification.json）；没核实到的记为未提及
+    d["media_recall"] = res(["not_mentioned"], "auto", "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）")
     return d
 
 
@@ -989,9 +992,14 @@ def main():
         accept_suggestions()
     overrides = json.loads(OVERRIDES.read_text(encoding="utf-8")) if OVERRIDES.exists() else {}
     verification = json.loads(VERIFICATION.read_text(encoding="utf-8")) if VERIFICATION.exists() else {}
+    safety = json.loads(SAFETY_NOTES.read_text(encoding="utf-8")) if SAFETY_NOTES.exists() else {}
     docs = []
     for path in sorted(PROJECTS.glob("*.json")):
         doc = json.loads(path.read_text(encoding="utf-8"))
+        if doc["id"] in safety:  # 安全审查备注，推荐时提醒用户
+            doc["safety_note"] = safety[doc["id"]]
+        else:
+            doc.pop("safety_note", None)
         doc["normalized"], doc["uncertainties"] = normalize(doc, overrides, verification)
         ver = verification.get(doc["id"], {})
         if ver.get("summary"):  # 核实时顺带改写的一句话简介（原简介有的是早期内部备注）

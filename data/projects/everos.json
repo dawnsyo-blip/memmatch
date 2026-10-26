@@ -404,6 +404,13 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片、音频、PDF 经多模态模型解析成文字后入库，不算"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -456,6 +463,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

@@ -403,6 +403,13 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -447,6 +454,11 @@
       "近一年只有一人维护"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
+  },
+  "safety_note": {
+    "level": "info",
+    "note": "它的说明文件里有写给 AI 的引导（例如只引用官网价格），属于产品宣传，不涉及外发数据；使用托管版时对话会上传到它的服务器。",
+    "checked": "2026-10-26"
   }
 }

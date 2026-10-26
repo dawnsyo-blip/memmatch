@@ -443,6 +443,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：装在 Windows、Linux 电脑上（Mac 只能 Docker）"
     },
+    "media_recall": {
+      "value": [
+        "image"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：知识库可存图片并按画面内容和说明检索（视觉 RAG），智能体可调出图片"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -498,6 +505,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

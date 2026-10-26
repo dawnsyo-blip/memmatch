@@ -402,6 +402,15 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "image",
+        "audio",
+        "video"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：Omni-SimpleMem 支持图片、音频、视频的存取检索；目前只有 Python 接口，MCP 版还没支持多模态"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -449,6 +458,6 @@
       "对话内容默认经过第三方服务器"
     ],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

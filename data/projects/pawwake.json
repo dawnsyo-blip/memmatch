@@ -462,6 +462,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：Fork、在 Render 网页上建服务和数据库、填环境变量，全程浏览器"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -504,6 +511,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

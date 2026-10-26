@@ -403,6 +403,13 @@
       "status": "auto",
       "basis": "只能装在自己的电脑上"
     },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片转成带来源链接的文字卡片，检索靠文字，不算"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -453,6 +460,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

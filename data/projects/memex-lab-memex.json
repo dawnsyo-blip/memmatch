@@ -437,6 +437,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：应用商店安装"
     },
+    "media_recall": {
+      "value": [
+        "image"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：照片以相册形式保存并由智能体读图；语音、视频文档没写能召回原件"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -487,6 +494,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

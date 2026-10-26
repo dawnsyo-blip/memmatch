@@ -408,6 +408,15 @@
       "status": "auto",
       "basis": "部署在服务器或云上的，要看部署步骤，逐项核实时填写"
     },
+    "media_recall": {
+      "value": [
+        "image",
+        "audio",
+        "video"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：图片、音频、视频可作为资源存入并解析；开启多模态向量后支持以图搜图；音视频是否可直接召回原件取决于媒体配置，文档写得不多"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -453,6 +462,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-25"
+    "decided_on": "2026-10-26"
   }
 }

@@ -483,6 +483,11 @@ README_REJECT = {
     ("weighted-compact", "error_guard"): "说的是会话记录",
     ("yorishiro", "error_guard"): "说的是界面撤销",
     ("zenbrain", "error_guard"): "说的是软件发布来源",
+    # 2026-10-26 多智能体记忆项目
+    ("mirix", "persona_continuity"): "命中的是示例数据里的默认人设",
+    ("memanto", "window_handoff"): "命中的是“Scoped by default”，与换窗无关",
+    ("powermem", "multimodal"): "是截图标题，不是记忆",
+    ("caura", "relationship_stage"): "“trust levels”是智能体权限分级，不是关系阶段",
     # import_history
     ("chatnest-ui", "import_history"): "命中的是代码 import 语句",
     ("graphiti", "import_history"): "命中的是代码 import 语句",
@@ -493,6 +498,12 @@ README_REJECT = {
 
 # 原表／说明中的中文命中经核对不算的：(项目 id, 特性) -> 原因。被剔除后仍会继续看 README。
 STRUCTURED_REJECT = {
+    # 2026-10-26 多智能体记忆项目（命中的是我们自己写的说明文字）
+    ("mirix", "privacy_protection"): "我们的备注在提醒隐私风险，不是项目的保护功能",
+    ("memorix", "privacy_protection"): "“本地优先”不等于隐私保护功能",
+    ("caura", "error_guard"): "“隔离”指按租户分开，不是防记错",
+    ("powermem", "window_handoff"): "“交接”指人与智能体之间的工作交接，不是换窗接续",
+    ("powermem", "dream_consolidation"): "只是后台处理流程，没写定期整理",
     # 2026-10-24 新项目
     ("agent-zero", "error_guard"): "“隔离”指按项目分开存放",
     ("extension-summaryception", "verbatim"): "只保留最近几轮原文",

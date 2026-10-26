@@ -65,7 +65,16 @@ ENUMS.update({
     "setup_device": {"phone_ok": "只用手机就能装好（手机 App、宿主插件，或全程浏览器部署）",
                      "needs_computer": "安装或部署时要用电脑", **NM},
 })
+# 2026-10-26 第四批：能否真正检索并重新召回多模态内容（负责人要求）。
+# 标准：系统自己保管图片／音频／视频的原件（或直接给原件做向量），召回时能把原件交回；
+# 只把多模态内容转成文字再存文字（图片描述、语音转写、OCR）的不算。全部逐项人工核实，规则不自动判定。
+ENUMS.update({
+    "media_recall": {"image": "图片：保管原图，能检索并重新召回", "audio": "音频：保管原音频，能检索并重新召回",
+                     "video": "视频：保管原视频（或关键帧），能检索并重新召回",
+                     "not_mentioned": "未提及，或只把多模态内容转成文字再存"},
+})
 LABELS = {
+    "media_recall": "能否检索并召回多模态内容",
     "phone_access": "手机能否连上", "local_model": "能否用本地模型", "model_lock": "是否绑定某家模型",
     "setup_device": "只用手机能否装好",
     "chinese_support": "中文支持", "memory_layers": "记忆是否分层", "retrieval_postprocess": "检索后处理",
