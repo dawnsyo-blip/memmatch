@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>记忆库推荐 · 配色样张</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+  .sheet { max-width: 720px; margin: 0 auto; padding: var(--s-6) var(--gutter) var(--s-6); }
+  .sheet h1 {
+    margin: 0;
+    font-family: var(--font-zh); font-weight: 600;
+    font-size: var(--fs-h2); line-height: var(--lh-h2); letter-spacing: .04em;
+  }
+  .sheet .lead { margin: var(--s-1) 0 0; color: var(--ink-soft); }
+
+  /* 示意图：外框像书页上的插图 */
+  .plate { margin: var(--s-4) 0 0; border: var(--line) solid var(--ink); background: var(--paper-shade); }
+  .plate svg { display: block; width: 100%; height: auto; }
+  .plate .lbl { font-family: var(--font-en); font-weight: 700; font-size: 11px; letter-spacing: .12em; fill: var(--ink); }
+  .plate .lead-line { stroke: var(--ink); stroke-width: .8; fill: none; }
+
+  h2.group {
+    margin: var(--s-5) 0 var(--s-2);
+    padding-bottom: var(--s-1);
+    border-bottom: var(--line) solid var(--rule);
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+
+  .swatches { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s-3) var(--s-2); }
+  @media (min-width: 560px) { .swatches { grid-template-columns: repeat(4, 1fr); } }
+  .sw .chip {
+    aspect-ratio: 1 / 1;
+    background: var(--c);
+    /* 色块上也加一层网点，像印刷出来的 */
+    background-image: radial-gradient(color-mix(in srgb, var(--ink) 16%, transparent) .55px, transparent .9px);
+    background-size: 3px 3px;
+  }
+  .sw .name { display: block; margin-top: var(--s-1); text-align: center; color: var(--ink); }
+  .sw .hex { display: block; text-align: center; color: var(--ink-faint); font-family: var(--font-en); font-size: var(--fs-caption); line-height: var(--lh-caption); letter-spacing: .06em; }
+  .sw .use { margin: var(--s-1) 0 0; color: var(--ink-soft); font-size: var(--fs-caption); line-height: var(--lh-caption); text-align: center; }
+
+  .note { margin: var(--s-4) 0 0; padding: var(--s-2) var(--s-3); border-left: var(--line-bold) solid var(--faded-plum); color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); }
+  .back { display: inline-block; margin-top: var(--s-4); color: var(--ink-soft); }
+</style>
+</head>
+<body class="paper grain">
+<main class="sheet">
+  <p class="caption" style="margin:0;color:var(--ink-faint)">Plate II · Colour Specimen</p>
+  <h1>配色样张</h1>
+  <p class="lead">色板取自《复古土星环与色彩图谱》，底下写明每个颜色在网站上用在哪里。</p>
+
+  <figure class="plate">
+    <svg viewBox="0 0 400 300" role="img" aria-label="仿照参考图绘制的土星与卫星示意图，用色板里的七个颜色填色">
+      <defs>
+        <pattern id="dots" width="2.4" height="2.4" patternUnits="userSpaceOnUse">
+          <circle cx="1.2" cy="1.2" r=".45" fill="var(--ink)" opacity=".18"/>
+        </pattern>
+        <clipPath id="frame"><rect x="0" y="0" width="400" height="300"/></clipPath>
+      </defs>
+      <g clip-path="url(#frame)" id="field"></g>
+      <rect width="400" height="300" fill="url(#dots)"/>
+
+      <!-- 土星 -->
+      <circle cx="62" cy="150" r="44" fill="var(--mustard)" stroke="var(--ink)" stroke-width="2.4"/>
+      <circle cx="62" cy="150" r="44" fill="url(#dots)"/>
+      <text class="lbl" x="62" y="153" text-anchor="middle">SATURN</text>
+
+      <!-- 环：侧看是一根细长条 -->
+      <path d="M114 150 l8 -6 h66 l6 6 l-6 6 h-66 z" fill="var(--mustard)" stroke="var(--ink)" stroke-width="1.2"/>
+      <circle cx="110" cy="150" r="9" fill="var(--dusty-pink)" stroke="var(--ink)" stroke-width="1"/>
+      <path class="lead-line" d="M150 147 L134 120"/>
+      <text class="lbl" x="118" y="115">RINGS</text>
+
+      <!-- 卫星 -->
+      <circle cx="232" cy="152" r="4.5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.2"/>
+      <circle cx="284" cy="152" r="5" fill="var(--paper)" stroke="var(--ink)" stroke-width="1.2"/>
+      <path class="lead-line" d="M236 149 L300 92 M288 148 L304 92"/>
+      <text class="lbl" x="292" y="86">MOONS</text>
+    </svg>
+  </figure>
+
+  <h2 class="group caption">I · Palette</h2>
+  <ul class="swatches" id="palette"></ul>
+
+  <h2 class="group caption">II · Paper &amp; Ink</h2>
+  <ul class="swatches" id="paperInk"></ul>
+
+  <p class="note">灰粉、藕荷、梅红这几个颜色和纸色的对比不够，只用在色块、线条和图形上；正文、按钮文字一律用暖黑（INK）或深灰（INK SOFT）。</p>
+
+  <a class="back caption-zh" href="首页.html">← 回到首页样张</a>
+</main>
+
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  /* 场线：从土星上下两极出发、向右展开的一圈圈弧线，由外到内填色 */
+  const field = document.getElementById("field");
+  const fills = ["#d5c0b3", "#c9a39b", "var(--dusty-pink)", "#b0807f", "var(--mauve)", "#a96470", "var(--faded-plum)", "#8f4652"];
+  const N = fills.length;
+  for (let k = N; k >= 1; k--) {
+    const w = 64 * k, h = 30 * k;
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("d", `M64 106 C ${64 + w} ${106 - h}, ${64 + w} ${194 + h}, 64 194 Z`);
+    p.setAttribute("fill", fills[N - k]);
+    p.setAttribute("stroke", "var(--ink)");
+    p.setAttribute("stroke-width", "1.1");
+    field.appendChild(p);
+  }
+  // 最里面一圈留出纸色，放环和卫星
+  const inner = document.createElementNS(NS, "path");
+  inner.setAttribute("d", "M64 112 C 210 88, 210 212, 64 188 Z");
+  inner.setAttribute("fill", "var(--paper)");
+  inner.setAttribute("stroke", "var(--ink)");
+  inner.setAttribute("stroke-width", "1.1");
+  field.appendChild(inner);
+  // 两道月牙
+  [[250, 40, 16], [300, 52, 18]].forEach(([x, r, t]) => {
+    const c = document.createElementNS(NS, "path");
+    c.setAttribute("d", `M${x} ${150 - r * 1.6} A ${r} ${r * 1.6} 0 0 1 ${x} ${150 + r * 1.6} A ${r - t / 2} ${r * 1.6 - 4} 0 0 0 ${x} ${150 - r * 1.6} Z`);
+    c.setAttribute("fill", "var(--paper)");
+    c.setAttribute("stroke", "var(--ink)");
+    c.setAttribute("stroke-width", "1");
+    c.setAttribute("transform", `translate(${-r * .9} 0)`);
+    field.appendChild(c);
+  });
+
+  const css = getComputedStyle(document.documentElement);
+  const val = (v) => css.getPropertyValue(v).trim();
+  const make = (id, items) => {
+    const ul = document.getElementById(id);
+    items.forEach(([v, name, use]) => {
+      const li = document.createElement("li");
+      li.className = "sw";
+      li.innerHTML = `<div class="chip" style="--c: var(${v})"></div><span class="name caption"></span><span class="hex"></span><p class="use caption-zh"></p>`;
+      li.querySelector(".name").textContent = name;
+      li.querySelector(".hex").textContent = val(v).toUpperCase();
+      li.querySelector(".use").textContent = use;
+      ul.appendChild(li);
+    });
+  };
+  make("palette", [
+    ["--mustard", "Mustard Yellow", "行星；进度条第 1 条纹"],
+    ["--cream", "Cream", "浅色块、卡片底色"],
+    ["--warm-gray", "Warm Gray", "纸面暗角、次要线条"],
+    ["--dusty-pink", "Dusty Pink", "进度条第 2 条纹；多选时停靠的小卫星"],
+    ["--mauve", "Mauve", "进度条第 3 条纹；可拖动的卫星"],
+    ["--faded-plum", "Faded Plum", "进度条第 4 条纹；键盘焦点框"],
+    ["--deep-plum", "Deep Plum", "纸面版的星点；深色强调"],
+  ]);
+  make("paperInk", [
+    ["--paper", "Paper", "答题页等纸面的底色"],
+    ["--ink", "Ink", "正文、标题、选中框"],
+    ["--ink-soft", "Ink Soft", "说明文字"],
+    ["--rule", "Rule", "未答的进度、行星环线"],
+    ["--night", "Night", "首页夜空"],
+    ["--night-ink", "Night Ink", "夜空上的文字和星图线条"],
+    ["--glow", "Glow", "星图中心和灯串的亮光"],
+  ]);
+})();
+</script>
+</body>
+</html>

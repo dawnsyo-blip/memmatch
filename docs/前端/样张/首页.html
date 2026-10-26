@@ -71,8 +71,8 @@
   @keyframes breathe { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.12); } }
   .callout line { stroke: currentColor; stroke-width: .6; }
   .callout text { fill: currentColor; }
-  .callout .en { font-family: var(--font-en); font-size: 7.2px; letter-spacing: .16em; }
-  .callout .zh { font-family: var(--font-zh); font-size: 8px; letter-spacing: .1em; fill: var(--night-soft); }
+  .callout .en { font-family: var(--font-en); font-size: 11px; letter-spacing: .14em; }
+  .callout .zh { font-family: var(--font-zh); font-size: 12px; letter-spacing: .06em; fill: var(--night-soft); }
   .callout a:hover .en, .callout a:focus-visible .en { fill: var(--glow); }
 
   /* 中心按钮：盖在星图中心上 */
@@ -85,13 +85,12 @@
   }
   .core:focus-visible { outline-color: var(--glow); }
 
-  .pulsar figcaption { padding: 0 var(--gutter); color: var(--night-soft); margin-top: var(--s-2); }
 
   /* 底部三个小图标 */
   .facts {
     list-style: none; margin: var(--s-3) 0 0; padding: 0;
-    display: flex; justify-content: space-between; gap: var(--s-2);
-    color: var(--night-soft);
+    display: flex; flex-direction: column; gap: var(--s-2);
+    color: var(--ink-soft);
   }
   .facts li { display: flex; align-items: center; gap: var(--s-1); }
   .facts svg { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.2; }
@@ -109,13 +108,13 @@
   body.paper-mode { background: var(--paper); color: var(--ink); }
   body.paper-mode .stars circle { fill: var(--deep-plum); }
   body.paper-mode .stars .tw { animation: none; }
-  body.paper-mode .subtitle, body.paper-mode .facts, body.paper-mode .pulsar figcaption,
+  body.paper-mode .subtitle, body.paper-mode .facts,
   body.paper-mode .callout .zh { color: var(--ink-soft); fill: var(--ink-soft); }
   body.paper-mode .bulb { fill: var(--faded-plum); }
   body.paper-mode .menu-btn { color: var(--ink); }
 
   .sample-switch {
-    position: fixed; right: var(--gutter); top: var(--s-2); z-index: 60;
+    position: fixed; right: var(--gutter); bottom: var(--s-2); z-index: 60;
     display: flex; gap: var(--s-1); align-items: center;
     padding: var(--s-1) var(--s-2);
     background: color-mix(in srgb, var(--night) 70%, transparent);
@@ -134,7 +133,7 @@
 
 <header class="topbar">
   <button class="menu-btn" id="menuBtn" aria-label="打开导航" aria-expanded="false" aria-controls="drawer">
-    <svg viewBox="0 0 26 18" aria-hidden="true"><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="2" y1="2" x2="24" y2="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="2" y1="16" x2="24" y2="16"/></g></svg>
+    <svg viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M640 192H224c-17.7 0-32-14.3-32-32s14.3-32 32-32h416c17.7 0 32 14.3 32 32s-14.3 32-32 32zM960 544H224c-17.7 0-32-14.3-32-32s14.3-32 32-32h736c17.7 0 32 14.3 32 32s-14.3 32-32 32zM640 896H224c-17.7 0-32-14.3-32-32s14.3-32 32-32h416c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 192H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 544H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32zM96 896H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32z"/></svg>
   </button>
 </header>
 
@@ -150,12 +149,17 @@
     <li><a href="#"><span class="caption">III</span>关于本站</a></li>
     <li><a href="#"><span class="caption">IV</span>作者</a></li>
   </ol>
+  <ul class="facts caption-zh" aria-label="网站概况">
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><ellipse cx="9" cy="4.5" rx="6.5" ry="2.5"/><path d="M2.5 4.5v9c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5v-9"/><path d="M2.5 9c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5"/></svg>收录 247 个开源记忆项目</li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7"/><path d="M9 4.5V9l3 2"/></svg>答完约 5 分钟</li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="3.5" y="8" width="11" height="8"/><path d="M6 8V5.5a3 3 0 0 1 6 0V8"/></svg>答卷只存在你的浏览器里</li>
+  </ul>
   <p class="note caption-zh">信息来自各项目的说明文档，未经实际安装验证。</p>
 </nav>
 
 <main class="home">
   <h1 class="headline" lang="en">a quick quiz to find<br>the memory patch<br>fitting <em class="caps">YOUR</em> AI agent</h1>
-  <p class="subtitle">找到适合您与 AI 共用的记忆库</p>
+  <p class="subtitle">找到适合你与 AI 共用的记忆库</p>
 
   <figure class="pulsar" id="pulsarFig">
     <svg id="pulsar" viewBox="-125 -205 400 380" preserveAspectRatio="xMinYMid meet" role="img" aria-label="仿照先驱者号金属板上的脉冲星图">
@@ -172,22 +176,16 @@
       <circle r="1.8" fill="#fff6dc"/>
       <g class="callout">
         <a href="答题页.html" id="calloutLink">
-          <line x1="6" y1="5" x2="58" y2="44"/>
-          <line x1="58" y1="44" x2="64" y2="44"/>
-          <text class="en" x="67" y="46.5">START HERE</text>
-          <text class="zh" x="67" y="60">点亮中心，开始答题</text>
+          <line x1="7" y1="-5.5" x2="124" y2="-110"/>
+          <line x1="124" y1="-110" x2="132" y2="-110"/>
+          <text class="en" x="136" y="-106.5">START HERE</text>
+          <text class="zh" x="136" y="-89">点亮中心，开始答题</text>
         </a>
       </g>
     </svg>
     <a class="core" id="core" href="答题页.html" aria-label="开始问卷"></a>
-    <figcaption class="caption">Fig. 1 · Pulsar map, after the Pioneer plaque, 1972</figcaption>
   </figure>
 
-  <ul class="facts caption-zh" aria-label="网站概况">
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><ellipse cx="9" cy="4.5" rx="6.5" ry="2.5"/><path d="M2.5 4.5v9c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5v-9"/><path d="M2.5 9c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5"/></svg>247 个开源项目</li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7"/><path d="M9 4.5V9l3 2"/></svg>约 5 分钟</li>
-    <li><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="3.5" y="8" width="11" height="8"/><path d="M6 8V5.5a3 3 0 0 1 6 0V8"/></svg>答卷不上传</li>
-  </ul>
 </main>
 
 <div class="sample-switch caption-zh" role="group" aria-label="样张切换：底色">
