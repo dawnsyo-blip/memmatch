@@ -1,6 +1,6 @@
 {
-  "version": "v4-2026-10-26",
-  "note": "按负责人确认的《记忆库推荐问卷 v4》编写。网站和推荐引擎只读这个文件；格式说明见 docs/questionnaire-format.md。",
+  "version": "v5-2026-10-26",
+  "note": "按《记忆库推荐问卷 v5》编写（v4 负责人已确认，v5 新增第 4a、8a 题）。网站和推荐引擎只读这个文件；格式说明见 docs/questionnaire-format.md。",
   "rank_weights": [3, 2, 1],
   "rank_rest": 1,
   "result": {"top_n": 8, "min_results": 3, "unknown_penalty": 1},

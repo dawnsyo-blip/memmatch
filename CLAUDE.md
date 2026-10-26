@@ -38,7 +38,7 @@
 - 同日新增字段 `setup_device`（只用手机能否装好：`phone_ok`／`needs_computer`）和客户端值 `chatgpt_gpt`（ChatGPT 自定义 GPT 的 Actions，手机 App 可用，不同于只限网页端的自定义 MCP）
 
 问卷与推荐（阶段 4）：
-- 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a、4a 题追问＋第 8a 题，负责人 2026-10-25 确认；4a、8a 是 2026-10-26 按负责人要求加的，题目由 Claude 拟定）；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
+- 正式问卷是负责人维护的 `记忆库推荐问卷 v5.md`（18 题＋第 3a、4a 题追问＋第 8a 题；v4 负责人 2026-10-25 确认，v5 在 v4 上加了 4a、8a，2026-10-26 按负责人要求加的，题目由 Claude 拟定，交负责人修改）。`记忆库推荐问卷 v4.md` 留作历史，不再改；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
 - 配置格式（条件、作用、合并方式、选项失效、放宽建议、加分、补充部件）见 `docs/questionnaire-format.md`
 - 推荐引擎在 `engine/`（JavaScript ES 模块，无依赖，浏览器和 Node 都能跑）：`rule-engine.js` 是规则实现，`index.js` 写明统一接口（换外部模型时另写一个实现即可），`load-node.js` 给测试和命令行加载数据
 - 命令：`npm test`（10 个虚构用户＋引擎测试，用户和期望在 `tests/personas.mjs`）；`npm run report` 生成 `docs/阶段4-推荐测试报告.md`；`node scripts/recommend.mjs 答卷.json` 跑单份答卷

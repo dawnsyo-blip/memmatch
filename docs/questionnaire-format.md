@@ -2,13 +2,13 @@
 
 问卷写在 `data/questionnaire/questions.json`。网站和推荐引擎（`engine/`）只读这个文件，代码里不写死任何题目。改题目、加选项、调整作用、改加分，都只改这个文件；改完运行 `npm test`，确认 10 个虚构用户的推荐仍符合期望。
 
-内容对应负责人的《记忆库推荐问卷 v4》。
+内容对应负责人的《记忆库推荐问卷 v5》。
 
 ## 整体结构
 
 ```json
 {
-  "version": "v4-2026-10-26",
+  "version": "v5-2026-10-26",
   "rank_weights": [3, 2, 1], "rank_rest": 1,
   "result": {"top_n": 8, "min_results": 3, "unknown_penalty": 1},
   "field_labels": {"runs_on": "运行位置", "model_api_key": "大模型接口密钥"},
