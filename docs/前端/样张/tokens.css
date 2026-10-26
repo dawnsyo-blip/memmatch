@@ -1,0 +1,193 @@
+/* 记忆库推荐 · 设计变量与基础样式（样张 v1，2026-10-26）
+   色板取自《复古土星环与色彩图谱》；中文排版参数见 .claude/skills/zh-web-typography。
+   全站只引用这里的变量，不写裸数字。 */
+
+:root {
+  /* 色板 */
+  --mustard: #d9a547;
+  --cream: #dfcdb1;
+  --warm-gray: #ae9e8b;
+  --dusty-pink: #bb8e88;
+  --mauve: #a17072;
+  --faded-plum: #9a505b;
+  --deep-plum: #6f3f42;
+
+  /* 纸与墨 */
+  --paper: #ece0cb;
+  --paper-shade: #e3d4bb;
+  --ink: #292524;          /* 偏暖的黑，不用纯黑 */
+  --ink-soft: #5d524c;
+  --ink-faint: #8c7f72;
+  --rule: #c4b5a0;         /* 浅灰线：未完成的进度、行星环 */
+
+  /* 夜空（首页） */
+  --night: #1f191c;
+  --night-ink: #e8d8bf;
+  --night-soft: #a8977f;
+  --glow: #f2c66b;
+
+  /* 字体：西文字体在前，西文字母才会用 Baskerville */
+  --font-en: "Libre Baskerville", Baskerville, Georgia, serif;
+  --font-zh: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
+  --font-body: "Libre Baskerville", "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
+
+  /* 字号 / 行高（行高取 24px 的倍数或一半） */
+  --fs-h1: 32px;  --lh-h1: 48px;
+  --fs-h2: 24px;  --lh-h2: 36px;
+  --fs-h3: 20px;  --lh-h3: 36px;
+  --fs-body: 16px; --lh-body: 24px;
+  --fs-small: 14px; --lh-small: 24px;
+  --fs-caption: 12px; --lh-caption: 18px;
+
+  /* 间距：纵向单位 24px 的倍数 */
+  --s-1: 6px;
+  --s-2: 12px;
+  --s-3: 24px;
+  --s-4: 36px;
+  --s-5: 48px;
+  --s-6: 72px;
+  --gutter: 16px;          /* 手机左右留白 */
+  --measure: 42em;         /* 行宽上限 */
+
+  --line: 1px;             /* 细线 */
+  --line-bold: 1.5px;      /* 选中框、强调线 */
+  --tap: 44px;             /* 最小点按高度 */
+
+  --ease-out: cubic-bezier(.22, .8, .24, 1);
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 24px; }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; overflow-x: clip; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  /* 极轻的“洇墨”：去掉数字文字过于锐利的边缘 */
+  text-shadow: 0 0 .5px color-mix(in srgb, currentColor 45%, transparent);
+}
+
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; }
+
+:focus-visible { outline: 1.5px dashed var(--faded-plum); outline-offset: 3px; }
+
+/* 英文图注：小字号、大写、适度字距 */
+.caption {
+  font-family: var(--font-en);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.caption-zh {
+  font-family: var(--font-zh);
+  font-size: var(--fs-caption);
+  line-height: var(--lh-caption);
+  letter-spacing: .08em;
+}
+
+/* ---------- 纸张质感 ---------- */
+/* 半色调网点 + 轻微的暗角，铺在纸面上 */
+.paper {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(ellipse at 50% 40%, transparent 55%, color-mix(in srgb, var(--warm-gray) 22%, transparent) 100%),
+    radial-gradient(color-mix(in srgb, var(--ink) 7%, transparent) .6px, transparent .9px);
+  background-size: 100% 100%, 4px 4px;
+  background-attachment: fixed, fixed;
+}
+
+/* 颗粒与纸纤维：盖在所有内容（包括文字）上面 */
+.grain::after,
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 90;
+}
+.grain::after {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .16  0 0 0 0 .13  0 0 0 0 .12  0 0 0 .7 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: .32;
+  mix-blend-mode: multiply;
+}
+.grain::before {
+  /* 纸纤维：横向拉长的低频噪点 */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.004 .09' numOctaves='2' seed='7' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .43  0 0 0 0 .36  0 0 0 0 .3  0 0 0 .9 -.35'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
+  opacity: .18;
+  mix-blend-mode: multiply;
+}
+
+/* 夜空页：颗粒改成亮色，叠加方式改为 screen */
+.night { background: var(--night); color: var(--night-ink); }
+.night.grain::after { opacity: .5; mix-blend-mode: screen; filter: invert(1); }
+.night.grain::before { opacity: .1; mix-blend-mode: screen; filter: invert(1); }
+
+/* ---------- 公共组件 ---------- */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--s-5);
+  padding: var(--s-2) var(--gutter);
+  display: flex;
+  align-items: center;
+  z-index: 40;
+}
+.menu-btn { width: var(--tap); height: var(--tap); margin-left: calc(var(--s-2) * -1); display: grid; place-items: center; }
+.menu-btn svg { width: 26px; height: 18px; }
+
+/* 侧边导航 */
+.drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(80vw, 320px);
+  padding: var(--s-6) var(--gutter) var(--s-4);
+  background: var(--paper);
+  color: var(--ink);
+  border-right: var(--line) solid var(--rule);
+  transform: translateX(-102%);
+  transition: transform .45s var(--ease-out);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.drawer.open { transform: none; }
+.drawer-close { position: absolute; top: var(--s-2); right: var(--s-1); width: var(--tap); height: var(--tap); }
+.drawer ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.drawer li a {
+  display: flex; align-items: baseline; gap: var(--s-2);
+  min-height: var(--tap); padding: var(--s-1) 0;
+  text-decoration: none;
+  border-bottom: var(--line) solid var(--rule);
+  font-family: var(--font-zh);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+}
+.drawer li .caption { color: var(--ink-faint); min-width: 2.5em; }
+.drawer .note { margin-top: auto; color: var(--ink-faint); }
+.scrim {
+  position: fixed; inset: 0; z-index: 70;
+  background: color-mix(in srgb, var(--night) 35%, transparent);
+  opacity: 0; pointer-events: none;
+  transition: opacity .45s var(--ease-out);
+}
+.scrim.open { opacity: 1; pointer-events: auto; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
