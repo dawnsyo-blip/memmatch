@@ -191,9 +191,9 @@
       "basis": "README：“made past decisions after a few context compactions. It re-fixes the same bug the same wro”（已核对）"
     },
     "cross_client": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“N.md) --- ## Why Every agent forgets *why* it ma”经核对不算：说的是 agent 会遗忘"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
     },
     "verbatim": {
       "value": "yes",
@@ -410,6 +410,13 @@
       ],
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：HTTP 模式用于 multi-agent shared memory（2026-10-26 补核）"
     },
     "pairs_with": {
       "value": [],

@@ -61,3 +61,28 @@ test("正式问卷：没显示的题（第 3a 题）不影响结果", () => {
   const b = real.recommend({ ...base, q3a: ["openclaw"] }, all); // 第 3 题没选遥控或程序化，第 3a 题不显示
   assert.deepEqual(a.results.map((x) => x.id), b.results.map((x) => x.id));
 });
+
+// 遥控电脑上的 Claude Code、多端共用，门槛和预算都放开
+const multiBase = { q1: ["anthropic"], q2: ["iphone", "mac"], q3: ["remote_control"], q3a: ["claude_code"], q4: "multi", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
+const has = (p, field, v) => [].concat(p.normalized[field].value).includes(v);
+
+test("第 4a 题：要各 Agent 分开记忆时，能分开的排在前面；第 4 题只选一个入口时这题不显示", () => {
+  const { projects: all, engine: real } = loadAll();
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const r = real.recommend({ ...multiBase, q4a: "per_agent" }, all);
+  const top = r.results.slice(0, 5).map((x) => byId[x.id]);
+  assert.ok(top.filter((p) => has(p, "multi_agent", "per_agent")).length >= 4, "前 5 名大多应能按 Agent 分开记忆");
+  const single = { ...multiBase, q4: "single" };
+  assert.deepEqual(real.recommend({ ...single, q4a: "per_agent" }, all).results.map((x) => x.id),
+    real.recommend(single, all).results.map((x) => x.id));
+});
+
+test("第 8a 题：要找回原图时，能存原图的项目靠前；不需要时不影响结果", () => {
+  const { projects: all, engine: real } = loadAll();
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const r = real.recommend({ ...multiBase, q8a: ["image"] }, all);
+  const top = r.results.slice(0, 3).map((x) => byId[x.id]);
+  assert.ok(top.every((p) => has(p, "media_recall", "image")), "前 3 名应都能存原图");
+  assert.deepEqual(real.recommend({ ...multiBase, q8a: ["none"] }, all).results.map((x) => x.id),
+    real.recommend(multiBase, all).results.map((x) => x.id));
+});

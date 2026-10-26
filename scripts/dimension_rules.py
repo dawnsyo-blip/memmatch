@@ -73,7 +73,16 @@ ENUMS.update({
                      "video": "视频：保管原视频（或关键帧），能检索并重新召回",
                      "not_mentioned": "未提及，或只把多模态内容转成文字再存"},
 })
+# 2026-10-26 第五批：几个不同的 Agent 能否共用记忆（问卷第 4a 题，负责人要求加题）。
+# shared：写明几个 Agent（或工具）读写同一份记忆；per_agent：能给每个 Agent 分开记忆空间或权限，只共享一部分。
+# 同一个 Agent 换设备不算；项目内部由几个“子智能体”分管记忆（如 MIRIX）也不算。全部逐项人工核实。
+ENUMS.update({
+    "multi_agent": {"shared": "写明几个不同的 Agent 共用同一份记忆",
+                    "per_agent": "能给每个 Agent 分开记忆空间或权限，只共享一部分",
+                    "not_mentioned": "未提及"},
+})
 LABELS = {
+    "multi_agent": "几个 Agent 能否共用记忆",
     "media_recall": "能否检索并召回多模态内容",
     "phone_access": "手机能否连上", "local_model": "能否用本地模型", "model_lock": "是否绑定某家模型",
     "setup_device": "只用手机能否装好",

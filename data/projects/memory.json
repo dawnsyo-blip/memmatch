@@ -186,9 +186,9 @@
       "basis": "README：“md) **Your AI agent has amnesia. Every session starts from zero. This fixes it.** Context e”（已核对）"
     },
     "cross_client": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -404,6 +404,13 @@
       ],
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：多 agent 运行时，辅助 agent 通过项目 ID 读同一份项目记忆（2026-10-26 补核）"
     },
     "pairs_with": {
       "value": [],

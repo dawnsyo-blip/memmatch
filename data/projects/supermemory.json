@@ -429,6 +429,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：图片做 OCR、视频做转写后只存文字，不算"
     },
+    "multi_agent": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

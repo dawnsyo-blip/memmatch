@@ -21,6 +21,12 @@
           "archive"
         ],
         "note": "换出的是上下文窗口，知识仍在外部存储；原采用的“自动衰减”指换出策略"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：多个 agent 共用一个存储（Multi-agent shared, single store）（2026-10-26 补核）"
       }
     }
   },
@@ -33,13 +39,26 @@
           "tools"
         ],
         "note": "只能让 AI 调工具查看、删除"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Claude 桌面版的聊天、Code、Cowork 共用一份记忆（2026-10-26 补核）"
       }
     }
   },
   "acontext": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：技能文件可在不同 agent、模型、框架之间共用（2026-10-26 补核）"
+      }
+    }
   },
   "aelios": {
     "checked": "2026-10-25",
@@ -132,6 +151,12 @@
           "tools"
         ],
         "note": "可读出它相信什么、追溯来源并更正"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：通过 MCP 让几个客户端用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -475,6 +500,13 @@
           "video"
         ],
         "note": "原件（图片、音频、视频字节）加密存进证据库，生成的描述不替代原件；检索靠派生的观察，召回可取回原件"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：Multiple agents and workspaces，可设共享工作区和私有工作区（2026-10-26 补核）"
       }
     }
   },
@@ -511,6 +543,12 @@
           "not_mentioned"
         ],
         "note": "store_image／store_audio_transcript 只存调用方给的文字描述和文件路径，不管理媒体本身，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：several clients share one store（2026-10-26 补核）"
       }
     }
   },
@@ -557,6 +595,12 @@
           "forget"
         ],
         "note": "召回混合打分；每日衰减"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：One memory across your tools（Claude Code、Codex、Cursor 等）（2026-10-26 补核）"
       }
     }
   },
@@ -591,6 +635,12 @@
           "needs_tunnel"
         ],
         "note": "REST API 和本机 MCP"
+      },
+      "multi_agent": {
+        "value": [
+          "per_agent"
+        ],
+        "note": "README：记忆按 (agent_id, user_id) 分开存取（2026-10-26 补核）"
       }
     }
   },
@@ -668,6 +718,12 @@
       "local_model": {
         "value": "no_model_needed",
         "note": "BM25 检索；可选的语义模式用本地小模型"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：几个客户端指向同一个 vault 即共用记忆（2026-10-26 补核）"
       }
     }
   },
@@ -717,6 +773,16 @@
           "on_request"
         ],
         "note": "AI 调工具写，写入时有门槛把关"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：HTTP 模式用于 multi-agent shared memory（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -752,6 +818,13 @@
       "local_model": {
         "value": "not_mentioned",
         "note": "本地版用本地 ONNX 重排；嵌入是否可本地 README 没说清"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：几个 agent 做同一个项目时用 share 按用户或组织范围共享；记忆带 agent_id（2026-10-26 补核）"
       }
     }
   },
@@ -857,6 +930,12 @@
           "own_server"
         ],
         "note": "自己的 Mac 或小 VPS；Cloudflare 只用来做隧道"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Claude Code、claude.ai 网页、Telegram 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -1010,6 +1089,13 @@
       "local_model": {
         "value": "no_model_needed",
         "note": "嵌入模型随包附带，不调用大模型；原判来自“Add to LM Studio”（LM Studio 在这里是 MCP 客户端）"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：本机所有 agent 共用一个 vault，每个 agent 有自己的身份和 namespace，可设读写、只读、无权限（2026-10-26 补核）"
       }
     }
   },
@@ -1096,7 +1182,14 @@
   "contextlattice": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：跨 agent 延续上下文，按 agent-id 记录（2026-10-26 补核）"
+      }
+    }
   },
   "cosmos-mcp": {
     "checked": "2026-10-25",
@@ -1465,6 +1558,13 @@
           "not_mentioned"
         ],
         "note": "图片、音频、PDF 经多模态模型解析成文字后入库，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：跨智能体的个人记忆，可按 agent_id 等检索（2026-10-26 补核）"
       }
     }
   },
@@ -1540,13 +1640,26 @@
           "dedup"
         ],
         "note": "写入时语义去重"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README 示例 multi-agent-shared-memory：多个 agent 共用一个记忆池（2026-10-26 补核）"
       }
     }
   },
   "fluctlightdb": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "per_agent"
+        ],
+        "note": "README：每个 agent 一个独立的记忆目录（2026-10-26 补核）"
+      }
+    }
   },
   "forge-reload": {
     "checked": "2026-10-25",
@@ -1568,18 +1681,49 @@
           "needs_tunnel"
         ],
         "note": "gbrain mcp expose 通过 Tailscale（可加 funnel 公开）把本机记忆发布成 MCP"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：几个 agent 共用一份记忆；可为每个 agent 发放限定范围的令牌，有写入隔离模式（2026-10-26 补核）"
       }
     }
   },
   "genome": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：多 agent 的信念归属（believed_by），可要求按 user_id／agent_id 划分（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
+      }
+    }
   },
   "goodmemory": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：按 agentId 划分范围，指定同一个存储地址即可让几个 agent 共用（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
+      }
+    }
   },
   "graph-memory": {
     "checked": "2026-10-25",
@@ -1670,7 +1814,14 @@
   "honcho": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：给几个 agent 一份共享记忆，支持多 agent 交互（2026-10-26 补核）"
+      }
+    }
   },
   "honey-os": {
     "checked": "2026-10-25",
@@ -1827,6 +1978,12 @@
           "image"
         ],
         "note": "对话里的图片与文字一起做联合向量（需 Gemini 多模态嵌入；换纯文本嵌入模型则失去）"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：网页端对话与其它客户端进同一个记忆库（2026-10-26 补核）"
       }
     }
   },
@@ -1932,6 +2089,17 @@
       "local_model": {
         "value": "no_model_needed",
         "note": "不依赖模型"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：One memory for every agent you use，记忆可按 agent 分区（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -1971,6 +2139,13 @@
       "time_awareness": {
         "value": "yes",
         "note": "日历记得纪念日、计划和生理期"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：一个共享记忆库，加上每个 AI 各自的档案（2026-10-26 补核）"
       }
     }
   },
@@ -2117,7 +2292,14 @@
   "kybase": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Different tool, same memory（2026-10-26 补核）"
+      }
+    }
   },
   "langmem": {
     "checked": "2026-10-25",
@@ -2359,7 +2541,14 @@
   "loci": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：跨 Agent 的本地记忆与数据层，多个 agent 共用（2026-10-26 补核）"
+      }
+    }
   },
   "longhand": {
     "checked": "2026-10-25",
@@ -2371,13 +2560,26 @@
           "linux"
         ],
         "note": "README 明说不支持 Windows，要用 WSL2"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Claude Code 和 Codex 共用一份记忆档案（2026-10-26 补核）"
       }
     }
   },
   "lore": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Claude Code 和 Codex CLI 共用（2026-10-26 补核）"
+      }
+    }
   },
   "loreroom": {
     "checked": "2026-10-25",
@@ -2486,6 +2688,12 @@
           "files"
         ],
         "note": "命令行审核队列；记忆是普通文件，可用任何编辑器改"
+      },
+      "multi_agent": {
+        "value": [
+          "per_agent"
+        ],
+        "note": "README：按 agent 设分区，跨分区访问被拒绝（2026-10-26 补核）"
       }
     }
   },
@@ -2609,6 +2817,13 @@
       "setup_device": {
         "value": "needs_computer",
         "note": "pip 安装或 Docker，远程要配隧道"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：多 agent 共享记忆；X-Agent-ID 按 agent 标记并限定检索范围（2026-10-26 补核）"
       }
     }
   },
@@ -2639,7 +2854,14 @@
   "mem9": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：OpenClaw、Hermes、Claude Code、Codex、DeepSeek Harness 等共用同一空间，可标记是哪个 agent 写的（2026-10-26 补核）"
+      }
+    }
   },
   "memengine": {
     "checked": "2026-10-25",
@@ -2699,6 +2921,12 @@
           "auto"
         ],
         "note": "智能体经提示 API 主动写入；后台自动整合、修订"
+      },
+      "multi_agent": {
+        "value": [
+          "per_agent"
+        ],
+        "note": "README：所有操作按 agent ID 划分（每个 agent 一份）（2026-10-26 补核）"
       }
     }
   },
@@ -2801,6 +3029,12 @@
           "linux"
         ],
         "note": "主力是 Apple Silicon Mac；Linux 有 CPU 后端，另有 Docker"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：跨 agent 继续会话（memo resume）（2026-10-26 补核）"
       }
     }
   },
@@ -2884,13 +3118,31 @@
       "local_model": {
         "value": "no_model_needed",
         "note": "不需要嵌入和云服务"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：多 agent 运行时，辅助 agent 通过项目 ID 读同一份项目记忆（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
   "memory-lancedb-pro": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：跨 agent 记忆；按 agent、用户、项目隔离范围（2026-10-26 补核）"
+      }
+    }
   },
   "memory-mcp": {
     "checked": "2026-10-25",
@@ -2991,6 +3243,16 @@
           "developer_built"
         ],
         "note": "通过 API／MCP 接入自己的系统，偏企业部署"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：针对多个智能体各自记忆、互不相通的问题，提供统一记忆（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -3065,6 +3327,12 @@
       "local_model": {
         "value": "not_mentioned",
         "note": "向量化固定用 Gemini"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：多个 agent 共用任务和记忆，一个起草任务、另一个领取（2026-10-26 补核）"
       }
     }
   },
@@ -3077,6 +3345,13 @@
           "not_mentioned"
         ],
         "note": "图片只保留链接，记忆本身是图片分析出的文字，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：多 agent 协作，可共享或隔离记忆（2026-10-26 补核）"
       }
     }
   },
@@ -3108,6 +3383,12 @@
           "not_mentioned"
         ],
         "note": "资源按模态读取后转成文字记忆，README 已不把多模态作为卖点，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Across Sessions. Across Agents. Across Devices.（2026-10-26 补核）"
       }
     }
   },
@@ -3120,6 +3401,13 @@
           "not_mentioned"
         ],
         "note": "上传文件由视觉模型抽取文字，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：Codex、Cursor 等共用一份记忆；可按 agent_id 过滤（2026-10-26 补核）"
       }
     }
   },
@@ -3198,6 +3486,12 @@
       "setup_device": {
         "value": "needs_computer",
         "note": "装在电脑上"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：一份共享记忆，所有 MCP 客户端共用（2026-10-26 补核）"
       }
     }
   },
@@ -3253,6 +3547,12 @@
           "not_mentioned"
         ],
         "note": "README 明确说只服务本机客户端，ChatGPT 等云端客户端不在范围内"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：本机所有 MCP 客户端的共享记忆层（2026-10-26 补核）"
       }
     }
   },
@@ -3319,6 +3619,12 @@
           "recency"
         ],
         "note": "复合排序；事实有三档可信度"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：跨 agent 记忆，每晚整合多个 agent 的记忆（2026-10-26 补核）"
       }
     }
   },
@@ -3368,6 +3674,12 @@
           "no_llm"
         ],
         "note": "交叉编码器重排，不是生成式大模型"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：几个客户端共用一个服务；多用户模式按令牌分 namespace（按用户，不是按 agent）（2026-10-26 补核）"
       }
     }
   },
@@ -3451,6 +3763,16 @@
           "needs_tunnel"
         ],
         "note": "streamable-http＋API Key；放在服务器上可远程连"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：可接 Claude Code、ChatGPT、Open WebUI 等多个助手，请求可带 X-Agent-Id（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -3490,6 +3812,16 @@
           "not_mentioned"
         ],
         "note": "图片先生成文字描述再索引（opt-in 的 describe_image），不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Multi-agent context sharing through one durable memory backend（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -3656,7 +3988,15 @@
   "neotoma": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：每次写入记录是哪个 agent，按 agent 授予最小权限（2026-10-26 补核）"
+      }
+    }
   },
   "nocturne-memory": {
     "checked": "2026-10-25",
@@ -3719,6 +4059,12 @@
       "dream_consolidation": {
         "value": "not_mentioned",
         "note": "README 没有离线整理；有一套让 AI 自查冗余、矛盾的审计技能，要手动触发"
+      },
+      "multi_agent": {
+        "value": [
+          "per_agent"
+        ],
+        "note": "README：Namespace 隔离，同时养多个 AI 人格时各自有独立记忆空间（2026-10-26 补核）"
       }
     }
   },
@@ -3866,6 +4212,12 @@
       "local_model": {
         "value": "no_model_needed",
         "note": "不需要模型服务"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：几个客户端共用记忆；多 agent 协调（锁、任务队列）是付费 pro 功能（2026-10-26 补核）"
       }
     }
   },
@@ -3960,7 +4312,15 @@
   "omnigraph": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：多个 agent 共享一个世界模型，每个 agent 可有自己的分支，审核后合并（2026-10-26 补核）"
+      }
+    }
   },
   "open-webui-memory": {
     "checked": "2026-10-25",
@@ -4244,6 +4604,12 @@
       "setup_device": {
         "value": "needs_computer",
         "note": "装在电脑上"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Claude Code、Codex、Cursor 读同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -4297,6 +4663,12 @@
       "cost": {
         "value": "free",
         "note": "本地免费，可选付费订阅"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Multi-Agent Hivemind，各 agent 有自己的会话，通过知识图谱共享记忆（2026-10-26 补核）"
       }
     }
   },
@@ -4395,6 +4767,12 @@
           "not_mentioned"
         ],
         "note": "图片转成带来源链接的文字卡片，检索靠文字，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：一个记忆工作区可在多个 agent 之间共用（2026-10-26 补核）"
       }
     }
   },
@@ -4465,6 +4843,12 @@
       "difficulty": {
         "value": "medium",
         "note": "pipx 安装加几条命令"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：跨 agent 的交接、简报和收件箱（2026-10-26 补核）"
       }
     }
   },
@@ -4491,6 +4875,13 @@
           "needs_tunnel"
         ],
         "note": "有 HTTP 接入；ChatGPT 开发者模式只在网页端，手机要自己打通"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：One memory store, every agent；可开启 namespace 做多 agent 隔离（默认关）（2026-10-26 补核）"
       }
     }
   },
@@ -4985,6 +5376,12 @@
           "needs_tunnel"
         ],
         "note": "same web --mcp 提供带 Bearer 令牌的 HTTP MCP"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：Claude Code、Cursor、Codex 等共用一层记忆，多 agent 有文件认领机制（2026-10-26 补核）"
       }
     }
   },
@@ -5120,6 +5517,13 @@
           "macos"
         ],
         "note": "安装脚本面向 Linux、macOS（含树莓派）"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：每个 agent 注册后有自己的索引（按 agent 隔离），可在项目内读其它 agent 的记忆（2026-10-26 补核）"
       }
     }
   },
@@ -5132,6 +5536,12 @@
           "video"
         ],
         "note": "视频抽帧、生成描述、建向量库，检索后可按时间段查看具体画面；只有视频，没有单独的图片或音频记忆"
+      },
+      "multi_agent": {
+        "value": [
+          "per_agent"
+        ],
+        "note": "README：兼容 mem0 的 agent_id 范围，可按 agent 分开存取（2026-10-26 补核）"
       }
     }
   },
@@ -5156,6 +5566,13 @@
       "cost": {
         "value": "model_fees_only",
         "note": "模型按用量付费"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：所有 Agent 共用一个记忆服务，按团队、用户、Agent 和可见范围控制权限（2026-10-26 补核）"
       }
     }
   },
@@ -5261,13 +5678,31 @@
       "cost": {
         "value": "free",
         "note": "本地运行"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：同一台机器上的多 agent 身份、共享写入的授权、按范围召回（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
   "tstockham96-engram": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：几个客户端共用，--agent 记录来源（2026-10-26 补核）"
+      }
+    }
   },
   "utsuwa": {
     "checked": "2026-10-25",
@@ -5537,6 +5972,13 @@
           "vendor_account"
         ],
         "note": "要在项目官网用邮箱验证领取令牌；记忆本身存在本地"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：团队记忆池共享，私有记忆只有自己可见，按 agent 控制权限（2026-10-26 补核）"
       }
     }
   },
@@ -5593,7 +6035,14 @@
   "zenbrain": {
     "checked": "2026-10-25",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README 示例：多个 agent 共用工作记忆（2026-10-26 补核）"
+      }
+    }
   },
   "cognee": {
     "checked": "2026-10-26",
@@ -5675,6 +6124,16 @@
           "not_mentioned"
         ],
         "note": "图片、音频需视觉／转写模型处理成文字，不算"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：团队和智能体共享记忆，有 Claude Code、Codex、OpenClaw 插件（2026-10-26 补核）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
       }
     }
   },
@@ -5816,6 +6275,13 @@
       "setup_device": {
         "value": "needs_computer",
         "note": "pip＋Docker"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：多个智能体共用一份受管理的记忆，跨智能体合并重复；默认每个 agent 有自己的 namespace（2026-10-26 补核）"
       }
     }
   },
@@ -5899,6 +6365,12 @@
       "setup_device": {
         "value": "needs_computer",
         "note": "uv＋服务器"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：跨会话、跨 agent、跨人员的上下文；按 Scope（项目）隔离，不是按 agent（2026-10-26 补核）"
       }
     }
   },
@@ -5950,6 +6422,12 @@
           "manual_only"
         ],
         "note": "deja forget／delete 手动"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：One memory, every agent，几十种 agent 读同一个索引（2026-10-26 补核）"
       }
     }
   },
@@ -6018,6 +6496,12 @@
           "image"
         ],
         "note": "可用 CLIP 给图片做向量并按图片检索（memory_vision_search），默认关闭，要开 AGENTMEMORY_IMAGE_EMBEDDINGS；没有音频、视频"
+      },
+      "multi_agent": {
+        "value": [
+          "shared"
+        ],
+        "note": "README：All agents share the same memory server，多个智能体靠租约协调（2026-10-26 补核）"
       }
     }
   },
@@ -6074,6 +6558,13 @@
           "any"
         ],
         "note": "Docker 部署"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：多租户、多智能体共享记忆，范围隔离、跨智能体传播结果（2026-10-26 补核）"
       }
     }
   },
@@ -6119,6 +6610,13 @@
           "video"
         ],
         "note": "媒体资产（图片、音频、视频，默认单个上限 100 MiB）导入后可挂到记忆上并取回；检索多靠文字说明，媒体向量要服务商明确支持才建"
+      },
+      "multi_agent": {
+        "value": [
+          "shared",
+          "per_agent"
+        ],
+        "note": "README：二十多种编程智能体共用项目记忆；可启用 agent 身份，区分个人和团队记录（2026-10-26 补核）"
       }
     }
   },

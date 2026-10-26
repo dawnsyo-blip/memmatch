@@ -426,6 +426,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：媒体资产（图片、音频、视频，默认单个上限 100 MiB）导入后可挂到记忆上并取回；检索多靠文字说明，媒体向量要服务商明确支持才建"
     },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README：二十多种编程智能体共用项目记忆；可启用 agent 身份，区分个人和团队记录（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

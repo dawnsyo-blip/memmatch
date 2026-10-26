@@ -424,6 +424,13 @@
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
     },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README：One memory, every agent，几十种 agent 读同一个索引（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

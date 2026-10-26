@@ -411,6 +411,13 @@
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
     },
+    "multi_agent": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

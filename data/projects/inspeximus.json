@@ -194,9 +194,9 @@
       "basis": "README：“UDE.md` editing, no re-explaining: - **SessionStart** injects the decisions still in force”（已核对）"
     },
     "cross_client": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“ical writes twice — same stored state? | **byte-id”经核对不算：说的是写入一致性"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -409,6 +409,14 @@
       ],
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：One memory for every agent you use，记忆可按 agent 分区（2026-10-26 补核）"
     },
     "pairs_with": {
       "value": [],

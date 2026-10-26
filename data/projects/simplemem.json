@@ -411,6 +411,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：Omni-SimpleMem 支持图片、音频、视频的存取检索；目前只有 Python 接口，MCP 版还没支持多模态"
     },
+    "multi_agent": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

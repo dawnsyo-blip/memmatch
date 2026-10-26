@@ -467,6 +467,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：图片只保留链接，记忆本身是图片分析出的文字，不算"
     },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：多 agent 协作，可共享或隔离记忆（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

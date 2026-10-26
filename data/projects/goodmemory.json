@@ -195,9 +195,9 @@
       "basis": "README 命中的“pter({ id: \"codex-handoff\", hostKind: \"code”经核对不算：只是一个适配器名字"
     },
     "cross_client": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“rack re-judges the *same stored answers* (not rege”经核对不算：说的是评测"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -412,6 +412,14 @@
       ],
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：按 agentId 划分范围，指定同一个存储地址即可让几个 agent 共用（2026-10-26 补核）"
     },
     "pairs_with": {
       "value": [],

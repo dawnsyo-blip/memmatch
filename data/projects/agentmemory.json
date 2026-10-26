@@ -444,6 +444,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：可用 CLIP 给图片做向量并按图片检索（memory_vision_search），默认关闭，要开 AGENTMEMORY_IMAGE_EMBEDDINGS；没有音频、视频"
     },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README：All agents share the same memory server，多个智能体靠租约协调（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

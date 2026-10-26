@@ -417,6 +417,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：图片、屏幕截图交给模型转成文字记忆，没有保管原图的说明，不算"
     },
+    "multi_agent": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

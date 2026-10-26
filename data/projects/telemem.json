@@ -457,6 +457,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：视频抽帧、生成描述、建向量库，检索后可按时间段查看具体画面；只有视频，没有单独的图片或音频记忆"
     },
+    "multi_agent": {
+      "value": [
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：兼容 mem0 的 agent_id 范围，可按 agent 分开存取（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

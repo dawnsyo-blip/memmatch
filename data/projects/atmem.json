@@ -404,6 +404,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：原件（图片、音频、视频字节）加密存进证据库，生成的描述不替代原件；检索靠派生的观察，召回可取回原件"
     },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：Multiple agents and workspaces，可设共享工作区和私有工作区（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

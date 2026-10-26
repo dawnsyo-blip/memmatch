@@ -211,7 +211,8 @@
         "local_model",
         "model_lock",
         "setup_device",
-        "media_recall"
+        "media_recall",
+        "multi_agent"
       ],
       "properties": {
         "access": {
@@ -374,6 +375,9 @@
           "$ref": "#/$defs/normalizedField"
         },
         "media_recall": {
+          "$ref": "#/$defs/normalizedField"
+        },
+        "multi_agent": {
           "$ref": "#/$defs/normalizedField"
         },
         "pairs_with": {

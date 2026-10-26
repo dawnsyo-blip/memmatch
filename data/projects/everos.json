@@ -411,6 +411,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：图片、音频、PDF 经多模态模型解析成文字后入库，不算"
     },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：跨智能体的个人记忆，可按 agent_id 等检索（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

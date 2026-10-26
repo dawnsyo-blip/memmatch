@@ -426,6 +426,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：资源按模态读取后转成文字记忆，README 已不把多模态作为卖点，不算"
     },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：Across Sessions. Across Agents. Across Devices.（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -196,9 +196,9 @@
       "basis": "README：“ning coding agents that need to survive compaction and session restarts. - Chat assistants”（已核对）"
     },
     "cross_client": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -419,6 +419,13 @@
       ],
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：图片先生成文字描述再索引（opt-in 的 describe_image），不算"
+    },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：Multi-agent context sharing through one durable memory backend（2026-10-26 补核）"
     },
     "pairs_with": {
       "value": [],

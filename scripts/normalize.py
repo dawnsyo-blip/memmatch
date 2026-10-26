@@ -97,7 +97,7 @@ for _a, _pairs in DR.RELATED.items():
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through",
          "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization",
-         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access", "media_recall"}
+         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access", "media_recall", "multi_agent"}
 
 
 def snippet(text, m, width=60):
@@ -742,6 +742,8 @@ def n_dimensions(c, out, fixed=()):
         d["setup_device"] = res("not_mentioned", "auto", "部署在服务器或云上的，要看部署步骤，逐项核实时填写")
     # 多模态召回只靠逐项人工核实（readme_verification.json）；没核实到的记为未提及
     d["media_recall"] = res(["not_mentioned"], "auto", "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）")
+    # 多智能体共用同样只靠逐项人工核实
+    d["multi_agent"] = res(["not_mentioned"], "auto", "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明")
     return d
 
 

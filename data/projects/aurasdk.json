@@ -410,6 +410,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：store_image／store_audio_transcript 只存调用方给的文字描述和文件路径，不管理媒体本身，不算"
     },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：several clients share one store（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

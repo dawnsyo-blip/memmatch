@@ -222,9 +222,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "cross_client": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README 写明几个 Agent 共用同一份记忆（2026-10-26 补核）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -439,6 +439,13 @@
       ],
       "status": "verified",
       "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：图片、音频需视觉／转写模型处理成文字，不算"
+    },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-26，README（9 个多智能体项目；部分字段对照了代码目录与配置））：README：团队和智能体共享记忆，有 Claude Code、Codex、OpenClaw 插件（2026-10-26 补核）"
     },
     "pairs_with": {
       "value": [],

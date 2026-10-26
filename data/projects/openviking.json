@@ -417,6 +417,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：图片、音频、视频可作为资源存入并解析；开启多模态向量后支持以图搜图；音视频是否可直接召回原件取决于媒体配置，文档写得不多"
     },
+    "multi_agent": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -417,6 +417,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：上传文件由视觉模型抽取文字，不算"
     },
+    "multi_agent": {
+      "value": [
+        "shared",
+        "per_agent"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：Codex、Cursor 等共用一份记忆；可按 agent_id 过滤（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

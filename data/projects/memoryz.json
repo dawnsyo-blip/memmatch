@@ -412,6 +412,13 @@
       "status": "auto",
       "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
     },
+    "multi_agent": {
+      "value": [
+        "shared"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-25，README）：README：多个 agent 共用任务和记忆，一个起草任务、另一个领取（2026-10-26 补核）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -8,7 +8,7 @@
 
 ```json
 {
-  "version": "v4-2026-10-25",
+  "version": "v4-2026-10-26",
   "rank_weights": [3, 2, 1], "rank_rest": 1,
   "result": {"top_n": 8, "min_results": 3, "unknown_penalty": 1},
   "field_labels": {"runs_on": "运行位置", "model_api_key": "大模型接口密钥"},
@@ -168,3 +168,7 @@
 能托管又能自己部署的项目，`vendor_account` 只算托管模式的要求（见账号题的 `hosting_only`）。
 
 字段值大多经过逐项核实（`data/readme_verification.json`，状态 `verified`）。`setup_device` 表示只用手机能否装好（`phone_ok`／`needs_computer`），第 2 题用它排除没有电脑的用户装不了的项目。
+
+2026-10-26 新增的两个字段只靠逐项核实、规则不自动判定：`multi_agent`（`shared` 写明几个 Agent 共用／`per_agent` 能按 Agent 分开空间或权限，第 4a 题加分）、`media_recall`（`image`／`audio`／`video`，能保管并召回原件，第 8a 题加分）。没核实到的都是 `not_mentioned`，所以只用来加分，不用来排除。
+
+偏好题的 `rules` 只算分，`note` 不会生效（筛选时跳过偏好题）；要给卡片加注意事项，得写在硬条件题或 `info` 题上。

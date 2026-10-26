@@ -38,7 +38,7 @@
 - 同日新增字段 `setup_device`（只用手机能否装好：`phone_ok`／`needs_computer`）和客户端值 `chatgpt_gpt`（ChatGPT 自定义 GPT 的 Actions，手机 App 可用，不同于只限网页端的自定义 MCP）
 
 问卷与推荐（阶段 4）：
-- 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a 题追问，负责人 2026-10-25 确认）；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
+- 正式问卷是负责人维护的 `记忆库推荐问卷 v4.md`（18 题＋第 3a、4a 题追问＋第 8a 题，负责人 2026-10-25 确认；4a、8a 是 2026-10-26 按负责人要求加的，题目由 Claude 拟定）；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
 - 配置格式（条件、作用、合并方式、选项失效、放宽建议、加分、补充部件）见 `docs/questionnaire-format.md`
 - 推荐引擎在 `engine/`（JavaScript ES 模块，无依赖，浏览器和 Node 都能跑）：`rule-engine.js` 是规则实现，`index.js` 写明统一接口（换外部模型时另写一个实现即可），`load-node.js` 给测试和命令行加载数据
 - 命令：`npm test`（10 个虚构用户＋引擎测试，用户和期望在 `tests/personas.mjs`）；`npm run report` 生成 `docs/阶段4-推荐测试报告.md`；`node scripts/recommend.mjs 答卷.json` 跑单份答卷
@@ -71,7 +71,9 @@
 
 多智能体记忆（2026-10-26，负责人要求补收评测好或 Star 多的）：旧规则 F5“多智能体不面向个人用户”不再一刀切排除。已改为纳入：Cognee、MIRIX、Memanto、PowerMem、deja、agentmemory、Caura，新增 Memorix、A-MEM（见 `candidate_review.py` 第 6 批 `NEW`）。Cipher 因仓库已归档、许可证 Elastic 2.0 排除。负责人 2026-10-26 同意调整 F5：评测突出或 Star 多的例外，其余多智能体项目（Star 均不足 20，无评测）仍排除。这 9 项已于同日逐项对照 README 核实（记在 `data/readme_verification.json`；MIRIX 现在的上手方式是 Docker＋Python 客户端，归开发者向；A-MEM 的 1003 Star 仓库只是论文复现代码，可用的库是 WujiangXu/A-mem-sys）；安全审查见 `docs/security-audit.md` 末节。
 
-多模态召回字段 `media_recall`（2026-10-26，负责人要求）：值 `image`／`audio`／`video`（可多选）或 `not_mentioned`。标准：系统自己保管原图／原音频／原视频（或直接给原件做向量），召回时能把原件交回；只把图片、语音、视频转成文字（描述、转写、OCR）再存文字的不算，哪怕留了文件路径或链接。与旧特性 `multimodal` 不同，后者命中范围宽（生图、读图都算），不要混用。规则不自动判定，全靠 `readme_verification.json` 里逐项核实：先用 scratchpad 脚本扫 README 里“媒体词＋记忆词”的行，再对命中项克隆仓库看代码和文档。没命中的项目按未提及处理，所以是“已知有”的下限，漏网项目要在以后复核时补。已核实有的 12 个，核实后判为只转文字的 14 个（备注里写了原因）。问卷还没有用这个字段，要加题先问负责人。
+多模态召回字段 `media_recall`（2026-10-26，负责人要求）：值 `image`／`audio`／`video`（可多选）或 `not_mentioned`。标准：系统自己保管原图／原音频／原视频（或直接给原件做向量），召回时能把原件交回；只把图片、语音、视频转成文字（描述、转写、OCR）再存文字的不算，哪怕留了文件路径或链接。与旧特性 `multimodal` 不同，后者命中范围宽（生图、读图都算），不要混用。规则不自动判定，全靠 `readme_verification.json` 里逐项核实：先用 scratchpad 脚本扫 README 里“媒体词＋记忆词”的行，再对命中项克隆仓库看代码和文档。没命中的项目按未提及处理，所以是“已知有”的下限，漏网项目要在以后复核时补。已核实有的 12 个，核实后判为只转文字的 14 个（备注里写了原因）。问卷第 8a 题用它加分（2026-10-26）。
+
+多智能体共用字段 `multi_agent`（2026-10-26，为问卷第 4a 题新增）：值 `shared`（写明几个不同的 Agent 或工具读写同一份记忆）、`per_agent`（能给每个 Agent 分开记忆空间或权限，只共享一部分），可两者都有，或 `not_mentioned`。同一个 Agent 换设备不算（那是 `cross_client`），项目内部由几个子智能体分管记忆（如 MIRIX、agent-zero 的子 agent）也不算；`namespace` 只按项目或用户分的不算 `per_agent`。和 `media_recall` 一样只靠逐项核实：扫 README 里多 agent、共享、agent_id、namespace 等词，逐条看原文判断。写明几个 Agent 共用、原来 `cross_client` 是“未提及”的 10 个顺手改成了 yes。结果：共用 64 个、能分开 29 个。
 
 ## 踩过的坑
 
@@ -108,4 +110,6 @@
 - **自动解析留下的典型误判**（2026-10-25 逐项核实时发现，规则判定的结果不能直接上线）：“同一 WiFi 下手机可连”被当成能装在手机上；“可导入 ChatGPT 导出记录”被当成能接 ChatGPT；“Add to LM Studio”（LM Studio 是 MCP 客户端）被当成能用本地模型；“推送到手机”被当成支持安卓、iOS；Cloudflare、Supabase、Zeabur 只当存储或隧道时被当成“跑在自己的云账号上”；云端运行的项目其实要在电脑上敲命令部署；只处理 Claude Code 记录的工具没标“只能配合 Claude”；界面提示“几秒后淡出”被采用成了“自动衰减”
 - **Python 在 Windows 上写的文本文件是 CRLF**，bash 的 `while read u` 读到的每行末尾带 `\r`，`git clone "$u.git"` 全部失败却看不出原因；要先 `tr -d '\r'`
 - **后台运行的 Bash 命令没有代理环境变量**，git clone 立即失败；需要联网的命令放前台跑
+- **参与推荐的不只是 `inclusion.status` = `included`**：`flagged`（带风险标记）也照样推荐，有 144 个，比 included 还多。扫描、统计时要用“不是 `excluded`”来筛，2026-10-26 补 `multi_agent` 时第一次只扫了 included，漏了一大半
+- **`data/readme_verification.json` 是 2 空格缩进、按加入顺序排列的**：脚本改它时别 `sort` 键、别用 `indent=1`，否则 git diff 变成上万行，看不出实际改了什么；往已有条目补字段时只改 `fields` 里那一项，不要整条覆盖（旧的 scratchpad merge.py 会整条覆盖）
 - **用 heredoc 写含反斜杠的正则会被吃掉转义**，2026-10-24 又把 dimension_rules.py 写坏一次。含 `\n`、`\d` 的改动一律用 Edit 工具。
