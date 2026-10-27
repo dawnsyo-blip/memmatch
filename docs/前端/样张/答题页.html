@@ -482,10 +482,12 @@
     g.replaceChildren();
     if (q.type === "single") return;
     const sel = state.answers[q.id] || [];
-    sel.forEach((id) => {
+    sel.forEach((id, order) => {
       const idx = q.options.findIndex((o) => o[0] === id);
       const a = geo.angles[idx], [x, y] = pt(a);
-      el("circle", { class: "parked", cx: x, cy: y, r: (4 + 1.6 * depth(a)).toFixed(2) }, g);
+      // 排序题：按选择的先后从大到小（第 1 个 6px，之后每个小 0.9px，最小 2.6px）；多选题大小一样
+      const r = q.type === "rank" ? Math.max(2.6, 6 - order * .9) : 4 + 1.6 * depth(a);
+      el("circle", { class: "parked", cx: x, cy: y, r: r.toFixed(2) }, g);
     });
   }
 
