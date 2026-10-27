@@ -109,10 +109,10 @@
     9%   { opacity: 0; }
     100% { opacity: 0; }
   }
-  /* 中心的光：像呼吸一样慢慢胀缩。一呼一吸 5.2 秒；外圈光晕比内层慢半拍，像光在往外漫 */
+  /* 中心的光：像呼吸一样慢慢胀缩，一呼一吸 5.2 秒。和右下角文字里的小光点同步（脚本把它们对到同一个起点） */
   .core-glow, .core-halo, .core-dot { transform-box: fill-box; transform-origin: center; }
   .core-glow { animation: breathe 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
-  .core-halo { animation: breathe-halo 5.2s cubic-bezier(.45, 0, .55, 1) -.6s infinite; }
+  .core-halo { animation: breathe-halo 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
   .core-dot  { animation: breathe-dot 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
   @keyframes breathe      { 0%, 100% { opacity: .62; transform: scale(.88); } 50% { opacity: .95; transform: scale(1.1); } }
   @keyframes breathe-halo { 0%, 100% { opacity: .35; transform: scale(.85); } 50% { opacity: .85; transform: scale(1.18); } }
@@ -161,7 +161,7 @@
     box-shadow: 0 0 4px color-mix(in srgb, var(--bulb) 55%, transparent);
     animation: glint 5.2s cubic-bezier(.45, 0, .55, 1) infinite;   /* 和星图中心同一节奏 */
   }
-  @keyframes glint { 0%, 100% { opacity: .45; } 50% { opacity: .8; } }
+  @keyframes glint { 0%, 100% { opacity: .45; transform: scale(.88); } 50% { opacity: .8; transform: scale(1.1); } }
   .start:hover, .start:focus-visible { --mark: var(--bulb); }
   .start:hover .caption, .start:focus-visible .caption { color: var(--ink); }
 
@@ -308,7 +308,7 @@
   ];
   const raysG = document.getElementById("rays");
   const bulbsG = document.getElementById("bulbs");
-  const STEP = 0.32; // 每盏灯亮起的间隔（秒）
+  const STEP = 0.6; // 相邻两道刻度亮起的间隔（秒）
 
   el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, raysG);
   // 一小束光：渐变从尾部透明到头部最亮，整段沿水平线平移（渐变跟着线一起移动）
@@ -334,7 +334,7 @@
     marks.push([len, bits.length]);   // 线尾那道也是垂直刻度
 
     // 灯串：从靠近中心的刻度往外逐拍推进，每一拍对应一个刻度位置；落在断点上的那一拍不亮
-    const pause = 1.2 + rand() * 1.6;
+    const pause = 2 + rand() * 2;   // 跑完一条线后停 2～4 秒
     const dur = (bits.length + 1) * STEP + pause;
     const offset = rand() * 4; // 灯串之间的启动时间偏移
     marks.forEach(([r, k]) => {
@@ -402,6 +402,16 @@
   addEventListener("resize", () => { clearTimeout(t); t = setTimeout(layout, 120); });
   document.fonts?.ready.then(() => { fitGolden(); placeCore(); });
   layout();
+
+  /* ---------- 呼吸同步：中心的光、光晕、亮点和文字里的小光点从同一个时间起点开始 ---------- */
+  const BREATH = ["breathe", "breathe-halo", "breathe-dot", "glint"];
+  const syncBreath = () => {
+    document.getAnimations().forEach((a) => {
+      if (BREATH.includes(a.animationName)) a.startTime = 0;
+    });
+  };
+  syncBreath();
+  document.fonts?.ready.then(syncBreath);   // 字体到了以后文字会重新排版，再对一次
 
   /* ---------- 点击中心：亮边铺满，再进问卷 ---------- */
   const flash = document.getElementById("flash");
