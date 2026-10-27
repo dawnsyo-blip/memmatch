@@ -84,7 +84,7 @@
         {"id": "mcp_client", "label": "Kelivo、RikkaHub、Operit 等支持 MCP 的客户端", "help": "自己填 API Key 的手机聊天软件",
          "effect": {"require": {"compatible_clients": ["kelivo", "any_mcp_client", "openai_compatible"]}, "exclude_any": {"category": ["自带记忆的应用"]}}},
         {"id": "sillytavern", "label": "SillyTavern（酒馆）", "help": "手机上一般用浏览器访问，本体跑在电脑或服务器上",
-         "effect": {"require": {"compatible_clients": ["sillytavern", "openai_compatible"]}, "exclude_any": {"category": ["自带记忆的应用"]}}},
+         "effect": {"require": {"compatible_clients": ["sillytavern", "openai_compatible", "any_mcp_client"]}, "exclude_any": {"category": ["自带记忆的应用"]}}},
         {"id": "app", "label": "还没有固定使用的 Agent，计划换用一个自带记忆的应用", "help": "这类应用自带聊天界面和记忆，记忆不能搬到别的助手上用",
          "effect": {"require": {"category": ["自带记忆的应用"]}}},
         {"id": "other", "label": "其它", "free_text": true, "effect": {}}
@@ -97,7 +97,11 @@
            {"when": {"question": "q5", "selected_any": ["hosted"]}, "require": {"phone_access": ["cloud"]}},
            {"when": {"question": "q5", "selected_any": ["cloud_free"]}, "require": {"runs_on": ["own_cloud_account"]}}
          ],
-         "reason": "手机连不上这个记忆库", "note": "要自己用 Cloudflare Tunnel 或 Tailscale 让手机连上", "note_if": {"phone_access": ["needs_tunnel"]}}
+         "reason": "手机连不上这个记忆库", "note": "要自己用 Cloudflare Tunnel 或 Tailscale 让手机连上", "note_if": {"phone_access": ["needs_tunnel"]}},
+        {"when": {"question": "q3", "selected_any": ["sillytavern"]},
+         "note": "酒馆要先装社区扩展 SillyTavern-MCP-Client（连同它要求的服务端插件），并在采样设置里打开函数调用，才能接这个 MCP 记忆库；所用的模型接口要支持工具调用",
+         "note_if": {"compatible_clients": ["any_mcp_client"]}, "note_unless": {"compatible_clients": ["sillytavern"]},
+         "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "原生支持酒馆，不用另装 MCP 扩展"}]}
       ],
       "relax": [
         {"label": "改用手机遥控电脑上的 Agent", "add": ["remote_control"]},

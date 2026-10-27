@@ -145,7 +145,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       const r = applyEffect(rule, project, answers);
       if (!r.ok) return { ok: false, unknown, notes, why: rule.reason };
       unknown = unknown.concat(r.unknown);
-      if (r.applicable && rule.note && (!rule.note_if || projectMatches(project, rule.note_if))) notes.push(rule.note);
+      if (r.applicable && rule.note && (!rule.note_if || projectMatches(project, rule.note_if)) && !(rule.note_unless && projectMatches(project, rule.note_unless))) notes.push(rule.note);
     }
     if (!sel.length || q.kind !== "hard") return { ok: true, unknown, notes };
     const opts = q.options.filter((o) => sel.includes(o.id));

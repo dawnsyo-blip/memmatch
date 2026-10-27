@@ -46,6 +46,7 @@
 - `scripts/prototype/` 是正式引擎之前的 Python 原型，只作参考；`docs/推荐结果示例.md` 是原型阶段的模拟记录
 - 组合推荐用的“设计上搭配使用”关系在 `dimension_rules.py` 的 `RELATED`，normalize 写进 `normalized.pairs_with`（双向）
 - 2026-10-25 配置里新增的规则（未改题目文字，负责人同意，已同步到问卷 v4.md）：第 2 题没有电脑也没有服务器时排除 `setup_device` = `needs_computer`；第 3a 题选了某个 Agent 时，它的原生插件加分（AstrBot 插件加 5 分）；第 17 题放宽建议加“注册 GitHub 账号”；引擎在单独放宽哪条都不够时，试两条一起放宽
+- 2026-10-27 负责人同意：第 3 题选酒馆时也保留 MCP 记忆库（酒馆装社区扩展 SillyTavern-MCP-Client 后能连 MCP），这些项目带“先装扩展”的注意事项（规则用新键 `note_unless` 排除原生酒馆扩展）；原生酒馆扩展加 10 分
 - `node scripts/recommend_frequency.mjs [份数]` 用随机答卷统计各项目被推荐的次数，用来决定先核哪些项目、发现某个项目异常地常被推荐
 - 推荐原则：硬条件只排除确定用不了的，文档没写的保留并标“需自行确认”；结果为空时给“放宽哪一条就有几个”的建议；用户答案优先于推荐偏好
 - 各家官方 App 能否接记忆库（2026-10 核实）：

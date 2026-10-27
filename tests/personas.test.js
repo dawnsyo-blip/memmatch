@@ -62,8 +62,14 @@ test("Kelivo＋VPS：手机能连上；有 Dylan Heartbeat；没有酒馆专用�
 
 test("酒馆角色扮演：酒馆扩展排在前面，不推荐要自己写代码接入的情绪引擎", () => {
   const r = run("sillytavern_roleplay");
-  for (const x of r.results.slice(0, 3)) assert.ok(vals(x.id, "compatible_clients").includes("sillytavern"), `${x.name} 不是酒馆扩展`);
-  for (const x of r.addons.state_engine?.items || []) assert.ok(vals(x.id, "compatible_clients").includes("sillytavern"), `${x.name} 接不进酒馆`);
+  // 2026-10-27 起酒馆装社区 MCP 扩展后也能接 MCP 记忆库，所以只要求原生扩展领先，MCP 的要带安装提示
+  const native = (x) => vals(x.id, "compatible_clients").includes("sillytavern");
+  assert.ok(native(r.results[0]), `${r.results[0].name} 不是酒馆扩展`);
+  assert.ok(r.results.slice(0, 3).filter(native).length >= 2, "前三名里酒馆扩展不到两个");
+  for (const x of r.results.filter((x) => !native(x) && vals(x.id, "compatible_clients").includes("any_mcp_client")))
+    assert.ok(x.cautions.some((c) => c.includes("SillyTavern-MCP-Client")), `${x.name} 缺少装 MCP 扩展的提示`);
+  for (const x of r.addons.state_engine?.items || [])
+    assert.ok(native(x) || vals(x.id, "compatible_clients").includes("any_mcp_client"), `${x.name} 接不进酒馆`);
 });
 
 test("AstrBot 机器人：推荐 AstrBot 插件，不推荐 OpenClaw 专用插件", () => {
