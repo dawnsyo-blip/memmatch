@@ -179,23 +179,36 @@
     z-index: 2;
   }
 
-  /* 点击中心后的转场：从中心扩大的圆（圆形展开），1.8 秒、正好在结束时盖满屏幕（放大倍数由脚本按屏幕算），然后进入答题页。
-     圆的颜色是底色，边缘是一圈很淡、晕开的暖光（没有硬边）；节奏起步轻、中间快、快盖满时放缓 */
-  .reveal {
+  /* 点击中心后的转场“点亮”（约 1.7 秒）：
+     1. 聚焦：整个画面以光点为中心慢慢放大（像镜头推近），标题和右下角文字先淡出
+     2. 点亮：光点的暖光同时从中心柔和地漫开，最后铺满屏幕（--arrive，不是刺眼的白）
+     3. 进入答题页：答题页先铺着同一层暖光，再慢慢退去 */
+  .zooming .home, .zooming .stars {
+    transform-origin: var(--zx) var(--zy);
+    transform: scale(5);
+    transition: transform 1.7s cubic-bezier(.6, 0, .3, 1);
+  }
+  .home, .stars { transition: transform 0s; }
+  .zooming .titles, .zooming .start, .zooming .topbar { opacity: 0; transition: opacity .5s var(--ease-out); }
+  .glowup {
     position: fixed; z-index: 95;
     width: 40px; height: 40px; margin: -20px 0 0 -20px;
     border-radius: 50%;
-    background: radial-gradient(closest-side,   /* 百分比按圆的半径（20px）算，光晕不会被圆边切掉 */
-      var(--paper) 0 60%,
-      color-mix(in srgb, var(--glow) 22%, var(--paper)) 64%,
-      color-mix(in srgb, var(--glow) 16%, transparent) 69%,
-      color-mix(in srgb, var(--glow) 4%, transparent) 75%,
-      transparent 80%);
-    transform: scale(0);
+    background: radial-gradient(closest-side,
+      color-mix(in srgb, #fdf0d4 55%, var(--arrive)) 0%,
+      var(--arrive) 38%,
+      var(--arrive) 55%,
+      color-mix(in srgb, var(--arrive) 40%, transparent) 78%,
+      transparent 100%);
+    opacity: 0; transform: scale(.3);
     pointer-events: none;
   }
-  .reveal.go { animation: reveal 1.8s cubic-bezier(.55, 0, .3, 1) forwards; }
-  @keyframes reveal { from { transform: scale(0); } to { transform: scale(var(--cover, 60)); } }
+  .glowup.go { animation: glowup 1.35s cubic-bezier(.55, 0, .35, 1) .45s forwards; }   /* 晚 0.45 秒出来：先看到镜头推近光点，再亮起来 */
+  @keyframes glowup {
+    0%   { opacity: 0; transform: scale(.3); }
+    20%  { opacity: 1; }
+    100% { opacity: 1; transform: scale(var(--cover, 60)); }
+  }
 </style>
 </head>
 <body class="paper grain">
@@ -288,7 +301,7 @@
   </a>
 </main>
 
-<div class="reveal" id="reveal"></div>
+<div class="glowup" id="glowup"></div>
 
 <script src="theme.js"></script>
 <script>
@@ -422,21 +435,25 @@
   syncBreath();
   document.fonts?.ready.then(syncBreath);   // 字体到了以后文字会重新排版，再对一次
 
-  /* ---------- 点击中心：圆从中心扩大盖满屏幕，再进问卷 ---------- */
-  const reveal = document.getElementById("reveal");
+  /* ---------- 点击中心：画面聚焦到光点、暖光漫开铺满，再进问卷 ---------- */
+  const glowup = document.getElementById("glowup");
   function launch(e) {
     if (reduce) return;
     e.preventDefault();
     const href = e.currentTarget.getAttribute("href");
     const r = core.getBoundingClientRect();
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    reveal.style.left = cx + "px";
-    reveal.style.top = cy + "px";
-    // 放大到“底色部分的半径”刚好够到最远的屏幕角：圆的直径 40px，底色占半径的 60%
+    document.body.style.setProperty("--zx", cx + "px");
+    document.body.style.setProperty("--zy", cy + "px");
+    document.documentElement.classList.add("zooming");
+    glowup.style.left = cx + "px";
+    glowup.style.top = cy + "px";
+    // 暖光放大到“实色部分的半径”（圆半径 20px 的 55%）刚好够到最远的屏幕角
     const far = Math.max(Math.hypot(cx, cy), Math.hypot(innerWidth - cx, cy), Math.hypot(cx, innerHeight - cy), Math.hypot(innerWidth - cx, innerHeight - cy));
-    reveal.style.setProperty("--cover", (far / (20 * 0.6) * 1.02).toFixed(1));
-    reveal.classList.add("go");
-    setTimeout(() => { location.href = href; }, 1800);
+    glowup.style.setProperty("--cover", (far / (20 * 0.55) * 1.02).toFixed(1));
+    glowup.classList.add("go");
+    try { sessionStorage.setItem("memsite-arrive", "1"); } catch (err) {}   // 告诉答题页：从暖光里淡出
+    setTimeout(() => { location.href = href; }, 1850);
   }
   core.addEventListener("click", launch);
   startLink.addEventListener("click", launch);

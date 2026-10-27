@@ -28,6 +28,7 @@
   --dot: color-mix(in srgb, var(--ink) 7%, transparent);   /* 半色调网点 */
   --vignette: color-mix(in srgb, var(--warm-gray) 22%, transparent);
   --focus: var(--faded-plum);
+  --arrive: #ecd5a4;       /* 首页“点亮”转场最后铺满屏幕的暖光（浅蜂蜜色），答题页从它淡出 */
 
   /* 字体：西文字体在前，西文字母才会用 Baskerville */
   --font-en: "Libre Baskerville", Baskerville, Georgia, serif;
@@ -80,6 +81,7 @@
   --dot: transparent;
   --vignette: transparent;
   --focus: var(--glow);
+  --arrive: #c9a46c;       /* 深色模式下暗一些的蜂蜜色；黄和深底直接混色会发灰发绿，所以单独指定 */
   color-scheme: dark;
 }
 
