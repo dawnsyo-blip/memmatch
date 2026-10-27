@@ -12,6 +12,7 @@
     if (location.hash.indexOf("light") > -1) t = "light";
     if (t === "dark") r.classList.add("theme-dark");
     if (location.search.indexOf("title=zh") > -1) r.classList.add("title-zh");
+    if (location.search.indexOf("map=golden") > -1) r.classList.add("map-golden");
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,14 +103,13 @@
   .core-glow { transform-box: fill-box; transform-origin: center; animation: breathe 2.8s ease-in-out infinite; }
   @keyframes breathe { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.12); } }
   /* 开始提示：放在右下角。显眼但不抢星图中心——
-     · 前面一颗芥末黄小光点，和星图中心同一节奏呼吸，提示“中心那团光可以点”
      · 四角各一笔细折线（像印刷品的裁切标记），圈出可点的范围，不加框、不加底色
      · 字号按负责人要求：英文 8px、中文 10px（规范最小 12px，这里是例外），两行两端对齐 */
   .start {
     position: absolute;
     right: var(--gutter);
     bottom: var(--s-4);
-    display: flex; align-items: center; gap: var(--s-2);
+    display: flex; align-items: center;
     padding: var(--s-1) var(--s-2);
     text-decoration: none;
     z-index: 2;
@@ -125,13 +125,6 @@
       linear-gradient(var(--mark), var(--mark)) right bottom / 1px 6px no-repeat;
     transition: --mark .3s;
   }
-  .start-dot {
-    flex: none; width: 5px; height: 5px; border-radius: 50%;
-    background: var(--bulb);
-    box-shadow: 0 0 6px 1px color-mix(in srgb, var(--bulb) 70%, transparent);
-    animation: breathe-dot 2.8s ease-in-out infinite;   /* 和 .core-glow 同一节奏 */
-  }
-  @keyframes breathe-dot { 0%, 100% { opacity: .45; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
   .start-text { display: grid; width: max-content; }
   .start .caption {
     font-size: 8px; line-height: 12px; color: var(--ink-soft);
@@ -144,6 +137,11 @@
   }
   .start:hover, .start:focus-visible { --mark: var(--bulb); }
   .start:hover .caption, .start:focus-visible .caption { color: var(--ink); }
+
+  /* 黄金分割版：星图铺满整屏，中心落在横向 30%、纵向 61.8%（位置由脚本按屏幕尺寸算） */
+  .map-golden .titles { position: relative; z-index: 1; }
+  .map-golden .pulsar { position: absolute; left: 0; top: 0; width: 100%; height: 100svh; min-height: 0; margin: 0; z-index: 0; }
+  .map-golden .pulsar svg { width: 100%; height: 100%; flex: none; }
 
   /* 中心按钮：盖在星图中心上 */
   .core {
@@ -231,10 +229,9 @@
   </figure>
 
   <a class="start" id="startLink" href="答题页.html">
-    <span class="start-dot" aria-hidden="true"></span>
     <span class="start-text">
       <span class="caption">Light up and start</span>
-      <span class="caption-zh">点亮中心，开始答题</span>
+      <span class="caption-zh">点亮光点，开始答题</span>
     </span>
   </a>
 </main>
@@ -307,6 +304,19 @@
   const fig = document.getElementById("pulsarFig");
   const core = document.getElementById("core");
   const startLink = document.getElementById("startLink");
+  /* 黄金分割版：按屏幕算 viewBox，让原点（星图中心）落在 (30%, 61.8%)。
+     比例尺不变（屏幕宽度对应 400 个图上单位）；屏幕太矮时往下让，保证最上面的射线离副标题至少 24px。 */
+  const golden = document.documentElement.classList.contains("map-golden");
+  const RAY_TOP = 160;                       // 最长射线伸到中心上方约 160 个单位
+  function fitGolden() {
+    if (!golden) return;
+    const W = fig.clientWidth, H = fig.clientHeight, k = 400 / W;
+    const visible = [...document.querySelectorAll(".titles")].find((n) => n.offsetParent);
+    const minY = (visible ? visible.getBoundingClientRect().bottom - fig.getBoundingClientRect().top : 0) + 24 + RAY_TOP / k;
+    const cy = Math.max(H * 0.618, minY);
+    svg.setAttribute("viewBox", `${(-W * 0.30 * k).toFixed(2)} ${(-cy * k).toFixed(2)} ${(W * k).toFixed(2)} ${(H * k).toFixed(2)}`);
+  }
+
   function placeCore() {
     const m = svg.getScreenCTM(), f = fig.getBoundingClientRect();
     if (!m) return;
@@ -338,9 +348,9 @@
   }
 
   let t;
-  const layout = () => { drawStars(); placeCore(); };
+  const layout = () => { drawStars(); fitGolden(); placeCore(); };
   addEventListener("resize", () => { clearTimeout(t); t = setTimeout(layout, 120); });
-  document.fonts?.ready.then(placeCore);
+  document.fonts?.ready.then(() => { fitGolden(); placeCore(); });
   layout();
 
   /* ---------- 点击中心：亮边铺满，再进问卷 ---------- */
