@@ -106,8 +106,14 @@
     9%   { opacity: 0; }
     100% { opacity: 0; }
   }
-  .core-glow { transform-box: fill-box; transform-origin: center; animation: breathe 2.8s ease-in-out infinite; }
-  @keyframes breathe { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.12); } }
+  /* 中心的光：像呼吸一样慢慢胀缩。一呼一吸 5.2 秒；外圈光晕比内层慢半拍，像光在往外漫 */
+  .core-glow, .core-halo, .core-dot { transform-box: fill-box; transform-origin: center; }
+  .core-glow { animation: breathe 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+  .core-halo { animation: breathe-halo 5.2s cubic-bezier(.45, 0, .55, 1) -.6s infinite; }
+  .core-dot  { animation: breathe-dot 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+  @keyframes breathe      { 0%, 100% { opacity: .62; transform: scale(.88); } 50% { opacity: .95; transform: scale(1.1); } }
+  @keyframes breathe-halo { 0%, 100% { opacity: .35; transform: scale(.85); } 50% { opacity: .85; transform: scale(1.18); } }
+  @keyframes breathe-dot  { 0%, 100% { opacity: .7; } 50% { opacity: 1; } }
   /* 开始提示：放在右下角。显眼但不抢星图中心——
      · 四角各一笔细折线（像印刷品的裁切标记），圈出可点的范围，不加框、不加底色
      · 字号按负责人要求：英文 8px、中文 10px（规范最小 12px，这里是例外），两行两端对齐 */
@@ -150,7 +156,7 @@
     border-radius: 50%;
     background: radial-gradient(circle, #fff3d6 0 18%, var(--bulb) 45%, color-mix(in srgb, var(--bulb) 0%, transparent) 72%);
     box-shadow: 0 0 4px color-mix(in srgb, var(--bulb) 55%, transparent);
-    animation: glint 2.8s ease-in-out infinite;
+    animation: glint 5.2s cubic-bezier(.45, 0, .55, 1) infinite;   /* 和星图中心同一节奏 */
   }
   @keyframes glint { 0%, 100% { opacity: .45; } 50% { opacity: .8; } }
   .start:hover, .start:focus-visible { --mark: var(--bulb); }
@@ -232,9 +238,17 @@
   <figure class="pulsar" id="pulsarFig">
     <svg id="pulsar" viewBox="-125 -162 400 337" preserveAspectRatio="xMinYMin meet" role="img" aria-label="仿照先驱者号金属板上的脉冲星图">
       <defs>
+        <!-- 中心的光：内层暖白、慢慢过渡到芥末黄再淡出，没有明显的边 -->
         <radialGradient id="coreGrad">
-          <stop offset="0" stop-color="#fff6dc"/>
-          <stop offset=".25" stop-color="var(--glow)"/>
+          <stop offset="0" stop-color="#fbe9c2" stop-opacity=".95"/>
+          <stop offset=".18" stop-color="#f6d48a" stop-opacity=".8"/>
+          <stop offset=".45" stop-color="var(--glow)" stop-opacity=".35"/>
+          <stop offset=".75" stop-color="var(--glow)" stop-opacity=".1"/>
+          <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="haloGrad">
+          <stop offset="0" stop-color="var(--glow)" stop-opacity=".22"/>
+          <stop offset=".5" stop-color="var(--glow)" stop-opacity=".08"/>
           <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="streakGrad" gradientUnits="userSpaceOnUse" x1="-48" y1="0" x2="0" y2="0">
@@ -247,8 +261,9 @@
       <g id="rays"></g>
       <g id="streakLayer"></g>
       <g id="bulbs"></g>
-      <circle class="core-glow" r="16" fill="url(#coreGrad)"/>
-      <circle r="1.8" fill="#fff6dc"/>
+      <circle class="core-halo" r="34" fill="url(#haloGrad)"/>
+      <circle class="core-glow" r="18" fill="url(#coreGrad)"/>
+      <circle class="core-dot" r="1.4" fill="#fdf0d4"/>
     </svg>
     <a class="core" id="core" href="答题页.html" aria-label="开始问卷"></a>
   </figure>
