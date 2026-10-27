@@ -197,7 +197,7 @@
 
 <svg class="pendant" id="pendant" aria-hidden="true">
   <path class="rope" id="rope"/>
-  <g id="starG"><circle class="star-glow" r="6"/><path class="star" d="M0 -5.2 L1.4 -1.7 L5 -1.6 L2.2 0.7 L3.1 4.3 L0 2.3 L-3.1 4.3 L-2.2 0.7 L-5 -1.6 L-1.4 -1.7 Z"/></g>
+  <g id="starG"><g transform="scale(.85)"><circle class="star-glow" r="6"/><path class="star" d="M0 -5.2 L1.4 -1.7 L5 -1.6 L2.2 0.7 L3.1 4.3 L0 2.3 L-3.1 4.3 L-2.2 0.7 L-5 -1.6 L-1.4 -1.7 Z"/></g></g>
 </svg>
 
 <main class="quiz">
@@ -332,7 +332,7 @@
     // 进度条以上是直的；以下略带弧度（中段稍微落后于末端，像有重量的细绳）
     const cx = px + L * .5 * Math.sin(th * .6), cy = py + L * .5 * Math.cos(th * .6);
     $("rope").setAttribute("d", `M${px.toFixed(1)} 0 L${px.toFixed(1)} ${py.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`);
-    $("starG").setAttribute("transform", `translate(${bx.toFixed(1)} ${(by + 4).toFixed(1)}) rotate(${(th * 180 / Math.PI).toFixed(1)})`);
+    $("starG").setAttribute("transform", `translate(${bx.toFixed(1)} ${(by + 3.4).toFixed(1)}) rotate(${(th * 180 / Math.PI).toFixed(1)})`);
   }
   function step(now) {
     const dt = Math.min(.04, (now - tLast) / 1000 || .016);
