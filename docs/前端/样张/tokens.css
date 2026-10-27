@@ -173,8 +173,8 @@ a { color: inherit; }
   z-index: 40;
 }
 /* 图标按钮：点按区 44px，图标本身的左边缘对齐到 gutter */
-.menu-btn { width: var(--tap); height: var(--tap); margin-left: -11px; display: grid; place-items: center; }
-.menu-btn svg { width: 22px; height: 22px; }
+.menu-btn { width: var(--tap); height: var(--tap); margin-left: -13.2px; display: grid; place-items: center; }
+.menu-btn svg { width: 17.6px; height: 17.6px; }
 
 /* 侧边导航 */
 .drawer {

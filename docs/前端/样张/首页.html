@@ -95,16 +95,25 @@
   .bulb { fill: var(--bulb); opacity: 0; animation: chase var(--dur) linear var(--delay) infinite; }
   @keyframes chase {
     0%   { opacity: 0; }
-    1.5% { opacity: 1; }
-    6%   { opacity: 0; }
+    2%   { opacity: 1; }
+    9%   { opacity: 0; }
     100% { opacity: 0; }
   }
   .core-glow { transform-box: fill-box; transform-origin: center; animation: breathe 2.8s ease-in-out infinite; }
   @keyframes breathe { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.12); } }
-  .callout line { stroke: var(--ink-soft); stroke-width: .6; }
-  .callout .en { fill: var(--ink); font-family: var(--font-en); font-size: 11px; letter-spacing: var(--ls-en-caps); }
-  .callout .zh { fill: var(--ink-soft); font-family: var(--font-zh); font-size: 12px; letter-spacing: var(--ls-zh-label); }
-  .callout a:hover .en, .callout a:focus-visible .en { fill: var(--bulb); }
+  /* 开始提示：右对齐到 gutter，底边离水平长线一个 --s-2（12px）；两行都是 12/18 的图注字 */
+  .start {
+    position: absolute;
+    right: var(--gutter);
+    transform: translateY(calc(-100% - var(--s-2)));
+    display: flex; flex-direction: column; align-items: flex-end;
+    text-align: right;
+    text-decoration: none;
+    z-index: 2;
+  }
+  .start .caption { color: var(--ink); }
+  .start .caption-zh { color: var(--ink-soft); }
+  .start:hover .caption, .start:focus-visible .caption { color: var(--bulb); }
 
   /* 中心按钮：盖在星图中心上 */
   .core {
@@ -187,16 +196,12 @@
       <g id="bulbs"></g>
       <circle class="core-glow" r="16" fill="url(#coreGrad)"/>
       <circle r="1.8" fill="#fff6dc"/>
-      <g class="callout">
-        <a href="答题页.html" id="calloutLink">
-          <line x1="7" y1="-5.5" x2="124" y2="-110"/>
-          <line x1="124" y1="-110" x2="132" y2="-110"/>
-          <text class="en" x="136" y="-106.5">START HERE</text>
-          <text class="zh" x="136" y="-89">点亮中心，开始答题</text>
-        </a>
-      </g>
     </svg>
     <a class="core" id="core" href="答题页.html" aria-label="开始问卷"></a>
+    <a class="start" id="startLink" href="答题页.html">
+      <span class="caption">Light up and start</span>
+      <span class="caption-zh">点亮中心，开始答题</span>
+    </a>
   </figure>
 </main>
 
@@ -229,7 +234,7 @@
   ];
   const raysG = document.getElementById("rays");
   const bulbsG = document.getElementById("bulbs");
-  const STEP = 0.11; // 每盏灯亮起的间隔（秒）
+  const STEP = 0.32; // 每盏灯亮起的间隔（秒）
 
   el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, raysG);
 
@@ -240,22 +245,24 @@
     const binStart = len * (0.5 + rand() * 0.12);
     el("line", { class: "ray", x1: 0, y1: 0, x2: ux * binStart, y2: uy * binStart }, raysG);
     const gap = (len - binStart) / bits.length;
+    const marks = [];
     bits.forEach((b, k) => {
       const r = binStart + gap * (k + 0.5), x = ux * r, y = uy * r;
+      marks.push(r);
       if (b) el("line", { class: "bit", x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 }, raysG);
       else el("line", { class: "bit", x1: x - ux * gap * .32, y1: y - uy * gap * .32, x2: x + ux * gap * .32, y2: y + uy * gap * .32 }, raysG);
     });
     el("line", { class: "bit", x1: ux * len - px * 3, y1: uy * len - py * 3, x2: ux * len + px * 3, y2: uy * len + py * 3 }, raysG);
+    marks.push(len);
 
-    // 灯串：从中心往外，每隔一段一盏灯；同一时间每条线只亮一盏
-    const spacing = 8;
-    const n = Math.floor((len - 6) / spacing);
-    const pause = 0.6 + rand() * 1.2;
+    // 灯串：灯就装在每一道刻度上，从靠近中心的一道开始往外逐个亮；同一时间每条线只亮一盏
+    const n = marks.length;
+    const pause = 1.2 + rand() * 1.6;
     const dur = n * STEP + pause;
-    const offset = rand() * 3; // 灯串之间的启动时间偏移
+    const offset = rand() * 4; // 灯串之间的启动时间偏移
     for (let k = 0; k < n; k++) {
-      const r = 6 + k * spacing;
-      const c = el("circle", { class: "bulb", cx: ux * r, cy: uy * r, r: 1.9 }, bulbsG);
+      const r = marks[k];
+      const c = el("circle", { class: "bulb", cx: ux * r, cy: uy * r, r: 2.4 }, bulbsG);
       c.style.setProperty("--dur", dur + "s");
       c.style.setProperty("--delay", (offset + k * STEP - dur) + "s");
     }
@@ -265,12 +272,14 @@
   const svg = document.getElementById("pulsar");
   const fig = document.getElementById("pulsarFig");
   const core = document.getElementById("core");
+  const startLink = document.getElementById("startLink");
   function placeCore() {
     const m = svg.getScreenCTM(), f = fig.getBoundingClientRect();
     if (!m) return;
     const p = new DOMPoint(0, 0).matrixTransform(m);
     core.style.left = p.x - f.left + "px";
     core.style.top = p.y - f.top + "px";
+    startLink.style.top = p.y - f.top + "px";   // 水平长线就在中心的高度
   }
 
   /* ---------- 星空 / 印刷斑点 ---------- */
@@ -314,7 +323,7 @@
     setTimeout(() => { location.href = href; }, 720);
   }
   core.addEventListener("click", launch);
-  document.getElementById("calloutLink").addEventListener("click", launch);
+  startLink.addEventListener("click", launch);
 
   /* ---------- 导航 ---------- */
   const btn = document.getElementById("menuBtn"), drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
