@@ -11,8 +11,6 @@
     try { t = localStorage.getItem("memsite-theme") || "dark"; } catch (e) {}
     if (location.hash.indexOf("light") > -1) t = "light";
     if (t === "dark") document.documentElement.classList.add("theme-dark");
-    // 从首页“点亮”转场过来：先铺着同一层暖光，再退去
-    try { if (sessionStorage.getItem("memsite-arrive")) { document.documentElement.classList.add("arrive"); sessionStorage.removeItem("memsite-arrive"); } } catch (e) {}
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,14 +21,10 @@
   body { min-height: 100svh; }
   .topbar { background: linear-gradient(var(--paper) 70%, transparent); }
 
-  .quiz { padding: var(--s-5) 0 var(--s-6); max-width: 560px; margin: 0 auto; animation: arrive .6s var(--ease-out) both; }
+  .quiz { padding: var(--s-5) 0 var(--s-6); max-width: 560px; margin: 0 auto; animation: arrive .7s var(--ease-out) both; }
   /* 进入时内容轻轻淡入 */
   @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
-  /* 从首页“点亮”转场过来：先铺着暖光（--arrive），再慢慢退去 */
-  .arrive-veil { display: none; }
-  .arrive .arrive-veil { display: block; position: fixed; inset: 0; z-index: 95; background: var(--arrive); pointer-events: none; animation: veil-out 1.1s cubic-bezier(.45, 0, .55, 1) .1s forwards; }
-  @keyframes veil-out { to { opacity: 0; visibility: hidden; } }
-  .arrive .quiz { animation-delay: .35s; }
+
 
   /* ---------- 进度条：侧看的行星环 ---------- */
   .rings { padding: var(--s-2) 0 0; }
@@ -224,7 +218,6 @@
 </main>
 
 <div class="toast caption-zh" id="toast" role="status"></div>
-<div class="arrive-veil" aria-hidden="true"></div>
 
 <script src="theme.js"></script>
 
