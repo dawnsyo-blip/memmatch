@@ -126,17 +126,17 @@
   body.paper-mode .sample-switch { background: color-mix(in srgb, var(--paper) 85%, transparent); color: var(--ink); border-color: var(--rule); }
   body.paper-mode .sample-switch button[aria-pressed="true"] { color: var(--faded-plum); }
 
-  /* 色卡版：只用《复古土星环与色彩图谱》里的颜色——暖灰纸底，星图用梅红系，亮光用芥末黄 */
-  body.palette-mode { background-color: #d5c8b3; }
-  body.palette-mode .pulsar .ray { stroke: var(--faded-plum); opacity: 1; }
-  body.palette-mode .pulsar .gc { stroke: var(--mauve); opacity: .8; }
-  body.palette-mode .pulsar .bit { stroke: var(--deep-plum); }
-  body.palette-mode .bulb { fill: var(--mustard); }
-  body.palette-mode .core-dot { fill: var(--mustard); }
-  body.palette-mode .subtitle { color: var(--deep-plum); }
-  body.palette-mode .callout line { stroke: var(--deep-plum); }
-  body.palette-mode .callout .zh { fill: var(--deep-plum); }
-  body.palette-mode .stars circle { fill: var(--dusty-pink); opacity: .7; }
+  /* 粉色版：颜色由 tokens.css 的 .theme-rose 提供（60 淡灰粉底 / 30 梅红线条和文字 / 10 芥末黄亮光） */
+  body.theme-rose .pulsar .ray { stroke: var(--line); opacity: 1; }
+  body.theme-rose .pulsar .gc { stroke: var(--rule); opacity: 1; }
+  body.theme-rose .pulsar .bit { stroke: var(--ink-soft); }
+  body.theme-rose .bulb { fill: var(--bulb); }
+  body.theme-rose .core-dot { fill: #fff3d6; }
+  body.theme-rose .subtitle, body.theme-rose .facts { color: var(--ink-soft); }
+  body.theme-rose .callout line { stroke: var(--ink-soft); }
+  body.theme-rose .callout .zh { fill: var(--ink-soft); }
+  body.theme-rose .stars circle { fill: var(--line); opacity: .45; }
+  body.theme-rose .sample-switch button[aria-pressed="true"] { color: var(--line); }
 </style>
 </head>
 <body class="night grain">
@@ -204,7 +204,7 @@
   <span>样张底色</span>
   <button type="button" data-mode="night" aria-pressed="true">星空</button>
   <button type="button" data-mode="paper" aria-pressed="false">纸面</button>
-  <button type="button" data-mode="palette" aria-pressed="false">色卡</button>
+  <button type="button" data-mode="rose" aria-pressed="false">粉色</button>
 </div>
 
 <div class="flash" id="flash"></div>
@@ -342,10 +342,10 @@
     document.body.classList.toggle("night", !light);
     document.body.classList.toggle("paper-mode", light);
     document.body.classList.toggle("paper", light);
-    document.body.classList.toggle("palette-mode", mode === "palette");
+    document.body.classList.toggle("theme-rose", mode === "rose");
     document.querySelectorAll(".sample-switch button").forEach((x) => x.setAttribute("aria-pressed", x === b));
   }));
-  const start = { "#paper": "paper", "#night": "night" }[location.hash] || "palette";
+  const start = { "#paper": "paper", "#night": "night" }[location.hash] || "rose";
   document.querySelector(`.sample-switch [data-mode="${start}"]`).click();
 })();
 </script>
