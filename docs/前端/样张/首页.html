@@ -435,6 +435,7 @@
   const zoomEase = bezier(.3, .45, .35, 1);     // 减速，但开头比上一版缓
   const spreadEase = bezier(.45, 0, .3, 1);     // 退开：轻轻起步，再慢慢停住
   const SPREAD = 20;                            // 退开的距离（图上单位；放大后看起来约 100px）
+  const fadeEls = ["rays", "bulbs", "streakLayer"].map((id) => document.getElementById(id));
   function zoomTo(cx, cy, maxScale, dur) {
     const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
     const sw = innerWidth, sh = innerHeight;
@@ -445,6 +446,9 @@
       svg.setAttribute("viewBox", vb0.map((v) => (v / s).toFixed(3)).join(" "));
       const d = SPREAD * spreadEase(Math.min(1, p / 0.85));
       spread.forEach(({ els, ux, uy }) => els.forEach((g) => g.setAttribute("transform", `translate(${(ux * d).toFixed(2)} ${(uy * d).toFixed(2)})`)));
+      // 射线、刻度、光束一边退开一边变淡（降到 20%），只有中心的光保持亮度
+      const fade = (1 - 0.8 * spreadEase(p)).toFixed(3);
+      fadeEls.forEach((g) => { g.style.opacity = fade; });
       stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
       if (p < 1) requestAnimationFrame(frame);
     };
