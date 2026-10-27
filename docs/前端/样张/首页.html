@@ -101,20 +101,49 @@
   }
   .core-glow { transform-box: fill-box; transform-origin: center; animation: breathe 2.8s ease-in-out infinite; }
   @keyframes breathe { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.12); } }
-  /* 开始提示：右对齐到 gutter，底边离水平长线一个 --s-2（12px）；两行都是 12/18 的图注字 */
+  /* 开始提示：放在右下角。显眼但不抢星图中心——
+     · 前面一颗芥末黄小光点，和星图中心同一节奏呼吸，提示“中心那团光可以点”
+     · 四角各一笔细折线（像印刷品的裁切标记），圈出可点的范围，不加框、不加底色
+     · 字号按负责人要求 8px（规范最小 12px，这里是例外），两行两端对齐 */
   .start {
     position: absolute;
     right: var(--gutter);
-    transform: translateY(calc(-100% - var(--s-2)));
-    display: grid;                     /* 两行同宽：宽度取较长的英文那行 */
-    width: max-content;
+    bottom: var(--s-4);
+    display: flex; align-items: center; gap: var(--s-2);
+    padding: var(--s-1) var(--s-2);
     text-decoration: none;
     z-index: 2;
+    --mark: var(--ink-faint);
+    background:
+      linear-gradient(var(--mark), var(--mark)) left top / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) left top / 1px 6px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right top / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right top / 1px 6px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) left bottom / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) left bottom / 1px 6px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right bottom / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right bottom / 1px 6px no-repeat;
+    transition: --mark .3s;
   }
-  /* 负责人要求比图注再小一号（规范最小 12px，这里是例外）；两行两端对齐 */
-  .start .caption { font-size: 10px; line-height: 15px; color: var(--ink); text-align: justify; text-align-last: justify; margin-right: calc(var(--ls-en-caps) * -1); }  /* 抵消最后一个字母后面的字距，右端才齐 */
-  .start .caption-zh { font-size: 11px; line-height: 18px; letter-spacing: 0; color: var(--ink-soft); text-align: justify; text-align-last: justify; }
-  .start:hover .caption, .start:focus-visible .caption { color: var(--bulb); }
+  .start-dot {
+    flex: none; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--bulb);
+    box-shadow: 0 0 6px 1px color-mix(in srgb, var(--bulb) 70%, transparent);
+    animation: breathe-dot 2.8s ease-in-out infinite;   /* 和 .core-glow 同一节奏 */
+  }
+  @keyframes breathe-dot { 0%, 100% { opacity: .45; transform: scale(.8); } 50% { opacity: 1; transform: scale(1.1); } }
+  .start-text { display: grid; width: max-content; }
+  .start .caption {
+    font-size: 8px; line-height: 12px; color: var(--ink-soft);
+    text-align: justify; text-align-last: justify;
+    margin-right: calc(var(--ls-en-caps) * -1);   /* 抵消最后一个字母后面的字距，右端才齐 */
+  }
+  .start .caption-zh {
+    font-size: 8px; line-height: 12px; letter-spacing: 0; color: var(--ink-faint);
+    text-align: justify; text-align-last: justify;
+  }
+  .start:hover, .start:focus-visible { --mark: var(--bulb); }
+  .start:hover .caption, .start:focus-visible .caption { color: var(--ink); }
 
   /* 中心按钮：盖在星图中心上 */
   .core {
@@ -199,11 +228,15 @@
       <circle r="1.8" fill="#fff6dc"/>
     </svg>
     <a class="core" id="core" href="答题页.html" aria-label="开始问卷"></a>
-    <a class="start" id="startLink" href="答题页.html">
+  </figure>
+
+  <a class="start" id="startLink" href="答题页.html">
+    <span class="start-dot" aria-hidden="true"></span>
+    <span class="start-text">
       <span class="caption">Light up and start</span>
       <span class="caption-zh">点亮中心，开始答题</span>
-    </a>
-  </figure>
+    </span>
+  </a>
 </main>
 
 <div class="flash" id="flash"></div>
@@ -280,7 +313,6 @@
     const p = new DOMPoint(0, 0).matrixTransform(m);
     core.style.left = p.x - f.left + "px";
     core.style.top = p.y - f.top + "px";
-    startLink.style.top = p.y - f.top + "px";   // 水平长线就在中心的高度
   }
 
   /* ---------- 星空 / 印刷斑点 ---------- */
