@@ -22,7 +22,17 @@
   --ink-faint: #706052;
   --rule: #c4b5a0;         /* 浅灰线：未答的进度、行星环（只作线条） */
   --star: var(--deep-plum);        /* 首页底色上的小点 */
-  --bulb: var(--faded-plum);       /* 星图上逐点亮起的灯 */
+  --bulb: #c98a2b;                 /* 刻度发光、文字里的小光点：浅底上用深一点的琥珀色才读得出“亮” */
+  /* 星图中心的光（浅底上：中心比纸更亮的暖白，往外是更深、更饱和的琥珀，才显得是“光”） */
+  --core-1: #fff9ec;
+  --core-2: #eeae3f;
+  --core-3: #d18a1f;
+  --halo-c: #d18a1f;
+  --glint-in: var(--core-2);       /* 文字里小光点的中心（浅底上用暖白会像空心圈） */
+  --core-size: 1.6;                /* 浅底上光不如深底显眼，整体放大一些 */
+  --gc: #b48a45;                   /* 通向银河中心的水平长线 */
+  --streak-c: #c98a2b;             /* 长线上滑动的光束 */
+  --streak-head: #e3a843;
   --moon: var(--mauve);            /* 可拖动的卫星 */
   --moon-parked: var(--dusty-pink);
   --dot: color-mix(in srgb, var(--ink) 7%, transparent);   /* 半色调网点 */
@@ -75,6 +85,15 @@
   --rule: #63504f;
   --star: var(--ink);
   --bulb: var(--glow);
+  --core-1: #fbe9c2;
+  --glint-in: #fff3d6;
+  --core-size: 1;
+  --core-2: #f6d48a;
+  --core-3: var(--glow);
+  --halo-c: var(--glow);
+  --gc: color-mix(in srgb, var(--glow) 55%, var(--ink));
+  --streak-c: var(--glow);
+  --streak-head: #f6d89a;
   --moon: var(--mustard);
   --moon-parked: var(--dusty-pink);
   --dot: transparent;

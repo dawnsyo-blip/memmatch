@@ -93,7 +93,7 @@
   .pulsar .ray, .pulsar .bit { stroke: var(--ink); stroke-width: .9; fill: none; stroke-linecap: square; }
   .pulsar .ray { opacity: .9; }
   /* 通向银河中心的水平长线：一直微微发亮（暖色），上面有一小束光从中心滑向右边 */
-  .pulsar .gc { stroke: color-mix(in srgb, var(--glow) 55%, var(--ink)); opacity: .7; }
+  .pulsar .gc { stroke: var(--gc); opacity: .7; }
   /* 光束：头尾都渐隐（没有硬边），最亮处只有 55%，尾巴更长，外面一层模糊的光晕；6 秒滑完一程 */
   .streak { animation: streak 6s linear infinite; }
   .streak-core { stroke-width: 1; stroke-linecap: round; }
@@ -111,6 +111,7 @@
   }
   /* 中心的光：像呼吸一样慢慢胀缩，一呼一吸 5.2 秒。和右下角文字里的小光点同步（脚本把它们对到同一个起点） */
   .core-glow, .core-halo, .core-dot { transform-box: fill-box; transform-origin: center; }
+  #coreG { transform: scale(var(--core-size)); }   /* 原点就是光点，按原点放大 */
   .core-glow { animation: breathe 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
   .core-halo { animation: breathe-halo 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
   .core-dot  { animation: breathe-dot 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
@@ -157,7 +158,7 @@
     margin: 0 .12em;
     vertical-align: -.02em;
     border-radius: 50%;
-    background: radial-gradient(circle, #fff3d6 0 18%, var(--bulb) 45%, color-mix(in srgb, var(--bulb) 0%, transparent) 72%);
+    background: radial-gradient(circle, var(--glint-in) 0 18%, var(--bulb) 45%, color-mix(in srgb, var(--bulb) 0%, transparent) 72%);
     box-shadow: 0 0 4px color-mix(in srgb, var(--bulb) 55%, transparent);
     animation: glint 5.2s cubic-bezier(.45, 0, .55, 1) infinite;   /* 和星图中心同一节奏 */
   }
@@ -243,22 +244,22 @@
       <defs>
         <!-- 中心的光：内层暖白、慢慢过渡到芥末黄再淡出，没有明显的边 -->
         <radialGradient id="coreGrad">
-          <stop offset="0" stop-color="#fbe9c2" stop-opacity=".95"/>
-          <stop offset=".18" stop-color="#f6d48a" stop-opacity=".8"/>
-          <stop offset=".45" stop-color="var(--glow)" stop-opacity=".35"/>
-          <stop offset=".75" stop-color="var(--glow)" stop-opacity=".1"/>
-          <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
+          <stop offset="0" stop-color="var(--core-1)" stop-opacity=".95"/>
+          <stop offset=".18" stop-color="var(--core-2)" stop-opacity=".8"/>
+          <stop offset=".45" stop-color="var(--core-3)" stop-opacity=".35"/>
+          <stop offset=".75" stop-color="var(--core-3)" stop-opacity=".1"/>
+          <stop offset="1" stop-color="var(--core-3)" stop-opacity="0"/>
         </radialGradient>
         <radialGradient id="haloGrad">
-          <stop offset="0" stop-color="var(--glow)" stop-opacity=".22"/>
-          <stop offset=".5" stop-color="var(--glow)" stop-opacity=".08"/>
-          <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
+          <stop offset="0" stop-color="var(--halo-c)" stop-opacity=".22"/>
+          <stop offset=".5" stop-color="var(--halo-c)" stop-opacity=".08"/>
+          <stop offset="1" stop-color="var(--halo-c)" stop-opacity="0"/>
         </radialGradient>
         <linearGradient id="streakGrad" gradientUnits="userSpaceOnUse" x1="-48" y1="0" x2="0" y2="0">
-          <stop offset="0" stop-color="var(--glow)" stop-opacity="0"/>
-          <stop offset=".6" stop-color="var(--glow)" stop-opacity=".25"/>
-          <stop offset=".92" stop-color="#f6d89a" stop-opacity=".55"/>
-          <stop offset="1" stop-color="#f6d89a" stop-opacity="0"/>
+          <stop offset="0" stop-color="var(--streak-c)" stop-opacity="0"/>
+          <stop offset=".6" stop-color="var(--streak-c)" stop-opacity=".25"/>
+          <stop offset=".92" stop-color="var(--streak-head)" stop-opacity=".55"/>
+          <stop offset="1" stop-color="var(--streak-head)" stop-opacity="0"/>
         </linearGradient>
         <!-- 转场时射线从中心到外围的渐隐：线头处全透明，往外一段距离内过渡到不透明（范围由脚本逐帧调整） -->
         <radialGradient id="rayFadeGrad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="0.01">
@@ -279,7 +280,7 @@
       <g id="coreG" filter="url(#coreBlur)">
         <circle class="core-halo" r="34" fill="url(#haloGrad)"/>
         <circle class="core-glow" r="18" fill="url(#coreGrad)"/>
-        <circle class="core-dot" r="1.4" fill="#fdf0d4"/>
+        <circle class="core-dot" r="1.4" fill="var(--core-1)"/>
       </g>
     </svg>
     <a class="core" id="core" href="答题页.html" aria-label="开始问卷"></a>
