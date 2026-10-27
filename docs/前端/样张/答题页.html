@@ -78,7 +78,7 @@
   /* 不再裁到选项区：圆环上下可以伸出去，整个左半圆完整露出（右半在屏幕外） */
   .orbit { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
   .orbit.top { z-index: 2; }
-  .orbit .ring { fill: none; stroke: var(--rule); }
+  .orbit .ring { fill: none; stroke: url(#ringDepth); }
   .orbit .tick { stroke: var(--rule); stroke-width: 1; }
   .orbit .parked { fill: var(--moon-parked); stroke: var(--ink); stroke-width: 1; }
   .moon { pointer-events: auto; cursor: grab; touch-action: none; }
@@ -281,43 +281,63 @@
     $("where").textContent = `${q.part}　${q.no} / ${TOTAL}`;
   }
 
-  /* ---------- 行星环几何 ----------
-     环心在屏幕右侧之外；每个选项行与外环相交的位置就是卫星停靠的位置。
-     环整体绕环心转动：转角 a 时，卫星在 (cx - R cos a, cy - R sin a)。 */
+  /* ---------- 行星环几何：倾斜的半椭圆 ----------
+     像斜着看到的行星环：椭圆中心在屏幕右边缘，竖向半轴随选项多少变化，横向半轴固定（不压到选项文字），
+     整体倾斜 TILT。椭圆上的点用参数 θ 表示（θ=0 在最左，向上为正）：
+       局部 L(θ) = (−rx·cosθ, −ry·sinθ)，屏幕 P(θ) = C + 旋转TILT(L)。
+     “转动”是让刻度和卫星沿椭圆移动（改 θ），不是旋转整个图形，看起来像环在空间里转。
+     下方是近处：线条更亮、卫星更大，上方是远处：更暗、更小，带出空间感。 */
   let geo = null, rot = 0, tween = null;
+  const TILT = 12 * Math.PI / 180;
+  const cT = Math.cos(TILT), sT = Math.sin(TILT);
+  const pt = (th, rx = geo.rx, ry = geo.ry) => {
+    const lx = -rx * Math.cos(th), ly = -ry * Math.sin(th);
+    return [geo.cx + lx * cT - ly * sT, geo.cy + lx * sT + ly * cT];
+  };
+  const depth = (th) => (1 - Math.sin(th)) / 2;   // 0＝最上（远）、1＝最下（近）
 
   function layoutOrbit() {
     const wrap = $("wrap"), svg = $("orbit");
     const W = wrap.clientWidth;
-    const rows = [...$("options").children].map((li) => ({ y: li.offsetTop + li.offsetHeight / 2, right: li.offsetLeft + li.offsetWidth }));
+    const rows = [...$("options").children].map((li) => ({ y: li.offsetTop + li.offsetHeight / 2 }));
     if (!rows.length) return;
     const top = rows[0].y, bottom = rows[rows.length - 1].y, H = bottom - top;
     const cy = (top + bottom) / 2;
-    // 半圆：圆心在屏幕右边缘，半径随选项多少变化（比首尾两个选项再往外 26px），左半圆完整露出
-    const R = Math.max(H / 2 + 26, 56);
-    const cx = W;
-    const angles = rows.map((r) => Math.asin((cy - r.y) / R));
-    geo = { W, cx, cy, R, rows, angles, min: angles[angles.length - 1] - 0.04, max: angles[0] + 0.04 };
+    const ry = Math.max(H / 2 + 26, 50) / cT;                 // 首尾选项再往外 26px
+    const rx = Math.min(W * 0.34, Math.max(ry * 0.9, 56));    // 横向不超过屏幕三分之一
+    geo = { W, cx: W, cy, rx, ry, rows };
+    // 每个选项所在高度对应的 θ（左半边 y 随 θ 单调变化，二分求解）
+    geo.angles = rows.map((r) => {
+      let lo = -Math.PI / 2, hi = Math.PI / 2;
+      for (let i = 0; i < 40; i++) { const m = (lo + hi) / 2; if (pt(m)[1] > r.y) lo = m; else hi = m; }
+      return (lo + hi) / 2;
+    });
+    geo.min = geo.angles[geo.angles.length - 1] - 0.05;
+    geo.max = geo.angles[0] + 0.05;
 
     const top2 = $("orbitTop");
     svg.replaceChildren();
     top2.replaceChildren();
     svg.setAttribute("viewBox", `0 0 ${W} ${wrap.clientHeight}`);
     top2.setAttribute("viewBox", `0 0 ${W} ${wrap.clientHeight}`);
-    const g = el("g", { id: "ringG" }, svg);
-    el("circle", { class: "ring", cx, cy, r: R + 9, "stroke-width": 1 }, g);
-    el("circle", { class: "ring", cx, cy, r: R, "stroke-width": 2.2 }, g);
-    el("circle", { class: "ring", cx, cy, r: R - 13, "stroke-width": 1 }, g);
-    for (let d = 0; d < 360; d += 7.5) {           // 刻度跟着环一起转，看得出在转动
-      const t = d * Math.PI / 180, long = d % 30 === 0;
-      el("line", { class: "tick", x1: cx + (R - 13) * Math.cos(t), y1: cy + (R - 13) * Math.sin(t),
-        x2: cx + (R - 13 + (long ? 9 : 4)) * Math.cos(t), y2: cy + (R - 13 + (long ? 9 : 4)) * Math.sin(t) }, g);
-    }
+    // 近亮远暗：竖向渐变（随倾斜方向一起转）
+    const defs = el("defs", {}, svg);
+    // 椭圆画在已经倾斜的组里，渐变用的是组内坐标，所以这里写竖直方向即可
+    const lg = el("linearGradient", { id: "ringDepth", gradientUnits: "userSpaceOnUse", x1: 0, y1: cy - ry, x2: 0, y2: cy + ry }, defs);
+    el("stop", { offset: 0, "stop-color": "var(--rule)", "stop-opacity": .35 }, lg);
+    el("stop", { offset: 1, "stop-color": "var(--rule)", "stop-opacity": 1 }, lg);
+    const g = el("g", { id: "ringG", transform: `rotate(${TILT * 180 / Math.PI} ${W} ${cy})` }, svg);
+    el("ellipse", { class: "ring", cx: W, cy, rx: rx + 9, ry: ry + 9, "stroke-width": 1 }, g);
+    el("ellipse", { class: "ring", cx: W, cy, rx, ry, "stroke-width": 2.2 }, g);
+    el("ellipse", { class: "ring", cx: W, cy, rx: rx - 11, ry: ry - 11, "stroke-width": 1 }, g);
+    geo.ticks = [];
+    const tg = el("g", { id: "ticksG" }, svg);
+    for (let k = 0; k < 64; k++) geo.ticks.push(el("line", { class: "tick" }, tg));
+
     el("g", { id: "parked" }, top2);
-    const moonG = el("g", { id: "moonG" }, top2);
-    const moon = el("g", { class: "moon", id: "moon", tabindex: 0, role: "slider", "aria-label": "卫星：拖动来选择选项" }, moonG);
-    el("circle", { class: "hit", cx: cx - R, cy, r: 24 }, moon);
-    el("circle", { class: "body", cx: cx - R, cy, r: 9 }, moon);
+    const moon = el("g", { class: "moon", id: "moon", tabindex: 0, role: "slider", "aria-label": "卫星：拖动来选择选项" }, top2);
+    geo.moonHit = el("circle", { class: "hit", r: 24 }, moon);
+    geo.moonBody = el("circle", { class: "body", r: 9 }, moon);
 
     bindMoon(moon);
     setRotation(currentTargetAngle(), false);
@@ -331,20 +351,35 @@
     return idx >= 0 ? geo.angles[idx] : 0;
   }
 
+  // 把环“转”到 θ=v：刻度沿内圈椭圆移动，卫星停在外圈 θ=v 处（大小随远近变化）
+  function drawRing(v) {
+    rot = v;
+    const N = geo.ticks.length, a = geo.rx - 11, b = geo.ry - 11;
+    geo.ticks.forEach((ln, k) => {
+      const th = k * 2 * Math.PI / N + v, long = k % 4 === 0, len = long ? 8 : 4;
+      const [x, y] = pt(th, a, b);
+      // 椭圆在该点的外法线方向（局部），再转到屏幕
+      let nx = -b * Math.cos(th), ny = -a * Math.sin(th);
+      const nl = Math.hypot(nx, ny); nx /= nl; ny /= nl;
+      const sx = nx * cT - ny * sT, sy = nx * sT + ny * cT;
+      ln.setAttribute("x1", x.toFixed(1)); ln.setAttribute("y1", y.toFixed(1));
+      ln.setAttribute("x2", (x + sx * len).toFixed(1)); ln.setAttribute("y2", (y + sy * len).toFixed(1));
+      ln.style.opacity = (.35 + .65 * depth(th)).toFixed(2);
+    });
+    const [mx, my] = pt(v);
+    const r = 7.5 + 3 * depth(v);
+    geo.moonBody.setAttribute("cx", mx); geo.moonBody.setAttribute("cy", my); geo.moonBody.setAttribute("r", r.toFixed(2));
+    geo.moonHit.setAttribute("cx", mx); geo.moonHit.setAttribute("cy", my);
+  }
+
   function setRotation(a, animate = true) {
     if (!geo) return;
-    const gs = [$("ringG"), $("moonG")];
-    const apply = (v) => {
-      rot = v;
-      const t = `rotate(${(v * 180 / Math.PI).toFixed(3)} ${geo.cx} ${geo.cy})`;
-      gs.forEach((g) => g.setAttribute("transform", t));
-    };
     cancelAnimationFrame(tween);
-    if (!animate || reduce) return apply(a);
+    if (!animate || reduce) return drawRing(a);
     const from = rot, t0 = performance.now(), dur = 520;
     const step = (now) => {
       const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3);
-      apply(from + (a - from) * e);
+      drawRing(from + (a - from) * e);
       if (p < 1) tween = requestAnimationFrame(step);
     };
     tween = requestAnimationFrame(step);
@@ -359,8 +394,8 @@
     const sel = state.answers[q.id] || [];
     sel.forEach((id) => {
       const idx = q.options.findIndex((o) => o[0] === id);
-      const a = geo.angles[idx];
-      el("circle", { class: "parked", cx: geo.cx - geo.R * Math.cos(a), cy: geo.cy - geo.R * Math.sin(a), r: 5 }, g);
+      const a = geo.angles[idx], [x, y] = pt(a);
+      el("circle", { class: "parked", cx: x, cy: y, r: (4 + 1.6 * depth(a)).toFixed(2) }, g);
     });
   }
 
@@ -369,8 +404,10 @@
     let dragging = false, startA = 0, startRot = 0;
     const angleAt = (e) => {
       const r = $("orbitTop").getBoundingClientRect();
-      const x = e.clientX - r.left, y = e.clientY - r.top;
-      return Math.atan2(geo.cy - y, geo.cx - x);  // 正左为 0，向上为正
+      // 指针位置转回椭圆的局部坐标，再求参数 θ
+      const dx = e.clientX - r.left - geo.cx, dy = e.clientY - r.top - geo.cy;
+      const lx = dx * cT + dy * sT, ly = -dx * sT + dy * cT;
+      return Math.atan2(-ly / geo.ry, -lx / geo.rx);
     };
     moon.addEventListener("pointerdown", (e) => {
       dragging = true; moon.setPointerCapture(e.pointerId);
