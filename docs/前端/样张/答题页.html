@@ -138,8 +138,9 @@
   .next { position: relative; width: 120px; height: 44px; color: var(--ink); }
   .next:disabled { opacity: .3; cursor: default; }
   .next svg { position: absolute; inset: 0; width: 120px; height: 44px; overflow: visible; }
-  /* 轨迹和土星同色（--ink）；没答本题时整个按钮变淡，答了以后前方虚线向右流动 */
+  /* 轨迹用文字色（--ink），土星用芥末黄；没答本题时整个按钮变淡，答了以后前方虚线向右流动 */
   .next .trail-arrow { stroke-linecap: butt; }
+  .next .probe { stroke: var(--bulb); }   /* 土星用芥末黄，轨迹照旧和文字同色 */
   .next .trail-ahead { stroke-dasharray: 3 4; }
   .next:not(:disabled) .trail-ahead { animation: march 1.2s linear infinite; }
   @keyframes march { to { stroke-dashoffset: -14; } }
