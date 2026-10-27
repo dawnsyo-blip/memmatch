@@ -41,9 +41,10 @@
   --focus: var(--faded-plum);
 
   /* 字体：西文字体在前，西文字母才会用 Baskerville */
-  --font-en: "Libre Baskerville", Baskerville, Georgia, serif;
+  /* 英文：Source Serif 4（2026-10-27 负责人定，替换 Libre Baskerville）；可变字体，按字号自动选设计尺寸，大标题另设展示尺寸 */
+  --font-en: "Source Serif 4", Georgia, serif;
   --font-zh: "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
-  --font-body: "Libre Baskerville", "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
+  --font-body: "Source Serif 4", "Noto Serif SC", "Source Han Serif SC", "Songti SC", STSong, SimSun, serif;
 
   /* 字号 / 行高（行高取 24px 的倍数或一半） */
   --fs-h1: 32px;  --lh-h1: 48px;
@@ -114,6 +115,7 @@ html, body { margin: 0; overflow-x: clip; }
 
 body {
   font-family: var(--font-body);
+  font-optical-sizing: auto;
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   letter-spacing: 0;
