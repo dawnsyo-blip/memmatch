@@ -94,10 +94,10 @@
   .pulsar .ray { opacity: .9; }
   /* 通向银河中心的水平长线：一直微微发亮（暖色），上面有一小束光从中心滑向右边 */
   .pulsar .gc { stroke: color-mix(in srgb, var(--glow) 55%, var(--ink)); opacity: .7; }
-  /* 光束：头部不发白、亮度压低，尾巴拉长，光晕更宽更淡，看起来柔和；6 秒滑完一程 */
+  /* 光束：头尾都渐隐（没有硬边），最亮处只有 55%，尾巴更长，外面一层模糊的光晕；6 秒滑完一程 */
   .streak { animation: streak 6s linear infinite; }
-  .streak-core { stroke-width: 1.1; stroke-linecap: round; }
-  .streak-halo { stroke-width: 6; stroke-linecap: round; opacity: .18; }
+  .streak-core { stroke-width: 1; stroke-linecap: round; }
+  .streak-halo { stroke-width: 5; stroke-linecap: round; opacity: .3; filter: blur(2px); }
   @keyframes streak { from { transform: translateX(0); } to { transform: translateX(320px); } }
   .bulb { fill: var(--bulb); opacity: 0; animation: chase var(--dur) linear var(--delay) infinite; }
   @keyframes chase {
@@ -237,10 +237,11 @@
           <stop offset=".25" stop-color="var(--glow)"/>
           <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
         </radialGradient>
-        <linearGradient id="streakGrad" gradientUnits="userSpaceOnUse" x1="-36" y1="0" x2="0" y2="0">
+        <linearGradient id="streakGrad" gradientUnits="userSpaceOnUse" x1="-48" y1="0" x2="0" y2="0">
           <stop offset="0" stop-color="var(--glow)" stop-opacity="0"/>
-          <stop offset=".7" stop-color="var(--glow)" stop-opacity=".45"/>
-          <stop offset="1" stop-color="#fbe2a8" stop-opacity=".8"/>
+          <stop offset=".6" stop-color="var(--glow)" stop-opacity=".25"/>
+          <stop offset=".92" stop-color="#f6d89a" stop-opacity=".55"/>
+          <stop offset="1" stop-color="#f6d89a" stop-opacity="0"/>
         </linearGradient>
       </defs>
       <g id="rays"></g>
@@ -294,8 +295,8 @@
   el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, raysG);
   // 一小束光：渐变从尾部透明到头部最亮，整段沿水平线平移（渐变跟着线一起移动）
   const streak = el("g", { class: "streak" }, document.getElementById("streakLayer"));
-  el("line", { class: "streak-halo", x1: -36, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
-  el("line", { class: "streak-core", x1: -28, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
+  el("line", { class: "streak-halo", x1: -48, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
+  el("line", { class: "streak-core", x1: -48, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
 
   RAYS.forEach(([deg, len]) => {
     const a = deg * Math.PI / 180, ux = Math.cos(a), uy = -Math.sin(a);
