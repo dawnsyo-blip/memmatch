@@ -117,15 +117,13 @@
   .opt .label { font-family: var(--font-body); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
   .opt[aria-checked="true"]::before { border-color: var(--ink); }
   .opt[aria-checked="true"] .mark { color: var(--ink); }
-  /* 带填空的选项：没选时只显示“其它”，选中后才出现“：”和填空。
-     填空用 12px 的小字，文字顶端和“其它”的顶端对齐（按顶部排，再用 margin-top 补上两种字号的内边距差） */
-  .opt.has-free { align-items: flex-start; }
+  /* 带填空的选项：没选时只显示“其它”，选中后才出现“：”和填空；填空和选项文字同一字号 */
   .opt .colon, .opt .free { display: none; }
   .opt.has-free[aria-checked="true"] .colon { display: inline; }
   .opt.has-free[aria-checked="true"] .free { display: block; }
   .opt .free {
-    width: 10em; margin: 3px 0 0 -4px; height: 15px;
-    font: inherit; font-size: var(--fs-caption); line-height: 1; color: var(--ink);
+    width: 9em; margin-left: 2px;
+    font: inherit; color: var(--ink);
     background: transparent; border: 0;
     border-bottom: var(--line) solid var(--ink-soft);
     padding: 0 2px; border-radius: 0;
@@ -224,14 +222,14 @@
 
   <div class="foot">
     <button class="next" id="next" aria-label="下一题"><svg class="dish" viewBox="0 0 34 32" aria-hidden="true">
-      <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter">
-        <path class="dish-back" d="M13 3.5 C4.2 9.2 4.2 22.8 13 28.5" stroke-width="1.4"/>
-        <path d="M13 3.5 C10.6 11.6 10.6 20.4 13 28.5" stroke-width="1"/>
-        <path d="M8.6 9.5 L10.6 9.9 M7.5 13 L10.1 13.3 M7.2 16 L9.9 16 M7.5 19 L10.1 18.7 M8.6 22.5 L10.6 22.1" stroke-width=".6" opacity=".7"/>
-        <path d="M12.6 4.2 L23 16 L12.6 27.8" stroke-width=".7"/>
-        <path d="M11.4 16 H23" stroke-width=".9"/>
-        <path d="M7.4 19.5 L9.6 23.5 M9.6 23.5 L6.5 30.5 M9.6 23.5 L12.6 30.5 M4 30.5 H15" stroke-width="1"/>
-        <g class="waves" stroke-width=".8">
+      <g fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="miter" stroke-width="1">
+        <path class="dish-back" d="M13 3.5 C4.2 9.2 4.2 22.8 13 28.5"/>
+        <path d="M13 3.5 C10.6 11.6 10.6 20.4 13 28.5"/>
+        <path d="M8.6 9.5 L10.6 9.9 M7.5 13 L10.1 13.3 M7.2 16 L9.9 16 M7.5 19 L10.1 18.7 M8.6 22.5 L10.6 22.1"/>
+        <path d="M12.6 4.2 L23 16 L12.6 27.8"/>
+        <path d="M11.4 16 H23"/>
+        <path d="M7.4 19.5 L9.6 23.5 M9.6 23.5 L6.5 30.5 M9.6 23.5 L12.6 30.5 M4 30.5 H15"/>
+        <g class="waves">
           <path class="wave" d="M26.2 13.2 A3.4 3.4 0 0 1 26.2 18.8"/>
           <path class="wave" d="M28.4 11 A6 6 0 0 1 28.4 21"/>
           <path class="wave" d="M30.6 8.8 A8.6 8.6 0 0 1 30.6 23.2"/>
