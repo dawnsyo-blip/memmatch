@@ -38,7 +38,7 @@
 
   /* ---------- 标题 ----------
      A（默认）：英文大标题 + 中文副标题；B（?title=zh）：中文大标题 + 英文副标题。两组都右对齐到 gutter。 */
-  .titles { margin-top: var(--s-5); display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+  .titles { margin-top: 0; display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
   .titles-zh { display: none; }
   .title-zh .titles-en { display: none; }
   .title-zh .titles-zh { display: flex; }
@@ -82,7 +82,7 @@
   /* ---------- 脉冲星图 ---------- */
   .pulsar {
     position: relative;
-    margin: var(--s-4) calc(var(--gutter) * -1) 0;
+    margin: var(--s-3) calc(var(--gutter) * -1) 0;
     flex: 1;
     min-height: 330px;
     display: flex;
@@ -104,7 +104,7 @@
   /* 开始提示：放在右下角。显眼但不抢星图中心——
      · 前面一颗芥末黄小光点，和星图中心同一节奏呼吸，提示“中心那团光可以点”
      · 四角各一笔细折线（像印刷品的裁切标记），圈出可点的范围，不加框、不加底色
-     · 字号按负责人要求 8px（规范最小 12px，这里是例外），两行两端对齐 */
+     · 字号按负责人要求：英文 8px、中文 10px（规范最小 12px，这里是例外），两行两端对齐 */
   .start {
     position: absolute;
     right: var(--gutter);
@@ -139,7 +139,7 @@
     margin-right: calc(var(--ls-en-caps) * -1);   /* 抵消最后一个字母后面的字距，右端才齐 */
   }
   .start .caption-zh {
-    font-size: 8px; line-height: 12px; letter-spacing: 0; color: var(--ink-faint);
+    font-size: 10px; line-height: 15px; letter-spacing: 0; color: var(--ink-faint);
     text-align: justify; text-align-last: justify;
   }
   .start:hover, .start:focus-visible { --mark: var(--bulb); }
@@ -214,7 +214,7 @@
   </div>
 
   <figure class="pulsar" id="pulsarFig">
-    <svg id="pulsar" viewBox="-125 -205 400 380" preserveAspectRatio="xMinYMid meet" role="img" aria-label="仿照先驱者号金属板上的脉冲星图">
+    <svg id="pulsar" viewBox="-125 -162 400 337" preserveAspectRatio="xMinYMin meet" role="img" aria-label="仿照先驱者号金属板上的脉冲星图">
       <defs>
         <radialGradient id="coreGrad">
           <stop offset="0" stop-color="#fff6dc"/>
