@@ -260,6 +260,14 @@
           <stop offset=".92" stop-color="#f6d89a" stop-opacity=".55"/>
           <stop offset="1" stop-color="#f6d89a" stop-opacity="0"/>
         </linearGradient>
+        <!-- 转场时射线从中心到外围的渐隐：线头处全透明，往外一段距离内过渡到不透明（范围由脚本逐帧调整） -->
+        <radialGradient id="rayFadeGrad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="0.01">
+          <stop id="rayFadeIn" offset="0" stop-color="#000"/>
+          <stop offset="1" stop-color="#fff"/>
+        </radialGradient>
+        <mask id="rayFade" maskUnits="userSpaceOnUse" x="-3000" y="-3000" width="6000" height="6000">
+          <rect x="-3000" y="-3000" width="6000" height="6000" fill="url(#rayFadeGrad)"/>
+        </mask>
         <!-- 转场时中心光点的边界逐渐变模糊（模糊程度由脚本逐帧调整，平时为 0） -->
         <filter id="coreBlur" x="-200%" y="-200%" width="500%" height="500%">
           <feGaussianBlur id="coreBlurAmt" stdDeviation="0"/>
@@ -444,9 +452,11 @@
   const fadeEls = ["rays", "bulbs", "streakLayer"].map((id) => document.getElementById(id));
   const coreGlow = svg.querySelector(".core-glow"), coreHalo = svg.querySelector(".core-halo");
   const coreBlur = document.getElementById("coreBlurAmt");
+  const rayFadeGrad = document.getElementById("rayFadeGrad"), rayFadeIn = document.getElementById("rayFadeIn");
   function zoomTo(cx, cy, maxScale, dur) {
     const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
     const sw = innerWidth, sh = innerHeight;
+    fadeEls.forEach((g) => g.setAttribute("mask", "url(#rayFade)"));   // 只在转场时挂上遮罩
     const t0 = performance.now();
     const frame = (now) => {
       const p = Math.min(1, (now - t0) / dur);
@@ -461,7 +471,11 @@
       const e = spreadEase(p);
       coreGlow.setAttribute("r", (18 * (1 + 1.2 * e)).toFixed(2));
       coreHalo.setAttribute("r", (34 * (1 + 2.5 * e)).toFixed(2));
-      coreBlur.setAttribute("stdDeviation", (1.6 * e).toFixed(3));   // 光点边界逐渐变模糊（图上单位，跟着推近一起放大）
+      coreBlur.setAttribute("stdDeviation", (1.6 * e).toFixed(3));
+      // 射线内端渐隐：线头（距中心 d）以内全透明，再往外 F 的距离里渐渐显出来
+      const F = 34 * e, R = Math.max(0.01, d + F);
+      rayFadeGrad.setAttribute("r", R.toFixed(2));
+      rayFadeIn.setAttribute("offset", (d / R).toFixed(4));   // 光点边界逐渐变模糊（图上单位，跟着推近一起放大）
       stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
       if (p < 1) requestAnimationFrame(frame);
     };
