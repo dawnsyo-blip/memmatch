@@ -2026,5 +2026,28 @@
       ],
       "note": "负责人同意采用建议值（2026-10-26）；原依据：README：“ctor-based semantic retrieval with time-decay scoring, an isolated Zero-Knowledge vau”——可能只是检索排序时旧记忆权重变低，不一定会遗忘，建议值 auto_decay"
     }
+  },
+  "lumimuse": {
+    "forgetting": {
+      "value": [
+        "manual_only",
+        "archive"
+      ],
+      "note": "负责人同意采用建议值（2026-10-27）；原依据：README 只提到删除：“rn JSON 导入 | | 💬 | **聊天体验** | 流式输出、编辑 / 删除 / 多版本重新生成、图片与文本附件、手动总结、现实时间注入 | | 🧠 | *”，没提自动衰减，建议值 manual_only；有归档：“忆** | 自动提取、AI 整理、画像、归档与索引；本地工作记忆 + 向量检索 +”"
+    }
+  },
+  "shared-diary-mcp": {
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "note": "负责人同意采用建议值（2026-10-27）；原依据：README 没提自动捕获或审核；MCP 工具通常由 AI 自行决定何时调用，建议值 on_request"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "note": "负责人同意采用建议值（2026-10-27）；原依据：README 只提到删除：“- 共同可见、仅自己可见、指定对象可见与趣味问题解锁 - 作者专属的日记编辑与删除（删除日记时一并删除回应） - 单层双向回应与未读状态 - 日记网页可按正文作者”，没提自动衰减，建议值 manual_only"
+    }
   }
 }

@@ -2499,6 +2499,24 @@
    "license_head": "MIT License\n\nCopyright (c) 2025 AGI Research\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
    "has_readme": true,
    "read_date": "2026-10-26"
+  },
+  "in30mn1a/lumimuse": {
+   "repo": "in30mn1a/LumiMuse",
+   "last_commit": "2026-10-18",
+   "stars": 28,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 in30mn1a\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merg",
+   "has_readme": true,
+   "read_date": "2026-10-27"
+  },
+  "yunsheng613/shared-diary-mcp": {
+   "repo": "YUNSHENG613/shared-diary-mcp",
+   "last_commit": "2026-08-31",
+   "stars": 38,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 YUNSHENG613 and contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use",
+   "has_readme": true,
+   "read_date": "2026-10-27"
   }
  }
 }

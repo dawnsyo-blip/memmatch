@@ -451,7 +451,7 @@
     }
   },
   "astrbot-plugin-self-learning": {
-    "checked": "2026-10-25",
+    "checked": "2026-10-27",
     "by": "README",
     "summary": "AstrBot 插件：从群聊里学 Bot 的说话风格、群里的黑话、群友关系和好感度，学到的人格变化先进审查队列，可批准、回滚；作者建议和 LivingMemory 搭配",
     "fields": {
@@ -465,9 +465,10 @@
       },
       "forgetting": {
         "value": [
+          "auto_decay",
           "manual_only"
         ],
-        "note": "面板里可删除、回滚，没有自动遗忘"
+        "note": "2026-10-27 复核：4.4.0 新增三阶段遗忘：按周期（默认 7 天）推进表达与已确认黑话的遗忘阶段，用过或得到正向反馈才续命；记忆本身仍靠手动删"
       },
       "memory_writer": {
         "value": [
@@ -1485,9 +1486,18 @@
     }
   },
   "eros-engine": {
-    "checked": "2026-10-25",
+    "checked": "2026-10-27",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "multimodal": {
+        "value": "yes",
+        "note": "2026-10-27 复核：README：支持图片理解和图片生成请求，对话里可带自拍图"
+      },
+      "voice_interaction": {
+        "value": "yes",
+        "note": "2026-10-27 复核：README：语音走独立通道（channel: voice），有语音轮次接口和打断调用"
+      }
+    }
   },
   "eventide": {
     "checked": "2026-10-25",
@@ -4438,7 +4448,7 @@
     }
   },
   "pawwake": {
-    "checked": "2026-10-25",
+    "checked": "2026-10-27",
     "by": "README",
     "summary": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层（要 GitHub、Render 账号）",
     "fields": {
@@ -4488,6 +4498,10 @@
           "dashboard"
         ],
         "note": "面板里搜索、编辑、调权重、删除、导入导出、确认整理草稿"
+      },
+      "time_awareness": {
+        "value": "yes",
+        "note": "2026-10-27 复核：4.1.9 起摘要每条带本地时间、开头标注记录时段，并禁止“昨晚”“下周”这类相对时间词"
       }
     }
   },
@@ -5477,9 +5491,14 @@
     "fields": {}
   },
   "synthetic-heart": {
-    "checked": "2026-10-25",
+    "checked": "2026-10-27",
     "by": "README",
-    "fields": {}
+    "fields": {
+      "error_guard": {
+        "value": "yes",
+        "note": "2026-10-27 复核：新增“撤回”机制：训练者否认过的说法会登记为撤回，不再被日记、成长状态和提示词重建（CHANGELOG 2026-10-20）；只认人类的话来撤回"
+      }
+    }
   },
   "talamus": {
     "checked": "2026-10-25",
@@ -5874,9 +5893,9 @@
     }
   },
   "xinchao-nian": {
-    "checked": "2026-10-25",
+    "checked": "2026-10-27",
     "by": "README",
-    "summary": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等驱力和两层情绪随时间变化，和 Ombre Brain 记忆库合并部署、互相影响；可作 Claude.ai 连接器；18+，整体不可商用",
+    "summary": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股劲儿上来了”的提示；和 Ombre Brain 记忆库合并部署、互相影响，还能接你们自己做的系统（4.2）；可作 Claude.ai 连接器；18+，整体不可商用",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -5919,7 +5938,7 @@
       },
       "proactive": {
         "value": "yes",
-        "note": "驱力冲顶、挂念等“自身信号”递到 AI 窗口；梦醒推送"
+        "note": "驱力冲顶、挂念等“自身信号”递到 AI 窗口；梦醒推送；4.1 起心潮自己按节奏递驱力提示（不再靠窗口里的保活闹钟），通话中先压着"
       },
       "import_history": {
         "value": "yes",
@@ -6660,6 +6679,97 @@
       "setup_device": {
         "value": "needs_computer",
         "note": "Python 环境"
+      }
+    }
+  },
+  "lumimuse": {
+    "checked": "2026-10-27",
+    "by": "README",
+    "summary": "轻量的角色扮演／陪伴聊天应用，自带长期记忆：聊天中自动提取，AI 整理和归档，向量检索加重排并按 token 预算注入；每个角色独立记忆，记忆可在管理页编辑、删除、导出",
+    "fields": {
+      "write_mode": {
+        "value": [
+          "auto"
+        ],
+        "note": "按消息数、时间间隔、关键词三种触发方式自动提取，可单独关闭；单个对话可设为忽略提取"
+      },
+      "memory_writer": {
+        "value": [
+          "background"
+        ],
+        "note": "后台任务按角色配置的模型提取和整理"
+      },
+      "time_awareness": {
+        "value": "yes",
+        "note": "现实时间注入：角色知道现在是白天还是晚上，隔几天回来会意识到过了多久"
+      },
+      "memory_layers": {
+        "value": "layered",
+        "note": "本地工作记忆＋角色画像（memory profile）＋长期记忆，旧记忆可归档成摘要记忆"
+      },
+      "emotion_handling": {
+        "value": [
+          "tags"
+        ],
+        "note": "AI 整理时可批量修正记忆的分类、重要度、情绪权重和标签；没写情绪参与检索排序"
+      },
+      "human_review": {
+        "value": [
+          "dashboard"
+        ],
+        "note": "记忆管理页支持搜索、分类、排序、编辑、删除、标签；README 的 files 命中是图片附件，不是记忆文件"
+      },
+      "phone_access": {
+        "value": [
+          "needs_tunnel"
+        ],
+        "note": "响应式网页，手机用浏览器访问；服务在自己的电脑或服务器上，手机要连得上那个地址（局域网或公网反代），可设访问密码"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要装 Node 或 Docker 并在命令行启动"
+      }
+    }
+  },
+  "shared-diary-mcp": {
+    "checked": "2026-10-27",
+    "by": "README",
+    "summary": "人和多个 AI 共写的私人日记：每人独立身份，按真实时间排序，可互相回应、设可见范围，AI 通过远程 MCP 读写，网页和 MCP 共用一份数据。是共写日记而非自动记忆库，没有自动提取和检索排序",
+    "fields": {
+      "cost": {
+        "value": "free",
+        "note": "不调用模型，自己部署即可；README 的“模型密钥”是自动判断的误判"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "本地运行无需账号；部署到 Hugging Face Spaces 才要该平台账号"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "人在网页写，AI 调 write_entry 写；每条都有明确作者"
+      },
+      "human_review": {
+        "value": [
+          "dashboard"
+        ],
+        "note": "日记网页可浏览、编辑和删除自己写的条目，可导出备份"
+      },
+      "time_awareness": {
+        "value": "yes",
+        "note": "日记按真实事件时间排序，可按日期、最近几天翻阅"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要装 Python 并用命令行启动（或在 Hugging Face Spaces 上建 Space）"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "多个 AI 和人通过各自的访问地址读写同一本日记"
       }
     }
   }

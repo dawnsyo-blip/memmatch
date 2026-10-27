@@ -242,9 +242,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "multimodal": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“** — SSE streaming, image understanding and generation requ”经核对不算：只是图片理解与生成请求"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-27，README）：2026-10-27 复核：README：支持图片理解和图片生成请求，对话里可带自拍图"
     },
     "time_awareness": {
       "value": "not_mentioned",
@@ -307,9 +307,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "voice_interaction": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "README 命中的“n already ship; STT/TTS currently stay on t”经核对不算：原文说语音要调用方自己实现"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-27，README）：2026-10-27 复核：README：语音走独立通道（channel: voice），有语音轮次接口和打断调用"
     },
     "privacy_protection": {
       "value": "not_mentioned",
@@ -478,16 +478,16 @@
     }
   ],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-27",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 66,
+    "stars": 70,
     "archived": false,
-    "release_count": 76,
-    "last_commit": "2026-10-11",
+    "release_count": 84,
+    "last_commit": "2026-10-27",
     "days_since_commit": 0,
-    "commits_1y": 489,
+    "commits_1y": 539,
     "contributors_1y": 1,
     "license_files": [
       "LICENSE"
@@ -510,6 +510,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-26"
+    "decided_on": "2026-10-27"
   }
 }

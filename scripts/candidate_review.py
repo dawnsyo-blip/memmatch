@@ -814,6 +814,16 @@ NEW.update({
         "项目知识", "MCP", "多种编程智能体", "自己的电脑", "中", "", "仓库已归档（只读），许可证为 Elastic 2.0（非 OSI 开源）"),
 })
 
+# 第 7 批（2026-10-27，核对 Atlas 站点更新时发现：未打“记忆”标签，但 README 有完整记忆系统）
+NEW.update({
+    "in30mn1a/lumimuse": _e("LumiMuse", "纳入", "P1", "轻量的角色扮演／陪伴聊天应用，自带长期记忆：自动提取、AI 整理和归档、向量检索加重排、按 token 预算注入，记忆可在管理页编辑删除并导出",
+        "关系动态、偏好、重要事件（按角色分开）", "独立应用（网页，Node 或 Docker）", "自带（模型接口自行配置）", "自己的电脑或服务器",
+        "中：Node 或 Docker Compose，进去后配模型和生图服务", "模型 API 密钥", "MIT；每个角色独立记忆；手机浏览器可用"),
+    "yunsheng613/shared-diary-mcp": _e("Shared Diary MCP", "纳入", "", "人和多个 AI 共写的私人日记：每人独立身份，按真实时间排序，可互相回应、设可见范围，AI 通过远程 MCP 读写，网页和 MCP 共用一份数据",
+        "共同书写的日记与回应", "远程 MCP（Streamable HTTP）＋网页", "支持 Streamable HTTP 的 MCP 客户端", "自己的电脑或服务器；可部署到 Hugging Face Spaces",
+        "中：装 Python 后起服务，再生成各人的访问地址", "无（不调用模型）", "MIT；负责人 2026-10-27 要求收入；是共写日记而非自动记忆库（没有自动提取和检索排序）；访问地址里带密钥，视同密码"),
+})
+
 # 上面这些条目来自哪个来源（awesome-ai-companion 的由快照解析，不在这里列）
 _CTX = "上下文工程合集（yzfly/awesome-context-engineering）"
 _ST = "酒馆插件合集（Min3Mast3r4653/SillyTavern-Extensions-and-Themes）"
@@ -883,6 +893,8 @@ BENCH.update({
     "vshulcz/deja-vu": "LongMemEval-S R@5 97.2%（作者自报，只测检索）",
 })
 EXTRA_SOURCES.update({k: "负责人指定（多智能体记忆，2026-10-26）" for k in ["avids2/memorix", "wujiangxu/a-mem", "campfirein/cipher"]})
+EXTRA_SOURCES["yunsheng613/shared-diary-mcp"] = "AI Companion Atlas（非记忆标签，负责人 2026-10-27 指定收入）"
+EXTRA_SOURCES["in30mn1a/lumimuse"] ="AI Companion Atlas / awesome-ai-companion（其它栏目，2026-10-27 核对站点更新时发现）"
 
 # 没有 GitHub 仓库、只按名称记录的条目：名称 -> (结论, 代码, 说明, 备注)
 NAME_ONLY = {

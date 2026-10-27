@@ -274,9 +274,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-27，README）：2026-10-27 复核：新增“撤回”机制：训练者否认过的说法会登记为撤回，不再被日记、成长状态和提示词重建（CHANGELOG 2026-10-20）；只认人类的话来撤回"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -484,16 +484,16 @@
     }
   ],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-27",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 74,
+    "stars": 104,
     "archived": false,
     "release_count": 1,
-    "last_commit": "2026-10-08",
-    "days_since_commit": 3,
-    "commits_1y": 1687,
+    "last_commit": "2026-10-21",
+    "days_since_commit": 7,
+    "commits_1y": 1634,
     "contributors_1y": 9,
     "license_files": [
       "LICENSE",
@@ -520,6 +520,11 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-26"
+    "decided_on": "2026-10-27"
+  },
+  "safety_note": {
+    "level": "notice",
+    "note": "网页管理界面默认不需要登录，而且容器监听所有网卡；2026-10-19 起可以开启登录（设置 SYNTH_WEBUI_API_TOKEN 或 SYNTH_WEBUI_AUTH=enabled），但默认仍是关的。不要直接暴露到公网。",
+    "checked": "2026-10-27"
   }
 }

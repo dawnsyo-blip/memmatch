@@ -18,7 +18,7 @@
     "summary": {
       "value": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层（要 GitHub、Render 账号）",
       "source": "Claude 据仓库 README 改写",
-      "read_date": "2026-10-25"
+      "read_date": "2026-10-27"
     },
     "memory_subject": {
       "value": "用户事实＋工作记忆（对话线）",
@@ -147,7 +147,7 @@
         "kelivo"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：README 以 Kelivo 为例；客户端要能加自定义请求头 X-Gateway-Key"
+      "basis": "Claude 核实（2026-10-27，README）：README 以 Kelivo 为例；客户端要能加自定义请求头 X-Gateway-Key"
     },
     "runs_on": {
       "value": [
@@ -155,7 +155,7 @@
         "own_server"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：Render、Zeabur 等，或任何能跑 Docker 的服务器"
+      "basis": "Claude 核实（2026-10-27，README）：Render、Zeabur 等，或任何能跑 Docker 的服务器"
     },
     "os": {
       "value": [
@@ -172,7 +172,7 @@
     "cost": {
       "value": "model_fees_only",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：Render 免费层可跑（免费 PostgreSQL 90 天，可换 Neon、Supabase）；模型按用量付费"
+      "basis": "Claude 核实（2026-10-27，README）：Render 免费层可跑（免费 PostgreSQL 90 天，可换 Neon、Supabase）；模型按用量付费"
     },
     "accounts_needed": {
       "value": [
@@ -181,7 +181,7 @@
         "model_api_key"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：网关转发和抽取、评分、整理都要模型服务商的 Key"
+      "basis": "Claude 核实（2026-10-27，README）：网关转发和抽取、评分、整理都要模型服务商的 Key"
     },
     "memory_subject": {
       "value": [
@@ -206,14 +206,14 @@
         "archive"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：删除默认可恢复；合并后来源归档；没有自动衰减"
+      "basis": "Claude 核实（2026-10-27，README）：删除默认可恢复；合并后来源归档；没有自动衰减"
     },
     "human_review": {
       "value": [
         "dashboard"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：面板里搜索、编辑、调权重、删除、导入导出、确认整理草稿"
+      "basis": "Claude 核实（2026-10-27，README）：面板里搜索、编辑、调权重、删除、导入导出、确认整理草稿"
     },
     "export": {
       "value": [
@@ -261,9 +261,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "time_awareness": {
-      "value": "not_mentioned",
-      "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-27，README）：2026-10-27 复核：4.1.9 起摘要每条带本地时间、开头标注记录时段，并禁止“昨晚”“下周”这类相对时间词"
     },
     "dream_consolidation": {
       "value": "yes",
@@ -273,7 +273,7 @@
     "emotion": {
       "value": "not_mentioned",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：只提到整理时保留原文里的情绪表达，没有情绪机制"
+      "basis": "Claude 核实（2026-10-27，README）：只提到整理时保留原文里的情绪表达，没有情绪机制"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -460,7 +460,7 @@
     "setup_device": {
       "value": "phone_ok",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：Fork、在 Render 网页上建服务和数据库、填环境变量，全程浏览器"
+      "basis": "Claude 核实（2026-10-27，README）：Fork、在 Render 网页上建服务和数据库、填环境变量，全程浏览器"
     },
     "media_recall": {
       "value": [
@@ -492,16 +492,16 @@
   },
   "uncertainties": [],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-27",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 159,
+    "stars": 162,
     "archived": false,
     "release_count": 3,
-    "last_commit": "2026-10-11",
-    "days_since_commit": 0,
-    "commits_1y": 163,
+    "last_commit": "2026-10-22",
+    "days_since_commit": 5,
+    "commits_1y": 166,
     "contributors_1y": 2,
     "license_files": [
       "LICENSE"
@@ -518,6 +518,11 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-26"
+    "decided_on": "2026-10-27"
+  },
+  "safety_note": {
+    "level": "notice",
+    "note": "2026-10-22 之前的版本（4.1.10 以前）有一个鉴权绕过漏洞（CVE-2026-48710），畸形请求能访问受保护的接口；请部署 4.1.10 或更新的版本，已经部署的要重新部署。",
+    "checked": "2026-10-27"
   }
 }

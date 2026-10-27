@@ -86,6 +86,8 @@
 
 多智能体记忆（2026-10-26，负责人要求补收评测好或 Star 多的）：旧规则 F5“多智能体不面向个人用户”不再一刀切排除。已改为纳入：Cognee、MIRIX、Memanto、PowerMem、deja、agentmemory、Caura，新增 Memorix、A-MEM（见 `candidate_review.py` 第 6 批 `NEW`）。Cipher 因仓库已归档、许可证 Elastic 2.0 排除。负责人 2026-10-26 同意调整 F5：评测突出或 Star 多的例外，其余多智能体项目（Star 均不足 20，无评测）仍排除。这 9 项已于同日逐项对照 README 核实（记在 `data/readme_verification.json`；MIRIX 现在的上手方式是 Docker＋Python 客户端，归开发者向；A-MEM 的 1003 Star 仓库只是论文复现代码，可用的库是 WujiangXu/A-mem-sys）；安全审查见 `docs/security-audit.md` 末节。
 
+AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“记忆”标签的条目与原表 50 项一致，没有新增；对约 24 个站点更新日期较新的项目重跑了 `check_health --only`，并按 README／CHANGELOG 复核字段（改动记在 `readme_verification.json`，备注以“2026-10-27 复核”开头）。另从未打记忆标签的条目里新增 LumiMuse（有完整记忆系统）和 Shared Diary MCP（负责人指定，是共写日记而非自动记忆库）；排除 WakeTrace（明说不建记忆库）、Wake Bridge（自称无记忆系统）、Villa Bridge（只做会话桥接）、MIRROW（需宿主的组件，记忆库未公开）。站点首页写“180 个项目”，页面实际约 224 张卡片，数字对不上。
+
 多模态召回字段 `media_recall`（2026-10-26，负责人要求）：值 `image`／`audio`／`video`（可多选）或 `not_mentioned`。标准：系统自己保管原图／原音频／原视频（或直接给原件做向量），召回时能把原件交回；只把图片、语音、视频转成文字（描述、转写、OCR）再存文字的不算，哪怕留了文件路径或链接。与旧特性 `multimodal` 不同，后者命中范围宽（生图、读图都算），不要混用。规则不自动判定，全靠 `readme_verification.json` 里逐项核实：先用 scratchpad 脚本扫 README 里“媒体词＋记忆词”的行，再对命中项克隆仓库看代码和文档。没命中的项目按未提及处理，所以是“已知有”的下限，漏网项目要在以后复核时补。已核实有的 12 个，核实后判为只转文字的 14 个（备注里写了原因）。问卷第 8a 题用它加分（2026-10-26）。
 
 多智能体共用字段 `multi_agent`（2026-10-26，为问卷第 4a 题新增）：值 `shared`（写明几个不同的 Agent 或工具读写同一份记忆）、`per_agent`（能给每个 Agent 分开记忆空间或权限，只共享一部分），可两者都有，或 `not_mentioned`。同一个 Agent 换设备不算（那是 `cross_client`），项目内部由几个子智能体分管记忆（如 MIRIX、agent-zero 的子 agent）也不算；`namespace` 只按项目或用户分的不算 `per_agent`。和 `media_recall` 一样只靠逐项核实：扫 README 里多 agent、共享、agent_id、namespace 等词，逐条看原文判断。写明几个 Agent 共用、原来 `cross_client` 是“未提及”的 10 个顺手改成了 yes。结果：共用 64 个、能分开 29 个。

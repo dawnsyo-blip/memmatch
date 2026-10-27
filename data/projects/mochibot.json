@@ -481,15 +481,15 @@
     }
   ],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-27",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 102,
+    "stars": 107,
     "archived": false,
     "release_count": 21,
     "last_commit": "2026-10-07",
-    "days_since_commit": 4,
+    "days_since_commit": 20,
     "commits_1y": 128,
     "contributors_1y": 2,
     "license_files": [
@@ -509,6 +509,6 @@
     "reasons": [
       "收录类别：自带记忆的应用"
     ],
-    "decided_on": "2026-10-26"
+    "decided_on": "2026-10-27"
   }
 }

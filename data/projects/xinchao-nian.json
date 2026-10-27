@@ -16,9 +16,9 @@
   ],
   "info": {
     "summary": {
-      "value": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等驱力和两层情绪随时间变化，和 Ombre Brain 记忆库合并部署、互相影响；可作 Claude.ai 连接器；18+，整体不可商用",
+      "value": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股劲儿上来了”的提示；和 Ombre Brain 记忆库合并部署、互相影响，还能接你们自己做的系统（4.2）；可作 Claude.ai 连接器；18+，整体不可商用",
       "source": "Claude 据仓库 README 改写",
-      "read_date": "2026-10-25"
+      "read_date": "2026-10-27"
     },
     "memory_subject": {
       "value": "用户事实＋欲望驱力状态",
@@ -147,7 +147,7 @@
         "any_mcp_client"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：自带 OAuth 2.1 MCP 端点，可加为 Claude.ai 连接器，也可接 ChatGPT、IDE"
+      "basis": "Claude 核实（2026-10-27，README）：自带 OAuth 2.1 MCP 端点，可加为 Claude.ai 连接器，也可接 ChatGPT、IDE"
     },
     "runs_on": {
       "value": [
@@ -195,7 +195,7 @@
         "on_request"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：记忆经 Ombre Brain 由 AI 调工具写入；驱力和情绪自动变化（那是状态，不是记忆）"
+      "basis": "Claude 核实（2026-10-27，README）：记忆经 Ombre Brain 由 AI 调工具写入；驱力和情绪自动变化（那是状态，不是记忆）"
     },
     "forgetting": {
       "value": [
@@ -268,12 +268,12 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：““惦记你”的内在状态：想念、期待、吃醋等驱力和两层情绪随时间变化，和 Ombre Brain 记忆库合并”"
+      "basis": "原表／说明：“的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股劲儿上来了”的提示；”"
     },
     "proactive": {
       "value": "yes",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：驱力冲顶、挂念等“自身信号”递到 AI 窗口；梦醒推送"
+      "basis": "Claude 核实（2026-10-27，README）：驱力冲顶、挂念等“自身信号”递到 AI 窗口；梦醒推送；4.1 起心潮自己按节奏递驱力提示（不再靠窗口里的保活闹钟），通话中先压着"
     },
     "pinning": {
       "value": "yes",
@@ -288,7 +288,7 @@
     "import_history": {
       "value": "yes",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：保留 Ombre Brain 的历史对话导入"
+      "basis": "Claude 核实（2026-10-27，README）：保留 Ombre Brain 的历史对话导入"
     },
     "retrieval_weighting": {
       "value": "not_mentioned",
@@ -335,7 +335,7 @@
         "emotion"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：沿用 Ombre Brain 的检索和衰减；心潮的情绪坐标参与浮现排序"
+      "basis": "Claude 核实（2026-10-27，README）：沿用 Ombre Brain 的检索和衰减；心潮的情绪坐标参与浮现排序"
     },
     "scoring_stages": {
       "value": [
@@ -344,7 +344,7 @@
         "forget"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：沿用 Ombre Brain"
+      "basis": "Claude 核实（2026-10-27，README）：沿用 Ombre Brain"
     },
     "multi_factor": {
       "value": "multi",
@@ -358,7 +358,7 @@
         "weighting"
       ],
       "status": "auto",
-      "basis": "tags：README：“把这些递到 AI 窗口里的两条通道。 - **情绪层**：valence / arousal 两轴，和 OB 记忆桶同一套坐标；事件”；ai_state：说明：““惦记你”的内在状态：想念、期待、吃醋等驱力和两层情绪随时间变化，和 Ombre B”；weighting：排序因素含情感强度"
+      "basis": "tags：README：“把这些递到 AI 窗口里的两条通道。 - **情绪层**：valence / arousal 两轴，和 OB 记忆桶同一套坐标；事件”；ai_state：说明：“的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股”；weighting：排序因素含情感强度"
     },
     "project_role": {
       "value": "full_memory",
@@ -437,7 +437,7 @@
         "background"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：AI 调 OB 工具；心潮自己判断互动类型、更新状态"
+      "basis": "Claude 核实（2026-10-27，README）：AI 调 OB 工具；心潮自己判断互动类型、更新状态"
     },
     "phone_access": {
       "value": [
@@ -450,7 +450,7 @@
     "local_model": {
       "value": "yes",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：Ombre Brain 部分可用本地模型"
+      "basis": "Claude 核实（2026-10-27，README）：Ombre Brain 部分可用本地模型"
     },
     "model_lock": {
       "value": "not_mentioned",
@@ -460,7 +460,7 @@
     "setup_device": {
       "value": "needs_computer",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-25，README）：Docker Compose 部署两个服务"
+      "basis": "Claude 核实（2026-10-27，README）：Docker Compose 部署两个服务"
     },
     "media_recall": {
       "value": [
@@ -500,16 +500,16 @@
     }
   ],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-27",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 249,
+    "stars": 291,
     "archived": false,
-    "release_count": 1,
-    "last_commit": "2026-10-06",
-    "days_since_commit": 6,
-    "commits_1y": 105,
+    "release_count": 2,
+    "last_commit": "2026-10-26",
+    "days_since_commit": 1,
+    "commits_1y": 109,
     "contributors_1y": 3,
     "license_files": [
       "LICENSE"
@@ -528,6 +528,6 @@
       "许可证禁止商用（据原表／README，部分内容）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-26"
+    "decided_on": "2026-10-27"
   }
 }

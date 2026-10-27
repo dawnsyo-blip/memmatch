@@ -478,17 +478,17 @@
     }
   ],
   "health": {
-    "checked_on": "2026-10-11",
+    "checked_on": "2026-10-27",
     "method": "git 克隆近一年提交记录＋读取仓库网页",
     "checker_version": 3,
     "status": "ok",
-    "stars": 31,
+    "stars": 32,
     "archived": false,
-    "release_count": 6,
-    "last_commit": "2026-10-04",
-    "days_since_commit": 7,
-    "commits_1y": 33,
-    "contributors_1y": 3,
+    "release_count": 7,
+    "last_commit": "2026-10-25",
+    "days_since_commit": 2,
+    "commits_1y": 96,
+    "contributors_1y": 4,
     "license_files": [
       "LICENSE"
     ],
@@ -509,6 +509,6 @@
       "许可证限制使用（据原表／README）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-26"
+    "decided_on": "2026-10-27"
   }
 }
