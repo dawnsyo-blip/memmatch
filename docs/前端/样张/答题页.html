@@ -144,15 +144,15 @@
   .next svg { position: absolute; inset: 0; width: 120px; height: 44px; overflow: visible; }
   .next .trail-past { opacity: .35; }
   .next:not(:disabled) .trail-past { stroke: var(--bulb); opacity: .85; }
-  .next .trail-arrow { opacity: .6; }
+  .next .trail-arrow { opacity: .6; stroke-linecap: butt; }
   .next:not(:disabled) .trail-arrow { stroke: var(--bulb); opacity: 1; }
   .next .trail-ahead { stroke-dasharray: 3 4; opacity: .6; }
   .next:not(:disabled) .trail-ahead { stroke: var(--bulb); opacity: 1; animation: march 1.2s linear infinite; }
   @keyframes march { to { stroke-dashoffset: -14; } }
   .next:not(:disabled) .probe { animation: cruise 3.2s ease-in-out infinite; }
   @keyframes cruise {
-    0%, 100% { transform: translate(63.68px, 26.40px) rotate(-13.9deg); }
-    50% { transform: translate(65.62px, 25.92px) rotate(-13.9deg); }
+    0%, 100% { transform: translate(69.19px, 26.40px) rotate(-13.2deg); }
+    50% { transform: translate(71.14px, 25.94px) rotate(-13.2deg); }
   }
 
   .toast {
@@ -231,12 +231,12 @@
     <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 120 44" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
         <!-- 同一条光滑曲线：飞过的实线、前方的虚线，在土星前后各留 5px 空白（不和土星交叉）；虚线末端一个小箭头，停在留白线以内 -->
-        <path class="trail-past" d="M-10.00 39.00 Q17.53 36.34 44.66 30.71"/>
-        <path class="trail-ahead" d="M84.45 20.82 Q98.28 16.80 112.00 12.00"/>
-        <path class="trail-arrow" d="M108.89 15.84 L112.00 12.00 L107.18 10.93"/>
+        <path class="trail-past" d="M-10.00 39.00 Q20.74 36.29 50.12 30.51"/>
+        <path class="trail-ahead" d="M90.02 21.07 Q104.85 16.95 119.30 12.00"/>
+        <path class="trail-arrow" d="M116.17 15.82 L119.30 12.00 L114.48 10.90"/>
         <!-- 土星（参照参考图里先驱者号书中的画法）：三道同心的环（只用线条，不画明暗、不铺环带底色），
              环的后半截被星球挡住、前半截压在星球上 -->
-        <g class="probe" transform="translate(63.68 26.40) rotate(-13.9)">
+        <g class="probe" transform="translate(69.19 26.40) rotate(-13.2)">
           <path d="M-14.5 0 A14.5 3.9 0 0 1 14.5 0"/>
           <circle r="6.8" style="fill: var(--paper)"/>
           <path d="M-14.5 0 A14.5 3.9 0 0 0 14.5 0"/>
