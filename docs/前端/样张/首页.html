@@ -12,7 +12,7 @@
     if (location.hash.indexOf("light") > -1) t = "light";
     if (t === "dark") r.classList.add("theme-dark");
     if (location.search.indexOf("title=zh") > -1) r.classList.add("title-zh");
-    if (location.search.indexOf("map=golden") > -1) r.classList.add("map-golden");
+    if (location.search.indexOf("map=top") < 0) r.classList.add("map-golden");   // 默认星图中心在 (30%, 61.8%)；?map=top 看旧排法
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -135,6 +135,18 @@
     font-size: 10px; line-height: 15px; letter-spacing: 0; color: var(--ink-faint);
     text-align: justify; text-align-last: justify;
   }
+  /* 文字里的“光点”：画成一颗小光点，和星图中心同一节奏呼吸，但更暗、光晕更小 */
+  .glint {
+    display: inline-block;
+    width: .62em; height: .62em;
+    margin: 0 .12em;
+    vertical-align: -.02em;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff3d6 0 18%, var(--bulb) 45%, color-mix(in srgb, var(--bulb) 0%, transparent) 72%);
+    box-shadow: 0 0 4px color-mix(in srgb, var(--bulb) 55%, transparent);
+    animation: glint 2.8s ease-in-out infinite;
+  }
+  @keyframes glint { 0%, 100% { opacity: .45; } 50% { opacity: .8; } }
   .start:hover, .start:focus-visible { --mark: var(--bulb); }
   .start:hover .caption, .start:focus-visible .caption { color: var(--ink); }
 
@@ -231,7 +243,7 @@
   <a class="start" id="startLink" href="答题页.html">
     <span class="start-text">
       <span class="caption">Light up and start</span>
-      <span class="caption-zh">点亮光点，开始答题</span>
+      <span class="caption-zh">点亮<span class="glint" role="img" aria-label="光点"></span>，开始答题</span>
     </span>
   </a>
 </main>
