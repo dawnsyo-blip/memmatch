@@ -55,7 +55,9 @@
     letter-spacing: -.005em;
   }
   .headline-en .caps { font-style: normal; letter-spacing: .06em; font-size: .86em; }
+  /* 副标题和英文标题最后一行等宽、两端对齐（宽度由脚本按最后一行实测） */
   .sub-zh {
+    text-align: justify; text-align-last: justify;
     margin: var(--s-2) 0 0;
     font-family: var(--font-zh);
     font-size: var(--fs-h4);
@@ -257,8 +259,8 @@
 
 <main class="home">
   <div class="titles titles-en">
-    <h1 class="headline-en" lang="en">a quick quiz to find<br>the memory patch<br>fitting <em class="caps">YOUR</em> AI agent</h1>
-    <p class="sub-zh">找到适合你与 AI 共用的记忆库</p>
+    <h1 class="headline-en" lang="en">a quick quiz to find<br>the memory patch<br><span id="lastLine">fitting <em class="caps">YOUR</em> AI agent</span></h1>
+    <p class="sub-zh" id="subZh">找到适合你与 AI 共用的记忆库</p>
   </div>
   <div class="titles titles-zh">
     <h1 class="headline-zh">找到适合你与 AI<br>共用的记忆库</h1>
@@ -463,9 +465,21 @@
   }
 
   let t;
-  const layout = () => { drawStars(); fitGolden(); placeCore(); };
+  // 副标题宽度＝英文标题最后一行的宽度
+  const matchSub = () => {
+    const last = document.getElementById("lastLine"), sub = document.getElementById("subZh");
+    if (!last || !sub) return;
+    const w = last.getBoundingClientRect().width;
+    // 先按原字号、不换行量出自然宽度；排不下一行就按比例缩小字号（不低于 14px），再两端对齐撑满
+    sub.style.width = "auto"; sub.style.fontSize = ""; sub.style.whiteSpace = "nowrap";
+    const natural = sub.scrollWidth, base = parseFloat(getComputedStyle(sub).fontSize);
+    if (natural > w) sub.style.fontSize = Math.max(14, base * w / natural * 0.97).toFixed(2) + "px";
+    sub.style.whiteSpace = "";
+    sub.style.width = w + "px";
+  };
+  const layout = () => { drawStars(); matchSub(); fitGolden(); placeCore(); };
   addEventListener("resize", () => { clearTimeout(t); t = setTimeout(layout, 120); });
-  document.fonts?.ready.then(() => { fitGolden(); placeCore(); });
+  document.fonts?.ready.then(() => { matchSub(); fitGolden(); placeCore(); });
   layout();
 
   /* ---------- 呼吸同步：中心的光、光晕、亮点和文字里的小光点从同一个时间起点开始 ---------- */
