@@ -436,6 +436,7 @@
   const spreadEase = bezier(.45, 0, .3, 1);     // 退开：轻轻起步，再慢慢停住
   const SPREAD = 20;                            // 退开的距离（图上单位；放大后看起来约 100px）
   const fadeEls = ["rays", "bulbs", "streakLayer"].map((id) => document.getElementById(id));
+  const coreGlow = svg.querySelector(".core-glow"), coreHalo = svg.querySelector(".core-halo");
   function zoomTo(cx, cy, maxScale, dur) {
     const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
     const sw = innerWidth, sh = innerHeight;
@@ -449,6 +450,10 @@
       // 射线、刻度、光束一边退开一边变淡（降到 20%），只有中心的光保持亮度
       const fade = (1 - 0.8 * spreadEase(p)).toFixed(3);
       fadeEls.forEach((g) => { g.style.opacity = fade; });
+      // 中心的光晕逐渐向外发散：在推近之外再额外变大（内层到 2.2 倍，外圈到 3.5 倍），呼吸动画照常
+      const e = spreadEase(p);
+      coreGlow.setAttribute("r", (18 * (1 + 1.2 * e)).toFixed(2));
+      coreHalo.setAttribute("r", (34 * (1 + 2.5 * e)).toFixed(2));
       stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
       if (p < 1) requestAnimationFrame(frame);
     };
