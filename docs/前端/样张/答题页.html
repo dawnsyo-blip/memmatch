@@ -21,7 +21,9 @@
   body { min-height: 100svh; }
   .topbar { background: linear-gradient(var(--paper) 70%, transparent); }
 
-  .quiz { padding: var(--s-5) 0 var(--s-6); max-width: 560px; margin: 0 auto; }
+  .quiz { padding: var(--s-5) 0 var(--s-6); max-width: 560px; margin: 0 auto; animation: arrive .6s var(--ease-out) both; }
+  /* 从首页的光晕转场过来：底色已经一样，内容再轻轻淡入 */
+  @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
 
   /* ---------- 进度条：侧看的行星环 ---------- */
   .rings { padding: var(--s-2) 0 0; }
