@@ -106,13 +106,14 @@
     position: absolute;
     right: var(--gutter);
     transform: translateY(calc(-100% - var(--s-2)));
-    display: flex; flex-direction: column; align-items: flex-end;
-    text-align: right;
+    display: grid;                     /* 两行同宽：宽度取较长的英文那行 */
+    width: max-content;
     text-decoration: none;
     z-index: 2;
   }
-  .start .caption { color: var(--ink); }
-  .start .caption-zh { color: var(--ink-soft); }
+  /* 负责人要求比图注再小一号（规范最小 12px，这里是例外）；两行两端对齐 */
+  .start .caption { font-size: 10px; line-height: 15px; color: var(--ink); text-align: justify; text-align-last: justify; margin-right: calc(var(--ls-en-caps) * -1); }  /* 抵消最后一个字母后面的字距，右端才齐 */
+  .start .caption-zh { font-size: 11px; line-height: 18px; letter-spacing: 0; color: var(--ink-soft); text-align: justify; text-align-last: justify; }
   .start:hover .caption, .start:focus-visible .caption { color: var(--bulb); }
 
   /* 中心按钮：盖在星图中心上 */
