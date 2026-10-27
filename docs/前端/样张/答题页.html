@@ -316,15 +316,15 @@
   }));
 
   /* ---------- 坠着星星的绳子：单摆 ----------
-     支点是绳子穿过进度条的位置（随游标移动），绳子在进度条下方长 L，末端挂星星。
+     支点在进度条最上面那条线上（随游标移动），从支点往下长 L，穿过整条进度条，末端挂星星。
      游标移动时按它的加速度推动摆角：θ'' = −(g/L)·sinθ − (a/L)·cosθ − c·θ'，摆动后慢慢停住。 */
-  const L = 22, G = 900, DAMP = 3.2;
+  const L = 33, G = 1350, DAMP = 3.2;   // 支点在进度条最上面那条线，绳长 33（G/L 不变，摆动周期仍约 1 秒）
   let v = 0, vFrom = 0, vTo = 0, t0 = 0, th = 0, om = 0, xPrev = null, velPrev = 0, raf = 0, tLast = 0;
   const TWEEN = 900;
   const easeIO = (p) => (p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
   function drawPendant() {
     const bar = $("ringsBar"), r = bar.getBoundingClientRect();
-    const px = r.left + scrollX + barX(v), py = r.top + scrollY + r.height / 2;
+    const px = r.left + scrollX + barX(v), py = r.top + scrollY;   // 支点：进度条最上面那条线
     const bx = px + L * Math.sin(th), by = py + L * Math.cos(th);
     const pend = $("pendant");
     pend.setAttribute("height", by + 12);
