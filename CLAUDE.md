@@ -68,7 +68,8 @@
 - 中文排版与文案参数以项目 skill `.claude/skills/zh-web-typography/SKILL.md` 为准（据 clreq、赫蹏、中文文案排版指北），英文设计 skill（impeccable、frontend-design）给的字号行高与之冲突时按它
 - 每页完成后用 web-design-guidelines 审一遍
 - 负责人 2026-10-25 定：网站称呼用户统一用“您”；全站不使用 emoji（要图形提示用 SVG 线条图标）。例外：2026-10-26 负责人要求首页改用“你”（副标题“找到适合你与 AI 共用的记忆库”）
-- 样张在 `docs/前端/样张/`（首页、答题页、色板，共用 `tokens.css`）；负责人的风格简报和参考图在 `docs/前端/`。菜单、左右箭头图标是负责人指定的 SVG（填色改成 currentColor）
+- 样张在 `docs/前端/样张/`（首页、答题页、色板，共用 `tokens.css` 和 `theme.js`）；负责人的风格简报和参考图在 `docs/前端/`。菜单、左右箭头图标是负责人指定的 SVG（填色改成 currentColor）
+- 负责人 2026-10-26 定：只保留两种模式——深色＝星空（默认）、浅色＝纸面，在导航栏里切换（存在浏览器里）。粉色、梅红试过后不用了。深色模式由 `<html class="theme-dark">` 打开，组件只引用语义变量（`--paper`、`--ink`、`--ink-soft`、`--ink-faint`、`--rule`、`--bulb`、`--moon` 等），两种模式在 `tokens.css` 里各定义一套；文字对底色的对比度两种模式都要过 4.5（浅色模式的 `--ink-faint` 原来只有 3.0，已改）
 
 安全审查（2026-10-26）：结论见 `docs/security-audit.md`，未发现恶意项目；需提醒用户的情况写在 `data/safety_notes.json`，normalize 写入各项目的 `safety_note`（推荐结果页要显示）。新增项目也要查一遍；akephalos 因仓库 404 已移除。
 

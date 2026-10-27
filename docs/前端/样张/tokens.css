@@ -1,9 +1,10 @@
-/* 记忆库推荐 · 设计变量与基础样式（样张 v1，2026-10-26）
+/* 记忆库推荐 · 设计变量与基础样式（样张 v3，2026-10-26）
+   两种模式：深色＝星空（默认），浅色＝纸面。深色模式由 <html class="theme-dark"> 打开，切换逻辑在 theme.js。
    色板取自《复古土星环与色彩图谱》；中文排版参数见 .claude/skills/zh-web-typography。
    全站只引用这里的变量，不写裸数字。 */
 
 :root {
-  /* 色板 */
+  /* 色板（两种模式通用） */
   --mustard: #d9a547;
   --cream: #dfcdb1;
   --warm-gray: #ae9e8b;
@@ -11,20 +12,22 @@
   --mauve: #a17072;
   --faded-plum: #9a505b;
   --deep-plum: #6f3f42;
+  --glow: #f2c66b;
 
-  /* 纸与墨 */
+  /* 浅色模式（纸面）。文字对纸色的对比度：ink 11.6 / ink-soft 5.8 / ink-faint 4.6 */
   --paper: #ece0cb;
   --paper-shade: #e3d4bb;
   --ink: #292524;          /* 偏暖的黑，不用纯黑 */
   --ink-soft: #5d524c;
-  --ink-faint: #8c7f72;
-  --rule: #c4b5a0;         /* 浅灰线：未完成的进度、行星环 */
-
-  /* 夜空（首页） */
-  --night: #1f191c;
-  --night-ink: #e8d8bf;
-  --night-soft: #a8977f;
-  --glow: #f2c66b;
+  --ink-faint: #706052;
+  --rule: #c4b5a0;         /* 浅灰线：未答的进度、行星环（只作线条） */
+  --star: var(--deep-plum);        /* 首页底色上的小点 */
+  --bulb: var(--faded-plum);       /* 星图上逐点亮起的灯 */
+  --moon: var(--mauve);            /* 可拖动的卫星 */
+  --moon-parked: var(--dusty-pink);
+  --dot: color-mix(in srgb, var(--ink) 7%, transparent);   /* 半色调网点 */
+  --vignette: color-mix(in srgb, var(--warm-gray) 22%, transparent);
+  --focus: var(--faded-plum);
 
   /* 字体：西文字体在前，西文字母才会用 Baskerville */
   --font-en: "Libre Baskerville", Baskerville, Georgia, serif;
@@ -35,9 +38,15 @@
   --fs-h1: 32px;  --lh-h1: 48px;
   --fs-h2: 24px;  --lh-h2: 36px;
   --fs-h3: 20px;  --lh-h3: 36px;
+  --fs-h4: 18px;  --lh-h4: 24px;
   --fs-body: 16px; --lh-body: 24px;
   --fs-small: 14px; --lh-small: 24px;
   --fs-caption: 12px; --lh-caption: 18px;
+
+  /* 字间距：正文保持 0；中文标题和短标签稍微放开；英文全大写图注放得多一些 */
+  --ls-zh-title: .04em;
+  --ls-zh-label: .04em;
+  --ls-en-caps: .14em;
 
   /* 间距：纵向单位 24px 的倍数 */
   --s-1: 6px;
@@ -46,7 +55,7 @@
   --s-4: 36px;
   --s-5: 48px;
   --s-6: 72px;
-  --gutter: 16px;          /* 手机左右留白 */
+  --gutter: 16px;          /* 手机左右留白；所有内容的左右边缘都对齐到这里 */
   --measure: 42em;         /* 行宽上限 */
 
   --line: 1px;             /* 细线 */
@@ -54,6 +63,24 @@
   --tap: 44px;             /* 最小点按高度 */
 
   --ease-out: cubic-bezier(.22, .8, .24, 1);
+}
+
+/* 深色模式（星空）。文字对底色的对比度：ink 12.4 / ink-soft 8.6 / ink-faint 5.5 */
+.theme-dark {
+  --paper: #1f191c;
+  --paper-shade: #2a2226;
+  --ink: #e8d8bf;
+  --ink-soft: #c5b59f;
+  --ink-faint: #a08f7b;
+  --rule: #63504f;
+  --star: var(--ink);
+  --bulb: var(--glow);
+  --moon: var(--mustard);
+  --moon-parked: var(--dusty-pink);
+  --dot: transparent;
+  --vignette: transparent;
+  --focus: var(--glow);
+  color-scheme: dark;
 }
 
 @media (min-width: 768px) {
@@ -68,6 +95,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
+  letter-spacing: 0;
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
@@ -76,35 +104,36 @@ body {
   overflow-wrap: anywhere;
   /* 极轻的“洇墨”：去掉数字文字过于锐利的边缘 */
   text-shadow: 0 0 .5px color-mix(in srgb, currentColor 45%, transparent);
+  transition: background-color .4s var(--ease-out), color .4s var(--ease-out);
 }
 
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 a { color: inherit; }
 
-:focus-visible { outline: 1.5px dashed var(--faded-plum); outline-offset: 3px; }
+:focus-visible { outline: 1.5px dashed var(--focus); outline-offset: 3px; }
 
 /* 英文图注：小字号、大写、适度字距 */
 .caption {
   font-family: var(--font-en);
   font-size: var(--fs-caption);
   line-height: var(--lh-caption);
-  letter-spacing: .14em;
+  letter-spacing: var(--ls-en-caps);
   text-transform: uppercase;
 }
 .caption-zh {
   font-family: var(--font-zh);
   font-size: var(--fs-caption);
   line-height: var(--lh-caption);
-  letter-spacing: .08em;
+  letter-spacing: var(--ls-zh-label);
 }
 
 /* ---------- 纸张质感 ---------- */
-/* 半色调网点 + 轻微的暗角，铺在纸面上 */
+/* 半色调网点 + 轻微的暗角（深色模式下两者都透明） */
 .paper {
   background-color: var(--paper);
   background-image:
-    radial-gradient(ellipse at 50% 40%, transparent 55%, color-mix(in srgb, var(--warm-gray) 22%, transparent) 100%),
-    radial-gradient(color-mix(in srgb, var(--ink) 7%, transparent) .6px, transparent .9px);
+    radial-gradient(ellipse at 50% 40%, transparent 55%, var(--vignette) 100%),
+    radial-gradient(var(--dot) .6px, transparent .9px);
   background-size: 100% 100%, 4px 4px;
   background-attachment: fixed, fixed;
 }
@@ -129,23 +158,22 @@ a { color: inherit; }
   opacity: .18;
   mix-blend-mode: multiply;
 }
-
-/* 夜空页：颗粒改成亮色，叠加方式改为 screen */
-.night { background: var(--night); color: var(--night-ink); }
-.night.grain::after { opacity: .5; mix-blend-mode: screen; filter: invert(1); }
-.night.grain::before { opacity: .1; mix-blend-mode: screen; filter: invert(1); }
+/* 深色模式：颗粒改成亮色，叠加方式改为 screen */
+.theme-dark .grain::after { opacity: .5; mix-blend-mode: screen; filter: invert(1); }
+.theme-dark .grain::before { opacity: .1; mix-blend-mode: screen; filter: invert(1); }
 
 /* ---------- 公共组件 ---------- */
 .topbar {
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--s-5);
-  padding: var(--s-2) var(--gutter);
+  padding: 0 var(--gutter);
   display: flex;
   align-items: center;
   z-index: 40;
 }
-.menu-btn { width: var(--tap); height: var(--tap); margin-left: calc(var(--s-2) * -1); display: grid; place-items: center; }
+/* 图标按钮：点按区 44px，图标本身的左边缘对齐到 gutter */
+.menu-btn { width: var(--tap); height: var(--tap); margin-left: -11px; display: grid; place-items: center; }
 .menu-btn svg { width: 22px; height: 22px; }
 
 /* 侧边导航 */
@@ -153,19 +181,20 @@ a { color: inherit; }
   position: fixed;
   inset: 0 auto 0 0;
   width: min(80vw, 320px);
-  padding: var(--s-6) var(--gutter) var(--s-4);
+  padding: var(--s-6) var(--gutter) var(--s-3);
   background: var(--paper);
   color: var(--ink);
   border-right: var(--line) solid var(--rule);
   transform: translateX(-102%);
-  transition: transform .45s var(--ease-out);
+  transition: transform .45s var(--ease-out), background-color .4s var(--ease-out);
   z-index: 80;
   display: flex;
   flex-direction: column;
-  gap: var(--s-3);
+  gap: var(--s-4);
 }
 .drawer.open { transform: none; }
-.drawer-close { position: absolute; top: var(--s-2); right: var(--s-1); width: var(--tap); height: var(--tap); }
+.drawer-close { position: absolute; top: 2px; right: calc(var(--gutter) - 13px); width: var(--tap); height: var(--tap); display: grid; place-items: center; }
+.drawer .label { margin: 0 0 var(--s-1); color: var(--ink-faint); }
 .drawer ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .drawer li a {
   display: flex; align-items: baseline; gap: var(--s-2);
@@ -175,12 +204,31 @@ a { color: inherit; }
   font-family: var(--font-zh);
   font-size: var(--fs-h3);
   line-height: var(--lh-h3);
+  letter-spacing: var(--ls-zh-title);
 }
 .drawer li .caption { color: var(--ink-faint); min-width: 2.5em; }
-.drawer .note { margin-top: auto; color: var(--ink-faint); }
+.drawer .facts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-2); color: var(--ink-soft); }
+.drawer .facts li { display: flex; align-items: center; gap: var(--s-2); }
+.drawer .facts svg { width: 18px; height: 18px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.2; }
+.drawer .note { margin: auto 0 0; color: var(--ink-faint); }
+
+/* 深色 / 浅色切换：两个直角按钮拼成一组 */
+.seg { display: flex; border: var(--line) solid var(--ink-soft); }
+.seg button {
+  flex: 1;
+  min-height: var(--tap);
+  display: flex; align-items: center; justify-content: center; gap: var(--s-1);
+  font-family: var(--font-zh); font-size: var(--fs-small); letter-spacing: var(--ls-zh-label);
+  color: var(--ink-soft);
+  transition: background-color .25s, color .25s;
+}
+.seg button + button { border-left: var(--line) solid var(--ink-soft); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.seg svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.3; }
+
 .scrim {
   position: fixed; inset: 0; z-index: 70;
-  background: color-mix(in srgb, var(--night) 35%, transparent);
+  background: color-mix(in srgb, #1f191c 40%, transparent);
   opacity: 0; pointer-events: none;
   transition: opacity .45s var(--ease-out);
 }
@@ -190,49 +238,4 @@ a { color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-}
-
-/* ---------- 粉色主题（样张 v2，2026-10-26） ----------
-   按 color-expert 的原则配色：
-   · 性格一致：全部取低饱和、灰调的颜色，色相集中在色卡的灰粉、梅红一带（OKLCH 色相 12°–32°）
-   · 60-30-10：底色淡灰粉占 60%，梅红系的线条和文字占 30%，芥末黄只占 10%，只用在发光和可拖动的卫星上，作视觉焦点
-   · 可读性靠明度差：文字对底色的 WCAG 对比度 —— 正文 9.9、说明 6.2、最浅的注释 4.8；芥末黄对底色只有 1.6，不用来写字
-   以下颜色都在 OKLCH 里由色卡颜色推出（明度、饱和度、色相见注释），计算脚本见提交说明 */
-.theme-rose {
-  --paper: #ead5d1;        /* L .89  C .024 H 32：灰粉提亮、去饱和，像泛粉的旧纸 */
-  --paper-shade: #e1c7c2;  /* L .85  C .030 H 30 */
-  --rule: #caaca8;         /* L .77  C .036 H 28：未答的进度、行星环 */
-  --line: #9d5c64;         /* L .55  C .085 H 12：星图射线、强调线（对底色 3.6，只作图形） */
-  --ink: #422426;          /* L .30  C .045 H 16：深梅色的“墨”，代替暖黑 */
-  --ink-soft: #684143;     /* L .42  C .055 H 16 */
-  --ink-faint: #755452;    /* L .48  C .045 H 22 */
-  --bulb: #d09033;         /* 芥末黄加深一点，亮灯在浅底上看得清 */
-}
-
-/* ---------- 梅红主题（样张 v4，2026-10-26） ----------
-   底色就是色卡的 faded plum（L .52，中等明度），所以文字只能用接近白的浅色：
-   能达到 4.5 对比度的只有 L .93 以上，层次靠字号、字距区分，不靠颜色深浅。
-   60 梅红底 / 30 浅粉线条和文字 / 10 提亮的芥末黄亮光。对比度：正文 4.9、副标题和注释 4.6、线条 3.0、亮灯 3.7 */
-.theme-plum {
-  --paper: #9a505b;        /* faded plum */
-  --paper-shade: #8d4752;
-  --rule: #b98185;         /* L .66：水平长线等弱线条 */
-  --line: #dcb2b0;         /* L .80：星图射线 */
-  --ink: #fcebde;          /* L .95 奶油色 */
-  --ink-soft: #fbe1dc;     /* L .93 浅粉 */
-  --ink-faint: #fbe1dc;    /* 这个底色上再浅就不够 4.5，和 ink-soft 相同 */
-  --bulb: #f5cb70;         /* 芥末黄提亮到 L .86 */
-}
-
-/* ---------- 星空主题（答题页用，2026-10-26） ----------
-   和首页星空版同一底色。文字对底色的对比度：正文 12.4、说明 8.6、注释 5.5；
-   未答的进度和行星环用 L .45 的暗灰梅（2.3，只作弱线条）；芥末黄 7.8，卫星用它作焦点 */
-.theme-night {
-  --paper: #1f191c;
-  --paper-shade: #2a2226;
-  --rule: #63504f;
-  --line: #a08f7b;
-  --ink: #e8d8bf;
-  --ink-soft: #c5b59f;
-  --ink-faint: #a08f7b;
 }
