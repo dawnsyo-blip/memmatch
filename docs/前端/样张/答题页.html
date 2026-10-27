@@ -138,12 +138,10 @@
   .next { position: relative; width: 120px; height: 44px; color: var(--ink); }
   .next:disabled { opacity: .3; cursor: default; }
   .next svg { position: absolute; inset: 0; width: 120px; height: 44px; overflow: visible; }
-  .next .trail-past { opacity: .35; }
-  .next:not(:disabled) .trail-past { stroke: var(--bulb); opacity: .85; }
-  .next .trail-arrow { opacity: .6; stroke-linecap: butt; }
-  .next:not(:disabled) .trail-arrow { stroke: var(--bulb); opacity: 1; }
-  .next .trail-ahead { stroke-dasharray: 3 4; opacity: .6; }
-  .next:not(:disabled) .trail-ahead { stroke: var(--bulb); opacity: 1; animation: march 1.2s linear infinite; }
+  /* 轨迹和土星同色（--ink）；没答本题时整个按钮变淡，答了以后前方虚线向右流动 */
+  .next .trail-arrow { stroke-linecap: butt; }
+  .next .trail-ahead { stroke-dasharray: 3 4; }
+  .next:not(:disabled) .trail-ahead { animation: march 1.2s linear infinite; }
   @keyframes march { to { stroke-dashoffset: -14; } }
   .next:not(:disabled) .probe { animation: cruise 3.2s ease-in-out infinite; }
   @keyframes cruise {
