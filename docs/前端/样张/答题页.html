@@ -26,25 +26,21 @@
   @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
 
 
-  /* ---------- 进度条：侧看的行星环 ---------- */
-  .rings { padding: var(--s-2) 0 0; }
-  .rings-bar { position: relative; display: flex; flex-direction: column; gap: 3px; }
-  .band { display: flex; gap: 2px; }
-  .band i { flex: 1; background: var(--rule); opacity: .7; transition: background-color .6s var(--ease-out), opacity .6s; }
-  .band:nth-child(1) { height: 2px; }
-  .band:nth-child(2) { height: 6px; }
-  .band:nth-child(3) { height: 3px; }
-  .band:nth-child(4) { height: 1.5px; }
-  .band i.done { opacity: 1; }
-  .band:nth-child(1) i.done { background: var(--mustard); }
-  .band:nth-child(2) i.done { background: var(--dusty-pink); }
-  .band:nth-child(3) i.done { background: var(--mauve); }
-  .band:nth-child(4) i.done { background: var(--faded-plum); }
-  .rings-marker {
-    position: absolute; top: -5px; bottom: -5px; width: var(--line-bold);
-    background: var(--ink);
-    transition: left .5s var(--ease-out);
-  }
+  /* ---------- 进度条：侧看的行星环，按问卷四个部分分成四段 ----------
+     每段宽度按该部分的题数，段内连续填充；游标是一根从屏幕顶上垂下来的细绳，穿过进度条，下端坠着一颗星星 */
+  .rings { padding: var(--s-1) 0 0; }
+  .rings-bar { position: relative; display: flex; flex-direction: column; gap: 3px; margin-bottom: 26px; }  /* 下方留出星星摆动的空间 */
+  .band { display: flex; gap: 6px; }
+  .band i { flex: var(--n) 1 0; background: linear-gradient(to right, var(--c) var(--f, 0%), var(--rule) var(--f, 0%)); }
+  .band:nth-child(1) { height: 2px; --c: var(--mustard); }
+  .band:nth-child(2) { height: 6px; --c: var(--dusty-pink); }
+  .band:nth-child(3) { height: 3px; --c: var(--mauve); }
+  .band:nth-child(4) { height: 1.5px; --c: var(--faded-plum); }
+  /* 坠着星星的绳子：画在顶栏下面一层，顶栏的渐变底色让绳子像从画面外垂下来 */
+  .pendant { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 39; overflow: visible; }
+  .pendant .rope { fill: none; stroke: var(--ink-faint); stroke-width: 1; }
+  .pendant .star { fill: var(--bulb); }
+  .pendant .star-glow { fill: var(--bulb); opacity: .25; filter: blur(2px); }
   .rings-meta {
     display: flex; justify-content: space-between; align-items: center;
     padding: 0 var(--gutter);
@@ -199,11 +195,15 @@
   <p class="note caption-zh">答卷只保存在您的浏览器里，可以随时离开，下次接着答。</p>
 </nav>
 
+<svg class="pendant" id="pendant" aria-hidden="true">
+  <path class="rope" id="rope"/>
+  <g id="starG"><circle class="star-glow" r="6"/><path class="star" d="M0 -5.2 L1.4 -1.7 L5 -1.6 L2.2 0.7 L3.1 4.3 L0 2.3 L-3.1 4.3 L-2.2 0.7 L-5 -1.6 L-1.4 -1.7 Z"/></g>
+</svg>
+
 <main class="quiz">
   <section class="rings" aria-label="答题进度">
     <div class="rings-bar" id="ringsBar" aria-hidden="true">
       <div class="band"></div><div class="band"></div><div class="band"></div><div class="band"></div>
-      <span class="rings-marker" id="marker"></span>
     </div>
     <div class="rings-meta">
       <button class="arrow" id="prevTop" aria-label="上一题"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="10.5,2.5 5,8 10.5,13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"/></svg></button>
@@ -296,18 +296,75 @@
     return n;
   };
 
-  /* ---------- 进度条 ---------- */
+  /* ---------- 进度条 ----------
+     四个部分的题数（含追问）：一 7、二 4、三 6、四 4，共 21。进度值 v＝已经走过的题数（当前题答了就算走过）。 */
+  const PARTS = [7, 4, 6, 4], GAP = 6;
+  const STARTS = PARTS.map((_, k) => PARTS.slice(0, k).reduce((a, b) => a + b, 0));
   const bands = [...document.querySelectorAll(".band")];
-  bands.forEach((b) => { for (let k = 0; k < TOTAL; k++) b.appendChild(document.createElement("i")); });
+  bands.forEach((b) => PARTS.forEach((n) => { const i = document.createElement("i"); i.style.setProperty("--n", n); b.appendChild(i); }));
+  const barX = (v) => {                       // 进度值 → 进度条上的横坐标
+    const W = $("ringsBar").clientWidth, unit = (W - GAP * (PARTS.length - 1)) / TOTAL;
+    let x = 0;
+    for (let k = 0; k < PARTS.length; k++) {
+      if (v <= STARTS[k] + PARTS[k] || k === PARTS.length - 1) return x + Math.max(0, v - STARTS[k]) * unit;
+      x += PARTS[k] * unit + GAP;
+    }
+    return x;
+  };
+  const fillTo = (v) => bands.forEach((b) => [...b.children].forEach((seg, k) => {
+    seg.style.setProperty("--f", (Math.min(1, Math.max(0, (v - STARTS[k]) / PARTS[k])) * 100).toFixed(2) + "%");
+  }));
+
+  /* ---------- 坠着星星的绳子：单摆 ----------
+     支点是绳子穿过进度条的位置（随游标移动），绳子在进度条下方长 L，末端挂星星。
+     游标移动时按它的加速度推动摆角：θ'' = −(g/L)·sinθ − (a/L)·cosθ − c·θ'，摆动后慢慢停住。 */
+  const L = 22, G = 900, DAMP = 3.2;
+  let v = 0, vFrom = 0, vTo = 0, t0 = 0, th = 0, om = 0, xPrev = null, velPrev = 0, raf = 0, tLast = 0;
+  const TWEEN = 900;
+  const easeIO = (p) => (p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+  function drawPendant() {
+    const bar = $("ringsBar"), r = bar.getBoundingClientRect();
+    const px = r.left + scrollX + barX(v), py = r.top + scrollY + r.height / 2;
+    const bx = px + L * Math.sin(th), by = py + L * Math.cos(th);
+    const pend = $("pendant");
+    pend.setAttribute("height", by + 12);
+    pend.setAttribute("viewBox", `0 0 ${document.documentElement.clientWidth} ${by + 12}`);
+    // 进度条以上是直的；以下略带弧度（中段稍微落后于末端，像有重量的细绳）
+    const cx = px + L * .5 * Math.sin(th * .6), cy = py + L * .5 * Math.cos(th * .6);
+    $("rope").setAttribute("d", `M${px.toFixed(1)} 0 L${px.toFixed(1)} ${py.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`);
+    $("starG").setAttribute("transform", `translate(${bx.toFixed(1)} ${(by + 4).toFixed(1)}) rotate(${(th * 180 / Math.PI).toFixed(1)})`);
+  }
+  function step(now) {
+    const dt = Math.min(.04, (now - tLast) / 1000 || .016);
+    tLast = now;
+    const p = Math.min(1, (now - t0) / TWEEN);
+    v = vFrom + (vTo - vFrom) * easeIO(p);
+    const x = barX(v);
+    const vel = xPrev === null ? 0 : (x - xPrev) / dt;
+    const acc = (vel - velPrev) / dt;
+    xPrev = x; velPrev = vel;
+    om += (-(G / L) * Math.sin(th) - (acc / L) * Math.cos(th) - DAMP * om) * dt;
+    th = Math.max(-.9, Math.min(.9, th + om * dt));
+    fillTo(v);
+    drawPendant();
+    if (p < 1 || Math.abs(th) > .002 || Math.abs(om) > .002) raf = requestAnimationFrame(step);
+    else { th = 0; om = 0; raf = 0; drawPendant(); }
+  }
+  function moveTo(target, animate) {
+    if (!animate || reduce) { v = vFrom = vTo = target; fillTo(v); drawPendant(); return; }
+    if (target === vTo) return;
+    vFrom = v; vTo = target; t0 = performance.now();
+    if (!raf) { tLast = t0; xPrev = null; velPrev = 0; raf = requestAnimationFrame(step); }
+  }
+  let firstDraw = true;
   function drawProgress() {
     const q = QS[state.i];
-    const done = new Set(QS.filter((x) => (state.answers[x.id] || []).length).map((x) => x.no));
-    // 样张里没放的题，当作已经答过（它们排在当前题之前时）
-    for (let n = 1; n < q.no; n++) if (!QS.some((x) => x.no === n)) done.add(n);
-    bands.forEach((b) => [...b.children].forEach((seg, k) => seg.classList.toggle("done", done.has(k + 1))));
-    $("marker").style.left = `calc(${((q.no - 1) / TOTAL) * 100}% - 0.75px)`;
+    const answered = (state.answers[q.id] || []).length > 0;
+    moveTo(q.no - 1 + (answered ? 1 : 0), !firstDraw);
+    firstDraw = false;
     $("where").textContent = `${q.part}　${q.no} / ${TOTAL}`;
   }
+  addEventListener("resize", () => drawPendant());
 
   /* ---------- 行星环几何：半椭圆（倾斜和透视的代码保留，TILT=0、depth 恒定即关闭） ----------
      像斜着看到的行星环：椭圆中心在屏幕右边缘，竖向半轴随选项多少变化，横向半轴固定（不压到选项文字），
