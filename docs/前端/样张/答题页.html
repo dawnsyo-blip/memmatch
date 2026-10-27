@@ -117,15 +117,18 @@
   .opt .label { font-family: var(--font-body); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
   .opt[aria-checked="true"]::before { border-color: var(--ink); }
   .opt[aria-checked="true"] .mark { color: var(--ink); }
-  /* 带填空的选项按基线对齐，输入框行高压到 1，下划线就贴着“其它：”的字底 */
-  .opt.has-free { align-items: baseline; }
+  /* 带填空的选项：没选时只显示“其它”，选中后才出现“：”和填空。
+     填空用 12px 的小字，文字顶端和“其它”的顶端对齐（按顶部排，再用 margin-top 补上两种字号的内边距差） */
+  .opt.has-free { align-items: flex-start; }
+  .opt .colon, .opt .free { display: none; }
+  .opt.has-free[aria-checked="true"] .colon { display: inline; }
+  .opt.has-free[aria-checked="true"] .free { display: block; }
   .opt .free {
-    width: 9em; margin-left: 2px;
-    font: inherit; font-size: var(--fs-small); line-height: 1.15; color: var(--ink);
+    width: 10em; margin: 1.5px 0 0 -4px;
+    font: inherit; font-size: var(--fs-caption); line-height: 1; color: var(--ink);
     background: transparent; border: 0;
     border-bottom: var(--line) solid var(--ink-soft);
-    padding: 0 2px; border-radius: 0;
-    position: relative; top: -.2em;   /* 输入框的下划线在字的下伸部之下，往上提到和“其它：”的字底齐平 */
+    padding: 0 2px 4px; border-radius: 0;
   }
   .opt .free::placeholder { color: var(--ink-faint); }
   .opt .free:focus { outline: none; border-bottom-color: var(--focus); }
@@ -496,7 +499,7 @@
       b.tabIndex = 0;
       b.setAttribute("role", q.type === "single" ? "radio" : "checkbox");
       b.innerHTML = `<span class="mark" aria-hidden="true">–</span><span class="label"></span>`;
-      b.querySelector(".label").textContent = flag === "free" ? label + "：" : label;
+      b.querySelector(".label").textContent = label;
       if (flag === "free") {
         const inp = document.createElement("input");
         inp.className = "free"; inp.placeholder = "请填写"; inp.value = state.free[q.id] || "";
@@ -509,6 +512,9 @@
           const on = (state.answers[q.id] || []).includes(id);
           if (inp.value && !on) choose(k, "input");
         });
+        const colon = document.createElement("span");
+        colon.className = "colon"; colon.textContent = "：";
+        b.querySelector(".label").appendChild(colon);   // 冒号贴着“其它”，不受选项内的间距影响
         b.appendChild(inp);
       }
       b.addEventListener("click", () => choose(k, "click"));
