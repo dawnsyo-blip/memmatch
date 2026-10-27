@@ -180,12 +180,11 @@
   }
 
   /* 点击中心后的转场（约 1.6 秒）：整个画面以光点为中心推近、放大光点；
-     标题、右下角文字、菜单先淡出，推近的后半段整个画面淡出成底色，接着答题页淡入。不铺色。 */
+     标题、右下角文字、菜单先淡出，推近的后半段整个画面淡出成底色，接着答题页淡入。不铺色。
+     放大不用 CSS transform（那会把画面当图片拉大、线条变糊），而是脚本逐帧缩小 SVG 的 viewBox，矢量重画，始终清晰 */
   .zooming .home, .zooming .stars {
-    transform-origin: var(--zx) var(--zy);
-    transform: scale(6);
     opacity: 0;
-    transition: transform 1.6s cubic-bezier(.6, 0, .3, 1), opacity .7s cubic-bezier(.45, 0, .55, 1) .85s;
+    transition: opacity .7s cubic-bezier(.45, 0, .55, 1) .85s;
   }
   .zooming .titles, .zooming .start, .zooming .topbar { opacity: 0; transition: opacity .5s var(--ease-out); }
 </style>
@@ -413,6 +412,32 @@
   syncBreath();
   document.fonts?.ready.then(syncBreath);   // 字体到了以后文字会重新排版，再对一次
 
+  /* ---------- 矢量推近：逐帧缩小 viewBox ----------
+     星图的原点就是光点，viewBox 以原点为中心缩小 s 倍，光点在屏幕上的位置不变；
+     背景星星的 viewBox 以光点的屏幕坐标 (cx, cy) 为中心缩小。缓动和原来的 cubic-bezier(.6, 0, .3, 1) 一样 */
+  function bezier(x1, y1, x2, y2) {
+    const B = (t, a, b) => 3 * a * t * (1 - t) ** 2 + 3 * b * t * t * (1 - t) + t ** 3;
+    return (x) => {
+      let lo = 0, hi = 1, t = x;
+      for (let i = 0; i < 20; i++) { t = (lo + hi) / 2; if (B(t, x1, x2) < x) lo = t; else hi = t; }
+      return B(t, y1, y2);
+    };
+  }
+  const zoomEase = bezier(.6, 0, .3, 1);
+  function zoomTo(cx, cy, maxScale, dur) {
+    const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    const sw = innerWidth, sh = innerHeight;
+    const t0 = performance.now();
+    const frame = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const s = 1 + (maxScale - 1) * zoomEase(p);
+      svg.setAttribute("viewBox", vb0.map((v) => (v / s).toFixed(3)).join(" "));
+      stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
+      if (p < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+
   /* ---------- 点击中心：画面推近、放大光点，淡出后进问卷 ---------- */
   function launch(e) {
     if (reduce) return;
@@ -420,9 +445,8 @@
     const href = e.currentTarget.getAttribute("href");
     const r = core.getBoundingClientRect();
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-    document.body.style.setProperty("--zx", cx + "px");
-    document.body.style.setProperty("--zy", cy + "px");
     document.documentElement.classList.add("zooming");
+    zoomTo(cx, cy, 6, 1600);
     setTimeout(() => { location.href = href; }, 1600);
   }
   core.addEventListener("click", launch);
