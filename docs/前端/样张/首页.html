@@ -92,7 +92,12 @@
   .pulsar svg { width: 100%; flex: 1; overflow: visible; }
   .pulsar .ray, .pulsar .bit { stroke: var(--ink); stroke-width: .9; fill: none; stroke-linecap: square; }
   .pulsar .ray { opacity: .9; }
-  .pulsar .gc { opacity: .55; }
+  /* 通向银河中心的水平长线：一直微微发亮（暖色），上面有一小束光从中心滑向右边 */
+  .pulsar .gc { stroke: color-mix(in srgb, var(--glow) 55%, var(--ink)); opacity: .7; }
+  .streak { animation: streak 3.6s linear infinite; }
+  .streak-core { stroke-width: 1.4; stroke-linecap: round; }
+  .streak-halo { stroke-width: 4; stroke-linecap: round; opacity: .35; }
+  @keyframes streak { from { transform: translateX(0); } to { transform: translateX(320px); } }
   .bulb { fill: var(--bulb); opacity: 0; animation: chase var(--dur) linear var(--delay) infinite; }
   @keyframes chase {
     0%   { opacity: 0; }
@@ -231,8 +236,14 @@
           <stop offset=".25" stop-color="var(--glow)"/>
           <stop offset="1" stop-color="var(--glow)" stop-opacity="0"/>
         </radialGradient>
+        <linearGradient id="streakGrad" gradientUnits="userSpaceOnUse" x1="-26" y1="0" x2="0" y2="0">
+          <stop offset="0" stop-color="var(--glow)" stop-opacity="0"/>
+          <stop offset=".75" stop-color="var(--glow)" stop-opacity=".85"/>
+          <stop offset="1" stop-color="#fff6dc"/>
+        </linearGradient>
       </defs>
       <g id="rays"></g>
+      <g id="streakLayer"></g>
       <g id="bulbs"></g>
       <circle class="core-glow" r="16" fill="url(#coreGrad)"/>
       <circle r="1.8" fill="#fff6dc"/>
@@ -280,6 +291,10 @@
   const STEP = 0.32; // 每盏灯亮起的间隔（秒）
 
   el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, raysG);
+  // 一小束光：渐变从尾部透明到头部最亮，整段沿水平线平移（渐变跟着线一起移动）
+  const streak = el("g", { class: "streak" }, document.getElementById("streakLayer"));
+  el("line", { class: "streak-halo", x1: -26, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
+  el("line", { class: "streak-core", x1: -18, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
 
   RAYS.forEach(([deg, len]) => {
     const a = deg * Math.PI / 180, ux = Math.cos(a), uy = -Math.sin(a);
@@ -291,24 +306,22 @@
     const marks = [];
     bits.forEach((b, k) => {
       const r = binStart + gap * (k + 0.5), x = ux * r, y = uy * r;
-      marks.push(r);
+      if (b) marks.push([r, k]);   // 只有垂直刻度装灯；0（沿线的短横）是断点，不亮
       if (b) el("line", { class: "bit", x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 }, raysG);
       else el("line", { class: "bit", x1: x - ux * gap * .32, y1: y - uy * gap * .32, x2: x + ux * gap * .32, y2: y + uy * gap * .32 }, raysG);
     });
     el("line", { class: "bit", x1: ux * len - px * 3, y1: uy * len - py * 3, x2: ux * len + px * 3, y2: uy * len + py * 3 }, raysG);
-    marks.push(len);
+    marks.push([len, bits.length]);   // 线尾那道也是垂直刻度
 
-    // 灯串：灯就装在每一道刻度上，从靠近中心的一道开始往外逐个亮；同一时间每条线只亮一盏
-    const n = marks.length;
+    // 灯串：从靠近中心的刻度往外逐拍推进，每一拍对应一个刻度位置；落在断点上的那一拍不亮
     const pause = 1.2 + rand() * 1.6;
-    const dur = n * STEP + pause;
+    const dur = (bits.length + 1) * STEP + pause;
     const offset = rand() * 4; // 灯串之间的启动时间偏移
-    for (let k = 0; k < n; k++) {
-      const r = marks[k];
+    marks.forEach(([r, k]) => {
       const c = el("circle", { class: "bulb", cx: ux * r, cy: uy * r, r: 2.4 }, bulbsG);
       c.style.setProperty("--dur", dur + "s");
       c.style.setProperty("--delay", (offset + k * STEP - dur) + "s");
-    }
+    });
   });
 
   /* ---------- 把中心按钮放到星图中心 ---------- */
