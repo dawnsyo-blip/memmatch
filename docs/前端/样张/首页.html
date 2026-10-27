@@ -179,12 +179,12 @@
     z-index: 2;
   }
 
-  /* 点击中心后的转场（约 1.6 秒）：整个画面以光点为中心推近、放大光点；
+  /* 点击中心后的转场（约 2 秒）：整个画面以光点为中心推近、放大光点；
      标题、右下角文字、菜单先淡出，推近的后半段整个画面淡出成底色，接着答题页淡入。不铺色。
      放大不用 CSS transform（那会把画面当图片拉大、线条变糊），而是脚本逐帧缩小 SVG 的 viewBox，矢量重画，始终清晰 */
   .zooming .home, .zooming .stars {
     opacity: 0;
-    transition: opacity .7s cubic-bezier(.45, 0, .55, 1) .85s;
+    transition: opacity .8s cubic-bezier(.45, 0, .55, 1) 1.15s;
   }
   .zooming .titles, .zooming .start, .zooming .topbar { opacity: 0; transition: opacity .5s var(--ease-out); }
 </style>
@@ -309,9 +309,14 @@
   const bulbsG = document.getElementById("bulbs");
   const STEP = 0.6; // 相邻两道刻度亮起的间隔（秒）
 
-  el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, raysG);
+  // 转场时要往外退开的各组：{ els: [元素…], ux, uy }
+  const spread = [];
+  const gcG = el("g", {}, raysG);
+  el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, gcG);
+  const streakLayer = document.getElementById("streakLayer");
+  spread.push({ els: [gcG, streakLayer], ux: 1, uy: 0 });
   // 一小束光：渐变从尾部透明到头部最亮，整段沿水平线平移（渐变跟着线一起移动）
-  const streak = el("g", { class: "streak" }, document.getElementById("streakLayer"));
+  const streak = el("g", { class: "streak" }, streakLayer);
   el("line", { class: "streak-halo", x1: -48, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
   el("line", { class: "streak-core", x1: -48, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
 
@@ -320,16 +325,18 @@
     const px = -uy, py = ux; // 垂直方向
     const bits = Array.from({ length: 10 + Math.floor(rand() * 4) }, () => (rand() > .45 ? 1 : 0));
     const binStart = len * (0.5 + rand() * 0.12);
-    el("line", { class: "ray", x1: 0, y1: 0, x2: ux * binStart, y2: uy * binStart }, raysG);
+    const rg = el("g", {}, raysG), bg = el("g", {}, bulbsG);
+    spread.push({ els: [rg, bg], ux, uy });
+    el("line", { class: "ray", x1: 0, y1: 0, x2: ux * binStart, y2: uy * binStart }, rg);
     const gap = (len - binStart) / bits.length;
     const marks = [];
     bits.forEach((b, k) => {
       const r = binStart + gap * (k + 0.5), x = ux * r, y = uy * r;
       if (b) marks.push([r, k]);   // 只有垂直刻度装灯；0（沿线的短横）是断点，不亮
-      if (b) el("line", { class: "bit", x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 }, raysG);
-      else el("line", { class: "bit", x1: x - ux * gap * .32, y1: y - uy * gap * .32, x2: x + ux * gap * .32, y2: y + uy * gap * .32 }, raysG);
+      if (b) el("line", { class: "bit", x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 }, rg);
+      else el("line", { class: "bit", x1: x - ux * gap * .32, y1: y - uy * gap * .32, x2: x + ux * gap * .32, y2: y + uy * gap * .32 }, rg);
     });
-    el("line", { class: "bit", x1: ux * len - px * 3, y1: uy * len - py * 3, x2: ux * len + px * 3, y2: uy * len + py * 3 }, raysG);
+    el("line", { class: "bit", x1: ux * len - px * 3, y1: uy * len - py * 3, x2: ux * len + px * 3, y2: uy * len + py * 3 }, rg);
     marks.push([len, bits.length]);   // 线尾那道也是垂直刻度
 
     // 灯串：从靠近中心的刻度往外逐拍推进，每一拍对应一个刻度位置；落在断点上的那一拍不亮
@@ -340,7 +347,7 @@
       // 刻度线本身发光：在原刻度上叠一道同样位置的亮线，外加一层模糊的光晕，一起亮起、一起暗下
       const x = ux * r, y = uy * r;
       const seg = { x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 };
-      const g = el("g", { class: "bulb" }, bulbsG);
+      const g = el("g", { class: "bulb" }, bg);
       el("line", { class: "bulb-halo", ...seg }, g);
       el("line", { class: "bulb-core", ...seg }, g);
       g.style.setProperty("--dur", dur + "s");
@@ -415,7 +422,8 @@
   /* ---------- 矢量推近：逐帧缩小 viewBox ----------
      星图的原点就是光点，viewBox 以原点为中心缩小 s 倍，光点在屏幕上的位置不变；
      背景星星的 viewBox 以光点的屏幕坐标 (cx, cy) 为中心缩小。
-     节奏“快-慢”：缓动用减速曲线；倍数按对数插值（1→6 倍里每一段感觉上的放大幅度一样），不会中途突然一跳 */
+     节奏“快-慢”：缓动用减速曲线；倍数按对数插值（1→6 倍里每一段感觉上的放大幅度一样），不会中途突然一跳。
+     同时每条射线沿自己的方向往外退开，中心空出一圈，露出光点（负责人的示意图） */
   function bezier(x1, y1, x2, y2) {
     const B = (t, a, b) => 3 * a * t * (1 - t) ** 2 + 3 * b * t * t * (1 - t) + t ** 3;
     return (x) => {
@@ -424,7 +432,9 @@
       return B(t, y1, y2);
     };
   }
-  const zoomEase = bezier(.25, .8, .3, 1);
+  const zoomEase = bezier(.3, .45, .35, 1);     // 减速，但开头比上一版缓
+  const spreadEase = bezier(.45, 0, .3, 1);     // 退开：轻轻起步，再慢慢停住
+  const SPREAD = 20;                            // 退开的距离（图上单位；放大后看起来约 100px）
   function zoomTo(cx, cy, maxScale, dur) {
     const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
     const sw = innerWidth, sh = innerHeight;
@@ -433,6 +443,8 @@
       const p = Math.min(1, (now - t0) / dur);
       const s = Math.pow(maxScale, zoomEase(p));
       svg.setAttribute("viewBox", vb0.map((v) => (v / s).toFixed(3)).join(" "));
+      const d = SPREAD * spreadEase(Math.min(1, p / 0.85));
+      spread.forEach(({ els, ux, uy }) => els.forEach((g) => g.setAttribute("transform", `translate(${(ux * d).toFixed(2)} ${(uy * d).toFixed(2)})`)));
       stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
       if (p < 1) requestAnimationFrame(frame);
     };
@@ -447,8 +459,8 @@
     const r = core.getBoundingClientRect();
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     document.documentElement.classList.add("zooming");
-    zoomTo(cx, cy, 6, 1600);
-    setTimeout(() => { location.href = href; }, 1600);
+    zoomTo(cx, cy, 6, 2000);
+    setTimeout(() => { location.href = href; }, 2000);
   }
   core.addEventListener("click", launch);
   startLink.addEventListener("click", launch);
