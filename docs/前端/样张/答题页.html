@@ -281,20 +281,20 @@
     $("where").textContent = `${q.part}　${q.no} / ${TOTAL}`;
   }
 
-  /* ---------- 行星环几何：倾斜的半椭圆 ----------
+  /* ---------- 行星环几何：半椭圆（倾斜和透视的代码保留，TILT=0、depth 恒定即关闭） ----------
      像斜着看到的行星环：椭圆中心在屏幕右边缘，竖向半轴随选项多少变化，横向半轴固定（不压到选项文字），
      整体倾斜 TILT。椭圆上的点用参数 θ 表示（θ=0 在最左，向上为正）：
        局部 L(θ) = (−rx·cosθ, −ry·sinθ)，屏幕 P(θ) = C + 旋转TILT(L)。
      “转动”是让刻度和卫星沿椭圆移动（改 θ），不是旋转整个图形，看起来像环在空间里转。
      下方是近处：线条更亮、卫星更大，上方是远处：更暗、更小，带出空间感。 */
   let geo = null, rot = 0, tween = null;
-  const TILT = 12 * Math.PI / 180;
+  const TILT = 0;   // 负责人 2026-10-27：去掉透视（倾斜、近亮远暗、近大远小都不要）
   const cT = Math.cos(TILT), sT = Math.sin(TILT);
   const pt = (th, rx = geo.rx, ry = geo.ry) => {
     const lx = -rx * Math.cos(th), ly = -ry * Math.sin(th);
     return [geo.cx + lx * cT - ly * sT, geo.cy + lx * sT + ly * cT];
   };
-  const depth = (th) => (1 - Math.sin(th)) / 2;   // 0＝最上（远）、1＝最下（近）
+  const depth = () => 0.5;   // 不分远近：亮度、大小一致
 
   function layoutOrbit() {
     const wrap = $("wrap"), svg = $("orbit");
@@ -324,7 +324,7 @@
     const defs = el("defs", {}, svg);
     // 椭圆画在已经倾斜的组里，渐变用的是组内坐标，所以这里写竖直方向即可
     const lg = el("linearGradient", { id: "ringDepth", gradientUnits: "userSpaceOnUse", x1: 0, y1: cy - ry, x2: 0, y2: cy + ry }, defs);
-    el("stop", { offset: 0, "stop-color": "var(--rule)", "stop-opacity": .35 }, lg);
+    el("stop", { offset: 0, "stop-color": "var(--rule)", "stop-opacity": 1 }, lg);
     el("stop", { offset: 1, "stop-color": "var(--rule)", "stop-opacity": 1 }, lg);
     const g = el("g", { id: "ringG", transform: `rotate(${TILT * 180 / Math.PI} ${W} ${cy})` }, svg);
     el("ellipse", { class: "ring", cx: W, cy, rx: rx + 9, ry: ry + 9, "stroke-width": 1 }, g);
@@ -364,7 +364,6 @@
       const sx = nx * cT - ny * sT, sy = nx * sT + ny * cT;
       ln.setAttribute("x1", x.toFixed(1)); ln.setAttribute("y1", y.toFixed(1));
       ln.setAttribute("x2", (x + sx * len).toFixed(1)); ln.setAttribute("y2", (y + sy * len).toFixed(1));
-      ln.style.opacity = (.35 + .65 * depth(th)).toFixed(2);
     });
     const [mx, my] = pt(v);
     const r = 7.5 + 3 * depth(v);
