@@ -260,13 +260,19 @@
           <stop offset=".92" stop-color="#f6d89a" stop-opacity=".55"/>
           <stop offset="1" stop-color="#f6d89a" stop-opacity="0"/>
         </linearGradient>
+        <!-- 转场时中心光点的边界逐渐变模糊（模糊程度由脚本逐帧调整，平时为 0） -->
+        <filter id="coreBlur" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur id="coreBlurAmt" stdDeviation="0"/>
+        </filter>
       </defs>
       <g id="rays"></g>
       <g id="streakLayer"></g>
       <g id="bulbs"></g>
-      <circle class="core-halo" r="34" fill="url(#haloGrad)"/>
-      <circle class="core-glow" r="18" fill="url(#coreGrad)"/>
-      <circle class="core-dot" r="1.4" fill="#fdf0d4"/>
+      <g id="coreG" filter="url(#coreBlur)">
+        <circle class="core-halo" r="34" fill="url(#haloGrad)"/>
+        <circle class="core-glow" r="18" fill="url(#coreGrad)"/>
+        <circle class="core-dot" r="1.4" fill="#fdf0d4"/>
+      </g>
     </svg>
     <a class="core" id="core" href="答题页.html" aria-label="开始问卷"></a>
   </figure>
@@ -437,6 +443,7 @@
   const SPREAD = 20;                            // 退开的距离（图上单位；放大后看起来约 100px）
   const fadeEls = ["rays", "bulbs", "streakLayer"].map((id) => document.getElementById(id));
   const coreGlow = svg.querySelector(".core-glow"), coreHalo = svg.querySelector(".core-halo");
+  const coreBlur = document.getElementById("coreBlurAmt");
   function zoomTo(cx, cy, maxScale, dur) {
     const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
     const sw = innerWidth, sh = innerHeight;
@@ -454,6 +461,7 @@
       const e = spreadEase(p);
       coreGlow.setAttribute("r", (18 * (1 + 1.2 * e)).toFixed(2));
       coreHalo.setAttribute("r", (34 * (1 + 2.5 * e)).toFixed(2));
+      coreBlur.setAttribute("stdDeviation", (1.6 * e).toFixed(3));   // 光点边界逐渐变模糊（图上单位，跟着推近一起放大）
       stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
       if (p < 1) requestAnimationFrame(frame);
     };
