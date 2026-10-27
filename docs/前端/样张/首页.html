@@ -90,7 +90,11 @@
     flex-direction: column;
   }
   .pulsar svg { width: 100%; flex: 1; overflow: visible; }
-  .pulsar .ray, .pulsar .bit { stroke: var(--ink); stroke-width: .9; fill: none; stroke-linecap: square; }
+  .pulsar .ray, .pulsar .bit { stroke: var(--ink); stroke-width: var(--w, .9); fill: none; stroke-linecap: square; }
+  /* 浅色模式：星图像旧书上印出来的插图——线条边缘轻微抖动、墨色深浅不匀（滤镜 #inked）。
+     深色模式是“发光的星图”，保持清晰；转场推近时也去掉滤镜（逐帧重算滤镜太重，射线那时也在淡出） */
+  :root:not(.theme-dark) #rays { filter: url(#inked); }
+  .zooming #rays { filter: none; }
   .pulsar .ray { opacity: .9; }
   /* 通向银河中心的水平长线：一直微微发亮（暖色），上面有一小束光从中心滑向右边 */
   .pulsar .gc { stroke: var(--gc); opacity: .7; }
@@ -269,6 +273,15 @@
         <mask id="rayFade" maskUnits="userSpaceOnUse" x="-3000" y="-3000" width="6000" height="6000">
           <rect x="-3000" y="-3000" width="6000" height="6000" fill="url(#rayFadeGrad)"/>
         </mask>
+        <!-- 印刷痕迹：① 高频噪声把线条像素推移约 1px（边缘起伏，像手画或凸版印刷）；
+             ② 低频噪声控制透明度，墨色在 70%～100% 之间深浅不匀（像墨没上匀、书页磨损） -->
+        <filter id="inked" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="2" seed="4" result="grain"/>
+          <feDisplacementMap in="SourceGraphic" in2="grain" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="wobble"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="11" result="blot"/>
+          <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .6 0 0 0 .45" result="density"/>
+          <feComposite in="wobble" in2="density" operator="in"/>
+        </filter>
         <!-- 转场时中心光点的边界逐渐变模糊（模糊程度由脚本逐帧调整，平时为 0） -->
         <filter id="coreBlur" x="-200%" y="-200%" width="500%" height="500%">
           <feGaussianBlur id="coreBlurAmt" stdDeviation="0"/>
@@ -323,6 +336,14 @@
   const raysG = document.getElementById("rays");
   const bulbsG = document.getElementById("bulbs");
   const STEP = 0.6; // 相邻两道刻度亮起的间隔（秒）
+  let hseed = 7;
+  const hrand = () => (hseed = (hseed * 16807) % 2147483647) / 2147483647;   // 手绘抖动专用
+  // 垂直刻度：方向在垂线基础上随机歪 ±4°，半长 2.6～3.4
+  const tick = (x, y, px, py) => {
+    const j = (hrand() - .5) * .14, hl = 2.6 + hrand() * .8;
+    const qx = px * Math.cos(j) - py * Math.sin(j), qy = px * Math.sin(j) + py * Math.cos(j);
+    return { x1: x - qx * hl, y1: y - qy * hl, x2: x + qx * hl, y2: y + qy * hl };
+  };
 
   // 转场时要往外退开的各组：{ els: [元素…], ux, uy }
   const spread = [];
@@ -341,27 +362,28 @@
     const bits = Array.from({ length: 10 + Math.floor(rand() * 4) }, () => (rand() > .45 ? 1 : 0));
     const binStart = len * (0.5 + rand() * 0.12);
     const rg = el("g", {}, raysG), bg = el("g", {}, bulbsG);
+    rg.style.setProperty("--w", (.78 + hrand() * .34).toFixed(2));   // 粗细 0.78～1.12
     spread.push({ els: [rg, bg], ux, uy });
     el("line", { class: "ray", x1: 0, y1: 0, x2: ux * binStart, y2: uy * binStart }, rg);
     const gap = (len - binStart) / bits.length;
     const marks = [];
     bits.forEach((b, k) => {
       const r = binStart + gap * (k + 0.5), x = ux * r, y = uy * r;
-      if (b) marks.push([r, k]);   // 只有垂直刻度装灯；0（沿线的短横）是断点，不亮
-      if (b) el("line", { class: "bit", x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 }, rg);
+      const seg = b ? tick(x, y, px, py) : null;
+      if (b) marks.push([r, k, seg]);   // 只有垂直刻度装灯；0（沿线的短横）是断点，不亮
+      if (b) el("line", { class: "bit", ...seg }, rg);
       else el("line", { class: "bit", x1: x - ux * gap * .32, y1: y - uy * gap * .32, x2: x + ux * gap * .32, y2: y + uy * gap * .32 }, rg);
     });
-    el("line", { class: "bit", x1: ux * len - px * 3, y1: uy * len - py * 3, x2: ux * len + px * 3, y2: uy * len + py * 3 }, rg);
-    marks.push([len, bits.length]);   // 线尾那道也是垂直刻度
+    const endSeg = tick(ux * len, uy * len, px, py);
+    el("line", { class: "bit", ...endSeg }, rg);
+    marks.push([len, bits.length, endSeg]);   // 线尾那道也是垂直刻度
 
     // 灯串：从靠近中心的刻度往外逐拍推进，每一拍对应一个刻度位置；落在断点上的那一拍不亮
     const pause = 2 + rand() * 2;   // 跑完一条线后停 2～4 秒
     const dur = (bits.length + 1) * STEP + pause;
     const offset = rand() * 4; // 灯串之间的启动时间偏移
-    marks.forEach(([r, k]) => {
+    marks.forEach(([r, k, seg]) => {
       // 刻度线本身发光：在原刻度上叠一道同样位置的亮线，外加一层模糊的光晕，一起亮起、一起暗下
-      const x = ux * r, y = uy * r;
-      const seg = { x1: x - px * 3, y1: y - py * 3, x2: x + px * 3, y2: y + py * 3 };
       const g = el("g", { class: "bulb" }, bg);
       el("line", { class: "bulb-halo", ...seg }, g);
       el("line", { class: "bulb-core", ...seg }, g);
