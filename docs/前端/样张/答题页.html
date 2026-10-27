@@ -79,11 +79,11 @@
   .orbit { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
   .orbit.top { z-index: 2; }
   .orbit .ring { fill: none; stroke: url(#ringDepth); }
-  .orbit .tick { stroke: var(--rule); stroke-width: 1; }
-  .orbit .parked { fill: var(--moon-parked); stroke: var(--ink); stroke-width: 1; }
+  .orbit .tick { stroke: var(--rule); stroke-linecap: butt; }
+  .orbit .parked { fill: var(--moon-parked); }
   .moon { pointer-events: auto; cursor: grab; touch-action: none; }
   .moon:active { cursor: grabbing; }
-  .moon .body { fill: var(--moon); stroke: var(--ink); stroke-width: 1.2; }
+  .moon .body { fill: var(--moon); }
   .moon .hit { fill: transparent; }
   .moon:focus-visible { outline: none; }
   .moon:focus-visible .body { stroke: var(--focus); stroke-width: 2.4; stroke-dasharray: 3 2; }
@@ -101,8 +101,12 @@
     width: 100%; min-height: var(--tap);
     padding: var(--s-1) var(--s-2);
     text-align: left;
+  }
+  .opt::before {
+    content: ""; position: absolute; inset: 6px 0;
     border: var(--line-bold) solid transparent;
     transition: border-color .25s var(--ease-out);
+    pointer-events: none;
   }
   .opt .mark {
     flex: none; width: 1em; text-align: center;
@@ -110,35 +114,30 @@
   }
   /* 文字底下垫一小块纸色，环线从文字后面穿过 */
   .opt .label { font-family: var(--font-body); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
-  .opt[aria-checked="true"] { border-color: var(--ink); }
+  .opt[aria-checked="true"]::before { border-color: var(--ink); }
   .opt[aria-checked="true"] .mark { color: var(--ink); }
+  /* 带填空的选项按基线对齐，输入框行高压到 1，下划线就贴着“其它：”的字底 */
+  .opt.has-free { align-items: baseline; }
   .opt .free {
     width: 9em; margin-left: 2px;
-    font: inherit; color: var(--ink);
+    font: inherit; line-height: 1.15; color: var(--ink);
     background: transparent; border: 0;
     border-bottom: var(--line) solid var(--ink-soft);
     padding: 0 2px; border-radius: 0;
+    position: relative; top: -.24em;   /* 输入框的下划线在字的下伸部之下，往上提到和“其它：”的字底齐平 */
   }
   .opt .free::placeholder { color: var(--ink-faint); }
   .opt .free:focus { outline: none; border-bottom-color: var(--focus); }
 
   /* ---------- 底部 ---------- */
   .foot {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex; justify-content: flex-end; align-items: center;
     padding: var(--s-4) var(--gutter) 0;
   }
-  .next {
-    display: inline-flex; align-items: center; gap: var(--s-2);
-    min-height: var(--tap); padding: 0 var(--s-3);
-    border: var(--line-bold) solid var(--ink);
-    font-family: var(--font-zh); letter-spacing: var(--ls-zh-label);
-    transition: background-color .25s, color .25s;
-  }
-  .next:not(:disabled):hover { background: var(--ink); color: var(--paper); }
-  .next:disabled { opacity: .35; cursor: default; }
-  .next svg { width: 12px; height: 12px; }
-  .privacy { display: flex; gap: var(--s-1); align-items: center; color: var(--ink-faint); }
-  .privacy svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.2; }
+  /* 下一题：只有一个直角箭头，点按区 44px，图标右边缘对齐 gutter */
+  .next { width: var(--tap); height: var(--tap); display: grid; place-items: center; margin-right: -14px; color: var(--ink); }
+  .next:disabled { opacity: .25; cursor: default; }
+  .next svg { width: 16px; height: 16px; }
 
   .toast {
     position: fixed; left: 50%; bottom: var(--s-3); transform: translate(-50%, 20px);
@@ -191,9 +190,9 @@
       <span class="rings-marker" id="marker"></span>
     </div>
     <div class="rings-meta">
-      <button class="arrow" id="prevTop" aria-label="上一题"><svg viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M783.36 1003.52c30.72-30.72 30.72-76.8 0-107.52L404.48 512l378.88-378.88c30.72-30.72 30.72-76.8 0-107.52-30.72-30.72-76.8-30.72-107.52 0L240.64 455.68c-30.72 30.72-30.72 76.8 0 107.52l435.2 435.2c30.72 30.72 76.8 30.72 107.52 5.12z"/></svg></button>
+      <button class="arrow" id="prevTop" aria-label="上一题"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="10.5,2.5 5,8 10.5,13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"/></svg></button>
       <span class="where caption-zh" id="where" aria-live="polite"></span>
-      <button class="arrow" id="nextTop" aria-label="下一题"><svg viewBox="0 0 1024 1024" aria-hidden="true"><path fill="currentColor" d="M240.64 20.48c-30.72 30.72-30.72 81.92 0 112.64l378.88 378.88-378.88 378.88c-30.72 30.72-30.72 76.8 0 107.52s76.8 30.72 107.52 0l435.2-435.2c30.72-30.72 30.72-76.8 0-107.52L348.16 20.48c-30.72-25.6-76.8-25.6-107.52 0z"/></svg></button>
+      <button class="arrow" id="nextTop" aria-label="下一题"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="5.5,2.5 11,8 5.5,13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"/></svg></button>
     </div>
   </section>
 
@@ -213,8 +212,7 @@
   </div>
 
   <div class="foot">
-    <span class="privacy caption-zh"><svg viewBox="0 0 14 14" aria-hidden="true"><rect x="2.5" y="6" width="9" height="6.5"/><path d="M4.5 6V4.2a2.5 2.5 0 0 1 5 0V6"/></svg>答卷不上传</span>
-    <button class="next" id="next">下一题<svg viewBox="0 0 1024 1024" class="chev" aria-hidden="true"><path fill="currentColor" d="M240.64 20.48c-30.72 30.72-30.72 81.92 0 112.64l378.88 378.88-378.88 378.88c-30.72 30.72-30.72 76.8 0 107.52s76.8 30.72 107.52 0l435.2-435.2c30.72-30.72 30.72-76.8 0-107.52L348.16 20.48c-30.72-25.6-76.8-25.6-107.52 0z"/></svg></button>
+    <button class="next" id="next" aria-label="下一题"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="5.5,2.5 11,8 5.5,13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"/></svg></button>
   </div>
 </main>
 
@@ -233,7 +231,7 @@
   const QS = [
     { id: "q1", no: 1, num: "第 1 题", part: "第一部分　模型、设备与入口", type: "multi",
       text: "您目前主要使用哪个厂商提供的模型？",
-      options: [["anthropic", "Anthropic（Claude）"], ["openai", "OpenAI（ChatGPT、GPT）"], ["google", "Google（Gemini）"],
+      options: [["anthropic", "Anthropic（Claude）"], ["openai", "OpenAI（ChatGPT）"], ["google", "Google（Gemini）"],
         ["glm", "智谱（GLM）"], ["deepseek", "DeepSeek"], ["kimi", "月之暗面（Kimi）"], ["qwen", "阿里（通义千问）"],
         ["doubao", "字节（豆包）"], ["local", "开源模型，本地运行"], ["other", "其它", "free"]] },
     { id: "q4", no: 5, num: "第 4 题", part: "第一部分　模型、设备与入口", type: "single",
@@ -330,9 +328,21 @@
     el("ellipse", { class: "ring", cx: W, cy, rx: rx + 9, ry: ry + 9, "stroke-width": 1 }, g);
     el("ellipse", { class: "ring", cx: W, cy, rx, ry, "stroke-width": 2.2 }, g);
     el("ellipse", { class: "ring", cx: W, cy, rx: rx - 11, ry: ry - 11, "stroke-width": 1 }, g);
+    // 刻度花纹：[长度, 粗细, 到下一道的间隔]，像仪表盘或齿轮上的刻度——粗的主刻度、细密的小刻度、一段空白
+    const PATTERN = [
+      [9, 2.2, 1.4], [4, .9, .8], [4, .9, .8], [4, .9, .8], [6, 1.3, 1.6],
+      [3, .7, .6], [3, .7, .6], [3, .7, 2.6], [7, 1.6, 1], [4, .9, 1],
+      [9.5, 2.8, .7], [9.5, 2.8, 2.2], [5, 1.1, .9], [3, .7, .6], [3, .7, 3.2],
+    ];
+    const REPEAT = 4, unit = 2 * Math.PI / (REPEAT * PATTERN.reduce((s, x) => s + x[2], 0));
     geo.ticks = [];
     const tg = el("g", { id: "ticksG" }, svg);
-    for (let k = 0; k < 64; k++) geo.ticks.push(el("line", { class: "tick" }, tg));
+    let off = 0;
+    for (let r = 0; r < REPEAT; r++) PATTERN.forEach(([len, w, gap]) => {
+      const ln = el("line", { class: "tick", "stroke-width": w }, tg);
+      geo.ticks.push({ ln, off, len });
+      off += gap * unit;
+    });
 
     el("g", { id: "parked" }, top2);
     const moon = el("g", { class: "moon", id: "moon", tabindex: 0, role: "slider", "aria-label": "卫星：拖动来选择选项" }, top2);
@@ -354,9 +364,9 @@
   // 把环“转”到 θ=v：刻度沿内圈椭圆移动，卫星停在外圈 θ=v 处（大小随远近变化）
   function drawRing(v) {
     rot = v;
-    const N = geo.ticks.length, a = geo.rx - 11, b = geo.ry - 11;
-    geo.ticks.forEach((ln, k) => {
-      const th = k * 2 * Math.PI / N + v, long = k % 4 === 0, len = long ? 8 : 4;
+    const a = geo.rx - 11, b = geo.ry - 11;
+    geo.ticks.forEach(({ ln, off, len }) => {
+      const th = off + v;
       const [x, y] = pt(th, a, b);
       // 椭圆在该点的外法线方向（局部），再转到屏幕
       let nx = -b * Math.cos(th), ny = -a * Math.sin(th);
@@ -496,6 +506,7 @@
       if (flag === "free") {
         const inp = document.createElement("input");
         inp.className = "free"; inp.placeholder = "请填写"; inp.value = state.free[q.id] || "";
+        b.classList.add("has-free");
         inp.setAttribute("aria-label", label + "，请填写");
         inp.addEventListener("click", (e) => e.stopPropagation());
         inp.addEventListener("keydown", (e) => e.stopPropagation());
@@ -522,7 +533,7 @@
     $("prevTop").disabled = state.i === 0;
     $("nextTop").disabled = !answered;
     $("next").disabled = !answered;
-    $("next").firstChild.textContent = state.i === QS.length - 1 ? "完成样张" : "下一题";
+    $("next").setAttribute("aria-label", state.i === QS.length - 1 ? "完成样张" : "下一题");
   }
 
   function go(d) {

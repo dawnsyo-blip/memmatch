@@ -19,7 +19,7 @@
       "text": "您目前主要使用哪个厂商提供的模型？",
       "options": [
         {"id": "anthropic", "label": "Anthropic（Claude）"},
-        {"id": "openai", "label": "OpenAI（ChatGPT、GPT）"},
+        {"id": "openai", "label": "OpenAI（ChatGPT）"},
         {"id": "google", "label": "Google（Gemini）"},
         {"id": "glm", "label": "智谱（GLM）"},
         {"id": "deepseek", "label": "DeepSeek"},
