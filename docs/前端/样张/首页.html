@@ -523,8 +523,8 @@
       svg.setAttribute("viewBox", vb0.map((v) => (v / s).toFixed(3)).join(" "));
       const d = SPREAD * spreadEase(Math.min(1, p / 0.85));
       spread.forEach(({ els, ux, uy }) => els.forEach((g) => g.setAttribute("transform", `translate(${(ux * d).toFixed(2)} ${(uy * d).toFixed(2)})`)));
-      // 射线、刻度、光束一边退开一边变淡（降到 20%），只有中心的光保持亮度
-      const fade = (1 - 0.8 * spreadEase(p)).toFixed(3);
+      // 射线、刻度、光束一边退开一边变淡，到 50% 时降到 0，只有中心的光保持亮度
+      const fade = (1 - spreadEase(Math.min(1, p / 0.5))).toFixed(3);   // 射线在转场进行到一半时完全淡出
       fadeEls.forEach((g) => { g.style.opacity = fade; });
       // 中心的光晕逐渐向外发散：在推近之外再额外变大（内层到 2.2 倍，外圈到 3.5 倍），呼吸动画照常
       const e = spreadEase(p);
