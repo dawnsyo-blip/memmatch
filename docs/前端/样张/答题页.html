@@ -134,6 +134,9 @@
   /* 粉色版：可拖动的卫星用芥末黄作视觉焦点，其余靠 .theme-rose 的变量 */
   body.theme-rose .moon .body { fill: var(--mustard); stroke: var(--ink); }
   body.theme-rose .orbit .parked { fill: var(--mauve); stroke: var(--ink); }
+  body.theme-night .moon .body { fill: var(--mustard); stroke: var(--ink); }
+  body.theme-night .orbit .parked { fill: var(--dusty-pink); stroke: var(--ink); }
+  body.theme-night .band i { opacity: .9; }
   .sample-switch { margin-left: auto; display: flex; gap: var(--s-1); align-items: center; color: var(--ink-soft); }
   .sample-switch button { padding: 2px var(--s-1); min-height: 32px; }
   .sample-switch button[aria-pressed="true"] { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
@@ -153,6 +156,7 @@
     <span>样张</span>
     <button type="button" data-theme="paper" aria-pressed="false">纸面</button>
     <button type="button" data-theme="rose" aria-pressed="false">粉色</button>
+    <button type="button" data-theme="night" aria-pressed="false">星空</button>
   </div>
 </header>
 
@@ -515,10 +519,12 @@
   const themeBtns = document.querySelectorAll(".sample-switch button");
   const setTheme = (name) => {
     document.body.classList.toggle("theme-rose", name === "rose");
+    document.body.classList.toggle("theme-night", name === "night");
+    document.body.classList.toggle("night", name === "night"); // 颗粒改成亮色
     themeBtns.forEach((b) => b.setAttribute("aria-pressed", b.dataset.theme === name));
   };
   themeBtns.forEach((b) => b.addEventListener("click", () => setTheme(b.dataset.theme)));
-  setTheme(location.hash.includes("paper") ? "paper" : "rose");
+  setTheme(location.hash.includes("paper") ? "paper" : location.hash.includes("rose") ? "rose" : "night");
 
   render();
   if (state.hinted) { $("hint").hidden = true; requestAnimationFrame(layoutOrbit); }
