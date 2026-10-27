@@ -137,6 +137,21 @@
   body.theme-rose .callout .zh { fill: var(--ink-soft); }
   body.theme-rose .stars circle { fill: var(--line); opacity: .45; }
   body.theme-rose .sample-switch button[aria-pressed="true"] { color: var(--line); }
+
+  /* 梅红版：颜色由 tokens.css 的 .theme-plum 提供（60 梅红底 / 30 浅粉线条和文字 / 10 提亮的芥末黄） */
+  body.theme-plum .pulsar .ray { stroke: var(--line); opacity: 1; }
+  body.theme-plum .pulsar .gc { stroke: var(--rule); opacity: 1; }
+  body.theme-plum .pulsar .bit { stroke: var(--ink-soft); }
+  body.theme-plum .bulb { fill: var(--bulb); }
+  body.theme-plum .core-dot { fill: #fff3d6; }
+  body.theme-plum .subtitle, body.theme-plum .facts { color: var(--ink-soft); }
+  body.theme-plum .callout line { stroke: var(--ink-soft); }
+  body.theme-plum .callout .zh { fill: var(--ink-soft); }
+  body.theme-plum .stars circle { fill: var(--ink); opacity: .55; }
+  body.theme-plum .sample-switch button[aria-pressed="true"] { color: var(--line); }
+  body.theme-plum .sample-switch { background: color-mix(in srgb, var(--paper) 85%, transparent); color: var(--ink); border-color: var(--line); }
+  body.theme-plum .sample-switch button[aria-pressed="true"] { color: var(--bulb); }
+  body.theme-plum .callout .en { fill: var(--ink); }
 </style>
 </head>
 <body class="night grain">
@@ -205,6 +220,7 @@
   <button type="button" data-mode="night" aria-pressed="true">星空</button>
   <button type="button" data-mode="paper" aria-pressed="false">纸面</button>
   <button type="button" data-mode="rose" aria-pressed="false">粉色</button>
+  <button type="button" data-mode="plum" aria-pressed="false">梅红</button>
 </div>
 
 <div class="flash" id="flash"></div>
@@ -343,9 +359,10 @@
     document.body.classList.toggle("paper-mode", light);
     document.body.classList.toggle("paper", light);
     document.body.classList.toggle("theme-rose", mode === "rose");
+    document.body.classList.toggle("theme-plum", mode === "plum");
     document.querySelectorAll(".sample-switch button").forEach((x) => x.setAttribute("aria-pressed", x === b));
   }));
-  const start = { "#paper": "paper", "#night": "night" }[location.hash] || "rose";
+  const start = { "#paper": "paper", "#night": "night", "#rose": "rose" }[location.hash] || "plum";
   document.querySelector(`.sample-switch [data-mode="${start}"]`).click();
 })();
 </script>
