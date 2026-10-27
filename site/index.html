@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>记忆库推荐</title>
+<meta name="description" content="回答几个问题，找到适合你与 AI 共用的开源记忆库">
+<script>
+  // 在画面出来前决定模式：默认深色（地址带 #light 时临时看浅色）
+  (function () {
+    var r = document.documentElement, t = "dark";
+    try { t = localStorage.getItem("memsite-theme") || "dark"; } catch (e) {}
+    if (location.hash.indexOf("light") > -1) t = "light";
+    if (t === "dark") r.classList.add("theme-dark");
+    r.classList.add("map-golden");   // 星图中心在 (30%, 61.8%)
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<style>
+  body { min-height: 100svh; }
+
+  /* 底色上的小点：深色模式是星星，浅色模式是印刷斑点 */
+  .stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .stars circle { fill: var(--star); }
+  .theme-dark .stars .tw { animation: twinkle var(--d, 4s) ease-in-out var(--delay, 0s) infinite; }
+  @keyframes twinkle { 0%, 100% { opacity: var(--o, .6); } 50% { opacity: .1; } }
+
+  .home {
+    position: relative;
+    z-index: 1;
+    min-height: 100svh;
+    padding: var(--s-6) var(--gutter) var(--s-3);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ---------- 标题 ----------
+     英文大标题 + 中文副标题，右对齐到 gutter。 */
+  .titles { margin-top: 0; display: flex; flex-direction: column; align-items: flex-end; text-align: right; }
+  .headline-en {
+    margin: 0;
+    /* 首页标题：Source Serif 4 Bold，固定用展示设计尺寸，粗细对比最强 */
+    font-family: var(--font-en);
+    font-variation-settings: "opsz" 60;   /* 和字体对比样张一样：用最大的展示设计尺寸，粗细对比最强 */
+    font-weight: 700;
+    font-size: clamp(27px, 7.4vw, 44px);
+    line-height: 1.33;                 /* 西文展示字：约 36px（1.5 个纵向单位） */
+    letter-spacing: -.005em;
+  }
+  .headline-en .caps { font-style: normal; letter-spacing: .06em; font-size: .86em; }
+  /* 副标题和英文标题最后一行等宽、两端对齐（宽度由脚本按最后一行实测） */
+  .sub-zh {
+    text-align: justify; text-align-last: justify;
+    margin: var(--s-2) 0 0;
+    font-family: var(--font-zh);
+    font-size: var(--fs-h4);
+    line-height: var(--lh-h4);
+    letter-spacing: var(--ls-zh-title);
+    color: var(--ink-soft);
+  }
+
+  /* ---------- 脉冲星图 ---------- */
+  .pulsar {
+    position: relative;
+    margin: var(--s-3) calc(var(--gutter) * -1) 0;
+    flex: 1;
+    min-height: 330px;
+    display: flex;
+    flex-direction: column;
+  }
+  .pulsar svg { width: 100%; flex: 1; overflow: visible; }
+  .pulsar .ray, .pulsar .bit { stroke: var(--map-line); stroke-width: var(--w, .9); fill: none; stroke-linecap: square; }
+  /* 浅色模式：星图像旧书上印出来的插图——线条边缘轻微抖动、墨色深浅不匀（滤镜 #inked）。
+     深色模式是“发光的星图”，保持清晰；转场推近时也去掉滤镜（逐帧重算滤镜太重，射线那时也在淡出） */
+  :root:not(.theme-dark) #rays { filter: url(#inked); }
+  /* 文字也加印刷痕迹（浅色模式）：标题、副标题用 #inkText，右下角小字用更轻的 #inkTextSm */
+  :root:not(.theme-dark) .titles { filter: url(#inkText); }
+  :root:not(.theme-dark) .start-text { filter: url(#inkTextSm); }
+  .zooming #rays { filter: none; }
+  .pulsar .ray { opacity: .9; }
+  /* 通向银河中心的水平长线：一直微微发亮（暖色），上面有一小束光从中心滑向右边 */
+  .pulsar .gc { stroke: var(--gc); opacity: .7; }
+  /* 光束：头尾都渐隐（没有硬边），最亮处只有 55%，尾巴更长，外面一层模糊的光晕；6 秒滑完一程 */
+  .streak { animation: streak 6s linear infinite; }
+  .streak-core { stroke-width: 1; stroke-linecap: round; }
+  .streak-halo { stroke-width: 5; stroke-linecap: round; opacity: .3; filter: blur(2px); }
+  @keyframes streak { from { transform: translateX(0); } to { transform: translateX(320px); } }
+  .bulb { opacity: 0; animation: chase var(--dur) linear var(--delay) infinite; }
+  .bulb line { fill: none; stroke: var(--bulb); stroke-linecap: round; }
+  .bulb-core { stroke-width: 1.3; }
+  .bulb-halo { stroke-width: 4; opacity: .4; filter: blur(1.5px); }
+  @keyframes chase {
+    0%   { opacity: 0; }
+    2%   { opacity: 1; }
+    9%   { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  /* 中心的光：像呼吸一样慢慢胀缩，一呼一吸 5.2 秒。和右下角文字里的小光点同步（脚本把它们对到同一个起点） */
+  .core-glow, .core-halo, .core-dot { transform-box: fill-box; transform-origin: center; }
+  #coreG { transform: scale(var(--core-size)); }   /* 原点就是光点，按原点放大 */
+  .core-glow { animation: breathe 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+  .core-halo { animation: breathe-halo 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+  .core-dot  { animation: breathe-dot 5.2s cubic-bezier(.45, 0, .55, 1) infinite; }
+  @keyframes breathe      { 0%, 100% { opacity: .62; transform: scale(.88); } 50% { opacity: .95; transform: scale(1.1); } }
+  @keyframes breathe-halo { 0%, 100% { opacity: .35; transform: scale(.85); } 50% { opacity: .85; transform: scale(1.18); } }
+  @keyframes breathe-dot  { 0%, 100% { opacity: .7; } 50% { opacity: 1; } }
+  /* 开始提示：放在右下角。显眼但不抢星图中心——
+     · 四角各一笔细折线（像印刷品的裁切标记），圈出可点的范围，不加框、不加底色
+     · 字号按负责人要求：英文 8px、中文 10px（规范最小 12px，这里是例外），两行两端对齐 */
+  .start {
+    position: absolute;
+    right: var(--gutter);
+    bottom: var(--s-4);
+    display: flex; align-items: center;
+    padding: var(--s-1) var(--s-2);
+    text-decoration: none;
+    z-index: 2;
+    --mark: var(--ink-faint);
+    background:
+      linear-gradient(var(--mark), var(--mark)) left top / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) left top / 1px 6px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right top / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right top / 1px 6px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) left bottom / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) left bottom / 1px 6px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right bottom / 6px 1px no-repeat,
+      linear-gradient(var(--mark), var(--mark)) right bottom / 1px 6px no-repeat;
+    transition: --mark .3s;
+  }
+  .start-text { display: grid; width: max-content; }
+  .start .caption {
+    font-size: 8px; line-height: 12px; color: var(--ink-soft);
+    text-align: justify; text-align-last: justify;
+    margin-right: calc(var(--ls-en-caps) * -1);   /* 抵消最后一个字母后面的字距，右端才齐 */
+  }
+  .start .caption-zh {
+    font-size: 10px; line-height: 15px; letter-spacing: 0; color: var(--ink-faint);
+    text-align: justify; text-align-last: justify;
+  }
+  /* 文字里的“光点”：画成一颗小光点，和星图中心同一节奏呼吸，但更暗、光晕更小 */
+  .glint {
+    display: inline-block;
+    width: .62em; height: .62em;
+    margin: 0 .12em;
+    vertical-align: -.02em;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--glint-in) 0 18%, var(--bulb) 45%, color-mix(in srgb, var(--bulb) 0%, transparent) 72%);
+    box-shadow: 0 0 4px color-mix(in srgb, var(--bulb) 55%, transparent);
+    animation: glint 5.2s cubic-bezier(.45, 0, .55, 1) infinite;   /* 和星图中心同一节奏 */
+  }
+  @keyframes glint { 0%, 100% { opacity: .45; transform: scale(.88); } 50% { opacity: .8; transform: scale(1.1); } }
+  .start:hover, .start:focus-visible { --mark: var(--bulb); }
+  .start:hover .caption, .start:focus-visible .caption { color: var(--ink); }
+
+  /* 黄金分割版：星图铺满整屏，中心落在横向 30%、纵向 61.8%（位置由脚本按屏幕尺寸算） */
+  .map-golden .titles { position: relative; z-index: 1; }
+  .map-golden .pulsar { position: absolute; left: 0; top: 0; width: 100%; height: 100svh; min-height: 0; margin: 0; z-index: 0; }
+  .map-golden .pulsar svg { width: 100%; height: 100%; flex: none; }
+
+  /* 中心按钮：盖在星图中心上 */
+  .core {
+    position: absolute;
+    width: 64px; height: 64px;
+    margin: -32px 0 0 -32px;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  /* 点击中心后的转场（约 2 秒）：整个画面以光点为中心推近、放大光点；
+     标题、右下角文字、菜单先淡出，推近的后半段整个画面淡出成底色，接着答题页淡入。不铺色。
+     放大不用 CSS transform（那会把画面当图片拉大、线条变糊），而是脚本逐帧缩小 SVG 的 viewBox，矢量重画，始终清晰 */
+  .zooming .home, .zooming .stars {
+    opacity: 0;
+    transition: opacity .8s cubic-bezier(.45, 0, .55, 1) 1.15s;
+  }
+  .zooming .titles, .zooming .start, .zooming .topbar { opacity: 0; transition: opacity .5s var(--ease-out); }
+</style>
+</head>
+<body class="paper grain">
+
+<svg class="stars" id="stars" aria-hidden="true"></svg>
+<!-- 文字的印刷痕迹（浅色模式用）：边缘轻微起伏＋墨色深浅不匀；小字用更轻的一档，保证能读 -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="inkText" x="-2%" y="-10%" width="104%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="21" result="grain"/>
+    <feDisplacementMap in="SourceGraphic" in2="grain" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="wobble"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="5" result="blot"/>
+    <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .45 0 0 0 .62" result="density"/>
+    <feComposite in="wobble" in2="density" operator="in"/>
+  </filter>
+  <filter id="inkTextSm" x="-2%" y="-10%" width="104%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" seed="21" result="grain"/>
+    <feDisplacementMap in="SourceGraphic" in2="grain" scale="0.45" xChannelSelector="R" yChannelSelector="G" result="wobble"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" seed="5" result="blot"/>
+    <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .3 0 0 0 .75" result="density"/>
+    <feComposite in="wobble" in2="density" operator="in"/>
+  </filter>
+</svg>
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="打开导航" aria-expanded="false" aria-controls="drawer">
+    <svg viewBox="0 0 22 22" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="butt"><path d="M1 3.4h2M1 11h2M1 18.6h2"/><path d="M5.5 3.4H14M5.5 11H21M5.5 18.6H14"/></g></svg>
+  </button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<nav class="drawer" id="drawer" aria-label="网站导航" inert>
+  <button class="drawer-close" id="drawerClose" aria-label="关闭导航">
+    <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><g stroke="currentColor" stroke-width="1.4"><line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/></g></svg>
+  </button>
+  <div>
+    <p class="label caption">Index</p>
+    <ol>
+      <li><a href="quiz.html"><span class="caption">I</span>开始问卷</a></li>
+      <li><a href="#"><span class="caption">II</span>项目目录</a></li>
+      <li><a href="#"><span class="caption">III</span>关于本站</a></li>
+      <li><a href="#"><span class="caption">IV</span>作者</a></li>
+    </ol>
+  </div>
+  <ul class="facts caption-zh" aria-label="网站概况">
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><ellipse cx="9" cy="4.5" rx="6.5" ry="2.5"/><path d="M2.5 4.5v9c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5v-9"/><path d="M2.5 9c0 1.4 2.9 2.5 6.5 2.5s6.5-1.1 6.5-2.5"/></svg>收录 247 个开源记忆项目</li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7"/><path d="M9 4.5V9l3 2"/></svg>答完约 5 分钟</li>
+    <li><svg viewBox="0 0 18 18" aria-hidden="true"><rect x="3.5" y="8" width="11" height="8"/><path d="M6 8V5.5a3 3 0 0 1 6 0V8"/></svg>答卷只存在你的浏览器里</li>
+  </ul>
+  <div>
+    <p class="label caption">Appearance</p>
+    <div class="seg" role="group" aria-label="外观">
+      <button type="button" data-theme-set="dark" aria-pressed="true"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M11.5 8.6A5 5 0 1 1 5.4 2.5a4 4 0 0 0 6.1 6.1z"/></svg>深色</button>
+      <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><path d="M7 1v1.6M7 11.4V13M1 7h1.6M11.4 7H13M2.8 2.8l1.1 1.1M10.1 10.1l1.1 1.1M2.8 11.2l1.1-1.1M10.1 3.9l1.1-1.1"/></svg>浅色</button>
+    </div>
+  </div>
+  <p class="note caption-zh">信息来自各项目的说明文档，未经实际安装验证。</p>
+</nav>
+
+<main class="home">
+  <div class="titles titles-en">
+    <h1 class="headline-en" lang="en">a quick quiz to find<br>the memory patch<br><span id="lastLine">fitting <em class="caps">YOUR</em> AI agent</span></h1>
+    <p class="sub-zh" id="subZh">找到适合你与 AI 共用的记忆库</p>
+  </div>
+
+  <figure class="pulsar" id="pulsarFig">
+    <svg id="pulsar" viewBox="-125 -162 400 337" preserveAspectRatio="xMinYMin meet" role="img" aria-label="仿照先驱者号金属板上的脉冲星图">
+      <defs>
+        <!-- 中心的光：内层暖白、慢慢过渡到芥末黄再淡出，没有明显的边 -->
+        <radialGradient id="coreGrad">
+          <stop offset="0" stop-color="var(--core-1)" stop-opacity=".95"/>
+          <stop offset=".18" stop-color="var(--core-2)" stop-opacity=".8"/>
+          <stop offset=".45" stop-color="var(--core-3)" stop-opacity=".35"/>
+          <stop offset=".75" stop-color="var(--core-3)" stop-opacity=".1"/>
+          <stop offset="1" stop-color="var(--core-3)" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="haloGrad">
+          <stop offset="0" stop-color="var(--halo-c)" stop-opacity=".22"/>
+          <stop offset=".5" stop-color="var(--halo-c)" stop-opacity=".08"/>
+          <stop offset="1" stop-color="var(--halo-c)" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="streakGrad" gradientUnits="userSpaceOnUse" x1="-48" y1="0" x2="0" y2="0">
+          <stop offset="0" stop-color="var(--streak-c)" stop-opacity="0"/>
+          <stop offset=".6" stop-color="var(--streak-c)" stop-opacity=".25"/>
+          <stop offset=".92" stop-color="var(--streak-head)" stop-opacity=".55"/>
+          <stop offset="1" stop-color="var(--streak-head)" stop-opacity="0"/>
+        </linearGradient>
+        <!-- 转场时射线从中心到外围的渐隐：线头处全透明，往外一段距离内过渡到不透明（范围由脚本逐帧调整） -->
+        <radialGradient id="rayFadeGrad" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="0.01">
+          <stop id="rayFadeIn" offset="0" stop-color="#000"/>
+          <stop offset="1" stop-color="#fff"/>
+        </radialGradient>
+        <mask id="rayFade" maskUnits="userSpaceOnUse" x="-3000" y="-3000" width="6000" height="6000">
+          <rect x="-3000" y="-3000" width="6000" height="6000" fill="url(#rayFadeGrad)"/>
+        </mask>
+        <!-- 印刷痕迹：① 高频噪声把线条像素推移约 1px（边缘起伏，像手画或凸版印刷）；
+             ② 低频噪声控制透明度，墨色在 70%～100% 之间深浅不匀（像墨没上匀、书页磨损） -->
+        <filter id="inked" x="-10%" y="-10%" width="120%" height="120%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="2" seed="4" result="grain"/>
+          <feDisplacementMap in="SourceGraphic" in2="grain" scale="0.9" xChannelSelector="R" yChannelSelector="G" result="wobble"/>
+          <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" seed="11" result="blot"/>
+          <feColorMatrix in="blot" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .6 0 0 0 .45" result="density"/>
+          <feComposite in="wobble" in2="density" operator="in"/>
+        </filter>
+        <!-- 转场时中心光点的边界逐渐变模糊（模糊程度由脚本逐帧调整，平时为 0） -->
+        <filter id="coreBlur" x="-200%" y="-200%" width="500%" height="500%">
+          <feGaussianBlur id="coreBlurAmt" stdDeviation="0"/>
+        </filter>
+      </defs>
+      <g id="rays"></g>
+      <g id="streakLayer"></g>
+      <g id="bulbs"></g>
+      <g id="coreG" filter="url(#coreBlur)">
+        <circle class="core-halo" r="34" fill="url(#haloGrad)"/>
+        <circle class="core-glow" r="18" fill="url(#coreGrad)"/>
+        <circle class="core-dot" r="1.4" fill="var(--core-1)"/>
+      </g>
+    </svg>
+    <a class="core" id="core" href="quiz.html" aria-label="开始问卷"></a>
+  </figure>
+
+  <a class="start" id="startLink" href="quiz.html">
+    <span class="start-text">
+      <span class="caption">Light up and start</span>
+      <span class="caption-zh">点亮<span class="glint" role="img" aria-label="光点"></span>，开始答题</span>
+    </span>
+  </a>
+</main>
+
+
+<script src="assets/theme.js"></script>
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 可复现的随机数，每次打开图案一样
+  let seed = 19720302;
+  const rand = () => (seed = (seed * 1664525 + 1013904223) % 4294967296) / 4294967296;
+
+  const el = (tag, attrs, parent) => {
+    const n = document.createElementNS(NS, tag);
+    for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  };
+
+  /* ---------- 脉冲星图 ----------
+     14 条射线（角度：0 为正右，逆时针为正；长度为图上单位）＋一条通向银河中心的水平长线。
+     每条线外段是二进制刻度：1 画成垂直短线，0 画成沿线的短横。 */
+  const RAYS = [
+    [53, 196], [98, 116], [69, 84], [48, 82], [145, 90], [13.5, 104],
+    [187, 150], [179.5, 128], [198.4, 86], [231, 78], [264, 120],   // 左边两条：照示意图略朝左下，夹角拉开到 7.5° 免得刻度叠在一起
+    [-58.5, 190], [-49, 76], [-17.3, 176],
+  ];
+  const raysG = document.getElementById("rays");
+  const bulbsG = document.getElementById("bulbs");
+  const STEP = 0.6; // 相邻两道刻度亮起的间隔（秒）
+  let hseed = 7;
+  const hrand = () => (hseed = (hseed * 16807) % 2147483647) / 2147483647;   // 手绘抖动专用
+  // 垂直刻度：方向在垂线基础上随机歪 ±4°，半长 2.6～3.4
+  const tick = (x, y, px, py) => {
+    const j = (hrand() - .5) * .14, hl = 2.6 + hrand() * .8;
+    const qx = px * Math.cos(j) - py * Math.sin(j), qy = px * Math.sin(j) + py * Math.cos(j);
+    return { x1: x - qx * hl, y1: y - qy * hl, x2: x + qx * hl, y2: y + qy * hl };
+  };
+
+  // 转场时要往外退开的各组：{ els: [元素…], ux, uy }
+  const spread = [];
+  const gcG = el("g", {}, raysG);
+  el("line", { class: "ray gc", x1: 0, y1: 0, x2: 400, y2: 0 }, gcG);
+  const streakLayer = document.getElementById("streakLayer");
+  spread.push({ els: [gcG, streakLayer], ux: 1, uy: 0 });
+  // 一小束光：渐变从尾部透明到头部最亮，整段沿水平线平移（渐变跟着线一起移动）
+  const streak = el("g", { class: "streak" }, streakLayer);
+  el("line", { class: "streak-halo", x1: -48, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
+  el("line", { class: "streak-core", x1: -48, y1: 0, x2: 0, y2: 0, stroke: "url(#streakGrad)" }, streak);
+
+  RAYS.forEach(([deg, len]) => {
+    const a = deg * Math.PI / 180, ux = Math.cos(a), uy = -Math.sin(a);
+    const px = -uy, py = ux; // 垂直方向
+    const bits = Array.from({ length: 10 + Math.floor(rand() * 4) }, () => (rand() > .45 ? 1 : 0));
+    const binStart = len * (0.5 + rand() * 0.12);
+    const rg = el("g", {}, raysG), bg = el("g", {}, bulbsG);
+    rg.style.setProperty("--w", (.78 + hrand() * .34).toFixed(2));   // 粗细 0.78～1.12
+    spread.push({ els: [rg, bg], ux, uy });
+    el("line", { class: "ray", x1: 0, y1: 0, x2: ux * binStart, y2: uy * binStart }, rg);
+    const gap = (len - binStart) / bits.length;
+    const marks = [];
+    bits.forEach((b, k) => {
+      const r = binStart + gap * (k + 0.5), x = ux * r, y = uy * r;
+      const seg = b ? tick(x, y, px, py) : null;
+      if (b) marks.push([r, k, seg]);   // 只有垂直刻度装灯；0（沿线的短横）是断点，不亮
+      if (b) el("line", { class: "bit", ...seg }, rg);
+      else el("line", { class: "bit", x1: x - ux * gap * .32, y1: y - uy * gap * .32, x2: x + ux * gap * .32, y2: y + uy * gap * .32 }, rg);
+    });
+    const endSeg = tick(ux * len, uy * len, px, py);
+    el("line", { class: "bit", ...endSeg }, rg);
+    marks.push([len, bits.length, endSeg]);   // 线尾那道也是垂直刻度
+
+    // 灯串：从靠近中心的刻度往外逐拍推进，每一拍对应一个刻度位置；落在断点上的那一拍不亮
+    const pause = 2 + rand() * 2;   // 跑完一条线后停 2～4 秒
+    const dur = (bits.length + 1) * STEP + pause;
+    const offset = rand() * 4; // 灯串之间的启动时间偏移
+    marks.forEach(([r, k, seg]) => {
+      // 刻度线本身发光：在原刻度上叠一道同样位置的亮线，外加一层模糊的光晕，一起亮起、一起暗下
+      const g = el("g", { class: "bulb" }, bg);
+      el("line", { class: "bulb-halo", ...seg }, g);
+      el("line", { class: "bulb-core", ...seg }, g);
+      g.style.setProperty("--dur", dur + "s");
+      g.style.setProperty("--delay", (offset + k * STEP - dur) + "s");
+    });
+  });
+
+  /* ---------- 把中心按钮放到星图中心 ---------- */
+  const svg = document.getElementById("pulsar");
+  const fig = document.getElementById("pulsarFig");
+  const core = document.getElementById("core");
+  const startLink = document.getElementById("startLink");
+  /* 黄金分割版：按屏幕算 viewBox，让原点（星图中心）落在 (30%, 61.8%)。
+     比例尺不变（屏幕宽度对应 400 个图上单位）；屏幕太矮时往下让，保证最上面的射线离副标题至少 24px。 */
+  const golden = document.documentElement.classList.contains("map-golden");
+  const RAY_TOP = 160;                       // 最长射线伸到中心上方约 160 个单位
+  function fitGolden() {
+    if (!golden) return;
+    const W = fig.clientWidth, H = fig.clientHeight, k = 400 / W;
+    const visible = [...document.querySelectorAll(".titles")].find((n) => n.offsetParent);
+    const minY = (visible ? visible.getBoundingClientRect().bottom - fig.getBoundingClientRect().top : 0) + 24 + RAY_TOP / k;
+    const cy = Math.max(H * 0.618, minY);
+    svg.setAttribute("viewBox", `${(-W * 0.30 * k).toFixed(2)} ${(-cy * k).toFixed(2)} ${(W * k).toFixed(2)} ${(H * k).toFixed(2)}`);
+  }
+
+  function placeCore() {
+    const m = svg.getScreenCTM(), f = fig.getBoundingClientRect();
+    if (!m) return;
+    const p = new DOMPoint(0, 0).matrixTransform(m);
+    core.style.left = p.x - f.left + "px";
+    core.style.top = p.y - f.top + "px";
+  }
+
+  /* ---------- 星空 / 印刷斑点 ---------- */
+  const stars = document.getElementById("stars");
+  function drawStars() {
+    stars.replaceChildren();
+    const w = innerWidth, h = innerHeight;
+    stars.setAttribute("viewBox", `0 0 ${w} ${h}`);
+    let s = 7;
+    const r2 = () => (s = (s * 16807) % 2147483647) / 2147483647;
+    const count = Math.round(w * h / 2600);
+    for (let i = 0; i < count; i++) {
+      const big = r2() > .93;
+      const o = (big ? .75 : .25 + r2() * .45).toFixed(2);
+      const c = el("circle", { cx: (r2() * w).toFixed(1), cy: (r2() * h).toFixed(1), r: big ? 1.3 : (.35 + r2() * .55).toFixed(2), opacity: o }, stars);
+      if (r2() > .78) {
+        c.classList.add("tw");
+        c.style.setProperty("--o", o);
+        c.style.setProperty("--d", (3 + r2() * 4).toFixed(1) + "s");
+        c.style.setProperty("--delay", (-r2() * 6).toFixed(1) + "s");
+      }
+    }
+  }
+
+  let t;
+  // 副标题宽度＝英文标题最后一行的宽度
+  const matchSub = () => {
+    const last = document.getElementById("lastLine"), sub = document.getElementById("subZh");
+    if (!last || !sub) return;
+    const w = last.getBoundingClientRect().width;
+    // 先按原字号、不换行量出自然宽度；排不下一行就按比例缩小字号（不低于 14px），再两端对齐撑满
+    sub.style.width = "auto"; sub.style.fontSize = ""; sub.style.whiteSpace = "nowrap";
+    const natural = sub.scrollWidth, base = parseFloat(getComputedStyle(sub).fontSize);
+    if (natural > w) sub.style.fontSize = Math.max(14, base * w / natural * 0.97).toFixed(2) + "px";
+    sub.style.whiteSpace = "";
+    sub.style.width = w + "px";
+  };
+  const layout = () => { drawStars(); matchSub(); fitGolden(); placeCore(); };
+  addEventListener("resize", () => { clearTimeout(t); t = setTimeout(layout, 120); });
+  document.fonts?.ready.then(() => { matchSub(); fitGolden(); placeCore(); });
+  layout();
+
+  /* ---------- 呼吸同步：中心的光、光晕、亮点和文字里的小光点从同一个时间起点开始 ---------- */
+  const BREATH = ["breathe", "breathe-halo", "breathe-dot", "glint"];
+  const syncBreath = () => {
+    document.getAnimations().forEach((a) => {
+      if (BREATH.includes(a.animationName)) a.startTime = 0;
+    });
+  };
+  syncBreath();
+  document.fonts?.ready.then(syncBreath);   // 字体到了以后文字会重新排版，再对一次
+
+  /* ---------- 矢量推近：逐帧缩小 viewBox ----------
+     星图的原点就是光点，viewBox 以原点为中心缩小 s 倍，光点在屏幕上的位置不变；
+     背景星星的 viewBox 以光点的屏幕坐标 (cx, cy) 为中心缩小。
+     节奏“快-慢”：缓动用减速曲线；倍数按对数插值（1→6 倍里每一段感觉上的放大幅度一样），不会中途突然一跳。
+     同时每条射线沿自己的方向往外退开，中心空出一圈，露出光点（负责人的示意图） */
+  function bezier(x1, y1, x2, y2) {
+    const B = (t, a, b) => 3 * a * t * (1 - t) ** 2 + 3 * b * t * t * (1 - t) + t ** 3;
+    return (x) => {
+      let lo = 0, hi = 1, t = x;
+      for (let i = 0; i < 20; i++) { t = (lo + hi) / 2; if (B(t, x1, x2) < x) lo = t; else hi = t; }
+      return B(t, y1, y2);
+    };
+  }
+  const zoomEase = bezier(.3, .45, .35, 1);     // 减速，但开头比上一版缓
+  const spreadEase = bezier(.45, 0, .3, 1);     // 退开：轻轻起步，再慢慢停住
+  const SPREAD = 20;                            // 退开的距离（图上单位；放大后看起来约 100px）
+  const fadeEls = ["rays", "bulbs", "streakLayer"].map((id) => document.getElementById(id));
+  const coreGlow = svg.querySelector(".core-glow"), coreHalo = svg.querySelector(".core-halo");
+  const coreBlur = document.getElementById("coreBlurAmt");
+  const rayFadeGrad = document.getElementById("rayFadeGrad"), rayFadeIn = document.getElementById("rayFadeIn");
+  function zoomTo(cx, cy, maxScale, dur) {
+    const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
+    const sw = innerWidth, sh = innerHeight;
+    fadeEls.forEach((g) => g.setAttribute("mask", "url(#rayFade)"));   // 只在转场时挂上遮罩
+    const t0 = performance.now();
+    const frame = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const s = Math.pow(maxScale, zoomEase(p));
+      svg.setAttribute("viewBox", vb0.map((v) => (v / s).toFixed(3)).join(" "));
+      const d = SPREAD * spreadEase(Math.min(1, p / 0.85));
+      spread.forEach(({ els, ux, uy }) => els.forEach((g) => g.setAttribute("transform", `translate(${(ux * d).toFixed(2)} ${(uy * d).toFixed(2)})`)));
+      // 射线、刻度、光束一边退开一边变淡，到 50% 时降到 0，只有中心的光保持亮度
+      const fade = (1 - spreadEase(Math.min(1, p / 0.5))).toFixed(3);   // 射线在转场进行到一半时完全淡出
+      fadeEls.forEach((g) => { g.style.opacity = fade; });
+      // 中心的光晕逐渐向外发散：在推近之外再额外变大（内层到 2.2 倍，外圈到 3.5 倍），呼吸动画照常
+      const e = spreadEase(p);
+      coreGlow.setAttribute("r", (18 * (1 + 1.2 * e)).toFixed(2));
+      coreHalo.setAttribute("r", (34 * (1 + 2.5 * e)).toFixed(2));
+      coreBlur.setAttribute("stdDeviation", (1.6 * e).toFixed(3));
+      // 射线内端渐隐：线头（距中心 d）以内全透明，再往外 F 的距离里渐渐显出来
+      const F = 34 * e, R = Math.max(0.01, d + F);
+      rayFadeGrad.setAttribute("r", R.toFixed(2));
+      rayFadeIn.setAttribute("offset", (d / R).toFixed(4));   // 光点边界逐渐变模糊（图上单位，跟着推近一起放大）
+      stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
+      if (p < 1) requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* ---------- 点击中心：画面推近、放大光点，淡出后进问卷 ---------- */
+  function launch(e) {
+    if (reduce) return;
+    e.preventDefault();
+    const href = e.currentTarget.getAttribute("href");
+    const r = core.getBoundingClientRect();
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    document.documentElement.classList.add("zooming");
+    zoomTo(cx, cy, 6, 2000);
+    setTimeout(() => { location.href = href; }, 2000);
+  }
+  core.addEventListener("click", launch);
+  startLink.addEventListener("click", launch);
+
+  /* ---------- 导航 ---------- */
+  const btn = document.getElementById("menuBtn"), drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
+  function setMenu(open) {
+    drawer.classList.toggle("open", open);
+    scrim.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", open);
+    drawer.inert = !open;
+    if (open) drawer.querySelector("a").focus(); else btn.focus();
+  }
+  btn.addEventListener("click", () => setMenu(true));
+  document.getElementById("drawerClose").addEventListener("click", () => setMenu(false));
+  scrim.addEventListener("click", () => setMenu(false));
+  addEventListener("keydown", (e) => { if (e.key === "Escape" && drawer.classList.contains("open")) setMenu(false); });
+  if (location.hash.indexOf("menu") > -1) setMenu(true); // 截图用
+})();
+</script>
+</body>
+</html>

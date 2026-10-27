@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>答题 · 记忆库推荐</title>
+<script>
+  // 在画面出来前决定模式：默认深色（地址带 light 时临时看浅色）
+  (function () {
+    var t = "dark";
+    try { t = localStorage.getItem("memsite-theme") || "dark"; } catch (e) {}
+    if (location.hash.indexOf("light") > -1) t = "light";
+    if (t === "dark") document.documentElement.classList.add("theme-dark");
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/tokens.css">
+<style>
+  body { min-height: 100svh; }
+  .topbar { background: linear-gradient(var(--paper) 70%, transparent); }
+
+  .quiz { padding: var(--s-5) 0 var(--s-6); max-width: 560px; margin: 0 auto; animation: arrive .7s var(--ease-out) both; }
+  /* 进入时内容轻轻淡入 */
+  @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
+
+
+  /* ---------- 进度条：侧看的行星环，按问卷四个部分分成四段 ----------
+     每段宽度按该部分的题数，段内连续填充；游标是一根从屏幕顶上垂下来的细绳，穿过进度条，下端坠着一颗星星 */
+  .rings { padding: var(--s-1) 0 0; }
+  .rings-bar { position: relative; display: flex; flex-direction: column; gap: 3px; margin-bottom: 26px; }  /* 下方留出星星摆动的空间 */
+  .band { display: flex; gap: 6px; }
+  .band i { flex: var(--n) 1 0; background: linear-gradient(to right, var(--c) var(--f, 0%), var(--rule) var(--f, 0%)); }
+  .band:nth-child(1) { height: 2px; --c: var(--mustard); }
+  .band:nth-child(2) { height: 6px; --c: var(--dusty-pink); }
+  .band:nth-child(3) { height: 3px; --c: var(--mauve); }
+  .band:nth-child(4) { height: 1.5px; --c: var(--faded-plum); }
+  /* 坠着星星的绳子：画在顶栏下面一层，顶栏的渐变底色让绳子像从画面外垂下来 */
+  .pendant { position: absolute; left: 0; top: 0; width: 100%; pointer-events: none; z-index: 39; overflow: visible; }
+  .pendant .rope { fill: none; stroke: var(--ink-faint); stroke-width: 1; }
+  .pendant .star { fill: var(--bulb); }
+  .pendant .star-glow { fill: var(--bulb); opacity: .25; filter: blur(2px); }
+  .rings-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 var(--gutter);
+    min-height: var(--tap);
+    color: var(--ink-soft);
+  }
+  .arrow { width: var(--tap); height: var(--tap); display: grid; place-items: center; color: var(--ink); }
+  /* 箭头图标 16px 居中在 44px 的点按区里，左右各挪 14px，让图标边缘落在 gutter 上，和题目、选项框对齐 */
+  #prevTop { margin-left: -14px; }
+  #nextTop { margin-right: -14px; }
+  .arrow svg { width: 16px; height: 16px; }
+  .arrow:disabled { opacity: .25; cursor: default; }
+  .rings-meta .where { text-align: center; }
+
+  /* ---------- 题目 ---------- */
+  .question { padding: var(--s-2) var(--gutter) 0; }
+  .kicker { color: var(--ink-faint); margin: 0; }
+  .qtitle {
+    margin: var(--s-1) 0 0;
+    font-family: var(--font-zh);
+    font-weight: 600;
+    font-size: var(--fs-h2);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-zh-title);
+    text-align: justify;
+  }
+  .qhelp { margin: var(--s-2) 0 0; color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
+
+  /* ---------- 选项 + 行星环 ---------- */
+  .options-wrap { position: relative; margin-top: var(--s-4); }
+  /* 环在选项文字下面，卫星在上面一层（只有卫星接收点按）；都裁掉选项区以外的部分 */
+  /* 不再裁到选项区：圆环上下可以伸出去，整个左半圆完整露出（右半在屏幕外） */
+  .orbit { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 0; }
+  .orbit.top { z-index: 2; }
+  .orbit .ring { fill: none; stroke: url(#ringDepth); }
+  .orbit .tick { stroke: var(--rule); stroke-width: 1; }
+  .orbit .parked { fill: var(--rule); }   /* 定格的小卫星和行星环同色 */
+  .moon { pointer-events: auto; cursor: grab; touch-action: none; }
+  .moon:active { cursor: grabbing; }
+  .moon .body { fill: var(--moon); }
+  .moon .hit { fill: transparent; }
+  .moon:focus-visible { outline: none; }
+  .moon:focus-visible .body { stroke: var(--focus); stroke-width: 2.4; stroke-dasharray: 3 2; }
+
+  .hint { display: flex; align-items: center; gap: var(--s-1); margin: var(--s-2) 0 0; color: var(--ink-faint); transition: opacity .4s; }
+  .hint svg { width: 28px; height: 12px; flex: none; }
+  .hint.gone { opacity: 0; }
+  .hint[hidden], .qhelp[hidden] { display: none; }
+
+  .options { position: relative; z-index: 1; list-style: none; margin: 0; padding: 0 var(--gutter); }
+  .options li + li { margin-top: var(--s-1); }
+  .opt {
+    position: relative;
+    /* 按第一行文字的基线对齐：选项折成两行或带小字说明时，短横和序号仍对着第一行；上下各 10px，单行时正好 44px 高 */
+    display: flex; align-items: baseline; gap: var(--s-2);
+    width: 100%; min-height: var(--tap);
+    padding: 10px var(--s-2);
+    text-align: left;
+  }
+  .opt::before {
+    content: ""; position: absolute; inset: 6px 0;
+    border: var(--line-bold) solid transparent;
+    transition: border-color .25s var(--ease-out);
+    pointer-events: none;
+  }
+  .opt .mark {
+    flex: none; width: 1em; text-align: center;
+    font-family: var(--font-en); color: var(--ink-faint);
+  }
+  .opt .text { display: flex; flex-direction: column; align-items: flex-start; }
+  .opt .line { display: flex; align-items: baseline; }
+  /* 选项下方的小字说明（如费用参考） */
+  .opt .ohelp { margin-top: 2px; font-size: var(--fs-small); line-height: 20px; color: var(--ink-faint); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
+  /* 按前面的回答预先选好的提示 */
+  .defnote { margin: var(--s-2) 0 0; color: var(--ink-faint); }
+  .defnote[hidden] { display: none; }
+  .drawer .note { display: flex; flex-direction: column; gap: var(--s-2); }
+  .drawer .note p { margin: 0; }
+  .reset { align-self: flex-start; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; min-height: 32px; }
+  .loading { padding: var(--s-6) var(--gutter); color: var(--ink-faint); }
+  /* 文字底下垫一小块纸色，环线从文字后面穿过 */
+  .opt .label { font-family: var(--font-body); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
+  .opt[aria-checked="true"]::before { border-color: var(--ink); }
+  .opt[aria-checked="true"] .mark { color: var(--ink); }
+  /* 带填空的选项：没选时只显示“其它”，选中后才出现“：”和填空；填空和选项文字同一字号 */
+  .opt .colon, .opt .free { display: none; }
+  .opt.has-free[aria-checked="true"] .colon { display: inline; }
+  .opt.has-free[aria-checked="true"] .free { display: block; }
+  .opt .free {
+    width: 9em; margin-left: 2px;
+    font: inherit; color: var(--ink);
+    background: transparent; border: 0;
+    border-bottom: var(--line) solid var(--ink-soft);
+    padding: 0 2px; border-radius: 0;
+  }
+  .opt .free::placeholder { color: var(--ink-faint); }
+  .opt .free:focus { outline: none; border-bottom-color: var(--focus); }
+
+  /* ---------- 底部 ---------- */
+  .foot {
+    display: flex; justify-content: flex-end; align-items: center;
+    padding: var(--s-4) var(--gutter) 0;
+  }
+  /* 下一题：只有一个直角箭头，点按区 44px，图标右边缘对齐 gutter */
+  /* 下一题：土星沿着虚线轨迹飞向屏幕右边外——“驶向下一站”。
+     答完本题后：前方虚线变成芥末黄并向右流动，探测器沿轨迹轻轻前后滑动；没答时整体变淡、静止 */
+  .next { position: relative; width: 120px; height: 44px; color: var(--ink); }
+  .next:disabled { opacity: .3; cursor: default; }
+  .next svg { position: absolute; inset: 0; width: 120px; height: 44px; overflow: visible; }
+  /* 轨迹用文字色（--ink），土星用芥末黄；没答本题时整个按钮变淡，答了以后前方虚线向右流动 */
+  .next .trail-arrow { stroke-linecap: butt; }
+  .next .probe { stroke: var(--bulb); }   /* 土星用芥末黄，轨迹照旧和文字同色 */
+  /* 浅色模式：轨迹和行星环同色 */
+  :root:not(.theme-dark) .next .trail-past, :root:not(.theme-dark) .next .trail-ahead, :root:not(.theme-dark) .next .trail-arrow { stroke: var(--rule); }
+  .next .trail-ahead { stroke-dasharray: 3 4; }
+  .next:not(:disabled) .trail-ahead { animation: march 1.2s linear infinite; }
+  @keyframes march { to { stroke-dashoffset: -14; } }
+  .next:not(:disabled) .probe { animation: cruise 3.2s ease-in-out infinite; }
+  @keyframes cruise {
+    0%, 100% { transform: translate(69.19px, 26.40px) rotate(-13.2deg); }
+    50% { transform: translate(71.14px, 25.94px) rotate(-13.2deg); }
+  }
+
+  .toast {
+    position: fixed; left: 50%; bottom: var(--s-3); transform: translate(-50%, 20px);
+    padding: var(--s-1) var(--s-3); background: var(--ink); color: var(--paper);
+    opacity: 0; transition: opacity .4s, transform .4s var(--ease-out); z-index: 85; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  .qcard { transition: opacity .3s var(--ease-out), transform .3s var(--ease-out); }
+  .qcard.out { opacity: 0; transform: translateX(-12px); }
+  .qcard.in { opacity: 0; transform: translateX(12px); }
+</style>
+</head>
+<body class="paper grain">
+
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="打开导航" aria-expanded="false" aria-controls="drawer">
+    <svg viewBox="0 0 22 22" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="butt"><path d="M1 3.4h2M1 11h2M1 18.6h2"/><path d="M5.5 3.4H14M5.5 11H21M5.5 18.6H14"/></g></svg>
+  </button>
+</header>
+
+<div class="scrim" id="scrim"></div>
+<nav class="drawer" id="drawer" aria-label="网站导航" inert>
+  <button class="drawer-close" id="drawerClose" aria-label="关闭导航">
+    <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><g stroke="currentColor" stroke-width="1.4"><line x1="3" y1="3" x2="17" y2="17"/><line x1="17" y1="3" x2="3" y2="17"/></g></svg>
+  </button>
+  <div>
+    <p class="label caption">Index</p>
+    <ol>
+      <li><a href="index.html"><span class="caption">I</span>首页</a></li>
+      <li><a href="#"><span class="caption">II</span>项目目录</a></li>
+      <li><a href="#"><span class="caption">III</span>关于本站</a></li>
+      <li><a href="#"><span class="caption">IV</span>作者</a></li>
+    </ol>
+  </div>
+  <div>
+    <p class="label caption">Appearance</p>
+    <div class="seg" role="group" aria-label="外观">
+      <button type="button" data-theme-set="dark" aria-pressed="true"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M11.5 8.6A5 5 0 1 1 5.4 2.5a4 4 0 0 0 6.1 6.1z"/></svg>深色</button>
+      <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="2.6"/><path d="M7 1v1.6M7 11.4V13M1 7h1.6M11.4 7H13M2.8 2.8l1.1 1.1M10.1 10.1l1.1 1.1M2.8 11.2l1.1-1.1M10.1 3.9l1.1-1.1"/></svg>浅色</button>
+    </div>
+  </div>
+  <div class="note">
+    <p class="caption-zh">答卷只保存在您的浏览器里，可以随时离开，下次接着答。</p>
+    <button type="button" class="reset caption-zh" id="resetBtn">清空答卷，从头开始</button>
+  </div>
+</nav>
+
+<svg class="pendant" id="pendant" aria-hidden="true">
+  <path class="rope" id="rope"/>
+  <g id="starG"><g transform="scale(.85)"><circle class="star-glow" r="6"/><path class="star" d="M0 -5.2 L1.4 -1.7 L5 -1.6 L2.2 0.7 L3.1 4.3 L0 2.3 L-3.1 4.3 L-2.2 0.7 L-5 -1.6 L-1.4 -1.7 Z"/></g></g>
+</svg>
+
+<main class="quiz">
+  <section class="rings" aria-label="答题进度">
+    <div class="rings-bar" id="ringsBar" aria-hidden="true">
+      <div class="band"></div><div class="band"></div><div class="band"></div><div class="band"></div>
+    </div>
+    <div class="rings-meta">
+      <button class="arrow" id="prevTop" aria-label="上一题"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="10.5,2.5 5,8 10.5,13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"/></svg></button>
+      <span class="where caption-zh" id="where" aria-live="polite"></span>
+      <button class="arrow" id="nextTop" aria-label="下一题"><svg viewBox="0 0 16 16" aria-hidden="true"><polyline points="5.5,2.5 11,8 5.5,13.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" stroke-linejoin="miter"/></svg></button>
+    </div>
+  </section>
+
+  <div class="qcard" id="card">
+    <section class="question">
+      <p class="kicker caption-zh" id="kicker"></p>
+      <h1 class="qtitle" id="qtitle"></h1>
+      <p class="qhelp" id="qhelp"></p>
+      <p class="defnote caption-zh" id="defnote" hidden>已按您前面的回答预先选好，可以修改。</p>
+      <p class="hint caption-zh" id="hint"><svg viewBox="0 0 28 12" aria-hidden="true"><path d="M1 11 A26 26 0 0 1 27 2" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="10" cy="5.6" r="3.2" fill="var(--mauve)" stroke="var(--ink)" stroke-width=".8"/></svg>拖动右侧环上的卫星，或直接点选</p>
+    </section>
+
+    <div class="options-wrap" id="wrap">
+      <svg class="orbit" id="orbit" aria-hidden="true"></svg>
+      <ul class="options" id="options"></ul>
+      <svg class="orbit top" id="orbitTop"></svg>
+    </div>
+  </div>
+
+  <div class="foot">
+    <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 120 44" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
+        <!-- 同一条光滑曲线：飞过的实线、前方的虚线，在土星前后各留 5px 空白（不和土星交叉）；虚线末端一个小箭头，停在留白线以内 -->
+        <path class="trail-past" d="M-10.00 39.00 Q19.97 36.36 48.65 30.80"/>
+        <path class="trail-ahead" d="M91.46 20.67 Q105.55 16.71 119.30 12.00"/>
+        <path class="trail-arrow" d="M116.17 15.82 L119.30 12.00 L114.48 10.90"/>
+        <!-- 土星（参照参考图里先驱者号书中的画法）：三道同心的环（只用线条，不画明暗、不铺环带底色），
+             环的后半截被星球挡住、前半截压在星球上 -->
+        <g class="probe" transform="translate(69.19 26.40) rotate(-13.2)">
+          <path d="M-13 0 A13 3.5 0 0 1 13 0 M-16 0 A16 4.3 0 0 1 16 0"/>
+          <circle r="6.8" style="fill: var(--paper)"/>
+          <path d="M-13 0 A13 3.5 0 0 0 13 0 M-16 0 A16 4.3 0 0 0 16 0"/>
+        </g>
+      </g>
+    </svg></button>
+  </div>
+</main>
+
+<div class="toast caption-zh" id="toast" role="status"></div>
+
+<script src="assets/theme.js"></script>
+<script type="module" src="assets/quiz.js"></script>
+</body>
+</html>

@@ -64,6 +64,9 @@
 
 阶段 5（前端）：
 - 前端的页面清单、风格简报模板、之后的设计规范放在 `docs/前端/`
+- **正式网站在 `site/`**（2026-10-27 起）：`index.html` 首页、`quiz.html` 答题页、`result.html` 结果页（目前是占位，只列出答卷）；共用 `site/assets/tokens.css`、`theme.js`，答题逻辑在 `site/assets/quiz.js`。样张（`docs/前端/样张/`）是定稿前的试验场，改正式页面改 `site/`
+- 预览：`npm run site` 后打开 http://localhost:5173/site/ （网站要 fetch `data/` 下的问卷配置、import `engine/`，直接双击 html 打不开）
+- 答题页完全按 `data/questionnaire/questions.json` 渲染：题目分属哪个部分写在配置的 `parts`；跳题 `show_if`、默认勾选 `default_if` 用引擎导出的 `checkCondition`（和推荐引擎同一套判断）；进度条四段的长度按当前要答的题数（追问没触发就不算）；答卷存在 `localStorage` 的 `memsite-quiz-v1`（`answers` 是选项 id 数组，填空在 `free["题号.选项"]`）
 - 已装的设计和动效 skill：impeccable、web-design-guidelines、frontend-design、GSAP 官方 8 个（gsap-core、gsap-timeline、gsap-scrolltrigger、gsap-react 等，MIT，装在用户目录）、color-expert（meodai，CC BY 4.0，配色原理：按性格配色、60-30-10、明度差决定可读性；配色时用它，颜色在 OKLCH 里推导并算 WCAG 对比度）。Lenis、Vanta、React Bits 没有靠谱的 skill，用时看官方文档
 - 中文排版与文案参数以项目 skill `.claude/skills/zh-web-typography/SKILL.md` 为准（据 clreq、赫蹏、中文文案排版指北），英文设计 skill（impeccable、frontend-design）给的字号行高与之冲突时按它
 - 每页完成后用 web-design-guidelines 审一遍

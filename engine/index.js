@@ -14,4 +14,4 @@
 //
 // 现在只有规则引擎；以后接入外部模型时，新写一个返回同样结构的实现即可，前端和测试不用改。
 
-export { createRuleEngine } from "./rule-engine.js";
+export { createRuleEngine, checkCondition } from "./rule-engine.js";

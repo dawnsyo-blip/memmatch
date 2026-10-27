@@ -25,6 +25,7 @@
 | `result.min_results` | 结果少于这个数时，给出放宽建议 |
 | `result.unknown_penalty` | 硬条件里每有一项“文档没写”就扣的分，让明确能用的排在前面 |
 | `field_labels` | 给用户看的字段名、账号名、门槛说明 |
+| `parts` | 问卷的四个部分：`label`（第一部分）、`title`、`questions`（按顺序列出题号，追问也要列）；答题页按它分进度条、显示“第几部分” |
 
 ## 一道题
 

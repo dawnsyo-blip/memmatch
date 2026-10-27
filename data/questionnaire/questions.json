@@ -13,6 +13,12 @@
     "settings_ui": "可以在界面里改设置", "config_file": "可以改配置文件", "prompts": "可以改提示词", "plain_data": "记忆是普通文件，可以直接改",
     "plugin_api": "留了插件接口", "small_code": "代码小巧，方便自己改"
   },
+  "parts": [
+    {"label": "第一部分", "title": "模型、设备与入口", "questions": ["q1", "q2", "q3", "q3a", "q4", "q4a", "q5"]},
+    {"label": "第二部分", "title": "使用习惯", "questions": ["q6", "q7", "q8", "q8a"]},
+    {"label": "第三部分", "title": "您希望记忆怎么运作", "questions": ["q9", "q10", "q11", "q12", "q13", "q14"]},
+    {"label": "第四部分", "title": "环境与预算", "questions": ["q15", "q16", "q17", "q18"]}
+  ],
   "questions": [
     {
       "id": "q1", "kind": "hard", "type": "multi", "short": "大模型厂商",

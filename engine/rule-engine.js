@@ -62,6 +62,9 @@ function checkCond(cond, answers) {
   throw new Error("不认识的条件：" + JSON.stringify(cond));
 }
 
+// 前端判断跳题（show_if）、默认勾选（default_if）也用这一个函数，保证和引擎同一套规则
+export { checkCond as checkCondition };
+
 // ---------- 引擎 ----------
 
 export function createRuleEngine({ questionnaire, settings = {} }) {
