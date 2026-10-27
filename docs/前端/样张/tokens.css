@@ -31,6 +31,7 @@
   --glint-in: var(--core-2);       /* 文字里小光点的中心（浅底上用暖白会像空心圈） */
   --core-size: 1.6;                /* 浅底上光不如深底显眼，整体放大一些 */
   --gc: #b48a45;                   /* 通向银河中心的水平长线 */
+  --map-line: #6e625a;             /* 星图的射线和刻度：比正文的墨色浅，像印在纸上的褪色墨线 */
   --streak-c: #c98a2b;             /* 长线上滑动的光束 */
   --streak-head: #e3a843;
   --moon: var(--mauve);            /* 可拖动的卫星 */
@@ -92,6 +93,7 @@
   --core-3: var(--glow);
   --halo-c: var(--glow);
   --gc: color-mix(in srgb, var(--glow) 55%, var(--ink));
+  --map-line: var(--ink);
   --streak-c: var(--glow);
   --streak-head: #f6d89a;
   --moon: var(--mustard);

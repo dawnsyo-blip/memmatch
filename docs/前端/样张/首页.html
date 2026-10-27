@@ -90,7 +90,7 @@
     flex-direction: column;
   }
   .pulsar svg { width: 100%; flex: 1; overflow: visible; }
-  .pulsar .ray, .pulsar .bit { stroke: var(--ink); stroke-width: var(--w, .9); fill: none; stroke-linecap: square; }
+  .pulsar .ray, .pulsar .bit { stroke: var(--map-line); stroke-width: var(--w, .9); fill: none; stroke-linecap: square; }
   /* 浅色模式：星图像旧书上印出来的插图——线条边缘轻微抖动、墨色深浅不匀（滤镜 #inked）。
      深色模式是“发光的星图”，保持清晰；转场推近时也去掉滤镜（逐帧重算滤镜太重，射线那时也在淡出） */
   :root:not(.theme-dark) #rays { filter: url(#inked); }
