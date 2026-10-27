@@ -414,7 +414,8 @@
 
   /* ---------- 矢量推近：逐帧缩小 viewBox ----------
      星图的原点就是光点，viewBox 以原点为中心缩小 s 倍，光点在屏幕上的位置不变；
-     背景星星的 viewBox 以光点的屏幕坐标 (cx, cy) 为中心缩小。缓动和原来的 cubic-bezier(.6, 0, .3, 1) 一样 */
+     背景星星的 viewBox 以光点的屏幕坐标 (cx, cy) 为中心缩小。
+     节奏“快-慢”：缓动用减速曲线；倍数按对数插值（1→6 倍里每一段感觉上的放大幅度一样），不会中途突然一跳 */
   function bezier(x1, y1, x2, y2) {
     const B = (t, a, b) => 3 * a * t * (1 - t) ** 2 + 3 * b * t * t * (1 - t) + t ** 3;
     return (x) => {
@@ -423,14 +424,14 @@
       return B(t, y1, y2);
     };
   }
-  const zoomEase = bezier(.6, 0, .3, 1);
+  const zoomEase = bezier(.25, .8, .3, 1);
   function zoomTo(cx, cy, maxScale, dur) {
     const vb0 = svg.getAttribute("viewBox").split(/\s+/).map(Number);
     const sw = innerWidth, sh = innerHeight;
     const t0 = performance.now();
     const frame = (now) => {
       const p = Math.min(1, (now - t0) / dur);
-      const s = 1 + (maxScale - 1) * zoomEase(p);
+      const s = Math.pow(maxScale, zoomEase(p));
       svg.setAttribute("viewBox", vb0.map((v) => (v / s).toFixed(3)).join(" "));
       stars.setAttribute("viewBox", `${(cx - cx / s).toFixed(2)} ${(cy - cy / s).toFixed(2)} ${(sw / s).toFixed(2)} ${(sh / s).toFixed(2)}`);
       if (p < 1) requestAnimationFrame(frame);
