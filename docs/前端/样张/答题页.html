@@ -137,7 +137,7 @@
     padding: var(--s-4) var(--gutter) 0;
   }
   /* 下一题：只有一个直角箭头，点按区 44px，图标右边缘对齐 gutter */
-  /* 下一题：旅行者号沿着虚线轨迹飞向屏幕右边外——“驶向下一站”。四角标记表示可以点。
+  /* 下一题：一个简笔探测器沿着虚线轨迹飞向屏幕右边外——“驶向下一站”。四角标记表示可以点。
      答完本题后：前方虚线变成芥末黄并向右流动，探测器沿轨迹轻轻前后滑动；没答时整体变淡、静止 */
   .next { position: relative; width: 120px; height: 44px; margin-right: calc(var(--gutter) * -1); color: var(--ink); }
   .next:disabled { opacity: .3; cursor: default; }
@@ -148,8 +148,8 @@
   @keyframes march { to { stroke-dashoffset: -14; } }
   .next:not(:disabled) .probe { animation: cruise 3.2s ease-in-out infinite; }
   @keyframes cruise {
-    0%, 100% { transform: translate(62px, 28px) rotate(-14deg) scale(1.25); }
-    50% { transform: translate(65px, 27.2px) rotate(-14deg) scale(1.25); }
+    0%, 100% { transform: translate(62px, 28px) rotate(-14deg); }
+    50% { transform: translate(65px, 27.2px) rotate(-14deg); }
   }
   .next:not(:disabled):hover .marks, .next:focus-visible .marks { stroke: var(--bulb); }
 
@@ -229,17 +229,14 @@
     <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 120 44" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
         <!-- 已经飞过的轨迹：淡的实线；前方的轨迹：虚线，一直伸出屏幕右边 -->
-        <path class="trail-past" d="M-6 38 Q28 36 47 31.8"/>
-        <path class="trail-ahead" d="M80 23.6 Q108 15.5 146 3"/>
-        <!-- 旅行者号（侧面线稿，沿轨迹方向略微抬头）：朝后（地球方向）的高增益天线、机身、三根吊杆 -->
-        <g class="probe" transform="translate(62 28) rotate(-14) scale(1.25)" stroke-width=".8">
-          <path d="M-5 -9 C-11 -4.5 -11 4.5 -5 9"/>
-          <path d="M-5 -9 L-5 9"/>
-          <path d="M-8.6 0 H-12.5"/>
-          <path d="M-4 -2.5 H2 V3 H-4"/>
-          <path d="M2 -1 L18 -7"/>
-          <path d="M1 3 L9 9 M4.6 4.7 l1.6 -1.9 l2.2 1.6 l-1.6 1.9 Z M8.2 7.4 l1.6 -1.9 l2.2 1.6 l-1.6 1.9 Z"/>
-          <path d="M-1 -2.5 L1.5 -10.5 M0.2 -8.7 l2.4 .8"/>
+        <path class="trail-past" d="M-6 38 Q30 36 52 30.6"/>
+        <path class="trail-ahead" d="M72 25.5 Q104 16.5 146 3"/>
+        <!-- 简笔探测器：正面看到的圆形天线（中间馈源点），一根朝前上方的吊杆，末端一个小方块 -->
+        <g class="probe" transform="translate(62 28) rotate(-14)">
+          <circle r="7"/>
+          <circle r="1.6" fill="currentColor"/>
+          <path d="M5 -5 L13 -13"/>
+          <path d="M12 -16 h4 v4 h-4 Z"/>
         </g>
         <!-- 四角裁切标记：和首页的开始提示一样，表示“这里能点” -->
         <path class="marks" d="M40 5 h5 M40 5 v5 M90 5 h-5 M90 5 v5 M40 46 h5 M40 46 v-5 M90 46 h-5 M90 46 v-5" stroke="var(--ink-faint)"/>
