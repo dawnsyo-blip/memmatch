@@ -467,12 +467,33 @@ function go(d) {
 }
 $("prevTop").addEventListener("click", () => go(-1));
 $("nextTop").addEventListener("click", () => go(1));
-// 点小土星：土星向右飞出，和题目卡片淡出同时进行；换题后回到原位
+// 点小土星：和题目卡片一起淡出（卡片 260ms 后换题），换题后再淡入
 $("next").addEventListener("click", () => {
   const b = $("next");
-  if (!reduce) { b.classList.add("launch"); setTimeout(() => b.classList.remove("launch"), 420); }
+  if (!reduce) { b.classList.add("fade"); setTimeout(() => b.classList.remove("fade"), 300); }
   go(1);
 });
+
+/* 小土星自转：星球上三条经线，经度相差 120°，每 6 秒转一圈。
+   经度 θ 的经线从正面看是半个椭圆：横半径 r·|sinθ|、竖半径 r，在 sinθ 那一侧；cosθ ≤ 0 时转到背面看不见，
+   越靠近边缘越淡。没答本题时停住不转；系统设了减少动态效果时只画一帧 */
+const MER_R = 6.8, MER_N = 3, MER_PERIOD = 6000;
+const merLines = Array.from({ length: MER_N }, () => el("path", { class: "meridian" }, $("meridians")));
+let merPhase = 0.35, merLast = 0;
+function drawMeridians(now) {
+  const dt = merLast ? Math.min(100, now - merLast) : 0;
+  merLast = now;
+  if (!$("next").disabled) merPhase += dt / MER_PERIOD * 2 * Math.PI;
+  merLines.forEach((ln, i) => {
+    const th = merPhase + i * 2 * Math.PI / MER_N, c = Math.cos(th), sn = Math.sin(th);
+    if (c <= 0.02) { ln.setAttribute("d", ""); return; }
+    const rx = Math.max(.01, MER_R * Math.abs(sn));
+    ln.setAttribute("d", `M0 ${-MER_R} A${rx.toFixed(2)} ${MER_R} 0 0 ${sn > 0 ? 1 : 0} 0 ${MER_R}`);
+    ln.setAttribute("opacity", Math.min(1, c * 1.4).toFixed(2));
+  });
+  if (!reduce) requestAnimationFrame(drawMeridians);
+}
+requestAnimationFrame(drawMeridians);
 $("backLatest").addEventListener("click", () => { const t = returnTarget(); if (t) show(t); });
 
 function toast(msg) {

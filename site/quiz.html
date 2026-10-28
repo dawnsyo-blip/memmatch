@@ -165,7 +165,8 @@
   .foot .textlink[hidden] { display: none; }
   /* 下一题：只剩一颗土星（负责人 2026-10-28 去掉了前后的轨迹线，两道环都是实线），靠土星自己的动作提示“往下一题去”：
      没答本题时变淡、静止，离右边留白线还差 8px；答完后变亮，同时微微向右滑到外环贴住留白线；
-     星球本身慢慢一胀一缩，像在呼吸；点下去时土星向右飞出，题目卡片同时淡出。点按区 56×44，右边缘对齐 gutter */
+     星球本身慢慢一胀一缩，像在呼吸，表面几道经线从左往右转过去，像在自转（经线由 quiz.js 逐帧画）；
+     点下去时土星和题目卡片一起淡出，换题后再一起淡入。点按区 56×44，右边缘对齐 gutter */
   .next { position: relative; width: 56px; height: 44px; color: var(--ink); transition: opacity .5s var(--ease-out); }
   .next:disabled { opacity: .3; cursor: default; }
   .next svg { position: absolute; inset: 0; width: 56px; height: 44px; overflow: visible; }
@@ -173,9 +174,12 @@
   .next .nudge { transition: transform .6s var(--ease-out), opacity .3s; }
   .next:not(:disabled) .nudge { transform: translateX(8px); }  /* 外环右端从 48 挪到 56，贴住留白线 */
   .next .planet { transform-box: fill-box; transform-origin: center; }
+  .next .meridian { stroke-width: .7; }
   .next:not(:disabled) .planet { animation: breathe 3.6s ease-in-out infinite; }
   @keyframes breathe { 50% { transform: scale(1.1); } }
-  .next.launch .nudge { transform: translateX(90px); opacity: 0; transition: transform .26s cubic-bezier(.5, 0, .9, .4), opacity .26s; }
+  /* 换题：和题目卡片一起淡出；看不见的时候回到答题前的位置，不让人看到它往回滑 */
+  .next.fade { opacity: 0; transition: opacity .26s; }
+  .next.fade .nudge { transition: none; }
   @media (prefers-reduced-motion: reduce) {
     .next, .next .nudge { transition: none; }
     .next:not(:disabled) .planet { animation: none; }
@@ -270,7 +274,10 @@
         <g class="nudge">
           <g class="probe" transform="translate(32 22) rotate(-13.2)">
             <path d="M-13 0 A13 3.5 0 0 1 13 0 M-16 0 A16 4.3 0 0 1 16 0"/>
-            <circle class="planet" r="6.8" style="fill: var(--paper)"/>
+            <g class="planet">
+              <circle r="6.8" style="fill: var(--paper)"/>
+              <g id="meridians"></g>
+            </g>
             <path d="M-13 0 A13 3.5 0 0 0 13 0 M-16 0 A16 4.3 0 0 0 16 0"/>
           </g>
         </g>
