@@ -467,7 +467,12 @@ function go(d) {
 }
 $("prevTop").addEventListener("click", () => go(-1));
 $("nextTop").addEventListener("click", () => go(1));
-$("next").addEventListener("click", () => go(1));
+// 点小土星：土星向右飞出，和题目卡片淡出同时进行；换题后回到原位
+$("next").addEventListener("click", () => {
+  const b = $("next");
+  if (!reduce) { b.classList.add("launch"); setTimeout(() => b.classList.remove("launch"), 420); }
+  go(1);
+});
 $("backLatest").addEventListener("click", () => { const t = returnTarget(); if (t) show(t); });
 
 function toast(msg) {
