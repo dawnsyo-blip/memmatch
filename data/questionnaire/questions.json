@@ -68,10 +68,11 @@
       "exclude_reason": "接不上您用的入口",
       "options": [
         {"id": "official", "label": "官方网页或手机端 App", "help": "如 ChatGPT 的 App",
-         "notice": "您选的官方 App 目前接不了自己部署的记忆库：ChatGPT 的自定义 MCP 只能在网页端用，DeepSeek、智谱、Kimi、通义千问、豆包的官方 App 不支持接外部记忆。可以考虑用手机远程连接电脑上的 Agent，或改用 Kelivo 这类客户端。",
+         "notice": "官方网页和 App 能接的记忆库很少：ChatGPT 自己添加的记忆库只能在网页上用，而且目前只有企业版、团队版能写入，插件目录里的 Notion 网页和 App 都能连；DeepSeek、智谱、Kimi、通义千问、豆包的官方网页和 App 不支持接外部记忆。可以考虑用手机远程连接电脑上的 Agent，或改用 Kelivo 这类客户端。",
          "effect": {"any_of": [
            {"when": {"question": "q2", "selected_any": ["anthropic"]}, "require": {"compatible_clients": ["claude_web_mobile"]}, "exclude_any": {"category": ["自带记忆的应用"]}},
-           {"when": {"question": "q2", "selected_any": ["anthropic", "google"]}, "require": {"phone_access": ["remote_mcp"]}, "exclude_any": {"category": ["自带记忆的应用"]}}
+           {"when": {"question": "q2", "selected_any": ["anthropic", "google"]}, "require": {"phone_access": ["remote_mcp"]}, "exclude_any": {"category": ["自带记忆的应用"]}},
+           {"when": {"question": "q2", "selected_any": ["openai"]}, "require": {"id": ["method-notion"]}}
          ]}},
         {"id": "remote_control", "label": "在手机端远程连接电脑上的 Agent", "help": "如使用 DeepSeek Harness 的远程插件",
          "effect": {"require_selected": {"question": "q3a", "field": "compatible_clients", "extra": ["any_mcp_client"],
@@ -103,7 +104,10 @@
          "note": "酒馆要先装社区扩展 SillyTavern-MCP-Client（连同它要求的服务端插件），并在采样设置里打开函数调用，才能接这个 MCP 记忆库；所用的模型接口要支持工具调用",
          "note_if": {"compatible_clients": ["any_mcp_client"]}, "note_unless": {"compatible_clients": ["sillytavern"]}},
         {"when": {"question": "q3", "selected_any": ["sillytavern"]},
-         "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "原生支持酒馆，不用另装 MCP 扩展"}]}
+         "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "原生支持酒馆，不用另装 MCP 扩展"}]},
+        {"when": {"all": [{"question": "q3", "selected_any": ["official"]}, {"question": "q2", "selected_any": ["openai"]}]},
+         "note": "ChatGPT 里通过插件目录的 Notion 应用连接，网页和手机 App 都能用；能否写入要看您的套餐和 Notion 授权（可能要付费套餐），连上后请先试一次",
+         "note_if": {"id": ["method-notion"]}}
       ],
       "relax": [
         {"label": "改用手机远程连接电脑上的 Agent", "add": ["remote_control"]},

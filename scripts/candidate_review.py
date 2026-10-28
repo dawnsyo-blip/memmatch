@@ -874,7 +874,7 @@ METHODS = {
     "Notion 当记忆（官方远程 MCP）": _e("Notion 当记忆（官方远程 MCP）", "纳入", "M",
         "不装专门的记忆库：在 Notion 里建一个记忆页面或数据库，通过 Notion 官方托管的远程 MCP 让 AI 搜索、读取、新建和修改页面；Notion 每种套餐都能用，记忆在 Notion 里随时手改",
         "你定的内容（关于你、约定、日记等）", "远程 MCP（Notion 官方托管，网址 https://mcp.notion.com/mcp，OAuth 登录）",
-        "Claude Code、Codex、Cursor、Hermes、VS Code 等（Notion 文档列出的）；Claude 桌面版和网页版、手机 App 可添加自定义连接器（付费套餐）；ChatGPT 网页端可添加",
+        "Claude Code、Codex、Cursor、Hermes、VS Code 等（Notion 文档列出的）；Claude 桌面版和网页版、手机 App 可添加自定义连接器（免费版限 1 个）；ChatGPT 插件目录里有 Notion 官方应用，网页和手机 App 都能连",
         "Notion 的服务器（托管）", "低：在客户端填网址并登录 Notion", "Notion 账号（免费版即可）",
         "没有自动提取、去重和遗忘，全看 AI 守不守规则；记忆存在 Notion 的服务器上；原来的本地开源版 makenotion/notion-mcp-server 已声明不再维护"),
 }

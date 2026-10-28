@@ -51,8 +51,8 @@
 - `node scripts/recommend_frequency.mjs [份数]` 用随机答卷统计各项目被推荐的次数，用来决定先核哪些项目、发现某个项目异常地常被推荐
 - 推荐原则：硬条件只排除确定用不了的，文档没写的保留并标“需自行确认”；结果为空时给“放宽哪一条就有几个”的建议；用户答案优先于推荐偏好
 - 各家官方 App 能否接记忆库（2026-10 核实）：
-  - Claude App 能用远程 MCP 连接器（要先在网页端添加，付费套餐）
-  - ChatGPT 的自定义 MCP 只限网页端，应用目录里上架的应用手机才能用
+  - Claude App 能用远程 MCP 连接器（要先在网页端添加；免费版限 1 个，付费版多个，2026-10-28 据第三方资料复核，官方帮助页抓不到全文）
+  - ChatGPT 的自定义 MCP 只限网页端，而且官方帮助页写明完整读写只开放给企业版、团队版、教育版（个人 Pro 只读，Plus 不明）；应用目录 2026-07-09 改名插件目录，里面的应用网页和手机 App 都能用，Notion 在其中（能否写入官方没写清）。所以第 3 题选官方 App＋OpenAI 时只放行 `method-notion`，并注明需自行确认
   - Gemini App 能加自定义 MCP（限美国个人账号）
   - DeepSeek、智谱官方 App 不能
   - 手机遥控电脑上的 Agent 是另一条路：Claude App 的 Remote Control 连 Claude Code，ChatGPT App 的 Remote 连 Codex，DeepSeek Harness 只有社区远程插件。这时记忆库装在电脑上即可
@@ -151,4 +151,5 @@ AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“
 - **径向渐变默认按方块对角线算百分比**（`farthest-corner`），比圆的半径大约 1.4 倍；按圆半径算要写 `closest-side`，否则尺寸算错、光晕还会被圆边切出一道硬边
 - **无界面 Edge 截不准动画**：窗口最小宽度约 500px（要看手机宽度就套一个 390px 的 iframe）；CSS 过渡和 requestAnimationFrame 的时间推进不可靠，几张截图常是同一帧；共用浏览器配置目录会让页面没渲染出来（3173 字节的纯色图）。看动画的中间状态要在测试副本里把进度写死（或暂停 CSS 动画、手动设 `currentTime`），每张图用独立的 `--user-data-dir`；测试副本放进样张目录才能读到相对路径的资源，截完删掉
 - **芥末黄和深色底直接混色会发灰发绿**（sRGB 混色），要的暖色单独指定色值
+- **import_projects 之后要跑两遍 normalize**：规则会读 `info.summary`，而 normalize 会把核实时改写的简介写进去。导入把简介重置成原文，第一遍按原文判、第二遍按改写简介判，2026-10-28 实测有 7 个项目的自动判定值因此来回变（supermemory、eventide、drivesoid 等）。仓库里的数据对应“跑两遍”的结果；以后想根治，要让规则只读原始说明
 - **用 heredoc 写含反斜杠的正则会被吃掉转义**，2026-10-24 又把 dimension_rules.py 写坏一次。含 `\n`、`\d` 的改动一律用 Edit 工具。
