@@ -173,7 +173,7 @@
   .next .trail-arrow { stroke-linecap: butt; }
   .next .probe { stroke: var(--bulb); }   /* 土星用芥末黄，轨迹照旧和文字同色 */
   /* 浅色模式：轨迹和行星环同色 */
-  :root:not(.theme-dark) .next .trail-past, :root:not(.theme-dark) .next .trail-ahead, :root:not(.theme-dark) .next .trail-arrow { stroke: var(--rule); }
+  :root:not(.theme-dark) .next .trail-ahead, :root:not(.theme-dark) .next .trail-arrow { stroke: var(--rule); }
   .next .trail-ahead { stroke-dasharray: 3 4; }
   .next:not(:disabled) .trail-ahead { animation: march 1.2s linear infinite; }
   @keyframes march { to { stroke-dashoffset: -14; } }
@@ -267,8 +267,7 @@
   <div class="foot">
     <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 120 44" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
-        <!-- 同一条光滑曲线：飞过的实线、前方的虚线，在土星前后各留 5px 空白（不和土星交叉）；虚线末端一个小箭头，停在留白线以内 -->
-        <path class="trail-past" d="M-10.00 39.00 Q19.97 36.36 48.65 30.80"/>
+        <!-- 土星前方的虚线轨迹，和土星之间留 5px 空白；虚线末端一个小箭头。土星后面原有一段飞过的实线，负责人 2026-10-28 要求删掉 -->
         <path class="trail-ahead" d="M91.46 20.67 Q105.55 16.71 119.30 12.00"/>
         <path class="trail-arrow" d="M116.17 15.82 L119.30 12.00 L114.48 10.90"/>
         <!-- 土星（参照参考图里先驱者号书中的画法）：三道同心的环（只用线条，不画明暗、不铺环带底色），
