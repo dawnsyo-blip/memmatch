@@ -300,7 +300,7 @@ function renderConflicts() {
     const p = document.createElement("p");
     p.append(partial ? "与历史选项部分互斥" : "与历史选项互斥");
     if (o !== state.detour) {
-      const b = Object.assign(document.createElement("button"), { type: "button", className: "textlink", textContent: `去${byId[o].num}修改` });
+      const b = Object.assign(document.createElement("button"), { type: "button", className: "textlink", textContent: byId[o].num });  // 只写题号，如“第 3 题”
       b.addEventListener("click", () => jump(o));
       p.append(b);
     }

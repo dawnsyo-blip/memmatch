@@ -157,11 +157,11 @@
 
   /* ---------- 底部 ---------- */
   .foot {
-    display: flex; justify-content: flex-end; align-items: center; gap: var(--s-3);
+    display: flex; flex-direction: column; align-items: flex-end; gap: var(--s-1);
     padding: var(--s-4) var(--gutter) 0;
   }
-  /* 往回翻或去改互斥的题时，下一题按钮左边出现“回到第 N 题” */
-  .foot .textlink { margin-right: auto; color: var(--ink-soft); }
+  /* 往回翻或去改互斥的题时，下一题按钮（小土星）下面出现“回到第 N 题” */
+  .foot .textlink { color: var(--ink-soft); }
   .foot .textlink[hidden] { display: none; }
   /* 下一题：只有一个直角箭头，点按区 44px，图标右边缘对齐 gutter */
   /* 下一题：土星沿着虚线轨迹飞向屏幕右边外——“驶向下一站”。
@@ -265,7 +265,6 @@
   </div>
 
   <div class="foot">
-    <button type="button" class="textlink caption-zh" id="backLatest" hidden></button>
     <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 120 44" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
         <!-- 同一条光滑曲线：飞过的实线、前方的虚线，在土星前后各留 5px 空白（不和土星交叉）；虚线末端一个小箭头，停在留白线以内 -->
@@ -281,6 +280,7 @@
         </g>
       </g>
     </svg></button>
+    <button type="button" class="textlink caption-zh" id="backLatest" hidden></button>
   </div>
 </main>
 
