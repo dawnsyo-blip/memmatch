@@ -1,0 +1,377 @@
+{
+  "acontext": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方托管版 acontext.io 送免费额度，用完后的价格 README 没写；自己用 Docker 部署不用买"
+  },
+  "basic-memory": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）"
+  },
+  "central-intelligence": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "托管版免费档限 500 条记忆，Pro 版 29 美元／月（5 万条）；本地运行不用付"
+  },
+  "claude-mem": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "本地使用免费；另有云同步和 CMEM Pro 托管版，价格 README 没写"
+  },
+  "honcho": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方托管版（api.honcho.dev）的价格 README 没写；也可自己部署"
+  },
+  "letta": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方 Letta Cloud 托管版的价格 README 没写，以官网为准；也可自己部署"
+  },
+  "mem0": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买"
+  },
+  "mem9": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方托管 api.mem9.ai 的价格 README 没写（配置里有用量限额设置）；也可自己部署"
+  },
+  "memmachine": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方平台可免费注册，付费情况 README 没写；也可在本地起服务"
+  },
+  "memori": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "Memori Cloud 免账号可用但限速，要更高额度需注册，价格 README 没写"
+  },
+  "memu": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
+  },
+  "mengram": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "托管版有免费档，付费价格 README 没写（对比表里的 19–249 美元／月是 Mem0 的）；也可自托管"
+  },
+  "openviking": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "也可用火山引擎托管的服务，价格 README 没写"
+  },
+  "supermemory": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
+  },
+  "hindsight": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "Hindsight Cloud 按用量计费，价格见 vectorize.io/pricing；自己部署不用买"
+  },
+  "omega-memory": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "免费版存满 2000 条后搜索降级为文本匹配、满 5000 条不再存新记忆，OMEGA Pro 解除上限，价格 README 没写"
+  },
+  "prism-mcp": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）"
+  },
+  "mira-oss": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "自己部署免费；作者另运营托管版 miraos.org，价格 README 没写"
+  },
+  "contextlattice": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
+  },
+  "remembra": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费"
+  },
+  "retaindb": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "optional_paid"
+    ],
+    "detail": "生产用的托管版 RetainDB Cloud 收费，价格 README 没写；自己跑免费"
+  },
+  "memobase": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "optional_paid"
+    ],
+    "detail": "Memobase Cloud 有免费档，付费情况 README 没写；也可自己起服务"
+  },
+  "archon-memory-core": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": "路线图计划 2026 年第三季度推出 Pro 付费档，目前全部免费"
+  },
+  "hbarefoot-engram": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": "项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+  },
+  "respark": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "hosting"
+    ],
+    "detail": "训练要租云 GPU（RunPod），账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅"
+  },
+  "ombre-brain": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api",
+      "hosting"
+    ],
+    "detail": "云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度"
+  },
+  "memoryconstellations": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "记忆处理的模型费约 7 美元／月（README 估算，可用 OpenRouter、DeepSeek、Gemini）"
+  },
+  "imprint-memory": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "默认配置设计在各家免费额度内，正常个人使用不用绑卡；向量也可用本地 Ollama"
+  },
+  "tstockham96-engram": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "README 称 Gemini 免费档约每分钟 20 次、每天 1500 次，个人轻用够；频繁使用建议换付费 Key"
+  },
+  "pawwake": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "可部署在 Render、Zeabur 的免费额度内；模型按调用付费"
+  },
+  "claude-imprint": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": ""
+  },
+  "claude-soul": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": ""
+  },
+  "cloud-and-island": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": ""
+  },
+  "companion-emergence": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": "用已有的 Claude Code 订阅驱动，README 称不用另配 API Key"
+  },
+  "graph-memory": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": ""
+  },
+  "keep-the-crow": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": ""
+  },
+  "not-fade-away": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": "README 提到 6 月 15 日起非交互调用（-p、Agent SDK）改按量计费，常驻会话仍走订阅"
+  },
+  "chatnest-ui": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "subscription"
+    ],
+    "detail": "自己用可走 Claude Code 订阅；对外提供服务必须改用 API Key（按量付费）"
+  },
+  "alethech": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": ""
+  },
+  "python-sdk": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": ""
+  },
+  "fluctlightdb": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": ""
+  },
+  "omnigraph": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": "图数据库本身不调用模型；若在配置里接外部向量化服务，那部分另计"
+  },
+  "wrenwen": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "只是架构文档、没有代码，照着自建时要自备模型接口"
+  },
+  "ai-daily-rules-tutorial": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "none"
+    ],
+    "detail": "只是教程，用的是您本来就在用的聊天应用；作者用 Claude Opus，换别的模型要自己调提示词"
+  },
+  "ai-companion-cot-emotion": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "values": [
+      "model_api"
+    ],
+    "detail": "每一轮要多调用一次模型生成内心独白，费用随之增加；README 的测试里换成 flash-lite 后没再撞到免费额度上限"
+  }
+}

@@ -420,6 +420,19 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "model_api",
+        "optional_paid"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：Memori Cloud 免账号可用但限速，要更高额度需注册，价格 README 没写"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。Memori Cloud 免账号可用但限速，要更高额度需注册，价格 README 没写。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：Memori Cloud 免账号可用但限速，要更高额度需注册，价格 README 没写"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -462,6 +475,6 @@
       "对话内容默认经过第三方服务器"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

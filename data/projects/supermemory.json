@@ -436,6 +436,19 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "model_api",
+        "optional_paid"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -478,6 +491,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

@@ -426,6 +426,18 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：README：几个客户端共用一个服务；多用户模式按令牌分 namespace（按用户，不是按 agent）（2026-10-26 补核）"
     },
+    "spend": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "按“需要的账号”和费用档推出：none（没有逐项核实过收费情况）"
+    },
+    "spend_note": {
+      "value": "不需要额外花钱。",
+      "status": "auto",
+      "basis": "按“需要的账号”和费用档推出：none（没有逐项核实过收费情况）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -462,6 +474,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

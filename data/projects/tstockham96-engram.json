@@ -422,6 +422,18 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：README：几个客户端共用，--agent 记录来源（2026-10-26 补核）"
     },
+    "spend": {
+      "value": [
+        "model_api"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：README 称 Gemini 免费档约每分钟 20 次、每天 1500 次，个人轻用够；频繁使用建议换付费 Key"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。README 称 Gemini 免费档约每分钟 20 次、每天 1500 次，个人轻用够；频繁使用建议换付费 Key。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：README 称 Gemini 免费档约每分钟 20 次、每天 1500 次，个人轻用够；频繁使用建议换付费 Key"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -460,6 +472,6 @@
       "近一年只有一人维护"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

@@ -431,6 +431,19 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "model_api",
+        "optional_paid"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -478,6 +491,6 @@
       "对话内容默认经过第三方服务器"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

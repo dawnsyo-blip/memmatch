@@ -433,6 +433,18 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：README：Across Sessions. Across Agents. Across Devices.（2026-10-26 补核）"
     },
+    "spend": {
+      "value": [
+        "model_api"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -475,6 +487,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

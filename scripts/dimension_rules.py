@@ -81,7 +81,19 @@ ENUMS.update({
                     "per_agent": "能给每个 Agent 分开记忆空间或权限，只共享一部分",
                     "not_mentioned": "未提及"},
 })
+# 2026-10-28 第六批：要额外花多少钱（负责人要求）。与 cost 不同：cost 是三档粗分（问卷预算题在用），
+# spend 说明具体花在哪、有没有金额。可多选；none 只在没有任何额外花费时单独出现。
+# 只看“为了用上这个项目要另外付的钱”，已经在付的聊天订阅也算（会在提示里写明）。逐项核实记在 data/spend_review.json。
+ENUMS.update({
+    "spend": {"none": "不需要额外花钱",
+              "model_api": "要自备模型或向量接口，按调用量付费（能接本地模型的可省）",
+              "subscription": "要已有的付费订阅（如 Claude Pro／Max）",
+              "hosting": "要另付服务器、云平台或租 GPU 的钱",
+              "product_fee": "项目本身收费（托管版或授权，不买用不了）",
+              "optional_paid": "另有付费的托管版或高级版，自己部署可以不买"},
+})
 LABELS = {
+    "spend": "要额外花多少钱",
     "multi_agent": "几个 Agent 能否共用记忆",
     "media_recall": "能否检索并召回多模态内容",
     "phone_access": "手机能否连上", "local_model": "能否用本地模型", "model_lock": "是否绑定某家模型",

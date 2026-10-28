@@ -487,6 +487,19 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "model_api",
+        "hosting"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费；要另付服务器、云平台或租 GPU 的钱（也能接本地模型，不花钱，但电脑要带得动）。云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度"
+    },
     "pairs_with": {
       "value": [
         "machine-studio",
@@ -532,6 +545,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

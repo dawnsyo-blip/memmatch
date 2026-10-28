@@ -425,6 +425,18 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：README：几个客户端共用记忆；多 agent 协调（锁、任务队列）是付费 pro 功能（2026-10-26 补核）"
     },
+    "spend": {
+      "value": [
+        "optional_paid"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：免费版存满 2000 条后搜索降级为文本匹配、满 5000 条不再存新记忆，OMEGA Pro 解除上限，价格 README 没写"
+    },
+    "spend_note": {
+      "value": "免费版存满 2000 条后搜索降级为文本匹配、满 5000 条不再存新记忆，OMEGA Pro 解除上限，价格 README 没写。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：免费版存满 2000 条后搜索降级为文本匹配、满 5000 条不再存新记忆，OMEGA Pro 解除上限，价格 README 没写"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -465,6 +477,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

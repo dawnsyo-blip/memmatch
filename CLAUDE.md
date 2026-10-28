@@ -62,6 +62,7 @@
 - `python -X utf8 scripts/check_health.py [--resume|--only a,b]` 写入各项目 `health`，生成 `docs/health-report.md`；网络故障记 `status=error`，用 `--resume` 续跑；检查逻辑改动时把 `CHECKER_VERSION` 加 1
 - `python -X utf8 scripts/decide_inclusion.py` 写入 `inclusion`，生成 `docs/inclusion-report.md`（之后停下等负责人审核）
 - 可调设置在 `data/settings.json`（停更天数等）
+- 负责人 2026-10-28 定：教程（`project_role` = `guide`）和上下文工具（`context_tool`）写完就用，不提示“超过 N 天没有提交”（`decide_inclusion.py` 的 `FINISHED_ROLES`）。`project_role` 是单值字段，值是字符串，别用 `set()` 去套
 
 阶段 5（前端）：
 - 前端的页面清单、风格简报模板、之后的设计规范放在 `docs/前端/`
@@ -92,6 +93,8 @@ AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“
 多模态召回字段 `media_recall`（2026-10-26，负责人要求）：值 `image`／`audio`／`video`（可多选）或 `not_mentioned`。标准：系统自己保管原图／原音频／原视频（或直接给原件做向量），召回时能把原件交回；只把图片、语音、视频转成文字（描述、转写、OCR）再存文字的不算，哪怕留了文件路径或链接。与旧特性 `multimodal` 不同，后者命中范围宽（生图、读图都算），不要混用。规则不自动判定，全靠 `readme_verification.json` 里逐项核实：先用 scratchpad 脚本扫 README 里“媒体词＋记忆词”的行，再对命中项克隆仓库看代码和文档。没命中的项目按未提及处理，所以是“已知有”的下限，漏网项目要在以后复核时补。已核实有的 12 个，核实后判为只转文字的 14 个（备注里写了原因）。问卷第 8a 题用它加分（2026-10-26）。
 
 多智能体共用字段 `multi_agent`（2026-10-26，为问卷第 4a 题新增）：值 `shared`（写明几个不同的 Agent 或工具读写同一份记忆）、`per_agent`（能给每个 Agent 分开记忆空间或权限，只共享一部分），可两者都有，或 `not_mentioned`。同一个 Agent 换设备不算（那是 `cross_client`），项目内部由几个子智能体分管记忆（如 MIRIX、agent-zero 的子 agent）也不算；`namespace` 只按项目或用户分的不算 `per_agent`。和 `media_recall` 一样只靠逐项核实：扫 README 里多 agent、共享、agent_id、namespace 等词，逐条看原文判断。写明几个 Agent 共用、原来 `cross_client` 是“未提及”的 10 个顺手改成了 yes。结果：共用 64 个、能分开 29 个。
+
+额外花费字段 `spend`＋`spend_note`（2026-10-28，负责人要求）：与粗分三档的 `cost`（问卷预算题在用，没动）不同，`spend` 可多选，说明具体花在哪：`none`、`model_api`（自备模型／向量接口，按量付费）、`subscription`（已有的付费订阅，如 Claude Pro）、`hosting`（服务器、云平台、租 GPU）、`product_fee`（项目本身收费，目前没有项目属于此类）、`optional_paid`（另有付费托管版或高级版，自己部署可不买）。`spend_note` 是给用户看的一句话，项目只要需要另付接口或订阅等就以“需要一些额外花销来搭配这个项目”开头，含 README 写明的金额。逐项核实写在 `data/spend_review.json`（41 个：全部有托管版或收费线索的项目、订阅类、租 GPU、几个费用原文未识别的）；没列入的按“需要的账号”和 `cost` 自动推出，状态为 auto，其中收费情况没有逐项看过。金额只写 README 写明的，没写的注“README 没写，以官网为准”；Mem0 的价格是 Mengram README 对比表里的二手信息。`python -X utf8 scripts/spend_report.py` 生成 `docs/spend-report.md`。新增项目要查一遍定价线索再决定；myco、cosmos-mcp 两个仍是 unknown。预算题还没接 `spend`（改题目要先问负责人）。
 
 ## 踩过的坑
 

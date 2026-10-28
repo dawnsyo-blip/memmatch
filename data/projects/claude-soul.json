@@ -410,6 +410,18 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "subscription"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅（Claude Pro 约 20 美元／月起，很多人本来就在付）。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -455,6 +467,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

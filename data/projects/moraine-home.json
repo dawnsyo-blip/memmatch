@@ -423,6 +423,18 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "none"
+      ],
+      "status": "auto",
+      "basis": "按“需要的账号”和费用档推出：none（没有逐项核实过收费情况）"
+    },
+    "spend_note": {
+      "value": "不需要额外花钱。",
+      "status": "auto",
+      "basis": "按“需要的账号”和费用档推出：none（没有逐项核实过收费情况）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -461,6 +473,6 @@
       "许可证禁止商用"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

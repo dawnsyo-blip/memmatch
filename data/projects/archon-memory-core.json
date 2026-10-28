@@ -409,6 +409,18 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：路线图计划 2026 年第三季度推出 Pro 付费档，目前全部免费"
+    },
+    "spend_note": {
+      "value": "不需要额外花钱。路线图计划 2026 年第三季度推出 Pro 付费档，目前全部免费。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：路线图计划 2026 年第三季度推出 Pro 付费档，目前全部免费"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -456,6 +468,6 @@
     "reasons": [
       "收录类别：需写代码（开发者向）"
     ],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

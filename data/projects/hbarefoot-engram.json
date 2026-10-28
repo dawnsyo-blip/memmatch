@@ -421,6 +421,18 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+    },
+    "spend_note": {
+      "value": "不需要额外花钱。项目接受赞助（5–499 美元／月），README 明说不解锁任何功能。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -455,6 +467,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

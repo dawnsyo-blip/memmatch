@@ -38,6 +38,7 @@ OVERRIDES = ROOT / "data/normalization_overrides.json"
 # Claude 逐个项目对照 README（高频推荐的还看了代码）核实的结果，优先于规则判定和负责人采用的建议值
 VERIFICATION = ROOT / "data/readme_verification.json"
 SAFETY_NOTES = ROOT / "data/safety_notes.json"
+SPEND_REVIEW = ROOT / "data/spend_review.json"
 REVIEW_MD = ROOT / "docs/review-normalization.md"
 REVIEW_XLSX = ROOT / "docs/review-normalization.xlsx"
 
@@ -97,7 +98,10 @@ for _a, _pairs in DR.RELATED.items():
 MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "memory_subject", "write_mode",
          "forgetting", "human_review", "export", "data_passes_through",
          "ranking_signals", "scoring_stages", "emotion_handling", "lifecycle", "pairing", "customization",
-         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access", "media_recall", "multi_agent"}
+         "chinese_support", "retrieval_postprocess", "recall_uses_llm", "memory_writer", "phone_access", "media_recall", "multi_agent", "spend"}
+
+
+SPEND_DATA = json.loads(SPEND_REVIEW.read_text(encoding="utf-8")) if SPEND_REVIEW.exists() else {}
 
 
 def snippet(text, m, width=60):
@@ -747,6 +751,51 @@ def n_dimensions(c, out, fixed=()):
     return d
 
 
+SPEND_PHRASE = {
+    "model_api": "要自备模型（或向量化）接口，按调用量付费",
+    "subscription": "要已有的付费订阅（Claude Pro 约 20 美元／月起，很多人本来就在付）",
+    "hosting": "要另付服务器、云平台或租 GPU 的钱",
+    "product_fee": "项目本身收费，不买用不了",
+}
+
+
+def n_spend(doc_id, out, review):
+    """要额外花多少钱：先按“需要的账号”推出，人工核实过的（data/spend_review.json）以核实为准。
+    返回 (spend, spend_note)；spend_note 是给用户看的一句话，含金额（README 写了才有）。"""
+    rev = review.get(doc_id)
+    accs = out["accounts_needed"]["value"]
+    if rev:
+        vals = rev["values"]
+        spend = res(vals, "verified", f"Claude 核实（{rev['checked']}，{rev['by']}）：" + (rev["detail"] or "没有发现收费或需要另付的接口"))
+    else:
+        vals = [v for v, a in (("model_api", "model_api_key"), ("subscription", "claude_subscription")) if a in accs]
+        if "model_api" not in vals and out["cost"]["value"] == "model_fees_only":  # 账号写“无”但已核实要调模型（如 AstrBot 里配置的服务）
+            vals.insert(0, "model_api")
+        if not vals and (not accs or out["cost"]["value"] in ("", "paid_service")):
+            return (res([], "needs_review", "费用原文未识别，且没有逐项核实过：" + out["cost"]["basis"]),
+                    res("", "unknown", "未核实"))
+        vals = vals or ["none"]
+        spend = res(vals, "auto", "按“需要的账号”和费用档推出：" + "、".join(accs or ["未知"]) + "（没有逐项核实过收费情况）")
+    needs = [SPEND_PHRASE[v] for v in vals if v in SPEND_PHRASE]
+    parts = []
+    if needs:
+        text = "需要一些额外花销来搭配这个项目：" + "；".join(needs)
+        if "model_api" in vals and out["local_model"]["value"] == "yes":
+            text += "（也能接本地模型，不花钱，但电脑要带得动）"
+        parts.append(text)
+    detail = rev["detail"] if rev else ""
+    if "optional_paid" in vals and not detail:
+        parts.append(("另有" if needs else "项目本身免费；有") + "付费的托管版或高级版，自己部署可以不买")
+    if not parts and not (detail and "none" not in vals):
+        parts.append("不需要额外花钱")
+    if detail:
+        parts.append(detail)
+    note = "。".join(parts)
+    if not note.endswith("。"):
+        note += "。"
+    return spend, res(note, spend["status"], spend["basis"])
+
+
 def paper_taxonomy(c):
     if not c.x:
         return None
@@ -788,6 +837,7 @@ def normalize(doc, overrides, verification=None):
     for field, item in n_dimensions(c, out, fixed).items():
         if field not in fixed:
             out[field] = item
+    out["spend"], spend_note = n_spend(doc["id"], out, SPEND_DATA)
     uncertainties = []
     for f in FIELDS:
         n = out[f]
@@ -795,6 +845,7 @@ def normalize(doc, overrides, verification=None):
             n["status"] = "unknown"
             uncertainties.append({"field": f, "label": FIELD_LABELS[f], "note": uncertainty_note(n["basis"])})
     norm = {f: out[f] for f in FIELDS}
+    norm["spend_note"] = spend_note
     rel = RELATED.get(doc["id"], [])
     norm["pairs_with"] = res([i for i, _ in rel], "auto",
                              "；".join(f"{i}：{n}" for i, n in rel) or "没有记录设计上搭配使用的项目")

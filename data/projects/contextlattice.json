@@ -408,6 +408,18 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-25，README）：README：跨 agent 延续上下文，按 agent-id 记录（2026-10-26 补核）"
     },
+    "spend": {
+      "value": [
+        "optional_paid"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
+    },
+    "spend_note": {
+      "value": "本地免费；付费版增加协作、高级分析和托管分发，价格未公开。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -463,6 +475,6 @@
     "exclusion_code": null,
     "flags": [],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

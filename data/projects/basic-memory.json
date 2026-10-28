@@ -421,6 +421,18 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "optional_paid"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）"
+    },
+    "spend_note": {
+      "value": "本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -463,6 +475,6 @@
       "托管模式下对话内容经过第三方服务器（也可自己部署）"
     ],
     "reasons": [],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }

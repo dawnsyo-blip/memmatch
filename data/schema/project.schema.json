@@ -212,7 +212,9 @@
         "model_lock",
         "setup_device",
         "media_recall",
-        "multi_agent"
+        "multi_agent",
+        "spend",
+        "spend_note"
       ],
       "properties": {
         "access": {
@@ -379,6 +381,14 @@
         },
         "multi_agent": {
           "$ref": "#/$defs/normalizedField"
+        },
+        "spend": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "要额外花多少钱（可多选）；金额等细节在 spend_note，逐项核实记在 data/spend_review.json"
+        },
+        "spend_note": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "给用户看的一句话：需要一些额外花销来搭配这个项目，含 README 写明的金额"
         },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",

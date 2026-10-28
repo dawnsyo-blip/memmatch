@@ -404,6 +404,18 @@
       "status": "auto",
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
+    "spend": {
+      "value": [
+        "hosting"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：训练要租云 GPU（RunPod），账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅"
+    },
+    "spend_note": {
+      "value": "需要一些额外花销来搭配这个项目：要另付服务器、云平台或租 GPU 的钱。训练要租云 GPU（RunPod），账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README）：训练要租云 GPU（RunPod），账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
@@ -455,6 +467,6 @@
     "reasons": [
       "收录类别：边缘项（存的不是对话记忆）"
     ],
-    "decided_on": "2026-10-27"
+    "decided_on": "2026-10-28"
   }
 }
