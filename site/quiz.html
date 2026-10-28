@@ -163,28 +163,22 @@
   /* 往回翻或去改互斥的题时，下一题按钮（小土星）下面出现“回到第 N 题” */
   .foot .textlink { color: var(--ink-soft); }
   .foot .textlink[hidden] { display: none; }
-  /* 下一题：只剩一颗土星（负责人 2026-10-28 去掉了前后的轨迹线），靠土星自己的动作提示“往下一题去”：
-     没答本题时变淡、静止；答完后整颗土星动起来：外环是一圈细碎的颗粒，绕着星球流动（前半截从左往右、后半截从右往左，
-     看起来是环在绕星球转），内环实线不动；星球本身慢慢一胀一缩，像在呼吸（负责人 2026-10-28 定）；
-     指上去时往右靠一点停住；点下去时土星向右飞出，题目卡片同时淡出。点按区 56×44，右边缘对齐 gutter */
-  .next { position: relative; width: 56px; height: 44px; color: var(--ink); }
+  /* 下一题：只剩一颗土星（负责人 2026-10-28 去掉了前后的轨迹线，两道环都是实线），靠土星自己的动作提示“往下一题去”：
+     没答本题时变淡、静止，离右边留白线还差 8px；答完后变亮，同时微微向右滑到外环贴住留白线；
+     星球本身慢慢一胀一缩，像在呼吸；点下去时土星向右飞出，题目卡片同时淡出。点按区 56×44，右边缘对齐 gutter */
+  .next { position: relative; width: 56px; height: 44px; color: var(--ink); transition: opacity .5s var(--ease-out); }
   .next:disabled { opacity: .3; cursor: default; }
   .next svg { position: absolute; inset: 0; width: 56px; height: 44px; overflow: visible; }
   .next .probe { stroke: var(--bulb); }
-  .next .nudge { transition: transform .3s var(--ease-out), opacity .3s; }
-  /* 外环颗粒：虚线一段 2.5、空 3，周期 5.5；每次挪两个周期（11），首尾接得上 */
-  .next .ring-flow { stroke-dasharray: 2.5 3; }
-  .next:not(:disabled) .ring-flow.front { animation: ring-front 2.4s linear infinite; }
-  .next:not(:disabled) .ring-flow.back { animation: ring-back 2.4s linear infinite; }
-  @keyframes ring-front { to { stroke-dashoffset: -11; } }
-  @keyframes ring-back { to { stroke-dashoffset: 11; } }
+  .next .nudge { transition: transform .6s var(--ease-out), opacity .3s; }
+  .next:not(:disabled) .nudge { transform: translateX(8px); }  /* 外环右端从 48 挪到 56，贴住留白线 */
   .next .planet { transform-box: fill-box; transform-origin: center; }
   .next:not(:disabled) .planet { animation: breathe 3.6s ease-in-out infinite; }
   @keyframes breathe { 50% { transform: scale(1.1); } }
-  .next:not(:disabled):hover .nudge, .next:not(:disabled):focus-visible .nudge { animation: none; transform: translateX(5px); }
-  .next.launch .nudge { animation: none; transform: translateX(90px); opacity: 0; transition: transform .26s cubic-bezier(.5, 0, .9, .4), opacity .26s; }
+  .next.launch .nudge { transform: translateX(90px); opacity: 0; transition: transform .26s cubic-bezier(.5, 0, .9, .4), opacity .26s; }
   @media (prefers-reduced-motion: reduce) {
-    .next .nudge, .next:not(:disabled) .ring-flow, .next:not(:disabled) .planet { animation: none; transition: none; }
+    .next, .next .nudge { transition: none; }
+    .next:not(:disabled) .planet { animation: none; }
   }
 
   .toast {
@@ -272,15 +266,12 @@
     <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 56 44" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
         <!-- 土星（参照参考图里先驱者号书中的画法）：三道同心的环（只用线条，不画明暗、不铺环带底色），
-             环的后半截被星球挡住、前半截压在星球上。外层 g 负责指上去、飞出，内层管位置和倾角。
-             两半圆弧都从左端画到右端，所以前半截的颗粒顺着路径走、后半截逆着走，合起来就是绕星球一圈 -->
+             环的后半截被星球挡住、前半截压在星球上。外层 g 负责答完后右滑、点下去飞出，内层管位置和倾角 -->
         <g class="nudge">
           <g class="probe" transform="translate(32 22) rotate(-13.2)">
-            <path d="M-13 0 A13 3.5 0 0 1 13 0"/>
-            <path class="ring-flow back" d="M-16 0 A16 4.3 0 0 1 16 0"/>
+            <path d="M-13 0 A13 3.5 0 0 1 13 0 M-16 0 A16 4.3 0 0 1 16 0"/>
             <circle class="planet" r="6.8" style="fill: var(--paper)"/>
-            <path d="M-13 0 A13 3.5 0 0 0 13 0"/>
-            <path class="ring-flow front" d="M-16 0 A16 4.3 0 0 0 16 0"/>
+            <path d="M-13 0 A13 3.5 0 0 0 13 0 M-16 0 A16 4.3 0 0 0 16 0"/>
           </g>
         </g>
       </g>
