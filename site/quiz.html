@@ -118,10 +118,17 @@
   .defnote { margin: var(--s-2) 0 0; color: var(--ink-faint); }
   .defnote[hidden] { display: none; }
   /* 前后矛盾提示：这道题的选择让别的题已选的选项不算数（或反过来），放在选项下面，不挤动环的位置 */
-  .conflict { margin: var(--s-3) 0 0; padding-left: var(--s-2); border-left: var(--line) solid var(--rule); color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
-  .conflict p { margin: 0; }
+  .conflict { margin: var(--s-3) var(--gutter) 0; padding-left: var(--s-2); border-left: var(--line) solid var(--rule); color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
+  .conflict p { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s-2); }
   .conflict p + p { margin-top: var(--s-1); }
   .conflict[hidden] { display: none; }
+  /* 文字按钮：去别的题修改、回到最新的题；点按区撑到 44px 高 */
+  .textlink { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; padding: 12px 0; margin: -12px 0; }
+  /* 被别的题排斥掉的选项，在选项文字后面标“互斥” */
+  .opt .clash { margin-left: var(--s-1); padding: 0 4px; border: var(--line) solid var(--rule); color: var(--ink-soft); font-size: var(--fs-small); line-height: 18px; white-space: nowrap; }
+  /* 进度条上标出互斥的那道题：一个小方块，点它跳过去 */
+  .clash-mark { position: absolute; top: -10px; width: 6px; height: 6px; margin-left: -3px; background: var(--ink); cursor: pointer; z-index: 2; }
+  .clash-mark::after { content: ""; position: absolute; inset: -12px -10px; }
   .drawer .note { display: flex; flex-direction: column; gap: var(--s-2); }
   .drawer .note p { margin: 0; }
   .reset { align-self: flex-start; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; min-height: 32px; }
@@ -146,9 +153,12 @@
 
   /* ---------- 底部 ---------- */
   .foot {
-    display: flex; justify-content: flex-end; align-items: center;
+    display: flex; justify-content: flex-end; align-items: center; gap: var(--s-3);
     padding: var(--s-4) var(--gutter) 0;
   }
+  /* 往回翻或去改互斥的题时，下一题按钮左边出现“回到第 N 题” */
+  .foot .textlink { margin-right: auto; color: var(--ink-soft); }
+  .foot .textlink[hidden] { display: none; }
   /* 下一题：只有一个直角箭头，点按区 44px，图标右边缘对齐 gutter */
   /* 下一题：土星沿着虚线轨迹飞向屏幕右边外——“驶向下一站”。
      答完本题后：前方虚线变成芥末黄并向右流动，探测器沿轨迹轻轻前后滑动；没答时整体变淡、静止 */
@@ -251,6 +261,7 @@
   </div>
 
   <div class="foot">
+    <button type="button" class="textlink caption-zh" id="backLatest" hidden></button>
     <button class="next" id="next" aria-label="下一题"><svg class="voyage" viewBox="0 0 120 44" aria-hidden="true">
       <g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="square" stroke-linejoin="miter" vector-effect="non-scaling-stroke">
         <!-- 同一条光滑曲线：飞过的实线、前方的虚线，在土星前后各留 5px 空白（不和土星交叉）；虚线末端一个小箭头，停在留白线以内 -->

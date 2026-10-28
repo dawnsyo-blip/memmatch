@@ -578,7 +578,9 @@
     {"if": {"forgetting": ["auto_decay", "archive"]}, "points": 0.5, "reason": "有遗忘机制，记忆库不会越堆越乱", "overridden_by": ["q13"]},
     {"if": {"retrieval_postprocess": ["rerank", "dedup", "budget", "threshold"]}, "points": 0.5, "reason": "召回后还会重排、筛选", "overridden_by": ["q14"]},
     {"if": {"lifecycle_complete": ["complete"]}, "points": 0.5, "reason": "写入、整理、召回、遗忘、查看修改全流程都有", "overridden_by": []},
-    {"if": {"project_role": ["memory_component"]}, "points": -2, "reason": "只做记忆的其中一环，要和别的记忆库搭配使用", "overridden_by": []}
+    {"if": {"project_role": ["memory_component"]}, "points": -2, "reason": "只做记忆的其中一环，要和别的记忆库搭配使用", "overridden_by": []},
+    {"if": {"project_role": ["method"]}, "points": -2, "reason": "不会自动记、自动找，要靠 LLM 按您写的规则读写笔记", "overridden_by": [],
+     "when_answers": {"question": "q12m", "selected_none": ["active"]}}
   ],
   "addons": [
     {"id": "context_tool", "title": "上下文延续工具", "why": "您的聊天软件聊久了会丢前文，这类工具负责长对话不断线，可以和记忆库一起用。",

@@ -41,11 +41,13 @@ const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } c
 const sel = (qid) => state.answers[qid] || [];
 const visible = () => QS.filter((q) => !q.show_if || checkCondition(q.show_if, state.answers));
 const curQ = () => byId[state.cur];
+// 答到的最远一题：显示中的题里最后一道来过的
+const latest = () => visible().filter((q) => state.seen[q.id]).pop();
 
 /* ---------- 进度条：四个部分各一段，段长按这一部分当前要答的题数 ---------- */
 const GAP = 6;
 const bands = [...document.querySelectorAll(".band")];
-let PARTS = cfg.parts.map(() => 1), STARTS = [], TOTAL = 1;
+let PARTS = cfg.parts.map(() => 1), STARTS = [], TOTAL = 1, floor = 0;  // floor：进度条至少填到答到的最远处，往回翻时星星回去、填充不退
 function measureParts() {
   const list = visible();
   PARTS = cfg.parts.map((_, k) => list.filter((q) => q.part === k).length || 1);
@@ -97,13 +99,13 @@ function step(now) {
   xPrev = x; velPrev = vel;
   om += (-(G / L) * Math.sin(th) - (acc / L) * Math.cos(th) - DAMP * om) * dt;
   th = Math.max(-.9, Math.min(.9, th + om * dt));
-  fillTo(v);
+  fillTo(Math.max(v, floor));
   drawPendant();
   if (p < 1 || Math.abs(th) > .002 || Math.abs(om) > .002) raf = requestAnimationFrame(step);
   else { th = 0; om = 0; raf = 0; drawPendant(); }
 }
 function moveTo(target, animate) {
-  if (!animate || reduce) { cancelAnimationFrame(raf); raf = 0; v = vFrom = vTo = target; th = om = 0; fillTo(v); drawPendant(); return; }
+  if (!animate || reduce) { cancelAnimationFrame(raf); raf = 0; v = vFrom = vTo = target; th = om = 0; fillTo(Math.max(v, floor)); drawPendant(); return; }
   if (target === vTo && raf) return;
   vFrom = v; vTo = target; t0 = performance.now();
   if (!raf) { tLast = t0; xPrev = null; velPrev = 0; raf = requestAnimationFrame(step); }
@@ -111,7 +113,8 @@ function moveTo(target, animate) {
 let firstDraw = true;
 function drawProgress() {
   measureParts();
-  const list = visible(), q = curQ(), idx = list.indexOf(q);
+  const list = visible(), q = curQ(), idx = list.indexOf(q), far = latest();
+  floor = far ? list.indexOf(far) + (sel(far.id).length ? 1 : 0) : 0;
   moveTo(idx + (sel(q.id).length ? 1 : 0), !firstDraw);
   firstDraw = false;
   const part = cfg.parts[q.part];
@@ -271,19 +274,51 @@ function choose(idx, via) {
   hideHint();
   setRotation(geo.angles[idx]);
   renderMarks();
-  renderConflicts();
   drawParked();
   drawProgress();
+  renderConflicts();
   updateNav();
   if (o.free && s.includes(o.id) && via !== "input") $("options").children[idx].querySelector("input")?.focus();
 }
 
-// 前后矛盾：只列和当前这道题有关的（这道题让别的题的选项不算数，或别的题让这道题的选项不算数）
+// 前后矛盾：只看和当前这道题有关的（这道题让别的题的选项不算数，或别的题让这道题的选项不算数）。
+// 提示只写“与历史选项互斥”，附一个去那道题修改的按钮；进度条上也标出那道题，点它同样跳过去。
+// 被排斥的选项后面标“互斥”。完整说明（哪条不算数、为什么）留到结果页。
 function renderConflicts() {
-  const box = $("conflict"), id = state.cur;
-  const list = findConflicts(cfg, state.answers).filter((c) => c.by_question === id || c.question === id);
-  box.replaceChildren(...list.map((c) => Object.assign(document.createElement("p"), { textContent: c.message })));
-  box.hidden = !list.length;
+  const box = $("conflict"), id = state.cur, list = visible();
+  const cs = findConflicts(cfg, state.answers).filter((c) => c.by_question === id || c.question === id);
+  const others = new Map();  // 另一道题 → 是否只是部分互斥
+  for (const c of cs) {
+    const o = c.question === id ? c.by_question : c.question;
+    others.set(o, (others.has(o) ? others.get(o) : true) && c.partial);
+  }
+  box.replaceChildren(...[...others].map(([o, partial]) => {
+    const p = document.createElement("p");
+    p.append(partial ? "与历史选项部分互斥" : "与历史选项互斥");
+    if (o !== state.detour) {
+      const b = Object.assign(document.createElement("button"), { type: "button", className: "textlink", textContent: `去${byId[o].num}修改` });
+      b.addEventListener("click", () => jump(o));
+      p.append(b);
+    }
+    return p;
+  }));
+  box.hidden = !others.size;
+
+  document.querySelectorAll(".clash-mark").forEach((n) => n.remove());
+  for (const o of others.keys()) {
+    const k = list.findIndex((q) => q.id === o);
+    if (k < 0) continue;
+    const m = Object.assign(document.createElement("span"), { className: "clash-mark", title: `去${byId[o].num}修改` });
+    m.style.left = barX(k + .5).toFixed(1) + "px";
+    m.addEventListener("click", () => jump(o));
+    $("ringsBar").appendChild(m);
+  }
+
+  const clashed = new Set(cs.filter((c) => c.question === id).map((c) => c.option));
+  [...$("options").children].forEach((li, k) => {
+    li.querySelector(".clash")?.remove();
+    if (clashed.has(curQ().options[k].id)) li.querySelector(".label").after(Object.assign(document.createElement("span"), { className: "clash", textContent: "互斥" }));
+  });
 }
 
 function renderMarks() {
@@ -356,27 +391,39 @@ function render() {
     ul.appendChild(li);
   });
   renderMarks();
-  renderConflicts();
   drawProgress();
+  renderConflicts();
   updateNav();
   requestAnimationFrame(layoutOrbit);
+}
+
+// 往回翻时“回到第 N 题”的目标：去改互斥的题时是出发的那道题，否则是答到的最远一题
+function returnTarget() {
+  const list = visible();
+  if (state.detour && list.some((q) => q.id === state.detour)) return state.detour;
+  return latest()?.id;
 }
 
 function updateNav() {
   const list = visible(), idx = list.indexOf(curQ()), answered = sel(state.cur).length > 0;
   const last = idx === list.length - 1;
+  const back = returnTarget(), backIdx = list.findIndex((q) => q.id === back);
+  const detour = state.detour === back && backIdx > idx;
   $("prevTop").disabled = idx <= 0;
   $("nextTop").disabled = !answered;
   $("next").disabled = !answered;
-  $("next").setAttribute("aria-label", last ? "完成，查看推荐" : "下一题");
+  $("next").setAttribute("aria-label", detour ? `回到${byId[back].num}` : last ? "完成，查看推荐" : "下一题");
+  $("nextTop").setAttribute("aria-label", detour ? `回到${byId[back].num}` : "下一题");
+  // 离最远处只差一题时，下一题按钮就够了
+  const link = $("backLatest");
+  link.hidden = !(backIdx > idx + 1);
+  link.disabled = !answered;
+  if (!link.hidden) link.textContent = `回到${byId[back].num}`;
 }
 
-function go(d) {
-  const list = visible(), idx = list.indexOf(curQ()), n = idx + d;
-  if (n < 0) return;
-  if (n >= list.length) { state.done = true; save(); location.href = "result.html"; return; }
+function show(id) {
   const card = $("card");
-  const swap = () => { state.cur = list[n].id; save(); render(); scrollTo({ top: 0 }); };
+  const swap = () => { state.cur = id; if (state.detour === id) delete state.detour; save(); render(); scrollTo({ top: 0 }); };
   if (reduce) return swap();
   card.classList.add("out");
   setTimeout(() => {
@@ -385,9 +432,30 @@ function go(d) {
     requestAnimationFrame(() => requestAnimationFrame(() => card.classList.remove("in")));
   }, 260);
 }
+
+// 去改互斥的那道题：记下从哪道题出发，改完点下一题直接回来
+function jump(id) {
+  if (!state.detour) state.detour = state.cur;
+  save();
+  show(id);
+}
+
+function go(d) {
+  const list = visible(), idx = list.indexOf(curQ());
+  if (d > 0 && state.detour) {
+    const k = list.findIndex((q) => q.id === state.detour);
+    if (k > idx) return show(state.detour);
+    delete state.detour;
+  }
+  const n = idx + d;
+  if (n < 0) return;
+  if (n >= list.length) { state.done = true; save(); location.href = "result.html"; return; }
+  show(list[n].id);
+}
 $("prevTop").addEventListener("click", () => go(-1));
 $("nextTop").addEventListener("click", () => go(1));
 $("next").addEventListener("click", () => go(1));
+$("backLatest").addEventListener("click", () => { const t = returnTarget(); if (t) show(t); });
 
 function toast(msg) {
   const t = $("toast"); t.textContent = msg; t.classList.add("show");
@@ -412,7 +480,7 @@ $("resetBtn").addEventListener("click", () => {
 });
 
 let rt;
-addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { layoutOrbit(); drawPendant(); }, 120); });
+addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { layoutOrbit(); drawPendant(); renderConflicts(); }, 120); });
 document.fonts?.ready.then(() => { layoutOrbit(); drawPendant(); });
 
 render();
