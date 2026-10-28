@@ -420,15 +420,15 @@
     },
     "spend": {
       "value": [
-        "optional_paid"
+        "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）。",
+      "value": "不需要额外花钱。可选花销（不付也能用）：本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "pairs_with": {
       "value": [],

@@ -489,16 +489,15 @@
     },
     "spend": {
       "value": [
-        "model_api",
-        "hosting"
+        "model_api"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度"
+      "basis": "Claude 核实（2026-10-28，README）：模型可领硅基流动免费额度，向量也可用本地 Ollama"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费；要另付服务器、云平台或租 GPU 的钱（也能接本地模型，不花钱，但电脑要带得动）。云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。模型可领硅基流动免费额度，向量也可用本地 Ollama。可选花销（不付也能用）：跑在自己的电脑、NAS 或 VPS 上不用另付；想用托管平台要选带持久盘的档位，如 Render Starter 7 美元／月起（免费层重启会丢记忆）。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度"
+      "basis": "Claude 核实（2026-10-28，README）：模型可领硅基流动免费额度，向量也可用本地 Ollama"
     },
     "pairs_with": {
       "value": [

@@ -410,15 +410,15 @@
     },
     "spend": {
       "value": [
-        "optional_paid"
+        "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "本地免费；付费版增加协作、高级分析和托管分发，价格未公开。",
+      "value": "不需要额外花钱。可选花销（不付也能用）：本地免费；付费版增加协作、高级分析和托管分发，价格未公开。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "pairs_with": {
       "value": [],

@@ -419,15 +419,15 @@
     },
     "spend": {
       "value": [
-        "optional_paid"
+        "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费。",
+      "value": "不需要额外花钱。可选花销（不付也能用）：云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "pairs_with": {
       "value": [],

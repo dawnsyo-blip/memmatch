@@ -426,12 +426,12 @@
         "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "不需要额外花钱。项目接受赞助（5–499 美元／月），README 明说不解锁任何功能。",
+      "value": "不需要额外花钱。可选花销（不付也能用）：项目接受赞助（5–499 美元／月），README 明说不解锁任何功能。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "pairs_with": {
       "value": [],

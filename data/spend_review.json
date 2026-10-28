@@ -3,89 +3,91 @@
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方托管版 acontext.io 送免费额度，用完后的价格 README 没写；自己用 Docker 部署不用买"
+    "detail": "",
+    "optional": "官方托管版 acontext.io 送免费额度，用完后的价格 README 没写；自己用 Docker 部署不用买"
   },
   "basic-memory": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）"
+    "detail": "",
+    "optional": "本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）"
   },
   "central-intelligence": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "托管版免费档限 500 条记忆，Pro 版 29 美元／月（5 万条）；本地运行不用付"
+    "detail": "",
+    "optional": "托管版免费档限 500 条记忆，Pro 版 29 美元／月（5 万条）；本地运行不用付"
   },
   "claude-mem": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "本地使用免费；另有云同步和 CMEM Pro 托管版，价格 README 没写"
+    "detail": "",
+    "optional": "本地使用免费；另有云同步和 CMEM Pro 托管版，价格 README 没写"
   },
   "honcho": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方托管版（api.honcho.dev）的价格 README 没写；也可自己部署"
+    "detail": "",
+    "optional": "官方托管版（api.honcho.dev）的价格 README 没写；也可自己部署"
   },
   "letta": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方 Letta Cloud 托管版的价格 README 没写，以官网为准；也可自己部署"
+    "detail": "",
+    "optional": "官方 Letta Cloud 托管版的价格 README 没写，以官网为准；也可自己部署"
   },
   "mem0": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买"
+    "detail": "",
+    "optional": "官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买"
   },
   "mem9": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方托管 api.mem9.ai 的价格 README 没写（配置里有用量限额设置）；也可自己部署"
+    "detail": "",
+    "optional": "官方托管 api.mem9.ai 的价格 README 没写（配置里有用量限额设置）；也可自己部署"
   },
   "memmachine": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方平台可免费注册，付费情况 README 没写；也可在本地起服务"
+    "detail": "",
+    "optional": "官方平台可免费注册，付费情况 README 没写；也可在本地起服务"
   },
   "memori": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "Memori Cloud 免账号可用但限速，要更高额度需注册，价格 README 没写"
+    "detail": "",
+    "optional": "Memori Cloud 免账号可用但限速，要更高额度需注册，价格 README 没写"
   },
   "memu": {
     "checked": "2026-10-28",
@@ -99,95 +101,100 @@
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "托管版有免费档，付费价格 README 没写（对比表里的 19–249 美元／月是 Mem0 的）；也可自托管"
+    "detail": "",
+    "optional": "托管版有免费档，付费价格 README 没写（对比表里的 19–249 美元／月是 Mem0 的）；也可自托管"
   },
   "openviking": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "也可用火山引擎托管的服务，价格 README 没写"
+    "detail": "",
+    "optional": "也可用火山引擎托管的服务，价格 README 没写"
   },
   "supermemory": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
+    "detail": "",
+    "optional": "官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
   },
   "hindsight": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "Hindsight Cloud 按用量计费，价格见 vectorize.io/pricing；自己部署不用买"
+    "detail": "",
+    "optional": "Hindsight Cloud 按用量计费，价格见 vectorize.io/pricing；自己部署不用买"
   },
   "omega-memory": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "免费版存满 2000 条后搜索降级为文本匹配、满 5000 条不再存新记忆，OMEGA Pro 解除上限，价格 README 没写"
+    "detail": "",
+    "optional": "免费版存满 2000 条后搜索降级为文本匹配、满 5000 条不再存新记忆，OMEGA Pro 解除上限，价格 README 没写"
   },
   "prism-mcp": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）"
+    "detail": "",
+    "optional": "本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）"
   },
   "mira-oss": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "自己部署免费；作者另运营托管版 miraos.org，价格 README 没写"
+    "detail": "",
+    "optional": "自己部署免费；作者另运营托管版 miraos.org，价格 README 没写"
   },
   "contextlattice": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
+    "detail": "",
+    "optional": "本地免费；付费版增加协作、高级分析和托管分发，价格未公开"
   },
   "remembra": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费"
+    "detail": "",
+    "optional": "云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费"
   },
   "retaindb": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "optional_paid"
+      "none"
     ],
-    "detail": "生产用的托管版 RetainDB Cloud 收费，价格 README 没写；自己跑免费"
+    "detail": "",
+    "optional": "生产用的托管版 RetainDB Cloud 收费，价格 README 没写；自己跑免费"
   },
   "memobase": {
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "optional_paid"
+      "model_api"
     ],
-    "detail": "Memobase Cloud 有免费档，付费情况 README 没写；也可自己起服务"
+    "detail": "",
+    "optional": "Memobase Cloud 有免费档，付费情况 README 没写；也可自己起服务"
   },
   "archon-memory-core": {
     "checked": "2026-10-28",
@@ -195,7 +202,8 @@
     "values": [
       "none"
     ],
-    "detail": "路线图计划 2026 年第三季度推出 Pro 付费档，目前全部免费"
+    "detail": "",
+    "optional": "路线图计划 2026 年第三季度推出 Pro 付费档，目前全部免费"
   },
   "hbarefoot-engram": {
     "checked": "2026-10-28",
@@ -203,7 +211,8 @@
     "values": [
       "none"
     ],
-    "detail": "项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+    "detail": "",
+    "optional": "项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
   },
   "respark": {
     "checked": "2026-10-28",
@@ -217,10 +226,10 @@
     "checked": "2026-10-28",
     "by": "README",
     "values": [
-      "model_api",
-      "hosting"
+      "model_api"
     ],
-    "detail": "云上部署要 Render Starter 7 美元／月起（免费层重启会丢记忆）；模型可领硅基流动免费额度"
+    "detail": "模型可领硅基流动免费额度，向量也可用本地 Ollama",
+    "optional": "跑在自己的电脑、NAS 或 VPS 上不用另付；想用托管平台要选带持久盘的档位，如 Render Starter 7 美元／月起（免费层重启会丢记忆）"
   },
   "memoryconstellations": {
     "checked": "2026-10-28",

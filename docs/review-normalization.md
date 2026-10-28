@@ -67,7 +67,7 @@
 | `setup_device` | `phone_ok` 只用手机就能装好（手机 App、宿主插件，或全程浏览器部署）；`needs_computer` 安装或部署时要用电脑；`not_mentioned` 未提及 | 205 | 0 | 0 | 0 |
 | `media_recall` | `image` 图片：保管原图，能检索并重新召回；`audio` 音频：保管原音频，能检索并重新召回；`video` 视频：保管原视频（或关键帧），能检索并重新召回；`not_mentioned` 未提及，或只把多模态内容转成文字再存 | 223 | 0 | 0 | 0 |
 | `multi_agent` | `shared` 写明几个不同的 Agent 共用同一份记忆；`per_agent` 能给每个 Agent 分开记忆空间或权限，只共享一部分；`not_mentioned` 未提及 | 179 | 0 | 0 | 0 |
-| `spend` | `none` 不需要额外花钱；`model_api` 要自备模型或向量接口，按调用量付费（能接本地模型的可省）；`subscription` 要已有的付费订阅（如 Claude Pro／Max）；`hosting` 要另付服务器、云平台或租 GPU 的钱；`product_fee` 项目本身收费（托管版或授权，不买用不了）；`optional_paid` 另有付费的托管版或高级版，自己部署可以不买 | 202 | 0 | 2 | 0 |
+| `spend` | `none` 不需要额外花钱；`model_api` 要自备模型或向量接口，按调用量付费（能接本地模型的可省）；`subscription` 要已有的付费订阅（如 Claude Pro／Max）；`hosting` 要另付服务器、云平台或租 GPU 的钱；`product_fee` 项目本身收费（托管版或授权，不买用不了） | 202 | 0 | 2 | 0 |
 
 共 249 个项目：文档未说明 407 处，待审核 0 处。另有 `paper_taxonomy`（论文分类）直接沿用原表，只有原表 50 个项目有。
 

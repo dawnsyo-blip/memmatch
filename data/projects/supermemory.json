@@ -438,16 +438,15 @@
     },
     "spend": {
       "value": [
-        "model_api",
-        "optional_paid"
+        "model_api"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。可选花销（不付也能用）：官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：官方托管版的价格 README 没写；自托管默认用本地向量，可接 Ollama 免费"
+      "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "pairs_with": {
       "value": [],

@@ -784,13 +784,14 @@ def n_spend(doc_id, out, review):
             text += "（也能接本地模型，不花钱，但电脑要带得动）"
         parts.append(text)
     detail = rev["detail"] if rev else ""
-    if "optional_paid" in vals and not detail:
-        parts.append(("另有" if needs else "项目本身免费；有") + "付费的托管版或高级版，自己部署可以不买")
-    if not parts and not (detail and "none" not in vals):
+    optional = rev.get("optional", "") if rev else ""
+    if not needs:
         parts.append("不需要额外花钱")
     if detail:
         parts.append(detail)
     note = "。".join(parts)
+    if optional:  # 可选花销：不付也能用，不计入 spend
+        note += "。可选花销（不付也能用）：" + optional
     if not note.endswith("。"):
         note += "。"
     return spend, res(note, spend["status"], spend["basis"])
