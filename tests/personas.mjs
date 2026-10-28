@@ -2,7 +2,7 @@
 // 偏好题没写的按这里的默认值填。
 
 const DEFAULTS = {
-  q6: "native", q7: ["companion"], q8: ["no_priority"], q10: "auto_review", q11: "any", q12: "any",
+  q6: "native", q7: ["companion"], q8: ["no_priority"], q10: "auto_review", q11: "any",
   q13: "emotional", q14: "few", q15: "unknown",
 };
 
@@ -82,7 +82,7 @@ export const PERSONAS = [
     title: "GLM＋OpenAI，手机遥控电脑上的 Codex，多端共用，要先审核再入库，情感重的要留着",
     answers: { q2: ["glm", "openai"], q1: ["iphone", "server", "windows"], q3: ["programmatic", "remote_control"],
                q3a: ["codex"], q4: "same_agent", q5: ["computer"], q6: "know", q7: ["work", "coding"], q8n: ["no_priority"],
-               q10: "review_first", q12: "now", q13: "emotional", q14: "long", q15: "yes",
+               q10: "review_first", q13: "emotional", q14: "long", q15: "yes",
                q16: "high", q17: ["api_key"], q18: "fifty" },
     expect: "Ombre Brain 排在前列；前 8 名里有先审核再入库的项目；组合方案里有 Ombre Brain＋Machine Studio；不推荐只能配合 Claude 的项目",
   },

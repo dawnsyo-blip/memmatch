@@ -291,7 +291,8 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       let unknown = [], notes = [], fail = null;
       const failedIds = []; // 这个项目没通过的全部题目（排除原因只取第一道；统计“哪道题让选择变少”要看全部）
       for (const q of Q) {
-        if (q.kind === "preference") continue;
+        // 偏好题一般不筛选；它的 rules 里写了排除（不是只加分）时，那几条照样排除
+        if (q.kind === "preference" && !(q.rules || []).some((r) => !r.score)) continue;
         const r = checkQuestion(q, p, a);
         if (r.notice) notices.add(r.notice);
         if (!r.ok) {

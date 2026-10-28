@@ -17,7 +17,7 @@
   "parts": [
     {"label": "第一部分", "title": "LLM、设备与入口", "questions": ["q1", "q2", "q3", "q3a", "q3b", "q3c", "q4", "q5"]},
     {"label": "第二部分", "title": "使用习惯", "questions": ["q7", "q6", "q8", "q8n"]},
-    {"label": "第三部分", "title": "记忆运作过程", "questions": ["q9", "q10", "q11", "q12", "q12m", "q13", "q14"]},
+    {"label": "第三部分", "title": "记忆运作过程", "questions": ["q9", "q10", "q11", "q12m", "q13", "q14"]},
     {"label": "第四部分", "title": "环境与预算", "questions": ["q15", "q16", "q17", "q18", "q19", "q20"]}
   ],
   "questions": [
@@ -385,27 +385,13 @@
       ]
     },
     {
-      "id": "q12", "kind": "preference", "type": "single", "short": "马上能用",
-      "text": "记忆要马上能用吗？",
-      "options": [
-        {"id": "now", "label": "要马上能用：刚说的事，下一句就该记得", "effect": {"score": [
-          {"if": {"memory_writer": ["chat_agent", "user"]}, "points": 1, "reason": "聊天时当场写入，下一句就能用"},
-          {"if": {"memory_writer": ["background"]}, "unless": {"memory_writer": ["chat_agent", "user"]}, "points": -1, "reason": "由后台整理写入，刚说的事可能要过一会儿才能想起"}]}},
-        {"id": "later", "label": "可以等一会儿：后台慢慢整理，几分钟后或第二天能用都行", "effect": {"score": [
-          {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理记忆"},
-          {"if": {"ranking_signals": ["relation"]}, "points": 1, "reason": "会把相关的记忆连起来"}]}},
-        {"id": "any", "label": "都可以", "effect": {}}
-      ]
-    },
-    {
-      "id": "q12m", "number": "13", "kind": "preference", "type": "single", "short": "维护记忆",
+      "id": "q12m", "number": "12", "kind": "preference", "type": "single", "short": "维护记忆",
       "text": "您希望花多少时间维护记忆？",
       "options": [
         {"id": "none", "label": "完全不想管", "effect": {"score": [
           {"if": {"write_mode": ["auto"]}, "points": 1, "reason": "自动记，不用您动手"},
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "会自己整理、合并记忆"},
-          {"if": {"forgetting": ["auto_decay", "archive"]}, "points": 1, "reason": "不常用的记忆会自己沉下去"},
-          {"if": {"project_role": ["method"]}, "points": -3, "reason": "要您自己按规则维护笔记"}]}},
+          {"if": {"forgetting": ["auto_decay", "archive"]}, "points": 1, "reason": "不常用的记忆会自己沉下去"}]}},
         {"id": "light", "label": "偶尔检查、修改", "effect": {"score": [
           {"if": {"human_review": ["dashboard", "files"]}, "points": 1, "reason": "想看的时候能打开检查和修改"}]}},
         {"id": "active", "label": "可以定期整理、修改、补充", "effect": {"score": [
@@ -414,13 +400,15 @@
           {"if": {"project_role": ["method"]}, "points": 1, "reason": "您愿意亲手维护，用笔记软件当记忆最直接、最透明"}]}}
       ],
       "rules": [
+        {"when": {"question": "q12m", "selected_any": ["none"]}, "exclude_any": {"project_role": ["method"]},
+         "reason": "笔记软件当记忆要您自己按规则维护笔记"},
         {"when": {"all": [{"question": "q12m", "selected_any": ["active"]},
                           {"any": [{"question": "q10", "selected_any": ["review_first"]}, {"question": "q6", "selected_any": ["notes"]}]}]},
          "score": [{"if": {"project_role": ["method"]}, "points": 3, "reason": "您愿意亲手审查和维护，笔记里的记忆完全由您掌控"}]}
       ]
     },
     {
-      "id": "q13", "number": "14", "kind": "preference", "type": "single", "short": "淡忘",
+      "id": "q13", "kind": "preference", "type": "single", "short": "淡忘",
       "text": "不太重要的信息，应该慢慢淡下去吗？",
       "help": "1. 记忆太多会降低召回和注入上下文的速度与质量。2. 什么是“不太重要的信息”？在大多数记忆框架下，“提及频率低”与“时间久远”会被默认为不重要的信息。3. “淡下去”还能找回吗？“淡下去”在大多数项目中不等于删除，只是降低优先级，需要时还能找回。",
       "options": [
@@ -435,7 +423,7 @@
       ]
     },
     {
-      "id": "q14", "number": "15", "kind": "preference", "type": "single", "short": "等待",
+      "id": "q14", "kind": "preference", "type": "single", "short": "等待",
       "text": "为了让它想得更准，您愿意每次多等一会儿吗？",
       "help": "检索时间越长，并不一定检索得越准，但理论上越久越可以找到更多相关信息。",
       "options": [
@@ -451,7 +439,7 @@
       ]
     },
     {
-      "id": "q15", "number": "16", "kind": "info", "type": "single", "short": "上下文工程",
+      "id": "q15", "kind": "info", "type": "single", "short": "上下文工程",
       "text": "您目前的交互中有自带或者匹配的上下文工程吗？",
       "help": "滑动窗口、压缩或摘要、换窗召回这类功能都属于上下文工程。",
       "show_if": {"question": "q3", "not_only_within": ["official", "none_yet"]},
@@ -462,7 +450,7 @@
       ]
     },
     {
-      "id": "q16", "number": "17", "kind": "hard", "type": "single", "short": "安装门槛",
+      "id": "q16", "kind": "hard", "type": "single", "short": "安装门槛",
       "text": "安装和设置阶段需要投入的精力，您能接受到什么程度？",
       "exclude_reason": "安装门槛超出您能接受的程度",
       "options": [
@@ -478,7 +466,7 @@
       ]
     },
     {
-      "id": "q17", "number": "18", "kind": "hard", "type": "multi", "short": "账号",
+      "id": "q17", "kind": "hard", "type": "multi", "short": "账号",
       "text": "下面这些账号或付费服务，您已有或者愿意准备哪些？",
       "combine": "allow",
       "exclude_reason": "需要您没勾选的账号",
@@ -509,7 +497,7 @@
       ]
     },
     {
-      "id": "q18", "number": "19", "kind": "hard", "type": "single", "short": "预算",
+      "id": "q18", "kind": "hard", "type": "single", "short": "预算",
       "text": "每个月为记忆库新增的花费，您能接受多少？",
       "help": "只算为记忆库新增的强制性花销",
       "exclude_reason": "超出您的预算",
@@ -542,7 +530,7 @@
       ]
     },
     {
-      "id": "q19", "number": "20", "kind": "preference", "type": "single", "short": "中文说明",
+      "id": "q19", "kind": "preference", "type": "single", "short": "中文说明",
       "text": "记忆库的界面和说明文档是英文的话，您能接受吗？",
       "options": [
         {"id": "ok", "label": "能接受，可以借助翻译", "effect": {}},
@@ -551,7 +539,7 @@
       ]
     },
     {
-      "id": "q20", "number": "21", "kind": "preference", "type": "single", "short": "导出",
+      "id": "q20", "kind": "preference", "type": "single", "short": "导出",
       "text": "以后换记忆库或换 LLM 时，您希望能把记忆导出来带走吗？",
       "options": [
         {"id": "must", "label": "一定要能导出", "effect": {"score": [

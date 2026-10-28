@@ -35,7 +35,11 @@ const byId = Object.fromEntries(QS.map((q) => [q.id, q]));
 
 /* ---------- 答卷：存在浏览器里，可以续答 ---------- */
 let state = { cur: QS[0].id, answers: {}, free: {}, seen: {}, hinted: false };
-try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.answers && byId[s.cur]) state = { ...state, ...s }; } catch (e) {}
+// 停在已删掉的题上（如原第 12 题）时，答案照留，接着从第一道没答的题开始
+try {
+  const s = JSON.parse(localStorage.getItem(KEY));
+  if (s && s.answers) state = { ...state, ...s, cur: byId[s.cur] ? s.cur : (QS.find((q) => !s.answers[q.id]) || QS[0]).id };
+} catch (e) {}
 const restored = Object.keys(state.answers).length > 0;
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
 const sel = (qid) => state.answers[qid] || [];

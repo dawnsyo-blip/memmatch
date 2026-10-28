@@ -132,3 +132,13 @@ test("第 7 题（q6）选“连接笔记类软件”：存成 Markdown 文件�
   assert.ok(bumped >= 3, "应有几个存成 Markdown 文件的记忆库被加分");
   assert.equal(b["method-note-vault"], a["method-note-vault"], "做法本身不应加分");
 });
+
+test("第 12 题（q12m）选“完全不想管”：笔记软件当记忆的做法被排除，原因记在这道题上", () => {
+  const { projects: all, questionnaire, settings } = loadAll();
+  const real = createRuleEngine({ questionnaire: { ...questionnaire, result: { ...questionnaire.result, top_n: 999 } }, settings });
+  const r = real.recommend({ ...multiBase, q12m: "none" }, all);
+  assert.ok(!r.results.some((x) => x.id.startsWith("method-")), "不想维护的人不该看到笔记做法");
+  const e = r.excluded.find((x) => x.id === "method-note-vault");
+  assert.ok(e && e.reason.includes("自己按规则维护"), `排除原因应来自第 12 题：${e?.reason}`);
+  assert.ok(real.recommend({ ...multiBase, q12m: "light" }, all).results.some((x) => x.id === "method-note-vault"), "偶尔检查的照常排名");
+});
