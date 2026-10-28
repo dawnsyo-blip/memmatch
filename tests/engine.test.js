@@ -142,3 +142,12 @@ test("第 12 题（q12m）选“完全不想管”：笔记软件当记忆的做
   assert.ok(e && e.reason.includes("自己按规则维护"), `排除原因应来自第 12 题：${e?.reason}`);
   assert.ok(real.recommend({ ...multiBase, q12m: "light" }, all).results.some((x) => x.id === "method-note-vault"), "偶尔检查的照常排名");
 });
+
+test("只提示的前后矛盾（warnings）：本地 LLM 却没有电脑，远程连接却要“点几下”", async () => {
+  const { questionnaire } = loadAll();
+  const { findConflicts } = await import("../engine/index.js");
+  assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone"], q2: ["local"] }).map((c) => c.question), ["q2"]);
+  assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone", "mac"], q2: ["local"] }), [], "有电脑时不提示");
+  assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone"], q2: ["local", "deepseek"] }), [], "还用别家 LLM 时不提示");
+  assert.deepEqual(findConflicts(questionnaire, { q3: ["remote_control"], q16: "low" }).map((c) => c.question), ["q16"]);
+});

@@ -70,7 +70,7 @@
 - **正式网站在 `site/`**（2026-10-27 起）：`index.html` 首页、`quiz.html` 答题页、`result.html` 结果页（目前是占位，只列出答卷）；共用 `site/assets/tokens.css`、`theme.js`，答题逻辑在 `site/assets/quiz.js`。样张（`docs/前端/样张/`）是定稿前的试验场，改正式页面改 `site/`
 - 预览：`npm run site` 后打开 http://localhost:5173/site/ （网站要 fetch `data/` 下的问卷配置、import `engine/`，直接双击 html 打不开）
 - 结果页在浏览器里跑推荐引擎，项目数据由 `node scripts/build_site_data.mjs` 打包成 `site/data/projects.json`（不进仓库，`npm run site` 会先打包；只留 value、status，结果和完整数据一致）。改了项目数据要重新打包
-- 前后矛盾提示（2026-10-28）：引擎导出 `findConflicts`，来自配置里选项的 `disables`（带 `note` 说明原因）；答题页按负责人要求只写“与历史选项互斥”／“部分互斥”＋“去第 N 题修改”，被排斥的选项标“互斥”，进度条上用小方块标出那道题（可点）；跳过去改时记下出发的题（`state.detour`），下一题按钮直接回去；往回翻时进度条填充不退（填到答到的最远处），离最远处两题以上时底部出现“回到第 N 题”。结果页概况里显示完整原因。已选选项全部失效时这道题照样筛选（占位值 `__disabled__`），以前会被当成没回答而不限运行位置
+- 前后矛盾提示（2026-10-28）：引擎导出 `findConflicts`，来自配置里选项的 `disables`（带 `note` 说明原因）；答题页按负责人要求只写“与历史选项互斥”／“部分互斥”＋“去第 N 题修改”，被排斥的选项标“互斥”，进度条上用小方块标出那道题（可点）；跳过去改时记下出发的题（`state.detour`），下一题按钮直接回去；往回翻时进度条填充不退（填到答到的最远处），离最远处两题以上时底部出现“回到第 N 题”。结果页概况里显示完整原因。已选选项全部失效时这道题照样筛选（占位值 `__disabled__`），以前会被当成没回答而不限运行位置。另有只提示、不改变筛选的前后矛盾，写在配置顶层的 `warnings`（本地 LLM 却没电脑、遥控 Agent 却要“点几下”或只选手机、接受托管却没勾项目方账号）
 - 结果页概况（临时版）：共几个、前后矛盾、`narrowed_by`（哪几道题收窄了范围）、放宽建议
 - 答题页完全按 `data/questionnaire/questions.json` 渲染：题目分属哪个部分写在配置的 `parts`；跳题 `show_if`、默认勾选 `default_if` 用引擎导出的 `checkCondition`（和推荐引擎同一套判断）；进度条四段的长度按当前要答的题数（追问没触发就不算）；答卷存在 `localStorage` 的 `memsite-quiz-v2`（v6 改了题号，所以从 v1 升级；以后改题号也要升级）（`answers` 是选项 id 数组，填空在 `free["题号.选项"]`）
 - 已装的设计和动效 skill：impeccable、web-design-guidelines、frontend-design、GSAP 官方 8 个（gsap-core、gsap-timeline、gsap-scrolltrigger、gsap-react 等，MIT，装在用户目录）、color-expert（meodai，CC BY 4.0，配色原理：按性格配色、60-30-10、明度差决定可读性；配色时用它，颜色在 OKLCH 里推导并算 WCAG 对比度）。Lenis、Vanta、React Bits 没有靠谱的 skill，用时看官方文档

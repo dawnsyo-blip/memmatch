@@ -266,9 +266,9 @@
       "show_if": {"question": "q6", "selected_none": ["know", "none"]},
       "options": [
         {"id": "entry_hallucination", "label": "录入幻觉：LLM 说“记住了”，其实没有记", "effect": {"score": [
-          {"if": {"human_review": ["*"]}, "points": 1, "reason": "随时能看到记了什么"},
-          {"if": {"write_mode": ["review_first"]}, "points": 1, "reason": "先给您看候选再入库"},
-          {"if": {"write_receipt": ["yes"]}, "points": 1, "reason": "写入后会明确回执"}]}},
+          {"if": {"human_review": ["*"]}, "points": 0.5, "reason": "随时能看到记了什么"},
+          {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看候选再入库"},
+          {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "写入后会明确回执"}]}},
         {"id": "window_loss", "label": "换窗失忆：开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
           {"if": {"window_handoff": ["yes"]}, "points": 1, "reason": "开新窗口能接上之前的内容"},
           {"if": {"cross_client": ["yes"]}, "points": 1, "reason": "几个入口共用一份记忆"}]}},
@@ -290,7 +290,8 @@
         {"id": "verbatim_repeat", "label": "逐字复述：一字一句复述原句，让人有压力", "effect": {"score": [
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会整理成摘要，原话只留档"}]}},
         {"id": "fabrication", "label": "凭空编造：LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
-          {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"}]}},
+          {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"},
+          {"if": {"reflection": ["yes"]}, "unless": {"error_guard": ["yes"]}, "points": -1, "reason": "会自己反思总结，但结论追溯不到原话"}]}},
         {"id": "messy", "label": "越记越乱：记忆重复堆积，回应越来越慢", "effect": {"score": [
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理、去重"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会合并重复的记忆"}]}},
@@ -304,9 +305,9 @@
       "show_if": {"question": "q6", "selected_any": ["know", "none"]},
       "options": [
         {"id": "entry_hallucination", "label": "录入幻觉：LLM 说“记住了”，其实没有记", "effect": {"score": [
-          {"if": {"human_review": ["*"]}, "points": 1, "reason": "随时能看到记了什么"},
-          {"if": {"write_mode": ["review_first"]}, "points": 1, "reason": "先给您看候选再入库"},
-          {"if": {"write_receipt": ["yes"]}, "points": 1, "reason": "写入后会明确回执"}]}},
+          {"if": {"human_review": ["*"]}, "points": 0.5, "reason": "随时能看到记了什么"},
+          {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看候选再入库"},
+          {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "写入后会明确回执"}]}},
         {"id": "window_loss", "label": "换窗失忆：开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
           {"if": {"window_handoff": ["yes"]}, "points": 1, "reason": "开新窗口能接上之前的内容"},
           {"if": {"cross_client": ["yes"]}, "points": 1, "reason": "几个入口共用一份记忆"}]}},
@@ -331,7 +332,8 @@
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理、去重"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会合并重复的记忆"}]}},
         {"id": "fabrication", "label": "凭空编造：LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
-          {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"}]}}
+          {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"},
+          {"if": {"reflection": ["yes"]}, "unless": {"error_guard": ["yes"]}, "points": -1, "reason": "会自己反思总结，但结论追溯不到原话"}]}}
       ]
     },
     {
@@ -550,6 +552,20 @@
         {"id": "any", "label": "无所谓", "effect": {}}
       ]
     }
+  ],
+  "warnings": [
+    {"question": "q2", "option": "local", "by_question": "q1",
+     "when": {"all": [{"question": "q2", "selected_only_within": ["local"]}, {"question": "q1", "selected_none": ["windows", "mac", "linux", "server"]}]},
+     "message": "第 2 题只选了本地运行的开源 LLM，但第 1 题没有电脑或服务器：本地模型一般要装在电脑或服务器上"},
+    {"question": "q16", "option": "low", "by_question": "q3",
+     "when": {"all": [{"question": "q3", "selected_any": ["remote_control", "programmatic"]}, {"question": "q16", "selected_any": ["low"]}]},
+     "message": "第 3 题选了远程连接电脑上的 Agent 或把 Agent 接进聊天软件，这类用法本身要在电脑上敲命令配置；第 16 题选“点几下就能用”会排除大部分配合它们的记忆库"},
+    {"question": "q5", "option": "phone", "by_question": "q3",
+     "when": {"all": [{"question": "q3", "selected_any": ["remote_control", "programmatic"]}, {"question": "q5", "selected_only_within": ["phone"]}]},
+     "message": "第 3 题用的 Agent 跑在电脑上，记忆库一般也装在那台电脑上；第 5 题只选了“只用手机”，可以加选“一台经常开着的电脑”"},
+    {"question": "q5", "option": "hosted", "by_question": "q17",
+     "when": {"all": [{"question": "q5", "selected_any": ["hosted"]}, {"question": "q17", "selected_none": ["vendor"]}]},
+     "message": "第 5 题接受项目方的托管服务，但第 17 题没勾“记忆库项目方自己的账号”：用托管服务都要注册项目方账号，托管版会被排除"}
   ],
   "preferences": [
     {"if": {"verbatim": ["yes"]}, "points": 0.5, "reason": "保留原始记录，可追溯", "overridden_by": []},

@@ -100,6 +100,11 @@ export function findConflicts(questionnaire, answers) {
       c.message += `。${num(byId[qid])}没有剩下能用的选项，请回去改一下`;
     });
   }
+  // 只提示、不改变筛选的前后矛盾（配置的 warnings）：两道题都答了（且在显示）、条件成立时列出
+  for (const w of questionnaire.warnings || []) {
+    if (![w.question, w.by_question].every((id) => selected(a, id).length) || !checkCond(w.when, a)) continue;
+    out.push({ question: w.question, option: w.option, by_question: w.by_question, by_option: null, partial: false, warning: true, message: w.message });
+  }
   return out;
 }
 
