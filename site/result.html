@@ -20,6 +20,8 @@
   /* 结果页（2026-10-28 定的结构，见 docs/前端/结果页内容草稿.md）：
      概况 → 为您挑出的 N 个（前 3 张展开，其余点开看）→ 搭配方案 → 其余也符合条件的 → 为什么是这些 → 改进建议（只给用过记忆服务的人）→ 页脚 */
   .topbar { background: linear-gradient(var(--paper) 70%, transparent); }
+  /* 对齐：序号单独一列 28px，名字、正文、建议都从序号列＋12px 处开始；纵向间距只用 6、12、24 的倍数 */
+  :root { --rank-w: 28px; --indent: calc(var(--rank-w) + var(--s-2)); }
   .sheet { max-width: 640px; margin: 0 auto; padding: var(--s-6) var(--gutter) var(--s-6); animation: arrive .7s var(--ease-out) both; }
   @keyframes arrive { from { opacity: 0; transform: translateY(6px); } }
   .loading { color: var(--ink-faint); }
@@ -33,16 +35,14 @@
   }
   h1 .num { font-family: var(--font-en); font-weight: 600; color: var(--bulb); }
   .lead { margin: var(--s-2) 0 0; color: var(--ink-soft); max-width: var(--measure); }
-  .jump { margin: var(--s-2) 0 0; display: flex; flex-wrap: wrap; column-gap: var(--s-3); }
-  .textlink { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; padding: 12px 0; margin: -12px 0; }
-  .jump .textlink { color: var(--ink-soft); }
+  .verified { margin: var(--s-2) 0 0; color: var(--ink-faint); }
 
   /* ---------- 区块标题：英文小字＋中文标题，上方一道细线 ---------- */
   .block { margin-top: var(--s-6); }
   .block > header { padding-top: var(--s-2); border-top: var(--line) solid var(--rule); }
   .block > header .caption { margin: 0; color: var(--ink-faint); }
   h2 {
-    margin: 2px 0 0;
+    margin: 0;
     font-family: var(--font-zh); font-weight: 600;
     font-size: var(--fs-h3); line-height: var(--lh-h3); letter-spacing: var(--ls-zh-title);
   }
@@ -53,7 +53,7 @@
   .pick { padding: var(--s-3) 0; border-bottom: var(--line) solid var(--rule); }
   .pick:last-child { border-bottom: 0; }
   .pick-head { display: flex; align-items: baseline; gap: var(--s-2); }
-  .rank { flex: none; width: 2em; font-family: var(--font-en); font-size: var(--fs-small); color: var(--bulb); font-variant-numeric: tabular-nums; }
+  .rank { flex: none; width: var(--rank-w); font-family: var(--font-en); font-size: var(--fs-small); color: var(--bulb); font-variant-numeric: tabular-nums; }
   .pick-title { flex: 1; min-width: 0; }
   h3 {
     margin: 0; display: inline;
@@ -61,15 +61,13 @@
     font-size: var(--fs-h3); line-height: 30px;
   }
   .cat { display: block; color: var(--ink-faint); }
-  .pick-body { padding-left: calc(2em + var(--s-2)); }   /* 和名字左边对齐，序号单独一列 */
+  .pick-body { padding-left: var(--indent); }   /* 和名字左边对齐，序号单独一列 */
   .summary { margin: var(--s-2) 0 0; color: var(--ink-soft); max-width: var(--measure); }
   .reasons { list-style: none; margin: var(--s-2) 0 0; padding: 0; }
   .reasons li { position: relative; padding-left: 18px; }
-  .reasons li + li { margin-top: 2px; }
-  .reasons li::before { content: ""; position: absolute; left: 2px; top: 10px; width: 5px; height: 5px; background: var(--bulb); }
-  .edge { margin: var(--s-2) 0 0; padding-left: var(--s-2); border-left: var(--line-bold) solid var(--bulb); max-width: var(--measure); }
-  .edge .k { display: block; color: var(--ink-faint); }
-  .facts { margin: var(--s-2) 0 0; display: grid; grid-template-columns: 4em 1fr; column-gap: var(--s-2); row-gap: 2px; font-size: var(--fs-small); line-height: var(--lh-small); }
+  .reasons li + li { margin-top: var(--s-1); }
+  .reasons li::before { content: ""; position: absolute; left: 0; top: 10px; width: 5px; height: 5px; background: var(--bulb); }
+  .facts { margin: var(--s-2) 0 0; display: grid; grid-template-columns: 4em 1fr; column-gap: var(--s-2); row-gap: var(--s-1); font-size: var(--fs-small); line-height: var(--lh-small); }
   .facts dt { color: var(--ink-faint); font-family: var(--font-zh); letter-spacing: var(--ls-zh-label); }
   .facts dd { margin: 0; color: var(--ink-soft); }
   .facts dd ul { list-style: none; margin: 0; padding: 0; }
@@ -88,7 +86,7 @@
   details.pick > summary::-webkit-details-marker { display: none; }
   details.pick > summary .pick-head { min-height: var(--tap); align-items: baseline; }
   details.pick > summary h3 { font-size: var(--fs-h4); line-height: var(--lh-h4); }
-  details.pick > summary .brief { display: block; margin-top: 2px; color: var(--ink-faint); font-size: var(--fs-small); line-height: var(--lh-small); }
+  details.pick > summary .brief { display: block; margin-top: 0; color: var(--ink-faint); font-size: var(--fs-small); line-height: var(--lh-small); }
   details.pick[open] > summary .brief { display: none; }
   .chev { flex: none; width: 12px; height: 12px; margin-left: auto; align-self: center; color: var(--ink-faint); transition: transform .3s var(--ease-out); }
   details[open] > summary .chev { transform: rotate(90deg); }
@@ -98,7 +96,7 @@
   .combos li { padding: var(--s-2) 0; border-bottom: var(--line) solid var(--rule); }
   .combos li:last-child { border-bottom: 0; }
   .combos .t { color: var(--ink-faint); }
-  .combos .names { margin: 2px 0 0; font-family: var(--font-body); }
+  .combos .names { margin: 0; font-family: var(--font-body); }
   .combos .plus { color: var(--bulb); padding: 0 var(--s-1); }
   .combos .role { color: var(--ink-faint); font-size: var(--fs-small); }
 
@@ -123,8 +121,8 @@
   .why p, .why li { color: var(--ink-soft); }
   .why p { margin: var(--s-2) 0 0; max-width: var(--measure); }
   .why ul { list-style: none; margin: var(--s-1) 0 0; padding: 0; }
-  .why li { position: relative; padding-left: 18px; margin-top: 2px; font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
-  .why li::before { content: ""; position: absolute; left: 2px; top: 11px; width: 6px; height: 1px; background: var(--ink-faint); }
+  .why li { position: relative; padding-left: 18px; margin-top: var(--s-1); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
+  .why li::before { content: ""; position: absolute; left: 0; top: 11px; width: 6px; height: 1px; background: var(--ink-faint); }
   .why .warn { padding-left: var(--s-2); border-left: var(--line-bold) solid var(--dusty-pink); }
   .why .relax li .n { color: var(--ink); font-variant-numeric: tabular-nums; }
   .excluded { margin-top: var(--s-2); }
@@ -137,19 +135,17 @@
   .advice li { padding: var(--s-2) 0; border-bottom: var(--line) solid var(--rule); }
   .advice li:last-child { border-bottom: 0; }
   .advice h3 { display: block; font-family: var(--font-zh); font-size: var(--fs-h4); line-height: var(--lh-h4); letter-spacing: var(--ls-zh-title); }
-  .advice h3 .rank { display: inline-block; width: 2em; font-weight: 400; }
-  .advice .help { display: block; margin-top: 2px; color: var(--ink-faint); font-size: var(--fs-small); line-height: var(--lh-small); font-weight: 400; letter-spacing: 0; }
+  .advice .help { display: block; margin-top: 0; color: var(--ink-faint); font-size: var(--fs-small); line-height: var(--lh-small); font-weight: 400; letter-spacing: 0; }
   .advice p { margin: var(--s-1) 0 0; max-width: var(--measure); }
   .advice .eg { color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); }
   .advice .eg .k { color: var(--ink-faint); }
   .addon { margin-top: var(--s-4); }
-  .addon > p { margin: 2px 0 0; color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
+  .addon > p { margin: 0; color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
   h4.addon-t { margin: 0; font-family: var(--font-zh); font-weight: 600; font-size: var(--fs-h4); line-height: var(--lh-h4); letter-spacing: var(--ls-zh-title); }
 
   /* ---------- 页脚 ---------- */
-  .foot { margin-top: var(--s-6); padding-top: var(--s-2); border-top: var(--line) solid var(--rule); }
-  .foot .note { margin: 0; color: var(--ink-faint); max-width: var(--measure); }
-  .actions { margin-top: var(--s-2); display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .foot { margin-top: var(--s-6); padding-top: var(--s-3); border-top: var(--line) solid var(--rule); }
+  .actions { margin-top: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
   .btn {
     min-height: var(--tap); padding: 0 var(--s-3);
     display: inline-flex; align-items: center; justify-content: center;
@@ -165,12 +161,6 @@
   .answers dt .no { color: var(--ink-faint); margin-right: var(--s-1); }
   .answers dd { margin: 0; color: var(--ink-faint); font-size: var(--fs-small); line-height: var(--lh-small); }
 
-  .toast {
-    position: fixed; left: 50%; bottom: var(--s-3); transform: translate(-50%, 20px);
-    padding: var(--s-1) var(--s-3); background: var(--ink); color: var(--paper);
-    opacity: 0; transition: opacity .4s, transform .4s var(--ease-out); z-index: 85; white-space: nowrap;
-  }
-  .toast.show { opacity: 1; transform: translate(-50%, 0); }
 </style>
 </head>
 <body class="paper grain">
@@ -210,8 +200,6 @@
 <main class="sheet" id="sheet">
   <p class="loading caption-zh">正在按您的回答挑选……</p>
 </main>
-
-<div class="toast caption-zh" id="toast" role="status"></div>
 
 <script src="assets/theme.js"></script>
 <script src="assets/nav.js"></script>
@@ -264,11 +252,11 @@
     const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
     let h = "";
     if (x.summary) h += `<p class="summary">${esc(x.summary)}</p>`;
-    if (x.reasons.length) h += `<ul class="reasons">${x.reasons.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
-    if (edges[x.id]) h += `<p class="edge"><span class="k caption-zh">相比其它几个</span>${esc(edges[x.id])}</p>`;
+    const lines = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];   // “相比其它几个”接在推荐理由后面，同样的样式
+    if (lines.length) h += `<ul class="reasons">${lines.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
     h += `<dl class="facts">`;
     if (diff.length) h += `<dt>门槛</dt><dd>${esc(diff[0])}</dd>`;
-    if (spend) h += `<dt>花销</dt><dd>${esc(spend)}</dd>`;
+    if (spend) h += `<dt>花销</dt><dd>${esc(spend.replace(/。$/, ""))}</dd>`;
     if (need.length) h += `<dt>需要</dt><dd>${esc(need.join("；"))}</dd>`;
     if (warn.length) h += `<dt>注意</dt><dd><ul>${warn.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></dd>`;
     h += `</dl>`;
@@ -291,7 +279,7 @@
   } else {
     html += `<h1>暂时没有完全符合的</h1><p class="lead">您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。</p>`;
   }
-  html += `<p class="jump caption-zh"><a class="textlink" href="#why">为什么是这些</a>` + (r.conflicts.length ? `<a class="textlink" href="#why">有 ${r.conflicts.length} 处前后矛盾</a>` : "") + `<a class="textlink" href="quiz.html">改答案</a></p>`;
+  html += `<p class="verified caption-zh">项目信息核实于 2026 年 10 月</p>`;
 
   /* ---------- 推荐 ---------- */
   if (r.results.length) {
@@ -346,8 +334,8 @@
     html += `<section class="block" id="advice" aria-labelledby="adviceT"><header><p class="caption">If you've tried one before</p><h2 id="adviceT">改进建议</h2>` +
       (advice.length ? `<p class="sub">按您在第 8 题排的顺序。</p>` : "") + `</header>`;
     if (advice.length) {
-      html += `<ol class="advice">` + advice.map((a, i) => `<li><h3><span class="rank">${pad(i + 1)}</span>${esc(a.label)}<span class="help">${esc(a.help)}</span></h3><p>${esc(a.text)}</p>` +
-        `<p class="eg">${a.examples.length ? `<span class="k">推荐里做到的：</span>${esc(a.examples.join("、"))}` : `<span class="k">推荐里还没有专门做这一点的。</span>`}</p></li>`).join("") + `</ol>`;
+      html += `<ol class="advice">` + advice.map((a, i) => `<li><div class="pick-head"><span class="rank">${pad(i + 1)}</span><div class="pick-title"><h3>${esc(a.label)}</h3><span class="help">${esc(a.help)}</span></div></div>` +
+        `<div class="pick-body"><p>${esc(a.text)}</p><p class="eg">${a.examples.length ? `<span class="k">推荐里做到的：</span>${esc(a.examples.join("、"))}` : `<span class="k">推荐里还没有专门做这一点的。</span>`}</p></div></li>`).join("") + `</ol>`;
     }
     for (const ad of addons) {
       html += `<div class="addon"><h4 class="addon-t">${esc(ad.title)}</h4>${ad.why ? `<p>${esc(ad.why)}</p>` : ""}<ul class="rest">` +
@@ -361,15 +349,14 @@
   }
 
   /* ---------- 页脚 ---------- */
-  html += `<footer class="foot"><p class="note caption-zh">以上信息核实于 2026 年 10 月，依据各项目公开的说明文档，没有逐个实际安装。</p>` +
-    `<div class="actions"><button type="button" class="btn primary" id="copyBtn">复制结果</button><a class="btn" href="quiz.html">改答案</a><a class="btn" href="index.html">回到首页</a></div>` +
+  html += `<footer class="foot">` +
+    `<div class="actions"><button type="button" class="btn primary" id="saveBtn">下载完整答卷</button><a class="btn" href="quiz.html">返回修改</a></div>` +
     `<details class="fold answers"><summary><span class="label caption-zh">查看您的答卷</span><span class="chev">${ARROW}</span></summary><dl id="answers"></dl></details></footer>`;
   sheet.innerHTML = html;
-  // 点“为什么是这些”“前后矛盾”时顺手展开那一块
-  document.querySelectorAll('a[href="#why"]').forEach((a) => a.addEventListener("click", () => { document.querySelector("#why > details").open = true; }));
 
   /* ---------- 答卷 ---------- */
   let ah = "";
+  const plain = [];   // 下载用的纯文本答卷
   cfg.parts.forEach((p) => p.questions.forEach((id) => {
     const q = byQ[id];
     const shown = !q.show_if || checkCondition(q.show_if, st.answers);
@@ -381,16 +368,25 @@
       return (q.type === "rank" ? `${k + 1}. ` : "") + (o ? o.label : oid) + (free ? `：${free}` : "");
     }).join(q.type === "rank" ? "　" : "；");
     ah += `<dt><span class="no">第 ${esc(q.number || id.slice(1))} 题</span>${esc(q.text)}</dt><dd>${txt ? esc(txt) : "（没有回答）"}</dd>`;
+    plain.push(`第 ${q.number || id.slice(1)} 题　${q.text}`, `　　${txt || "（没有回答）"}`);
   }));
   document.getElementById("answers").innerHTML = ah;
 
-  /* ---------- 复制结果 ---------- */
-  const toast = (msg) => { const t = document.getElementById("toast"); t.textContent = msg; t.classList.add("show"); clearTimeout(t.h); t.h = setTimeout(() => t.classList.remove("show"), 2400); };
-  document.getElementById("copyBtn").addEventListener("click", async () => {
-    const lines = ["记忆库推荐结果", ""];
-    r.results.forEach((x, i) => { lines.push(`${i + 1}. ${x.name}`, `   ${x.summary}`, `   ${x.repo_url}`); });
-    if (!r.results.length) lines.push("暂时没有完全符合的。", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
-    try { await navigator.clipboard.writeText(lines.join("\n")); toast("已复制"); } catch (e) { toast("复制失败，请手动选择文字复制"); }
+  /* ---------- 下载完整答卷：全部回答＋推荐结果，存成纯文本 ---------- */
+  document.getElementById("saveBtn").addEventListener("click", () => {
+    const d = new Date(), day = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    const out = ["记忆库推荐 · 完整答卷", `下载于 ${day}；项目信息核实于 2026 年 10 月`, "", "【您的回答】", ...plain, "", "【推荐结果】"];
+    if (r.results.length) {
+      r.results.forEach((x, i) => out.push(`${i + 1}. ${x.name}`, `　　${x.summary}`, ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []), `　　${x.repo_url}`));
+      if (r.more?.length) out.push("", `其余 ${r.more.length} 个也符合条件：`, ...r.more.map((x) => `· ${x.name}　${x.repo_url}`));
+    } else {
+      out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
+    }
+    if (advice.length) out.push("", "【改进建议】", ...advice.flatMap((a, i) => [`${i + 1}. ${a.label}：${a.text}`, ...(a.examples.length ? [`　　推荐里做到的：${a.examples.join("、")}`] : [])]));
+    const url = URL.createObjectURL(new Blob([out.join("\r\n") + "\r\n"], { type: "text/plain;charset=utf-8" }));
+    const link = Object.assign(document.createElement("a"), { href: url, download: `记忆库推荐答卷-${day}.txt` });
+    document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
 </script>
 </body>

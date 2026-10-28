@@ -42,11 +42,11 @@ export function edgeLines(results, byId) {
     const usable = EDGE.map((f, i) => ({ f, ids: holders[i] }))
       .filter(({ f, ids }) => ids.includes(r.id) && !(f.skip && f.skip.test(said)));
     const only = usable.filter((x) => x.ids.length === 1).slice(0, 2);
-    if (only.length) { out[r.id] = `这 ${n} 个里只有它：${only.map((x) => x.f.text).join("；")}。`; continue; }
+    if (only.length) { out[r.id] = `这 ${n} 个里只有它：${only.map((x) => x.f.text).join("；")}`; continue; }
     const pair = usable.find((x) => x.ids.length === 2);
     if (pair) {
       const other = results.find((x) => x.id === pair.ids.find((id) => id !== r.id));
-      out[r.id] = `这 ${n} 个里只有它和 ${other.name}：${pair.f.text}。`;
+      out[r.id] = `这 ${n} 个里只有它和 ${other.name}：${pair.f.text}`;
     }
   }
   return out;
