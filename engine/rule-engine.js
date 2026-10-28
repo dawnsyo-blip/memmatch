@@ -367,85 +367,137 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     };
   }
 
-  function buildCombos(results, addons, answers, projects) {
-    const combos = [];
+  // 搭配方案：最多两个，每个最多 3 个部件。
+  // 正在用某套记忆的人：方案一在他现在用的上面补一个，方案二给新方案；
+  // 其余的人：方案一是完整系统＋补强，方案二是几个能互相补上环节的项目（不强求凑齐五个环节）
+  function buildCombos(results, addons, answers, projects, free) {
     const projById = Object.fromEntries(projects.map((p) => [p.id, p]));
-    const main = results.filter((r) => r.role === "full_memory" || r.role === "companion_app");
-    const memories = results.filter((r) => r.role !== "note_connector");
-    const byMemId = Object.fromEntries(memories.map((r) => [r.id, r]));
-
+    const memories = results.filter((r) => !["note_connector", "guide", "method"].includes(r.role));
+    const pool = memories.slice(0, 15);
     const ALL_STAGES = ["capture", "consolidate", "retrieve", "forget", "review"];
     const stageLabel = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
-    const stagesOf = (id) => {
-      const p = projById[id];
-      return p?.normalized?.lifecycle ? [].concat(p.normalized.lifecycle.value) : [];
+    const stagesOf = (id) => ALL_STAGES.filter((s) => (projById[id] ? fieldValues(projById[id], "lifecycle") : []).includes(s));
+    const pairsOf = (id) => (projById[id] ? fieldValues(projById[id], "pairs_with") : []);
+    const part = (r, extra = {}) => {
+      const stages = stagesOf(r.id);
+      return { id: r.id, name: r.name, stages, desc: stages.length ? "负责" + stages.map((s) => stageLabel[s]).join("、") : "", ...extra };
     };
+    const gainOver = (have) => (r) => stagesOf(r.id).filter((s) => !have.includes(s)).length;
 
-    // 方案一：完整系统搭配一个补充项目
-    const complete = main.slice(0, 10).find((r) => r.lifecycle_complete);
-    if (complete) {
-      let companion = null, companionDesc = "", via = "", label = "";
-      for (const pid of complete.pairs_with) {
-        if (byMemId[pid]) { companion = byMemId[pid]; companionDesc = "设计上搭配使用"; via = "pairs"; break; }
+    // 第 8 题排第一的问题
+    const concernId = [].concat(answers.q8 || [], answers.q8n || []).find((v) => v !== "other" && v !== "no_problem");
+    const concernOpt = concernId && ["q8", "q8n"].map((id) => Q.find((q) => q.id === id)?.options.find((o) => o.id === concernId)).find(Boolean);
+    const concernRules = (concernOpt?.effect?.score || []).filter((s) => s.points >= 1);
+    const fitsConcern = (r) => { const p = projById[r.id]; return concernRules.some((s) => projectMatches(p, s.if) && !(s.unless && projectMatches(p, s.unless))); };
+    const concern = (r) => ({ r, via: "concern", label: concernOpt.label });
+
+    // 给已有的部分补一个：设计上搭配的（按数据里写好的顺序）> 补上缺的环节最多的 > 针对第 8 题的问题；
+    // 后两种优先选流程不完整的小项目，完整系统叠完整系统不算补强
+    function companionFor(baseIds, exclude, smallOnly = false) {
+      const cand = pool.filter((r) => !exclude.has(r.id));
+      const allCand = memories.filter((r) => !exclude.has(r.id));
+      const byCandId = Object.fromEntries(allCand.map((r) => [r.id, r]));
+      const pid = baseIds.flatMap(pairsOf).find((id) => byCandId[id])
+        || allCand.find((r) => baseIds.some((id) => pairsOf(r.id).includes(id)))?.id;
+      if (pid) return { r: byCandId[pid], via: "pairs" };
+      const small = cand.filter((r) => !r.lifecycle_complete);
+      const tiers = smallOnly ? [small] : [small, cand];
+      const gain = gainOver([...new Set(baseIds.flatMap(stagesOf))]);
+      for (const list of tiers) {
+        const best = list.filter((r) => gain(r) > 0).sort((a, b) => gain(b) - gain(a))[0];
+        if (best) return { r: best, via: "stages" };
       }
-      if (!companion) {
-        const concerns = [].concat(answers.q8 || [], answers.q8n || []).filter((v) => v !== "other" && v !== "no_problem");
-        if (concerns[0]) {
-          const qDef = questionnaire.questions.find((x) => x.id === "q8") || questionnaire.questions.find((x) => x.id === "q8n");
-          const opt = qDef?.options.find((o) => o.id === concerns[0]);
-          if (opt) {
-            const rules = (opt.effect?.score || []).filter((s) => s.points >= 1);
-            companion = memories.slice(0, 15).find((r) => r.id !== complete.id && rules.some((s) => projectMatches(projById[r.id], s.if)));
-            if (companion) { companionDesc = "针对" + opt.label; via = "concern"; label = opt.label; }
-          }
+      for (const list of tiers) {
+        const c = concernRules.length && list.find(fitsConcern);
+        if (c) return concern(c);
+      }
+      return null;
+    }
+
+    // 第 7 题：用户现在用的是什么。填了项目名的按名字对上收录的项目
+    function currentSetup() {
+      const used = [].concat(answers.q6 || []);
+      const text = used.includes("other") ? String(free["q6.other"] || "") : "";
+      if (text) {
+        const norm = (s) => String(s).toLowerCase().replace(/[\s\-_·.]/g, "");
+        const GENERIC = new Set(["memory", "memories", "context", "recall", "remember"]);
+        // 按顿号、逗号等拆开逐个对；短名字只认完全一样的，免得 memo 认成 memory 的一部分
+        const tokens = text.split(/[，,、；;／/\n]+/).map(norm).filter(Boolean);
+        const hit = (k) => k.length >= 3 && !GENERIC.has(k) && tokens.some((t) => t === k || (k.length >= 6 && t.includes(k)));
+        const hits = projects.filter((p) => [p.id, String(p.name).split("（")[0]].map(norm).some(hit));
+        const rank = (p) => { const i = results.findIndex((r) => r.id === p.id); return i < 0 ? Infinity : i; };
+        const seen = new Set(), ids = [];
+        for (const p of hits.sort((a, b) => rank(a) - rank(b))) {
+          const main = norm(String(p.name).split("（")[0]);
+          if (!seen.has(main)) { seen.add(main); ids.push(p.id); }
         }
+        if (ids.length) return { base: "project", ids: ids.slice(0, 2) };
       }
-      if (!companion) {
-        const extras = Object.values(addons).flatMap((a) => a.items);
-        const ext = extras.find((x) => x.id !== complete.id);
-        if (ext) { companion = byMemId[ext.id] || ext; companionDesc = ext.addon_title || "补充工具"; via = "addon"; label = companionDesc; }
-      }
-      if (companion) {
-        combos.push({ kind: 1, title: "完整系统＋专项补强", via, label, parts: [
-          { id: complete.id, name: complete.name, desc: "覆盖全流程", stages: ALL_STAGES },
-          { id: companion.id, name: companion.name, desc: companionDesc },
-        ] });
-      }
+      if (used.includes("notes")) return { base: "notes" };
+      if (used.includes("native")) return { base: "native" };
+      return null;
     }
 
-    // 方案二：多个项目组合出完整流程
-    const tops = memories.slice(0, 15).filter((r) => !r.lifecycle_complete);
-    let found = null;
-    for (const r of tops) {
-      for (const pid of r.pairs_with) {
-        if (!byMemId[pid]) continue;
-        const union = new Set([...stagesOf(r.id), ...stagesOf(pid)]);
-        if (ALL_STAGES.every((s) => union.has(s))) { found = [r, byMemId[pid]]; break; }
+    function currentPlan(cur) {
+      if (cur.base === "project") {
+        const c = companionFor(cur.ids, new Set(cur.ids));
+        if (!c) return null;
+        return { type: "current", base: "project", title: "在您现在用的基础上改进", via: c.via, label: c.label,
+          parts: [...cur.ids.map((id) => part(projById[id], { current: true })), part(c.r)] };
       }
-      if (found) break;
-    }
-    if (!found) {
-      for (let i = 0; i < tops.length && !found; i++) {
-        const si = stagesOf(tops[i].id);
-        if (si.length < 2) continue;
-        for (let j = i + 1; j < tops.length; j++) {
-          const union = new Set([...si, ...stagesOf(tops[j].id)]);
-          if (ALL_STAGES.every((s) => union.has(s))) { found = [tops[i], tops[j]]; break; }
-        }
-      }
-    }
-    if (found) {
-      combos.push({ kind: 2, title: "几个项目组合出完整流程", parts: found.map((r) => {
-        const s = ALL_STAGES.filter((v) => stagesOf(r.id).includes(v));
-        return { id: r.id, name: r.name, desc: "负责" + s.map((v) => stageLabel[v]).join("、"), stages: s };
-      }) });
+      const md = cur.base === "notes" && pool.find((r) => projectMatches(projById[r.id], { human_review: ["files"], export: ["markdown"] }));
+      const c = md ? { r: md, via: "markdown" } : (concernRules.length && pool.find(fitsConcern) ? concern(pool.find(fitsConcern)) : (pool[0] && { r: pool[0], via: "top" }));
+      if (!c) return null;
+      const baseName = cur.base === "notes" ? "您的笔记库" : "客户端自带的记忆";
+      return { type: "current", base: cur.base, title: "在您现在用的基础上改进", via: c.via, label: c.label,
+        parts: [{ id: null, name: baseName, stages: [], desc: "", current: true }, part(c.r)] };
     }
 
-    return combos;
+    function completePlan() {
+      const complete = memories.filter((r) => r.role === "full_memory" || r.role === "companion_app").slice(0, 10).find((r) => r.lifecycle_complete);
+      if (!complete) return null;
+      let c = companionFor([complete.id], new Set([complete.id]), true);
+      if (!c) {
+        const ext = Object.values(addons).flatMap((a) => a.items).find((x) => x.id !== complete.id);
+        if (ext) c = { r: ext, via: "addon", label: ext.addon_title };
+      }
+      return c && { type: "complete", title: "完整系统＋专项补强", via: c.via, label: c.label, parts: [part(complete), part(c.r)] };
+    }
+
+    function groupPlan() {
+      const cand = pool.filter((r) => !r.lifecycle_complete);
+      for (const r of cand) {
+        const mates = cand.filter((o) => o.id !== r.id && (pairsOf(r.id).includes(o.id) || pairsOf(o.id).includes(r.id))).slice(0, 2);
+        if (mates.length) return { type: "group", title: "几个项目互相配合", via: "pairs", parts: [r, ...mates].map((x) => part(x)) };
+      }
+      const pick = [];
+      let have = [];
+      while (pick.length < 3) {
+        const rest = cand.filter((r) => !pick.includes(r));
+        const gain = gainOver(have);
+        const next = pick.length ? rest.filter((r) => gain(r) > 0).sort((a, b) => gain(b) - gain(a))[0] : rest[0];
+        if (!next) break;
+        pick.push(next);
+        have = [...new Set([...have, ...stagesOf(next.id)])];
+        if (ALL_STAGES.every((s) => have.includes(s))) break;
+      }
+      return pick.length >= 2 ? { type: "group", title: "几个项目互相配合", via: "stages", parts: pick.map((x) => part(x)) } : null;
+    }
+
+    // 两个方案尽量不重复用同一个推荐项目；实在没有别的选择时，只要不完全相同也可以
+    const key = (c) => c.parts.map((p) => p.id).sort().join(",");
+    const cur = currentSetup();
+    const curPlan = cur && currentPlan(cur);
+    const first = curPlan || completePlan();
+    const rest = (curPlan ? [completePlan(), groupPlan()] : [groupPlan()]).filter((c) => c && (!first || key(c) !== key(first)));
+    if (!first) return rest.slice(0, 1);
+    const used = new Set(first.parts.filter((p) => p.id && !p.current).map((p) => p.id));
+    const second = rest.find((c) => !c.parts.some((p) => used.has(p.id))) || rest[0];
+    return second ? [first, second] : [first];
   }
 
   // ---------- 对外接口 ----------
-  function recommend(answers, projects) {
+  function recommend(answers, projects, options = {}) {
     const run = filter(answers, projects);
     const scored = run.kept.map(present).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
     const topN = questionnaire.result?.top_n || 8;
@@ -506,7 +558,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       total_kept: results.length,
       addons,
       guides,
-      combos: buildCombos(scored, addons, answers, projects),
+      combos: buildCombos(scored, addons, answers, projects, options.free || {}),
       excluded: run.excluded.map((e) => ({ id: e.project.id, name: e.project.name, reason: explainExclusion(e) })),
       notices: [...run.notices],
       relax,

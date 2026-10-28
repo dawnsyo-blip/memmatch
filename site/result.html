@@ -237,9 +237,8 @@
   }
 
   const answers = Object.fromEntries(Object.entries(st.answers).map(([id, v]) => [id, byQ[id]?.type === "single" ? v[0] : v]));
-  const r = createRuleEngine({ questionnaire: cfg, settings: data.settings }).recommend(answers, data.projects);
+  const r = createRuleEngine({ questionnaire: cfg, settings: data.settings }).recommend(answers, data.projects, { free: st.free });
   const byId = Object.fromEntries(data.projects.map((p) => [p.id, p]));
-  const topN = cfg.result?.top_n || 8;
   const edges = edgeLines(r.results, byId);
   const advice = adviceItems(answers, cfg, r.results, byId);
   const val = (id, f) => byId[id]?.normalized?.[f]?.value;
@@ -247,16 +246,46 @@
   /* ---------- 搭配方案的说明句 ---------- */
   const STAGE = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
   const gist = (id) => String(byId[id]?.info?.summary?.value || "").split(/[：；，。]/)[0];
+  const stageList = (arr) => arr.map((s) => STAGE[s]).join("、");
+  // 用户在用的几个用顿号连起来，只标一次“您在用”
+  function comboNames(c) {
+    const cur = c.parts.filter((p) => p.current), add = c.parts.filter((p) => !p.current);
+    const curHtml = cur.length ? cur.map((p) => (p.id ? nm(p.name) : esc(p.name))).join("、") + (cur[0].id ? `<span class="nm-note">您在用</span>` : "") : "";
+    return [curHtml, ...add.map((p) => nm(p.name))].filter(Boolean).join(`<span class="plus">＋</span>`);
+  }
   function comboText(c) {
-    const [a, b] = c.parts, A = splitName(a.name)[0], B = splitName(b.name)[0];
-    if (c.kind === 2) {
-      const add = b.stages.filter((s) => !a.stages.includes(s)).map((s) => STAGE[s]).join("、");
-      return `${A} 负责${a.stages.map((s) => STAGE[s]).join("、")}，${B} 补上${add}，合起来覆盖全流程。`;
+    const N = (p) => splitName(p.name)[0];
+    const parts = c.parts, last = parts[parts.length - 1], B = N(last);
+    const base = parts.filter((p) => p.current);
+    const baseStages = [...new Set(base.flatMap((p) => p.stages))];
+    const why = () => ({
+      pairs: `，两者设计上就是搭配使用的${gist(last.id) ? `，${B} ${gist(last.id)}` : ""}`,
+      stages: `，补上${stageList(last.stages.filter((s) => !baseStages.includes(s)))}`,
+      concern: `，针对您在第 8 题选的“${c.label}”`,
+      markdown: `，它把记忆存成 Markdown 文件，可以和笔记放在一起`,
+      top: c.base === "native" ? `，记忆就不只存在客户端里` : "",
+    }[c.via] || "");
+    if (c.type === "current") {
+      const lead = c.base === "project" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${B}`
+        : c.base === "notes" ? `保留您的笔记库，再加 ${B}` : `继续用现在的客户端，再接上 ${B}`;
+      return lead + why() + "。";
     }
-    const head = `${A} 一个项目就覆盖写入、整理、召回、遗忘、查看修改全流程；`;
-    if (c.via === "pairs") return head + `${B} 和它设计上就是搭配使用的${gist(b.id) ? "，" + gist(b.id) : ""}。`;
-    if (c.via === "concern") return head + `${B} 针对您在第 8 题选的“${c.label}”。`;
-    return head + `${B} 是可以加装的${c.label}。`;
+    if (c.type === "complete") {
+      const A = N(parts[0]);
+      const tail = { pairs: `${B} 和它设计上就是搭配使用的${gist(last.id) ? "，" + gist(last.id) : ""}`,
+        concern: `${B} 针对您在第 8 题选的“${c.label}”`, addon: `${B} 是可以加装的${c.label}` }[c.via] || `再加上 ${B}`;
+      return `${A} 一个项目就覆盖写入、整理、召回、遗忘、查看修改全流程；${tail}。`;
+    }
+    const all = [...new Set(parts.flatMap((p) => p.stages))];
+    const cover = all.length === 5 ? "，合起来覆盖全流程" : all.length ? `，合起来覆盖${stageList(Object.keys(STAGE).filter((s) => all.includes(s)))}` : "";
+    if (c.via === "pairs") return `${parts.map(N).join("、")} 设计上就是搭配使用的${cover}。`;
+    let have = [];
+    const segs = parts.map((p, i) => {
+      const add = p.stages.filter((s) => !have.includes(s));
+      have = [...have, ...add];
+      return i === 0 ? `${N(p)} 负责${stageList(add)}` : `${N(p)} 补上${stageList(add)}`;
+    });
+    return segs.join("，") + cover + "。";
   }
 
   /* ---------- 一张卡片 ---------- */
@@ -300,12 +329,12 @@
   const few = r.total_kept < 5;
   let html = `<p class="eyebrow caption">Results</p>`;
   if (r.results.length) {
-    html += `<h1>为您挑出的 <span class="num">${r.results.length}</span> 个记忆库</h1>`;
-    html += `<p class="lead">符合您条件的共 ${r.total_kept} 个${r.total_kept > topN ? `，这里是最合适的 ${topN} 个` : ""}。<br>筛选的硬条件：可用设备、可用于存放记忆库的设备等。<br>筛选的软条件：对记忆生成、演化、检索的偏好等。</p>`;
+    html += `<h1>为您挑出 <span class="num">${r.results.length}</span> 个记忆库</h1>`;
+    html += `<p class="lead">筛选的硬条件：可用设备、所用 LLM／Agent。<br>筛选的软条件：对记忆生成、演化、检索的偏好。</p>`;
   } else {
     html += `<h1>暂时没有完全符合的</h1><p class="lead">您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。</p>`;
   }
-  html += `<p class="verified caption-zh">项目信息核实于 2026 年 10 月</p>`;
+  html += `<p class="verified caption-zh">项目描述基于 README 生成，核实于 2026 年 10 月</p>`;
 
   /* ---------- 推荐 ---------- */
   if (r.results.length) {
@@ -322,8 +351,8 @@
   if (r.combos.length) {
     html += `<section class="block" aria-labelledby="combosT"><header><p class="caption">Combinations</p><h2 id="combosT">搭配方案</h2></header><ul class="combos">`;
     r.combos.forEach((c, i) => {
-      html += `<li><span class="t caption-zh">方案${"一二三"[i]}　${esc(c.title)}</span><p class="names">` +
-        c.parts.map((p) => nm(p.name)).join(`<span class="plus">＋</span>`) + `</p><p class="d">${esc(comboText(c))}</p></li>`;
+      html += `<li><span class="t caption-zh">方案${"一二三"[i]}</span><p class="names">` +
+        comboNames(c) + `</p><p class="d">${esc(comboText(c))}</p></li>`;
     });
     html += `</ul></section>`;
   }
@@ -402,7 +431,7 @@
   /* ---------- 下载完整答卷：全部回答＋推荐结果，存成纯文本 ---------- */
   document.getElementById("saveBtn").addEventListener("click", () => {
     const d = new Date(), day = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-    const out = ["记忆库推荐 · 完整答卷", `下载于 ${day}；项目信息核实于 2026 年 10 月`, "", "【您的回答】", ...plain, "", "【推荐结果】"];
+    const out = ["记忆库推荐 · 完整答卷", `下载于 ${day}；项目描述基于 README 生成，核实于 2026 年 10 月`, "", "【您的回答】", ...plain, "", "【推荐结果】"];
     if (r.results.length) {
       r.results.forEach((x, i) => out.push(`${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`, ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []), `　　${x.repo_url}`));
       if (r.more?.length) out.push("", `其余 ${r.more.length} 个也符合条件：`, ...r.more.map((x) => `· ${nmPlain(x.name)}　${x.repo_url}`));
