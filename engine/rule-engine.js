@@ -3,6 +3,7 @@
 // 浏览器和 Node 都能运行（纯 ES 模块，没有依赖）。
 
 const CATEGORY_APP = "自带记忆的应用";
+const DISABLED = "__disabled__"; // 已选选项全部失效后的占位值，见 answersFor
 
 // ---------- 读项目字段 ----------
 
@@ -65,6 +66,43 @@ function checkCond(cond, answers) {
 // 前端判断跳题（show_if）、默认勾选（default_if）也用这一个函数，保证和引擎同一套规则
 export { checkCond as checkCondition };
 
+// 前后矛盾：选了某项（如预算 0 元）让别的题已选的选项（如“新买 VPS”）不算数。答题页和结果页都用。
+// 返回 [{ question, option, by_question, by_option, partial, emptied, message }]
+//   partial  只对一部分项目不算数（写了 unless_project）
+//   emptied  那道题已选的选项全部不算数，等于这道题没有可用的回答
+export function findConflicts(questionnaire, answers) {
+  const Q = questionnaire.questions;
+  const byId = Object.fromEntries(Q.map((q) => [q.id, q]));
+  const a = { ...answers };
+  for (const q of Q) if (q.show_if && !checkCond(q.show_if, a)) delete a[q.id];
+  const num = (q) => `第 ${q.number || q.id.slice(1)} 题`;
+  const label = (q, id) => q.options.find((o) => o.id === id)?.label || id;
+  const out = [];
+  for (const q of Q) {
+    for (const opt of q.options || []) {
+      if (!selected(a, q.id).includes(opt.id)) continue;
+      for (const d of opt.disables || []) {
+        const t = byId[d.question];
+        const sel = selected(a, d.question);
+        for (const o of d.options.filter((x) => sel.includes(x))) {
+          out.push({ question: t.id, option: o, by_question: q.id, by_option: opt.id, partial: !!d.unless_project,
+            message: `${num(q)}选了“${label(q, opt.id)}”，${num(t)}的“${label(t, o)}”${d.unless_project ? "只对一部分项目算数" : "就不算数了"}${d.note ? `：${d.note}` : ""}` });
+        }
+      }
+    }
+  }
+  // 某道题已选的选项全部被无条件地去掉
+  for (const qid of new Set(out.map((c) => c.question))) {
+    const gone = new Set(out.filter((c) => c.question === qid && !c.partial).map((c) => c.option));
+    const sel = selected(a, qid);
+    if (sel.length && sel.every((s) => gone.has(s))) out.filter((c) => c.question === qid && !c.partial).forEach((c) => {
+      c.emptied = true;
+      c.message += `。${num(byId[qid])}没有剩下能用的选项，请回去改一下`;
+    });
+  }
+  return out;
+}
+
 // ---------- 引擎 ----------
 
 export function createRuleEngine({ questionnaire, settings = {} }) {
@@ -89,12 +127,16 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
   }
 
   // 某个项目看到的答卷（失效的选项按项目条件决定是否去掉）
+  // 已选的选项全部失效时，记成一个不对应任何选项的占位值：这道题仍然在筛选，只是没有选项能通过；
+  // 不能留空，否则会被当成“没回答”而不筛选（比如预算 0 元、第 5 题只选了新买 VPS，结果变成不限运行位置）
   function answersFor(project, prep) {
     if (!prep.disabled.length) return prep.answers;
     const a = { ...prep.answers };
     for (const d of prep.disabled) {
       if (d.unless && projectMatches(project, d.unless)) continue;
-      const sel = selected(a, d.question).filter((s) => s !== d.option);
+      const before = selected(a, d.question);
+      let sel = before.filter((s) => s !== d.option);
+      if (before.length && !sel.length) sel = [DISABLED];
       a[d.question] = Array.isArray(prep.answers[d.question]) ? sel : sel[0];
     }
     return a;
@@ -247,18 +289,42 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       if (p.review_status === "unreviewed" && !settings.recommend_unreviewed) continue;
       const a = answersFor(p, prep);
       let unknown = [], notes = [], fail = null;
+      const failedIds = []; // 这个项目没通过的全部题目（排除原因只取第一道；统计“哪道题让选择变少”要看全部）
       for (const q of Q) {
         if (q.kind === "preference") continue;
         const r = checkQuestion(q, p, a);
         if (r.notice) notices.add(r.notice);
-        if (!r.ok) { fail = { question: q, detail: r }; break; }
+        if (!r.ok) {
+          failedIds.push(q.id);
+          if (!fail) fail = { question: q, detail: r };
+          continue;
+        }
         unknown = unknown.concat(r.unknown);
         notes = notes.concat(r.notes);
       }
-      if (fail) excluded.push({ project: p, question: fail.question, detail: fail.detail });
+      if (fail) excluded.push({ project: p, question: fail.question, detail: fail.detail, failed: failedIds });
       else kept.push({ project: p, unknown: [...new Set(unknown)], notes: [...new Set(notes)], answers: a });
     }
     return { kept, excluded, notices, answers: prep.answers };
+  }
+
+  // 哪几道题让可选项目变少：only = 只因为这一道题被排除的个数（改了这道题就能回来），total = 这道题排除的总数
+  function narrowing(run, isMainProject) {
+    const stat = {};
+    for (const e of run.excluded) {
+      if (!isMainProject(e.project)) continue;
+      for (const id of e.failed) {
+        stat[id] ||= { only: 0, total: 0 };
+        stat[id].total++;
+        if (e.failed.length === 1) stat[id].only++;
+      }
+    }
+    return Object.entries(stat).map(([id, s]) => {
+      const q = byId[id];
+      const sel = selected(run.answers, id);
+      return { question: id, number: q.number || id.slice(1), short: q.short || q.text,
+        selected: sel.map((o) => q.options.find((x) => x.id === o)?.label || o), ...s };
+    }).sort((x, y) => y.only - x.only || y.total - x.total);
   }
 
   function explainExclusion(e) {
@@ -322,7 +388,8 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const run = filter(answers, projects);
     const scored = run.kept.map(present).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
     const topN = questionnaire.result?.top_n || 8;
-    const isMain = (r) => !["context_tool", "state_engine", "guide", "note_connector"].includes(r.role);
+    const NOT_MAIN = ["context_tool", "state_engine", "guide", "note_connector"];
+    const isMain = (r) => !NOT_MAIN.includes(r.role);
     // 做法（笔记软件当记忆）和记忆库一起排名；笔记软件连接器不单独排名，挂在做法下面作为可选工具：
     // 列出全部通过筛选的，按 pairs_with 的顺序（数据里按笔记软件排好，Obsidian 在前），不按分数
     const connectors = Object.fromEntries(scored.filter((r) => r.role === "note_connector").map((c) => [c.id, c]));
@@ -381,6 +448,8 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       excluded: run.excluded.map((e) => ({ id: e.project.id, name: e.project.name, reason: explainExclusion(e) })),
       notices: [...run.notices],
       relax,
+      narrowed_by: narrowing(run, (p) => !NOT_MAIN.includes(fieldValues(p, "project_role")[0])),
+      conflicts: findConflicts(questionnaire, answers),
     };
   }
 

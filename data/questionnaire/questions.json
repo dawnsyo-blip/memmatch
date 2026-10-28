@@ -389,7 +389,8 @@
       "text": "记忆要马上能用吗？",
       "options": [
         {"id": "now", "label": "要马上能用：刚说的事，下一句就该记得", "effect": {"score": [
-          {"if": {"write_mode": ["on_request", "auto"]}, "points": 1, "reason": "写入后马上就能用"}]}},
+          {"if": {"memory_writer": ["chat_agent", "user"]}, "points": 1, "reason": "聊天时当场写入，下一句就能用"},
+          {"if": {"memory_writer": ["background"]}, "unless": {"memory_writer": ["chat_agent", "user"]}, "points": -1, "reason": "由后台整理写入，刚说的事可能要过一会儿才能想起"}]}},
         {"id": "later", "label": "可以等一会儿：后台慢慢整理，几分钟后或第二天能用都行", "effect": {"score": [
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理记忆"},
           {"if": {"ranking_signals": ["relation"]}, "points": 1, "reason": "会把相关的记忆连起来"}]}},
@@ -522,11 +523,11 @@
       },
       "options": [
         {"id": "zero", "label": "0 元", "help": "只用不花钱的项目，或用本地模型代替接口费", "values": {"spend": []},
-         "disables": [{"question": "q5", "options": ["vps_new"]},
-                      {"question": "q5", "options": ["hosted"], "unless_project": {"spend": ["none"]}},
-                      {"question": "q17", "options": ["api_key"], "unless_project": {"local_model": ["yes"]}}]},
+         "disables": [{"question": "q5", "options": ["vps_new"], "note": "新买 VPS 每月要花钱"},
+                      {"question": "q5", "options": ["hosted"], "unless_project": {"spend": ["none"]}, "note": "只保留不收费的托管，如 Notion"},
+                      {"question": "q17", "options": ["api_key"], "unless_project": {"local_model": ["yes"]}, "note": "API Key 按用量付费，只保留能改用本地模型的项目"}]},
         {"id": "ten", "label": "10 元以内", "help": "LLM 或向量化接口的用量费，一般每月几元", "values": {"spend": ["model_api"]},
-         "disables": [{"question": "q5", "options": ["vps_new"]}]},
+         "disables": [{"question": "q5", "options": ["vps_new"], "note": "新买 VPS 每月约 20–50 元，超出 10 元"}]},
         {"id": "fifty", "label": "50 元以内", "help": "再加一台 VPS，最低约 50 元／月左右", "values": {"spend": ["model_api", "hosting"]}},
         {"id": "more", "label": "更多也可以", "values": {"spend": ["model_api", "hosting", "subscription", "product_fee"]}}
       ],
@@ -576,7 +577,8 @@
     {"if": {"customization": ["*"]}, "points": 0.5, "reason": "方便以后自己改", "overridden_by": []},
     {"if": {"forgetting": ["auto_decay", "archive"]}, "points": 0.5, "reason": "有遗忘机制，记忆库不会越堆越乱", "overridden_by": ["q13"]},
     {"if": {"retrieval_postprocess": ["rerank", "dedup", "budget", "threshold"]}, "points": 0.5, "reason": "召回后还会重排、筛选", "overridden_by": ["q14"]},
-    {"if": {"lifecycle_complete": ["complete"]}, "points": 0.5, "reason": "写入、整理、召回、遗忘、查看修改全流程都有", "overridden_by": []}
+    {"if": {"lifecycle_complete": ["complete"]}, "points": 0.5, "reason": "写入、整理、召回、遗忘、查看修改全流程都有", "overridden_by": []},
+    {"if": {"project_role": ["memory_component"]}, "points": -2, "reason": "只做记忆的其中一环，要和别的记忆库搭配使用", "overridden_by": []}
   ],
   "addons": [
     {"id": "context_tool", "title": "上下文延续工具", "why": "您的聊天软件聊久了会丢前文，这类工具负责长对话不断线，可以和记忆库一起用。",

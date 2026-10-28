@@ -6770,6 +6770,10 @@
       "cross_client": {
         "value": "yes",
         "note": "多个 AI 和人通过各自的访问地址读写同一本日记"
+      },
+      "project_role": {
+        "value": "memory_component",
+        "note": "2026-10-28 负责人确认：共写日记，AI 只能按日期或最近几天翻阅，没有按相关度召回（关键词搜索还在 Roadmap），要和别的记忆库搭配使用"
       }
     }
   },

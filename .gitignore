@@ -9,3 +9,5 @@ node_modules/
 *.db
 env
 cache/
+# 网站用的项目数据包，由 scripts/build_site_data.mjs 生成
+site/data/

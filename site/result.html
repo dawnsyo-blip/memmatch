@@ -28,6 +28,12 @@
   dd.skip { color: var(--ink-faint); }
   .links { margin-top: var(--s-5); display: flex; gap: var(--s-3); }
   .links a { color: var(--ink-soft); text-underline-offset: 3px; }
+  /* 结果概况：共几个、前后矛盾、哪几题让选择变少、放宽建议 */
+  .summary p, .summary li { color: var(--ink-soft); }
+  .summary .count { color: var(--ink); font-family: var(--font-zh); }
+  .summary ul { margin: var(--s-1) 0 0; padding-left: 1.2em; }
+  .summary li { margin-top: var(--s-1); font-size: var(--fs-small); line-height: var(--lh-small); }
+  .summary .warn { padding-left: var(--s-2); border-left: var(--line) solid var(--rule); }
 </style>
 </head>
 <body class="paper grain">
@@ -35,11 +41,12 @@
   <p class="caption" style="margin:0;color:var(--ink-faint)">Your answers</p>
   <h1>您的答卷</h1>
   <p class="lead caption-zh">结果页正在设计中。下面是这份答卷的全部回答，只保存在您的浏览器里。</p>
+  <section class="summary" id="summary" aria-live="polite"></section>
   <div id="list"></div>
   <p class="links caption-zh"><a href="quiz.html">回去修改</a><a href="index.html">回到首页</a></p>
 </main>
 <script type="module">
-  import { checkCondition } from "../engine/index.js";
+  import { checkCondition, createRuleEngine } from "../engine/index.js";
   const cfg = await fetch("../data/questionnaire/questions.json").then((r) => r.json());
   let st = { answers: {}, free: {} };
   try { st = { ...st, ...JSON.parse(localStorage.getItem("memsite-quiz-v2")) }; } catch (e) {}
@@ -63,6 +70,30 @@
     });
     list.insertAdjacentHTML("beforeend", html + "</dl>");
   });
+
+  // 结果概况（结果页正式设计前的临时版）：项目数据由 scripts/build_site_data.mjs 打包
+  const box = document.getElementById("summary");
+  try {
+    const data = await fetch("data/projects.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    const answers = Object.fromEntries(Object.entries(st.answers).map(([id, v]) => [id, byId[id]?.type === "single" ? v[0] : v]));
+    const r = createRuleEngine({ questionnaire: cfg, settings: data.settings }).recommend(answers, data.projects);
+    const topN = cfg.result?.top_n || 8;
+    let html = `<h2 class="caption-zh">结果概况</h2><p><span class="count">符合您条件的记忆库共 ${r.total_kept} 个。</span></p>`;
+    if (r.conflicts.length) html += `<p class="warn caption-zh">${r.conflicts.map((c) => esc(c.message)).join("<br>")}</p>`;
+    // 可选的不多时，说明是哪几道题收窄了范围（只因为这一道题被排除的个数，改了这道题就能回来）
+    // 没有哪道题单独排除项目（都是几道题一起排除的）时，改列排除总数最多的几道
+    const alone = r.narrowed_by.filter((x) => x.only > 0);
+    const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
+    if (r.total_kept < topN && narrow.length) {
+      html += `<p>可选的不多，主要是这几道题收窄了范围：</p><ul>` + narrow.map((x) =>
+        `<li>第 ${esc(x.number)} 题“${esc(x.short)}”${x.selected.length ? `（您选了：${esc(x.selected.join("、"))}）` : ""}：` +
+        (alone.length ? `单这一题就排除了 ${x.only} 个` : `排除了 ${x.total} 个（同时也不符合别的条件）`) + `</li>`).join("") + `</ul>`;
+    }
+    if (r.relax.length) html += `<p>放宽这些条件，可以多出一些选择：</p><ul>` + r.relax.map((x) => `<li>${esc(x.label)}，就有 ${x.count} 个</li>`).join("") + `</ul>`;
+    box.innerHTML = html;
+  } catch (e) {
+    box.innerHTML = `<h2 class="caption-zh">结果概况</h2><p class="caption-zh">项目数据还没打包，请用 npm run site 启动预览。</p>`;
+  }
 </script>
 </body>
 </html>

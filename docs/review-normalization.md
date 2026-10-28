@@ -49,7 +49,7 @@
 | `scoring_stages` | `write` 写入时打分或筛选；`retrieve` 召回时综合排序；`forget` 遗忘时按分数决定；`not_mentioned` 未提及 | 245 | 0 | 0 | 0 |
 | `multi_factor` | `multi` 多维（相似度之外至少综合两个因素）；`single` 单一（只看相似度，或只多一个因素）；`not_mentioned` 未提及 | 257 | 0 | 0 | 0 |
 | `emotion_handling` | `tags` 给记忆打情绪标签（如效价、唤醒度）；`weighting` 情绪强度影响记忆的保留或召回；`ai_state` AI 自己有会随时间变化的情绪、驱力或身体状态；`user_mood` 记录用户的心情和状态；`not_mentioned` 未提及 | 250 | 0 | 0 | 0 |
-| `project_role` | `full_memory` 完整记忆系统；`context_tool` 上下文延续工具（压缩、摘要、换窗）；`memory_component` 记忆部件（只做其中一环）；`state_engine` 状态引擎（情绪、身体、梦）；`companion_app` 自带记忆的应用或 agent；`dev_framework` 开发框架或代码库；`guide` 教程或设计文档；`method` 做法（不装专门的记忆库，用笔记软件当记忆）；`note_connector` 笔记软件连接器（做法的部件） | 245 | 0 | 0 | 0 |
+| `project_role` | `full_memory` 完整记忆系统；`context_tool` 上下文延续工具（压缩、摘要、换窗）；`memory_component` 记忆部件（只做其中一环）；`state_engine` 状态引擎（情绪、身体、梦）；`companion_app` 自带记忆的应用或 agent；`dev_framework` 开发框架或代码库；`guide` 教程或设计文档；`method` 做法（不装专门的记忆库，用笔记软件当记忆）；`note_connector` 笔记软件连接器（做法的部件） | 244 | 0 | 0 | 0 |
 | `lifecycle` | `capture` 写入；`consolidate` 整理（合并、摘要、反思）；`retrieve` 召回；`forget` 自动遗忘或归档；`review` 人工查看和修改 | 257 | 0 | 0 | 0 |
 | `lifecycle_complete` | `complete` 五个环节都有；`partial` 只覆盖部分环节 | 257 | 0 | 0 | 0 |
 | `pairing` | `designed_to_pair` 明确说明可和其它记忆库搭配（旁路、叠加）；`standard_interface` 走 MCP、OpenAI 兼容接口或宿主插件，可和别的工具并用；`replaces_builtin` 会替换宿主自带的记忆或压缩；`self_contained` 自带完整界面，记忆不拿出来和别的项目共用；`depends_on` 要先有另一个项目才能用；`not_mentioned` 未提及 | 256 | 0 | 0 | 0 |

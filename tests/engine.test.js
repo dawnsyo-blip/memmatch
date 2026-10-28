@@ -43,6 +43,23 @@ test("预算 0 元时，“新买 VPS”失效，只装在服务器上的项目�
   assert.ok(r.excluded.some((e) => e.id === "d"));
 });
 
+test("失效的选项是那道题唯一的回答时，这道题照样筛选，并提示前后矛盾", () => {
+  const r = engine.recommend({ where: ["vps"], money: "zero" }, projects);
+  assert.deepEqual(r.results, [], "运行位置只剩失效的“新买 VPS”，不该变成不限运行位置");
+  assert.equal(r.conflicts.length, 1);
+  assert.ok(r.conflicts[0].emptied && r.conflicts[0].question === "where" && r.conflicts[0].by_option === "zero");
+  assert.ok(r.relax.length === 0 || r.relax.every((x) => x.count > 0));
+  assert.deepEqual(engine.recommend({ where: ["pc", "vps"], money: "zero" }, projects).conflicts.map((c) => c.emptied), [undefined]);
+});
+
+test("narrowed_by：只因为某一道题被排除的个数", () => {
+  const r = engine.recommend({ where: ["pc"], money: "zero" }, projects);
+  const by = Object.fromEntries(r.narrowed_by.map((x) => [x.question, x]));
+  assert.deepEqual([by.where.only, by.where.total], [1, 1], "b 免费，只因为装在服务器上被排除");
+  assert.deepEqual([by.money.only, by.money.total], [1, 1], "d 只因为收费被排除");
+  assert.deepEqual(by.money.selected, ["0 元"]);
+});
+
 test("文档没写的字段不排除，只标“需自行确认”并略微靠后", () => {
   const unknownCost = { ...P("e", { runs_on: ["own_computer"], write_mode: ["review_first"] }) };
   unknownCost.normalized.cost = { value: null, status: "unknown", basis: "" };

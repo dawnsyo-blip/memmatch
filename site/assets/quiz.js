@@ -1,7 +1,7 @@
 // 答题页：读问卷配置（data/questionnaire/questions.json），一题一题地问。
 // 跳题（show_if）和默认勾选（default_if）用推荐引擎同一个条件判断函数；答卷只存在浏览器里。
 // 交互和视觉见 docs/前端/样张/答题页.html（样张阶段的定稿）。
-import { checkCondition } from "../../engine/index.js";
+import { checkCondition, findConflicts } from "../../engine/index.js";
 
 const CONFIG_URL = "../data/questionnaire/questions.json";
 const KEY = "memsite-quiz-v2";
@@ -271,10 +271,19 @@ function choose(idx, via) {
   hideHint();
   setRotation(geo.angles[idx]);
   renderMarks();
+  renderConflicts();
   drawParked();
   drawProgress();
   updateNav();
   if (o.free && s.includes(o.id) && via !== "input") $("options").children[idx].querySelector("input")?.focus();
+}
+
+// 前后矛盾：只列和当前这道题有关的（这道题让别的题的选项不算数，或别的题让这道题的选项不算数）
+function renderConflicts() {
+  const box = $("conflict"), id = state.cur;
+  const list = findConflicts(cfg, state.answers).filter((c) => c.by_question === id || c.question === id);
+  box.replaceChildren(...list.map((c) => Object.assign(document.createElement("p"), { textContent: c.message })));
+  box.hidden = !list.length;
 }
 
 function renderMarks() {
@@ -347,6 +356,7 @@ function render() {
     ul.appendChild(li);
   });
   renderMarks();
+  renderConflicts();
   drawProgress();
   updateNav();
   requestAnimationFrame(layoutOrbit);

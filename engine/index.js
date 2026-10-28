@@ -12,7 +12,10 @@
 //   excluded    被排除的项目及原因 [{ id, name, reason }]
 //   notices     要提醒用户的话（如“官方 App 接不了外部记忆”）
 //   relax       结果太少时的放宽建议 [{ question, label, count }]
+//   narrowed_by 哪几道题让可选项目变少 [{ question, number, short, selected[], only, total }]，按 only 从多到少
+//               only＝只因为这一道题被排除的个数（改了这道题就能回来），total＝这道题排除的总数；只算记忆库，不算补充部件和教程
+//   conflicts   前后矛盾 [{ question, option, by_question, by_option, partial, emptied, message }]，见 findConflicts
 //
 // 现在只有规则引擎；以后接入外部模型时，新写一个返回同样结构的实现即可，前端和测试不用改。
 
-export { createRuleEngine, checkCondition } from "./rule-engine.js";
+export { createRuleEngine, checkCondition, findConflicts } from "./rule-engine.js";

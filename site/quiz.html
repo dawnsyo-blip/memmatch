@@ -117,6 +117,11 @@
   /* 按前面的回答预先选好的提示 */
   .defnote { margin: var(--s-2) 0 0; color: var(--ink-faint); }
   .defnote[hidden] { display: none; }
+  /* 前后矛盾提示：这道题的选择让别的题已选的选项不算数（或反过来），放在选项下面，不挤动环的位置 */
+  .conflict { margin: var(--s-3) 0 0; padding-left: var(--s-2); border-left: var(--line) solid var(--rule); color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
+  .conflict p { margin: 0; }
+  .conflict p + p { margin-top: var(--s-1); }
+  .conflict[hidden] { display: none; }
   .drawer .note { display: flex; flex-direction: column; gap: var(--s-2); }
   .drawer .note p { margin: 0; }
   .reset { align-self: flex-start; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; min-height: 32px; }
@@ -242,6 +247,7 @@
       <ul class="options" id="options"></ul>
       <svg class="orbit top" id="orbitTop"></svg>
     </div>
+    <div class="conflict" id="conflict" role="status" aria-live="polite" hidden></div>
   </div>
 
   <div class="foot">

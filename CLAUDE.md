@@ -69,6 +69,9 @@
 - 前端的页面清单、风格简报模板、之后的设计规范放在 `docs/前端/`
 - **正式网站在 `site/`**（2026-10-27 起）：`index.html` 首页、`quiz.html` 答题页、`result.html` 结果页（目前是占位，只列出答卷）；共用 `site/assets/tokens.css`、`theme.js`，答题逻辑在 `site/assets/quiz.js`。样张（`docs/前端/样张/`）是定稿前的试验场，改正式页面改 `site/`
 - 预览：`npm run site` 后打开 http://localhost:5173/site/ （网站要 fetch `data/` 下的问卷配置、import `engine/`，直接双击 html 打不开）
+- 结果页在浏览器里跑推荐引擎，项目数据由 `node scripts/build_site_data.mjs` 打包成 `site/data/projects.json`（不进仓库，`npm run site` 会先打包；只留 value、status，结果和完整数据一致）。改了项目数据要重新打包
+- 前后矛盾提示（2026-10-28）：引擎导出 `findConflicts`，来自配置里选项的 `disables`（带 `note` 说明原因）；答题页在相关两道题下面显示，结果页在概况里显示。已选选项全部失效时这道题照样筛选（占位值 `__disabled__`），以前会被当成没回答而不限运行位置
+- 结果页概况（临时版）：共几个、前后矛盾、`narrowed_by`（哪几道题收窄了范围）、放宽建议
 - 答题页完全按 `data/questionnaire/questions.json` 渲染：题目分属哪个部分写在配置的 `parts`；跳题 `show_if`、默认勾选 `default_if` 用引擎导出的 `checkCondition`（和推荐引擎同一套判断）；进度条四段的长度按当前要答的题数（追问没触发就不算）；答卷存在 `localStorage` 的 `memsite-quiz-v2`（v6 改了题号，所以从 v1 升级；以后改题号也要升级）（`answers` 是选项 id 数组，填空在 `free["题号.选项"]`）
 - 已装的设计和动效 skill：impeccable、web-design-guidelines、frontend-design、GSAP 官方 8 个（gsap-core、gsap-timeline、gsap-scrolltrigger、gsap-react 等，MIT，装在用户目录）、color-expert（meodai，CC BY 4.0，配色原理：按性格配色、60-30-10、明度差决定可读性；配色时用它，颜色在 OKLCH 里推导并算 WCAG 对比度）。Lenis、Vanta、React Bits 没有靠谱的 skill，用时看官方文档
 - 中文排版与文案参数以项目 skill `.claude/skills/zh-web-typography/SKILL.md` 为准（据 clreq、赫蹏、中文文案排版指北），英文设计 skill（impeccable、frontend-design）给的字号行高与之冲突时按它
@@ -89,7 +92,7 @@
 
 多智能体记忆（2026-10-26，负责人要求补收评测好或 Star 多的）：旧规则 F5“多智能体不面向个人用户”不再一刀切排除。已改为纳入：Cognee、MIRIX、Memanto、PowerMem、deja、agentmemory、Caura，新增 Memorix、A-MEM（见 `candidate_review.py` 第 6 批 `NEW`）。Cipher 因仓库已归档、许可证 Elastic 2.0 排除。负责人 2026-10-26 同意调整 F5：评测突出或 Star 多的例外，其余多智能体项目（Star 均不足 20，无评测）仍排除。这 9 项已于同日逐项对照 README 核实（记在 `data/readme_verification.json`；MIRIX 现在的上手方式是 Docker＋Python 客户端，归开发者向；A-MEM 的 1003 Star 仓库只是论文复现代码，可用的库是 WujiangXu/A-mem-sys）；安全审查见 `docs/security-audit.md` 末节。
 
-AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“记忆”标签的条目与原表 50 项一致，没有新增；对约 24 个站点更新日期较新的项目重跑了 `check_health --only`，并按 README／CHANGELOG 复核字段（改动记在 `readme_verification.json`，备注以“2026-10-27 复核”开头）。另从未打记忆标签的条目里新增 LumiMuse（有完整记忆系统）和 Shared Diary MCP（负责人指定，是共写日记而非自动记忆库）；排除 WakeTrace（明说不建记忆库）、Wake Bridge（自称无记忆系统）、Villa Bridge（只做会话桥接）、MIRROW（需宿主的组件，记忆库未公开）。站点首页写“180 个项目”，页面实际约 224 张卡片，数字对不上。
+AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“记忆”标签的条目与原表 50 项一致，没有新增；对约 24 个站点更新日期较新的项目重跑了 `check_health --only`，并按 README／CHANGELOG 复核字段（改动记在 `readme_verification.json`，备注以“2026-10-27 复核”开头）。另从未打记忆标签的条目里新增 LumiMuse（有完整记忆系统）和 Shared Diary MCP（负责人指定，是共写日记而非自动记忆库；2026-10-28 负责人确认它没有按相关度召回，定位改为 `memory_component`，并给所有记忆部件加了 -2 分的推荐偏好，因为它条件宽、在随机答卷里约 15% 进前 8）；排除 WakeTrace（明说不建记忆库）、Wake Bridge（自称无记忆系统）、Villa Bridge（只做会话桥接）、MIRROW（需宿主的组件，记忆库未公开）。站点首页写“180 个项目”，页面实际约 224 张卡片，数字对不上。
 
 多模态召回字段 `media_recall`（2026-10-26，负责人要求）：值 `image`／`audio`／`video`（可多选）或 `not_mentioned`。标准：系统自己保管原图／原音频／原视频（或直接给原件做向量），召回时能把原件交回；只把图片、语音、视频转成文字（描述、转写、OCR）再存文字的不算，哪怕留了文件路径或链接。与旧特性 `multimodal` 不同，后者命中范围宽（生图、读图都算），不要混用。规则不自动判定，全靠 `readme_verification.json` 里逐项核实：先用 scratchpad 脚本扫 README 里“媒体词＋记忆词”的行，再对命中项克隆仓库看代码和文档。没命中的项目按未提及处理，所以是“已知有”的下限，漏网项目要在以后复核时补。已核实有的 12 个，核实后判为只转文字的 14 个（备注里写了原因）。问卷第 8a 题用它加分（2026-10-26）。
 
