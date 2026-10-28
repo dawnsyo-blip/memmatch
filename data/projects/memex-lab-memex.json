@@ -15,7 +15,7 @@
   ],
   "info": {
     "summary": {
-      "value": "本地优先的 AI 生活日志 App（iOS、安卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Key 或用 ChatGPT、Gemini 账号登录",
+      "value": "本地优先的 AI 生活日志 App，iOS、安卓应用商店可下载：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Key 或用 ChatGPT、Gemini 账号登录",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
@@ -243,12 +243,12 @@
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Ke”"
+      "basis": "原表／说明：“安卓应用商店可下载：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Ke”"
     },
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“S、安卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模”"
+      "basis": "原表／说明：“OS、安卓应用商店可下载：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -308,7 +308,7 @@
     "privacy_protection": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“本地优先的 AI 生活日志 App（iOS、安卓应用商店可”"
+      "basis": "原表／说明：“本地优先的 AI 生活日志 App，iOS、安卓应用商店可”"
     },
     "ranking_signals": {
       "value": [
@@ -459,7 +459,7 @@
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费；也可改用本地模型，不花钱，但对电脑配置有要求。",
       "status": "auto",
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },

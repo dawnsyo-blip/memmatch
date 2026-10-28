@@ -17,7 +17,7 @@
   ],
   "info": {
     "summary": {
-      "value": "OceanBase 出品的上下文服务（原 PowerMem，现名 PowerContext）：把决定、约束、经验和技能存在对话之外，换会话、换智能体、换人都能接续；基础模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；macOS、Linux 支持，Windows 为实验性",
+      "value": "OceanBase 出品的上下文服务，原名 PowerMem，现名 PowerContext：把决定、约束、经验和技能存在对话之外，换会话、换智能体、换人都能接续；基础模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；支持 macOS、Linux，Windows 为实验性",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-26"
     },
@@ -300,7 +300,7 @@
         "semantic"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；macOS、Linux 支持，Wi”"
+      "basis": "semantic：说明：“模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；支持 macOS、Linux，Wi”"
     },
     "scoring_stages": {
       "value": [
@@ -444,7 +444,7 @@
       "basis": "按“需要的账号”和费用档推出：none（没有逐项核实过收费情况）"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费。",
       "status": "auto",
       "basis": "按“需要的账号”和费用档推出：none（没有逐项核实过收费情况）"
     },

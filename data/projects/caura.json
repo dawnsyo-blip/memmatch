@@ -16,7 +16,7 @@
   ],
   "info": {
     "summary": {
-      "value": "面向多租户、多智能体团队的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；Docker 自建（PostgreSQL＋Redis），也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队",
+      "value": "面向多租户、多智能体团队的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；可用 Docker 自建，依赖 PostgreSQL 和 Redis，也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-26"
     },
@@ -295,7 +295,7 @@
         "confidence"
       ],
       "status": "auto",
-      "basis": "semantic：README：“d. Add an AI provider key for semantic search — see [Self-Hosted](#self-hos”；keyword：README：“mantic similarity + full-text keyword matching + knowledge graph expansio”；relation：README：“full-text keyword matching + knowledge graph expansion (up to 2 hops), ran”；confidence：说明：“的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；Docker 自建（Pos”"
+      "basis": "semantic：README：“d. Add an AI provider key for semantic search — see [Self-Hosted](#self-hos”；keyword：README：“mantic similarity + full-text keyword matching + knowledge graph expansio”；relation：README：“full-text keyword matching + knowledge graph expansion (up to 2 hops), ran”；confidence：说明：“的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；可用 Docker 自建，”"
     },
     "scoring_stages": {
       "value": [
@@ -303,7 +303,7 @@
         "retrieve"
       ],
       "status": "auto",
-      "basis": "write：说明：“s），也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队；智能体学到的事实与”；retrieve：排序因素含 relation、confidence（推断召回时综合排序）"
+      "basis": "write：说明：“is，也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队；智能体学到的事实与”；retrieve：排序因素含 relation、confidence（推断召回时综合排序）"
     },
     "multi_factor": {
       "value": "multi",
@@ -442,7 +442,7 @@
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费。",
       "status": "auto",
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },
@@ -486,7 +486,7 @@
   },
   "safety_note": {
     "level": "notice",
-    "note": "它的安装方式是把服务器返回的脚本直接交给 shell 执行（curl | bash），脚本内容随服务器变化；建议先下载看过再执行，并优先用自己部署的服务器。",
+    "note": "它的安装方式是把服务器返回的脚本直接交给 shell 执行，即 curl | bash，脚本内容随服务器变化；建议先下载看过再执行，并优先用自己部署的服务器。",
     "checked": "2026-10-26"
   }
 }

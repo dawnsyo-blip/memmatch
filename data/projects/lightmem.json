@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "浙大的轻量记忆框架（ICLR 2026），给开发者用的 Python 库，另有 MCP 工具",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-24"
+      "value": "浙江大学的轻量记忆框架，论文发表于 ICLR 2026；是给开发者用的 Python 库，另有 MCP 工具",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "对话记忆",
@@ -419,7 +419,7 @@
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费；也可改用本地模型，不花钱，但对电脑配置有要求。",
       "status": "auto",
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },

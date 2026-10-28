@@ -417,12 +417,12 @@
         "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README＋mcp.polarity-lab.com）：记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare（二手信息）"
+      "basis": "Claude 核实（2026-10-28，README＋mcp.polarity-lab.com）：记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare，属二手信息"
     },
     "spend_note": {
-      "value": "不需要额外花钱。记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare（二手信息）。",
+      "value": "不需要额外花钱。记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare，属二手信息。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README＋mcp.polarity-lab.com）：记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare（二手信息）"
+      "basis": "Claude 核实（2026-10-28，README＋mcp.polarity-lab.com）：记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare，属二手信息"
     },
     "pairs_with": {
       "value": [],

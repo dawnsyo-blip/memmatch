@@ -16,7 +16,7 @@
   ],
   "info": {
     "summary": {
-      "value": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层（要 GitHub、Render 账号）",
+      "value": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要您在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层，需要 GitHub 和 Render 账号",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-27"
     },
@@ -268,7 +268,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省”"
+      "basis": "原表／说明：“容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要您在面板里逐条确认，带分区缓存省”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -393,7 +393,7 @@
         "config_file"
       ],
       "status": "auto",
-      "basis": "settings_ui：说明：“期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”"
+      "basis": "settings_ui：说明：“期从对话里抽记忆，整理合并生成草稿后要您在面板里逐条确认，带分区缓存省 token；可部”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”"
     },
     "chinese_support": {
       "value": [
@@ -406,7 +406,7 @@
     "memory_layers": {
       "value": "layered",
       "status": "auto",
-      "basis": "说明：“Hub、Render 账号）；用户事实＋工作记忆（对话线）；网关；任意 OpenAI 兼”"
+      "basis": "说明：“ub 和 Render 账号；用户事实＋工作记忆（对话线）；网关；任意 OpenAI 兼”"
     },
     "retrieval_postprocess": {
       "value": [
@@ -484,7 +484,7 @@
       "basis": "Claude 核实（2026-10-28，README）：可部署在 Render、Zeabur 的免费额度内；模型按调用付费"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。可部署在 Render、Zeabur 的免费额度内；模型按调用付费。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费；也可改用本地模型，不花钱，但对电脑配置有要求。可部署在 Render、Zeabur 的免费额度内；模型按调用付费。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：可部署在 Render、Zeabur 的免费额度内；模型按调用付费"
     },
@@ -534,7 +534,7 @@
   },
   "safety_note": {
     "level": "notice",
-    "note": "2026-10-22 之前的版本（4.1.10 以前）有一个鉴权绕过漏洞（CVE-2026-48710），畸形请求能访问受保护的接口；请部署 4.1.10 或更新的版本，已经部署的要重新部署。",
+    "note": "4.1.10 以前的版本，即 2026-10-22 之前发布的版本，有一个鉴权绕过漏洞，编号 CVE-2026-48710，畸形请求能访问受保护的接口；请部署 4.1.10 或更新的版本，已经部署的要重新部署。",
     "checked": "2026-10-27"
   }
 }

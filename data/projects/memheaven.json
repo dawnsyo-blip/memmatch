@@ -15,7 +15,7 @@
   ],
   "info": {
     "summary": {
-      "value": "部署在你自己 Cloudflare 免费账号上的远程 MCP 记忆（MemPalace 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，部署要在电脑上敲 npm 和 wrangler 命令",
+      "value": "MemPalace 的云端版，部署在您自己的 Cloudflare 免费账号上，作为远程 MCP 记忆：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，部署要在电脑上敲 npm 和 wrangler 命令",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
@@ -196,7 +196,7 @@
     "verbatim": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“MCP 记忆（MemPalace 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验”"
+      "basis": "原表／说明：“lare 免费账号上，作为远程 MCP 记忆：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验”"
     },
     "multimodal": {
       "value": "not_mentioned",
@@ -280,7 +280,7 @@
         "relation"
       ],
       "status": "auto",
-      "basis": "semantic：README：“**Vectorize** powers semantic vector search. - **Workers AI** generates e”；keyword：README：“wers with hybrid semantic and lexical retrieval. - `mempalace_check_duplicate”；relation：说明：“ce 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，”"
+      "basis": "semantic：README：“**Vectorize** powers semantic vector search. - **Workers AI** generates e”；keyword：README：“wers with hybrid semantic and lexical retrieval. - `mempalace_check_duplicate”；relation：说明：“程 MCP 记忆：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，”"
     },
     "scoring_stages": {
       "value": [

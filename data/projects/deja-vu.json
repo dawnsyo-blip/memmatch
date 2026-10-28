@@ -17,7 +17,7 @@
   ],
   "info": {
     "summary": {
-      "value": "回溯索引 40 多种智能体留在硬盘上的会话记录，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选（可接本地 Ollama）；不需要账号，自动清除密钥；装法是一条 curl 命令，Windows 用 Scoop 或 winget",
+      "value": "回溯索引 40 多种智能体留在硬盘上的会话记录，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选，可接本地 Ollama；不需要账号，自动清除密钥；用一条 curl 命令安装，Windows 用 Scoop 或 winget",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-26"
     },
@@ -376,7 +376,7 @@
         "no_llm"
       ],
       "status": "auto",
-      "basis": "no_llm：说明：“，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选（可接本地 Ollama）”"
+      "basis": "no_llm：说明：“，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选，可接本地 Ollama；”"
     },
     "sensitive_suppression": {
       "value": "yes",

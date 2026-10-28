@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "把任意 Claude Code 会话（含崩溃的）整理成交接文件，并从历史提炼项目记忆",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "把任意 Claude Code 会话整理成交接文件，崩溃中断的会话也可以，并从历史中提炼项目记忆",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "会话交接＋项目记忆",
@@ -153,7 +153,7 @@
         "cli"
       ],
       "status": "auto",
-      "basis": "cli：（含崩溃的）整理成交接文件，并从历史提炼项目记忆；命令行；# claude-handoff ![clau"
+      "basis": "cli：件，崩溃中断的会话也可以，并从历史中提炼项目记忆；命令行；# claude-handoff ![clau"
     },
     "export": {
       "value": [
@@ -182,7 +182,7 @@
     "window_handoff": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“意 Claude Code 会话（含崩溃的）整理成交接文件，并从历史提炼项目记忆；会话交接＋项目记忆；命”"
+      "basis": "原表／说明：“把任意 Claude Code 会话整理成交接文件，崩溃中断的会话也可以，并从历史中提炼项目记忆”"
     },
     "cross_client": {
       "value": "not_mentioned",

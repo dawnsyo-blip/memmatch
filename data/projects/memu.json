@@ -441,7 +441,7 @@
       "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费。memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
     },

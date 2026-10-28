@@ -15,8 +15,8 @@
   ],
   "info": {
     "summary": {
-      "value": "三层（热、温、冷）记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需载入、冷层存进 Obsidian 供搜索",
-      "source": "Claude 据仓库 README 判断",
+      "value": "三层记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文，温层按需载入，冷层存进 Obsidian 供搜索",
+      "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
     "memory_subject": {
@@ -343,7 +343,7 @@
     "memory_layers": {
       "value": "layered",
       "status": "auto",
-      "basis": "说明：“第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需载入、冷层存进 Ob”"
+      "basis": "说明：“三层记忆加 Obsidian 第二大脑：会话钩子”"
     },
     "retrieval_postprocess": {
       "value": [
@@ -374,7 +374,7 @@
         "background"
       ],
       "status": "auto",
-      "basis": "background：说明：“记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文、温层按需”"
+      "basis": "background：说明：“记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文，温层按需”"
     },
     "phone_access": {
       "value": [

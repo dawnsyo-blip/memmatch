@@ -648,7 +648,7 @@
   "basic-memory": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AGPL）；云版每月约 15 美元，可在 Claude、ChatGPT 自定义 GPT 里从网页一键连接",
+    "summary": "人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版采用 AGPL 许可，永久免费；云版每月约 15 美元，可在 Claude、ChatGPT 自定义 GPT 里从网页一键连接",
     "fields": {
       "cost": {
         "value": "free",
@@ -731,6 +731,7 @@
   "bitterbot-desktop": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "把经验沉淀为技能，技能可以通过点对点网络交换，形成一套技能经济",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -803,7 +804,7 @@
   "central-intelligence": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "持久记忆服务：一条命令注册拿到 API Key 并自动配置编程工具（默认用项目方托管）；也可装纯本地版带面板，或自己部署服务端",
+    "summary": "持久记忆服务：一条命令注册拿到 API Key 并自动配置编程工具，默认用项目方托管；也可装纯本地版带面板，或自己部署服务端",
     "fields": {
       "accounts_needed": {
         "value": [
@@ -891,6 +892,7 @@
   "claude-handoff": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "把任意 Claude Code 会话整理成交接文件，崩溃中断的会话也可以，并从历史中提炼项目记忆",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -943,7 +945,7 @@
   "claude-mem": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "Claude Code 等编程 Agent 的自动记忆：后台观察每次工具调用，压缩成可搜索的记录，下次会话自动带入；安装时会请你注册项目方账号用托管的“观察者”（30 天免费试用），也可以跳过、只用本机",
+    "summary": "Claude Code 等编程 Agent 的自动记忆：后台观察每次工具调用，压缩成可搜索的记录，下次会话自动带入；安装时会请您注册项目方账号，使用托管的“观察者”，可免费试用 30 天，也可以跳过、只用本机",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -1038,6 +1040,7 @@
   "companion-emergence": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "赫布式联想记忆，即一同被想起的记忆会彼此强化，并带真正的遗忘；强调“无人注视时的生活”",
     "fields": {
       "proactive": {
         "value": "yes",
@@ -1270,6 +1273,7 @@
   "daemonkey-agent": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "两套记忆：灵魂层记录身份、画像和成长日志，Playbook 把跑通的任务沉淀为手册，同类任务自动带上；本地自托管，可回档",
     "fields": {
       "phone_access": {
         "value": [
@@ -1296,7 +1300,7 @@
   "drivesoid": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒、焦虑……）随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务供你的桥接层或 Claude Code 钩子读取，不存对话内容",
+    "summary": "给 AI 人设加一套情绪驱力：想念、亲密、嫉妒、焦虑等 16 个心理维度随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务，供您的桥接层或 Claude Code 钩子读取，不存对话内容",
     "fields": {
       "access": {
         "value": [
@@ -1422,7 +1426,7 @@
   "echo-mistik": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "本地运行的简易 AI 伴侣网页（完整版 Mistik 的公开子集）：长期记忆、滚动摘要、心情状态和反思笔记，核心是“共享价值观”对行为的约束；需要 Groq API Key，禁止商用",
+    "summary": "本地运行的简易 AI 伴侣网页，是完整版 Mistik 的公开子集：长期记忆、滚动摘要、心情状态和反思笔记，核心是“共享价值观”对行为的约束；需要 Groq API Key，禁止商用",
     "fields": {
       "write_mode": {
         "value": [
@@ -1443,7 +1447,7 @@
   "emotion-system": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "从 AI 自己写下的思考里读出情绪，换成有基线、会慢慢回落的数值，累计思念并适时给它主动联系你的机会；Node.js 包，要接进自己的聊天后端，调用 OpenRouter 上的 Jev 模型（约 2 美元／月）",
+    "summary": "从 AI 自己写下的思考里读出情绪，换成有基线、会慢慢回落的数值，累计思念并适时给它主动联系您的机会；是 Node.js 包，要接进自己的聊天后端，调用 OpenRouter 上的 Jev 模型，约 2 美元／月",
     "fields": {
       "memory_subject": {
         "value": [],
@@ -1502,7 +1506,7 @@
   "eventide": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "给 AI 伴侣的身体状态引擎（Python 库）：身体周期、驱力数值、短时事件和梦境，生成隐藏的状态提示插进对话；要写代码接进自己的宿主；成人向，禁止商用",
+    "summary": "给 AI 伴侣的身体状态引擎，是一个 Python 库：身体周期、驱力数值、短时事件和梦境，生成隐藏的状态提示插进对话；要写代码接进自己的宿主；成人向，禁止商用",
     "fields": {
       "accounts_needed": {
         "value": [
@@ -1904,7 +1908,7 @@
   "imprint-memory": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "每轮对话自动原文入库并切成事件，提问前自动浮现相关记忆；主要配合 Claude Code（自动记录靠它的钩子），可同步 claude.ai 网页聊天；中文分词和“昨天”“上个月”这类时间说法支持得好",
+    "summary": "每轮对话自动原文入库并切成事件，提问前自动浮现相关记忆；主要配合 Claude Code，自动记录靠它的钩子，可同步 claude.ai 网页聊天；中文分词和“昨天”“上个月”这类时间说法支持得好",
     "fields": {
       "os": {
         "value": [
@@ -2172,7 +2176,7 @@
   "ki-co": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "本地优先的 AI 伴侣小屋：人格核、分层记忆、日记和“回忆种子”（候选，确认后才转为长期记忆），可导入 ChatGPT 导出的旧记录；网页、PWA、桌面版都能用，手机网页也行；禁止商用",
+    "summary": "本地优先的 AI 伴侣小屋：人格核、分层记忆、日记和“回忆种子”，种子是候选记忆，确认后才转为长期记忆；可导入 ChatGPT 导出的旧记录；网页、PWA、桌面版都能用，手机网页也行；禁止商用",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -2363,7 +2367,7 @@
   "letta": {
     "checked": "2026-10-25",
     "by": "README（letta-ai/letta-code，含 MemFS 文档）",
-    "summary": "Letta Code：会自己改写记忆、技能和提示词的有状态 Agent；记忆用 MemFS 存成 git 管理的 Markdown，可看可改可同步到自己的 GitHub 仓库；可在终端、网页（含手机 chat.letta.com）、Telegram 里和同一个 Agent 聊；默认存 Letta Cloud，也可本地模式",
+    "summary": "Letta Code：会自己改写记忆、技能和提示词的有状态 Agent；记忆用 MemFS 存成 git 管理的 Markdown，可看可改，可同步到自己的 GitHub 仓库；可在终端、网页和 Telegram 里和同一个 Agent 聊，手机可用 chat.letta.com；默认存 Letta Cloud，也可本地模式",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -2460,6 +2464,7 @@
   "lightmem": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "浙江大学的轻量记忆框架，论文发表于 ICLR 2026；是给开发者用的 Python 库，另有 MCP 工具",
     "fields": {
       "media_recall": {
         "value": [
@@ -2614,7 +2619,7 @@
   "machine-studio": {
     "checked": "2026-10-25",
     "by": "README＋代码",
-    "summary": "专存会过期的技术记忆（项目进度、部署参数、踩坑），能真删除，按项目看时间线；和 Ombre Brain 的情感记忆分开放",
+    "summary": "专存会过期的技术记忆，如项目进度、部署参数、踩坑记录，能真删除，按项目看时间线；和 Ombre Brain 的情感记忆分开放",
     "fields": {
       "emotion": {
         "value": "not_mentioned",
@@ -2720,7 +2725,7 @@
   "mcp-memory-service": {
     "checked": "2026-10-25",
     "by": "README＋代码",
-    "summary": "自托管的记忆服务：本地向量＋关键词检索、知识图谱、定期整合与衰减归档，带八个标签页的网页面板；可用 OAuth 做远程连接器给 claude.ai、ChatGPT 网页用（要自己打通公网）",
+    "summary": "自托管的记忆服务：本地向量＋关键词检索、知识图谱、定期整合与衰减归档，带八个标签页的网页面板；可用 OAuth 做远程连接器给 claude.ai、ChatGPT 网页用，但要自己打通公网",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -2881,7 +2886,7 @@
   "memex-lab-memex": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "本地优先的 AI 生活日志 App（iOS、安卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Key 或用 ChatGPT、Gemini 账号登录",
+    "summary": "本地优先的 AI 生活日志 App，iOS、安卓应用商店可下载：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Key 或用 ChatGPT、Gemini 账号登录",
     "fields": {
       "runs_on": {
         "value": [
@@ -2948,7 +2953,7 @@
   "memheaven": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "部署在你自己 Cloudflare 免费账号上的远程 MCP 记忆（MemPalace 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，部署要在电脑上敲 npm 和 wrangler 命令",
+    "summary": "MemPalace 的云端版，部署在您自己的 Cloudflare 免费账号上，作为远程 MCP 记忆：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，部署要在电脑上敲 npm 和 wrangler 命令",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -3099,6 +3104,7 @@
   "memory": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "三层记忆加 Obsidian 第二大脑：会话钩子自动记下决定和偏好，热层常驻上下文，温层按需载入，冷层存进 Obsidian 供搜索",
     "fields": {
       "os": {
         "value": [
@@ -3290,6 +3296,7 @@
   "memorymesh": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "面向文字角色扮演和互动叙事的知识图谱记忆，基于官方 memory server 改写",
     "fields": {
       "write_mode": {
         "value": [
@@ -4275,7 +4282,7 @@
   "omnidimen-emotion": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "情绪向微调的 Qwen 本地模型（4B–14B）：擅长识别情绪、写有共情的回复；要换掉聊天模型来用，不是记忆库，也不是能和记忆库搭配的插件",
+    "summary": "情绪向微调的 Qwen 本地模型，有 4B 到 14B 几种大小：擅长识别情绪、写有共情的回复；要换掉聊天模型来用，不是记忆库，也不是能和记忆库搭配的插件",
     "fields": {
       "project_role": {
         "value": "dev_framework",
@@ -4450,7 +4457,7 @@
   "pawwake": {
     "checked": "2026-10-27",
     "by": "README",
-    "summary": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层（要 GitHub、Render 账号）",
+    "summary": "挂在 Kelivo 等 OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要您在面板里逐条确认，带分区缓存省 token；可部署在 Render 免费层，需要 GitHub 和 Render 账号",
     "fields": {
       "accounts_needed": {
         "value": [
@@ -4630,7 +4637,7 @@
   "pilulier": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "给 AI 伴侣用的“药盒”：手动给自己的一句话挂一颗行为提示（如“冲突在场”“主动哄回”），只影响下一次回复，用完即从历史里删除；是给自建网页聊天前端用的组件",
+    "summary": "给 AI 伴侣用的“药盒”：手动给自己的一句话挂一颗行为提示，如“冲突在场”“主动哄回”，只影响下一次回复，用完即从历史里删除；是给自建网页聊天前端用的组件",
     "fields": {
       "cost": {
         "value": "free",
@@ -4724,7 +4731,7 @@
   "psycheros": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "陪伴型 Agent 外壳：AI 的身份文件和日→年层级记忆放在独立的 MCP 核心里，换界面（自带网页、酒馆、Claude Code）还是同一个它；有定时自主行动、Discord 私聊、看图和语音；桌面安装包加向导，需自备模型 API",
+    "summary": "陪伴型 Agent 外壳：AI 的身份文件和日→年层级记忆放在独立的 MCP 核心里，无论换成自带网页、酒馆还是 Claude Code，都是同一个它；有定时自主行动、Discord 私聊、看图和语音；桌面安装包加向导，需自备模型 API",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -4793,7 +4800,7 @@
   "remembra": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "编程 Agent 的会话交接：会话结束时从 git 和会话记录生成交接摘要，下一个 Agent（换机器、换厂商也行）开始时自动读到；支持 Claude Code、Codex、Gemini CLI 等，可用免费云服务或本地 Docker 自部署",
+    "summary": "编程 Agent 的会话交接：会话结束时从 git 和会话记录生成交接摘要，下一个 Agent 开始时自动读到，换机器、换厂商也行；支持 Claude Code、Codex、Gemini CLI 等，可用免费云服务或本地 Docker 自部署",
     "fields": {
       "os": {
         "value": [
@@ -5407,7 +5414,7 @@
   "supermemory": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "记忆与上下文引擎：自动抽取事实、维护用户画像、处理新旧矛盾、过期信息自动遗忘；默认用官方托管服务（数据存在对方服务器），也有能装在自己电脑上的单文件版",
+    "summary": "记忆与上下文引擎：自动抽取事实、维护用户画像、处理新旧矛盾、过期信息自动遗忘；默认用官方托管服务，数据存在对方服务器，也有能装在自己电脑上的单文件版",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -5493,6 +5500,7 @@
   "synthetic-heart": {
     "checked": "2026-10-27",
     "by": "README",
+    "summary": "模块化数字实体：记忆、人格、意志、梦境、插件动作",
     "fields": {
       "error_guard": {
         "value": "yes",
@@ -5726,7 +5734,7 @@
   "utsuwa": {
     "checked": "2026-10-25",
     "by": "README",
-    "summary": "带 3D VRM 形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化的心情、本地语义记忆；网页版打开即用，数据存在浏览器本地，要自备模型 API Key（或电脑上的本地模型）",
+    "summary": "带 3D VRM 形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化的心情、本地语义记忆；网页版打开即用，数据存在浏览器本地，要自备模型 API Key，也可用电脑上的本地模型",
     "fields": {
       "accounts_needed": {
         "value": [
@@ -5879,6 +5887,7 @@
   "wrenwen": {
     "checked": "2026-10-25",
     "by": "README",
+    "summary": "一套自建 AI 伴侣系统的完整架构文档，涵盖三层记忆、门槛制召回、欲望与唤醒，没有代码",
     "fields": {
       "os": {
         "value": [
@@ -5895,7 +5904,7 @@
   "xinchao-nian": {
     "checked": "2026-10-27",
     "by": "README",
-    "summary": "给 AI 装上会“惦记你”的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股劲儿上来了”的提示；和 Ombre Brain 记忆库合并部署、互相影响，还能接你们自己做的系统（4.2）；可作 Claude.ai 连接器；18+，整体不可商用",
+    "summary": "给 AI 装上会“惦记您”的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股劲儿上来了”的提示；和 Ombre Brain 记忆库合并部署、互相影响，4.2 版起还能接您自己做的系统；可作 Claude.ai 连接器；18+，整体不可商用",
     "fields": {
       "compatible_clients": {
         "value": [
@@ -6066,7 +6075,7 @@
   "cognee": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "把文档、对话、代码和智能体的工作记录构建成知识图谱的记忆平台，多个智能体和团队可共享；有 Claude Code、Codex、OpenClaw 插件和 MCP 服务；不配模型密钥也能本地跑（用内置小模型），配上密钥后才有生成式回答",
+    "summary": "把文档、对话、代码和智能体的工作记录构建成知识图谱的记忆平台，多个智能体和团队可共享；有 Claude Code、Codex、OpenClaw 插件和 MCP 服务；不配模型密钥也能用内置小模型在本地运行，配上密钥后才有生成式回答",
     "fields": {
       "write_mode": {
         "value": [
@@ -6159,7 +6168,7 @@
   "mirix": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "多智能体记忆系统：六类记忆（核心、情节、语义、程序、资源、知识库）各由专门的智能体管理；README 现在的上手方式是 Docker 起后端和面板，再用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆",
+    "summary": "多智能体记忆系统：核心、情节、语义、程序、资源、知识库六类记忆各由专门的智能体管理；README 现在的上手方式是用 Docker 起后端和面板，再用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆",
     "fields": {
       "access": {
         "value": [
@@ -6221,7 +6230,7 @@
   "memanto": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行动前给出精简简报；可完全本地运行（Docker＋Ollama，不需要账号），也可用免费云",
+    "summary": "管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行动前给出精简简报；可用 Docker 和 Ollama 完全本地运行，不需要账号，也可用免费云",
     "fields": {
       "accounts_needed": {
         "value": [
@@ -6307,7 +6316,7 @@
   "powermem": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "OceanBase 出品的上下文服务（原 PowerMem，现名 PowerContext）：把决定、约束、经验和技能存在对话之外，换会话、换智能体、换人都能接续；基础模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；macOS、Linux 支持，Windows 为实验性",
+    "summary": "OceanBase 出品的上下文服务，原名 PowerMem，现名 PowerContext：把决定、约束、经验和技能存在对话之外，换会话、换智能体、换人都能接续；基础模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；支持 macOS、Linux，Windows 为实验性",
     "fields": {
       "write_mode": {
         "value": [
@@ -6396,7 +6405,7 @@
   "deja-vu": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "回溯索引 40 多种智能体留在硬盘上的会话记录，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选（可接本地 Ollama）；不需要账号，自动清除密钥；装法是一条 curl 命令，Windows 用 Scoop 或 winget",
+    "summary": "回溯索引 40 多种智能体留在硬盘上的会话记录，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选，可接本地 Ollama；不需要账号，自动清除密钥；用一条 curl 命令安装，Windows 用 Scoop 或 winget",
     "fields": {
       "write_mode": {
         "value": [
@@ -6527,7 +6536,7 @@
   "caura": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "面向多租户、多智能体团队的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；Docker 自建（PostgreSQL＋Redis），也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队",
+    "summary": "面向多租户、多智能体团队的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；可用 Docker 自建，依赖 PostgreSQL 和 Redis，也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队",
     "fields": {
       "memory_subject": {
         "value": [
@@ -6590,7 +6599,7 @@
   "memorix": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "本地优先的共享项目记忆层：二十多种编程智能体共用一份记忆（SQLite 存储，大模型和嵌入都是可选），可协调多智能体协作，有本地面板；还支持可选的多设备同步和媒体附件；需要 Node.js 22.18 以上",
+    "summary": "本地优先的共享项目记忆层：二十多种编程智能体共用一份记忆，用 SQLite 存储，大模型和嵌入都是可选；可协调多智能体协作，有本地面板；还支持可选的多设备同步和媒体附件；需要 Node.js 22.18 以上",
     "fields": {
       "forgetting": {
         "value": [
@@ -6642,7 +6651,7 @@
   "a-mem": {
     "checked": "2026-10-26",
     "by": "README（9 个多智能体项目；部分字段对照了代码目录与配置）",
-    "summary": "NeurIPS 论文《A-MEM》的复现代码：按 Zettelkasten 笔记法让记忆自己建立链接、演化。这个仓库专为复现论文成绩（LoCoMo），不是给人接入的库；想用的话看作者的另一个仓库 WujiangXu/A-mem-sys（约 400 Star，2025-11 后无更新）",
+    "summary": "NeurIPS 论文《A-MEM》的复现代码：按 Zettelkasten 笔记法让记忆自己建立链接、演化。这个仓库专为复现论文在 LoCoMo 上的成绩，不是给人接入的库；想用的话看作者的另一个仓库 WujiangXu/A-mem-sys，约 400 Star，2025-11 后无更新",
     "fields": {
       "project_role": {
         "value": "dev_framework",
@@ -6780,6 +6789,7 @@
   "method-note-vault": {
     "checked": "2026-10-28",
     "by": "Claude 整理（做法条目，没有 README）",
+    "summary": "不装专门的记忆库，把记忆写在 Obsidian、Logseq 等本地笔记库里，本质上就是一个 Markdown 文件夹；让能读写文件的 AI 按您定的规则读和记；记忆全是普通文件，随时手改，换模型也带得走",
     "fields": {
       "project_role": {
         "value": "method",
@@ -7303,6 +7313,7 @@
   "smith-and-web-obsidian-mcp-server": {
     "checked": "2026-10-28",
     "by": "README",
+    "summary": "放在服务器上的 Obsidian 连接器：通过网络访问笔记库，可选用本地 Ollama 向量做按意思搜索，需另起 Postgres",
     "fields": {
       "project_role": {
         "value": "note_connector",

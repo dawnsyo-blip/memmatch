@@ -15,7 +15,7 @@
   ],
   "info": {
     "summary": {
-      "value": "持久记忆服务：一条命令注册拿到 API Key 并自动配置编程工具（默认用项目方托管）；也可装纯本地版带面板，或自己部署服务端",
+      "value": "持久记忆服务：一条命令注册拿到 API Key 并自动配置编程工具，默认用项目方托管；也可装纯本地版带面板，或自己部署服务端",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
@@ -168,7 +168,7 @@
         "tools"
       ],
       "status": "auto",
-      "basis": "dashboard：配置编程工具（默认用项目方托管）；也可装纯本地版带面板，或自己部署服务端；MCP；免代码用法默认经第三方；cli：onment variable set. ## CLI Usage ```bash # Install；tools：l Intelligence **Agents forget. CI remembers.** Persis"
+      "basis": "dashboard：动配置编程工具，默认用项目方托管；也可装纯本地版带面板，或自己部署服务端；MCP；免代码用法默认经第三方；cli：onment variable set. ## CLI Usage ```bash # Install；tools：l Intelligence **Agents forget. CI remembers.** Persis"
     },
     "export": {
       "value": [
@@ -435,7 +435,7 @@
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。可选花销（不付也能用）：托管版免费档限 500 条记忆，Pro 版 29 美元／月（5 万条）；本地运行不用付。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费。可选花销，不付也能用：托管版免费档限 500 条记忆，Pro 版 29 美元／月，可存 5 万条；本地运行不用付。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },

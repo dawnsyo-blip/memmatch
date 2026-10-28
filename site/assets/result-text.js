@@ -31,6 +31,18 @@ const EDGE = [
   { has: { spend: ["none"] }, text: "不需要额外花钱" },
 ];
 
+// 项目名里括号部分多是作者或旧名，页面上拆出来另行显示，不用括号
+export function splitName(name) {
+  const m = String(name ?? "").match(/^(.*?)（(.+)）$/);
+  return m ? [m[1], m[2]] : [String(name ?? ""), ""];
+}
+
+// 句子里提到的项目名只用主名；同一批里主名重复时才带上区分的部分
+function nameIn(name, results) {
+  const [main, note] = splitName(name);
+  return note && results.filter((r) => splitName(r.name)[0] === main).length > 1 ? `${main} · ${note}` : main;
+}
+
 // 在同一批推荐里找“只有它有”的能力；没有独有的，再找“只有它和另一个有”的
 export function edgeLines(results, byId) {
   const out = {};
@@ -46,7 +58,7 @@ export function edgeLines(results, byId) {
     const pair = usable.find((x) => x.ids.length === 2);
     if (pair) {
       const other = results.find((x) => x.id === pair.ids.find((id) => id !== r.id));
-      out[r.id] = `这 ${n} 个里只有它和 ${other.name}：${pair.f.text}`;
+      out[r.id] = `这 ${n} 个里只有它和 ${nameIn(other.name, results)}：${pair.f.text}`;
     }
   }
   return out;
@@ -65,14 +77,8 @@ const ADVICE = {
   messy: "要有整理这一步：空闲时自动合并重复、清理过时的记忆，召回的内容才不会越堆越多、越来越慢。",
 };
 
-const EXPERIENCED = ["native", "notes", "open_source", "other"];
-
-export function isExperienced(answers) {
-  return [].concat(answers.q6 || []).some((v) => EXPERIENCED.includes(v));
-}
-
 export function adviceItems(answers, questionnaire, results, byId) {
-  const qid = answers.q8?.length ? “q8” : “q8n”;
+  const qid = answers.q8?.length ? "q8" : "q8n";
   const q = questionnaire.questions.find((x) => x.id === qid);
   if (!q) return [];
   return [].concat(answers[qid] || []).filter((id) => ADVICE[id]).map((id) => {

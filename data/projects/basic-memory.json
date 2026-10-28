@@ -15,7 +15,7 @@
   ],
   "info": {
     "summary": {
-      "value": "人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AGPL）；云版每月约 15 美元，可在 Claude、ChatGPT 自定义 GPT 里从网页一键连接",
+      "value": "人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版采用 AGPL 许可，永久免费；云版每月约 15 美元，可在 Claude、ChatGPT 自定义 GPT 里从网页一键连接",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
@@ -164,7 +164,7 @@
         "files"
       ],
       "status": "auto",
-      "basis": "dashboard：an htop-inspired project dashboard. Full [CHANGELOG](CHANG；files：人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AG；cli：(skills). If your Skills CLI supports repository subd"
+      "basis": "dashboard：an htop-inspired project dashboard. Full [CHANGELOG](CHANG；files：人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版采用 AGPL；cli：(skills). If your Skills CLI supports repository subd"
     },
     "export": {
       "value": [
@@ -199,7 +199,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AGPL）；云版每月约 15 美”"
+      "basis": "原表／说明：“的 Markdown 笔记知识库，几个 AI 工具共用：本地版采用 AGPL 许可，永久免费；云版每月约”"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -429,7 +429,7 @@
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "不需要额外花钱。可选花销（不付也能用）：本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）。",
+      "value": "不需要额外花钱。可选花销，不付也能用：本地版免费；官方云版 15 美元／月，年付约 12.5 美元／月，可试用 7 天。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },

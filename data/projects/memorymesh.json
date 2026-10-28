@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "面向文字角色扮演和互动叙事的知识图谱记忆（基于官方 memory server 改写）",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "面向文字角色扮演和互动叙事的知识图谱记忆，基于官方 memory server 改写",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "故事世界与角色",
@@ -275,7 +275,7 @@
         "confidence"
       ],
       "status": "auto",
-      "basis": "relation：说明：“面向文字角色扮演和互动叙事的知识图谱记忆（基于官方 memory serve”；confidence：README：“f information - Implements confidence scores for assertions - Supports”"
+      "basis": "relation：说明：“面向文字角色扮演和互动叙事的知识图谱记忆，基于官方 memory serve”；confidence：README：“f information - Implements confidence scores for assertions - Supports”"
     },
     "scoring_stages": {
       "value": [

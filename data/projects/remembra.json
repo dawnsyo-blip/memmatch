@@ -15,7 +15,7 @@
   ],
   "info": {
     "summary": {
-      "value": "编程 Agent 的会话交接：会话结束时从 git 和会话记录生成交接摘要，下一个 Agent（换机器、换厂商也行）开始时自动读到；支持 Claude Code、Codex、Gemini CLI 等，可用免费云服务或本地 Docker 自部署",
+      "value": "编程 Agent 的会话交接：会话结束时从 git 和会话记录生成交接摘要，下一个 Agent 开始时自动读到，换机器、换厂商也行；支持 Claude Code、Codex、Gemini CLI 等，可用免费云服务或本地 Docker 自部署",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
@@ -425,7 +425,7 @@
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "不需要额外花钱。可选花销（不付也能用）：云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费。",
+      "value": "不需要额外花钱。可选花销，不付也能用：云版分 Free、Solo 12 美元／月、Pro 29 美元／月、Team 15 美元／人／月；自己部署免费。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
@@ -477,7 +477,7 @@
   },
   "safety_note": {
     "level": "info",
-    "note": "它的说明文件里有写给 AI 的引导（例如只引用官网价格），属于产品宣传，不涉及外发数据；使用托管版时对话会上传到它的服务器。",
+    "note": "它的说明文件里有写给 AI 的引导，例如只引用官网价格，属于产品宣传，不涉及外发数据；使用托管版时对话会上传到它的服务器。",
     "checked": "2026-10-26"
   }
 }

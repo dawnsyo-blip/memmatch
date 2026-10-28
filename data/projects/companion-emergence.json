@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "赫布式（共同激活即强化）联想记忆＋真遗忘，强调“无人注视时的生活”",
-      "source": "负责人原表「记忆项目总表」，据各仓库 README",
-      "read_date": "2026-10-10"
+      "value": "赫布式联想记忆，即一同被想起的记忆会彼此强化，并带真正的遗忘；强调“无人注视时的生活”",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-25"
     },
     "memory_subject": {
       "value": "AI 身份＋情绪／身体状态",
@@ -202,7 +202,7 @@
         "tools"
       ],
       "status": "auto",
-      "basis": "dashboard：强化）联想记忆＋真遗忘，强调“无人注视时的生活”；桌面应用＋后台常驻服务；桌面应用＋后台服务，只用 Clau；files：. **Voice template.** A markdown file the persona reads each t；cli：to Anthropic's `claude` CLI for LLM calls. Install i"
+      "basis": "dashboard：此强化，并带真正的遗忘；强调“无人注视时的生活”；桌面应用＋后台常驻服务；桌面应用＋后台服务，只用 Clau；files：. **Voice template.** A markdown file the persona reads each t；cli：to Anthropic's `claude` CLI for LLM calls. Install i"
     },
     "export": {
       "value": [],
@@ -259,7 +259,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“忆＋真遗忘，强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅”"
+      "basis": "原表／说明：“真正的遗忘；强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后台常驻服务；自带桌面端（仅”"
     },
     "proactive": {
       "value": "yes",
@@ -299,7 +299,7 @@
     "independent_life": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“赫布式（共同激活即强化）联想记忆＋真遗忘，强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后”"
+      "basis": "原表／说明：“一同被想起的记忆会彼此强化，并带真正的遗忘；强调“无人注视时的生活”；AI 身份＋情绪／身体状态；桌面应用＋后”"
     },
     "visual_presence": {
       "value": "not_mentioned",
@@ -467,7 +467,7 @@
       "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅驱动，README 称不用另配 API Key"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅（Claude Pro 约 20 美元／月起，很多人本来就在付）。用已有的 Claude Code 订阅驱动，README 称不用另配 API Key。",
+      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。用已有的 Claude Code 订阅驱动，README 称不用另配 API Key。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅驱动，README 称不用另配 API Key"
     },

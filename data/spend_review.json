@@ -15,7 +15,7 @@
       "none"
     ],
     "detail": "",
-    "optional": "本地版免费；官方云版 15 美元／月（年付约 12.5 美元／月，7 天试用）"
+    "optional": "本地版免费；官方云版 15 美元／月，年付约 12.5 美元／月，可试用 7 天"
   },
   "central-intelligence": {
     "checked": "2026-10-28",
@@ -24,7 +24,7 @@
       "model_api"
     ],
     "detail": "",
-    "optional": "托管版免费档限 500 条记忆，Pro 版 29 美元／月（5 万条）；本地运行不用付"
+    "optional": "托管版免费档限 500 条记忆，Pro 版 29 美元／月，可存 5 万条；本地运行不用付"
   },
   "claude-mem": {
     "checked": "2026-10-28",
@@ -42,7 +42,7 @@
       "model_api"
     ],
     "detail": "",
-    "optional": "官方托管版（api.honcho.dev）的价格 README 没写；也可自己部署"
+    "optional": "官方托管版 api.honcho.dev 的价格 README 没写；也可自己部署"
   },
   "letta": {
     "checked": "2026-10-28",
@@ -60,7 +60,7 @@
       "model_api"
     ],
     "detail": "",
-    "optional": "官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月（二手信息，以官网为准）；开源版自己部署不用买"
+    "optional": "官方托管平台有免费档，付费档据 Mengram README 的对比表为 19–249 美元／月，属二手信息，以官网为准；开源版自己部署不用买"
   },
   "mem9": {
     "checked": "2026-10-28",
@@ -69,7 +69,7 @@
       "model_api"
     ],
     "detail": "",
-    "optional": "官方托管 api.mem9.ai 的价格 README 没写（配置里有用量限额设置）；也可自己部署"
+    "optional": "官方托管 api.mem9.ai 的价格 README 没写，配置里有用量限额设置；也可自己部署"
   },
   "memmachine": {
     "checked": "2026-10-28",
@@ -104,7 +104,7 @@
       "model_api"
     ],
     "detail": "",
-    "optional": "托管版有免费档，付费价格 README 没写（对比表里的 19–249 美元／月是 Mem0 的）；也可自托管"
+    "optional": "托管版有免费档，付费价格 README 没写，对比表里的 19–249 美元／月是 Mem0 的价格；也可自托管"
   },
   "openviking": {
     "checked": "2026-10-28",
@@ -149,7 +149,7 @@
       "none"
     ],
     "detail": "",
-    "optional": "本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月（云同步、更高档模型）"
+    "optional": "本地免费；Prism 自家套餐 Pro 15 美元／月、Team 20 美元／人／月，付费后可用云同步和更高档的模型"
   },
   "mira-oss": {
     "checked": "2026-10-28",
@@ -212,7 +212,7 @@
       "none"
     ],
     "detail": "",
-    "optional": "项目接受赞助（5–499 美元／月），README 明说不解锁任何功能"
+    "optional": "项目接受每月 5–499 美元的赞助，README 明说不解锁任何功能"
   },
   "respark": {
     "checked": "2026-10-28",
@@ -220,7 +220,7 @@
     "values": [
       "hosting"
     ],
-    "detail": "训练要租云 GPU（RunPod），账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅"
+    "detail": "训练要在 RunPod 租云 GPU，账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅"
   },
   "ombre-brain": {
     "checked": "2026-10-28",
@@ -229,7 +229,7 @@
       "model_api"
     ],
     "detail": "模型可领硅基流动免费额度，向量也可用本地 Ollama",
-    "optional": "跑在自己的电脑、NAS 或 VPS 上不用另付；想用托管平台要选带持久盘的档位，如 Render Starter 7 美元／月起（免费层重启会丢记忆）"
+    "optional": "跑在自己的电脑、NAS 或 VPS 上不用另付；想用托管平台要选带持久盘的档位，如 Render Starter 7 美元／月起，免费层重启会丢记忆"
   },
   "memoryconstellations": {
     "checked": "2026-10-28",
@@ -237,7 +237,7 @@
     "values": [
       "model_api"
     ],
-    "detail": "记忆处理的模型费约 7 美元／月（README 估算，可用 OpenRouter、DeepSeek、Gemini）"
+    "detail": "记忆处理的模型费约 7 美元／月，这是 README 的估算，可用 OpenRouter、DeepSeek、Gemini"
   },
   "imprint-memory": {
     "checked": "2026-10-28",
@@ -317,7 +317,7 @@
     "values": [
       "subscription"
     ],
-    "detail": "README 提到 6 月 15 日起非交互调用（-p、Agent SDK）改按量计费，常驻会话仍走订阅"
+    "detail": "README 提到 6 月 15 日起通过 -p 参数或 Agent SDK 的非交互调用改按量计费，常驻会话仍走订阅"
   },
   "chatnest-ui": {
     "checked": "2026-10-28",
@@ -325,7 +325,7 @@
     "values": [
       "subscription"
     ],
-    "detail": "自己用可走 Claude Code 订阅；对外提供服务必须改用 API Key（按量付费）"
+    "detail": "自己用可走 Claude Code 订阅；对外提供服务必须改用按量付费的 API Key"
   },
   "alethech": {
     "checked": "2026-10-28",
@@ -390,7 +390,7 @@
       "none"
     ],
     "detail": "Notion 免费版即可用 MCP；商业版、企业版的请求上限更高",
-    "optional": "Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 里连 Notion 要付费套餐（Plus 可用）"
+    "optional": "Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 里连 Notion 要付费套餐，Plus 可用"
   },
   "method-note-vault": {
     "checked": "2026-10-28",
@@ -399,7 +399,7 @@
       "none"
     ],
     "detail": "",
-    "optional": "想在手机上看笔记，可以用 Obsidian Sync（付费）同步，也可以用 iCloud、Git 免费同步"
+    "optional": "想在手机上看笔记，可以用付费的 Obsidian Sync 同步，也可以用 iCloud、Git 免费同步"
   },
   "myco": {
     "checked": "2026-10-28",
@@ -416,7 +416,7 @@
     "values": [
       "none"
     ],
-    "detail": "记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare（二手信息）",
+    "detail": "记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare，属二手信息",
     "optional": ""
   }
 }

@@ -15,9 +15,9 @@
   ],
   "info": {
     "summary": {
-      "value": "不装专门的记忆库：把记忆写在本地笔记库（Obsidian、Logseq 等，本质是一个 Markdown 文件夹）里，让能读写文件的 AI 按你定的规则读和记；记忆全是普通文件，随时手改，换模型也带得走",
-      "source": "Claude 据仓库 README 判断",
-      "read_date": "2026-10-10"
+      "value": "不装专门的记忆库，把记忆写在 Obsidian、Logseq 等本地笔记库里，本质上就是一个 Markdown 文件夹；让能读写文件的 AI 按您定的规则读和记；记忆全是普通文件，随时手改，换模型也带得走",
+      "source": "Claude 据仓库 README 改写",
+      "read_date": "2026-10-28"
     },
     "memory_subject": {
       "value": "你定的内容（关于你、约定、日记等）",
@@ -420,7 +420,7 @@
       "basis": "Claude 核实（2026-10-28，Claude 整理）：没有发现收费或需要另付的接口"
     },
     "spend_note": {
-      "value": "不需要额外花钱。可选花销（不付也能用）：想在手机上看笔记，可以用 Obsidian Sync（付费）同步，也可以用 iCloud、Git 免费同步。",
+      "value": "不需要额外花钱。可选花销，不付也能用：想在手机上看笔记，可以用付费的 Obsidian Sync 同步，也可以用 iCloud、Git 免费同步。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，Claude 整理）：没有发现收费或需要另付的接口"
     },

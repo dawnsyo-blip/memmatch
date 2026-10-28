@@ -16,7 +16,7 @@
   ],
   "info": {
     "summary": {
-      "value": "给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒、焦虑……）随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务供你的桥接层或 Claude Code 钩子读取，不存对话内容",
+      "value": "给 AI 人设加一套情绪驱力：想念、亲密、嫉妒、焦虑等 16 个心理维度随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务，供您的桥接层或 Claude Code 钩子读取，不存对话内容",
       "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-25"
     },
@@ -222,7 +222,7 @@
     "persona_continuity": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒”"
+      "basis": "原表／说明：“给 AI 人设加一套情绪驱力：想念、亲密、嫉妒、焦虑等 16 个”"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -247,7 +247,7 @@
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“理维度（想念、亲密、嫉妒、焦虑……）随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP”"
+      "basis": "原表／说明：“亲密、嫉妒、焦虑等 16 个心理维度随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP”"
     },
     "dream_consolidation": {
       "value": "not_mentioned",
@@ -257,7 +257,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒、焦虑……”"
+      "basis": "原表／说明：“给 AI 人设加一套情绪驱力：想念、亲密、嫉妒、焦虑等 16 个心理维度随”"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -364,7 +364,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "designed_to_pair：说明：“日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务供你的桥接层或 Clau”；standard_interface：接入方式 host_plugin"
+      "basis": "designed_to_pair：说明：“日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务，供您的桥接层或 Cla”；standard_interface：接入方式 host_plugin"
     },
     "customization": {
       "value": [
@@ -461,7 +461,7 @@
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费（也能接本地模型，不花钱，但电脑要带得动）。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费；也可改用本地模型，不花钱，但对电脑配置有要求。",
       "status": "auto",
       "basis": "按“需要的账号”和费用档推出：model_api_key（没有逐项核实过收费情况）"
     },

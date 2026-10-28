@@ -467,12 +467,12 @@
         "model_api"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：记忆处理的模型费约 7 美元／月（README 估算，可用 OpenRouter、DeepSeek、Gemini）"
+      "basis": "Claude 核实（2026-10-28，README）：记忆处理的模型费约 7 美元／月，这是 README 的估算，可用 OpenRouter、DeepSeek、Gemini"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要自备模型（或向量化）接口，按调用量付费。记忆处理的模型费约 7 美元／月（README 估算，可用 OpenRouter、DeepSeek、Gemini）。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费。记忆处理的模型费约 7 美元／月，这是 README 的估算，可用 OpenRouter、DeepSeek、Gemini。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：记忆处理的模型费约 7 美元／月（README 估算，可用 OpenRouter、DeepSeek、Gemini）"
+      "basis": "Claude 核实（2026-10-28，README）：记忆处理的模型费约 7 美元／月，这是 README 的估算，可用 OpenRouter、DeepSeek、Gemini"
     },
     "pairs_with": {
       "value": [],

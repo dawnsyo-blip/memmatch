@@ -10,7 +10,7 @@
     "model_api_key": "大模型接口密钥", "claude_subscription": "Claude 付费套餐", "github": "GitHub 账号",
     "vendor_account": "项目方账号", "cloudflare": "Cloudflare 账号", "render": "Render 账号", "telegram": "Telegram 机器人",
     "model_api": "LLM 或向量化接口的用量费", "subscription": "付费订阅", "hosting": "服务器或云平台费用", "product_fee": "项目本身收费",
-    "difficulty:low": "低（下载安装或一键安装）", "difficulty:medium": "中（照着教程敲几条命令）", "difficulty:high": "高（要改较多配置或写代码）",
+    "difficulty:low": "低，下载安装或一键安装即可", "difficulty:medium": "中，需照着教程敲几条命令", "difficulty:high": "高，要改较多配置或写代码",
     "settings_ui": "可以在界面里改设置", "config_file": "可以改配置文件", "prompts": "可以改提示词", "plain_data": "记忆是普通文件，可以直接改",
     "plugin_api": "留了插件接口", "small_code": "代码小巧，方便自己改"
   },
@@ -101,12 +101,12 @@
          ],
          "reason": "手机连不上这个记忆库", "note": "要自己用 Cloudflare Tunnel 或 Tailscale 让手机连上", "note_if": {"phone_access": ["needs_tunnel"]}},
         {"when": {"all": [{"question": "q3", "selected_any": ["sillytavern"]}, {"question": "q3c", "selected_none": ["no"]}]},
-         "note": "酒馆要先装社区扩展 SillyTavern-MCP-Client（连同它要求的服务端插件），并在采样设置里打开函数调用，才能接这个 MCP 记忆库；所用的模型接口要支持工具调用",
+         "note": "酒馆要先装社区扩展 SillyTavern-MCP-Client 及它要求的服务端插件，并在采样设置里打开函数调用，才能接这个 MCP 记忆库；所用的模型接口要支持工具调用",
          "note_if": {"compatible_clients": ["any_mcp_client"]}, "note_unless": {"compatible_clients": ["sillytavern"]}},
         {"when": {"question": "q3", "selected_any": ["sillytavern"]},
          "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "原生支持酒馆，不用另装 MCP 扩展"}]},
         {"when": {"all": [{"question": "q3", "selected_any": ["official"]}, {"question": "q2", "selected_any": ["openai"]}]},
-         "note": "ChatGPT 里要在网页上进“设置 → 插件”找到 Notion 连接，连好后手机 App 也能用；需要 ChatGPT 付费套餐（Plus 实测可用）。连接时如果提示“此应用目前不提供浏览器设置 URL”，换从设置里的插件页连",
+         "note": "ChatGPT 里要在网页上进“设置 → 插件”找到 Notion 连接，连好后手机 App 也能用；需要 ChatGPT 付费套餐，Plus 实测可用。连接时如果提示“此应用目前不提供浏览器设置 URL”，换从设置里的插件页连",
          "note_if": {"id": ["method-notion"]}}
       ],
       "relax": [
@@ -183,7 +183,7 @@
       ],
       "rules": [
         {"when": {"question": "q4", "selected_any": ["same_agent", "shared", "per_agent"]},
-         "note": "文档没写能否多端共用（MCP 服务一般可以同时给几个入口用）", "note_if": {"cross_client": ["not_mentioned"]},
+         "note": "文档没写能否多端共用，不过 MCP 服务一般可以同时给几个入口用", "note_if": {"cross_client": ["not_mentioned"]},
          "score": [{"if": {"cross_client": ["yes"]}, "points": 2, "reason": "写明了能在几个入口共用同一份记忆"}]},
         {"when": {"question": "q4", "selected_any": ["shared"]},
          "score": [{"if": {"multi_agent": ["shared"]}, "points": 2, "reason": "写明了几个 Agent 能共用同一份记忆"}]},
@@ -212,9 +212,9 @@
         {"when": {"question": "q5", "selected_none": ["hosted"]}, "exclude_only": {"data_passes_through": ["third_party"]},
          "unless_project": {"project_role": ["method"]}, "reason": "只能用项目方的托管服务"},
         {"when": {"question": "q5", "selected_none": ["hosted"]},
-         "note": "按自己部署的方式用（默认是托管）", "note_if": {"runs_on": ["third_party_hosted"]}, "note_unless": {"project_role": ["method"]}},
+         "note": "默认用托管服务，需改为自己部署", "note_if": {"runs_on": ["third_party_hosted"]}, "note_unless": {"project_role": ["method"]}},
         {"when": {"question": "q5", "selected_none": ["hosted"]},
-         "note": "记忆存在 Notion 的服务器上（Notion 不是记忆库项目方，内容由您自己写、随时能看能改）；介意的话请改用本地笔记库",
+         "note": "记忆存在 Notion 的服务器上。Notion 不是记忆库项目方，内容由您自己写，随时能看能改；介意的话请改用本地笔记库",
          "note_if": {"project_role": ["method"], "runs_on": ["third_party_hosted"]}}
       ],
       "relax": [
@@ -531,7 +531,7 @@
       ],
       "rules": [
         {"when": {"question": "q18", "selected_any": ["zero"]},
-         "note": "要用本地模型代替付费接口（电脑要带得动）", "note_if": {"spend": ["model_api"]}}
+         "note": "要用本地模型代替付费接口，对电脑配置有要求", "note_if": {"spend": ["model_api"]}}
       ],
       "relax": [
         {"label": "每月 10 元以内", "set": "ten"},
@@ -553,10 +553,10 @@
       "text": "以后换记忆库或换 LLM 时，您希望能把记忆导出来带走吗？",
       "options": [
         {"id": "must", "label": "一定要能导出", "effect": {"score": [
-          {"if": {"export": ["markdown", "json"]}, "points": 2, "reason": "记忆能导出成通用格式（Markdown 或 JSON）"},
+          {"if": {"export": ["markdown", "json"]}, "points": 2, "reason": "记忆能导出成 Markdown 或 JSON 等通用格式"},
           {"if": {"customization": ["plain_data"]}, "points": 1, "reason": "记忆是普通文件，直接就能拷走"}]}},
         {"id": "prefer", "label": "最好能", "effect": {"score": [
-          {"if": {"export": ["markdown", "json"]}, "points": 1, "reason": "记忆能导出成通用格式（Markdown 或 JSON）"}]}},
+          {"if": {"export": ["markdown", "json"]}, "points": 1, "reason": "记忆能导出成 Markdown 或 JSON 等通用格式"}]}},
         {"id": "any", "label": "无所谓", "effect": {}}
       ]
     }

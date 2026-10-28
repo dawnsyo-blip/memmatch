@@ -15,8 +15,8 @@
   ],
   "info": {
     "summary": {
-      "value": "放在服务器上的 Obsidian 连接器：通过网络访问笔记库，可选用本地 Ollama 向量做按意思搜索（要另起 Postgres）",
-      "source": "Claude 据仓库 README 判断",
+      "value": "放在服务器上的 Obsidian 连接器：通过网络访问笔记库，可选用本地 Ollama 向量做按意思搜索，需另起 Postgres",
+      "source": "Claude 据仓库 README 改写",
       "read_date": "2026-10-28"
     },
     "memory_subject": {
@@ -284,7 +284,7 @@
         "relation"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“络访问笔记库，可选用本地 Ollama 向量做按意思搜索（要另起 Postgres）”；keyword：README：“ounts ### Search & Links - **Full-Text Search**: Search content and filenam”；relation：README：“paraphrase`, `decision-why`, `multi-hop`, and `recent`, reported in t”"
+      "basis": "semantic：说明：“络访问笔记库，可选用本地 Ollama 向量做按意思搜索，需另起 Postgres；”；keyword：README：“ounts ### Search & Links - **Full-Text Search**: Search content and filenam”；relation：README：“paraphrase`, `decision-why`, `multi-hop`, and `recent`, reported in t”"
     },
     "scoring_stages": {
       "value": [
