@@ -474,26 +474,23 @@ $("next").addEventListener("click", () => {
   go(1);
 });
 
-/* 小土星自转：星球上三条经线，经度相差 120°，每 6 秒转一圈。
-   经度 θ 的经线从正面看是半个椭圆：横半径 r·|sinθ|、竖半径 r，在 sinθ 那一侧；cosθ ≤ 0 时转到背面看不见，
-   越靠近边缘越淡。没答本题时停住不转；系统设了减少动态效果时只画一帧 */
-const MER_R = 6.8, MER_N = 3, MER_PERIOD = 6000;
-const merLines = Array.from({ length: MER_N }, () => el("path", { class: "meridian" }, $("meridians")));
-let merPhase = 0.35, merLast = 0;
-function drawMeridians(now) {
-  const dt = merLast ? Math.min(100, now - merLast) : 0;
-  merLast = now;
-  if (!$("next").disabled) merPhase += dt / MER_PERIOD * 2 * Math.PI;
-  merLines.forEach((ln, i) => {
-    const th = merPhase + i * 2 * Math.PI / MER_N, c = Math.cos(th), sn = Math.sin(th);
-    if (c <= 0.02) { ln.setAttribute("d", ""); return; }
-    const rx = Math.max(.01, MER_R * Math.abs(sn));
-    ln.setAttribute("d", `M0 ${-MER_R} A${rx.toFixed(2)} ${MER_R} 0 0 ${sn > 0 ? 1 : 0} 0 ${MER_R}`);
-    ln.setAttribute("opacity", Math.min(1, c * 1.4).toFixed(2));
-  });
-  if (!reduce) requestAnimationFrame(drawMeridians);
+/* 小土星斜着自转：自转轴绕着一个小圆圈慢慢晃（像陀螺进动），每 6 秒一圈。
+   画面上就是两件事错开四分之一圈同时发生：环的倾角在 -13.2° 左右各摆 6°，环面的张开程度在 0.7～1.3 倍之间变。
+   没答本题时停住不动；系统设了减少动态效果时只画一帧 */
+const TILT = -13.2, TILT_SWING = 6, OPEN_SWING = .3, WOBBLE_PERIOD = 6000;
+let wobble = 0, wobbleLast = 0;
+const ringPath = (k, sweep) => `M-13 0 A13 ${(3.5 * k).toFixed(2)} 0 0 ${sweep} 13 0 M-16 0 A16 ${(4.3 * k).toFixed(2)} 0 0 ${sweep} 16 0`;
+function drawSaturn(now) {
+  const dt = wobbleLast ? Math.min(100, now - wobbleLast) : 0;
+  wobbleLast = now;
+  if (!$("next").disabled) wobble += dt / WOBBLE_PERIOD * 2 * Math.PI;
+  const k = 1 + OPEN_SWING * Math.cos(wobble);
+  $("probe").setAttribute("transform", `translate(32 22) rotate(${(TILT + TILT_SWING * Math.sin(wobble)).toFixed(2)})`);
+  $("ringBack").setAttribute("d", ringPath(k, 1));
+  $("ringFront").setAttribute("d", ringPath(k, 0));
+  if (!reduce) requestAnimationFrame(drawSaturn);
 }
-requestAnimationFrame(drawMeridians);
+requestAnimationFrame(drawSaturn);
 $("backLatest").addEventListener("click", () => { const t = returnTarget(); if (t) show(t); });
 
 function toast(msg) {
