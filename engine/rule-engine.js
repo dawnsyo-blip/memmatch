@@ -352,7 +352,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     if (diff) cautions.push(`上手门槛：${labels["difficulty:" + diff] || diff}`);
     const accounts = fieldValues(p, "accounts_needed").filter((v) => v !== "none");
     const localOk = fieldValues(p, "local_model").includes("yes");
-    if (accounts.length) cautions.push(`需要：${accounts.map((v) => (labels[v] || v) + (v === "model_api_key" && localOk ? "（也可以用本地模型代替）" : "")).join("、")}`);
+    if (accounts.length) cautions.push(`需要：${accounts.map((v) => (labels[v] || v) + (v === "model_api_key" && localOk ? "，也可以用本地模型代替" : "")).join("、")}`);
     return {
       id: p.id, name: p.name, category: p.candidate.category, repo_url: p.repo_url,
       summary: p.info?.summary?.value || "",
@@ -367,25 +367,80 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     };
   }
 
-  // results 是全部通过筛选的项目（已排序）；搭档可以排在后面，但主项目只看前 10 名
-  function buildCombos(results, addons) {
+  function buildCombos(results, addons, answers, projects) {
     const combos = [];
+    const projById = Object.fromEntries(projects.map((p) => [p.id, p]));
     const main = results.filter((r) => r.role === "full_memory" || r.role === "companion_app");
+    const memories = results.filter((r) => r.role !== "note_connector");
+    const byMemId = Object.fromEntries(memories.map((r) => [r.id, r]));
+
+    const ALL_STAGES = ["capture", "consolidate", "retrieve", "forget", "review"];
+    const stageLabel = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
+    const stagesOf = (id) => {
+      const p = projById[id];
+      return p?.normalized?.lifecycle ? [].concat(p.normalized.lifecycle.value) : [];
+    };
+
+    // 方案一：完整系统搭配一个补充项目
     const complete = main.slice(0, 10).find((r) => r.lifecycle_complete);
-    if (complete) combos.push({ title: "一个项目覆盖写入、整理、召回、遗忘、查看修改全流程", parts: [{ role: "完整记忆系统", id: complete.id, name: complete.name }] });
-    const memories = results.filter((r) => r.role !== "note_connector"); // 连接器只挂在做法下面，不单独组合
-    const byId = Object.fromEntries(memories.map((r) => [r.id, r]));
-    for (const r of memories.slice(0, 10)) {
+    if (complete) {
+      let companion = null, companionDesc = "";
+      for (const pid of complete.pairs_with) {
+        if (byMemId[pid]) { companion = byMemId[pid]; companionDesc = projById[pid]?.candidate?.category || "搭配使用"; break; }
+      }
+      if (!companion) {
+        const concerns = [].concat(answers.q8 || [], answers.q8n || []).filter((v) => v !== "other" && v !== "no_problem");
+        if (concerns[0]) {
+          const qDef = questionnaire.questions.find((x) => x.id === "q8") || questionnaire.questions.find((x) => x.id === "q8n");
+          const opt = qDef?.options.find((o) => o.id === concerns[0]);
+          if (opt) {
+            const rules = (opt.effect?.score || []).filter((s) => s.points >= 1);
+            companion = memories.slice(0, 15).find((r) => r.id !== complete.id && rules.some((s) => projectMatches(projById[r.id], s.if)));
+            if (companion) companionDesc = "针对" + opt.label;
+          }
+        }
+      }
+      if (!companion) {
+        const extras = Object.values(addons).flatMap((a) => a.items);
+        const ext = extras.find((x) => x.id !== complete.id);
+        if (ext) { companion = byMemId[ext.id] || ext; companionDesc = ext.addon_title || "补充工具"; }
+      }
+      if (companion) {
+        combos.push({ title: "完整系统＋专项补强", parts: [
+          { id: complete.id, name: complete.name, desc: "覆盖全流程" },
+          { id: companion.id, name: companion.name, desc: companionDesc },
+        ] });
+      }
+    }
+
+    // 方案二：多个项目组合出完整流程
+    const tops = memories.slice(0, 15).filter((r) => !r.lifecycle_complete);
+    let found = null;
+    for (const r of tops) {
       for (const pid of r.pairs_with) {
-        if (byId[pid] && !combos.some((c) => c.parts.some((x) => x.id === pid) && c.parts.some((x) => x.id === r.id))) {
-          combos.push({ title: "设计上就是搭配使用的组合", parts: [{ role: "主记忆", id: r.id, name: r.name }, { role: "搭配", id: pid, name: byId[pid].name }] });
+        if (!byMemId[pid]) continue;
+        const union = new Set([...stagesOf(r.id), ...stagesOf(pid)]);
+        if (ALL_STAGES.every((s) => union.has(s))) { found = [r, byMemId[pid]]; break; }
+      }
+      if (found) break;
+    }
+    if (!found) {
+      for (let i = 0; i < tops.length && !found; i++) {
+        const si = stagesOf(tops[i].id);
+        if (si.length < 2) continue;
+        for (let j = i + 1; j < tops.length; j++) {
+          const union = new Set([...si, ...stagesOf(tops[j].id)]);
+          if (ALL_STAGES.every((s) => union.has(s))) { found = [tops[i], tops[j]]; break; }
         }
       }
     }
-    const extras = Object.values(addons).map((a) => a.items[0]).filter(Boolean);
-    if (main[0] && extras.length) {
-      combos.push({ title: "记忆库＋补充部件", parts: [{ role: "记忆库", id: main[0].id, name: main[0].name }, ...extras.map((x) => ({ role: x.addon_title, id: x.id, name: x.name }))] });
+    if (found) {
+      combos.push({ title: found.length + " 个项目组合出完整流程", parts: found.map((r) => {
+        const s = stagesOf(r.id);
+        return { id: r.id, name: r.name, desc: "负责" + s.map((v) => stageLabel[v] || v).join("、") };
+      }) });
     }
+
     return combos;
   }
 
@@ -451,7 +506,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       total_kept: results.length,
       addons,
       guides,
-      combos: buildCombos(scored, addons),
+      combos: buildCombos(scored, addons, answers, projects),
       excluded: run.excluded.map((e) => ({ id: e.project.id, name: e.project.name, reason: explainExclusion(e) })),
       notices: [...run.notices],
       relax,

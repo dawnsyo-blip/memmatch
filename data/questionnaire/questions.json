@@ -63,7 +63,7 @@
       ]
     },
     {
-      "id": "q3", "kind": "hard", "type": "multi", "short": "手机上的入口",
+      "id": "q3", "kind": "hard", "type": "multi", "short": "入口",
       "text": "您在手机上通过什么入口和 LLM 沟通？",
       "exclude_reason": "接不上您用的入口",
       "options": [

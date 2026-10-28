@@ -21,14 +21,14 @@ const EDGE = [
   { has: { pinning: ["yes"] }, text: "能把重要的记忆钉住，一直带着" },
   { has: { proactive: ["yes"] }, text: "会主动提起相关的事" },
   { has: { lifecycle_complete: ["complete"] }, text: "从写入到遗忘全流程都有", skip: /全流程/ },
-  { has: { difficulty: ["low"] }, text: "下载安装或一键安装就能用" },
-  { has: { spend: ["none"] }, text: "不需要额外花钱" },
   { has: { local_model: ["no_model_needed"] }, text: "完全不调用大模型" },
   { has: { customization: ["settings_ui"] }, text: "能在界面里改设置", skip: /界面里改/ },
   { has: { customization: ["plain_data"] }, text: "记忆是普通文件，可以直接打开改", skip: /普通文件/ },
   { has: { chinese_support: ["zh_retrieval"] }, text: "中文检索做过优化", skip: /中文检索/ },
   { has: { multi_agent: ["per_agent"] }, text: "能给不同的 Agent 分开记忆", skip: /分开/ },
   { has: { retrieval_postprocess: ["rerank", "dedup"] }, text: "召回后还会重排、去重", skip: /重排/ },
+  { has: { difficulty: ["low"] }, text: "下载安装或一键安装就能用" },
+  { has: { spend: ["none"] }, text: "不需要额外花钱" },
 ];
 
 // 在同一批推荐里找“只有它有”的能力；没有独有的，再找“只有它和另一个有”的
@@ -72,11 +72,11 @@ export function isExperienced(answers) {
 }
 
 export function adviceItems(answers, questionnaire, results, byId) {
-  if (!isExperienced(answers)) return [];
-  const q = questionnaire.questions.find((x) => x.id === "q8");
-  return [].concat(answers.q8 || []).filter((id) => ADVICE[id]).map((id) => {
+  const qid = answers.q8?.length ? “q8” : “q8n”;
+  const q = questionnaire.questions.find((x) => x.id === qid);
+  if (!q) return [];
+  return [].concat(answers[qid] || []).filter((id) => ADVICE[id]).map((id) => {
     const opt = q.options.find((o) => o.id === id);
-    // 只看 1 分以上的规则：“随时能看到记了什么”（0.5 分）几乎每个项目都有，算进来就失去了参考意义
     const rules = (opt.effect?.score || []).filter((s) => s.points >= 1);
     const examples = results.filter((r) => {
       const p = byId[r.id];

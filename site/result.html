@@ -205,7 +205,7 @@
 <script src="assets/nav.js"></script>
 <script type="module">
   import { checkCondition, createRuleEngine } from "../engine/index.js";
-  import { edgeLines, adviceItems, isExperienced } from "./assets/result-text.js";
+  import { edgeLines, adviceItems } from "./assets/result-text.js";
 
   const sheet = document.getElementById("sheet");
   const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -274,8 +274,7 @@
   let html = `<p class="eyebrow caption">Results</p>`;
   if (r.results.length) {
     html += `<h1>为您挑出的 <span class="num">${r.results.length}</span> 个记忆库</h1>`;
-    html += `<p class="lead">符合您条件的共 ${r.total_kept} 个${r.total_kept > topN ? `，这里是最合适的 ${topN} 个` : ""}。` +
-      (narrow.length ? `筛选主要看：${narrow.map((x) => esc(x.short)).join("、")}。` : "") + `</p>`;
+    html += `<p class="lead">符合您条件的共 ${r.total_kept} 个${r.total_kept > topN ? `，这里是最合适的 ${topN} 个` : ""}。<br>筛选的硬条件：可用设备、可用于存放记忆库的设备等。<br>筛选的软条件：对记忆生成、演化、检索的偏好等。</p>`;
   } else {
     html += `<h1>暂时没有完全符合的</h1><p class="lead">您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。</p>`;
   }
@@ -297,7 +296,7 @@
     html += `<section class="block" aria-labelledby="combosT"><header><p class="caption">Combinations</p><h2 id="combosT">搭配方案</h2></header><ul class="combos">`;
     for (const c of r.combos) {
       html += `<li><span class="t caption-zh">${esc(c.title)}</span><p class="names">` +
-        c.parts.map((p) => `${esc(p.name)}${c.parts.length > 1 ? ` <span class="role">（${esc(p.role)}）</span>` : ""}`).join(`<span class="plus">＋</span>`) + `</p></li>`;
+        c.parts.map((p) => esc(p.name) + (p.desc ? ` <span class="role">${esc(p.desc)}</span>` : "")).join(`<span class="plus">＋</span>`) + `</p></li>`;
     }
     html += `</ul></section>`;
   }
@@ -313,9 +312,10 @@
   html += `<section class="block tight why${r.more?.length ? "" : " first"}" id="why"><details class="fold"${few || r.conflicts.length ? " open" : ""}><summary><span class="label">为什么是这些</span><span class="chev">${ARROW}</span></summary>`;
   html += `<p>收录的 ${data.projects.length} 个项目里，符合您条件的有 ${r.total_kept} 个。</p>`;
   if (narrow.length) {
-    html += `<p>排除得最多的几道题：</p><ul>` + narrow.map((x) =>
-      `<li>第 ${esc(x.number)} 题“${esc(x.short)}”${x.selected.length ? `（您选了：${esc(x.selected.join("、"))}）` : ""}：` +
-      (alone.length ? `单这一题就排除了 ${x.only} 个` : `排除了 ${x.total} 个（它们也不符合别的条件）`) + `</li>`).join("") + `</ul>`;
+    html += `<p>排除较多的条件：</p><ul>` + narrow.map((x) =>
+      `<li>第 ${esc(x.number)} 题”${esc(x.short)}”` +
+      (x.selected.length ? `，您选了${esc(x.selected.join(“、”))}` : “”) +
+      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目</li>`).join(“”) + `</ul>`;
   }
   if (r.conflicts.length) html += `<p class="warn">${r.conflicts.map((c) => esc(c.message)).join("<br>")}</p>`;
   if (r.notices.length) html += `<ul>${r.notices.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>`;
@@ -324,14 +324,14 @@
     const groups = {};
     for (const e of r.excluded) (groups[e.reason] ||= []).push(e.name);
     html += `<details class="fold excluded"><summary><span class="label caption-zh">被排除的 ${r.excluded.length} 个及原因</span><span class="chev">${ARROW}</span></summary><dl>` +
-      Object.entries(groups).sort((a, b) => b[1].length - a[1].length).map(([why, names]) => `<dt>${esc(why)}（${names.length} 个）</dt><dd>${esc(names.join("、"))}</dd>`).join("") + `</dl></details>`;
+      Object.entries(groups).sort((a, b) => b[1].length - a[1].length).map(([why, names]) => `<dt>${esc(why)}，${names.length} 个</dt><dd>${esc(names.join("、"))}</dd>`).join("") + `</dl></details>`;
   }
   html += `</details></section>`;
 
   /* ---------- 改进建议（只给用过记忆服务的人） ---------- */
   const addons = Object.values(r.addons || {});
-  if (isExperienced(answers) && (advice.length || addons.length || r.guides.length)) {
-    html += `<section class="block" id="advice" aria-labelledby="adviceT"><header><p class="caption">If you've tried one before</p><h2 id="adviceT">改进建议</h2>` +
+  if (advice.length || addons.length || r.guides.length) {
+    html += `<section class="block" id="advice" aria-labelledby="adviceT"><header><p class="caption">Advice</p><h2 id="adviceT">改进建议</h2>` +
       (advice.length ? `<p class="sub">按您在第 8 题排的顺序。</p>` : "") + `</header>`;
     if (advice.length) {
       html += `<ol class="advice">` + advice.map((a, i) => `<li><div class="pick-head"><span class="rank">${pad(i + 1)}</span><div class="pick-title"><h3>${esc(a.label)}</h3><span class="help">${esc(a.help)}</span></div></div>` +
@@ -367,7 +367,7 @@
       const free = st.free[`${id}.${oid}`];
       return (q.type === "rank" ? `${k + 1}. ` : "") + (o ? o.label : oid) + (free ? `：${free}` : "");
     }).join(q.type === "rank" ? "　" : "；");
-    ah += `<dt><span class="no">第 ${esc(q.number || id.slice(1))} 题</span>${esc(q.text)}</dt><dd>${txt ? esc(txt) : "（没有回答）"}</dd>`;
+    ah += `<dt><span class="no">第 ${esc(q.number || id.slice(1))} 题</span>${esc(q.text)}</dt><dd>${txt ? esc(txt) : "未回答"}</dd>`;
     plain.push(`第 ${q.number || id.slice(1)} 题　${q.text}`, `　　${txt || "（没有回答）"}`);
   }));
   document.getElementById("answers").innerHTML = ah;
