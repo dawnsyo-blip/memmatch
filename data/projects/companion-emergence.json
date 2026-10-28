@@ -464,12 +464,12 @@
         "subscription"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅驱动，README 称不用另配 API Key"
+      "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅运行，README 称不用另配大模型服务的密钥"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。用已有的 Claude Code 订阅驱动，README 称不用另配 API Key。",
+      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。用已有的 Claude Code 订阅运行，README 称不用另配大模型服务的密钥。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅驱动，README 称不用另配 API Key"
+      "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅运行，README 称不用另配大模型服务的密钥"
     },
     "pairs_with": {
       "value": [],

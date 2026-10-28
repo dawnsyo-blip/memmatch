@@ -412,12 +412,12 @@
         "subscription"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：README 提到 6 月 15 日起通过 -p 参数或 Agent SDK 的非交互调用改按量计费，常驻会话仍走订阅"
+      "basis": "Claude 核实（2026-10-28，README）：README 提到 6 月 15 日起，通过 -p 参数或 Agent SDK 自动调用 Claude 改为按用量计费，一直开着的对话仍走订阅"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。README 提到 6 月 15 日起通过 -p 参数或 Agent SDK 的非交互调用改按量计费，常驻会话仍走订阅。",
+      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。README 提到 6 月 15 日起，通过 -p 参数或 Agent SDK 自动调用 Claude 改为按用量计费，一直开着的对话仍走订阅。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：README 提到 6 月 15 日起通过 -p 参数或 Agent SDK 的非交互调用改按量计费，常驻会话仍走订阅"
+      "basis": "Claude 核实（2026-10-28，README）：README 提到 6 月 15 日起，通过 -p 参数或 Agent SDK 自动调用 Claude 改为按用量计费，一直开着的对话仍走订阅"
     },
     "pairs_with": {
       "value": [],

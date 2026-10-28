@@ -410,12 +410,12 @@
         "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口"
+      "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装好 Rust、Node.js、Python，并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不用另开模型服务"
     },
     "spend_note": {
-      "value": "不需要额外花钱。只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口。",
+      "value": "不需要额外花钱。只要在电脑上装好 Rust、Node.js、Python，并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不用另开模型服务。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口"
+      "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装好 Rust、Node.js、Python，并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不用另开模型服务"
     },
     "pairs_with": {
       "value": [],

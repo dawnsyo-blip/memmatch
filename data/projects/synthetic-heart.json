@@ -536,7 +536,7 @@
   },
   "safety_note": {
     "level": "notice",
-    "note": "网页管理界面默认不需要登录，而且容器监听所有网卡；2026-10-19 起可以开启登录，方法是设置 SYNTH_WEBUI_API_TOKEN 或 SYNTH_WEBUI_AUTH=enabled，但默认仍是关的。不要直接暴露到公网。",
+    "note": "网页管理界面默认不需要登录，而且同一网络里的其它设备都能访问；2026-10-19 起可以开启登录，方法是设置 SYNTH_WEBUI_API_TOKEN 或 SYNTH_WEBUI_AUTH=enabled，但默认仍是关的。不要让它直接暴露在公网上。",
     "checked": "2026-10-27"
   }
 }
