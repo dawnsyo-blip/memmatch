@@ -5,19 +5,19 @@ import { projectMatches } from "../../engine/index.js";
 
 // 拿来比较的能力，按对用户的重要程度排；skip 是推荐理由里已经说过的同一件事，说过就不重复
 const EDGE = [
-  { has: { write_mode: ["review_first"] }, text: "先给您看候选，确认后才入库", skip: /候选/ },
-  { has: { write_receipt: ["yes"] }, text: "写入后会明确回执", skip: /回执/ },
+  { has: { write_mode: ["review_first"] }, text: "先给您看要记的内容，确认后才存", skip: /候选|要记的内容/ },
+  { has: { write_receipt: ["yes"] }, text: "记下后会明确告诉您记了什么", skip: /回执|告诉您记了什么/ },
   { has: { sensitive_suppression: ["yes"] }, text: "能压住您不想再提的事", skip: /压住/ },
   { has: { media_recall: ["image", "audio", "video"] }, text: "能保存原图或原声，想起来时交回原件" },
   { has: { forgetting: ["archive"] }, text: "删掉的记忆只是归档，还能找回", skip: /归档/ },
-  { has: { reflection: ["yes"], error_guard: ["yes"] }, text: "自己反思得出的结论能追溯到原话", skip: /反思/ },
-  { has: { dream_consolidation: ["yes"] }, text: "空闲时会自动整理、去重", skip: /整理|去重|合并/ },
+  { has: { reflection: ["yes"], error_guard: ["yes"] }, text: "AI 自己总结出的结论能查到依据的原话", skip: /反思|总结出/ },
+  { has: { dream_consolidation: ["yes"] }, text: "空闲时会自动整理、合并重复的记忆", skip: /整理|去重|合并/ },
   { has: { memory_layers: ["layered"] }, text: "把记忆分层管理", skip: /分层/ },
   { has: { emotion_handling: ["weighting"] }, text: "情绪重的记忆记得更牢", skip: /情绪重|情感重/ },
   { has: { verbatim: ["yes"] }, text: "保留原话，可以核对", skip: /原话|原始记录/ },
   { has: { window_handoff: ["yes"] }, text: "开新窗口能接上之前的内容", skip: /新窗口/ },
   { has: { time_awareness: ["yes"] }, text: "记得每件事是什么时候的", skip: /什么时候|时间线/ },
-  { has: { error_guard: ["yes"] }, text: "改动保留历史，记错了能改回来", skip: /纠错|追溯/ },
+  { has: { error_guard: ["yes"] }, text: "改动保留历史，记错了能改回来", skip: /纠错|追溯|出处|记错了能改/ },
   { has: { pinning: ["yes"] }, text: "能把重要的记忆钉住，一直带着" },
   { has: { proactive: ["yes"] }, text: "会主动提起相关的事" },
   { has: { lifecycle_complete: ["complete"] }, text: "从记下到遗忘都有", skip: /全流程|记下到遗忘/ },
@@ -66,15 +66,15 @@ export function edgeLines(results, byId) {
 
 // 改进建议：按问卷第 8 题的说明写；“做到的项目”直接用这道题的加分规则判断，和推荐引擎一致
 const ADVICE = {
-  entry_hallucination: "LLM 说“记住了”，不一定真的写进去了。选能随时打开查看记了什么的，最好写入后有回执，或者先给您看候选再入库。",
-  window_loss: "记忆要存在对话窗口以外，新窗口开始时自动读回来；几个入口共用一份记忆，换个地方聊也接得上。",
+  entry_hallucination: "AI 说“记住了”，不一定真的存下了。选能随时打开查看记了什么的，最好记下后会告诉您记了什么，或者先给您看要记的内容，确认后才存。",
+  window_loss: "记忆要存在对话窗口之外，开新窗口时自动读回来；几个入口共用一份记忆，换个地方聊也接得上。",
   overwrite: "新信息不该直接盖掉旧的。选改动时保留历史、记得每件事发生时间的，记错了还能改回来。",
-  no_priority: "只按“像不像”找记忆，常提的小事会挤掉少提的大事。选综合重要性、新旧、情绪等多个维度排序的，最好还能压住您不想再提的事。",
-  you_me: "只存摘要时，“谁说的”最容易丢。选保留原话、每条记忆都能追溯来源的。",
+  no_priority: "只按“像不像”找记忆，常提的小事会挤掉少提的大事。选综合重要程度、新旧、情绪等几个方面来排序的，最好还能压住您不想再提的事。",
+  you_me: "只存摘要时，“谁说的”最容易丢。选保留原话、每条记忆都能查到出处的。",
   stereotype: "只记一句结论，会丢掉事情的前因后果。选保留原话、有时间线的，最好还能区分确定和不确定的认识。",
-  verbatim_repeat: "原话可以留档，平时想起的应该是整理过的摘要，LLM 就不会一字一句念回来。",
-  fabrication: "LLM 自己反思得出的结论，要能追溯到原话；追溯不到的反思，反而容易编出没发生过的事。",
-  messy: "要有整理这一步：空闲时自动合并重复、清理过时的记忆，召回的内容才不会越堆越多、越来越慢。",
+  verbatim_repeat: "原话可以留档，平时想起的应该是整理过的摘要，AI 就不会一字一句念回来。",
+  fabrication: "AI 自己总结出的结论，要能查到依据的原话；查不到依据的总结，反而容易编出没发生过的事。",
+  messy: "要有整理这一步：空闲时自动合并重复、清理过时的记忆，想起的内容才不会越堆越多、越来越慢。",
 };
 
 export function adviceItems(answers, questionnaire, results, byId) {

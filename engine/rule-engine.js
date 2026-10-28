@@ -352,7 +352,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     if (diff) cautions.push(`上手门槛：${labels["difficulty:" + diff] || diff}`);
     const accounts = fieldValues(p, "accounts_needed").filter((v) => v !== "none");
     const localOk = fieldValues(p, "local_model").includes("yes");
-    if (accounts.length) cautions.push(`需要：${accounts.map((v) => (labels[v] || v) + (v === "model_api_key" && localOk ? "，也可以用本地模型代替" : "")).join("、")}`);
+    if (accounts.length) cautions.push(`需要：${accounts.map((v) => (labels[v] || v) + (v === "model_api_key" && localOk ? "，也可以改用装在自己电脑上的模型" : "")).join("、")}`);
     return {
       id: p.id, name: p.name, category: p.candidate.category, repo_url: p.repo_url,
       summary: p.info?.summary?.value || "",

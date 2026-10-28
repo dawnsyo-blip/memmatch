@@ -752,9 +752,9 @@ def n_dimensions(c, out, fixed=()):
 
 
 SPEND_PHRASE = {
-    "model_api": "要自备模型或向量化接口，按调用量付费",
+    "model_api": "要另外开通大模型服务，按用量付费",
     "subscription": "要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付",
-    "hosting": "要另付服务器、云平台或租 GPU 的钱",
+    "hosting": "要另付服务器、云平台或租用显卡的钱",
     "product_fee": "项目本身收费，不买用不了",
 }
 
@@ -781,7 +781,7 @@ def n_spend(doc_id, out, review):
     if needs:
         text = "需要一些额外花销来搭配这个项目：" + "；".join(needs)
         if "model_api" in vals and out["local_model"]["value"] == "yes":
-            text += "；也可改用本地模型，不花钱，但对电脑配置有要求"
+            text += "；也可以改用装在自己电脑上的模型，不花钱，但对电脑配置有要求"
         parts.append(text)
     detail = rev["detail"] if rev else ""
     optional = rev.get("optional", "") if rev else ""
