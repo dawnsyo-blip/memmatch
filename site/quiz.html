@@ -165,8 +165,9 @@
   .foot .textlink[hidden] { display: none; }
   /* 下一题：只剩一颗土星（负责人 2026-10-28 去掉了前后的轨迹线，两道环都是实线），靠土星自己的动作提示“往下一题去”：
      没答本题时变淡、静止，离右边留白线还差 8px；答完后变亮，同时微微向右滑到外环贴住留白线；
-     星球本身慢慢一胀一缩，像在呼吸；整颗土星的自转轴绕着一个小圆圈慢慢晃（进动）：环的倾角左右摆、
-     环面一会儿张开一会儿收窄，看起来是斜着在转（由 quiz.js 逐帧画）；
+     整颗土星的自转轴绕着一个小圆圈慢慢晃（进动）：环的倾角左右摆、环面一会儿张开一会儿收窄，看起来是斜着在转；
+     星球是横宽竖窄的扁球（和真的土星一样扁约 10%），跟着环一起倾斜，环面张开时也稍微变圆（由 quiz.js 逐帧画）。
+     原来的“呼吸”（星球一胀一缩）和晃动配不上，负责人 2026-10-28 定去掉；
      点下去时土星和题目卡片一起淡出，换题后再一起淡入。点按区 56×44，右边缘对齐 gutter */
   .next { position: relative; width: 56px; height: 44px; color: var(--ink); transition: opacity .5s var(--ease-out); }
   .next:disabled { opacity: .3; cursor: default; }
@@ -174,15 +175,11 @@
   .next .probe { stroke: var(--bulb); }
   .next .nudge { transition: transform .6s var(--ease-out), opacity .3s; }
   .next:not(:disabled) .nudge { transform: translateX(8px); }  /* 外环右端从 48 挪到 56，贴住留白线 */
-  .next .planet { transform-box: fill-box; transform-origin: center; }
-  .next:not(:disabled) .planet { animation: breathe 3.6s ease-in-out infinite; }
-  @keyframes breathe { 50% { transform: scale(1.1); } }
   /* 换题：和题目卡片一起淡出；看不见的时候回到答题前的位置，不让人看到它往回滑 */
   .next.fade { opacity: 0; transition: opacity .26s; }
   .next.fade .nudge { transition: none; }
   @media (prefers-reduced-motion: reduce) {
     .next, .next .nudge { transition: none; }
-    .next:not(:disabled) .planet { animation: none; }
   }
 
   .toast {
@@ -274,7 +271,7 @@
         <g class="nudge">
           <g class="probe" id="probe" transform="translate(32 22) rotate(-13.2)">
             <path id="ringBack" d="M-13 0 A13 3.5 0 0 1 13 0 M-16 0 A16 4.3 0 0 1 16 0"/>
-            <circle class="planet" r="6.8" style="fill: var(--paper)"/>
+            <ellipse class="planet" id="planet" rx="7.1" ry="6.4" style="fill: var(--paper)"/>
             <path id="ringFront" d="M-13 0 A13 3.5 0 0 0 13 0 M-16 0 A16 4.3 0 0 0 16 0"/>
           </g>
         </g>

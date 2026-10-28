@@ -476,6 +476,7 @@ $("next").addEventListener("click", () => {
 
 /* 小土星斜着自转：自转轴绕着一个小圆圈慢慢晃（像陀螺进动），每 6 秒一圈。
    画面上就是两件事错开四分之一圈同时发生：环的倾角在 -13.2° 左右各摆 6°，环面的张开程度在 0.7～1.3 倍之间变。
+   星球是扁球，横半径 7.1、竖半径 6.4，和环在同一个组里一起倾斜；环面张开（视线更靠近极地）时竖半径跟着变大一点。
    没答本题时停住不动；系统设了减少动态效果时只画一帧 */
 const TILT = -13.2, TILT_SWING = 6, OPEN_SWING = .3, WOBBLE_PERIOD = 6000;
 let wobble = 0, wobbleLast = 0;
@@ -488,6 +489,7 @@ function drawSaturn(now) {
   $("probe").setAttribute("transform", `translate(32 22) rotate(${(TILT + TILT_SWING * Math.sin(wobble)).toFixed(2)})`);
   $("ringBack").setAttribute("d", ringPath(k, 1));
   $("ringFront").setAttribute("d", ringPath(k, 0));
+  $("planet").setAttribute("ry", (6.4 + (k - 1) * 1.2).toFixed(2));
   if (!reduce) requestAnimationFrame(drawSaturn);
 }
 requestAnimationFrame(drawSaturn);
