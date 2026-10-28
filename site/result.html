@@ -213,6 +213,7 @@
   const pad = (n) => String(n).padStart(2, "0");
   const nm = (n) => { const [a, b] = splitName(n); return esc(a) + (b ? `<span class="nm-note">${esc(b)}</span>` : ""); };
   const nmPlain = (n) => { const [a, b] = splitName(n); return b ? `${a} · ${b}` : a; };
+  const sentence = (s) => { s = String(s ?? "").trim(); return !s || /[。！？]$/.test(s) ? s : s + "。"; };
   const CAT = { "需写代码（开发者向）": "开发者向，需要写代码", "边缘项（存的不是对话记忆）": "边缘项，存的不是对话记忆", "做法（笔记软件当记忆）": "做法：用笔记软件当记忆" };
   const catText = (c) => CAT[c] || String(c ?? "").replace(/（(.+)）$/, "，$1");
   const ARROW = `<svg viewBox="0 0 12 12" aria-hidden="true"><polyline points="3.5,1.5 8,6 3.5,10.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
@@ -256,7 +257,7 @@
     if (safety) warn.push(safety);
     const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
     let h = "";
-    if (x.summary) h += `<p class="summary">${esc(x.summary)}</p>`;
+    if (x.summary) h += `<p class="summary">${esc(sentence(x.summary))}</p>`;
     const lines = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];   // “相比其它几个”接在推荐理由后面，同样的样式
     if (lines.length) h += `<ul class="reasons">${lines.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
     h += `<dl class="facts">`;
@@ -270,7 +271,7 @@
     return h;
   }
   const head = (x, i, folded) => `<div class="pick-head"><span class="rank">${pad(i + 1)}</span><div class="pick-title"><h3>${nm(x.name)}</h3>` +
-    (folded ? `<span class="brief">${esc(x.summary)}</span>` : `<span class="cat caption-zh">${esc(catText(x.category))}</span>`) + `</div>${folded ? `<span class="chev">${ARROW}</span>` : ""}</div>`;
+    (folded ? `<span class="brief">${esc(sentence(x.summary))}</span>` : `<span class="cat caption-zh">${esc(catText(x.category))}</span>`) + `</div>${folded ? `<span class="chev">${ARROW}</span>` : ""}</div>`;
 
   /* ---------- 概况 ---------- */
   const alone = r.narrowed_by.filter((x) => x.only > 0);
@@ -309,7 +310,7 @@
   /* ---------- 其余也符合条件的 ---------- */
   if (r.more?.length) {
     html += `<section class="block tight first"><details class="fold"><summary><span class="label">其余 ${r.more.length} 个也符合条件</span><span class="chev">${ARROW}</span></summary><ul class="rest">` +
-      r.more.map((x) => `<li><a href="${esc(x.repo_url)}" target="_blank" rel="noopener">${nm(x.name)}</a><span class="s">${esc(x.summary)}</span></li>`).join("") +
+      r.more.map((x) => `<li><a href="${esc(x.repo_url)}" target="_blank" rel="noopener">${nm(x.name)}</a><span class="s">${esc(sentence(x.summary))}</span></li>`).join("") +
       `</ul></details></section>`;
   }
 
@@ -344,11 +345,11 @@
     }
     for (const ad of addons) {
       html += `<div class="addon"><h4 class="addon-t">${esc(ad.title)}</h4>${ad.why ? `<p>${esc(ad.why)}</p>` : ""}<ul class="rest">` +
-        ad.items.map((x) => `<li><a href="${esc(x.repo_url)}" target="_blank" rel="noopener">${nm(x.name)}</a><span class="s">${esc(x.summary)}</span></li>`).join("") + `</ul></div>`;
+        ad.items.map((x) => `<li><a href="${esc(x.repo_url)}" target="_blank" rel="noopener">${nm(x.name)}</a><span class="s">${esc(sentence(x.summary))}</span></li>`).join("") + `</ul></div>`;
     }
     if (r.guides.length) {
       html += `<div class="addon"><h4 class="addon-t">相关的做法和教程</h4><p>没有代码，照着做或参考它的设计。</p><ul class="rest">` +
-        r.guides.map((x) => `<li><a href="${esc(x.repo_url)}" target="_blank" rel="noopener">${nm(x.name)}</a><span class="s">${esc(x.summary)}</span></li>`).join("") + `</ul></div>`;
+        r.guides.map((x) => `<li><a href="${esc(x.repo_url)}" target="_blank" rel="noopener">${nm(x.name)}</a><span class="s">${esc(sentence(x.summary))}</span></li>`).join("") + `</ul></div>`;
     }
     html += `</section>`;
   }
@@ -382,7 +383,7 @@
     const d = new Date(), day = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
     const out = ["记忆库推荐 · 完整答卷", `下载于 ${day}；项目信息核实于 2026 年 10 月`, "", "【您的回答】", ...plain, "", "【推荐结果】"];
     if (r.results.length) {
-      r.results.forEach((x, i) => out.push(`${i + 1}. ${nmPlain(x.name)}`, `　　${x.summary}`, ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []), `　　${x.repo_url}`));
+      r.results.forEach((x, i) => out.push(`${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`, ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []), `　　${x.repo_url}`));
       if (r.more?.length) out.push("", `其余 ${r.more.length} 个也符合条件：`, ...r.more.map((x) => `· ${nmPlain(x.name)}　${x.repo_url}`));
     } else {
       out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
