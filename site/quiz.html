@@ -150,6 +150,9 @@
     padding: 0 2px; border-radius: 0;
   }
   .opt .free::placeholder { color: var(--ink-faint); }
+  /* 有说明小字的填空：选中后说明换成填空（同一位置、同样的小字），说明变成提示文字 */
+  .opt .free.under { width: 16em; max-width: 100%; margin: 2px 0 0; padding: 0; font-size: var(--fs-small); line-height: 20px; }
+  .opt.free-under[aria-checked="true"] .ohelp { display: none; }
   .opt .free:focus { outline: none; border-bottom-color: var(--focus); }
 
   /* ---------- 底部 ---------- */

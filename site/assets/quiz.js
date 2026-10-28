@@ -367,6 +367,7 @@ function render() {
     b.setAttribute("role", q.type === "single" ? "radio" : "checkbox");
     b.innerHTML = `<span class="mark" aria-hidden="true">–</span><span class="text"><span class="line"><span class="label"></span></span></span>`;
     b.querySelector(".label").textContent = o.label;
+    let under = null;
     if (o.free) {
       const key = `${q.id}.${o.id}`;
       const inp = document.createElement("input");
@@ -379,16 +380,24 @@ function render() {
         state.free[key] = inp.value; save();
         if (inp.value && !sel(q.id).includes(o.id)) choose(k, "input");
       });
-      const colon = document.createElement("span");
-      colon.className = "colon"; colon.textContent = "：";
-      b.querySelector(".label").appendChild(colon);
-      b.querySelector(".line").appendChild(inp);
+      if (o.help) {
+        // 有说明小字的（如“请填写您所用过的记忆项目”）：选中后填空出现在说明的位置，说明变成填空的提示文字
+        inp.classList.add("under"); inp.placeholder = o.help;
+        b.classList.add("free-under");
+        under = inp;
+      } else {
+        const colon = document.createElement("span");
+        colon.className = "colon"; colon.textContent = "：";
+        b.querySelector(".label").appendChild(colon);
+        b.querySelector(".line").appendChild(inp);
+      }
     }
     if (o.help) {
       const h = document.createElement("span");
       h.className = "ohelp"; h.textContent = o.help;
       b.querySelector(".text").appendChild(h);
     }
+    if (under) b.querySelector(".text").appendChild(under);
     b.addEventListener("click", () => choose(k, "click"));
     b.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); choose(k, "click"); } });
     li.appendChild(b);
