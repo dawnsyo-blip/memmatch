@@ -97,9 +97,9 @@
   .combos li { padding: var(--s-2) 0; border-bottom: var(--line) solid var(--rule); }
   .combos li:last-child { border-bottom: 0; }
   .combos .t { color: var(--ink-faint); }
-  .combos .names { margin: 0; font-family: var(--font-body); }
-  .combos .plus { color: var(--bulb); padding: 0 var(--s-1); }
-  .combos .role { color: var(--ink-faint); font-size: var(--fs-small); }
+  .combos .names { margin: 0; font-family: var(--font-body); font-weight: 600; }
+  .combos .plus { color: var(--bulb); padding: 0 var(--s-1); font-weight: 400; }
+  .combos .d { margin: var(--s-1) 0 0; color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
 
   /* ---------- 折叠区（其余项目、为什么是这些、被排除的、答卷） ---------- */
   /* 其余项目、为什么是这些：两块挨着放，用细线隔开，不各自空一大段 */
@@ -244,6 +244,21 @@
   const advice = adviceItems(answers, cfg, r.results, byId);
   const val = (id, f) => byId[id]?.normalized?.[f]?.value;
 
+  /* ---------- 搭配方案的说明句 ---------- */
+  const STAGE = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
+  const gist = (id) => String(byId[id]?.info?.summary?.value || "").split(/[：；，。]/)[0];
+  function comboText(c) {
+    const [a, b] = c.parts, A = splitName(a.name)[0], B = splitName(b.name)[0];
+    if (c.kind === 2) {
+      const add = b.stages.filter((s) => !a.stages.includes(s)).map((s) => STAGE[s]).join("、");
+      return `${A} 负责${a.stages.map((s) => STAGE[s]).join("、")}，${B} 补上${add}，合起来覆盖全流程。`;
+    }
+    const head = `${A} 一个项目就覆盖写入、整理、召回、遗忘、查看修改全流程；`;
+    if (c.via === "pairs") return head + `${B} 和它设计上就是搭配使用的${gist(b.id) ? "，" + gist(b.id) : ""}。`;
+    if (c.via === "concern") return head + `${B} 针对您在第 8 题选的“${c.label}”。`;
+    return head + `${B} 是可以加装的${c.label}。`;
+  }
+
   /* ---------- 一张卡片 ---------- */
   // 门槛、花销、需要、注意不用句号：句号处换行，换行前用“；”，最后一句不加标点
   function factLines(texts) {
@@ -306,10 +321,10 @@
   /* ---------- 搭配方案 ---------- */
   if (r.combos.length) {
     html += `<section class="block" aria-labelledby="combosT"><header><p class="caption">Combinations</p><h2 id="combosT">搭配方案</h2></header><ul class="combos">`;
-    for (const c of r.combos) {
-      html += `<li><span class="t caption-zh">${esc(c.title)}</span><p class="names">` +
-        c.parts.map((p) => nm(p.name) + (p.desc ? ` <span class="role">${esc(catText(p.desc))}</span>` : "")).join(`<span class="plus">＋</span>`) + `</p></li>`;
-    }
+    r.combos.forEach((c, i) => {
+      html += `<li><span class="t caption-zh">方案${"一二三"[i]}　${esc(c.title)}</span><p class="names">` +
+        c.parts.map((p) => nm(p.name)).join(`<span class="plus">＋</span>`) + `</p><p class="d">${esc(comboText(c))}</p></li>`;
+    });
     html += `</ul></section>`;
   }
 

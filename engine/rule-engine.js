@@ -384,9 +384,9 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     // 方案一：完整系统搭配一个补充项目
     const complete = main.slice(0, 10).find((r) => r.lifecycle_complete);
     if (complete) {
-      let companion = null, companionDesc = "";
+      let companion = null, companionDesc = "", via = "", label = "";
       for (const pid of complete.pairs_with) {
-        if (byMemId[pid]) { companion = byMemId[pid]; companionDesc = projById[pid]?.candidate?.category || "搭配使用"; break; }
+        if (byMemId[pid]) { companion = byMemId[pid]; companionDesc = "设计上搭配使用"; via = "pairs"; break; }
       }
       if (!companion) {
         const concerns = [].concat(answers.q8 || [], answers.q8n || []).filter((v) => v !== "other" && v !== "no_problem");
@@ -396,18 +396,18 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
           if (opt) {
             const rules = (opt.effect?.score || []).filter((s) => s.points >= 1);
             companion = memories.slice(0, 15).find((r) => r.id !== complete.id && rules.some((s) => projectMatches(projById[r.id], s.if)));
-            if (companion) companionDesc = "针对" + opt.label;
+            if (companion) { companionDesc = "针对" + opt.label; via = "concern"; label = opt.label; }
           }
         }
       }
       if (!companion) {
         const extras = Object.values(addons).flatMap((a) => a.items);
         const ext = extras.find((x) => x.id !== complete.id);
-        if (ext) { companion = byMemId[ext.id] || ext; companionDesc = ext.addon_title || "补充工具"; }
+        if (ext) { companion = byMemId[ext.id] || ext; companionDesc = ext.addon_title || "补充工具"; via = "addon"; label = companionDesc; }
       }
       if (companion) {
-        combos.push({ title: "完整系统＋专项补强", parts: [
-          { id: complete.id, name: complete.name, desc: "覆盖全流程" },
+        combos.push({ kind: 1, title: "完整系统＋专项补强", via, label, parts: [
+          { id: complete.id, name: complete.name, desc: "覆盖全流程", stages: ALL_STAGES },
           { id: companion.id, name: companion.name, desc: companionDesc },
         ] });
       }
@@ -435,9 +435,9 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       }
     }
     if (found) {
-      combos.push({ title: found.length + " 个项目组合出完整流程", parts: found.map((r) => {
-        const s = stagesOf(r.id);
-        return { id: r.id, name: r.name, desc: "负责" + s.map((v) => stageLabel[v] || v).join("、") };
+      combos.push({ kind: 2, title: "几个项目组合出完整流程", parts: found.map((r) => {
+        const s = ALL_STAGES.filter((v) => stagesOf(r.id).includes(v));
+        return { id: r.id, name: r.name, desc: "负责" + s.map((v) => stageLabel[v]).join("、"), stages: s };
       }) });
     }
 

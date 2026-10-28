@@ -22,7 +22,7 @@ export function formatResult(r, { showExcluded = 0 } = {}) {
   if (r.guides.length) lines.push("", "**相关教程**：" + r.guides.map((g) => g.name).join("、"));
   if (r.combos.length) {
     lines.push("", "**组合方案**：");
-    for (const c of r.combos) lines.push(`- ${c.title}：` + c.parts.map((p) => `${p.name}（${p.role}）`).join(" ＋ "));
+    for (const c of r.combos) lines.push(`- ${c.title}：` + c.parts.map((p) => `${p.name}：${p.desc}`).join(" ＋ "));
   }
   if (r.relax.length) {
     lines.push("", "**放宽条件可以多些选择**：");
