@@ -321,7 +321,7 @@
         {"id": "overwrite", "label": "错误覆写", "help": "记了新信息，旧的就被整个覆盖了", "effect": {"score": [
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "新事实取代旧事实时保留历史，能纠错"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "记得每件事是什么时候的"}]}},
-        {"id": "no_priority", "label": "轻重不分", "help": "忘记提及频率低但对我很重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
+        {"id": "no_priority", "label": "轻重不分", "help": "忘记不常提起但重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
           {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要性、新旧等多个维度决定先想起什么"},
           {"if": {"ranking_signals": ["importance"]}, "points": 1, "reason": "会给记忆打重要性分"},
           {"if": {"emotion_handling": ["weighting"]}, "points": 1, "reason": "情绪重的记忆记得更牢"},

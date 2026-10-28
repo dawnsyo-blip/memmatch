@@ -164,18 +164,17 @@
   .foot .textlink { color: var(--ink-soft); }
   .foot .textlink[hidden] { display: none; }
   /* 下一题：只剩一颗土星（负责人 2026-10-28 去掉了前后的轨迹线），靠土星自己的动作提示“往下一题去”：
-     没答本题时变淡、静止；答完后先向右轻跳一下，之后每隔一会儿再跳一下（快出慢回，像被推着往前）；
+     没答本题时变淡、静止；答完后先用 1.5 秒缓慢转一圈，停 3 秒再转一圈（负责人 2026-10-28 从“向右轻跳”改为旋转）；
      指上去时往右靠一点停住；点下去时土星向右飞出，题目卡片同时淡出。点按区 56×44，右边缘对齐 gutter */
   .next { position: relative; width: 56px; height: 44px; color: var(--ink); }
   .next:disabled { opacity: .3; cursor: default; }
   .next svg { position: absolute; inset: 0; width: 56px; height: 44px; overflow: visible; }
   .next .probe { stroke: var(--bulb); }
-  .next .nudge { transition: transform .3s var(--ease-out), opacity .3s; }
-  .next:not(:disabled) .nudge { animation: nudge 2.8s var(--ease-out) infinite; }
-  @keyframes nudge {
-    0% { transform: translateX(0); }
-    10% { transform: translateX(7px); }
-    32%, 100% { transform: translateX(0); }
+  .next .nudge { transform-box: view-box; transform-origin: 32px 22px; transition: transform .3s var(--ease-out), opacity .3s; }
+  .next:not(:disabled) .nudge { animation: spin 4.5s ease-in-out infinite; }  /* 1.5 秒转一圈，停 3 秒 */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    33%, 100% { transform: rotate(360deg); }
   }
   .next:not(:disabled):hover .nudge, .next:not(:disabled):focus-visible .nudge { animation: none; transform: translateX(5px); }
   .next.launch .nudge { animation: none; transform: translateX(90px); opacity: 0; transition: transform .26s cubic-bezier(.5, 0, .9, .4), opacity .26s; }
