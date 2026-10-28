@@ -113,7 +113,7 @@
   .opt .text { display: flex; flex-direction: column; align-items: flex-start; }
   .opt .line { display: flex; align-items: baseline; }
   /* 选项下方的小字说明（如费用参考） */
-  .opt .ohelp { margin-top: 2px; font-size: var(--fs-small); line-height: 20px; color: var(--ink-faint); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
+  .opt .ohelp { margin-top: 2px; font-size: var(--fs-small); line-height: 20px; color: var(--ink-faint); }
   /* 按前面的回答预先选好的提示 */
   .defnote { margin: var(--s-2) 0 0; color: var(--ink-faint); }
   .defnote[hidden] { display: none; }
@@ -134,7 +134,8 @@
   .reset { align-self: flex-start; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 3px; min-height: 32px; }
   .loading { padding: var(--s-6) var(--gutter); color: var(--ink-faint); }
   /* 文字底下垫一小块纸色，环线从文字后面穿过 */
-  .opt .label { font-family: var(--font-body); background: var(--paper); box-shadow: 0 0 0 3px var(--paper); }
+  /* 文字下面不垫底色：行星环保持完整，从文字后面穿过（负责人 2026-10-28 定） */
+  .opt .label { font-family: var(--font-body); }
   .opt[aria-checked="true"]::before { border-color: var(--ink); }
   .opt[aria-checked="true"] .mark { color: var(--ink); }
   /* 带填空的选项：没选时只显示“其它”，选中后才出现“：”和填空；填空和选项文字同一字号 */

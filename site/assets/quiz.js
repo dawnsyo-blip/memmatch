@@ -164,7 +164,7 @@ function layoutOrbit() {
   const tg = el("g", {}, svg);
   for (let k = 0; k < 64; k++) geo.ticks.push({ ln: el("line", { class: "tick" }, tg), off: k * 2 * Math.PI / 64, len: k % 4 === 0 ? 8 : 4 });
 
-  el("g", { id: "parked" }, top2);
+  el("g", { id: "parked" }, svg);  // 已选选项的小卫星画在文字下面一层，不挡字
   const moon = el("g", { class: "moon", id: "moon", tabindex: 0, role: "slider", "aria-label": "卫星：拖动来选择选项" }, top2);
   geo.moonHit = el("circle", { class: "hit", r: 24 }, moon);
   geo.moonBody = el("circle", { class: "body", r: 9 }, moon);
