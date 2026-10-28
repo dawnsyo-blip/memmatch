@@ -245,6 +245,12 @@
   const val = (id, f) => byId[id]?.normalized?.[f]?.value;
 
   /* ---------- 一张卡片 ---------- */
+  // 门槛、花销、需要、注意不用句号：句号处换行，换行前用“；”，最后一句不加标点
+  function factLines(texts) {
+    const segs = [].concat(texts).flatMap((t) => String(t ?? "").split("。"))
+      .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
+    return `<ul>${segs.map((s, i) => `<li>${esc(s)}${i < segs.length - 1 ? "；" : ""}</li>`).join("")}</ul>`;
+  }
   function cardBody(x) {
     const diff = [], need = [], warn = [];
     for (const c of x.cautions) {
@@ -259,12 +265,12 @@
     let h = "";
     if (x.summary) h += `<p class="summary">${esc(sentence(x.summary))}</p>`;
     const lines = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];   // “相比其它几个”接在推荐理由后面，同样的样式
-    if (lines.length) h += `<ul class="reasons">${lines.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>`;
+    if (lines.length) h += `<ul class="reasons">${lines.map((t) => `<li>${esc(String(t).replace(/。$/, ""))}</li>`).join("")}</ul>`;
     h += `<dl class="facts">`;
-    if (diff.length) h += `<dt>门槛</dt><dd>${esc(diff[0])}</dd>`;
-    if (spend) h += `<dt>花销</dt><dd>${esc(spend.replace(/。$/, ""))}</dd>`;
-    if (need.length) h += `<dt>需要</dt><dd>${esc(need.join("；"))}</dd>`;
-    if (warn.length) h += `<dt>注意</dt><dd><ul>${warn.map((t, i) => `<li>${esc(String(t).trim().replace(/[。；，]$/, "") + (i < warn.length - 1 ? "；" : "。"))}</li>`).join("")}</ul></dd>`;
+    if (diff.length) h += `<dt>门槛</dt><dd>${factLines(diff[0])}</dd>`;
+    if (spend) h += `<dt>花销</dt><dd>${factLines(spend)}</dd>`;
+    if (need.length) h += `<dt>需要</dt><dd>${factLines(need)}</dd>`;
+    if (warn.length) h += `<dt>注意</dt><dd>${factLines(warn)}</dd>`;
     h += `</dl>`;
     if (x.parts?.length) h += `<p class="parts"><span class="k">可以搭配的连接工具：</span>${x.parts.map((p) => nm(p.name)).join("、")}</p>`;
     if (x.repo_url) h += `<a class="go caption-zh" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span>${x.role === "method" ? "查看做法说明" : "查看项目"}</span>${OUT}</a>`;
