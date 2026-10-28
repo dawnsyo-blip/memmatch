@@ -6,6 +6,7 @@
 // recommend 返回：
 //   results     排好序的推荐 [{ id, name, score, reasons[], cautions[], unknowns[], … }]
 //               做法条目（role 为 method，笔记软件当记忆）一起排名，另带 parts[]：可选的笔记软件连接器
+//   more        前 top_n 名以外、也通过筛选的项目（结构同 results）
 //   addons      补充部件（上下文延续工具、情绪引擎等）{ id: { title, why, items[] } }
 //   guides      相关教程
 //   combos      组合方案 [{ title, parts: [{ role, id, name }] }]
@@ -18,4 +19,4 @@
 //
 // 现在只有规则引擎；以后接入外部模型时，新写一个返回同样结构的实现即可，前端和测试不用改。
 
-export { createRuleEngine, checkCondition, findConflicts } from "./rule-engine.js";
+export { createRuleEngine, checkCondition, findConflicts, projectMatches } from "./rule-engine.js";

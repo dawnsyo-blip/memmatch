@@ -1,0 +1,4 @@
+{
+  "_说明": "网站上显示的项目名（打包 site/data/projects.json 时替换 name；原始数据里的名字不改）。2026-10-28 负责人要求 Machine Studio 只用英文名",
+  "machine-studio": "Machine Studio"
+}

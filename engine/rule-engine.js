@@ -64,7 +64,7 @@ function checkCond(cond, answers) {
 }
 
 // 前端判断跳题（show_if）、默认勾选（default_if）也用这一个函数，保证和引擎同一套规则
-export { checkCond as checkCondition };
+export { checkCond as checkCondition, projectMatches };
 
 // 前后矛盾：选了某项（如预算 0 元）让别的题已选的选项（如“新买 VPS”）不算数。答题页和结果页都用。
 // 返回 [{ question, option, by_question, by_option, partial, emptied, message }]
@@ -447,6 +447,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     return {
       engine: "rule",
       results: results.slice(0, topN),
+      more: results.slice(topN),
       total_kept: results.length,
       addons,
       guides,
