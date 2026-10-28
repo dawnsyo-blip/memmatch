@@ -71,7 +71,7 @@ font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 
 ## 6. 换行与对齐
 
-- 正文**左对齐**，不要两端对齐（中西文混排时两端对齐会拉出难看的空隙）。
+- **长段正文两端对齐**，标题、列表项、短标签左对齐（负责人 2026-10-28 定，覆盖原先“正文一律左对齐”的建议）。只有一两行的说明不算长段，照样左对齐。
 - `word-break: normal; overflow-wrap: anywhere;` 防止长网址撑破手机布局。
 - 标点不出现在行首：设 `line-break: strict;`。
 - 数字表格用 `font-variant-numeric: tabular-nums;`，数字列右对齐。
@@ -89,6 +89,6 @@ font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
 - [ ] 正文 16px、行高 1.5 以上，行宽不超过约 42 个汉字
 - [ ] 标题与下文的距离小于与上文的距离
 - [ ] 中英文、中文与数字之间有空格；中文用全角标点
-- [ ] 没有斜体中文、没有两端对齐的混排段落
+- [ ] 没有斜体中文；长段正文两端对齐，标题和列表项左对齐
 - [ ] 称呼用户统一是“您”；没有 emoji
 - [ ] 375px 宽度下没有横向滚动，长网址能断行

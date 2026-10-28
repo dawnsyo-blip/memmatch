@@ -89,7 +89,11 @@
   details.pick > summary h3 { font-size: var(--fs-h4); line-height: var(--lh-h4); }
   details.pick > summary .brief { display: block; margin-top: 0; color: var(--ink-faint); font-size: var(--fs-small); line-height: var(--lh-small); }
   details.pick[open] > summary .brief { display: none; }
-  .chev { flex: none; width: 12px; height: 12px; margin-left: auto; align-self: center; color: var(--ink-faint); transition: transform .3s var(--ease-out); }
+  /* 箭头本身是块，图标不落在文字基线上，否则会比文字中线低半行 */
+  .chev { flex: none; display: flex; width: 12px; height: 12px; margin-left: auto; align-self: center; color: var(--ink-faint); transition: transform .3s var(--ease-out); }
+  .chev svg { display: block; width: 12px; height: 12px; }
+  /* 折叠卡片的箭头对齐名字那一行，不对齐名字加简介两行的中间 */
+  .pick-head .chev { align-self: flex-start; margin-top: calc((var(--lh-h4) - 12px) / 2); }
   details[open] > summary .chev { transform: rotate(90deg); }
 
   /* ---------- 搭配方案 ---------- */
@@ -147,6 +151,12 @@
   /* ---------- 页脚 ---------- */
   .foot { margin-top: var(--s-6); padding-top: var(--s-3); border-top: var(--line) solid var(--rule); }
   .actions { margin-top: 0; display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .foot .actions { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .foot .btn { padding: 0 var(--s-1); white-space: nowrap; }
+
+  /* 长段正文两端对齐，标题和列表项左对齐（负责人 2026-10-28 定） */
+  .summary, details.pick > summary .brief, .rest .s, .combos .d, .advice p:not(.eg), .why p, .addon > p { text-align: justify; }
+  .combos .d .k { color: var(--ink-faint); }
   .btn {
     min-height: var(--tap); padding: 0 var(--s-3);
     display: inline-flex; align-items: center; justify-content: center;
@@ -288,14 +298,46 @@
     return segs.join("，") + cover + "。";
   }
 
+  // 两个方案比一比：列出这个方案胜过另一个的地方；安装门槛和花销变化大，排在最后
+  const DIFF = { low: 0, medium: 1, high: 2 };
+  const ranked = [...r.results, ...(r.more || [])].map((x) => x.id);
+  function comboFacts(c) {
+    const adds = c.parts.filter((p) => p.id && !p.current);
+    const stages = new Set(c.parts.flatMap((p) => p.stages));
+    return {
+      keep: c.type === "current",
+      installs: adds.length,
+      stages: stages.size,
+      paired: c.via === "pairs",
+      diff: Math.max(...adds.map((p) => DIFF[val(p.id, "difficulty")] ?? 1)),
+      free: adds.every((p) => [].concat(val(p.id, "spend") || []).includes("none")),
+      rank: Math.min(...adds.map((p) => { const i = ranked.indexOf(p.id); return i < 0 ? 999 : i; })),
+    };
+  }
+  function comboEdge(c, other) {
+    const x = comboFacts(c), y = comboFacts(other), out = [];
+    if (x.keep && !y.keep) out.push("不用换掉您现在用的记忆，直接在上面补");
+    if (!x.keep && y.keep) out.push("另起一套，不受现在所用记忆的限制");
+    if (x.installs < y.installs) out.push(`只需要装 ${x.installs} 个项目`);
+    if (x.stages === 5 && y.stages < 5) out.push("覆盖写入到查看修改的全流程");
+    else if (x.stages > y.stages) out.push("覆盖的记忆环节更多");
+    if (x.paired && !y.paired) out.push("项目之间设计上就是搭配使用的");
+    if (x.diff < y.diff) out.push("上手门槛更低");
+    if (x.free && !y.free) out.push("不需要额外花钱");
+    if (!out.length && x.installs > y.installs) out.push("分工更细，某个环节不满意时可以单独替换");
+    if (!out.length && x.rank < y.rank) out.push("用到的项目和您的回答更契合");
+    return out;
+  }
+
   /* ---------- 一张卡片 ---------- */
   // 门槛、花销、需要、注意不用句号：句号处换行，换行前用“；”，最后一句不加标点
   function factLines(texts) {
-    const segs = [].concat(texts).flatMap((t) => String(t ?? "").split("。"))
-      .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
+    const segs = segsOf(texts);
     return `<ul>${segs.map((s, i) => `<li>${esc(s)}${i < segs.length - 1 ? "；" : ""}</li>`).join("")}</ul>`;
   }
-  function cardBody(x) {
+  const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split("。"))
+    .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
+  function factsOf(x) {
     const diff = [], need = [], warn = [];
     for (const c of x.cautions) {
       if (c.startsWith("上手门槛：")) diff.push(c.slice(5));
@@ -306,16 +348,14 @@
     const safety = byId[x.id]?.safety_note;
     if (safety) warn.push(safety);
     const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
+    return [["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["需要", need], ["注意", warn]].filter(([, v]) => v.length);
+  }
+  function cardBody(x) {
     let h = "";
     if (x.summary) h += `<p class="summary">${esc(sentence(x.summary))}</p>`;
     const lines = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];   // “相比其它几个”接在推荐理由后面，同样的样式
     if (lines.length) h += `<ul class="reasons">${lines.map((t) => `<li>${esc(String(t).replace(/。$/, ""))}</li>`).join("")}</ul>`;
-    h += `<dl class="facts">`;
-    if (diff.length) h += `<dt>门槛</dt><dd>${factLines(diff[0])}</dd>`;
-    if (spend) h += `<dt>花销</dt><dd>${factLines(spend)}</dd>`;
-    if (need.length) h += `<dt>需要</dt><dd>${factLines(need)}</dd>`;
-    if (warn.length) h += `<dt>注意</dt><dd>${factLines(warn)}</dd>`;
-    h += `</dl>`;
+    h += `<dl class="facts">${factsOf(x).map(([k, v]) => `<dt>${k}</dt><dd>${factLines(v)}</dd>`).join("")}</dl>`;
     if (x.parts?.length) h += `<p class="parts"><span class="k">可以搭配的连接工具：</span>${x.parts.map((p) => nm(p.name)).join("、")}</p>`;
     if (x.repo_url) h += `<a class="go caption-zh" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span>${x.role === "method" ? "查看做法说明" : "查看项目"}</span>${OUT}</a>`;
     return h;
@@ -348,11 +388,14 @@
   }
 
   /* ---------- 搭配方案 ---------- */
-  if (r.combos.length) {
+  const PLAN = ["方案一", "方案二"];
+  const comboEdges = r.combos.map((c, i) => comboEdge(c, r.combos[1 - i]));
+  if (r.combos.length === 2) {
     html += `<section class="block" aria-labelledby="combosT"><header><p class="caption">Combinations</p><h2 id="combosT">搭配方案</h2></header><ul class="combos">`;
     r.combos.forEach((c, i) => {
-      html += `<li><span class="t caption-zh">方案${"一二三"[i]}</span><p class="names">` +
-        comboNames(c) + `</p><p class="d">${esc(comboText(c))}</p></li>`;
+      html += `<li><span class="t caption-zh">${PLAN[i]}</span><p class="names">` +
+        comboNames(c) + `</p><p class="d">${esc(comboText(c))}</p>` +
+        (comboEdges[i].length ? `<p class="d"><span class="k">相比${PLAN[1 - i]}：</span>${esc(comboEdges[i].join("；"))}</p>` : "") + `</li>`;
     });
     html += `</ul></section>`;
   }
@@ -406,7 +449,7 @@
 
   /* ---------- 页脚 ---------- */
   html += `<footer class="foot">` +
-    `<div class="actions"><button type="button" class="btn primary" id="saveBtn">下载完整答卷</button><a class="btn" href="quiz.html">返回修改</a></div>` +
+    `<div class="actions"><button type="button" class="btn" id="saveAnswers">下载答卷</button><button type="button" class="btn primary" id="saveResults">下载推荐结果</button><a class="btn" href="quiz.html">返回修改问卷</a></div>` +
     `<details class="fold answers"><summary><span class="label caption-zh">查看您的答卷</span><span class="chev">${ARROW}</span></summary><dl id="answers"></dl></details></footer>`;
   sheet.innerHTML = html;
 
@@ -428,21 +471,35 @@
   }));
   document.getElementById("answers").innerHTML = ah;
 
-  /* ---------- 下载完整答卷：全部回答＋推荐结果，存成纯文本 ---------- */
-  document.getElementById("saveBtn").addEventListener("click", () => {
-    const d = new Date(), day = `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-    const out = ["记忆库推荐 · 完整答卷", `下载于 ${day}；项目描述基于 README 生成，核实于 2026 年 10 月`, "", "【您的回答】", ...plain, "", "【推荐结果】"];
+  /* ---------- 下载：答卷、推荐结果各存一份纯文本 ---------- */
+  const today = () => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`; };
+  function saveText(lines, file) {
+    const url = URL.createObjectURL(new Blob([lines.join("\r\n") + "\r\n"], { type: "text/plain;charset=utf-8" }));
+    const link = Object.assign(document.createElement("a"), { href: url, download: file });
+    document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  document.getElementById("saveAnswers").addEventListener("click", () => {
+    const day = today();
+    saveText(["记忆库推荐 · 答卷", `下载于 ${day}`, "", ...plain], `记忆库推荐答卷-${day}.txt`);
+  });
+  document.getElementById("saveResults").addEventListener("click", () => {
+    const day = today();
+    const out = ["记忆库推荐 · 推荐结果", `下载于 ${day}；项目描述基于 README 生成，核实于 2026 年 10 月`, ""];
     if (r.results.length) {
-      r.results.forEach((x, i) => out.push(`${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`, ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []), `　　${x.repo_url}`));
-      if (r.more?.length) out.push("", `其余 ${r.more.length} 个也符合条件：`, ...r.more.map((x) => `· ${nmPlain(x.name)}　${x.repo_url}`));
+      out.push(`【为您挑出 ${r.results.length} 个记忆库】`);
+      r.results.forEach((x, i) => out.push("", `${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`,
+        ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []),
+        ...factsOf(x).map(([k, v]) => `　　${k}：${segsOf(v).join("；")}`), `　　${x.repo_url}`));
+      if (r.combos.length === 2) out.push("", "【搭配方案】", ...r.combos.flatMap((c, i) => [
+        `${PLAN[i]}：${c.parts.map((p) => nmPlain(p.name)).join(" ＋ ")}`, `　　${comboText(c)}`,
+        ...(comboEdges[i].length ? [`　　相比${PLAN[1 - i]}：${comboEdges[i].join("；")}`] : [])]));
+      if (r.more?.length) out.push("", `【其余 ${r.more.length} 个也符合条件】`, ...r.more.map((x) => `· ${nmPlain(x.name)}　${x.repo_url}`));
     } else {
       out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
     }
     if (advice.length) out.push("", "【改进建议】", ...advice.flatMap((a, i) => [`${i + 1}. ${a.label}：${a.text}`, ...(a.examples.length ? [`　　推荐里做到的：${a.examples.map(nmPlain).join("、")}`] : [])]));
-    const url = URL.createObjectURL(new Blob([out.join("\r\n") + "\r\n"], { type: "text/plain;charset=utf-8" }));
-    const link = Object.assign(document.createElement("a"), { href: url, download: `记忆库推荐答卷-${day}.txt` });
-    document.body.append(link); link.click(); link.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    saveText(out, `记忆库推荐结果-${day}.txt`);
   });
 </script>
 </body>

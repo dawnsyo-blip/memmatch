@@ -417,7 +417,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     // 第 7 题：用户现在用的是什么。填了项目名的按名字对上收录的项目
     function currentSetup() {
       const used = [].concat(answers.q6 || []);
-      const text = used.includes("other") ? String(free["q6.other"] || "") : "";
+      const text = ["open_source", "other"].filter((o) => used.includes(o)).map((o) => free[`q6.${o}`] || "").join("、");
       if (text) {
         const norm = (s) => String(s).toLowerCase().replace(/[\s\-_·.]/g, "");
         const GENERIC = new Set(["memory", "memories", "context", "recall", "remember"]);
@@ -484,16 +484,16 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       return pick.length >= 2 ? { type: "group", title: "几个项目互相配合", via: "stages", parts: pick.map((x) => part(x)) } : null;
     }
 
-    // 两个方案尽量不重复用同一个推荐项目；实在没有别的选择时，只要不完全相同也可以
+    // 凑不出两个方案就都不给（负责人 2026-10-28）；两个方案尽量不重复用同一个推荐项目，实在没有别的选择时，只要不完全相同也可以
     const key = (c) => c.parts.map((p) => p.id).sort().join(",");
     const cur = currentSetup();
     const curPlan = cur && currentPlan(cur);
     const first = curPlan || completePlan();
     const rest = (curPlan ? [completePlan(), groupPlan()] : [groupPlan()]).filter((c) => c && (!first || key(c) !== key(first)));
-    if (!first) return rest.slice(0, 1);
+    if (!first) return [];
     const used = new Set(first.parts.filter((p) => p.id && !p.current).map((p) => p.id));
     const second = rest.find((c) => !c.parts.some((p) => used.has(p.id))) || rest[0];
-    return second ? [first, second] : [first];
+    return second ? [first, second] : [];
   }
 
   // ---------- 对外接口 ----------

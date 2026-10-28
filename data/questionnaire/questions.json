@@ -255,7 +255,7 @@
       "options": [
         {"id": "native", "label": "官端或其它客户端自带的记忆功能", "help": "比如 ChatGPT 的记忆，或 Kelivo 自带的记忆功能"},
         {"id": "notes", "label": "连接 Obsidian、Notion 等笔记类软件"},
-        {"id": "open_source", "label": "开源的记忆项目", "help": "比如各类记忆 MCP、酒馆的记忆扩展"},
+        {"id": "open_source", "label": "开源的记忆项目", "help": "请填写您所用的项目，比如各类记忆 MCP、酒馆的记忆扩展", "free_text": true},
         {"id": "other", "label": "用过其它类型的记忆项目", "free_text": true, "help": "请填写您所用过的记忆项目"},
         {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "free_text": true, "exclusive": true, "help": "请填写您所知道的记忆项目"},
         {"id": "none", "label": "没用过，也不太了解", "exclusive": true}
