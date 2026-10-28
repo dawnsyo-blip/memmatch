@@ -76,7 +76,7 @@
         {"id": "remote_control", "label": "在手机端远程连接电脑上的 Agent", "help": "如使用 DeepSeek Harness 的远程插件",
          "effect": {"require_selected": {"question": "q3a", "field": "compatible_clients", "extra": ["any_mcp_client"],
                                          "fallback": ["claude_code", "codex", "deepseek_harness"]},
-                    "require": {"runs_on": ["own_computer"]}, "exclude_any": {"category": ["自带记忆的应用"]}}},
+                    "exclude_any": {"category": ["自带记忆的应用"]}}},
         {"id": "programmatic", "label": "把 Agent/LLM 接进聊天软件或自建前端", "help": "如用 Hermes 把 Agent 接进微信或 -p 方式接入前端",
          "effect": {"require_selected": {"question": "q3a", "field": "compatible_clients", "extra": ["any_mcp_client", "openai_compatible"]},
                     "exclude_any": {"category": ["自带记忆的应用"]}}},
@@ -190,7 +190,8 @@
       "id": "q5", "kind": "hard", "type": "multi", "short": "记忆库放在哪",
       "text": "可以接受记忆库放在哪里运行？",
       "help": "大多数记忆库要在一台设备上一直运行，聊天时才能随时取用记忆。",
-      "combine": "union", "union_field": "runs_on", "unless_project": {"category": ["自带记忆的应用"]},
+      "combine": "union", "union_field": "runs_on",
+      "unless_project": [{"category": ["自带记忆的应用"]}, {"project_role": ["method"], "runs_on": ["third_party_hosted"]}],
       "exclude_reason": "运行位置不符合您的选择",
       "options": [
         {"id": "computer", "label": "一台经常开着的电脑", "help": "0 元", "values": {"runs_on": ["own_computer"]},
@@ -203,9 +204,12 @@
       ],
       "rules": [
         {"when": {"question": "q5", "selected_none": ["hosted"]}, "exclude_only": {"data_passes_through": ["third_party"]},
-         "reason": "只能用项目方的托管服务"},
+         "unless_project": {"project_role": ["method"]}, "reason": "只能用项目方的托管服务"},
         {"when": {"question": "q5", "selected_none": ["hosted"]},
-         "note": "按自己部署的方式用（默认是托管）", "note_if": {"runs_on": ["third_party_hosted"]}}
+         "note": "按自己部署的方式用（默认是托管）", "note_if": {"runs_on": ["third_party_hosted"]}, "note_unless": {"project_role": ["method"]}},
+        {"when": {"question": "q5", "selected_none": ["hosted"]},
+         "note": "记忆存在 Notion 的服务器上（Notion 不是记忆库项目方，内容由您自己写、随时能看能改）；介意的话请改用本地笔记库",
+         "note_if": {"project_role": ["method"], "runs_on": ["third_party_hosted"]}}
       ],
       "relax": [
         {"label": "可以用一台经常开着的电脑", "add": ["computer"]},

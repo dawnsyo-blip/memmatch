@@ -215,7 +215,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“嵌入式本地记忆，整理操作要人工审核后才生效；用户事实；MCP；Clau”"
+      "basis": "原表／说明：“事实，新事实取代旧的，旧的仍可按时间点查回；离线“睡眠整理”去重、摘要、降级，需要判断的都排进审核队列等”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -235,7 +235,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“嵌入式本地记忆，整理操作要人工审核后才生效；用户事实；MCP；Claude Code”"
+      "basis": "原表／说明：“嵌入式本地记忆：自动抽取事实，新事实取代旧的，旧的仍可按时间点查回；离线“睡眠整理”去重、”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -394,7 +394,7 @@
     "local_model": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“tion | | `lean-memory[llm]` | Ollama-backed LLM typing pass | | `l”"
+      "basis": "说明：“审核队列等你批准；首次要下载约 2GB 本地模型；用户事实；MCP；Claude Cod”"
     },
     "model_lock": {
       "value": "not_mentioned",

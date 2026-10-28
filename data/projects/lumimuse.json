@@ -214,7 +214,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“扮演／陪伴聊天应用，自带长期记忆：自动提取、AI 整理和归档、向量检索加重排、按 token 预算注入，”"
+      "basis": "原表／说明：“陪伴聊天应用，自带长期记忆：聊天中自动提取，AI 整理和归档，向量检索加重排并按 token 预算注入；”"
     },
     "emotion": {
       "value": "yes",
@@ -283,7 +283,7 @@
         "importance"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“带长期记忆：自动提取、AI 整理和归档、向量检索加重排、按 token 预算注入，记”；keyword：README：“yUI / 自定义 API，版本历史与图片管理，支持自动生图关键词 | | 🔌 | **多供应商** | 多套 API 配置一”；importance：README：“提取，避免测试对话污染记忆库 - AI 整理可批量修正分类、重要度、情绪权重与标签，并自动重建相关索引 - AI 归档可将旧记”"
+      "basis": "semantic：说明：“记忆：聊天中自动提取，AI 整理和归档，向量检索加重排并按 token 预算注入；每”；keyword：README：“yUI / 自定义 API，版本历史与图片管理，支持自动生图关键词 | | 🔌 | **多供应商** | 多套 API 配置一”；importance：README：“提取，避免测试对话污染记忆库 - AI 整理可批量修正分类、重要度、情绪权重与标签，并自动重建相关索引 - AI 归档可将旧记”"
     },
     "scoring_stages": {
       "value": [
@@ -359,7 +359,7 @@
         "budget"
       ],
       "status": "auto",
-      "basis": "rerank：说明：“：自动提取、AI 整理和归档、向量检索加重排、按 token 预算注入，记忆可在管理”；budget：说明：“、AI 整理和归档、向量检索加重排、按 token 预算注入，记忆可在管理页编辑删除并导出；关系”"
+      "basis": "rerank：说明：“中自动提取，AI 整理和归档，向量检索加重排并按 token 预算注入；每个角色独立”；budget：说明：“，AI 整理和归档，向量检索加重排并按 token 预算注入；每个角色独立记忆，记忆可在管理页编”"
     },
     "recall_uses_llm": {
       "value": [

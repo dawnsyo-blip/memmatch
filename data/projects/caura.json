@@ -295,14 +295,15 @@
         "confidence"
       ],
       "status": "auto",
-      "basis": "semantic：README：“d. Add an AI provider key for semantic search — see [Self-Hosted](#self-hos”；keyword：README：“mantic similarity + full-text keyword matching + knowledge graph expansio”；relation：说明：“能体传播结果、信任分级、审计留痕，带知识图谱和 MCP；智能体学到的事实与结果；MC”；confidence：说明：“开源记忆：按范围隔离、跨智能体传播结果、信任分级、审计留痕，带知识图谱和 MCP；智能”"
+      "basis": "semantic：README：“d. Add an AI provider key for semantic search — see [Self-Hosted](#self-hos”；keyword：README：“mantic similarity + full-text keyword matching + knowledge graph expansio”；relation：README：“full-text keyword matching + knowledge graph expansion (up to 2 hops), ran”；confidence：说明：“的开源记忆：范围隔离、跨智能体传播结果、信任分级、审计留痕；Docker 自建（Pos”"
     },
     "scoring_stages": {
       "value": [
+        "write",
         "retrieve"
       ],
       "status": "auto",
-      "basis": "retrieve：排序因素含 relation、confidence（推断召回时综合排序）"
+      "basis": "write：说明：“s），也有 caura.ai 托管；每次写入由大模型归类、打分；部署偏重，适合团队；智能体学到的事实与”；retrieve：排序因素含 relation、confidence（推断召回时综合排序）"
     },
     "multi_factor": {
       "value": "multi",

@@ -406,14 +406,16 @@
       "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
     },
     "spend": {
-      "value": [],
-      "status": "unknown",
-      "basis": "费用原文未识别，且没有逐项核实过：费用原文未识别：自己的电脑；偏编程场景"
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口"
     },
     "spend_note": {
-      "value": "",
-      "status": "unknown",
-      "basis": "未核实"
+      "value": "不需要额外花钱。只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口"
     },
     "pairs_with": {
       "value": [],
@@ -446,11 +448,6 @@
       "field": "export",
       "label": "能否导出",
       "note": "没写导出功能，也看不出数据格式"
-    },
-    {
-      "field": "spend",
-      "label": "要额外花多少钱",
-      "note": "文档写的是“自己的电脑；偏编程场景”，归不进固定选项"
     }
   ],
   "health": {

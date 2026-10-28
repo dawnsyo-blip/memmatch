@@ -153,7 +153,8 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     if (q.combine === "union") {
       // 把所选选项的 values 合起来，项目的这个字段要和它有交集
       const field = q.union_field;
-      if (q.unless_project && projectMatches(project, q.unless_project)) return { ok: true, unknown, notes };
+      // unless_project 可以写一组条件，或几组条件的数组（满足其中一组即可）
+      if (q.unless_project && [].concat(q.unless_project).some((u) => projectMatches(project, u))) return { ok: true, unknown, notes };
       const wanted = opts.flatMap((o) => (o.values || {})[field] || []);
       if (fieldUnknown(project, field)) return { ok: true, unknown: unknown.concat([field]), notes };
       return intersects(fieldValues(project, field), wanted) ? { ok: true, unknown, notes } : { ok: false, unknown, notes };
@@ -355,12 +356,14 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
         const n = count([s]);
         if (n > results.length) relax.push({ question: s.question, label: s.label, count: n });
       }
-      if (!relax.length) {
+      // 单独放宽哪一条都不够（或放宽后仍少于 min_results 个）时，再试两条一起放宽，只列比单条更多的组合
+      const bestSingle = Math.max(results.length, ...relax.map((x) => x.count));
+      if (bestSingle < (questionnaire.result?.min_results || 3)) {
         for (let i = 0; i < steps.length; i++) {
           for (let j = i + 1; j < steps.length; j++) {
             if (steps[i].question === steps[j].question) continue;
             const n = count([steps[i], steps[j]]);
-            if (n > results.length) relax.push({ question: `${steps[i].question}+${steps[j].question}`, label: `${steps[i].label}，同时${steps[j].label}`, count: n });
+            if (n > bestSingle) relax.push({ question: `${steps[i].question}+${steps[j].question}`, label: `${steps[i].label}，同时${steps[j].label}`, count: n });
           }
         }
       }

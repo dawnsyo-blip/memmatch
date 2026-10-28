@@ -263,7 +263,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“ADME 未描述记忆整合或遗忘；演化的是关系阶段与心情；Transformers.js 本地语义检索；按”"
+      "basis": "原表／说明：“形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化的心情、本地语义记忆；网页版打开即用，数据存在浏览器本地”"
     },
     "proactive": {
       "value": "yes",
@@ -298,7 +298,7 @@
     "relationship_stage": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“, comfort, and respect separately - **8 Relationship Stages**: Progress from Stranger → Acquaintan”（已核对）"
+      "basis": "原表／说明：“带 3D VRM 形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化的心情、本地语义记忆；网页版打开即用，数据”"
     },
     "independent_life": {
       "value": "not_mentioned",
@@ -308,7 +308,7 @@
     "visual_presence": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“托管；自带（网页/桌面）；伴侣应用自带记忆；3D VRM 角色＋8 阶段恋爱进阶；早期版本存档可能不兼容，”"
+      "basis": "原表／说明：“带 3D VRM 形象的 AI 伴侣：恋爱模拟式的关系阶段、会变化”"
     },
     "voice_interaction": {
       "value": "yes",
@@ -433,7 +433,7 @@
     "local_model": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“ropic, Google, xAI, DeepSeek, Ollama, LM Studio, and any OpenAI-co”"
+      "basis": "说明：“，要自备模型 API Key（或电脑上的本地模型）；用户事实＋角色成长；网页版、桌面版或”"
     },
     "model_lock": {
       "value": "not_mentioned",

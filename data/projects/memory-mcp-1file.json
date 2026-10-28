@@ -287,7 +287,7 @@
         "confidence"
       ],
       "status": "auto",
-      "basis": "semantic：README：“an embedded ONNX runtime. The embedding model is baked into the binar”；keyword：README：“mode`: `vector` (default) or `bm25`. | ### 🕸️ Knowledge Graph |”；recency：README：“from 5 code choices). ### 2. Temporal Decay & \"Presence\" * **Problem:**”；relation：README：“or semantic similarity. 2. **Knowledge Graph** (PetGraph) for entity relat”；confidence：README：“workspaces. ### 4. Epistemic Confidence Scoring * **Problem:** The agent tr”"
+      "basis": "semantic：说明：“CP：语义＋知识图谱，还会索引项目代码；嵌入模型打包在程序里，不需要 API Key 和”；keyword：README：“mode`: `vector` (default) or `bm25`. | ### 🕸️ Knowledge Graph |”；recency：README：“from 5 code choices). ### 2. Temporal Decay & \"Presence\" * **Problem:**”；relation：说明：“st 程序的本地记忆 MCP：语义＋知识图谱，还会索引项目代码；嵌入模型打包在程序里”；confidence：README：“workspaces. ### 4. Epistemic Confidence Scoring * **Problem:** The agent tr”"
     },
     "scoring_stages": {
       "value": [

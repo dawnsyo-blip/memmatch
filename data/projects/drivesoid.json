@@ -220,9 +220,9 @@
       "basis": "许可证原文：CC BY-NC-SA 4.0（2.1.0 起；2.0.0 及以前为 MIT）（含多份许可，取限制最多的一项）"
     },
     "persona_continuity": {
-      "value": "not_mentioned",
+      "value": "yes",
       "status": "auto",
-      "basis": "README 命中的“tion | |---|---| | `persona.name` | Your AI's n”经核对不算：只是配置 AI 名字"
+      "basis": "原表／说明：“给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒”"
     },
     "window_handoff": {
       "value": "not_mentioned",
@@ -245,9 +245,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "time_awareness": {
-      "value": "not_mentioned",
+      "value": "yes",
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "原表／说明：“理维度（想念、亲密、嫉妒、焦虑……）随对话、睡眠和日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP”"
     },
     "dream_consolidation": {
       "value": "not_mentioned",
@@ -257,7 +257,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“站点仅在关键词中标“记忆”；记的是情感状态而非内容；工作／状态记忆（快情绪、慢心境）；H”"
+      "basis": "原表／说明：“给 AI 人设加一套情绪驱力：16 个心理维度（想念、亲密、嫉妒、焦虑……”"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -364,7 +364,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "designed_to_pair：说明：“／状态记忆（快情绪、慢心境）；HTTP 旁路服务；存的是情绪状态；不存记忆内容，只维”；standard_interface：接入方式 host_plugin"
+      "basis": "designed_to_pair：说明：“日程实时变化，快情绪慢慢回落到心境；作为旁路 HTTP 服务供你的桥接层或 Clau”；standard_interface：接入方式 host_plugin"
     },
     "customization": {
       "value": [

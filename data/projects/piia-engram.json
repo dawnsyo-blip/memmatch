@@ -201,7 +201,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“review, and context that can follow you across tools. **Trust model in four lines:** - **N”（已核对）"
+      "basis": "原表／说明：“是谁、怎么做事、踩过的坑存成本地文件，几个编程工具共用；AI 提议的高风险内容要你审核，还能预览 AI”"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -241,7 +241,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“dium writes are auto-absorbed but fully auditable and reversible. Set `ENGRAM_APPROVA”（已核对）"
+      "basis": "原表／说明：“文件，几个编程工具共用；AI 提议的高风险内容要你审核，还能预览 AI 实际会看到什么；用户偏好与工作方”"
     },
     "import_history": {
       "value": "yes",

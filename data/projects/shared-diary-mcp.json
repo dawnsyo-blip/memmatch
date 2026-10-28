@@ -385,7 +385,7 @@
         "cloud"
       ],
       "status": "auto",
-      "basis": "remote_mcp：说明：“排序，可互相回应、设可见范围，AI 通过远程 MCP 读写，网页和 MCP 共用一份数据；共”；cloud：运行位置含 own_cloud_account"
+      "basis": "remote_mcp：说明：“排序，可互相回应、设可见范围，AI 通过远程 MCP 读写，网页和 MCP 共用一份数据。是”；cloud：运行位置含 own_cloud_account"
     },
     "local_model": {
       "value": "no_model_needed",

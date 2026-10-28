@@ -103,7 +103,8 @@ AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“
 - `project_role` 新增 `method`、`note_connector`；做法和记忆库一起在 results 里排名（实测排在第 46–59 名），带 `parts`：通过筛选的连接器（来自 `RELATED`）；连接器不单独进 results、addons、combos。测试见 `tests/engine.test.js` 末尾
 - `check_health` 对分组 `M` 记 `status=method`、不联网检查；`decide_inclusion` 因此不会按“无法获取代码”排除它们
 - 自动规则对连接器误伤严重（笔记软件的 API token 被当成模型密钥→判成要付模型费；整理笔记→离线整理；OCR 文字→多模态），全部靠 `readme_verification.json` 改正；每个都有安全备注（AI 能删改笔记，先备份）
-- 第 3 题“遥控电脑上的 Agent”要求 `runs_on` 含 `own_computer`，所以 Notion 这类托管服务对这类用户会被排除（问卷原有规则，没改）
+- 第 3 题“遥控电脑上的 Agent”原来要求 `runs_on` 含 `own_computer`，Notion 这类托管服务因此被排除；负责人 2026-10-28 放宽：用这类 Agent 的人一定有电脑，运行位置只看第 5 题
+- 第 5 题没勾托管的用户也保留“Notion 当记忆”（负责人 2026-10-28：Notion 不是记忆库项目方、内容由用户自己写、是大公司），附提醒；实现是题目 `unless_project` 改成数组、排除规则加 `unless_project`、“按自己部署的方式用”的提示加 `note_unless`。放宽建议同时改为：单条放宽后仍少于 `min_results` 个也试两条组合（否则“只想点几下”的 Claude App 用户只会看到“注册账号就有 Notion”）
 - 第 7 题（配置 id 是 `q6`）新增选项 `notes`“连接 Obsidian、Notion 等笔记类软件”（负责人在文字稿里加的）：记忆存成 Markdown 文件（`human_review` 含 `files` 且 `export` 含 `markdown`）的记忆库加 2 分，做法本身不加（`unless`）。负责人 2026-10-28 定：做法不提前、不单独列，Markdown 记忆库可以优先
 
 ## 踩过的坑

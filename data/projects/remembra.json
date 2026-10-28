@@ -163,7 +163,7 @@
         "tools"
       ],
       "status": "auto",
-      "basis": "dashboard：or the Trail page in the dashboard. A git log for your agen；cli：or `/hooks` in the Codex CLI. When a hook's command c；tools：ry`, `recall_memories`, `update_memory`, `forget_memories`, `li"
+      "basis": "dashboard：or the Trail page in the dashboard. A git log for your agen；cli：Claude Code、Codex、Gemini CLI 等，可用免费云服务或本地 Docker 自部署；；tools：ry`, `recall_memories`, `update_memory`, `forget_memories`, `li"
     },
     "export": {
       "value": [],
@@ -190,7 +190,7 @@
     "window_handoff": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“agent 会话结束时保存交接记录；交接记录；MCP；Claude Code、C”"
+      "basis": "原表／说明：“编程 Agent 的会话交接：会话结束时从 git 和会话记录生成交接摘要，下”"
     },
     "cross_client": {
       "value": "yes",

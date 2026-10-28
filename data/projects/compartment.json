@@ -165,7 +165,7 @@
         "tools"
       ],
       "status": "auto",
-      "basis": "dashboard：、完全离线的本地记忆库，一条命令接入多个客户端，带桌面应用和面板；MCP；# Compartment **；cli：es Agent, Cursor and the CLI can use the vault at the；tools：ecides what to store and forget; Compartment captures, e"
+      "basis": "dashboard：入 Claude Code、Codex 等，带桌面面板；MCP；# Compartment **Enc；cli：es Agent, Cursor and the CLI can use the vault at the；tools：ecides what to store and forget; Compartment captures, e"
     },
     "export": {
       "value": [
@@ -200,7 +200,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“加密、完全离线的本地记忆库，一条命令接入多个客户端，带桌面应用和面板；用户事实（每条带来源和日期）；”"
+      "basis": "README：“ery later session, in every project, to every agent on the machine, and nothing leaves the”（已核对）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -240,7 +240,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“接入多个客户端，带桌面应用和面板；用户事实（每条带来源和日期）；MCP；Claude Desktop、C”"
+      "basis": "原表／说明：“加密、完全离线的本地记忆库：每条记忆是一句话、带来源和日期，偏好变了自动取代旧的，可设到期日；一条命令”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -280,7 +280,7 @@
     "privacy_protection": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“加密、完全离线的本地记忆库，一条命令接入多个客户端，带”"
+      "basis": "原表／说明：“加密、完全离线的本地记忆库：每条记忆是一句话、带来源和”"
     },
     "ranking_signals": {
       "value": [

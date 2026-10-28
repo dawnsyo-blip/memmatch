@@ -227,9 +227,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "not_mentioned",
+      "value": "yes",
       "status": "auto",
-      "basis": "README 命中的“the record of every correction you pushed back on.”经核对不算：说的是会话记录"
+      "basis": "原表／说明：“ode 本地会话记录，生成可核验的分任务会话回顾和纠错资料库；只服务 Claude Code，偏技术；会”"
     },
     "import_history": {
       "value": "not_mentioned",

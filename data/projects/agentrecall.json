@@ -232,7 +232,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“从更正中学习的 Claude Code 记忆；更正与教训”"
+      "basis": "原表／说明：“编程 Agent 的“更正账本”：你纠正它一次就记一条，并追踪这条更正在之后”"
     },
     "import_history": {
       "value": "not_mentioned",

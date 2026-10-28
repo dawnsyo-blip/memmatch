@@ -275,7 +275,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“给记忆加“情感重量”，配合遗忘曲线；可接 Obsidian，被心”"
+      "basis": "原表／说明：“带情感坐标的长期记忆：情绪越强、越常被想起就忘得越慢，遗”"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -456,7 +456,7 @@
         "needs_tunnel"
       ],
       "status": "auto",
-      "basis": "remote_mcp：README：“Tunnel 连接器，无需命令行即可开启公网访问 - **OAuth 2.1 远程鉴权**：通过 HTTPS 连接时自动触发 OAu”；cloud：运行位置含 own_cloud_account；needs_tunnel：说明：“情绪坐标）；MCP；MCP 客户端；经 Cloudflare Tunnel 可远程使用；情绪越强衰减越慢；遗忘是下”"
+      "basis": "remote_mcp：说明：“Markdown 文件，带网页面板，可做远程连接器给 Claude App 用；用户事实（”；cloud：运行位置含 own_cloud_account；needs_tunnel：说明：“情绪坐标）；MCP；MCP 客户端；经 Cloudflare Tunnel 可远程使用；情绪越强衰减越慢；遗忘是下”"
     },
     "local_model": {
       "value": "yes",

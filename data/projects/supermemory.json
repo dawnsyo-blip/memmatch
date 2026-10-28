@@ -253,7 +253,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "README：“profiles, handles knowledge updates and contradictions, forgets expired information, and deli”（已核对）"
+      "basis": "原表／说明：“与上下文引擎：自动抽取事实、维护用户画像、处理新旧矛盾、过期信息自动遗忘；默认用官方托管服务（数据存在对”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -297,22 +297,23 @@
     },
     "ranking_signals": {
       "value": [
-        "semantic"
+        "semantic",
+        "recency"
       ],
       "status": "auto",
-      "basis": "semantic：README：“permemory graph engine, local embeddings, and your credentials, then p”"
+      "basis": "semantic：README：“permemory graph engine, local embeddings, and your credentials, then p”；recency：说明：“文引擎：自动抽取事实、维护用户画像、处理新旧矛盾、过期信息自动遗忘；默认用官方托管服”"
     },
     "scoring_stages": {
       "value": [
-        "not_mentioned"
+        "retrieve"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "retrieve：排序因素含 recency（推断召回时综合排序）"
     },
     "multi_factor": {
       "value": "single",
       "status": "auto",
-      "basis": "相似度之外的因素 0 个：无"
+      "basis": "相似度之外的因素 1 个：recency"
     },
     "emotion_handling": {
       "value": [
@@ -350,10 +351,10 @@
     },
     "customization": {
       "value": [
-        "not_mentioned"
+        "small_code"
       ],
       "status": "auto",
-      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+      "basis": "small_code：说明：“存在对方服务器），也有能装在自己电脑上的单文件版；用户事实＋画像；插件＋MCP；Cla”"
     },
     "chinese_support": {
       "value": [
