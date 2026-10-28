@@ -264,7 +264,7 @@
     if (diff.length) h += `<dt>门槛</dt><dd>${esc(diff[0])}</dd>`;
     if (spend) h += `<dt>花销</dt><dd>${esc(spend.replace(/。$/, ""))}</dd>`;
     if (need.length) h += `<dt>需要</dt><dd>${esc(need.join("；"))}</dd>`;
-    if (warn.length) h += `<dt>注意</dt><dd><ul>${warn.map((t) => `<li>${esc(t)}</li>`).join("")}</ul></dd>`;
+    if (warn.length) h += `<dt>注意</dt><dd><ul>${warn.map((t, i) => `<li>${esc(String(t).trim().replace(/[。；，]$/, "") + (i < warn.length - 1 ? "；" : "。"))}</li>`).join("")}</ul></dd>`;
     h += `</dl>`;
     if (x.parts?.length) h += `<p class="parts"><span class="k">可以搭配的连接工具：</span>${x.parts.map((p) => nm(p.name)).join("、")}</p>`;
     if (x.repo_url) h += `<a class="go caption-zh" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span>${x.role === "method" ? "查看做法说明" : "查看项目"}</span>${OUT}</a>`;
