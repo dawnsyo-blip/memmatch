@@ -97,7 +97,7 @@
         "any_mcp_client"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档（get-started-with-mcp、common-mcp-clients））：Notion 文档列出 Codex、Claude Code、Cursor、Hermes、VS Code 等；Claude 网页版添加自定义连接器后桌面版和手机 App 可用（免费版限 1 个，2026-10-28 复核）；ChatGPT 自己添加的自定义连接器只限网页端且个人账号写不进去，但插件目录里有 Notion 官方应用，网页和手机 App 都能连（能否写入官方没写清）"
+      "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档（get-started-with-mcp、common-mcp-clients））：Notion 文档列出 Codex、Claude Code、Cursor、Hermes、VS Code 等；Claude 网页版添加自定义连接器后桌面版和手机 App 可用（免费版限 1 个，2026-10-28 复核）；ChatGPT 自己添加的自定义连接器只限网页端且个人账号写不进去，但插件目录里有 Notion 官方应用，网页和手机 App 都能连；负责人 2026-10-28 用 Plus 账号实测：网页上安装后手机 App 也能用"
     },
     "runs_on": {
       "value": [
@@ -420,7 +420,7 @@
       "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版即可用 MCP；商业版、企业版的请求上限更高"
     },
     "spend_note": {
-      "value": "不需要额外花钱。Notion 免费版即可用 MCP；商业版、企业版的请求上限更高。可选花销（不付也能用）：Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 插件目录里的 Notion 可能要付费套餐。",
+      "value": "不需要额外花钱。Notion 免费版即可用 MCP；商业版、企业版的请求上限更高。可选花销（不付也能用）：Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 里连 Notion 要付费套餐（Plus 可用）。",
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版即可用 MCP；商业版、企业版的请求上限更高"
     },

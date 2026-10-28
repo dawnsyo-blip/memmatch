@@ -390,7 +390,7 @@
       "none"
     ],
     "detail": "Notion 免费版即可用 MCP；商业版、企业版的请求上限更高",
-    "optional": "Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 插件目录里的 Notion 可能要付费套餐"
+    "optional": "Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 里连 Notion 要付费套餐（Plus 可用）"
   },
   "method-note-vault": {
     "checked": "2026-10-28",

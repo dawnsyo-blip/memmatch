@@ -106,7 +106,7 @@
         {"when": {"question": "q3", "selected_any": ["sillytavern"]},
          "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "原生支持酒馆，不用另装 MCP 扩展"}]},
         {"when": {"all": [{"question": "q3", "selected_any": ["official"]}, {"question": "q2", "selected_any": ["openai"]}]},
-         "note": "ChatGPT 里通过插件目录的 Notion 应用连接，网页和手机 App 都能用；能否写入要看您的套餐和 Notion 授权（可能要付费套餐），连上后请先试一次",
+         "note": "ChatGPT 里要在网页上进“设置 → 插件”找到 Notion 连接，连好后手机 App 也能用；需要 ChatGPT 付费套餐（Plus 实测可用）。连接时如果提示“此应用目前不提供浏览器设置 URL”，换从设置里的插件页连",
          "note_if": {"id": ["method-notion"]}}
       ],
       "relax": [

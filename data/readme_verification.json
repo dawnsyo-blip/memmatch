@@ -6940,7 +6940,7 @@
           "chatgpt",
           "any_mcp_client"
         ],
-        "note": "Notion 文档列出 Codex、Claude Code、Cursor、Hermes、VS Code 等；Claude 网页版添加自定义连接器后桌面版和手机 App 可用（免费版限 1 个，2026-10-28 复核）；ChatGPT 自己添加的自定义连接器只限网页端且个人账号写不进去，但插件目录里有 Notion 官方应用，网页和手机 App 都能连（能否写入官方没写清）"
+        "note": "Notion 文档列出 Codex、Claude Code、Cursor、Hermes、VS Code 等；Claude 网页版添加自定义连接器后桌面版和手机 App 可用（免费版限 1 个，2026-10-28 复核）；ChatGPT 自己添加的自定义连接器只限网页端且个人账号写不进去，但插件目录里有 Notion 官方应用，网页和手机 App 都能连；负责人 2026-10-28 用 Plus 账号实测：网页上安装后手机 App 也能用"
       },
       "runs_on": {
         "value": [
