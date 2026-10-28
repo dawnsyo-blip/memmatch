@@ -269,7 +269,7 @@
     {
       "id": "q8", "number": "8", "kind": "preference", "type": "rank", "short": "遇到过的记忆问题",
       "text": "在以下记忆问题中，您遇到过哪些？",
-      "help": "请按您最排斥的顺序排序。",
+      "help": "请按排斥程度排序。",
       "show_if": {"question": "q6", "selected_none": ["know", "none"]},
       "options": [
         {"id": "entry_hallucination", "label": "录入幻觉", "help": "LLM 说“记住了”，其实没有记", "effect": {"score": [
@@ -308,7 +308,8 @@
     },
     {
       "id": "q8n", "number": "8", "kind": "preference", "type": "rank", "short": "担心的记忆问题",
-      "text": "如果使用记忆库，您最担心出现哪些问题？请按担心程度排序。",
+      "text": "如果使用记忆库，您最担心出现哪些问题？",
+      "help": "请按排斥程度排序。",
       "show_if": {"question": "q6", "selected_any": ["know", "none"]},
       "options": [
         {"id": "entry_hallucination", "label": "录入幻觉", "help": "LLM 说“记住了”，其实没有记", "effect": {"score": [

@@ -7,7 +7,7 @@ const CONFIG_URL = "../data/questionnaire/questions.json";
 const KEY = "memsite-quiz-v2";
 const NS = "http://www.w3.org/2000/svg";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const TYPE_NOTE = { single: "单选", multi: "可多选", rank: "可多选，按重要程度排序" };
+const TYPE_NOTE = { single: "单选", multi: "多选", rank: "多选 · 排序" };
 
 const $ = (id) => document.getElementById(id);
 const el = (tag, attrs, parent) => {
