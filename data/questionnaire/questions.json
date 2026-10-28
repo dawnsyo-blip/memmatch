@@ -206,7 +206,7 @@
         {"id": "vps_new", "label": "可以新买一台便宜的 VPS", "help": "约 20–50 元/月", "values": {"runs_on": ["own_server"]}},
         {"id": "cloud_free", "label": "注册免费云平台账号，全程用浏览器操作", "help": "如 Cloudflare、Render 等，免费额度内 0 元", "values": {"runs_on": ["own_cloud_account"]}},
         {"id": "phone", "label": "只用手机", "help": "0 元", "values": {"runs_on": ["phone"]}},
-        {"id": "hosted", "label": "可以接受项目方提供的托管服务", "help": "对话内容会存到对方服务器，订阅费用不等", "values": {"runs_on": ["third_party_hosted"]}}
+        {"id": "hosted", "label": "可以接受项目方提供的托管服务", "help": "对话内容会存到第三方服务器，订阅费用不等", "values": {"runs_on": ["third_party_hosted"]}}
       ],
       "rules": [
         {"when": {"question": "q5", "selected_none": ["hosted"]}, "exclude_only": {"data_passes_through": ["third_party"]},
@@ -492,9 +492,9 @@
         ]
       },
       "options": [
-        {"id": "github", "label": "GitHub 账号", "help": "免费；部分项目用它同步或备份记忆", "values": {"accounts_needed": ["github"]}},
+        {"id": "github", "label": "GitHub 账号", "help": "免费，部分项目用它同步或备份记忆", "values": {"accounts_needed": ["github"]}},
         {"id": "vendor", "label": "记忆库项目方自己的账号", "help": "有免费档，但对话会存到对方的服务器", "values": {"accounts_needed": ["vendor_account"]}},
-        {"id": "api_key", "label": "LLM API Key，按用量付费", "help": "在整理和检索阶段调用模型，每月几元到几十元不等", "values": {"accounts_needed": ["model_api_key"]}},
+        {"id": "api_key", "label": "LLM API Key，按用量付费", "help": "在整理和检索阶段调用，每月几元到几十元不等", "values": {"accounts_needed": ["model_api_key"]}},
         {"id": "subscription", "label": "LLM 订阅套餐",
          "values": {"accounts_needed": ["claude_subscription"]}, "values_when": {"question": "q2", "selected_any": ["anthropic"]}},
         {"id": "none", "label": "都不想，只用免费、不用注册的", "exclusive": true}
