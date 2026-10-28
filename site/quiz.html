@@ -67,7 +67,7 @@
     letter-spacing: var(--ls-zh-title);
     text-align: justify;
   }
-  .qhelp { margin: var(--s-2) 0 0; color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); }
+  .qhelp { margin: var(--s-2) 0 0; color: var(--ink-soft); font-size: var(--fs-small); line-height: var(--lh-small); max-width: var(--measure); white-space: pre-line; }
 
   /* ---------- 选项 + 行星环 ---------- */
   .options-wrap { position: relative; margin-top: var(--s-4); }
@@ -113,7 +113,7 @@
   .opt .text { display: flex; flex-direction: column; align-items: flex-start; }
   .opt .line { display: flex; align-items: baseline; }
   /* 选项下方的小字说明（如费用参考） */
-  .opt .ohelp { margin-top: 2px; font-size: var(--fs-small); line-height: 20px; color: var(--ink-faint); }
+  .opt .ohelp { margin-top: 2px; font-size: var(--fs-small); line-height: 20px; color: var(--ink-faint); white-space: pre-line; }  /* 配置里说明分行的，页面上照样换行 */
   /* 按前面的回答预先选好的提示 */
   .defnote { margin: var(--s-2) 0 0; color: var(--ink-faint); }
   .defnote[hidden] { display: none; }

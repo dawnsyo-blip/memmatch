@@ -160,7 +160,8 @@
     },
     {
       "id": "q3c", "kind": "info", "type": "single", "short": "酒馆装 MCP 扩展",
-      "text": "酒馆接 MCP 记忆库需要另装一个社区扩展，安装该扩展需要在运行酒馆的电脑或服务器上用命令行装配。您可以接受吗？",
+      "text": "酒馆接 MCP 记忆库需要另装一个社区扩展，您可以接受吗？",
+      "help": "安装该扩展需要在运行酒馆的电脑或服务器上用命令行装配",
       "show_if": {"question": "q3", "selected_any": ["sillytavern"]},
       "options": [
         {"id": "yes", "label": "可以/已经装了"},
@@ -249,15 +250,15 @@
       ]
     },
     {
-      "id": "q6", "number": "7", "kind": "info", "type": "single", "short": "用过的记忆服务",
+      "id": "q6", "number": "7", "kind": "info", "type": "multi", "short": "用过的记忆服务",
       "text": "您目前主要在使用什么记忆服务？",
       "options": [
         {"id": "native", "label": "官端或其它客户端自带的记忆功能", "help": "比如 ChatGPT 的记忆，或 Kelivo 自带的记忆功能"},
         {"id": "notes", "label": "连接 Obsidian、Notion 等笔记类软件"},
         {"id": "open_source", "label": "开源的记忆项目", "help": "比如各类记忆 MCP、酒馆的记忆扩展"},
         {"id": "other", "label": "用过其它类型的记忆项目", "free_text": true, "help": "请填写您所用过的记忆项目"},
-        {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "free_text": true, "help": "请填写您所知道的记忆项目"},
-        {"id": "none", "label": "没用过，也不太了解"}
+        {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "free_text": true, "exclusive": true, "help": "请填写您所知道的记忆项目"},
+        {"id": "none", "label": "没用过，也不太了解", "exclusive": true}
       ],
       "rules": [
         {"when": {"question": "q6", "selected_any": ["notes"]},
@@ -267,37 +268,38 @@
     },
     {
       "id": "q8", "number": "8", "kind": "preference", "type": "rank", "short": "遇到过的记忆问题",
-      "text": "在以下记忆问题中，您遇到过哪些？请按您最排斥的顺序排序。",
+      "text": "在以下记忆问题中，您遇到过哪些？",
+      "help": "请按您最排斥的顺序排序。",
       "show_if": {"question": "q6", "selected_none": ["know", "none"]},
       "options": [
-        {"id": "entry_hallucination", "label": "录入幻觉：LLM 说“记住了”，其实没有记", "effect": {"score": [
+        {"id": "entry_hallucination", "label": "录入幻觉", "help": "LLM 说“记住了”，其实没有记", "effect": {"score": [
           {"if": {"human_review": ["*"]}, "points": 0.5, "reason": "随时能看到记了什么"},
           {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看候选再入库"},
           {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "写入后会明确回执"}]}},
-        {"id": "window_loss", "label": "换窗失忆：开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
+        {"id": "window_loss", "label": "换窗失忆", "help": "开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
           {"if": {"window_handoff": ["yes"]}, "points": 1, "reason": "开新窗口能接上之前的内容"},
           {"if": {"cross_client": ["yes"]}, "points": 1, "reason": "几个入口共用一份记忆"}]}},
-        {"id": "overwrite", "label": "错误覆写：记了新信息，旧的就被整个覆盖了", "effect": {"score": [
+        {"id": "overwrite", "label": "错误覆写", "help": "记了新信息，旧的就被整个覆盖了", "effect": {"score": [
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "新事实取代旧事实时保留历史，能纠错"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "记得每件事是什么时候的"}]}},
-        {"id": "no_priority", "label": "轻重不分：忘记不常提起但重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
+        {"id": "no_priority", "label": "轻重不分", "help": "忘记不常提起但重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
           {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要性、新旧等多个维度决定先想起什么"},
           {"if": {"ranking_signals": ["importance"]}, "points": 1, "reason": "会给记忆打重要性分"},
           {"if": {"emotion_handling": ["weighting"]}, "points": 1, "reason": "情绪重的记忆记得更牢"},
           {"if": {"sensitive_suppression": ["yes"]}, "points": 1, "reason": "能压住您不想再提的事"}]}},
-        {"id": "you_me", "label": "你我不分：LLM 回忆时把“你说的”和“我说的”弄混", "effect": {"score": [
+        {"id": "you_me", "label": "你我不分", "help": "LLM 回忆时把“你说的”和“我说的”弄混", "effect": {"score": [
           {"if": {"verbatim": ["yes"]}, "points": 1, "reason": "保留原话，能查是谁说的"},
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "记忆能追溯来源"}]}},
-        {"id": "stereotype", "label": "刻板印象：知道关于我的事，却不记得这件事对我意味着什么", "effect": {"score": [
+        {"id": "stereotype", "label": "刻板印象", "help": "知道关于我的事，却不记得这件事对我意味着什么", "effect": {"score": [
           {"if": {"verbatim": ["yes"]}, "points": 1, "reason": "保留原话，不只剩摘要"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "有时间线，知道事情的来龙去脉"},
           {"if": {"ranking_signals": ["confidence"]}, "points": 1, "reason": "区分确定和不确定的认识"}]}},
-        {"id": "verbatim_repeat", "label": "逐字复述：一字一句复述原句，让人有压力", "effect": {"score": [
+        {"id": "verbatim_repeat", "label": "逐字复述", "help": "一字一句复述原句，让人有压力", "effect": {"score": [
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会整理成摘要，原话只留档"}]}},
-        {"id": "fabrication", "label": "凭空编造：LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
+        {"id": "fabrication", "label": "凭空编造", "help": "LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
           {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"},
           {"if": {"reflection": ["yes"]}, "unless": {"error_guard": ["yes"]}, "points": -1, "reason": "会自己反思总结，但结论追溯不到原话"}]}},
-        {"id": "messy", "label": "越记越乱：记忆重复堆积，回应越来越慢", "effect": {"score": [
+        {"id": "messy", "label": "越记越乱", "help": "记忆重复堆积，回应越来越慢", "effect": {"score": [
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理、去重"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会合并重复的记忆"}]}},
         {"id": "other", "label": "其他", "free_text": true},
@@ -309,34 +311,34 @@
       "text": "如果使用记忆库，您最担心出现哪些问题？请按担心程度排序。",
       "show_if": {"question": "q6", "selected_any": ["know", "none"]},
       "options": [
-        {"id": "entry_hallucination", "label": "录入幻觉：LLM 说“记住了”，其实没有记", "effect": {"score": [
+        {"id": "entry_hallucination", "label": "录入幻觉", "help": "LLM 说“记住了”，其实没有记", "effect": {"score": [
           {"if": {"human_review": ["*"]}, "points": 0.5, "reason": "随时能看到记了什么"},
           {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看候选再入库"},
           {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "写入后会明确回执"}]}},
-        {"id": "window_loss", "label": "换窗失忆：开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
+        {"id": "window_loss", "label": "换窗失忆", "help": "开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
           {"if": {"window_handoff": ["yes"]}, "points": 1, "reason": "开新窗口能接上之前的内容"},
           {"if": {"cross_client": ["yes"]}, "points": 1, "reason": "几个入口共用一份记忆"}]}},
-        {"id": "overwrite", "label": "错误覆写：记了新信息，旧的就被整个覆盖了", "effect": {"score": [
+        {"id": "overwrite", "label": "错误覆写", "help": "记了新信息，旧的就被整个覆盖了", "effect": {"score": [
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "新事实取代旧事实时保留历史，能纠错"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "记得每件事是什么时候的"}]}},
-        {"id": "no_priority", "label": "轻重不分：忘记提及频率低但对我很重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
+        {"id": "no_priority", "label": "轻重不分", "help": "忘记提及频率低但对我很重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
           {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要性、新旧等多个维度决定先想起什么"},
           {"if": {"ranking_signals": ["importance"]}, "points": 1, "reason": "会给记忆打重要性分"},
           {"if": {"emotion_handling": ["weighting"]}, "points": 1, "reason": "情绪重的记忆记得更牢"},
           {"if": {"sensitive_suppression": ["yes"]}, "points": 1, "reason": "能压住您不想再提的事"}]}},
-        {"id": "you_me", "label": "你我不分：LLM 回忆时把“你说的”和“我说的”弄混", "effect": {"score": [
+        {"id": "you_me", "label": "你我不分", "help": "LLM 回忆时把“你说的”和“我说的”弄混", "effect": {"score": [
           {"if": {"verbatim": ["yes"]}, "points": 1, "reason": "保留原话，能查是谁说的"},
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "记忆能追溯来源"}]}},
-        {"id": "stereotype", "label": "刻板印象：知道关于我的事，却不记得这件事对我意味着什么", "effect": {"score": [
+        {"id": "stereotype", "label": "刻板印象", "help": "知道关于我的事，却不记得这件事对我意味着什么", "effect": {"score": [
           {"if": {"verbatim": ["yes"]}, "points": 1, "reason": "保留原话，不只剩摘要"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "有时间线，知道事情的来龙去脉"},
           {"if": {"ranking_signals": ["confidence"]}, "points": 1, "reason": "区分确定和不确定的认识"}]}},
-        {"id": "verbatim_repeat", "label": "逐字复述：一字一句复述原句，让人有压力", "effect": {"score": [
+        {"id": "verbatim_repeat", "label": "逐字复述", "help": "一字一句复述原句，让人有压力", "effect": {"score": [
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会整理成摘要，原话只留档"}]}},
-        {"id": "messy", "label": "越记越乱：记忆重复堆积、前后矛盾", "effect": {"score": [
+        {"id": "messy", "label": "越记越乱", "help": "记忆重复堆积、前后矛盾", "effect": {"score": [
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理、去重"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会合并重复的记忆"}]}},
-        {"id": "fabrication", "label": "凭空编造：LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
+        {"id": "fabrication", "label": "凭空编造", "help": "LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
           {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"},
           {"if": {"reflection": ["yes"]}, "unless": {"error_guard": ["yes"]}, "points": -1, "reason": "会自己反思总结，但结论追溯不到原话"}]}}
       ]
@@ -351,7 +353,7 @@
           {"if": {"media_recall": ["audio"]}, "points": 3, "reason": "能存下原始语音，以后还能找回来"}]}},
         {"id": "video", "label": "要，需要保留视频", "effect": {"score": [
           {"if": {"media_recall": ["video"]}, "points": 3, "reason": "能存下原视频，以后还能找回来"}]}},
-        {"id": "none", "label": "不需要，记录文字内容就够了", "exclusive": true},
+        {"id": "none", "label": "不需要，只需要记录文字内容", "exclusive": true},
         {"id": "any", "label": "都可以", "exclusive": true, "effect": {"score": [
           {"if": {"media_recall": ["image", "audio", "video"]}, "points": 1, "reason": "能存下图片、语音或视频的原件"}]}}
       ]
@@ -360,20 +362,20 @@
       "id": "q10", "kind": "preference", "type": "single", "short": "写入把关",
       "text": "LLM 从对话里录入记忆时，您更希望怎么把关？",
       "options": [
-        {"id": "auto", "label": "LLM 完全自动判断：省时省力，但可能有重复或记错的地方", "effect": {"score": [
+        {"id": "auto", "label": "LLM 完全自动判断", "help": "省时省力，但可能有重复或记错的地方", "effect": {"score": [
           {"if": {"write_mode": ["auto"]}, "points": 2, "reason": "会自动记，不用您操心"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会自动整理、合并记忆"}]}},
-        {"id": "auto_review", "label": "LLM 自动录入，我事后审查：录入时不中断对话，需要时我能打开检查并修正", "effect": {"score": [
+        {"id": "auto_review", "label": "LLM 自动录入，我事后审查", "help": "录入时不中断对话，需要时我能打开检查并修正", "effect": {"score": [
           {"if": {"write_mode": ["auto"], "human_review": ["*"]}, "points": 2, "reason": "自动记，您能随时打开检查修正"},
           {"if": {"human_review": ["dashboard"]}, "points": 1, "reason": "有网页面板可以查看修改"},
           {"if": {"pinning": ["yes"]}, "points": 1, "reason": "能把重要的记忆钉住"},
           {"if": {"customization": ["plain_data"]}, "points": 1, "reason": "记忆是普通文件，可以直接改"}]}},
-        {"id": "review_first", "label": "我审查后再录入：记忆更精简、更准，但要在录入时或定期花时间审查", "effect": {"score": [
+        {"id": "review_first", "label": "我审查后再录入", "help": "记忆更精简、更准，但要在录入时或定期花时间审查", "effect": {"score": [
           {"if": {"write_mode": ["review_first"]}, "points": 4, "reason": "先给您审核，您同意了才记"},
           {"if": {"human_review": ["dashboard"]}, "points": 1, "reason": "有网页面板可以查看修改"},
           {"if": {"pinning": ["yes"]}, "points": 1, "reason": "能把重要的记忆钉住"},
           {"if": {"customization": ["plain_data"]}, "points": 1, "reason": "记忆是普通文件，可以直接改"}]}},
-        {"id": "review_then_llm", "label": "录入时由我审查，但入库后交给 LLM 自己整理", "effect": {"score": [
+        {"id": "review_then_llm", "label": "录入时由我审查，入库后交给 LLM 整理", "effect": {"score": [
           {"if": {"write_mode": ["review_first"]}, "points": 4, "reason": "先给您审核，您同意了才记"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "入库后会自动整理、合并记忆"}]}}
       ]
@@ -383,9 +385,9 @@
       "text": "记录的任务，您更希望由哪个 LLM 来完成？",
       "show_if": {"question": "q6", "selected_none": ["none"]},
       "options": [
-        {"id": "chat", "label": "对话的 LLM 自己记录：掌握窗口内的上下文，最清楚什么重要；但记的时候会占用对话回合，并且消耗对应的 token", "effect": {"score": [
+        {"id": "chat", "label": "对话的 LLM 自己记录", "help": "掌握窗口内的上下文，最清楚什么重要；\n但记的时候会占用对话回合，并且消耗对应的 token", "effect": {"score": [
           {"if": {"memory_writer": ["chat_agent"]}, "points": 1.5, "reason": "由聊天的 LLM 自己决定记什么"}]}},
-        {"id": "background", "label": "交给其它 LLM 记录：选择便宜的模型可以节省 token；后台记录，不打断聊天；需要把对话内容发给该 LLM，并且它看不到完整上下文，未必能够准确判断重要内容", "effect": {"score": [
+        {"id": "background", "label": "交给其它 LLM 记录", "help": "选择便宜的模型可以节省 token；\n后台记录，不打断聊天；\n需要把对话内容发给该 LLM；\n该 LLM 看不到完整上下文，未必能够准确判断重要内容", "effect": {"score": [
           {"if": {"memory_writer": ["background"]}, "points": 1.5, "reason": "后台整理，不打断聊天"},
           {"if": {"dream_consolidation": ["yes"]}, "points": 0.5, "reason": "空闲时会自动整理记忆"}]}},
         {"id": "any", "label": "都可以", "effect": {}}
@@ -417,21 +419,21 @@
     {
       "id": "q13", "kind": "preference", "type": "single", "short": "淡忘",
       "text": "不太重要的信息，应该慢慢淡下去吗？",
-      "help": "1. 记忆太多会降低召回和注入上下文的速度与质量。2. 什么是“不太重要的信息”？在大多数记忆框架下，“提及频率低”与“时间久远”会被默认为不重要的信息。3. “淡下去”还能找回吗？“淡下去”在大多数项目中不等于删除，只是降低优先级，需要时还能找回。",
+      "help": "1. 记忆太多会降低召回和注入上下文的速度与质量；\n2. 什么是“不太重要的信息”？在大多数记忆框架下，“提及频率低”与“时间久远”会被默认为不重要的信息；\n3. “淡下去”还能找回吗？“淡下去”在大多数项目中不等于删除，只是降低优先级，需要时还能找回。",
       "options": [
         {"id": "yes", "label": "可以，可以忘掉久远的、不常提的小事", "effect": {"score": [
           {"if": {"forgetting": ["auto_decay", "archive"]}, "points": 1, "reason": "不常提的小事会慢慢淡下去"}]}},
-        {"id": "emotional", "label": "可以，但承载特殊情感的内容要一直留着", "effect": {"score": [
+        {"id": "emotional", "label": "可以，但要保留承载特殊情感的内容", "effect": {"score": [
           {"if": {"emotion_handling": ["weighting"]}, "points": 2, "reason": "情感重的记忆会留得更久"},
           {"if": {"scoring_stages": ["forget"]}, "points": 1, "reason": "遗忘时会看重要程度，不只看时间"},
           {"if": {"pinning": ["yes"]}, "points": 1, "reason": "可以把重要的记忆钉住，永不淡忘"}]}},
-        {"id": "no", "label": "不要，我希望它尽量多参考过去的信息，哪怕记得不那么清楚", "effect": {"score": [
+        {"id": "no", "label": "不要，我希望它有尽量多的参考信息，哪怕记得不那么清楚", "effect": {"score": [
           {"if": {"forgetting": ["none", "archive", "manual_only"]}, "points": 1, "reason": "不会自动删掉记忆"}]}}
       ]
     },
     {
       "id": "q14", "kind": "preference", "type": "single", "short": "等待",
-      "text": "为了让它想得更准，您愿意每次多等一会儿吗？",
+      "text": "为了让 LLM 想得更准，您愿意每次多等一会儿吗？",
       "help": "检索时间越长，并不一定检索得越准，但理论上越久越可以找到更多相关信息。",
       "options": [
         {"id": "fast", "label": "尽量别让我等", "effect": {"score": [
@@ -451,7 +453,7 @@
       "help": "滑动窗口、压缩或摘要、换窗召回这类功能都属于上下文工程。",
       "show_if": {"question": "q3", "not_only_within": ["official", "none_yet"]},
       "options": [
-        {"id": "yes", "label": "有（比如 Kelivo 的自动摘要）"},
+        {"id": "yes", "label": "有", "help": "比如 Kelivo 的自动摘要与换窗"},
         {"id": "no", "label": "没有，聊久了前面的就丢了"},
         {"id": "unknown", "label": "不清楚"}
       ]
