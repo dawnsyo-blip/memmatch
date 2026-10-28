@@ -49,7 +49,7 @@ const curQ = () => byId[state.cur];
 const latest = () => visible().filter((q) => state.seen[q.id]).pop();
 
 /* ---------- 进度条：四个部分各一段，段长按这一部分当前要答的题数 ---------- */
-const GAP = 6;
+const GAP = 3;  // 和 .band 的 gap 一致
 const bands = [...document.querySelectorAll(".band")];
 let PARTS = cfg.parts.map(() => 1), STARTS = [], TOTAL = 1, floor = 0;  // floor：进度条至少填到答到的最远处，往回翻时星星回去、填充不退
 function measureParts() {

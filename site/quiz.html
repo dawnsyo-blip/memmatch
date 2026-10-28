@@ -30,7 +30,7 @@
      每段宽度按该部分的题数，段内连续填充；游标是一根从屏幕顶上垂下来的细绳，穿过进度条，下端坠着一颗星星 */
   .rings { padding: var(--s-1) 0 0; }
   .rings-bar { position: relative; display: flex; flex-direction: column; gap: 3px; margin-bottom: 26px; }  /* 下方留出星星摆动的空间 */
-  .band { display: flex; gap: 6px; }
+  .band { display: flex; gap: 3px; }  /* 各部分之间的间隙，和 quiz.js 的 GAP 一致 */
   .band i { flex: var(--n) 1 0; background: linear-gradient(to right, var(--c) var(--f, 0%), var(--rule) var(--f, 0%)); }
   .band:nth-child(1) { height: 2px; --c: var(--mustard); }
   .band:nth-child(2) { height: 6px; --c: var(--dusty-pink); }

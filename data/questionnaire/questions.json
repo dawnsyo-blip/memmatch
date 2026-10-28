@@ -493,7 +493,7 @@
       },
       "options": [
         {"id": "github", "label": "GitHub 账号", "help": "免费，部分项目用它同步或备份记忆", "values": {"accounts_needed": ["github"]}},
-        {"id": "vendor", "label": "记忆库项目方自己的账号", "help": "有免费档，但对话会存到对方的服务器", "values": {"accounts_needed": ["vendor_account"]}},
+        {"id": "vendor", "label": "记忆库项目方自己的账号", "help": "有免费档，但对话会存到第三方服务器", "values": {"accounts_needed": ["vendor_account"]}},
         {"id": "api_key", "label": "LLM API Key，按用量付费", "help": "在整理和检索阶段调用，每月几元到几十元不等", "values": {"accounts_needed": ["model_api_key"]}},
         {"id": "subscription", "label": "LLM 订阅套餐",
          "values": {"accounts_needed": ["claude_subscription"]}, "values_when": {"question": "q2", "selected_any": ["anthropic"]}},
