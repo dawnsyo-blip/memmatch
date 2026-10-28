@@ -156,7 +156,6 @@
 
   /* 长段正文两端对齐，标题和列表项左对齐（负责人 2026-10-28 定） */
   .summary, details.pick > summary .brief, .rest .s, .combos .d, .advice p:not(.eg), .why p, .addon > p { text-align: justify; }
-  .combos .d .k { color: var(--ink-faint); }
   .btn {
     min-height: var(--tap); padding: 0 var(--s-3);
     display: inline-flex; align-items: center; justify-content: center;
@@ -263,70 +262,76 @@
     const curHtml = cur.length ? cur.map((p) => (p.id ? nm(p.name) : esc(p.name))).join("、") + (cur[0].id ? `<span class="nm-note">您在用</span>` : "") : "";
     return [curHtml, ...add.map((p) => nm(p.name))].filter(Boolean).join(`<span class="plus">＋</span>`);
   }
-  function comboText(c) {
-    const N = (p) => splitName(p.name)[0];
-    const parts = c.parts, last = parts[parts.length - 1], B = N(last);
-    const base = parts.filter((p) => p.current);
-    const baseStages = [...new Set(base.flatMap((p) => p.stages))];
-    const why = () => ({
-      pairs: `，两者设计上就是搭配使用的${gist(last.id) ? `，${B} ${gist(last.id)}` : ""}`,
-      stages: `，补上${stageList(last.stages.filter((s) => !baseStages.includes(s)))}`,
-      concern: `，针对您在第 8 题选的“${c.label}”`,
-      markdown: `，它把记忆存成 Markdown 文件，可以和笔记放在一起`,
-      top: c.base === "native" ? `，记忆就不只存在客户端里` : "",
-    }[c.via] || "");
-    if (c.type === "current") {
-      const lead = c.base === "project" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${B}`
-        : c.base === "notes" ? `保留您的笔记库，再加 ${B}` : `继续用现在的客户端，再接上 ${B}`;
-      return lead + why() + "。";
-    }
-    if (c.type === "complete") {
-      const A = N(parts[0]);
-      const tail = { pairs: `${B} 和它设计上就是搭配使用的${gist(last.id) ? "，" + gist(last.id) : ""}`,
-        concern: `${B} 针对您在第 8 题选的“${c.label}”`, addon: `${B} 是可以加装的${c.label}` }[c.via] || `再加上 ${B}`;
-      return `${A} 一个项目就覆盖写入、整理、召回、遗忘、查看修改全流程；${tail}。`;
-    }
-    const all = [...new Set(parts.flatMap((p) => p.stages))];
-    const cover = all.length === 5 ? "，合起来覆盖全流程" : all.length ? `，合起来覆盖${stageList(Object.keys(STAGE).filter((s) => all.includes(s)))}` : "";
-    if (c.via === "pairs") return `${parts.map(N).join("、")} 设计上就是搭配使用的${cover}。`;
-    let have = [];
-    const segs = parts.map((p, i) => {
-      const add = p.stages.filter((s) => !have.includes(s));
-      have = [...have, ...add];
-      return i === 0 ? `${N(p)} 负责${stageList(add)}` : `${N(p)} 补上${stageList(add)}`;
-    });
-    return segs.join("，") + cover + "。";
-  }
-
-  // 两个方案比一比：列出这个方案胜过另一个的地方；安装门槛和花销变化大，排在最后
+  // 两个方案的说明句本身就是对比：句首点出这个方案胜过另一个的地方，冒号后写分工，比另一个少了环节时在句末说明。
+  // 安装门槛和花销变化大，排在最后
+  const PLAN = ["方案一", "方案二"];
   const DIFF = { low: 0, medium: 1, high: 2 };
-  const ranked = [...r.results, ...(r.more || [])].map((x) => x.id);
+  const stagesIn = (c) => Object.keys(STAGE).filter((s) => c.parts.some((p) => p.stages.includes(s)));
   function comboFacts(c) {
     const adds = c.parts.filter((p) => p.id && !p.current);
-    const stages = new Set(c.parts.flatMap((p) => p.stages));
     return {
       keep: c.type === "current",
       installs: adds.length,
-      stages: stages.size,
+      stages: stagesIn(c).length,
       paired: c.via === "pairs",
       diff: Math.max(...adds.map((p) => DIFF[val(p.id, "difficulty")] ?? 1)),
       free: adds.every((p) => [].concat(val(p.id, "spend") || []).includes("none")),
-      rank: Math.min(...adds.map((p) => { const i = ranked.indexOf(p.id); return i < 0 ? 999 : i; })),
     };
   }
   function comboEdge(c, other) {
     const x = comboFacts(c), y = comboFacts(other), out = [];
-    if (x.keep && !y.keep) out.push("不用换掉您现在用的记忆，直接在上面补");
-    if (!x.keep && y.keep) out.push("另起一套，不受现在所用记忆的限制");
-    if (x.installs < y.installs) out.push(`只需要装 ${x.installs} 个项目`);
-    if (x.stages === 5 && y.stages < 5) out.push("覆盖写入到查看修改的全流程");
-    else if (x.stages > y.stages) out.push("覆盖的记忆环节更多");
-    if (x.paired && !y.paired) out.push("项目之间设计上就是搭配使用的");
-    if (x.diff < y.diff) out.push("上手门槛更低");
-    if (x.free && !y.free) out.push("不需要额外花钱");
-    if (!out.length && x.installs > y.installs) out.push("分工更细，某个环节不满意时可以单独替换");
-    if (!out.length && x.rank < y.rank) out.push("用到的项目和您的回答更契合");
+    if (x.keep && !y.keep) out.push("不用换掉现在用的");
+    if (!x.keep && y.keep) out.push("另起一套");
+    if (x.installs < y.installs) out.push(`只装 ${x.installs} 个项目`);
+    if (x.stages === 5 && y.stages < 5) out.push("覆盖全流程");
+    else if (x.stages > y.stages) out.push("覆盖的环节更多");
+    if (x.paired && !y.paired) out.push("设计上搭配使用");
+    if (x.diff < y.diff) out.push("门槛更低");
+    if (x.free && !y.free) out.push("不用额外花钱");
+    if (!out.length && x.installs > y.installs) out.push("分工更细");
     return out;
+  }
+  function comboBody(c, saidPaired = false) {
+    const N = (p) => splitName(p.name)[0];
+    const parts = c.parts, last = parts[parts.length - 1], B = N(last);
+    const base = parts.filter((p) => p.current);
+    const baseStages = [...new Set(base.flatMap((p) => p.stages))];
+    const why = {
+      pairs: saidPaired ? (gist(last.id) ? `，${B} ${gist(last.id)}` : "") : `，两者设计上就是搭配使用的${gist(last.id) ? `，${B} ${gist(last.id)}` : ""}`,
+      stages: `，补上${stageList(last.stages.filter((s) => !baseStages.includes(s)))}`,
+      concern: `，针对您在第 8 题选的“${c.label}”`,
+      markdown: `，它把记忆存成 Markdown 文件，可以和笔记放在一起`,
+      top: c.base === "native" ? `，记忆就不只存在客户端里` : "",
+    }[c.via] || "";
+    if (c.type === "current") {
+      const lead = c.base === "project" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${B}`
+        : c.base === "notes" ? `保留您的笔记库，再加 ${B}` : `继续用现在的客户端，再接上 ${B}`;
+      return lead + why;
+    }
+    if (c.type === "complete") {
+      const tail = { pairs: saidPaired ? `${B} ${gist(last.id) || "和它搭配"}` : `${B} 和它设计上就是搭配使用的${gist(last.id) ? "，" + gist(last.id) : ""}`,
+        concern: `${B} 针对您在第 8 题选的“${c.label}”`, addon: `${B} 是可以加装的${c.label}` }[c.via] || `再加上 ${B}`;
+      return `${N(parts[0])} 一个项目包办写入到查看修改，${tail}`;
+    }
+    const cover = stagesIn(c).length === 5 ? "，合起来覆盖全流程" : "";
+    if (c.via === "pairs" && !saidPaired) return `${parts.map(N).join("、")} 设计上就是搭配使用的${cover}`;
+    let have = [];
+    return parts.map((p, i) => {
+      const add = p.stages.filter((s) => !have.includes(s));
+      have = [...have, ...add];
+      return `${N(p)} ${i === 0 ? "负责" : "补上"}${stageList(add)}`;
+    }).join("，") + cover;
+  }
+  // 对比是双向的：两边都说得出胜过对方的地方才给方案二，否则只留方案一，不编号、不写对比
+  const combos = r.combos.length === 2 && comboEdge(r.combos[0], r.combos[1]).length && comboEdge(r.combos[1], r.combos[0]).length
+    ? r.combos : r.combos.slice(0, 1);
+  function comboText(c, i) {
+    const other = combos[1 - i];
+    if (!other) return comboBody(c) + "。";
+    const edge = comboEdge(c, other);
+    const lack = stagesIn(other).filter((s) => !stagesIn(c).includes(s));
+    const tail = lack.length ? `；比${PLAN[1 - i]}少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
+    return (edge.length ? edge.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
   }
 
   /* ---------- 一张卡片 ---------- */
@@ -388,14 +393,11 @@
   }
 
   /* ---------- 搭配方案 ---------- */
-  const PLAN = ["方案一", "方案二"];
-  const comboEdges = r.combos.map((c, i) => comboEdge(c, r.combos[1 - i]));
-  if (r.combos.length === 2) {
+  if (combos.length) {
     html += `<section class="block" aria-labelledby="combosT"><header><p class="caption">Combinations</p><h2 id="combosT">搭配方案</h2></header><ul class="combos">`;
-    r.combos.forEach((c, i) => {
-      html += `<li><span class="t caption-zh">${PLAN[i]}</span><p class="names">` +
-        comboNames(c) + `</p><p class="d">${esc(comboText(c))}</p>` +
-        (comboEdges[i].length ? `<p class="d"><span class="k">相比${PLAN[1 - i]}：</span>${esc(comboEdges[i].join("；"))}</p>` : "") + `</li>`;
+    combos.forEach((c, i) => {
+      html += `<li>${combos.length > 1 ? `<span class="t caption-zh">${PLAN[i]}</span>` : ""}<p class="names">` +
+        comboNames(c) + `</p><p class="d">${esc(comboText(c, i))}</p></li>`;
     });
     html += `</ul></section>`;
   }
@@ -491,9 +493,8 @@
       r.results.forEach((x, i) => out.push("", `${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`,
         ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []),
         ...factsOf(x).map(([k, v]) => `　　${k}：${segsOf(v).join("；")}`), `　　${x.repo_url}`));
-      if (r.combos.length === 2) out.push("", "【搭配方案】", ...r.combos.flatMap((c, i) => [
-        `${PLAN[i]}：${c.parts.map((p) => nmPlain(p.name)).join(" ＋ ")}`, `　　${comboText(c)}`,
-        ...(comboEdges[i].length ? [`　　相比${PLAN[1 - i]}：${comboEdges[i].join("；")}`] : [])]));
+      if (combos.length) out.push("", "【搭配方案】", ...combos.flatMap((c, i) => [
+        `${combos.length > 1 ? PLAN[i] + "：" : ""}${c.parts.map((p) => nmPlain(p.name)).join(" ＋ ")}`, `　　${comboText(c, i)}`]));
       if (r.more?.length) out.push("", `【其余 ${r.more.length} 个也符合条件】`, ...r.more.map((x) => `· ${nmPlain(x.name)}　${x.repo_url}`));
     } else {
       out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
