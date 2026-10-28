@@ -419,7 +419,7 @@
     "local_model": {
       "value": "yes",
       "status": "auto",
-      "basis": "说明：“情绪向微调的 Qwen 本地模型（4B–14B）：擅长识别情绪、写有共情”"
+      "basis": "README：“**GGUF**, easily usable with [LM Studio](https://lmstudio.ai/), [Olla”"
     },
     "model_lock": {
       "value": "not_mentioned",

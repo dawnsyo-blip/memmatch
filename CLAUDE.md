@@ -38,7 +38,8 @@
 - 同日新增字段 `setup_device`（只用手机能否装好：`phone_ok`／`needs_computer`）和客户端值 `chatgpt_gpt`（ChatGPT 自定义 GPT 的 Actions，手机 App 可用，不同于只限网页端的自定义 MCP）
 
 问卷与推荐（阶段 4）：
-- 正式问卷是负责人维护的 `记忆库推荐问卷 v5.md`（18 题＋第 3a、4a 题追问＋第 8a 题；v4 负责人 2026-10-25 确认，v5 在 v4 上加了 4a、8a，2026-10-26 按负责人要求加的，题目由 Claude 拟定，交负责人修改）。旧版问卷（v1–v4）放在 `docs/历史问卷/`，不再改；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
+- 正式问卷是负责人维护的 `记忆库推荐问卷 v6.md`（21 题＋第 3a、3b、3c 追问，第 8 题按第 7 题分两个版本；负责人改题在根目录的 `记忆库推荐问卷 v6 文字稿.md` 上进行，由配置导出、改完后同步回配置和 v6。题号只是显示用：配置里调换或插入题目时不改原有 id，用 `number` 字段设显示题号（如第 6、7 题对调后 `q7` 显示为 6；新加的第 13 题 id 是 `q12m`，原 `q13`–`q20` 显示为 14–21）；负责人 2026-10-28 在文字稿上逐题改定，正文由配置导出）。旧版问卷（v1–v5，以及 v6 的底稿“v5 文字稿”）放在 `docs/历史问卷/`，不再改；网站读的配置是 `data/questionnaire/questions.json`，两者要保持一致，改题目先问负责人
+- v6 配置的题号：第 1 题是设备（id `q1`）、第 2 题是 LLM 厂商（`q2`），和 v5 对调；第 8 题两个版本是 `q8`（用过的）和 `q8n`（没用过的），配置里用 `"number": "8"` 让页面显示同一个题号；原 q8a→q9，q9＋q12→q10，q10→q11，q11→q12。预算题 `q18` 按强制花销 `spend` 筛选（`combine: allow`）
 - 配置格式（条件、作用、合并方式、选项失效、放宽建议、加分、补充部件）见 `docs/questionnaire-format.md`
 - 推荐引擎在 `engine/`（JavaScript ES 模块，无依赖，浏览器和 Node 都能跑）：`rule-engine.js` 是规则实现，`index.js` 写明统一接口（换外部模型时另写一个实现即可），`load-node.js` 给测试和命令行加载数据
 - 命令：`npm test`（10 个虚构用户＋引擎测试，用户和期望在 `tests/personas.mjs`）；`npm run report` 生成 `docs/阶段4-推荐测试报告.md`；`node scripts/recommend.mjs 答卷.json` 跑单份答卷
@@ -68,7 +69,7 @@
 - 前端的页面清单、风格简报模板、之后的设计规范放在 `docs/前端/`
 - **正式网站在 `site/`**（2026-10-27 起）：`index.html` 首页、`quiz.html` 答题页、`result.html` 结果页（目前是占位，只列出答卷）；共用 `site/assets/tokens.css`、`theme.js`，答题逻辑在 `site/assets/quiz.js`。样张（`docs/前端/样张/`）是定稿前的试验场，改正式页面改 `site/`
 - 预览：`npm run site` 后打开 http://localhost:5173/site/ （网站要 fetch `data/` 下的问卷配置、import `engine/`，直接双击 html 打不开）
-- 答题页完全按 `data/questionnaire/questions.json` 渲染：题目分属哪个部分写在配置的 `parts`；跳题 `show_if`、默认勾选 `default_if` 用引擎导出的 `checkCondition`（和推荐引擎同一套判断）；进度条四段的长度按当前要答的题数（追问没触发就不算）；答卷存在 `localStorage` 的 `memsite-quiz-v1`（`answers` 是选项 id 数组，填空在 `free["题号.选项"]`）
+- 答题页完全按 `data/questionnaire/questions.json` 渲染：题目分属哪个部分写在配置的 `parts`；跳题 `show_if`、默认勾选 `default_if` 用引擎导出的 `checkCondition`（和推荐引擎同一套判断）；进度条四段的长度按当前要答的题数（追问没触发就不算）；答卷存在 `localStorage` 的 `memsite-quiz-v2`（v6 改了题号，所以从 v1 升级；以后改题号也要升级）（`answers` 是选项 id 数组，填空在 `free["题号.选项"]`）
 - 已装的设计和动效 skill：impeccable、web-design-guidelines、frontend-design、GSAP 官方 8 个（gsap-core、gsap-timeline、gsap-scrolltrigger、gsap-react 等，MIT，装在用户目录）、color-expert（meodai，CC BY 4.0，配色原理：按性格配色、60-30-10、明度差决定可读性；配色时用它，颜色在 OKLCH 里推导并算 WCAG 对比度）。Lenis、Vanta、React Bits 没有靠谱的 skill，用时看官方文档
 - 中文排版与文案参数以项目 skill `.claude/skills/zh-web-typography/SKILL.md` 为准（据 clreq、赫蹏、中文文案排版指北），英文设计 skill（impeccable、frontend-design）给的字号行高与之冲突时按它
 - 每页完成后用 web-design-guidelines 审一遍
@@ -95,6 +96,15 @@ AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“
 多智能体共用字段 `multi_agent`（2026-10-26，为问卷第 4a 题新增）：值 `shared`（写明几个不同的 Agent 或工具读写同一份记忆）、`per_agent`（能给每个 Agent 分开记忆空间或权限，只共享一部分），可两者都有，或 `not_mentioned`。同一个 Agent 换设备不算（那是 `cross_client`），项目内部由几个子智能体分管记忆（如 MIRIX、agent-zero 的子 agent）也不算；`namespace` 只按项目或用户分的不算 `per_agent`。和 `media_recall` 一样只靠逐项核实：扫 README 里多 agent、共享、agent_id、namespace 等词，逐条看原文判断。写明几个 Agent 共用、原来 `cross_client` 是“未提及”的 10 个顺手改成了 yes。结果：共用 64 个、能分开 29 个。
 
 额外花费字段 `spend`＋`spend_note`（2026-10-28，负责人要求）：与粗分三档的 `cost`（问卷预算题在用，没动）不同，`spend` 可多选，说明具体花在哪：`none`、`model_api`（自备模型／向量接口，按量付费）、`subscription`（已有的付费订阅，如 Claude Pro）、`hosting`（服务器、云平台、租 GPU）、`product_fee`（项目本身收费，目前没有项目属于此类）。**只统计强制花销**（不付就用不了的，负责人 2026-10-28 要求）：付费托管版、云部署的收费档位（如 Render Starter）、赞助等可选花销不进 `spend`，写在 `spend_note` 的“可选花销（不付也能用）”后面，数据里是 `data/spend_review.json` 的 `optional`。`spend_note` 是给用户看的一句话，项目只要需要另付接口或订阅等就以“需要一些额外花销来搭配这个项目”开头，含 README 写明的金额。逐项核实写在 `data/spend_review.json`（41 个：全部有托管版或收费线索的项目、订阅类、租 GPU、几个费用原文未识别的）；没列入的按“需要的账号”和 `cost` 自动推出，状态为 auto，其中收费情况没有逐项看过。金额只写 README 写明的，没写的注“README 没写，以官网为准”；Mem0 的价格是 Mengram README 对比表里的二手信息。`python -X utf8 scripts/spend_report.py` 生成 `docs/spend-report.md`。新增项目要查一遍定价线索再决定；myco、cosmos-mcp 两个仍是 unknown。预算题还没接 `spend`（改题目要先问负责人）。
+
+笔记软件当记忆（2026-10-28，负责人同意；负责人定：和记忆库一起排名，不单独列、不给优先级——它自动化程度低，而且用户可能正是嫌它不好用才来换）：
+- 两条“做法”条目，没有代码仓库：`method-note-vault`（本地 Markdown 笔记库，Obsidian、Logseq 等，Agent 直接读写或 Claude 桌面版用官方 Filesystem MCP）、`method-notion`（Notion 官方托管远程 MCP）。定义在 `candidate_review.py` 的 `METHODS`（id 在 `METHOD_IDS`，链接在 `METHOD_URLS`），分组代码 `M`，类别“做法（笔记软件当记忆）”；`method-note-vault` 的链接是给用户看的说明 `docs/做法/笔记软件当记忆.md`（含读写规则模板，称“您”）
+- 6 个笔记软件连接器作为它的部件（`NEW` 第 8 批，类别“笔记软件连接器”）：Obsidian 4 个（MCPVault、cyanheads、MarkusPfundstein、smith-and-web 可远程）、Logseq、Anytype（官方）。思源（PurpleLiu）、Joplin 收入后负责人决定去掉：笔记软件本身由个人运营的不考虑（Joplin 由作者一人主导）。结果页列出全部通过筛选的连接器，按 `RELATED` 里的顺序（Obsidian 在前），不按分数、不限个数。原来按 F3 排除；只收能写入、在维护的。不收的和原因写在第 8 批的注释里（flomo 只能写、飞书一年多没更新、Apple Notes 停更、TriliumNext 原型、思源两个都去掉、Notion 本地版已不维护）
+- `project_role` 新增 `method`、`note_connector`；做法和记忆库一起在 results 里排名（实测排在第 46–59 名），带 `parts`：通过筛选的连接器（来自 `RELATED`）；连接器不单独进 results、addons、combos。测试见 `tests/engine.test.js` 末尾
+- `check_health` 对分组 `M` 记 `status=method`、不联网检查；`decide_inclusion` 因此不会按“无法获取代码”排除它们
+- 自动规则对连接器误伤严重（笔记软件的 API token 被当成模型密钥→判成要付模型费；整理笔记→离线整理；OCR 文字→多模态），全部靠 `readme_verification.json` 改正；每个都有安全备注（AI 能删改笔记，先备份）
+- 第 3 题“遥控电脑上的 Agent”要求 `runs_on` 含 `own_computer`，所以 Notion 这类托管服务对这类用户会被排除（问卷原有规则，没改）
+- 第 7 题（配置 id 是 `q6`）新增选项 `notes`“连接 Obsidian、Notion 等笔记类软件”（负责人在文字稿里加的）：记忆存成 Markdown 文件（`human_review` 含 `files` 且 `export` 含 `markdown`）的记忆库加 2 分，做法本身不加（`unless`）。负责人 2026-10-28 定：做法不提前、不单独列，Markdown 记忆库可以优先
 
 ## 踩过的坑
 

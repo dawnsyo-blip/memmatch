@@ -15,6 +15,7 @@ CODES = {
     "P6": "偏工作/项目/团队场景，不以个人日常对话为主",
     "P7": "主打人格、档案或技能定制，记忆只是附带功能",
     "G": "教程、搭建指南或设计文档：本身不是可直接安装的软件，照着做能实现记忆、换窗或伴侣功能",
+    "M": "做法：不装专门的记忆库，用笔记软件当记忆，让 AI 通过文件或连接器读写（没有代码仓库）",
     # 排除（A/B/C/E1/E2 与路线图阶段 3 的代码含义一致）
     "A": "需要用户自己写代码才能用（只提供代码库或需自行开发前端/对接）",
     "B": "核心闭源，只能用对方的托管服务",
@@ -48,12 +49,16 @@ GROUP_POLICY = {
     "E2": ("纳入", "边缘项（存的不是对话记忆）", ""),
     # 2026-10-24 补充来源时新增：合集里有不少教程和设计文档，单列一类（Claude 提议，负责人 2026-10-24 同意）
     "G": ("纳入", "教程与搭建指南", ""),
+    # 2026-10-28 负责人同意：笔记软件当记忆作为“做法”收入，只作参考选项，不和记忆库一起排名
+    "M": ("纳入", "做法（笔记软件当记忆）", ""),
 }
 
 # 个别项目的收录类别不按代码推算，直接指定（键为项目名）
 CATEGORY_OVERRIDE = {
     "EchoVault": "需写代码（开发者向）",
     "Memex": "自带记忆的应用",
+    **{n: "笔记软件连接器" for n in ("MCPVault", "Obsidian MCP Server（cyanheads）", "mcp-obsidian（MarkusPfundstein）",
+                                   "Obsidian MCP Server（smith-and-web）", "Anytype MCP", "mcp-logseq")},
 }
 DEFAULT_CATEGORY = "可接入已有助手"
 
@@ -824,6 +829,64 @@ NEW.update({
         "中：装 Python 后起服务，再生成各人的访问地址", "无（不调用模型）", "MIT；负责人 2026-10-27 要求收入；是共写日记而非自动记忆库（没有自动提取和检索排序）；访问地址里带密钥，视同密码"),
 })
 
+# 第 8 批（2026-10-28，负责人同意）：笔记软件连接器。原来按 F3“笔记软件连接器，不是对话记忆”排除；
+# 现在作为“笔记软件当记忆”这条做法（见 METHODS）的部件收入：只收能写入、还在维护的，每种笔记软件挑一两个。
+# 不收：只能搜索不能写的；flomo（社区连接器只能写不能读）；飞书 lark-openapi-mcp（一年多没更新、要先建开放平台应用）；
+# Apple Notes（mcp-apple-notes 2024-12 后没更新）；TriliumNext（作者写明是原型）；思源 porkll/siyuan-mcp（已归档）；思源 PurpleLiu/siyuan-mcp 收入后负责人 2026-10-28 决定去掉（Star 只有个位数、超过半年没更新）；Joplin 同日去掉：负责人定笔记软件本身由个人运营的不考虑，Joplin 由作者 Laurent Cozic 一人主导开发（Obsidian、Logseq、Anytype、Notion 都是公司运营）。
+# Notion 的官方连接器是托管服务、没有维护中的仓库（makenotion/notion-mcp-server 已声明不再维护），直接写进做法条目。
+_NC = "笔记软件连接器（直接读写笔记，没有自动提取、整理和遗忘，要自己定规则）"
+NEW.update({
+    "bitbonsai/mcp-obsidian": _e("MCPVault", "纳入", "", "让 AI 读写、搜索 Obsidian 笔记库：直接操作笔记文件，不需要打开 Obsidian 或装插件，文件操作限制在笔记库目录里",
+        "笔记（由你和 AI 共同维护）", "MCP（本地）", "Claude 桌面版、Claude Code、Codex、Gemini CLI、OpenCode、Cursor 等 MCP 客户端", "自己的电脑",
+        "中：装 Node.js 后在客户端配置里加一段", "无（不调用模型）", _NC + "；仓库已更名为 MCPVault"),
+    "cyanheads/obsidian-mcp-server": _e("Obsidian MCP Server（cyanheads）", "纳入", "", "通过 Obsidian 的 Local REST API 插件读写笔记：可只改某个标题下的一段或某个属性，删除前可要求确认",
+        "笔记（由你和 AI 共同维护）", "MCP（本地 stdio 或 Streamable HTTP）", "Claude 桌面版、Claude Code、Cursor 等 MCP 客户端", "自己的电脑（Obsidian 要开着）",
+        "中：Obsidian 里装 Local REST API 插件、复制密钥，再配置客户端", "无（不调用模型）", _NC),
+    "markuspfundstein/mcp-obsidian": _e("mcp-obsidian（MarkusPfundstein）", "纳入", "", "最早、Star 最多的 Obsidian 连接器：经 Local REST API 插件列出、读取、搜索、追加、局部修改和删除笔记",
+        "笔记（由你和 AI 共同维护）", "MCP（本地）", "Claude 桌面版等 MCP 客户端", "自己的电脑（Obsidian 要开着）",
+        "中：Obsidian 里装 Local REST API 插件、复制密钥，再配置客户端（要装 uv）", "无（不调用模型）", _NC),
+    "smith-and-web/obsidian-mcp-server": _e("Obsidian MCP Server（smith-and-web）", "纳入", "", "放在服务器上的 Obsidian 连接器：通过网络访问笔记库，可选用本地 Ollama 向量做按意思搜索（要另起 Postgres）",
+        "笔记（由你和 AI 共同维护）", "MCP（HTTP＋SSE，可远程）", "支持远程 MCP 的客户端；只支持本地的客户端经 mcp-remote 转接", "自己的电脑或服务器（Docker 或 npx；笔记库要同步到这台机器）",
+        "高：要起服务、设密钥，远程用还要配域名或 Tailscale", "无（不调用模型）", _NC + "；只支持 Bearer 密钥认证"),
+    "anyproto/anytype-mcp": _e("Anytype MCP", "纳入", "", "Anytype 官方连接器：让 AI 搜索、读取、新建和修改 Anytype 里的空间、对象和清单",
+        "笔记（由你和 AI 共同维护）", "MCP（本地）", "Claude 桌面版、Cursor、LM Studio 等 MCP 客户端", "自己的电脑（Anytype 要开着）",
+        "中：Anytype 里生成 API 密钥，再配置客户端", "无（不调用模型）", _NC + "；官方出品"),
+    "ergut/mcp-logseq": _e("mcp-logseq", "纳入", "", "通过 Logseq 的本地 HTTP 接口让 AI 读写页面和块，可选向量搜索",
+        "笔记（由你和 AI 共同维护）", "MCP（本地）", "Claude 桌面版、Claude Code、Codex、Cursor 等 MCP 客户端", "自己的电脑（Logseq 要开着并打开 HTTP 接口）",
+        "中：Logseq 设置里开 HTTP 接口、生成令牌，再配置客户端（要装 uv）", "无（不调用模型；向量搜索可选）", _NC),
+    "alondmnt/joplin-mcp": _e("Joplin MCP", "排除", "P5", "让 AI 读写 Joplin 笔记、笔记本和标签，能读附件图片和 PDF 里识别出的文字，可分别开关新建、修改、删除权限",
+        "笔记（由你和 AI 共同维护）", "MCP（本地）；另有 Claude Code 插件", "Claude 桌面版、Claude Code、Jan 等 MCP 客户端", "自己的电脑（Joplin 要开着并启用 Web Clipper 服务）",
+        "中：Joplin 里复制授权令牌，再配置客户端（要装 uv）", "无（不调用模型）", _NC),
+    "purpleliu/siyuan-mcp": _e("SiYuan MCP（PurpleLiu）", "排除", "P5", "让 AI 搜索、读取、新建和整理思源笔记里的文档，支持本地和 HTTP 两种接法",
+        "笔记（由你和 AI 共同维护）", "MCP（本地 stdio 或 HTTP）", "Claude 桌面版、Cursor 等 MCP 客户端", "自己的电脑（思源笔记要开着）",
+        "中：思源设置里复制 API 令牌，从源码构建后配置客户端", "无（不调用模型）", _NC + "；Star 很少，是目前能找到的、还在维护的思源连接器（另一个 porkll/siyuan-mcp 已归档）"),
+})
+EXTRA_SOURCES_NOTE_APPS = "网络检索（笔记软件连接器，2026-10-28 负责人同意收入）"
+
+# 做法条目：没有代码仓库，按名称记录。名称 -> 各列（url 填说明文档或官方文档）
+METHODS = {
+    "笔记库当记忆（Obsidian 等本地 Markdown 笔记）": _e("笔记库当记忆（Obsidian 等本地 Markdown 笔记）", "纳入", "M",
+        "不装专门的记忆库：把记忆写在本地笔记库（Obsidian、Logseq 等，本质是一个 Markdown 文件夹）里，让能读写文件的 AI 按你定的规则读和记；记忆全是普通文件，随时手改，换模型也带得走",
+        "你定的内容（关于你、约定、日记等）", "Agent 直接读写文件；Claude 桌面版用官方 Filesystem MCP；也可装笔记软件连接器",
+        "Claude Code、Codex、Gemini CLI、OpenCode、Cursor 等能读写文件的 Agent；Claude 桌面版（Filesystem MCP）",
+        "自己的电脑（手机要另配同步或远程连接）", "中：建文件夹、写一段规则；Claude 桌面版要加一段 MCP 配置", "无",
+        "没有自动提取、去重和遗忘，全看 AI 守不守规则；Obsidian 本身免费，跨设备同步可用 Obsidian Sync（付费）、iCloud 或 Git"),
+    "Notion 当记忆（官方远程 MCP）": _e("Notion 当记忆（官方远程 MCP）", "纳入", "M",
+        "不装专门的记忆库：在 Notion 里建一个记忆页面或数据库，通过 Notion 官方托管的远程 MCP 让 AI 搜索、读取、新建和修改页面；Notion 每种套餐都能用，记忆在 Notion 里随时手改",
+        "你定的内容（关于你、约定、日记等）", "远程 MCP（Notion 官方托管，网址 https://mcp.notion.com/mcp，OAuth 登录）",
+        "Claude Code、Codex、Cursor、Hermes、VS Code 等（Notion 文档列出的）；Claude 桌面版和网页版、手机 App 可添加自定义连接器（付费套餐）；ChatGPT 网页端可添加",
+        "Notion 的服务器（托管）", "低：在客户端填网址并登录 Notion", "Notion 账号（免费版即可）",
+        "没有自动提取、去重和遗忘，全看 AI 守不守规则；记忆存在 Notion 的服务器上；原来的本地开源版 makenotion/notion-mcp-server 已声明不再维护"),
+}
+METHOD_IDS = {
+    "笔记库当记忆（Obsidian 等本地 Markdown 笔记）": "method-note-vault",
+    "Notion 当记忆（官方远程 MCP）": "method-notion",
+}
+METHOD_URLS = {
+    "笔记库当记忆（Obsidian 等本地 Markdown 笔记）": "docs/做法/笔记软件当记忆.md",
+    "Notion 当记忆（官方远程 MCP）": "https://developers.notion.com/docs/get-started-with-mcp",
+}
+
 # 上面这些条目来自哪个来源（awesome-ai-companion 的由快照解析，不在这里列）
 _CTX = "上下文工程合集（yzfly/awesome-context-engineering）"
 _ST = "酒馆插件合集（Min3Mast3r4653/SillyTavern-Extensions-and-Themes）"
@@ -895,6 +958,9 @@ BENCH.update({
 EXTRA_SOURCES.update({k: "负责人指定（多智能体记忆，2026-10-26）" for k in ["avids2/memorix", "wujiangxu/a-mem", "campfirein/cipher"]})
 EXTRA_SOURCES["yunsheng613/shared-diary-mcp"] = "AI Companion Atlas（非记忆标签，负责人 2026-10-27 指定收入）"
 EXTRA_SOURCES["in30mn1a/lumimuse"] ="AI Companion Atlas / awesome-ai-companion（其它栏目，2026-10-27 核对站点更新时发现）"
+EXTRA_SOURCES.update({k: EXTRA_SOURCES_NOTE_APPS for k in ["cyanheads/obsidian-mcp-server", "markuspfundstein/mcp-obsidian",
+                                                         "anyproto/anytype-mcp", "ergut/mcp-logseq", "alondmnt/joplin-mcp",
+                                                         "purpleliu/siyuan-mcp"]})
 
 # 没有 GitHub 仓库、只按名称记录的条目：名称 -> (结论, 代码, 说明, 备注)
 NAME_ONLY = {

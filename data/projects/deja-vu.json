@@ -376,7 +376,7 @@
         "no_llm"
       ],
       "status": "auto",
-      "basis": "no_llm：说明：“，把相关部分交给当前智能体；纯词法检索，不用大模型，嵌入向量可选（可接本地 Ollama）”"
+      "basis": "no_llm：说明：“能体，实现跨智能体共享经验；纯词法检索，不用大模型和向量；历史会话；MCP（.mcpb）＋”"
     },
     "sensitive_suppression": {
       "value": "yes",

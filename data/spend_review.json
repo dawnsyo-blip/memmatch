@@ -382,5 +382,23 @@
       "model_api"
     ],
     "detail": "每一轮要多调用一次模型生成内心独白，费用随之增加；README 的测试里换成 flash-lite 后没再撞到免费额度上限"
+  },
+  "method-notion": {
+    "checked": "2026-10-28",
+    "by": "Notion 官方开发者文档",
+    "values": [
+      "none"
+    ],
+    "detail": "Notion 免费版即可用 MCP；商业版、企业版的请求上限更高",
+    "optional": "在 Claude 网页版、桌面版或手机 App 里添加自定义连接器要 Claude 付费套餐"
+  },
+  "method-note-vault": {
+    "checked": "2026-10-28",
+    "by": "Claude 整理",
+    "values": [
+      "none"
+    ],
+    "detail": "",
+    "optional": "想在手机上看笔记，可以用 Obsidian Sync（付费）同步，也可以用 iCloud、Git 免费同步"
   }
 }

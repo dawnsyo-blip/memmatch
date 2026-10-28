@@ -164,7 +164,7 @@
         "files"
       ],
       "status": "auto",
-      "basis": "dashboard：an htop-inspired project dashboard. Full [CHANGELOG](CHANG；files：人和 AI 共同读写的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AG；cli：(skills). If your Skills CLI supports repository subd"
+      "basis": "dashboard：an htop-inspired project dashboard. Full [CHANGELOG](CHANG；files：Your knowledge lives as Markdown files that both you and your A；cli：(skills). If your Skills CLI supports repository subd"
     },
     "export": {
       "value": [
@@ -199,7 +199,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“的 Markdown 笔记知识库，几个 AI 工具共用：本地版永久免费（AGPL）；云版每月约 15 美”"
+      "basis": "README：“ee what they do. - **Cloud, optional.** Sync across devices when you want — never required.”（已核对）"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -287,7 +287,7 @@
         "relation"
       ],
       "status": "auto",
-      "basis": "semantic：README：“ks compound into context. - **Semantic search.** Find notes by meaning, not”；relation：README：“eeps them in step. - **A real knowledge graph.** Observations and wikilinks”"
+      "basis": "semantic：README：“ks compound into context. - **Semantic search.** Find notes by meaning, not”；relation：说明：“AI 共同读写的 Markdown 知识图谱；本地版免费，另有付费云版；笔记＋对话上”"
     },
     "scoring_stages": {
       "value": [

@@ -312,7 +312,7 @@
         "confidence"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“模式用 BM25 关键词检索，配嵌入后加语义检索；本地运行，带实时查看面板；macOS、”；keyword：README：“offline replay. - **Recall:** keyword search works without an API key; loc”；recency：README：“| \"How to do it\" | Memories decay over time (Ebbinghaus curve). Frequentl”；frequency：README：“over time (Ebbinghaus curve). Frequently accessed memories strengthen. Stale me”；relation：README：“onfidence scoring, lifecycle, knowledge graphs, and hybrid search: agentmem”；confidence：README：“pathy's LLM Wiki pattern with confidence scoring, lifecycle, knowledge graphs,”"
+      "basis": "semantic：说明：“，多个智能体通过租约和信号协调共享；本地向量，无需外部数据库；项目决定＋经验＋会话要”；keyword：README：“offline replay. - **Recall:** keyword search works without an API key; loc”；recency：README：“| \"How to do it\" | Memories decay over time (Ebbinghaus curve). Frequentl”；frequency：README：“over time (Ebbinghaus curve). Frequently accessed memories strengthen. Stale me”；relation：README：“onfidence scoring, lifecycle, knowledge graphs, and hybrid search: agentmem”；confidence：README：“pathy's LLM Wiki pattern with confidence scoring, lifecycle, knowledge graphs,”"
     },
     "scoring_stages": {
       "value": [

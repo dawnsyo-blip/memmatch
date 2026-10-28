@@ -239,6 +239,13 @@ def collect_rows():
             name=name, v=v, c=code, desc=desc, subj="", acc="", cli="", run="", diff="", need="", lic="", date="",
             stars=None, url="", src=["评测榜单（LongMemEval、BEAM 等）"], note=note,
             prov={f: PROV_CLAUDE for f in INFO_FIELDS}, raw={"评测榜单": note})
+    # 做法条目（笔记软件当记忆）：没有代码仓库，链接填说明文档或官方文档
+    for name, e in R.METHODS.items():
+        rows[f"name:{name}"] = dict(
+            name=e["name"], v=e["v"], c=e["c"], desc=e["desc"], subj=e["subj"], acc=e["acc"], cli=e["cli"],
+            run=e["run"], diff=e["diff"], need=e["need"], lic="", date="", stars=None, url=R.METHOD_URLS[name],
+            src=["Claude 整理（负责人 2026-10-28 同意收入）"], note=e["note"],
+            prov={f: PROV_CLAUDE for f in INFO_FIELDS}, raw={"人工筛选": e})
 
     # 5) 评测成绩写进备注和 raw（多为厂商自报，只作参考）
     for key, score in R.BENCH.items():

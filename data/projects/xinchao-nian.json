@@ -268,7 +268,7 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股劲儿上来了”的提示；”"
+      "basis": "原表／说明：“+、含非商业约束；会“惦记”你：12 维驱力＋两层情绪＋记得在为什么生气；18+；整体不可商用；动态驱力”"
     },
     "proactive": {
       "value": "yes",
@@ -358,7 +358,7 @@
         "weighting"
       ],
       "status": "auto",
-      "basis": "tags：README：“把这些递到 AI 窗口里的两条通道。 - **情绪层**：valence / arousal 两轴，和 OB 记忆桶同一套坐标；事件”；ai_state：说明：“的内在状态：想念、期待、吃醋等 11 股驱力和两层情绪随时间变化，自己按节奏递“哪股”；weighting：排序因素含情感强度"
+      "basis": "tags：README：“把这些递到 AI 窗口里的两条通道。 - **情绪层**：valence / arousal 两轴，和 OB 记忆桶同一套坐标；事件”；ai_state：说明：“动态驱力引擎与 Ombre Brain 合并发行”；weighting：排序因素含情感强度"
     },
     "project_role": {
       "value": "full_memory",

@@ -4,7 +4,7 @@
 import { checkCondition } from "../../engine/index.js";
 
 const CONFIG_URL = "../data/questionnaire/questions.json";
-const KEY = "memsite-quiz-v1";
+const KEY = "memsite-quiz-v2";
 const NS = "http://www.w3.org/2000/svg";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const TYPE_NOTE = { single: "单选", multi: "可多选", rank: "可多选，按重要程度排序" };
@@ -23,7 +23,7 @@ const partOf = {};
 cfg.parts.forEach((p, k) => p.questions.forEach((id) => { partOf[id] = k; }));
 const QS = cfg.questions.map((q) => ({
   id: q.id,
-  num: `第 ${q.id.slice(1)} 题`,
+  num: `第 ${q.number || q.id.slice(1)} 题`,
   part: partOf[q.id],
   type: q.type,
   text: q.text,

@@ -245,6 +245,7 @@ def flags(h):
 def write_report(docs):
     ok = [d for d in docs if d["health"]["status"] == "ok"]
     bad = [d for d in docs if d["health"]["status"] in ("not_github", "unreachable")]
+    methods = [d for d in docs if d["health"]["status"] == "method"]
     failed = [d for d in docs if d["health"]["status"] == "error"]
     from collections import Counter
     flag_count = Counter(x for d in docs for x in d["health"]["flags"])
@@ -253,7 +254,7 @@ def write_report(docs):
         f"> 由 `scripts/check_health.py` 生成，检查日期 {TODAY.isoformat()}。按路线图只在导入时检查一次，网站上每个项目会显示这个“信息核实日期”。", "",
         "检查方法：git 克隆近一年的提交记录（不下载文件内容、不运行代码），统计最后提交日期、近一年提交数和贡献人数（不计机器人账号），"
         "读取仓库里的许可证文件；再从仓库网页读取是否已归档、正式发布版本数和 Star 数。", "",
-        f"共 {len(docs)} 个项目，成功检查 {len(ok)} 个，无法自动检查 {len(bad)} 个，因网络问题检查失败 {len(failed)} 个（用 `--resume` 重试）。停更阈值为 {SETTINGS['stale_days']} 天（可在 `data/settings.json` 修改）。", "",
+        f"共 {len(docs)} 个项目（含 {len(methods)} 个不需要检查的做法条目），成功检查 {len(ok)} 个，无法自动检查 {len(bad)} 个，因网络问题检查失败 {len(failed)} 个（用 `--resume` 重试）。停更阈值为 {SETTINGS['stale_days']} 天（可在 `data/settings.json` 修改）。", "",
         "## 风险提示统计（只提示、不排除）", "", "| 提示 | 项目数 |", "|---|---|",
     ] + [f"| {k} | {v} |" for k, v in flag_count.most_common()] + [""]
 
@@ -276,7 +277,7 @@ def write_report(docs):
     for d in sorted(docs, key=lambda d: d["name"].lower()):
         h = d["health"]
         if h["status"] != "ok":
-            lines.append(f"| {d['name']} | — | — | — | — | — | — | — | 无法自动检查 |")
+            lines.append(f"| {d['name']} | — | — | — | — | — | — | — | {'做法条目，不检查' if h['status'] == 'method' else '无法自动检查'} |")
             continue
         lines.append(f"| {d['name']} | {h.get('last_commit') or '—'} | {h.get('days_since_commit', '—')} | "
                      f"{h.get('commits_1y', '—')}／{h.get('contributors_1y', '—')} | {h.get('release_count', '—')} | "
@@ -324,6 +325,12 @@ def main():
         return True
 
     todo = [p for p in paths if needs(p)]
+    # 做法条目（笔记软件当记忆）没有代码仓库，不检查维护情况和许可证
+    for p in [p for p in todo if docs[p]["candidate"]["group_code"] == "M"]:
+        docs[p]["health"] = {"checked_on": TODAY.isoformat(), "method": "做法条目，不检查", "checker_version": CHECKER_VERSION,
+                             "status": "method", "note": "做法条目，没有代码仓库", "flags": []}
+        p.write_text(json.dumps(docs[p], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        todo.remove(p)
     if not github_reachable():
         raise SystemExit("现在连不上 github.com，稍后再试（用 --resume 继续）。")
     failures = 0

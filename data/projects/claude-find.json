@@ -191,7 +191,7 @@
     "verbatim": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“aude Code 历史会话做语义＋关键词搜索，搜原文而不是摘要；只服务 Claude Code，要装”"
+      "basis": "原表／说明：“部 Claude Code 历史对话做语义搜索，搜原文而非摘要；历史对话；MCP；Claude Code”"
     },
     "multimodal": {
       "value": "not_mentioned",
@@ -274,7 +274,7 @@
         "keyword"
       ],
       "status": "auto",
-      "basis": "semantic：README：“need it. ![demo](demo.gif) Semantic search over all your past Claude Cod”；keyword：说明：“Claude Code 历史会话做语义＋关键词搜索，搜原文而不是摘要；只服务 Clau”"
+      "basis": "semantic：说明：“全部 Claude Code 历史对话做语义搜索，搜原文而非摘要；历史对话；MCP；Cl”；keyword：README：“th hybrid semantic + keyword (FTS5) merged via Reciprocal Rank F”"
     },
     "scoring_stages": {
       "value": [
@@ -380,7 +380,7 @@
     "local_model": {
       "value": "yes",
       "status": "auto",
-      "basis": "说明：“laude Code，要装 Bun 和 Ollama；历史对话；MCP；Claude Cod”"
+      "basis": "README：“tup ```bash brew install bun ollama bunx claude-find setup ``` `”"
     },
     "model_lock": {
       "value": "claude_only",

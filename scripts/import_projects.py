@@ -36,7 +36,7 @@ def make_ids(rows):
     """优先用仓库名；重名时加上所有者；非 GitHub 项目用项目名。"""
     def base(key, r):
         if key.startswith("name:"):
-            return slug(r["name"]) or "project"
+            return R.METHOD_IDS.get(key[5:]) or slug(r["name"]) or "project"
         return slug(key.split("/", 1)[1])
 
     bases = {k: base(k, r) for k, r in rows.items()}

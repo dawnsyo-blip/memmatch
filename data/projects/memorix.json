@@ -206,7 +206,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“本地优先的共享项目记忆层：二十多种编程智能体共用一份记忆（SQLite 存储，大模型和嵌入都是可选”"
+      "basis": "原表／说明：“ursor、Gemini CLI 等二十多种智能体共用一份记忆，可协调多智能体协作，有本地控制面板；项目”"
     },
     "verbatim": {
       "value": "not_mentioned",

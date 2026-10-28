@@ -196,7 +196,7 @@
     "verbatim": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“MCP 记忆（MemPalace 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验”"
+      "basis": "README：“ory project that helped show how useful verbatim, searchable long-term memory can be for”（已核对）"
     },
     "multimodal": {
       "value": "not_mentioned",
@@ -280,7 +280,7 @@
         "relation"
       ],
       "status": "auto",
-      "basis": "semantic：README：“**Vectorize** powers semantic vector search. - **Workers AI** generates e”；keyword：README：“wers with hybrid semantic and lexical retrieval. - `mempalace_check_duplicate”；relation：说明：“ce 的云端版）：保留原文、带时间的知识图谱、冲突检查；ChatGPT 已验证可连，”"
+      "basis": "semantic：README：“**Vectorize** powers semantic vector search. - **Workers AI** generates e”；keyword：README：“wers with hybrid semantic and lexical retrieval. - `mempalace_check_duplicate”；relation：README：“index rows for the tenant. **Knowledge graph tools** - `mempalace_kg_quer”"
     },
     "scoring_stages": {
       "value": [

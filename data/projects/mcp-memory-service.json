@@ -227,7 +227,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“管的记忆服务：本地向量＋关键词检索、知识图谱、定期整合与衰减归档，带八个标签页的网页面板；可用 OAut”"
+      "basis": "原表／说明：“自托管记忆后端：语义搜索、自动整合、面板；可做远程 MCP 给网页版用；用户事实＋决”"
     },
     "emotion": {
       "value": "not_mentioned",

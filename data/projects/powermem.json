@@ -300,7 +300,7 @@
         "semantic"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“模式不需要模型密钥，完整模式要自备生成和嵌入模型密钥；macOS、Linux 支持，Wi”"
+      "basis": "semantic：README：“t`, and `Trigger` contracts | Embedding PowerContext or adding a comp”"
     },
     "scoring_stages": {
       "value": [

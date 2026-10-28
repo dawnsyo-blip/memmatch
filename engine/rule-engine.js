@@ -300,8 +300,9 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const main = results.filter((r) => r.role === "full_memory" || r.role === "companion_app");
     const complete = main.slice(0, 10).find((r) => r.lifecycle_complete);
     if (complete) combos.push({ title: "一个项目覆盖写入、整理、召回、遗忘、查看修改全流程", parts: [{ role: "完整记忆系统", id: complete.id, name: complete.name }] });
-    const byId = Object.fromEntries(results.map((r) => [r.id, r]));
-    for (const r of results.slice(0, 10)) {
+    const memories = results.filter((r) => r.role !== "note_connector"); // 连接器只挂在做法下面，不单独组合
+    const byId = Object.fromEntries(memories.map((r) => [r.id, r]));
+    for (const r of memories.slice(0, 10)) {
       for (const pid of r.pairs_with) {
         if (byId[pid] && !combos.some((c) => c.parts.some((x) => x.id === pid) && c.parts.some((x) => x.id === r.id))) {
           combos.push({ title: "设计上就是搭配使用的组合", parts: [{ role: "主记忆", id: r.id, name: r.name }, { role: "搭配", id: pid, name: byId[pid].name }] });
@@ -320,8 +321,12 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const run = filter(answers, projects);
     const scored = run.kept.map(present).sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));
     const topN = questionnaire.result?.top_n || 8;
-    const isMain = (r) => !["context_tool", "state_engine", "guide"].includes(r.role);
-    const results = scored.filter(isMain);
+    const isMain = (r) => !["context_tool", "state_engine", "guide", "note_connector"].includes(r.role);
+    // 做法（笔记软件当记忆）和记忆库一起排名；笔记软件连接器不单独排名，挂在做法下面作为可选工具：
+    // 列出全部通过筛选的，按 pairs_with 的顺序（数据里按笔记软件排好，Obsidian 在前），不按分数
+    const connectors = Object.fromEntries(scored.filter((r) => r.role === "note_connector").map((c) => [c.id, c]));
+    const results = scored.filter(isMain)
+      .map((r) => (r.role === "method" ? { ...r, parts: r.pairs_with.map((id) => connectors[id]).filter(Boolean) } : r));
 
     const addons = {};
     for (const ad of questionnaire.addons || []) {

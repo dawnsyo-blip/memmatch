@@ -24,7 +24,9 @@ ENUMS = {
     "project_role": {
         "full_memory": "完整记忆系统", "context_tool": "上下文延续工具（压缩、摘要、换窗）",
         "memory_component": "记忆部件（只做其中一环）", "state_engine": "状态引擎（情绪、身体、梦）",
-        "companion_app": "自带记忆的应用或 agent", "dev_framework": "开发框架或代码库", "guide": "教程或设计文档"},
+        "companion_app": "自带记忆的应用或 agent", "dev_framework": "开发框架或代码库", "guide": "教程或设计文档",
+        # 2026-10-28：笔记软件当记忆。这两类只作参考选项，引擎单独输出（methods），不和记忆库一起排名
+        "method": "做法（不装专门的记忆库，用笔记软件当记忆）", "note_connector": "笔记软件连接器（做法的部件）"},
     "lifecycle": {"capture": "写入", "consolidate": "整理（合并、摘要、反思）", "retrieve": "召回",
                   "forget": "自动遗忘或归档", "review": "人工查看和修改"},
     "lifecycle_complete": {"complete": "五个环节都有", "partial": "只覆盖部分环节"},
@@ -316,6 +318,13 @@ RELATED = {
     "rolling-memory": [("lmc-5", "作者说明可和 LMC-5 这类外置记忆库一起用，负责紧接着的对话衔接")],
     "tidefall": [("eventide", "Tidefall 的周期和事件设定来自 Eventide")],
     "swap-tutorial": [("lmc-5", "教程用的是 LMC-5 的精炼续窗脚本")],
+    # 2026-10-28：笔记库当记忆这条做法的可选连接器（Agent 能直接读写文件时不需要）。按这里的顺序显示：Obsidian 在前
+    "method-note-vault": [
+        ("bitbonsai-mcp-obsidian", "Obsidian：直接读写笔记文件，不用开 Obsidian"),
+        ("cyanheads-obsidian-mcp-server", "Obsidian：经 Local REST API 插件，可局部修改"),
+        ("markuspfundstein-mcp-obsidian", "Obsidian：经 Local REST API 插件，Star 最多"),
+        ("smith-and-web-obsidian-mcp-server", "Obsidian：放在服务器上远程访问"),
+        ("mcp-logseq", "Logseq"), ("anytype-mcp", "Anytype（官方）")],
     "ai-companion-telegram-guide": [("mochibot", "教程基于 MochiBot")],
 }
 

@@ -238,17 +238,17 @@
     "multimodal": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“录；用户事实（生活日志）；独立 App；记忆来源是多模态生活日志，是采集端 App，不是对话记忆层；不是供”"
+      "basis": "原表／说明：“记忆来源是“人的生活日志”而非聊天记录，多模态碎片→时间线，可迁移为 Markdown；用户事实”"
     },
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模型 Ke”"
+      "basis": "原表／说明：“忆来源是“人的生活日志”而非聊天记录，多模态碎片→时间线，可迁移为 Markdown；用户事实（生活日志）”"
     },
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“S、安卓应用商店可下载）：随手记下碎片，AI 自动整理成时间线卡片、日程和知识；数据只存在手机上，自带模”"
+      "basis": "原表／说明：“移为 Markdown；多 Agent 把碎片记录整理成结构化卡片，自动打标签、实体抽取、关联链接；专门”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -308,7 +308,7 @@
     "privacy_protection": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“本地优先的 AI 生活日志 App（iOS、安卓应用商店可”"
+      "basis": "README：“ation - No cloud dependency — your data never leaves your device ### 📂 Storage & Backup - Supports iClo”（已核对）"
     },
     "ranking_signals": {
       "value": [

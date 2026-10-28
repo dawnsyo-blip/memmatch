@@ -163,7 +163,7 @@
         "tools"
       ],
       "status": "auto",
-      "basis": "cli：图谱；内置本地嵌入模型，不需要 API Key，以命令行为主；CLI＋MCP；2026-09 改名，以命令；tools：mory`, `list_memories`, `update_memory`, `delete_memory`, `expo"
+      "basis": "cli：内置本地嵌入模型，可用 rclone 跨机器同步；CLI＋MCP；2026-09 改名，以命令行为主；#；tools：mory`, `list_memories`, `update_memory`, `delete_memory`, `expo"
     },
     "export": {
       "value": [
@@ -363,7 +363,7 @@
         "rerank"
       ],
       "status": "auto",
-      "basis": "rerank：说明：“本地持久记忆：关键词＋向量混合检索再重排，按重要性和新旧自动归档，带时间知识图谱”"
+      "basis": "rerank：README：“for ONNX/GGUF embeddings and reranking | Library | | [skret](http”"
     },
     "recall_uses_llm": {
       "value": [

@@ -211,7 +211,7 @@
     "time_awareness": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“决定保留、合并或修改；本地中文向量＋关键词检索，带时间线和手机网页工作台；测试版，禁止商用；对话事件与关系”"
+      "basis": "README：“dated while changes remain visible as a timeline. - **Revisable importance:** memories c”（已核对）"
     },
     "dream_consolidation": {
       "value": "yes",
@@ -285,7 +285,7 @@
         "importance"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“AI 一起决定保留、合并或修改；本地中文向量＋关键词检索，带时间线和手机网页工作台；”；keyword：说明：“一起决定保留、合并或修改；本地中文向量＋关键词检索，带时间线和手机网页工作台；测试版，”；importance：README：“as a timeline. - **Revisable importance:** memories can be weighted,”"
+      "basis": "semantic：说明：“I 决定保留、合并或修改；本地 CPU 向量检索，带手机网页；对话事件与关系里程碑；”；keyword：README：“retrieval combined with exact keyword search; - reviewable consolidation f”；importance：README：“as a timeline. - **Revisable importance:** memories can be weighted,”"
     },
     "scoring_stages": {
       "value": [
@@ -348,7 +348,7 @@
         "zh_retrieval"
       ],
       "status": "auto",
-      "basis": "zh_docs：README 有中文版链接（“中文说明”）；zh_retrieval：说明：“和 AI 一起决定保留、合并或修改；本地中文向量＋关键词检索，带时间线和手机网页工作台；”"
+      "basis": "zh_docs：README 有中文版链接（“中文说明”）；zh_retrieval：README：“dings via FastEmbed and `BAAI/bge-small-zh-v1.5`; - JSON-file and authen”"
     },
     "memory_layers": {
       "value": "layered",

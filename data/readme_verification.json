@@ -6772,5 +6772,801 @@
         "note": "多个 AI 和人通过各自的访问地址读写同一本日记"
       }
     }
+  },
+  "method-note-vault": {
+    "checked": "2026-10-28",
+    "by": "Claude 整理（做法条目，没有 README）",
+    "fields": {
+      "project_role": {
+        "value": "method",
+        "note": "做法条目：不装专门的记忆库，用本地笔记库当记忆"
+      },
+      "access": {
+        "value": [
+          "guide"
+        ],
+        "note": "照着做：Agent 直接读写文件，Claude 桌面版用官方 Filesystem MCP，也可装笔记软件连接器"
+      },
+      "compatible_clients": {
+        "value": [
+          "claude_code",
+          "codex",
+          "gemini_cli",
+          "opencode",
+          "cursor",
+          "claude_desktop"
+        ],
+        "note": "能读写文件的 Agent；Claude 桌面版经 Filesystem MCP"
+      },
+      "runs_on": {
+        "value": [
+          "own_computer"
+        ],
+        "note": "笔记库在自己的电脑上；手机只能看同步过去的笔记"
+      },
+      "os": {
+        "value": [
+          "windows",
+          "macos",
+          "linux"
+        ],
+        "note": "Obsidian、Logseq 和这些 Agent 都支持三种系统"
+      },
+      "difficulty": {
+        "value": "medium",
+        "note": "建文件夹、写一段规则；Claude 桌面版要加一段 MCP 配置"
+      },
+      "cost": {
+        "value": "free",
+        "note": "笔记软件和 Filesystem MCP 免费；模型费用按您原本用的 Agent 算"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "不需要额外账号"
+      },
+      "memory_subject": {
+        "value": [
+          "user_facts",
+          "task_context"
+        ],
+        "note": "您定的内容：关于您、约定、日记"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "按规则由 AI 写，或您说“记住”时写；没有自动提取"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "AI 按规则写，您也能直接写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘，过时内容按规则移到归档文件夹"
+      },
+      "human_review": {
+        "value": [
+          "files"
+        ],
+        "note": "就是普通笔记文件"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "本来就是 Markdown 文件"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "文件在本机；读到的内容会发给您用的模型"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "几个 Agent 读同一个文件夹即可"
+      },
+      "time_awareness": {
+        "value": "yes",
+        "note": "日记按日期分文件"
+      },
+      "pinning": {
+        "value": "yes",
+        "note": "“关于我”“约定”每次对话都先读，相当于钉选"
+      },
+      "phone_access": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "手机官方 App 读不到电脑上的文件，要同步或遥控电脑"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要在电脑上操作"
+      },
+      "local_model": {
+        "value": "yes",
+        "note": "支持本地模型的 Agent（如 OpenCode）也能用"
+      },
+      "customization": {
+        "value": [
+          "plain_data",
+          "prompts"
+        ],
+        "note": "记忆是普通文件，规则是一段文字，都能自己改"
+      },
+      "chinese_support": {
+        "value": [
+          "zh_docs"
+        ],
+        "note": "说明文档是中文"
+      }
+    }
+  },
+  "method-notion": {
+    "checked": "2026-10-28",
+    "by": "Notion 官方开发者文档（get-started-with-mcp、common-mcp-clients）",
+    "fields": {
+      "project_role": {
+        "value": "method",
+        "note": "做法条目：不装专门的记忆库，用 Notion 页面当记忆"
+      },
+      "access": {
+        "value": [
+          "mcp"
+        ],
+        "note": "Notion 官方托管的远程 MCP，OAuth 登录"
+      },
+      "compatible_clients": {
+        "value": [
+          "claude_code",
+          "codex",
+          "cursor",
+          "hermes",
+          "claude_desktop",
+          "claude_web_mobile",
+          "chatgpt",
+          "any_mcp_client"
+        ],
+        "note": "Notion 文档列出 Codex、Claude Code、Cursor、Hermes、VS Code 等；Claude 网页版添加自定义连接器后桌面版和手机 App 可用（付费套餐）；ChatGPT 自定义连接器只限网页端"
+      },
+      "runs_on": {
+        "value": [
+          "third_party_hosted"
+        ],
+        "note": "Notion 的服务器"
+      },
+      "os": {
+        "value": [
+          "any"
+        ],
+        "note": "浏览器或任意客户端"
+      },
+      "difficulty": {
+        "value": "low",
+        "note": "在客户端填网址、登录 Notion"
+      },
+      "cost": {
+        "value": "free",
+        "note": "Notion 文档写明每种套餐都能用 MCP"
+      },
+      "accounts_needed": {
+        "value": [
+          "vendor_account"
+        ],
+        "note": "Notion 账号（免费版即可）；工作区访客不能连"
+      },
+      "memory_subject": {
+        "value": [
+          "user_facts",
+          "task_context"
+        ],
+        "note": "您定的内容"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具新建、修改页面；没有自动提取"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "AI 按规则写，您也能在 Notion 里直接写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘"
+      },
+      "human_review": {
+        "value": [
+          "dashboard"
+        ],
+        "note": "在 Notion 里看和改"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "Notion 可导出 Markdown"
+      },
+      "data_passes_through": {
+        "value": [
+          "third_party"
+        ],
+        "note": "记忆存在 Notion 的服务器上"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "几个客户端连同一个 Notion 工作区"
+      },
+      "phone_access": {
+        "value": [
+          "remote_mcp",
+          "cloud"
+        ],
+        "note": "远程连接器；手机 App 要客户端支持（Claude App 可以）"
+      },
+      "setup_device": {
+        "value": "phone_ok",
+        "note": "在 Claude 网页版添加连接器即可，不用在电脑上装东西（要付费套餐）"
+      },
+      "local_model": {
+        "value": "not_mentioned",
+        "note": "要看您用的客户端"
+      },
+      "customization": {
+        "value": [
+          "prompts"
+        ],
+        "note": "规则是一段文字"
+      },
+      "chinese_support": {
+        "value": [
+          "zh_docs"
+        ],
+        "note": "说明文档是中文；Notion 支持中文"
+      }
+    }
+  },
+  "bitbonsai-mcp-obsidian": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "fields": {
+      "project_role": {
+        "value": "note_connector",
+        "note": "笔记软件连接器：只让 AI 读写笔记，作为“笔记库当记忆”这条做法的部件"
+      },
+      "cost": {
+        "value": "free",
+        "note": "连接器本身不调用模型；README 里的 API token 是笔记软件自己的访问令牌，不是模型密钥"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "只要笔记软件里生成的本地令牌，不需要注册账号"
+      },
+      "local_model": {
+        "value": "no_model_needed",
+        "note": "不调用模型"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具时才写，什么时候写由规则或 AI 决定"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "聊天的 AI 调工具写，您也可以直接在笔记软件里写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘机制，笔记要自己删或归档"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "笔记都在笔记软件里，可导出 Markdown"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "同一个笔记库可以接几个客户端，笔记软件本身也能在别的设备上看"
+      },
+      "dream_consolidation": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是整理笔记、笔记属性等，不是自动整理记忆"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要在电脑上装运行环境并改客户端配置"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "连接器在本机运行；笔记内容会作为对话发给您用的模型"
+      },
+      "human_review": {
+        "value": [
+          "dashboard",
+          "files"
+        ],
+        "note": "在 Obsidian 里看和改，也能直接改 Markdown 文件"
+      },
+      "phone_access": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "只支持本地连接，手机要另配同步或遥控电脑"
+      },
+      "retrieval_postprocess": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "README 里的命中不是检索后处理"
+      }
+    }
+  },
+  "cyanheads-obsidian-mcp-server": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "fields": {
+      "project_role": {
+        "value": "note_connector",
+        "note": "笔记软件连接器：只让 AI 读写笔记，作为“笔记库当记忆”这条做法的部件"
+      },
+      "cost": {
+        "value": "free",
+        "note": "连接器本身不调用模型；README 里的 API token 是笔记软件自己的访问令牌，不是模型密钥"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "只要笔记软件里生成的本地令牌，不需要注册账号"
+      },
+      "local_model": {
+        "value": "no_model_needed",
+        "note": "不调用模型"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具时才写，什么时候写由规则或 AI 决定"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "聊天的 AI 调工具写，您也可以直接在笔记软件里写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘机制，笔记要自己删或归档"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "笔记都在笔记软件里，可导出 Markdown"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "同一个笔记库可以接几个客户端，笔记软件本身也能在别的设备上看"
+      },
+      "dream_consolidation": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是整理笔记、笔记属性等，不是自动整理记忆"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要在电脑上装运行环境并改客户端配置"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "连接器在本机运行；笔记内容会作为对话发给您用的模型"
+      },
+      "human_review": {
+        "value": [
+          "dashboard",
+          "files"
+        ],
+        "note": "在 Obsidian 里看和改，也能直接改 Markdown 文件"
+      },
+      "phone_access": {
+        "value": [
+          "http_endpoint",
+          "needs_tunnel"
+        ],
+        "note": "支持 HTTP 接法，手机要连得先配公网地址或隧道"
+      },
+      "privacy_protection": {
+        "value": "not_mentioned",
+        "note": "README 写的是删除前可要求确认，不是加密或脱敏"
+      }
+    }
+  },
+  "markuspfundstein-mcp-obsidian": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "fields": {
+      "project_role": {
+        "value": "note_connector",
+        "note": "笔记软件连接器：只让 AI 读写笔记，作为“笔记库当记忆”这条做法的部件"
+      },
+      "cost": {
+        "value": "free",
+        "note": "连接器本身不调用模型；README 里的 API token 是笔记软件自己的访问令牌，不是模型密钥"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "只要笔记软件里生成的本地令牌，不需要注册账号"
+      },
+      "local_model": {
+        "value": "no_model_needed",
+        "note": "不调用模型"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具时才写，什么时候写由规则或 AI 决定"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "聊天的 AI 调工具写，您也可以直接在笔记软件里写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘机制，笔记要自己删或归档"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "笔记都在笔记软件里，可导出 Markdown"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "同一个笔记库可以接几个客户端，笔记软件本身也能在别的设备上看"
+      },
+      "dream_consolidation": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是整理笔记、笔记属性等，不是自动整理记忆"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要在电脑上装运行环境并改客户端配置"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "连接器在本机运行；笔记内容会作为对话发给您用的模型"
+      },
+      "human_review": {
+        "value": [
+          "dashboard",
+          "files"
+        ],
+        "note": "在 Obsidian 里看和改，也能直接改 Markdown 文件"
+      },
+      "phone_access": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "只支持本地连接，手机要另配同步或遥控电脑"
+      },
+      "pinning": {
+        "value": "not_mentioned",
+        "note": "README 里的命中不是钉选记忆"
+      }
+    }
+  },
+  "smith-and-web-obsidian-mcp-server": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "fields": {
+      "project_role": {
+        "value": "note_connector",
+        "note": "笔记软件连接器：只让 AI 读写笔记，作为“笔记库当记忆”这条做法的部件"
+      },
+      "cost": {
+        "value": "free",
+        "note": "连接器本身不调用模型；README 里的 API token 是笔记软件自己的访问令牌，不是模型密钥"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "只要笔记软件里生成的本地令牌，不需要注册账号"
+      },
+      "local_model": {
+        "value": "yes",
+        "note": "按意思搜索可选，用本地 Ollama 生成向量"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具时才写，什么时候写由规则或 AI 决定"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "聊天的 AI 调工具写，您也可以直接在笔记软件里写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘机制，笔记要自己删或归档"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "笔记都在笔记软件里，可导出 Markdown"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "同一个笔记库可以接几个客户端，笔记软件本身也能在别的设备上看"
+      },
+      "dream_consolidation": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是整理笔记、笔记属性等，不是自动整理记忆"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要用 npx 或 Docker 起服务"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "连接器在本机运行；笔记内容会作为对话发给您用的模型"
+      },
+      "human_review": {
+        "value": [
+          "dashboard",
+          "files"
+        ],
+        "note": "在 Obsidian 里看和改，也能直接改 Markdown 文件"
+      },
+      "phone_access": {
+        "value": [
+          "http_endpoint",
+          "needs_tunnel"
+        ],
+        "note": "支持 HTTP 接法，手机要连得先配公网地址或隧道"
+      },
+      "runs_on": {
+        "value": [
+          "own_computer",
+          "own_server"
+        ],
+        "note": "放在自己的电脑或服务器上，笔记库要在那台机器上"
+      },
+      "window_handoff": {
+        "value": "not_mentioned",
+        "note": "README 里的命中不是换窗续接"
+      },
+      "time_awareness": {
+        "value": "not_mentioned",
+        "note": "README 里的命中不是记忆时间线"
+      },
+      "error_guard": {
+        "value": "not_mentioned",
+        "note": "README 里的命中不是记错防护"
+      },
+      "privacy_protection": {
+        "value": "not_mentioned",
+        "note": "拦截密钥的规则只用于可选的搜索日志，不管笔记写入"
+      },
+      "chinese_support": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "README 没写中文支持"
+      }
+    }
+  },
+  "anytype-mcp": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "fields": {
+      "project_role": {
+        "value": "note_connector",
+        "note": "笔记软件连接器：只让 AI 读写笔记，作为“笔记库当记忆”这条做法的部件"
+      },
+      "cost": {
+        "value": "free",
+        "note": "连接器本身不调用模型；README 里的 API token 是笔记软件自己的访问令牌，不是模型密钥"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "只要笔记软件里生成的本地令牌，不需要注册账号"
+      },
+      "local_model": {
+        "value": "no_model_needed",
+        "note": "不调用模型"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具时才写，什么时候写由规则或 AI 决定"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "聊天的 AI 调工具写，您也可以直接在笔记软件里写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘机制，笔记要自己删或归档"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "笔记都在笔记软件里，可导出 Markdown"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "同一个笔记库可以接几个客户端，笔记软件本身也能在别的设备上看"
+      },
+      "dream_consolidation": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是整理笔记、笔记属性等，不是自动整理记忆"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要在电脑上装运行环境并改客户端配置"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "连接器在本机运行；笔记内容会作为对话发给您用的模型"
+      },
+      "human_review": {
+        "value": [
+          "dashboard"
+        ],
+        "note": "在笔记软件里直接看和改"
+      },
+      "phone_access": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "只支持本地连接，手机要另配同步或遥控电脑"
+      }
+    }
+  },
+  "mcp-logseq": {
+    "checked": "2026-10-28",
+    "by": "README",
+    "fields": {
+      "project_role": {
+        "value": "note_connector",
+        "note": "笔记软件连接器：只让 AI 读写笔记，作为“笔记库当记忆”这条做法的部件"
+      },
+      "cost": {
+        "value": "free",
+        "note": "连接器本身不调用模型；README 里的 API token 是笔记软件自己的访问令牌，不是模型密钥"
+      },
+      "accounts_needed": {
+        "value": [
+          "none"
+        ],
+        "note": "只要笔记软件里生成的本地令牌，不需要注册账号"
+      },
+      "local_model": {
+        "value": "no_model_needed",
+        "note": "不调用模型"
+      },
+      "write_mode": {
+        "value": [
+          "on_request"
+        ],
+        "note": "AI 调工具时才写，什么时候写由规则或 AI 决定"
+      },
+      "memory_writer": {
+        "value": [
+          "chat_agent",
+          "user"
+        ],
+        "note": "聊天的 AI 调工具写，您也可以直接在笔记软件里写"
+      },
+      "forgetting": {
+        "value": [
+          "manual_only"
+        ],
+        "note": "没有遗忘机制，笔记要自己删或归档"
+      },
+      "export": {
+        "value": [
+          "markdown"
+        ],
+        "note": "笔记都在笔记软件里，可导出 Markdown"
+      },
+      "cross_client": {
+        "value": "yes",
+        "note": "同一个笔记库可以接几个客户端，笔记软件本身也能在别的设备上看"
+      },
+      "dream_consolidation": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是整理笔记、笔记属性等，不是自动整理记忆"
+      },
+      "setup_device": {
+        "value": "needs_computer",
+        "note": "要在电脑上装运行环境并改客户端配置"
+      },
+      "data_passes_through": {
+        "value": [
+          "local_only"
+        ],
+        "note": "连接器在本机运行；笔记内容会作为对话发给您用的模型"
+      },
+      "human_review": {
+        "value": [
+          "dashboard",
+          "files"
+        ],
+        "note": "在 Obsidian 里看和改，也能直接改 Markdown 文件"
+      },
+      "phone_access": {
+        "value": [
+          "not_mentioned"
+        ],
+        "note": "只支持本地连接，手机要另配同步或遥控电脑"
+      },
+      "time_awareness": {
+        "value": "not_mentioned",
+        "note": "README 里的命中是日志页的示例，不是记忆时间线"
+      }
+    }
   }
 }

@@ -164,7 +164,7 @@
         "tools"
       ],
       "status": "auto",
-      "basis": "dashboard：忆按热、温、冷慢慢淡化成一行痕迹，从不悄悄删除；带面板，只服务本机的 MCP 客户端；MCP；# 🧠 M；files：.** Because memories are plain files — and imports can pull i；cli：**Claude Code** via its CLI if present. Restart your"
+      "basis": "dashboard：忆＋会话交接：在一个工具里记下，换个工具接着聊；带面板和“记忆护照”导出；MCP；# 🧠 Mind Ma；files：.** Because memories are plain files — and imports can pull i；cli：**Claude Code** via its CLI if present. Restart your"
     },
     "export": {
       "value": [
@@ -193,7 +193,7 @@
     "window_handoff": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“本地共享记忆＋会话交接：在一个工具里记下、换个工具接着聊；不用的记忆按热”"
+      "basis": "原表／说明：“本地共享记忆＋会话交接：在一个工具里记下，换个工具接着聊；带面板和“记忆”"
     },
     "cross_client": {
       "value": "yes",

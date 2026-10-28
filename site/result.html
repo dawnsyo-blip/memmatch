@@ -42,7 +42,7 @@
   import { checkCondition } from "../engine/index.js";
   const cfg = await fetch("../data/questionnaire/questions.json").then((r) => r.json());
   let st = { answers: {}, free: {} };
-  try { st = { ...st, ...JSON.parse(localStorage.getItem("memsite-quiz-v1")) }; } catch (e) {}
+  try { st = { ...st, ...JSON.parse(localStorage.getItem("memsite-quiz-v2")) }; } catch (e) {}
   const byId = Object.fromEntries(cfg.questions.map((q) => [q.id, q]));
   const list = document.getElementById("list");
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -51,13 +51,14 @@
     p.questions.forEach((id) => {
       const q = byId[id];
       const shown = !q.show_if || checkCondition(q.show_if, st.answers);
+      if (!shown && q.number) return;   // 同一题号的两个版本（如第 8 题），只列显示过的那个
       const sel = st.answers[id] || [];
       const txt = sel.map((oid, k) => {
         const o = q.options.find((x) => x.id === oid);
         const free = st.free[`${id}.${oid}`];
         return (q.type === "rank" ? `${k + 1}. ` : "") + (o ? o.label : oid) + (free ? `：${free}` : "");
       }).join(q.type === "rank" ? "　" : "；");
-      html += `<dt><span class="no caption-zh">第 ${esc(id.slice(1))} 题</span>${esc(q.text)}</dt>`;
+      html += `<dt><span class="no caption-zh">第 ${esc(q.number || id.slice(1))} 题</span>${esc(q.text)}</dt>`;
       html += shown ? `<dd>${txt ? esc(txt) : "（还没有回答）"}</dd>` : `<dd class="skip">（按前面的回答跳过）</dd>`;
     });
     list.insertAdjacentHTML("beforeend", html + "</dl>");

@@ -2517,6 +2517,249 @@
    "license_head": "MIT License\n\nCopyright (c) 2026 YUNSHENG613 and contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use",
    "has_readme": true,
    "read_date": "2026-10-27"
+  },
+  "bitbonsai/mcp-obsidian": {
+   "repo": "bitbonsai/mcp-obsidian",
+   "last_commit": "2026-10-23",
+   "stars": 1704,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Mauricio Wolff\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "dot-realitytest/obsidian-codex-mcp": {
+   "repo": "dot-realitytest/obsidian-codex-mcp",
+   "last_commit": "2026-10-17",
+   "stars": 17,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Nica Loren\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "entire-vc/evc-team-relay-mcp": {
+   "repo": "entire-vc/evc-team-relay-mcp",
+   "last_commit": "2026-10-25",
+   "stars": 3,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Entire VC\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, mer",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "junnnnnw00/obsidian-everywhere": {
+   "repo": "junnnnnw00/obsidian-everywhere",
+   "last_commit": "2026-08-28",
+   "stars": 16,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Obsidian Everywhere contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "kvantra-dev/nouz-mcp": {
+   "repo": "kvantra-dev/nouz-mcp",
+   "last_commit": "2026-10-16",
+   "stars": 24,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Maria Belkina\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify,",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "louis030195/easy-obsidian-mcp": {
+   "repo": "louis030195/easy-obsidian-mcp",
+   "last_commit": "2025-10-20",
+   "stars": 17,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "maxkuminov/obsidian-mcp": {
+   "repo": "maxkuminov/obsidian-mcp",
+   "last_commit": "2026-10-23",
+   "stars": 18,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Max Kuminov\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "rps321321/obsidian-mcp-pro": {
+   "repo": "rps321321/obsidian-mcp-pro",
+   "last_commit": "2026-10-23",
+   "stars": 33,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 rps321\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge,",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "smith-and-web/obsidian-mcp-server": {
+   "repo": "smith-and-web/obsidian-mcp-server",
+   "last_commit": "2026-10-26",
+   "stars": 19,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Josh Smith\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "the-40-thieves/obsidian-tc": {
+   "repo": "the-40-thieves/obsidian-tc",
+   "last_commit": "2026-10-27",
+   "stars": 13,
+   "archived": false,
+   "license_head": "                    GNU AFFERO GENERAL PUBLIC LICENSE\n                       Version 3, 19 November 2007\n\n Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>\n Everyone is permitted to copy and distribute verbatim copies\n of this license document, but changing it is not allowed.\n\n  ",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "markuspfundstein/mcp-obsidian": {
+   "repo": "MarkusPfundstein/mcp-obsidian",
+   "last_commit": "2026-08-31",
+   "stars": 4506,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2024 Markus Pfundstein\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, mod",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "cyanheads/obsidian-mcp-server": {
+   "repo": "cyanheads/obsidian-mcp-server",
+   "last_commit": "2026-10-25",
+   "stars": 700,
+   "archived": false,
+   "license_head": "Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distr",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "stevenstavrakis/obsidian-mcp": {
+   "repo": "StevenStavrakis/obsidian-mcp",
+   "last_commit": "2026-08-13",
+   "stars": 747,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2024 Steven Stavrakis\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modi",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "jacksteamdev/obsidian-mcp-tools": {
+   "repo": "jacksteamdev/obsidian-mcp-tools",
+   "last_commit": "2026-05-13",
+   "stars": 827,
+   "archived": true,
+   "license_head": "MIT License\n\nCopyright (c) 2024 Jack Steam\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, me",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "iansinnott/obsidian-claude-code-mcp": {
+   "repo": "iansinnott/obsidian-claude-code-mcp",
+   "last_commit": "2025-06-23",
+   "stars": 358,
+   "archived": false,
+   "license_head": "Copyright (C) 2020-2025 by Dynalist Inc.\n\nPermission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "coddingtonbear/obsidian-local-rest-api": {
+   "repo": "coddingtonbear/obsidian-local-rest-api",
+   "last_commit": "2026-10-17",
+   "stars": 3080,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2023, Adam Coddington\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modi",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "makenotion/notion-mcp-server": {
+   "repo": "makenotion/notion-mcp-server",
+   "last_commit": "2026-10-27",
+   "stars": 4684,
+   "archived": false,
+   "license_head": "Copyright (c) 2025 Notion Labs, Inc.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, p",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "anyproto/anytype-mcp": {
+   "repo": "anyproto/anytype-mcp",
+   "last_commit": "2026-10-03",
+   "stars": 538,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2023 Any Association\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modif",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "larksuite/lark-openapi-mcp": {
+   "repo": "larksuite/lark-openapi-mcp",
+   "last_commit": "2025-08-14",
+   "stars": 851,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Lark Technologies Pte. Ltd.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use,",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "ergut/mcp-logseq": {
+   "repo": "ergut/mcp-logseq",
+   "last_commit": "2026-09-27",
+   "stars": 346,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2026 Salih Ergüt\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "varunity/mcp-logseq": {
+   "repo": "varunity/mcp-logseq",
+   "last_commit": "2026-02-18",
+   "stars": 0,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) Varun Baker 2026\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, m",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "purpleliu/siyuan-mcp": {
+   "repo": "PurpleLiu/siyuan-mcp",
+   "last_commit": "2026-02-06",
+   "stars": 7,
+   "archived": false,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "porkll/siyuan-mcp": {
+   "repo": "porkll/siyuan-mcp",
+   "last_commit": "2025-11-12",
+   "stars": 15,
+   "archived": true,
+   "license_head": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for u",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "jordanburke/joplin-mcp-server": {
+   "repo": "jordanburke/joplin-mcp-server",
+   "last_commit": "2026-09-13",
+   "stars": 8,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Jordan Burke\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "alondmnt/joplin-mcp": {
+   "repo": "alondmnt/joplin-mcp",
+   "last_commit": "2026-09-12",
+   "stars": 174,
+   "archived": false,
+   "license_head": "MIT License\n\nCopyright (c) 2025 Alon Diament\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, ",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "rafalwilinski/mcp-apple-notes": {
+   "repo": "RafalWilinski/mcp-apple-notes",
+   "last_commit": "2024-12-17",
+   "stars": 417,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-28"
+  },
+  "tan-yong-sheng/triliumnext-mcp": {
+   "repo": "tan-yong-sheng/triliumnext-mcp",
+   "last_commit": "2026-03-24",
+   "stars": 68,
+   "archived": false,
+   "license_head": "",
+   "has_readme": true,
+   "read_date": "2026-10-28"
   }
  }
 }

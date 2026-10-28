@@ -253,12 +253,12 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“ik 的公开子集）：长期记忆、滚动摘要、心情状态和反思笔记，核心是“共享价值观”对行为的约束；需要 Gr”"
+      "basis": "原表／说明：“进程把对话写成长期记忆事实与滚动会话摘要；后台写“梦境”反思笔记；Mistik 版本的记忆修改需用户批”"
     },
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“Mistik 的公开子集）：长期记忆、滚动摘要、心情状态和反思笔记，核心是“共享价值观”对行为的约束；”"
+      "basis": "README：“th a persistent context layer — memory, mood state, a reflective notes system, and a curat”（已核对）"
     },
     "proactive": {
       "value": "not_mentioned",
@@ -288,7 +288,7 @@
     "reflection": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“ik 的公开子集）：长期记忆、滚动摘要、心情状态和反思笔记，核心是“共享价值观”对行为的约束；需要 Gr”"
+      "basis": "原表／说明：“对话写成长期记忆事实与滚动会话摘要；后台写“梦境”反思笔记；Mistik 版本的记忆修改需用户批准；记忆”"
     },
     "relationship_stage": {
       "value": "not_mentioned",

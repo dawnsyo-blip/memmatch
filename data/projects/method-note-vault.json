@@ -1,0 +1,469 @@
+{
+  "id": "method-note-vault",
+  "name": "笔记库当记忆（Obsidian 等本地 Markdown 笔记）",
+  "repo_url": "docs/做法/笔记软件当记忆.md",
+  "source": "initial",
+  "review_status": "reviewed",
+  "candidate": {
+    "category": "做法（笔记软件当记忆）",
+    "group_code": "M",
+    "group_meaning": "做法：不装专门的记忆库，用笔记软件当记忆，让 AI 通过文件或连接器读写（没有代码仓库）",
+    "decided_on": "2026-10-10"
+  },
+  "origins": [
+    "Claude 整理（负责人 2026-10-28 同意收入）"
+  ],
+  "info": {
+    "summary": {
+      "value": "不装专门的记忆库：把记忆写在本地笔记库（Obsidian、Logseq 等，本质是一个 Markdown 文件夹）里，让能读写文件的 AI 按你定的规则读和记；记忆全是普通文件，随时手改，换模型也带得走",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "memory_subject": {
+      "value": "你定的内容（关于你、约定、日记等）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "access": {
+      "value": "Agent 直接读写文件；Claude 桌面版用官方 Filesystem MCP；也可装笔记软件连接器",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "compatible_clients": {
+      "value": "Claude Code、Codex、Gemini CLI、OpenCode、Cursor 等能读写文件的 Agent；Claude 桌面版（Filesystem MCP）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "runs_on": {
+      "value": "自己的电脑（手机要另配同步或远程连接）",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "difficulty": {
+      "value": "中：建文件夹、写一段规则；Claude 桌面版要加一段 MCP 配置",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "accounts_needed": {
+      "value": "无",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    },
+    "notes": {
+      "value": "没有自动提取、去重和遗忘，全看 AI 守不守规则；Obsidian 本身免费，跨设备同步可用 Obsidian Sync（付费）、iCloud 或 Git",
+      "source": "Claude 据仓库 README 判断",
+      "read_date": "2026-10-10"
+    }
+  },
+  "repo_health": {
+    "last_commit": null,
+    "stars": null,
+    "archived": null,
+    "source": "无法自动读取（不在 GitHub 上或仓库无法访问）",
+    "read_date": "2026-10-10"
+  },
+  "raw": {
+    "人工筛选": {
+      "name": "笔记库当记忆（Obsidian 等本地 Markdown 笔记）",
+      "v": "纳入",
+      "c": "M",
+      "desc": "不装专门的记忆库：把记忆写在本地笔记库（Obsidian、Logseq 等，本质是一个 Markdown 文件夹）里，让能读写文件的 AI 按你定的规则读和记；记忆全是普通文件，随时手改，换模型也带得走",
+      "subj": "你定的内容（关于你、约定、日记等）",
+      "acc": "Agent 直接读写文件；Claude 桌面版用官方 Filesystem MCP；也可装笔记软件连接器",
+      "cli": "Claude Code、Codex、Gemini CLI、OpenCode、Cursor 等能读写文件的 Agent；Claude 桌面版（Filesystem MCP）",
+      "run": "自己的电脑（手机要另配同步或远程连接）",
+      "diff": "中：建文件夹、写一段规则；Claude 桌面版要加一段 MCP 配置",
+      "need": "无",
+      "note": "没有自动提取、去重和遗忘，全看 AI 守不守规则；Obsidian 本身免费，跨设备同步可用 Obsidian Sync（付费）、iCloud 或 Git"
+    }
+  },
+  "normalized": {
+    "access": {
+      "value": [
+        "guide"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：照着做：Agent 直接读写文件，Claude 桌面版用官方 Filesystem MCP，也可装笔记软件连接器"
+    },
+    "compatible_clients": {
+      "value": [
+        "claude_code",
+        "codex",
+        "gemini_cli",
+        "opencode",
+        "cursor",
+        "claude_desktop"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：能读写文件的 Agent；Claude 桌面版经 Filesystem MCP"
+    },
+    "runs_on": {
+      "value": [
+        "own_computer"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：笔记库在自己的电脑上；手机只能看同步过去的笔记"
+    },
+    "os": {
+      "value": [
+        "windows",
+        "macos",
+        "linux"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：Obsidian、Logseq 和这些 Agent 都支持三种系统"
+    },
+    "difficulty": {
+      "value": "medium",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：建文件夹、写一段规则；Claude 桌面版要加一段 MCP 配置"
+    },
+    "cost": {
+      "value": "free",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：笔记软件和 Filesystem MCP 免费；模型费用按您原本用的 Agent 算"
+    },
+    "accounts_needed": {
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：不需要额外账号"
+    },
+    "memory_subject": {
+      "value": [
+        "user_facts",
+        "task_context"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：您定的内容：关于您、约定、日记"
+    },
+    "write_mode": {
+      "value": [
+        "on_request"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：按规则由 AI 写，或您说“记住”时写；没有自动提取"
+    },
+    "forgetting": {
+      "value": [
+        "manual_only"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：没有遗忘，过时内容按规则移到归档文件夹"
+    },
+    "human_review": {
+      "value": [
+        "files"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：就是普通笔记文件"
+    },
+    "export": {
+      "value": [
+        "markdown"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：本来就是 Markdown 文件"
+    },
+    "data_passes_through": {
+      "value": [
+        "local_only"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：文件在本机；读到的内容会发给您用的模型"
+    },
+    "license_category": {
+      "value": "",
+      "status": "unknown",
+      "basis": "没有许可证信息"
+    },
+    "persona_continuity": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "window_handoff": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "cross_client": {
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：几个 Agent 读同一个文件夹即可"
+    },
+    "verbatim": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multimodal": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "time_awareness": {
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：日记按日期分文件"
+    },
+    "dream_consolidation": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "emotion": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "proactive": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "pinning": {
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：“关于我”“约定”每次对话都先读，相当于钉选"
+    },
+    "error_guard": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "import_history": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_weighting": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "reflection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "relationship_stage": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "independent_life": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "visual_presence": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "voice_interaction": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "privacy_protection": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "ranking_signals": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "scoring_stages": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "multi_factor": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没找到排序方式"
+    },
+    "emotion_handling": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "project_role": {
+      "value": "method",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：做法条目：不装专门的记忆库，用本地笔记库当记忆"
+    },
+    "lifecycle": {
+      "value": [
+        "capture",
+        "review"
+      ],
+      "status": "auto",
+      "basis": "写入方式：on_request；查看修改：files"
+    },
+    "lifecycle_complete": {
+      "value": "partial",
+      "status": "auto",
+      "basis": "覆盖 2/5 个环节（由写入、整理、遗忘、查看修改等字段推出）"
+    },
+    "pairing": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "customization": {
+      "value": [
+        "plain_data",
+        "prompts"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：记忆是普通文件，规则是一段文字，都能自己改"
+    },
+    "chinese_support": {
+      "value": [
+        "zh_docs"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：说明文档是中文"
+    },
+    "memory_layers": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "retrieval_postprocess": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "recall_uses_llm": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "sensitive_suppression": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "write_receipt": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
+    },
+    "memory_writer": {
+      "value": [
+        "chat_agent",
+        "user"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：AI 按规则写，您也能直接写"
+    },
+    "phone_access": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：手机官方 App 读不到电脑上的文件，要同步或遥控电脑"
+    },
+    "local_model": {
+      "value": "yes",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：支持本地模型的 Agent（如 OpenCode）也能用"
+    },
+    "model_lock": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没发现只能配合某一家模型的说法"
+    },
+    "setup_device": {
+      "value": "needs_computer",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理（做法条目，没有 README））：要在电脑上操作"
+    },
+    "media_recall": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现项目自己保管并能召回图片、音频、视频原件的说明（只转成文字的不算）"
+    },
+    "multi_agent": {
+      "value": [
+        "not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "没有发现几个 Agent 共用记忆或按 Agent 分开空间的说明"
+    },
+    "spend": {
+      "value": [
+        "none"
+      ],
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理）：没有发现收费或需要另付的接口"
+    },
+    "spend_note": {
+      "value": "不需要额外花钱。可选花销（不付也能用）：想在手机上看笔记，可以用 Obsidian Sync（付费）同步，也可以用 iCloud、Git 免费同步。",
+      "status": "verified",
+      "basis": "Claude 核实（2026-10-28，Claude 整理）：没有发现收费或需要另付的接口"
+    },
+    "pairs_with": {
+      "value": [
+        "bitbonsai-mcp-obsidian",
+        "cyanheads-obsidian-mcp-server",
+        "markuspfundstein-mcp-obsidian",
+        "smith-and-web-obsidian-mcp-server",
+        "mcp-logseq",
+        "anytype-mcp"
+      ],
+      "status": "auto",
+      "basis": "bitbonsai-mcp-obsidian：Obsidian：直接读写笔记文件，不用开 Obsidian；cyanheads-obsidian-mcp-server：Obsidian：经 Local REST API 插件，可局部修改；markuspfundstein-mcp-obsidian：Obsidian：经 Local REST API 插件，Star 最多；smith-and-web-obsidian-mcp-server：Obsidian：放在服务器上远程访问；mcp-logseq：Logseq；anytype-mcp：Anytype（官方）"
+    }
+  },
+  "uncertainties": [
+    {
+      "field": "license_category",
+      "label": "许可证类别",
+      "note": "没有许可证信息"
+    }
+  ],
+  "safety_note": {
+    "level": "notice",
+    "checked": "2026-10-28",
+    "note": "能读写文件的 Agent 可以改动它所在文件夹里的任何文件。请把记忆放在单独的文件夹，先备份笔记库，Agent 要求运行命令或改文件时看清再允许。"
+  },
+  "health": {
+    "checked_on": "2026-10-28",
+    "method": "做法条目，不检查",
+    "checker_version": 3,
+    "status": "method",
+    "note": "做法条目，没有代码仓库",
+    "flags": []
+  },
+  "inclusion": {
+    "status": "included",
+    "exclusion_code": null,
+    "flags": [],
+    "reasons": [
+      "收录类别：做法（笔记软件当记忆）"
+    ],
+    "decided_on": "2026-10-28"
+  }
+}

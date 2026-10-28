@@ -170,7 +170,7 @@
         "dashboard"
       ],
       "status": "auto",
-      "basis": "dashboard：ADME 现在的上手方式是 Docker 起后端和面板，再用 Python 客户端接入，宣传可通过屏幕截"
+      "basis": "dashboard：识库）各由专门的智能体管理；Docker 起后端和面板，用 Python 客户端接入，宣传可通过屏幕截图"
     },
     "export": {
       "value": [],
@@ -212,7 +212,7 @@
     "multimodal": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“板，再用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆；对话＋屏幕活动；Docker 后端”"
+      "basis": "原表／说明：“面板，用 Python 客户端接入，宣传可通过屏幕截图和对话积累记忆；对话＋屏幕活动；Docker 后端”"
     },
     "time_awareness": {
       "value": "not_mentioned",

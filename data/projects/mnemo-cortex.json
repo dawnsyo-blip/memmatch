@@ -262,7 +262,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“分可信等级、与锁定事实冲突的写入变成提案由你裁决，每晚“做梦”整合多个 Agent 的记忆；推荐配本地”"
+      "basis": "原表／说明：“、脱敏；Analyst 把原始会话日志蒸馏成笔记；夜间跨 Agent 整合（Dreaming）与压缩；事”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -277,12 +277,12 @@
     "pinning": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“度的本地记忆：自动监听会话入库，事实分可信等级、与锁定事实冲突的写入变成提案由你裁决，每晚“做梦”整合多”"
+      "basis": "原表／说明：“ming）与压缩；事实置信度三级阶梯随印证升降；与锁定事实冲突的写入转为提案，由用户裁决；语义检索＋复合”"
     },
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“记忆：自动监听会话入库，事实分可信等级、与锁定事实冲突的写入变成提案由你裁决，每晚“做梦”整合多个 Ag”"
+      "basis": "原表／说明：“可信度导向最强：每条记忆可追溯来源和置信度，冲突交人裁决；多 Agent 共享，支持”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -322,7 +322,7 @@
     "privacy_protection": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“由用户裁决；防篡改记忆账本；多 Agent 共享；加密 U 盘同步；可信度导向最强：每条记忆可追溯来源和”"
+      "basis": "原表／说明：“和置信度，冲突交人裁决；多 Agent 共享，支持加密 U 盘迁移；用户事实；本地服务器＋MCP；另有会”"
     },
     "ranking_signals": {
       "value": [
@@ -442,7 +442,7 @@
     "local_model": {
       "value": "yes",
       "status": "auto",
-      "basis": "说明：“合多个 Agent 的记忆；推荐配本地 Ollama，ChatGPT 可经自定义 GPT 网”"
+      "basis": "README：“-desktop-linux.md), OpenClaw, LM Studio, and more), and [CORTEX-OS.md”"
     },
     "model_lock": {
       "value": "not_mentioned",

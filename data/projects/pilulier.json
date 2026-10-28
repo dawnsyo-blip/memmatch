@@ -202,9 +202,9 @@
       "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "error_guard": {
-      "value": "yes",
+      "value": "not_mentioned",
       "status": "auto",
-      "basis": "原表／说明：“的“药盒”：手动给自己的一句话挂一颗行为提示（如“冲突在场”“主动哄回”），只影响下一次回复，用完即从历”"
+      "basis": "原表、说明和 README 都没提到（未提及不等于没有）"
     },
     "import_history": {
       "value": "not_mentioned",

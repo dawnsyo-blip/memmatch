@@ -187,7 +187,7 @@
         "other_file"
       ],
       "status": "auto",
-      "basis": "明确写了导出：“f five silos. | `memanto memory export --okf` | **And it does”；“te is a file.** `memanto memory export --okf` gives you the [Op”"
+      "basis": "明确写了导出：“盾、遗忘过期内容，并在智能体行动前给出精简简报；可导出 Markdown／OKF；CLI＋REST＋本地界面；Python”；“f five silos. | `memanto memory export --okf` | **And it does”"
     },
     "data_passes_through": {
       "value": [
@@ -215,7 +215,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“llama，不需要账号），也可用免费云；多个智能体共用的记忆；CLI＋REST＋本地界面；Python／”"
+      "basis": "原表／说明：“简报；可导出 Markdown／OKF；多个智能体共用的记忆；CLI＋REST＋本地界面；Python／”"
     },
     "verbatim": {
       "value": "not_mentioned",
@@ -235,7 +235,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行”"
+      "basis": "原表／说明：“管理多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、遗忘过期内容，并在智能体行动前给出”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -255,7 +255,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、按策略让过期内容失效，并在智能体行动前给出精简简”"
+      "basis": "原表／说明：“多个智能体记忆的“记忆智能体”：定时合并重复、标出矛盾、遗忘过期内容，并在智能体行动前给出精简简报；可导”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -413,7 +413,7 @@
     "local_model": {
       "value": "yes",
       "status": "auto",
-      "basis": "说明：“精简简报；可完全本地运行（Docker＋Ollama，不需要账号），也可用免费云；多个智能体”"
+      "basis": "README：“our machine.** Local Docker + Ollama, no account, no API key, noth”"
     },
     "model_lock": {
       "value": "not_mentioned",

@@ -1,6 +1,6 @@
 // 用一份答卷跑推荐，打印给人看的结果。
 // 用法：node scripts/recommend.mjs <答卷.json>
-//      答卷格式：{ "q1": ["anthropic"], "q3": ["remote_control"], "q3a": ["claude_code"], "q16": "medium", ... }
+//      答卷格式：{ "q2": ["anthropic"], "q3": ["remote_control"], "q3a": ["claude_code"], "q16": "medium", ... }
 import { readFileSync } from "node:fs";
 import { loadAll } from "../engine/load-node.js";
 

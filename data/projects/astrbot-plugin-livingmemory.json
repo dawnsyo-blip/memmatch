@@ -262,7 +262,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“AstrBot 长期记忆插件：按对话轮次自动整理偏好、人物关系、计划和约定，关键词＋向量＋图谱召回”"
+      "basis": "原表／说明：“给 AstrBot 加上会生长、衰减、整理的完整记忆生命周期；用户事实；AstrBot 插件”"
     },
     "emotion": {
       "value": "not_mentioned",

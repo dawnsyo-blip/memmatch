@@ -5,6 +5,7 @@
 //   projects 项目列表：data/projects/*.json 的内容
 // recommend 返回：
 //   results     排好序的推荐 [{ id, name, score, reasons[], cautions[], unknowns[], … }]
+//               做法条目（role 为 method，笔记软件当记忆）一起排名，另带 parts[]：可选的笔记软件连接器
 //   addons      补充部件（上下文延续工具、情绪引擎等）{ id: { title, why, items[] } }
 //   guides      相关教程
 //   combos      组合方案 [{ title, parts: [{ role, id, name }] }]

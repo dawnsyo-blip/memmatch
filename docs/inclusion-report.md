@@ -1,6 +1,6 @@
 # 阶段 3 收录状态报告
 
-> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-27。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
+> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-28。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
 
 ## 判定规则
 
@@ -14,8 +14,8 @@
 
 | 状态 | 数量 |
 |---|---|
-| 收录 | 100 |
-| 收录但加风险提示 | 146 |
+| 收录 | 105 |
+| 收录但加风险提示 | 149 |
 | 排除 | 3 |
 | 待定（证据不足） | 0 |
 
@@ -29,13 +29,13 @@
 
 | 风险提示 | 项目数 |
 |---|---|
-| 没有正式发布版本 | 75 |
-| 近一年只有一人维护 | 70 |
-| 超过 180 天没有提交 | 21 |
+| 没有正式发布版本 | 76 |
+| 近一年只有一人维护 | 71 |
 | 没有许可证文件 | 19 |
+| 超过 180 天没有提交 | 19 |
 | 许可证禁止商用 | 17 |
 | 托管模式下对话内容经过第三方服务器（也可自己部署） | 14 |
-| 对话内容默认经过第三方服务器 | 6 |
+| 对话内容默认经过第三方服务器 | 7 |
 | 许可证非标准，需看原文 | 4 |
 | 近一年没有人提交 | 3 |
 | 许可证限制使用（据原表／README） | 2 |
@@ -50,10 +50,11 @@
 | kimi-core（`kimi-core`） | N | 仓库无法访问（已删除、改名或设为私有） |
 | kimi-room（`kimi-room`） | N | 仓库无法访问（已删除、改名或设为私有） |
 
-## 收录但加风险提示（146 个）
+## 收录但加风险提示（149 个）
 
 | 项目 | 收录类别 | 风险提示 |
 |---|---|---|
+| Notion 当记忆（官方远程 MCP）（`method-notion`） | 做法（笔记软件当记忆） | 对话内容默认经过第三方服务器 |
 | /memory（maxtechera）（`memory`） | 可接入已有助手 | 超过 180 天没有提交 |
 | Acheron（`acheron-mcp-server`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
 | agent-memory（g1itchbot）（`agent-memory`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
@@ -130,7 +131,7 @@
 | Supermemory（`supermemory`） | 可接入已有助手 | 托管模式下对话内容经过第三方服务器（也可自己部署） |
 | taOSmd（`taosmd`） | 可接入已有助手 | 近一年只有一人维护 |
 | Tessera（`project-tessera`） | 可接入已有助手 | 超过 180 天没有提交 |
-| Timeline Memory（`timeline-memory`） | 可接入已有助手 | 超过 180 天没有提交、近一年只有一人维护、没有正式发布版本 |
+| Timeline Memory（`timeline-memory`） | 可接入已有助手 | 近一年只有一人维护、没有正式发布版本 |
 | VectHare（`vecthare`） | 可接入已有助手 | 没有正式发布版本、没有许可证文件 |
 | vMem（`0compactmem`） | 可接入已有助手 | 近一年只有一人维护、没有许可证文件 |
 | YourMemory（`yourmemory`） | 可接入已有助手 | 许可证禁止商用 |
@@ -143,10 +144,12 @@
 | Claude Code 换窗教程（精炼续窗）（`swap-tutorial`） | 教程与搭建指南 | 近一年只有一人维护、没有正式发布版本 |
 | WrenWen（`wrenwen`） | 教程与搭建指南 | 近一年只有一人维护、没有正式发布版本、没有许可证文件 |
 | 不会消失的恋人（`not-fade-away`） | 教程与搭建指南 | 没有正式发布版本、许可证非标准，需看原文 |
-| 云与岛（`cloud-and-island`） | 教程与搭建指南 | 超过 180 天没有提交、没有正式发布版本、没有许可证文件 |
+| 云与岛（`cloud-and-island`） | 教程与搭建指南 | 没有正式发布版本、没有许可证文件 |
 | 把 AI 伴侣搬进 Telegram（`ai-companion-telegram-guide`） | 教程与搭建指南 | 近一年只有一人维护、没有正式发布版本、许可证非标准，需看原文 |
 | 把乌鸦留在身边（`keep-the-crow`） | 教程与搭建指南 | 近一年只有一人维护、没有正式发布版本、许可证禁止商用 |
 | 给 AI 伴侣装思考链和情绪（`ai-companion-cot-emotion`） | 教程与搭建指南 | 近一年只有一人维护、没有正式发布版本、没有许可证文件 |
+| mcp-obsidian（MarkusPfundstein）（`markuspfundstein-mcp-obsidian`） | 笔记软件连接器 | 没有正式发布版本 |
+| Obsidian MCP Server（smith-and-web）（`smith-and-web-obsidian-mcp-server`） | 笔记软件连接器 | 近一年只有一人维护 |
 | AI Pocket Chat（`ai-pocket-chat`） | 自带记忆的应用 | 近一年只有一人维护、没有正式发布版本 |
 | connectome-host（`connectome-host`） | 自带记忆的应用 | 没有许可证文件 |
 | Echo Mistik（`echo-mistik`） | 自带记忆的应用 | 近一年只有一人维护、许可证禁止商用 |
@@ -201,10 +204,11 @@
 | 草履虫 Paramecium（`paramecium`） | 需写代码（开发者向） | 没有正式发布版本、没有许可证文件 |
 | 记忆星图 Memory Constellations（`memoryconstellations`） | 需写代码（开发者向） | 没有正式发布版本 |
 
-## 收录（100 个）
+## 收录（105 个）
 
 | 项目 | 收录类别 | 风险提示 |
 |---|---|---|
+| 笔记库当记忆（Obsidian 等本地 Markdown 笔记）（`method-note-vault`） | 做法（笔记软件当记忆） | — |
 | Aelios（`aelios`） | 可接入已有助手 | — |
 | afair（`afair`） | 可接入已有助手 | — |
 | agentmemory（rohitg00）（`agentmemory`） | 可接入已有助手 | — |
@@ -273,6 +277,10 @@
 | weighted-compact（`weighted-compact`） | 可接入已有助手 | — |
 | widemem（`widemem-ai`） | 可接入已有助手 | — |
 | 爪迹 Pawwake（`pawwake`） | 可接入已有助手 | — |
+| Anytype MCP（`anytype-mcp`） | 笔记软件连接器 | — |
+| mcp-logseq（`mcp-logseq`） | 笔记软件连接器 | — |
+| MCPVault（`bitbonsai-mcp-obsidian`） | 笔记软件连接器 | — |
+| Obsidian MCP Server（cyanheads）（`cyanheads-obsidian-mcp-server`） | 笔记软件连接器 | — |
 | Agent Zero（`agent-zero`） | 自带记忆的应用 | — |
 | Bitterbot（`bitterbot-desktop`） | 自带记忆的应用 | — |
 | Companion Emergence（`companion-emergence`） | 自带记忆的应用 | — |

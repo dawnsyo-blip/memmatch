@@ -248,7 +248,7 @@
     "cross_client": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“库、Vectorize 向量库）上，一套分层记忆供不同客户端共用，带可视化管理；每轮对话原文入库；助手可直接”"
+      "basis": "原表／说明：“库、Vectorize 向量库）上，一套分层记忆供不同客户端共用，带可视化管理；用户事实；网关＋MCP（两种都”"
     },
     "verbatim": {
       "value": "yes",
@@ -268,7 +268,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“aude 网页和手机 App 走 MCP 连接器；每晚把对话整理成候选记忆，可审核、撤回；部署全程在浏览”"
+      "basis": "原表／说明：“；每轮对话原文入库；助手可直接 remember；夜间 Dream 从当天对话抽事实成候选，由模型或人审”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -288,7 +288,7 @@
     "error_guard": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“走 MCP 连接器；每晚把对话整理成候选记忆，可审核、撤回；部署全程在浏览器里完成；用户事实；网关＋M”"
+      "basis": "原表／说明：“间 Dream 从当天对话抽事实成候选，由模型或人审核；可撤回、取代、归档、遗忘；每轮自动召回相关旧记忆”"
     },
     "import_history": {
       "value": "not_mentioned",
@@ -403,7 +403,7 @@
     "memory_layers": {
       "value": "layered",
       "status": "auto",
-      "basis": "说明：“库、Vectorize 向量库）上，一套分层记忆供不同客户端共用，带可视化管理；每轮对话”"
+      "basis": "说明：“库、Vectorize 向量库）上，一套分层记忆供不同客户端共用，带可视化管理；用户事实”"
     },
     "retrieval_postprocess": {
       "value": [

@@ -288,7 +288,7 @@
         "relation"
       ],
       "status": "auto",
-      "basis": "semantic：说明：“基于 Qdrant 的混合检索记忆层：向量＋BM25＋知识图谱，多段排序，可标记过”；keyword：说明：“Qdrant 的混合检索记忆层：向量＋BM25＋知识图谱，多段排序，可标记过时事实；带”；recency：README：“arity, relationship tracking, recency, user/project scope, and feed”；relation：说明：“的混合检索记忆层：向量＋BM25＋知识图谱，多段排序，可标记过时事实；带 MCP”"
+      "basis": "semantic：README：“arch backends — anywhere pure vector similarity falls short on its own. **St”；keyword：README：“Memgraph): semantic, keyword (BM25), temporal, and graph recall,”；recency：README：“arity, relationship tracking, recency, user/project scope, and feed”；relation：README：“keyword (BM25), temporal, and graph recall, fused with Reciprocal Rank F”"
     },
     "scoring_stages": {
       "value": [

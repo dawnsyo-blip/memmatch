@@ -2,7 +2,7 @@
 
 帮已经在用个人 AI 助手、主要通过文字交流的普通用户，从开源记忆项目里找到能接到自己助手上的那几个。
 
-开发计划见 [ROADMAP.md](ROADMAP.md)，给 Claude Code 的工作约定和踩过的坑见 [CLAUDE.md](CLAUDE.md)。当前正式问卷是 [记忆库推荐问卷 v5.md](记忆库推荐问卷%20v5.md)。
+开发计划见 [ROADMAP.md](ROADMAP.md)，给 Claude Code 的工作约定和踩过的坑见 [CLAUDE.md](CLAUDE.md)。当前正式问卷是 [记忆库推荐问卷 v6.md](记忆库推荐问卷%20v6.md)。
 
 | 目录 | 内容 |
 |---|---|

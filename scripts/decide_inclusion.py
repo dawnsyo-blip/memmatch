@@ -25,6 +25,8 @@ EXCLUSION_CODES = {
     "D": "数据格式不开放，也没有导出功能",
     "N": "无法获取代码：仓库无法访问，或代码不在代码托管网站上",
 }
+FINISHED_ROLES = {"guide", "context_tool"}
+STALE_FLAGS = {f"超过 {SETTINGS['stale_days']} 天没有提交"}
 STATUS_LABELS = {"included": "收录", "flagged": "收录但加风险提示", "excluded": "排除", "pending": "待定（证据不足）"}
 
 
@@ -53,6 +55,10 @@ def decide(doc):
 
     # 风险提示（只提示不排除）
     flags += [f for f in h.get("flags", []) if f != "无法自动检查"]
+    # 教程、上下文工具这类写完就用的项目不需要持续更新，不提示停更（负责人 2026-10-28）
+    role = n["project_role"]["value"]   # 单值字段，是字符串
+    if role in FINISHED_ROLES:
+        flags = [f for f in flags if f not in STALE_FLAGS]
     # 仓库许可证文件没体现、但原表或 README 记录了使用限制的（如含非商业约束的子模块），照样提示
     old = n["license_category"]["value"]
     if old == "noncommercial" and "许可证禁止商用" not in flags:

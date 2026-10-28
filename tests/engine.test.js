@@ -56,33 +56,62 @@ test("文档没写的字段不排除，只标“需自行确认”并略微靠�
 
 test("正式问卷：没显示的题（第 3a 题）不影响结果", () => {
   const { projects: all, engine: real } = loadAll();
-  const base = { q1: ["anthropic"], q2: ["iphone", "mac"], q3: ["mcp_client"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
+  const base = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["mcp_client"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
   const a = real.recommend(base, all);
   const b = real.recommend({ ...base, q3a: ["openclaw"] }, all); // 第 3 题没选遥控或程序化，第 3a 题不显示
   assert.deepEqual(a.results.map((x) => x.id), b.results.map((x) => x.id));
 });
 
 // 遥控电脑上的 Claude Code、多端共用，门槛和预算都放开
-const multiBase = { q1: ["anthropic"], q2: ["iphone", "mac"], q3: ["remote_control"], q3a: ["claude_code"], q4: "multi", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
+const multiBase = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["remote_control"], q3a: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
 const has = (p, field, v) => [].concat(p.normalized[field].value).includes(v);
 
-test("第 4a 题：要各 Agent 分开记忆时，能分开的排在前面；第 4 题只选一个入口时这题不显示", () => {
+test("第 4 题：要各 Agent 分开记忆时，能分开的排在前面", () => {
   const { projects: all, engine: real } = loadAll();
   const byId = Object.fromEntries(all.map((p) => [p.id, p]));
-  const r = real.recommend({ ...multiBase, q4a: "per_agent" }, all);
+  const r = real.recommend({ ...multiBase, q4: "per_agent" }, all);
   const top = r.results.slice(0, 5).map((x) => byId[x.id]);
   assert.ok(top.filter((p) => has(p, "multi_agent", "per_agent")).length >= 4, "前 5 名大多应能按 Agent 分开记忆");
-  const single = { ...multiBase, q4: "single" };
-  assert.deepEqual(real.recommend({ ...single, q4a: "per_agent" }, all).results.map((x) => x.id),
-    real.recommend(single, all).results.map((x) => x.id));
 });
 
-test("第 8a 题：要找回原图时，能存原图的项目靠前；不需要时不影响结果", () => {
+test("第 9 题：要找回原图时，能存原图的项目靠前；不需要时不影响结果", () => {
   const { projects: all, engine: real } = loadAll();
   const byId = Object.fromEntries(all.map((p) => [p.id, p]));
-  const r = real.recommend({ ...multiBase, q8a: ["image"] }, all);
+  const r = real.recommend({ ...multiBase, q9: ["image"] }, all);
   const top = r.results.slice(0, 3).map((x) => byId[x.id]);
   assert.ok(top.every((p) => has(p, "media_recall", "image")), "前 3 名应都能存原图");
-  assert.deepEqual(real.recommend({ ...multiBase, q8a: ["none"] }, all).results.map((x) => x.id),
+  assert.deepEqual(real.recommend({ ...multiBase, q9: ["none"] }, all).results.map((x) => x.id),
     real.recommend(multiBase, all).results.map((x) => x.id));
+});
+
+test("笔记软件当记忆：做法和记忆库一起排名，连接器只挂在做法下面，不单独出现", () => {
+  const { projects: all, questionnaire, settings } = loadAll();
+  const wide = createRuleEngine({ questionnaire: { ...questionnaire, result: { ...questionnaire.result, top_n: 999 } }, settings });
+  const role = Object.fromEntries(all.map((p) => [p.id, [].concat(p.normalized.project_role.value)[0]]));
+  const r = wide.recommend(multiBase, all);
+  const shown = [...r.results, ...r.guides, ...Object.values(r.addons).flatMap((a) => a.items), ...r.combos.flatMap((c) => c.parts)];
+  assert.ok(shown.every((x) => role[x.id] !== "note_connector"), "连接器不应单独出现");
+  const m = r.results.find((x) => x.id === "method-note-vault");
+  assert.ok(m, "遥控电脑上的 Claude Code 应能在排名里看到“笔记库当记忆”");
+  assert.ok(m.parts.length && m.parts.every((x) => role[x.id] === "note_connector"), "做法下面应挂着可选的连接器");
+  const order = all.find((p) => p.id === "method-note-vault").normalized.pairs_with.value;
+  assert.deepEqual(m.parts.map((x) => x.id), order.filter((id) => m.parts.some((x) => x.id === id)), "连接器应按数据里的顺序列出，不按分数");
+  assert.ok(m.parts[0].id.includes("obsidian"), "Obsidian 的连接器应排在最前");
+  assert.ok(r.results.indexOf(m) >= 8, "自动化程度低，不应排进前 8");
+});
+
+test("第 7 题（q6）选“连接笔记类软件”：存成 Markdown 文件的记忆库加 2 分，做法本身不加", () => {
+  const { projects: all, questionnaire, settings } = loadAll();
+  const wide = createRuleEngine({ questionnaire: { ...questionnaire, result: { ...questionnaire.result, top_n: 999 } }, settings });
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const md = (id) => has(byId[id], "human_review", "files") && has(byId[id], "export", "markdown") && !has(byId[id], "project_role", "method");
+  const scoreOf = (r) => Object.fromEntries(r.results.map((x) => [x.id, x.score]));
+  const a = scoreOf(wide.recommend({ ...multiBase, q6: "open_source" }, all)), b = scoreOf(wide.recommend({ ...multiBase, q6: "notes" }, all));
+  let bumped = 0;
+  for (const id of Object.keys(a)) {
+    assert.equal(b[id], a[id] + (md(id) ? 2 : 0), `${id} 分数不对`);
+    if (md(id)) bumped++;
+  }
+  assert.ok(bumped >= 3, "应有几个存成 Markdown 文件的记忆库被加分");
+  assert.equal(b["method-note-vault"], a["method-note-vault"], "做法本身不应加分");
 });

@@ -206,12 +206,12 @@
     "emotion": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“从 AI 自己写下的思考里读出情绪，换成有基线、会慢慢回落的数值，累计思念并适时给它”"
+      "basis": "原表／说明：“从 AI 自己写下的思考里读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系”"
     },
     "proactive": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“，换成有基线、会慢慢回落的数值，累计思念并适时给它主动联系你的机会；Node.js 包，要接进自己的聊天后端”"
+      "basis": "原表／说明：“读出情绪，换成会慢慢回落的数值，累计思念并适时给它主动联系你的机会；AI 情绪状态；Node.js 包（每轮”"
     },
     "pinning": {
       "value": "not_mentioned",
@@ -287,7 +287,7 @@
         "ai_state"
       ],
       "status": "auto",
-      "basis": "ai_state：说明：“上的 Jev 模型（约 2 美元／月）；AI 情绪状态；Node.js 包（每轮回复后调用”"
+      "basis": "ai_state：说明：“值，累计思念并适时给它主动联系你的机会；AI 情绪状态；Node.js 包（每轮回复后调用”"
     },
     "project_role": {
       "value": "state_engine",

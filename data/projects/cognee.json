@@ -313,7 +313,7 @@
         "relation"
       ],
       "status": "auto",
-      "basis": "semantic：README：“model and embeds with a local embedding model; both download on first”；keyword：README：“bundled sample data and runs keyword search without an API key. Use the l”；relation：说明：“、对话、代码和智能体的工作记录构建成知识图谱的记忆平台，多个智能体和团队可共享；有”"
+      "basis": "semantic：README：“model and embeds with a local embedding model; both download on first”；keyword：README：“bundled sample data and runs keyword search without an API key. Use the l”；relation：说明：“、对话、代码和智能体的工作记录构建成知识图谱，供多个智能体和团队共享的记忆平台，有”"
     },
     "scoring_stages": {
       "value": [

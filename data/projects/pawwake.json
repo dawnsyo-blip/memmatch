@@ -268,7 +268,7 @@
     "dream_consolidation": {
       "value": "yes",
       "status": "auto",
-      "basis": "原表／说明：“容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省”"
+      "basis": "原表／说明：“提取碎片记忆并评分；可批量导入预置记忆；碎片→事件整理合并（AI 生成可编辑草稿，可撤回合并）→手动标记”"
     },
     "emotion": {
       "value": "not_mentioned",
@@ -393,7 +393,7 @@
         "config_file"
       ],
       "status": "auto",
-      "basis": "settings_ui：说明：“期从对话里抽记忆，整理合并生成草稿后要你在面板里逐条确认，带分区缓存省 token；可部”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”"
+      "basis": "settings_ui：README：“I 支持调用方传入 session 与片段排除集合 - **设置面板** — 在 Dashboard 中直接管理所有运行时配置，”；config_file：README：“Render 会自动检测 Dockerfile 4. 设置环境变量（Environment → Add Environment”"
     },
     "chinese_support": {
       "value": [
@@ -406,7 +406,7 @@
     "memory_layers": {
       "value": "layered",
       "status": "auto",
-      "basis": "说明：“Hub、Render 账号）；用户事实＋工作记忆（对话线）；网关；任意 OpenAI 兼”"
+      "basis": "说明：“存、Dashboard 面板；用户事实＋工作记忆（对话线）；网关；任意 OpenAI 兼”"
     },
     "retrieval_postprocess": {
       "value": [
@@ -437,7 +437,7 @@
         "background"
       ],
       "status": "auto",
-      "basis": "background：说明：“OpenAI 兼容客户端前面的记忆网关：小模型定期从对话里抽记忆，整理合并生成草稿后要”"
+      "basis": "background：写入方式含自动记或先出候选（推断）"
     },
     "phone_access": {
       "value": [
