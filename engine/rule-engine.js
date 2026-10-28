@@ -382,7 +382,6 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       const stages = stagesOf(r.id);
       return { id: r.id, name: r.name, stages, desc: stages.length ? "负责" + stages.map((s) => stageLabel[s]).join("、") : "", ...extra };
     };
-    const gainOver = (have) => (r) => stagesOf(r.id).filter((s) => !have.includes(s)).length;
 
     // 第 8 题排第一的问题
     const concernId = [].concat(answers.q8 || [], answers.q8n || []).find((v) => v !== "other" && v !== "no_problem");
@@ -391,27 +390,17 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const fitsConcern = (r) => { const p = projById[r.id]; return concernRules.some((s) => projectMatches(p, s.if) && !(s.unless && projectMatches(p, s.unless))); };
     const concern = (r) => ({ r, via: "concern", label: concernOpt.label });
 
-    // 给已有的部分补一个：设计上搭配的（按数据里写好的顺序）> 补上缺的环节最多的 > 针对第 8 题的问题；
-    // 后两种优先选流程不完整的小项目，完整系统叠完整系统不算补强
-    function companionFor(baseIds, exclude, smallOnly = false) {
-      const cand = pool.filter((r) => !exclude.has(r.id));
+    // 给一个记忆库补一个：只补真能配合的——作者设计的搭配（按数据里写好的顺序），或用户需要的补充部件（情绪引擎、上下文延续工具）。
+    // 两个独立的记忆库各存各的，一个的遗忘、整理碰不到另一个的记忆，按环节拼起来并不成立，所以不这样补
+    const addonItems = Object.values(addons).flatMap((a) => a.items);
+    function companionFor(baseIds, exclude) {
       const allCand = memories.filter((r) => !exclude.has(r.id));
       const byCandId = Object.fromEntries(allCand.map((r) => [r.id, r]));
       const pid = baseIds.flatMap(pairsOf).find((id) => byCandId[id])
         || allCand.find((r) => baseIds.some((id) => pairsOf(r.id).includes(id)))?.id;
       if (pid) return { r: byCandId[pid], via: "pairs" };
-      const small = cand.filter((r) => !r.lifecycle_complete);
-      const tiers = smallOnly ? [small] : [small, cand];
-      const gain = gainOver([...new Set(baseIds.flatMap(stagesOf))]);
-      for (const list of tiers) {
-        const best = list.filter((r) => gain(r) > 0).sort((a, b) => gain(b) - gain(a))[0];
-        if (best) return { r: best, via: "stages" };
-      }
-      for (const list of tiers) {
-        const c = concernRules.length && list.find(fitsConcern);
-        if (c) return concern(c);
-      }
-      return null;
+      const ext = addonItems.find((x) => !exclude.has(x.id));
+      return ext ? { r: ext, via: "addon", label: ext.addon_title } : null;
     }
 
     // 第 7 题：用户现在用的是什么。填了项目名的按名字对上收录的项目
@@ -456,44 +445,35 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     function completePlan() {
       const complete = memories.filter((r) => r.role === "full_memory" || r.role === "companion_app").slice(0, 10).find((r) => r.lifecycle_complete);
       if (!complete) return null;
-      let c = companionFor([complete.id], new Set([complete.id]), true);
-      if (!c) {
-        const ext = Object.values(addons).flatMap((a) => a.items).find((x) => x.id !== complete.id);
-        if (ext) c = { r: ext, via: "addon", label: ext.addon_title };
-      }
+      const c = companionFor([complete.id], new Set([complete.id]));
       return c && { type: "complete", title: "完整系统＋专项补强", via: c.via, label: c.label, parts: [part(complete), part(c.r)] };
     }
 
-    function groupPlan() {
-      const cand = pool.filter((r) => !r.lifecycle_complete);
+    // 方案二：作者设计的一组（都不完整的），或一个记忆库加上用户需要的补充部件（每类一个，最多两个）
+    function groupPlan(avoid) {
+      const cand = pool.filter((r) => !r.lifecycle_complete && r.role !== "context_tool" && r.role !== "state_engine");
       for (const r of cand) {
-        const mates = cand.filter((o) => o.id !== r.id && (pairsOf(r.id).includes(o.id) || pairsOf(o.id).includes(r.id))).slice(0, 2);
+        const mates = memories.filter((o) => o.id !== r.id && !o.lifecycle_complete && (pairsOf(r.id).includes(o.id) || pairsOf(o.id).includes(r.id))).slice(0, 2);
         if (mates.length) return { type: "group", title: "几个项目互相配合", via: "pairs", parts: [r, ...mates].map((x) => part(x)) };
       }
-      const pick = [];
-      let have = [];
-      while (pick.length < 3) {
-        const rest = cand.filter((r) => !pick.includes(r));
-        const gain = gainOver(have);
-        const next = pick.length ? rest.filter((r) => gain(r) > 0).sort((a, b) => gain(b) - gain(a))[0] : rest[0];
-        if (!next) break;
-        pick.push(next);
-        have = [...new Set([...have, ...stagesOf(next.id)])];
-        if (ALL_STAGES.every((s) => have.includes(s))) break;
-      }
-      return pick.length >= 2 ? { type: "group", title: "几个项目互相配合", via: "stages", parts: pick.map((x) => part(x)) } : null;
+      const tools = Object.values(addons).map((a) => a.items[0]).filter(Boolean).slice(0, 2);
+      const libs = memories.filter((r) => ["full_memory", "companion_app", "memory_component"].includes(r.role));
+      const lib = libs.find((r) => !avoid.has(r.id)) || libs[0];
+      if (!lib || !tools.length) return null;
+      return { type: "group", title: "记忆库加补充部件", via: "roles", parts: [part(lib), ...tools.map((x) => part(x))] };
     }
 
-    // 凑不出两个方案就都不给（负责人 2026-10-28）；两个方案尽量不重复用同一个推荐项目，实在没有别的选择时，只要不完全相同也可以
+    // 最多两个方案；只有一个时照样给（页面上不编号、不写对比）。两个方案尽量不重复用同一个推荐项目
     const key = (c) => c.parts.map((p) => p.id).sort().join(",");
     const cur = currentSetup();
     const curPlan = cur && currentPlan(cur);
     const first = curPlan || completePlan();
-    const rest = (curPlan ? [completePlan(), groupPlan()] : [groupPlan()]).filter((c) => c && (!first || key(c) !== key(first)));
-    if (!first) return [];
+    const avoid = new Set((first?.parts || []).filter((p) => p.id && !p.current).map((p) => p.id));
+    const rest = (curPlan ? [completePlan(), groupPlan(avoid)] : [groupPlan(avoid)]).filter((c) => c && (!first || key(c) !== key(first)));
+    if (!first) return rest.slice(0, 1);
     const used = new Set(first.parts.filter((p) => p.id && !p.current).map((p) => p.id));
     const second = rest.find((c) => !c.parts.some((p) => used.has(p.id))) || rest[0];
-    return second ? [first, second] : [];
+    return second ? [first, second] : [first];
   }
 
   // ---------- 对外接口 ----------
