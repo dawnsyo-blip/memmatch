@@ -335,7 +335,7 @@
           {"if": {"ranking_signals": ["confidence"]}, "points": 1, "reason": "区分确定和不确定的认识"}]}},
         {"id": "verbatim_repeat", "label": "逐字复述", "help": "一字一句复述原句，让人有压力", "effect": {"score": [
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会整理成摘要，原话只留档"}]}},
-        {"id": "messy", "label": "越记越乱", "help": "记忆重复堆积、前后矛盾", "effect": {"score": [
+        {"id": "messy", "label": "越记越乱", "help": "记忆重复堆积，回应越来越慢", "effect": {"score": [
           {"if": {"dream_consolidation": ["yes"]}, "points": 1, "reason": "空闲时会自动整理、去重"},
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会合并重复的记忆"}]}},
         {"id": "fabrication", "label": "凭空编造", "help": "LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
