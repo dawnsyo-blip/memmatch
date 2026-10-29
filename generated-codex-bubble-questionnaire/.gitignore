@@ -1,4 +1,5 @@
 .preview-profile/
 .preview-profile-*/
 artifacts/
+.font-sources/
 *.log

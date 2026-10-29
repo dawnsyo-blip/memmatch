@@ -1,0 +1,33 @@
+{
+  "sources": {
+    "SourceHanSansCN-Light.otf": "https://raw.githubusercontent.com/adobe-fonts/source-han-sans/release/SubsetOTF/CN/SourceHanSansCN-Light.otf",
+    "SourceHanSansCN-Regular.otf": "https://raw.githubusercontent.com/adobe-fonts/source-han-sans/release/SubsetOTF/CN/SourceHanSansCN-Regular.otf",
+    "InterVariable.woff2": "https://raw.githubusercontent.com/rsms/inter/master/docs/font-files/InterVariable.woff2",
+    "SourceHanSans-OFL.txt": "https://raw.githubusercontent.com/adobe-fonts/source-han-sans/master/LICENSE.txt",
+    "Inter-OFL.txt": "https://raw.githubusercontent.com/rsms/inter/master/LICENSE.txt"
+  },
+  "corpus_characters": 1092,
+  "fonts": [
+    {
+      "file": "memory-han-sans-light.woff2",
+      "weight": 300,
+      "bytes": 195620,
+      "sha256": "30e5b407f724f071a44f6035c49d476239b4bde6fac6f366f53f017e34112522",
+      "source_sha256": "c406ec4c795fe71ec443a8a55570d7df53dea560ea93d4117eadab6e2b19680d",
+      "characters": 1091
+    },
+    {
+      "file": "memory-han-sans-regular.woff2",
+      "weight": 400,
+      "bytes": 195668,
+      "sha256": "422dadceb757f965c387ad490f517e07160470af52fd799a5f5f735ae64ad200",
+      "source_sha256": "e2bc8a2e7f37474b774fff8db758681ece40bb6947a90d571bce9dd60671a8e4",
+      "characters": 1091
+    },
+    {
+      "file": "inter-variable.woff2",
+      "bytes": 352240,
+      "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3"
+    }
+  ]
+}

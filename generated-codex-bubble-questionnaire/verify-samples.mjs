@@ -19,8 +19,9 @@ try{
   ws.onmessage=event=>{const data=JSON.parse(event.data);if(data.id){const p=pending.get(data.id);pending.delete(data.id);data.error?p?.reject(new Error(JSON.stringify(data.error))):p?.resolve(data.result);}else if(data.method==='Runtime.exceptionThrown')errors.push(data.params.exceptionDetails);};
   const cdp=(method,params={})=>new Promise((resolve,reject)=>{const id=++nextId;pending.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}));});
   const evaluate=async expression=>{const r=await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(JSON.stringify(r.exceptionDetails));return r.result.value;};
+  const platformFonts=async selector=>{const {root}=await cdp('DOM.getDocument');const {nodeId}=await cdp('DOM.querySelector',{nodeId:root.nodeId,selector});return (await cdp('CSS.getPlatformFontsForNode',{nodeId})).fonts;};
   const wait=async expression=>{for(let i=0;i<120;i++){if(await evaluate(expression))return;await delay(50);}throw new Error('Timeout: '+expression);};
-  const navigate=async file=>{const [name,query]=file.split('?');const url=pathToFileURL(path.join(dir,name));if(query)url.search=query;await cdp('Page.navigate',{url:url.href});await wait('document.readyState === "complete" && !!window.MemoryUI');await delay(50);};
+  const navigate=async file=>{const [name,query]=file.split('?');const url=pathToFileURL(path.join(dir,name));if(query)url.search=query;await cdp('Page.navigate',{url:url.href});await wait('document.readyState === "complete" && !!window.MemoryUI');await evaluate('document.fonts.ready.then(()=>true)');await delay(50);};
   const click=async selector=>{await evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);await delay(40);};
   const screenshot=async name=>{await delay(240);const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});await writeFile(path.join(artifacts,name+'.png'),Buffer.from(shot.data,'base64'));};
   const viewport=async(width,height)=>{await cdp('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<600});await cdp('Emulation.setTouchEmulationEnabled',{enabled:width<600,maxTouchPoints:1});};
@@ -40,8 +41,11 @@ try{
     }
     await delay(100);
   };
-  await cdp('Runtime.enable');await cdp('Page.enable');await viewport(1440,1000);
+  await cdp('Runtime.enable');await cdp('Page.enable');await cdp('DOM.enable');await cdp('CSS.enable');await viewport(1440,1000);
   await navigate('index.html');await evaluate('localStorage.clear()');await navigate('index.html');
+  const homeFonts=await platformFonts('#hero-title');
+  check(homeFonts.some(f=>f.isCustomFont&&f.postScriptName.includes('MemoryHanSans-Light')),'Local Source Han Sans Light actually renders the Chinese title');
+  check(homeFonts.some(f=>f.isCustomFont&&f.familyName.includes('Inter')),'Local Inter actually renders Latin text in the title');
   check(await evaluate('getComputedStyle(document.documentElement).colorScheme === "light" && !document.querySelector(".theme-toggle")'),'One light theme only');
   check(await evaluate('document.body.getBoundingClientRect().width<=440'),'Desktop preview retains phone width');
   check(await evaluate('!document.querySelector(".journey,.hero-description,.brand-caption,.privacy-line")'),'Redundant home copy is removed from markup');
@@ -71,6 +75,9 @@ try{
   await wait('!document.getElementById("info-general").matches(":popover-open")');
   check(true,'Information popup dismisses with Escape');
   await navigate('quiz.html');
+  const answerFonts=await platformFonts('.option-copy strong');
+  check(answerFonts.some(f=>f.isCustomFont&&f.postScriptName.includes('MemoryHanSans-Regular')),'Local Source Han Sans Regular actually renders answer labels');
+  check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontWeight==="300"&&getComputedStyle(document.getElementById("next")).fontWeight==="400"'),'Title is Light and buttons use the lighter Regular weight');
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textAlign==="left"&&getComputedStyle(document.querySelector(".question-heading")).letterSpacing==="normal"'),'Title uses uniform natural spacing without justification');
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontSize==="32px"&&getComputedStyle(document.querySelector(".question-heading")).lineHeight==="48px"'),'Title follows project 32px / 48px typography');
   check(await evaluate('getComputedStyle(document.querySelector(".quiz-layout")).paddingLeft==="16px"'),'Phone page uses project 16px side margins');
