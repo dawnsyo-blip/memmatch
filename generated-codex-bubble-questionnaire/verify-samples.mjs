@@ -26,6 +26,7 @@ try{
   const screenshot=async name=>{await delay(240);const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});await writeFile(path.join(artifacts,name+'.png'),Buffer.from(shot.data,'base64'));};
   const viewport=async(width,height)=>{await cdp('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<600});await cdp('Emulation.setTouchEmulationEnabled',{enabled:width<600,maxTouchPoints:1});};
   const noOverflow=async name=>check(await evaluate('document.documentElement.scrollWidth <= innerWidth'),name+' without horizontal overflow');
+  const aligned=async(selectors,edge)=>{const values=await evaluate(`${JSON.stringify(selectors)}.map(s=>document.querySelector(s).getBoundingClientRect()[${JSON.stringify(edge)}])`);const ok=Math.max(...values)-Math.min(...values)<1;if(!ok)console.error({edge,selectors,values});return ok;};
   const rankOrder=()=>evaluate('Array.from(document.querySelectorAll("[data-rank]")).map(el=>el.dataset.rank)');
   const drag=async(sourceIndex,targetIndex,touch=false)=>{
     const rects=await evaluate('Array.from(document.querySelectorAll("[data-rank]")).map(el=>{const r=el.getBoundingClientRect();return {x:r.left+r.width*.45,y:r.top+r.height/2}})');
@@ -51,6 +52,7 @@ try{
   check(await evaluate('!document.querySelector(".journey,.hero-description,.brand-caption,.privacy-line")'),'Redundant home copy is removed from markup');
   await screenshot('home-desktop-light');await noOverflow('Desktop homepage');
   await viewport(390,844);await screenshot('home-mobile-light');
+  check(await aligned(['.brand','#hero-title','#start-link'],'left'),'Home brand, title and primary action share the same page margin');
   check(await evaluate('document.getElementById("start-link").getBoundingClientRect().bottom<=innerHeight'),'Home primary action fits on a phone screen');
   check(await evaluate('document.querySelectorAll(".memory-board button[aria-pressed]").length===16'),'All 16 home bubbles are native toggle buttons');
   await click('.bubble[aria-label="气泡 1"]');
@@ -81,6 +83,9 @@ try{
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textAlign==="left"&&getComputedStyle(document.querySelector(".question-heading")).letterSpacing==="normal"'),'Title uses uniform natural spacing without justification');
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontSize==="32px"&&getComputedStyle(document.querySelector(".question-heading")).lineHeight==="48px"'),'Title follows project 32px / 48px typography');
   check(await evaluate('getComputedStyle(document.querySelector(".quiz-layout")).paddingLeft==="16px"'),'Phone page uses project 16px side margins');
+  check(await aligned(['.brand','.question-heading','.progress-track','.option-bubble','#next'],'left'),'Header, title, progress, bubbles and first primary action share the page left edge');
+  check(await aligned(['.header-actions','.question-meta','.option-wrap','#next'],'right'),'Header actions, question metadata, choices and primary action share the page right edge');
+  check(await evaluate('(()=>{const b=document.querySelector("#next").getBoundingClientRect(),t=document.querySelector("#next-label").getBoundingClientRect(),a=document.querySelector("#next [data-icon]").getBoundingClientRect();return t.left-b.left===12&&b.right-a.right===12})()'),'Next label is on the button left and arrow stays on the right');
   check(await evaluate('document.querySelectorAll(".option-bubble").length===7'),'Each device option is a circular bubble');
   check(await evaluate('getComputedStyle(document.querySelector(".option-bubble")).width==="44px"'),'Option bubble is reduced to 44px');
   check(await evaluate('Array.from(document.querySelectorAll(".option-wrap")).every((el,i,items)=>!i||el.getBoundingClientRect().top>=items[i-1].getBoundingClientRect().bottom)'),'Choices form one vertical list');
@@ -98,7 +103,7 @@ try{
   const tree=await cdp('Accessibility.getFullAXTree');
   check(tree.nodes.some(n=>n.role?.value==='checkbox'&&n.name?.value==='iPhone 或 iPad'),'Native choice retains a concise accessible name');
   check(await evaluate('!document.getElementById("info-question")'),'No empty question-info button after removing generic instructions');
-  for(const width of [320,375,430]){await viewport(width,844);await noOverflow(width+'px phone');}
+  for(const width of [320,375,430]){await viewport(width,844);await noOverflow(width+'px phone');check(await aligned(['.brand','.question-heading','.progress-track','.option-wrap','#next'],'left')&&await aligned(['.header-actions','.question-meta','.option-wrap','#next'],'right'),width+'px phone retains consistent page margins');}
   await viewport(375,812);await noOverflow('375px bubble question');
   await click('#next');await click('#option-anthropic');await click('#next');
   await click('[popovertarget="info-option-official"]');await wait('document.getElementById("info-option-official").matches(":popover-open")');
@@ -113,6 +118,8 @@ try{
   await navigate('quiz.html?q=q1');
   const savedBefore=await evaluate('localStorage.getItem("codex-memory-between-quiz-v6")');
   await viewport(1440,1000);await navigate('ranking-sample.html');
+  check(await aligned(['.back-button:not([hidden])','#next'],'top')&&await aligned(['.back-button:not([hidden])','#next'],'bottom'),'Footer buttons keep equal heights and aligned edges');
+  check(await aligned(['.brand','.question-heading','.rank-bubble','.option-bubble','.back-button:not([hidden])'],'left'),'Ranking bubbles and back action follow the same page margin');
   check((await rankOrder()).join(',')==='companion,work','Rank sample opens with selected items at top');
   check(await evaluate('document.querySelector(".rank-selected").getBoundingClientRect().top < document.querySelector(".options").getBoundingClientRect().top'),'Selected items appear above unselected bubbles');
   check(await evaluate('(()=>{const a=document.querySelector(".rank-bubble").getBoundingClientRect(),b=document.querySelector(".option-bubble").getBoundingClientRect();return Math.abs(a.left+a.width/2-b.left-b.width/2)<1})()'),'Selected and unselected bubbles share a vertical center line');
