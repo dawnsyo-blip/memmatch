@@ -55,7 +55,12 @@ try{
   await wait('!document.getElementById("info-general").matches(":popover-open")');
   check(true,'Information popup dismisses with Escape');
   await navigate('quiz.html');
+  check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textAlign==="justify"'),'Question title uses justified alignment');
+  check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontSize==="32px"&&getComputedStyle(document.querySelector(".question-heading")).lineHeight==="48px"'),'Title follows project 32px / 48px typography');
+  check(await evaluate('getComputedStyle(document.querySelector(".quiz-layout")).paddingLeft==="16px"'),'Phone page uses project 16px side margins');
   check(await evaluate('document.querySelectorAll(".option-bubble").length===7'),'Each device option is a circular bubble');
+  check(await evaluate('Array.from(document.querySelectorAll(".option-wrap")).every((el,i,items)=>!i||el.getBoundingClientRect().top>=items[i-1].getBoundingClientRect().bottom)'),'Choices form one vertical list');
+  check(await evaluate('Array.from(document.querySelectorAll(".option-label")).every(el=>el.querySelector(".option-bubble").getBoundingClientRect().right<el.querySelector(".option-copy").getBoundingClientRect().left)'),'Each bubble sits to the left of its label');
   const before=await evaluate('getComputedStyle(document.querySelector(".option-bubble")).boxShadow');
   await click('#option-iphone');await click('#option-windows');
   check(await evaluate('document.querySelectorAll(".option-label input:checked").length===2'),'Poking bubbles selects multiple choices');
@@ -68,16 +73,19 @@ try{
   check(await evaluate('!document.querySelector(".question-reassurance,.question-subtitle,.question-help,.sidebar-note")'),'Question explanations are not permanently displayed');
   const tree=await cdp('Accessibility.getFullAXTree');
   check(tree.nodes.some(n=>n.role?.value==='checkbox'&&n.name?.value==='iPhone 或 iPad'),'Native choice retains a concise accessible name');
-  await click('[popovertarget="info-question"]');await wait('document.getElementById("info-question").matches(":popover-open")');
-  await delay(300);check(await evaluate('document.getElementById("info-question").matches(":popover-open")'),'Information remains open until dismissed');
-  check(await evaluate('document.getElementById("info-question").textContent.includes("可选择多项")'),'Question instructions remain available on demand');
-  await screenshot('question-info-mobile');await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});
+  check(await evaluate('!document.getElementById("info-question")'),'No empty question-info button after removing generic instructions');
   for(const width of [320,375,430]){await viewport(width,844);await noOverflow(width+'px phone');}
   await viewport(375,812);await noOverflow('375px bubble question');
   await click('#next');await click('#option-anthropic');await click('#next');
   await click('[popovertarget="info-option-official"]');await wait('document.getElementById("info-option-official").matches(":popover-open")');
   check(await evaluate('!document.getElementById("option-official").checked'),'Option info can open without selecting the option');
   check(await evaluate('document.getElementById("info-option-official").textContent.includes("ChatGPT")'),'Option explanation remains available on demand');
+  await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});
+  await click('#option-none_yet');await click('#next');await click('.option-label input');await click('#next');
+  await click('[popovertarget="info-question"]');await wait('document.getElementById("info-question").matches(":popover-open")');
+  await delay(300);check(await evaluate('document.getElementById("info-question").matches(":popover-open")'),'Information remains open until dismissed');
+  check(await evaluate('document.getElementById("info-question").textContent.includes("大多数记忆库")&&!document.getElementById("info-question").textContent.includes("可选择多项")'),'Question-specific explanation remains without generic opening sentence');
+  await screenshot('question-info-mobile');await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});
   await navigate('quiz.html?q=q1');
   const savedBefore=await evaluate('localStorage.getItem("codex-memory-between-quiz-v6")');
   await viewport(1440,1000);await navigate('ranking-sample.html');
