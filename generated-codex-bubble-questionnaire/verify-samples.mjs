@@ -55,10 +55,11 @@ try{
   await wait('!document.getElementById("info-general").matches(":popover-open")');
   check(true,'Information popup dismisses with Escape');
   await navigate('quiz.html');
-  check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textAlign==="justify"'),'Question title uses justified alignment');
+  check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textAlign==="left"&&getComputedStyle(document.querySelector(".question-heading")).letterSpacing==="normal"'),'Title uses uniform natural spacing without justification');
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontSize==="32px"&&getComputedStyle(document.querySelector(".question-heading")).lineHeight==="48px"'),'Title follows project 32px / 48px typography');
   check(await evaluate('getComputedStyle(document.querySelector(".quiz-layout")).paddingLeft==="16px"'),'Phone page uses project 16px side margins');
   check(await evaluate('document.querySelectorAll(".option-bubble").length===7'),'Each device option is a circular bubble');
+  check(await evaluate('getComputedStyle(document.querySelector(".option-bubble")).width==="44px"'),'Option bubble is reduced to 44px');
   check(await evaluate('Array.from(document.querySelectorAll(".option-wrap")).every((el,i,items)=>!i||el.getBoundingClientRect().top>=items[i-1].getBoundingClientRect().bottom)'),'Choices form one vertical list');
   check(await evaluate('Array.from(document.querySelectorAll(".option-label")).every(el=>el.querySelector(".option-bubble").getBoundingClientRect().right<el.querySelector(".option-copy").getBoundingClientRect().left)'),'Each bubble sits to the left of its label');
   const before=await evaluate('getComputedStyle(document.querySelector(".option-bubble")).boxShadow');
@@ -91,6 +92,8 @@ try{
   await viewport(1440,1000);await navigate('ranking-sample.html');
   check((await rankOrder()).join(',')==='companion,work','Rank sample opens with selected items at top');
   check(await evaluate('document.querySelector(".rank-selected").getBoundingClientRect().top < document.querySelector(".options").getBoundingClientRect().top'),'Selected items appear above unselected bubbles');
+  check(await evaluate('(()=>{const a=document.querySelector(".rank-bubble").getBoundingClientRect(),b=document.querySelector(".option-bubble").getBoundingClientRect();return Math.abs(a.left+a.width/2-b.left-b.width/2)<1})()'),'Selected and unselected bubbles share a vertical center line');
+  check(await evaluate('Math.abs(document.querySelector(".rank-row-copy").getBoundingClientRect().left-document.querySelector(".option-copy").getBoundingClientRect().left)<1'),'Selected and unselected option labels share a left edge');
   await click('#option-coding');
   check((await rankOrder()).join(',')==='companion,work,coding','Poked option moves into selected list');
   check(await evaluate('!document.getElementById("option-coding")'),'Selected option leaves unselected bubble grid');
