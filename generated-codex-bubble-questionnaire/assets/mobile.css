@@ -137,11 +137,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .bubble-glyph svg { width: 20px; height: 20px; stroke-width: 1.35; }
 .option-copy { flex: 1; min-width: 0; }
 .option-copy strong { display: block; font-size: var(--unit-inline); line-height: var(--unit-block); font-weight: 400; }
-.selection-orb { position: absolute; right: -2px; bottom: -1px; display: grid; place-items: center; width: 18px; height: 18px; border: 2px solid var(--bg); border-radius: 50%; background: var(--accent); color: var(--accent-ink); opacity: 0; transform: scale(.7); transition: opacity .18s, transform .18s; }
-.selection-orb svg { width: 10px; height: 10px; stroke-width: 2; }
 .option-label:active .option-bubble { transform: scale(.89); box-shadow: var(--pressed); }
 .option-label:has(input:checked) .option-bubble { background: var(--selected); box-shadow: var(--pressed); transform: scale(.96); }
-.option-label:has(input:checked) .selection-orb { opacity: 1; transform: scale(1); }
 .option-label:has(input:checked) .option-copy strong { color: var(--accent); font-weight: 400; }
 .option-info { grid-column: 2; grid-row: 1; }
 .option-info .info-trigger { color: var(--secondary); }
