@@ -8,6 +8,9 @@ import { loadAll, ROOT } from "../engine/load-node.js";
 
 const { projects, settings } = loadAll();
 const displayNames = JSON.parse(readFileSync(join(ROOT, "data/display_names.json"), "utf8"));
+const displaySummariesPath = join(ROOT, "data/display_summaries.json");
+let displaySummaries = {};
+try { displaySummaries = JSON.parse(readFileSync(displaySummariesPath, "utf8")); } catch {}
 const slim = projects
   .filter((p) => p.inclusion?.status !== "excluded")
   .map((p) => ({
@@ -15,7 +18,7 @@ const slim = projects
     candidate: { category: p.candidate.category },
     inclusion: { status: p.inclusion.status, flags: p.inclusion.flags || [] },
     review_status: p.review_status,
-    info: { summary: { value: p.info?.summary?.value || "" } },
+    info: { summary: { value: displaySummaries[p.id] || p.info?.summary?.value || "" } },
     normalized: Object.fromEntries(Object.entries(p.normalized).map(([k, f]) => [k, { value: f.value, status: f.status }])),
     ...(p.safety_note ? { safety_note: p.safety_note.note } : {}),
   }));
