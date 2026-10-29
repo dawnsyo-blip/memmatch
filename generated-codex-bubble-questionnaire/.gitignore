@@ -1,0 +1,4 @@
+.preview-profile/
+.preview-profile-*/
+artifacts/
+*.log
