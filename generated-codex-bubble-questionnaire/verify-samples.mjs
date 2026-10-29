@@ -10,6 +10,10 @@ const delay=ms=>new Promise(r=>setTimeout(r,ms));
 const browser=spawn('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',['--headless=new','--disable-gpu','--no-first-run','--no-default-browser-check','--disable-background-networking','--disable-sync','--remote-debugging-port=9337',`--user-data-dir=${path.join(dir,'.preview-profile-samples')}`,'about:blank'],{windowsHide:true,stdio:'ignore'});
 let ws;const checks=[],errors=[];
 const check=(ok,message)=>{assert.ok(ok,message);checks.push(message);};
+const contrast=(foreground,background)=>{
+  const luminance=color=>{const [r,g,b]=color.match(/[\d.]+/g).slice(0,3).map(n=>{const v=Number(n)/255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;});return .2126*r+.7152*g+.0722*b;};
+  const a=luminance(foreground),b=luminance(background);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+};
 try{
   let targets;
   for(let i=0;i<40;i++){try{targets=await(await fetch('http://127.0.0.1:9337/json/list',{signal:AbortSignal.timeout(500)})).json();if(targets.some(t=>t.type==='page'))break;}catch{}await delay(100);}
@@ -82,6 +86,10 @@ try{
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontWeight==="300"&&getComputedStyle(document.getElementById("next")).fontWeight==="400"'),'Title is Light and buttons use the lighter Regular weight');
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textAlign==="left"&&getComputedStyle(document.querySelector(".question-heading")).letterSpacing==="normal"'),'Title uses uniform natural spacing without justification');
   check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).fontSize==="32px"&&getComputedStyle(document.querySelector(".question-heading")).lineHeight==="48px"'),'Title follows project 32px / 48px typography');
+  check(await evaluate('getComputedStyle(document.querySelector(".question-heading")).textWrapStyle==="auto"&&getComputedStyle(document.querySelector(".question-heading")).textWrapMode==="wrap"'),'Headings use natural wrapping instead of balancing lines');
+  const palette=await evaluate('(()=>{const style=s=>getComputedStyle(document.querySelector(s)),bg=style("body").backgroundColor;return [{name:"Body",fg:style("body").color,bg},{name:"Secondary text",fg:style(".question-type").color,bg},{name:"Primary button",fg:style("#next").color,bg:style("#next").backgroundColor}]})()');
+  check(palette.every(p=>[p.fg,p.bg].every(c=>{const rgb=c.match(/[\d.]+/g).slice(0,3).map(Number);return rgb[0]===rgb[1]&&rgb[1]===rgb[2];})),'Main surfaces, text and primary action use neutral grayscale');
+  for(const p of palette)check(contrast(p.fg,p.bg)>=4.5,p.name+' retains readable contrast of at least 4.5:1');
   check(await evaluate('getComputedStyle(document.querySelector(".quiz-layout")).paddingLeft==="16px"'),'Phone page uses project 16px side margins');
   check(await aligned(['.brand','.question-heading','.progress-track','.option-bubble','#next'],'left'),'Header, title, progress, bubbles and first primary action share the page left edge');
   check(await aligned(['.header-actions','.question-meta','.option-wrap','#next'],'right'),'Header actions, question metadata, choices and primary action share the page right edge');
@@ -145,6 +153,16 @@ try{
   check(await evaluate('getComputedStyle(document.querySelector(".option-bubble")).transitionDuration === "0s"'),'Reduced-motion preference disables animations');
   await viewport(375,812);await navigate('index.html');await noOverflow('375px homepage');
   await click('#restart-home');check(await evaluate('document.querySelector("dialog").textContent.includes("无法恢复")'),'Reset keeps an explicit irreversible consequence warning');await click('#keep-progress');
+  const priorAnswers=await evaluate('localStorage.getItem("codex-memory-between-quiz-v6")');
+  await evaluate('(()=>{const s=MemoryUI.emptyState();for(const q of MemoryData.questionnaire.questions){const o=q.options.find(o=>!o.free_text);s.answers[q.id]=[o.id];s.seen[q.id]=true;}s.complete=true;MemoryUI.writeState(s);})()');
+  await navigate('quiz.html');await wait('!document.getElementById("completion").hidden');
+  for(const width of [320,375,430]){
+    await viewport(width,844);await noOverflow(width+'px result page');
+    check(await aligned(['#completion-title','#review-answers','.completion-actions'],'left')&&await aligned(['#review-answers','.completion-actions'],'right'),width+'px result primary action spans the content width');
+    check(await aligned(['#download-answers','#download-results'],'top')&&await evaluate('document.getElementById("download-answers").getBoundingClientRect().top>document.getElementById("review-answers").getBoundingClientRect().bottom'),width+'px result downloads sit together below the primary action');
+  }
+  await viewport(390,844);await screenshot('completion-mobile-gray');
+  await evaluate(`localStorage.setItem("codex-memory-between-quiz-v6",${JSON.stringify(priorAnswers)})`);
   check(errors.length===0,'No uncaught browser exceptions');
   await writeFile(path.join(artifacts,'qa-samples-report.json'),JSON.stringify({passed:checks.length,checks,errors},null,2));
   console.log(JSON.stringify({passed:checks.length,artifacts},null,2));await cdp('Browser.close').catch(()=>{});
