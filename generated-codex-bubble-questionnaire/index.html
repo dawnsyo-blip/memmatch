@@ -25,12 +25,13 @@
         <h1 id="hero-title">找到适合你的<br>AI 记忆库</h1>
       </div>
       <div class="hero-object">
-        <div class="memory-board" aria-hidden="true">
-          <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
-          <span class="bubble"></span><span class="bubble bubble-tint"></span><span class="bubble"></span><span class="bubble"></span>
-          <span class="bubble"></span><span class="bubble"></span><span class="bubble bubble-core"><span data-icon="spark"></span></span><span class="bubble"></span>
-          <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
+        <div class="memory-board" role="group" aria-label="互动气泡" aria-describedby="bubble-help">
+          <button class="bubble" type="button" aria-label="气泡 1" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 2" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 3" aria-pressed="true"></button><button class="bubble" type="button" aria-label="气泡 4" aria-pressed="false"></button>
+          <button class="bubble" type="button" aria-label="气泡 5" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 6" aria-pressed="true"></button><button class="bubble" type="button" aria-label="气泡 7" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 8" aria-pressed="false"></button>
+          <button class="bubble" type="button" aria-label="气泡 9" aria-pressed="true"></button><button class="bubble" type="button" aria-label="气泡 10" aria-pressed="false"></button><button class="bubble bubble-core" type="button" aria-label="气泡 11" aria-pressed="false"><span data-icon="spark"></span></button><button class="bubble" type="button" aria-label="气泡 12" aria-pressed="false"></button>
+          <button class="bubble" type="button" aria-label="气泡 13" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 14" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 15" aria-pressed="false"></button><button class="bubble" type="button" aria-label="气泡 16" aria-pressed="true"></button>
         </div>
+        <p class="sr-only" id="bubble-help">使用方向键切换气泡，按空格或回车戳下，再按一次恢复。</p>
       </div>
     </section>
     <div class="home-actions">

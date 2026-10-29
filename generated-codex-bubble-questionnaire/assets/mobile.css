@@ -80,10 +80,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .hero { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--space-lg); padding-block: var(--space-sm) var(--space-lg); }
 .hero h1 { font-size: var(--font-title); font-weight: 500; line-height: var(--line-title); letter-spacing: 0; word-spacing: normal; text-align: left; text-wrap: wrap; }
 .hero-object { width: 234px; max-width: 82%; align-self: center; margin-block: 6px; }
-.memory-board { aspect-ratio: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; padding: 24px; border-radius: 32px; background: var(--bg); transform: rotate(-7deg); box-shadow: 12px 12px 26px var(--shadow), -12px -12px 26px var(--light); }
-.bubble { aspect-ratio: 1; display: grid; place-items: center; border-radius: 50%; box-shadow: 4px 4px 8px var(--shadow), -4px -4px 8px var(--light); }
-.bubble:nth-child(3), .bubble:nth-child(9), .bubble:nth-child(16), .bubble-tint { box-shadow: var(--pressed); }
+.memory-board { aspect-ratio: 1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 16px; border-radius: 32px; background: var(--bg); transform: rotate(-7deg); box-shadow: 12px 12px 26px var(--shadow), -12px -12px 26px var(--light); }
+.bubble { aspect-ratio: 1; display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; border-radius: 50%; background: var(--bg); box-shadow: 4px 4px 8px var(--shadow), -4px -4px 8px var(--light); transition: transform .18s, box-shadow .18s, background-color .18s; }
+.bubble[aria-pressed="true"] { background: var(--selected); box-shadow: var(--pressed); transform: scale(.95); }
+.bubble:active { box-shadow: var(--pressed); transform: scale(.88); }
 .bubble-core { background: var(--accent); color: var(--accent-ink); }
+.bubble-core[aria-pressed="true"], .bubble-core:active { background: var(--accent); box-shadow: inset 4px 4px 8px #193e49, inset -4px -4px 8px #417787; }
 .bubble-core svg { width: 16px; height: 16px; }
 .home-actions { display: grid; gap: 4px; padding-block: 12px calc(20px + env(safe-area-inset-bottom, 0px)); }
 .hero-start { width: 100%; justify-content: space-between; }
