@@ -8,37 +8,31 @@
   <meta name="description" content="从您的设备和使用习惯开始，找到合适的开源记忆库。">
   <title>开始了解您 · 记忆之间</title>
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/mobile.css">
   <script src="assets/generated-data.js" defer></script>
   <script src="assets/generated-engine.js" defer></script>
   <script src="assets/shared.js" defer></script>
   <script src="assets/quiz.js" defer></script>
 </head>
-<body class="quiz-page">
+<body class="quiz-page phone-page">
   <a class="skip-link" href="#main">跳至题目</a>
   <header class="site-header shell">
-    <a class="brand" href="index.html" aria-label="记忆之间，首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>记忆之间<span class="brand-caption">A LITTLE MORE REMEMBERED</span></span></a>
-    <nav class="header-actions" aria-label="问卷导航"><a class="text-button exit-link" href="index.html"><span id="exit-label">保存并退出</span><span data-icon="diagonal"></span></a><button class="round-button" data-open="about" aria-label="关于这份问卷"><span data-icon="help"></span></button></nav>
+    <a class="brand" href="index.html" aria-label="记忆之间，首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>记忆之间</span></a>
+    <nav class="header-actions" aria-label="问卷导航"><span data-general-info></span><a class="icon-button exit-link" href="index.html" aria-label="保存并退出问卷"><span id="exit-label" class="sr-only">保存并退出</span><span data-icon="close"></span></a></nav>
   </header>
   <main id="main" class="shell quiz-layout">
-    <aside class="quiz-sidebar" aria-label="问卷部分">
-      <p class="eyebrow sidebar-eyebrow">一点点，了解您</p>
-      <ol class="part-list" id="part-list"></ol>
-      <div class="sidebar-note"><span data-icon="lock"></span><p>答案只保存在本机。<br>随时离开，下次继续。</p></div>
-    </aside>
     <section class="question-workspace" aria-label="问卷题目">
-      <div class="question-progress"><span class="eyebrow" id="part-label">第一部分 · LLM、设备与入口</span><span class="question-count" id="question-count"></span></div>
+      <div class="question-progress"><span class="sr-only" id="part-label">LLM、设备与入口</span><span class="question-count" id="question-count"></span></div>
       <div class="progress-track" id="progress-track" role="progressbar" aria-label="已回答进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-fill"></span></div>
       <form id="question-form" novalidate>
+        <p class="storage-warning" id="storage-warning" role="status" hidden></p>
         <div id="question-content"></div>
         <p class="form-error" id="form-error" role="status" hidden></p>
-        <div class="question-controls"><button class="back-button" id="previous" type="button"><span data-icon="back"></span><span>上一题</span></button><span class="save-indicator" id="save-indicator"><span class="status-dot" aria-hidden="true"></span><span id="save-label">进度仅保存在本机</span></span><button class="primary-button next-button" id="next" type="submit"><span id="next-label">下一题</span><span data-icon="arrow"></span></button></div>
+        <div class="question-controls"><button class="back-button icon-button" id="previous" type="button" aria-label="上一题"><span data-icon="back"></span></button><span class="sr-only" id="save-label">进度仅保存在本机</span><button class="primary-button next-button" id="next" type="submit"><span id="next-label">下一题</span><span data-icon="arrow"></span></button></div>
       </form>
-      <p class="question-reassurance" id="question-reassurance">按您的实际情况选择，就很好。</p>
       <section id="completion" hidden aria-label="推荐摘要"></section>
     </section>
   </main>
-  <footer class="site-footer shell quiz-footer"><p>每一份记忆，都从了解开始。</p><button class="text-button" data-open="about">关于这份问卷<span data-icon="diagonal"></span></button></footer>
   <div id="modal-root"></div><p class="toast" id="toast" role="status" hidden></p>
   <noscript><p class="noscript-note">问卷需要 JavaScript。请启用后刷新，答案仅在浏览器中处理。</p></noscript>
 </body>

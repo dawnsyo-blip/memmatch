@@ -8,51 +8,38 @@
   <meta name="description" content="通过一份简短问卷，找到适合你与 AI 共用的开源记忆库。答卷只保存在你的浏览器。">
   <title>记忆之间 · 找到适合你的 AI 记忆库</title>
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/mobile.css">
   <script src="assets/generated-data.js" defer></script>
   <script src="assets/shared.js" defer></script>
   <script src="assets/home.js" defer></script>
 </head>
-<body class="home-page">
+<body class="home-page phone-page">
   <a class="skip-link" href="#main">跳至主要内容</a>
   <header class="site-header shell">
-    <a class="brand" href="index.html" aria-label="记忆之间，首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>记忆之间<span class="brand-caption">A LITTLE MORE REMEMBERED</span></span></a>
-    <nav class="header-actions" aria-label="主导航">
-      <button class="text-button nav-secondary nav-catalog" data-open="catalog">项目目录<span class="tiny-dot" aria-hidden="true"></span></button>
-      <button class="text-button nav-secondary" data-open="about">关于问卷</button>
-    </nav>
+    <a class="brand" href="index.html" aria-label="记忆之间，首页"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>记忆之间</span></a>
+    <nav class="header-actions" aria-label="主导航"><span data-general-info></span></nav>
   </header>
   <main id="main" class="shell">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span>为每一次对话，留一点记忆</p>
-        <h1 id="hero-title">聊过的，<br>不必从头说起。</h1>
-        <p class="hero-description">找到适合你与 AI 共用的记忆库。<br>让偏好、日常与重要的事，在对话之间延续。</p>
-        <div class="start-group">
-          <a class="primary-button hero-start" id="start-link" href="quiz.html"><span id="start-label">开始问卷</span><span class="button-orb" data-icon="arrow"></span></a>
-          <p class="microcopy" id="start-note">20 道主问题<span aria-hidden="true"> · </span>约 5–8 分钟</p>
-          <button class="text-button restart-home" id="restart-home" hidden>重新开始</button>
-        </div>
-        <p class="privacy-line"><span data-icon="lock"></span>无需登录，答卷只留在你的浏览器。</p>
+        <h1 id="hero-title">找到适合你的<br>AI 记忆库</h1>
       </div>
       <div class="hero-object">
-        <div class="object-caption"><span class="caption-line" aria-hidden="true"></span>让记忆，有处安放<span class="object-index">01 — 04</span></div>
-        <button class="memory-board" id="memory-board" aria-label="点亮记忆圆点" aria-pressed="false">
+        <div class="memory-board" aria-hidden="true">
           <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
           <span class="bubble"></span><span class="bubble bubble-tint"></span><span class="bubble"></span><span class="bubble"></span>
           <span class="bubble"></span><span class="bubble"></span><span class="bubble bubble-core"><span data-icon="spark"></span></span><span class="bubble"></span>
           <span class="bubble"></span><span class="bubble"></span><span class="bubble"></span><span class="bubble"></span>
-        </button>
-        <div class="object-footnote"><span class="small-bubble" aria-hidden="true"></span><span id="object-message" aria-live="polite">一次了解，找到更合拍的记忆方式。</span></div>
+        </div>
       </div>
     </section>
-    <section class="journey" aria-label="如何找到适合的记忆库">
-      <article><span class="step-number">01</span><div><h2>先了解你的日常</h2><p>从设备、使用习惯，到记忆偏好。</p></div></article>
-      <article><span class="step-number">02</span><div><h2>把选择缩小一点</h2><p>筛去用不了的，再按偏好排序。</p></div></article>
-      <article><span class="step-number">03</span><div><h2>找到合适的那几个</h2><p>看清推荐理由，也了解使用门槛。</p></div></article>
-    </section>
+    <div class="home-actions">
+      <p class="storage-warning" id="storage-warning" role="status" hidden></p>
+      <a class="primary-button hero-start" id="start-link" href="quiz.html"><span id="start-label">开始问卷</span><span data-icon="arrow"></span></a>
+      <button class="text-button" data-open="catalog">浏览项目</button>
+      <button class="text-button restart-home" id="restart-home" hidden>重新开始</button>
+    </div>
   </main>
-  <footer class="site-footer shell"><p>独立整理的开源记忆项目<span class="footer-dot">·</span><span id="project-count">正在读取项目</span></p><button class="text-button footer-source" data-open="about">依据项目文档整理，未经实际安装验证<span data-icon="diagonal"></span></button></footer>
   <div id="modal-root"></div>
   <p class="toast" id="toast" role="status" hidden></p>
   <noscript><p class="noscript-note">请启用 JavaScript 以加载项目目录和保存答题进度。</p></noscript>

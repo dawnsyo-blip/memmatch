@@ -25,10 +25,9 @@
     const ok=UI.writeState(state);
     document.getElementById('save-label').textContent=ok?'已保存到本机':'当前浏览器无法保存进度';
     if(!ok){
-      document.getElementById('save-indicator').style.display='flex';
       document.getElementById('exit-label').textContent='退出问卷';
-      document.querySelector('.sidebar-note p').textContent='当前浏览器无法保存进度，请在本次访问中完成问卷。';
-      document.getElementById('question-reassurance').textContent='当前浏览器无法保存进度。请在本次访问中完成，或下载答卷后离开。';
+      document.querySelector('.exit-link').setAttribute('aria-label','退出问卷，进度尚未保存');
+      const warning=document.getElementById('storage-warning');warning.textContent='当前浏览器无法保存进度，离开后将丢失回答。';warning.hidden=false;
     }
     return ok;
   }
@@ -41,47 +40,38 @@
   function setURL(id){const url=new URL(location.href);url.searchParams.set('q',id);history.replaceState(null,'',url);}
   function renderRail(q,done=false){
     const list=visible(),pi=partOf(q),answered=list.filter(complete).length;
-    document.getElementById('part-list').innerHTML=config.parts.map((p,i)=>{
-      const qs=list.filter(x=>p.questions.includes(x.id)),finished=qs.length>0&&qs.every(complete);
-      const canGo=sampleMode?false:qs.some(complete)||i===pi||(!done&&qs[0]?.id===firstIncomplete()?.id);
-      return `<li><button type="button" class="part-button ${finished?'complete':''}" data-part="${i}" ${i===pi&&!done?'aria-current="step"':''} ${!canGo?'disabled':''}><span class="part-orb">${finished&&i!==pi?icon('check'):`<span class="orb-number">0${i+1}</span>`}</span><span class="part-meta"><small>${esc(p.label)}</small><strong><span class="full-part-title">${esc(p.title)}</span><span class="compact-part-title">${['设备入口','使用习惯','记忆运作','环境预算'][i]}</span></strong></span></button></li>`;
-    }).join('');
-    document.querySelectorAll('[data-part]').forEach(el=>el.onclick=()=>{
-      const qs=list.filter(x=>config.parts[Number(el.dataset.part)].questions.includes(x.id));
-      go(qs.find(x=>!complete(x))||qs[0]);
-    });
     const value=Math.round(answered/list.length*100);
     document.getElementById('progress-fill').style.width=value+'%';
     document.getElementById('progress-track').setAttribute('aria-valuenow',String(value));
     document.getElementById('progress-track').setAttribute('aria-valuetext',`已回答 ${answered} 道，共 ${list.length} 道`);
-    document.getElementById('part-label').textContent=done?'一份更适合您的记忆':`${config.parts[pi].label} · ${config.parts[pi].title}`;
+    document.getElementById('part-label').textContent=done?'问卷已完成':`${config.parts[pi].label} · ${config.parts[pi].title}`;
     const index=list.findIndex(x=>x.id===q.id)+1;
-    document.getElementById('question-count').innerHTML=done?'已完成':`<b>${String(index).padStart(2,'0')}</b> / ${list.length} 题`;
+    document.getElementById('question-count').innerHTML=done?'已完成':`<b>${String(index).padStart(2,'0')}</b> / ${list.length}`;
   }
   function deviceIcon(id){return {iphone:'phone',android:'android',windows:'monitor',mac:'laptop',linux:'terminal',server:'server',other:'plus'}[id]||'plus';}
   function renderRank(q){
     if(q.type!=='rank'||!selected(q).length)return '';
-    return `<div class="rank-selected"><p class="rank-selected-label"><span>已选择 ${selected(q).length} 项</span><span id="rank-help">拖动整行，调整先后</span></p><p class="sr-only" id="rank-feedback" role="status"></p><ol class="rank-selected-list" aria-label="已选项目的优先顺序">${selected(q).map((id,i)=>{
+    return `<div class="rank-selected"><p class="sr-only" id="rank-feedback" role="status"></p><ol class="rank-selected-list" aria-label="已选项目的优先顺序">${selected(q).map((id,i)=>{
       const o=q.options.find(o=>o.id===id);
-      return `<li class="rank-row" data-rank="${esc(id)}" tabindex="0" aria-label="第 ${i+1} 位，${esc(o.label)}" aria-describedby="rank-keyboard-help"><button class="rank-bubble" type="button" data-remove-rank="${esc(id)}" aria-label="取消选择${esc(o.label)}">${i+1}</button><span class="rank-row-copy"><strong>${esc(o.label)}</strong>${o.help?`<small>${esc(o.help)}</small>`:''}</span><span class="rank-actions"><button type="button" data-move="${esc(id)}" data-direction="-1" aria-label="将${esc(o.label)}提前" ${i===0?'disabled':''}>${icon('up')}</button><button type="button" data-move="${esc(id)}" data-direction="1" aria-label="将${esc(o.label)}后移" ${i===selected(q).length-1?'disabled':''}>${icon('down')}</button><span class="drag-grip" aria-hidden="true">${icon('grip')}</span></span>${o.free_text?`<div class="free-field rank-free"><label for="free-${esc(id)}">请补充说明</label><input id="free-${esc(id)}" name="free-${esc(q.id)}-${esc(id)}" data-free="${esc(id)}" autocomplete="off" maxlength="300" value="${esc(state.free[`${q.id}.${id}`]||'')}" placeholder="请填写名称或简要说明…" aria-required="true"></div>`:''}</li>`;
+      return `<li class="rank-row" data-rank="${esc(id)}" tabindex="0" aria-label="第 ${i+1} 位，${esc(o.label)}" aria-describedby="rank-keyboard-help"><button class="rank-bubble" type="button" data-remove-rank="${esc(id)}" aria-label="取消选择${esc(o.label)}">${i+1}</button><span class="rank-row-copy"><strong>${esc(o.label)}</strong>${o.help?UI.infoButton('rank-'+id,o.label,o.help):''}</span><button class="icon-button rank-menu" type="button" data-rank-menu="${esc(id)}" aria-label="调整${esc(o.label)}的顺序">${icon('grip')}</button>${o.free_text?`<div class="free-field rank-free"><label for="free-${esc(id)}">请补充说明</label><input id="free-${esc(id)}" name="free-${esc(q.id)}-${esc(id)}" data-free="${esc(id)}" autocomplete="off" maxlength="300" value="${esc(state.free[`${q.id}.${id}`]||'')}" placeholder="请填写名称或简要说明…" aria-required="true"></div>`:''}</li>`;
     }).join('')}</ol><p class="sr-only" id="rank-keyboard-help">可拖动整个条目排序，或使用上下移动按钮。聚焦条目后，也可按上下方向键移动。点击条目前方的气泡可以取消选择。</p></div>`;
   }
   function render({focus=false,animate=false}={}){
     const q=byId[state.current];
-    form.hidden=false;document.getElementById('completion').hidden=true;document.getElementById('question-reassurance').hidden=false;
+    form.hidden=false;document.getElementById('completion').hidden=true;
     let appliedDefault=false;
     if(!state.seen[q.id]){
       const defaults=q.options.filter(o=>o.default_if&&checkCondition(o.default_if,state.answers)).map(o=>o.id);
       if(defaults.length&&!selected(q).length){state.answers[q.id]=q.type==='single'?defaults.slice(0,1):defaults;appliedDefault=true;}
       state.seen[q.id]=true;
     }
-    const descriptions=q.options.some(o=>o.help&&o.help.length>35);
     const typeText=q.type==='single'?'单选':q.type==='rank'?'排序':'多选';
-    const guidance=q.type==='single'?'戳下最符合您的一颗气泡':q.type==='rank'?'戳选气泡，再拖动上方条目排序':'戳下符合您情况的气泡，可多选';
-    content.innerHTML=`<h1 class="question-heading" id="question-title" tabindex="-1">${esc(q.text)}</h1><p class="question-subtitle" id="question-description"><span class="type-tag">${typeText}</span>${guidance}</p>${q.help?`<p class="question-help ${q.help.length>120?'long-help':''}" id="question-help">${esc(q.help)}</p>`:''}${appliedDefault?'<p class="default-note">已根据前面的回答帮您选好，您可以修改。</p>':''}${renderRank(q)}${q.type==='rank'&&selected(q).length?'<p class="rank-remaining">还可以选择</p>':''}<fieldset class="options ${descriptions?'long-options':''}" aria-describedby="question-description${q.help?' question-help':''}"><legend>${esc(q.text)}</legend>${q.options.map((o,index)=>{
+    const guidance=q.type==='single'?'选择一项。':q.type==='rank'?'戳选后，拖动上方条目调整顺序。点击条目前方的气泡可取消选择，也可通过右侧菜单上移或下移。':'可选择多项。再次点击气泡可取消选择。';
+    const details=[guidance,q.help,appliedDefault?'已根据前面的回答预选，您可以修改。':''].filter(Boolean).join('\n');
+    content.innerHTML=`<h1 class="question-heading" id="question-title" tabindex="-1">${esc(q.text)}</h1><div class="question-meta"><span class="question-type">${typeText}</span>${UI.infoButton('question','题目说明',details)}</div><p class="sr-only" id="question-description">${esc(guidance)}</p>${q.help?`<p class="sr-only" id="question-help">${esc(q.help)}</p>`:''}${renderRank(q)}<fieldset class="options ${q.id==='q1'?'device-options':''}" aria-describedby="question-description${q.help?' question-help':''}"><legend>${esc(q.text)}</legend>${q.options.map(o=>{
       const checked=selected(q).includes(o.id),rank=selected(q).indexOf(o.id)+1;
       if(q.type==='rank'&&checked)return '';
-      return `<div class="option-wrap"><label class="option-label" for="option-${esc(o.id)}"><input type="${q.type==='single'?'radio':'checkbox'}" name="${esc(q.id)}" id="option-${esc(o.id)}" value="${esc(o.id)}" ${checked?'checked':''} ${o.help?`aria-describedby="help-${esc(o.id)}"`:''}><span class="option-bubble" aria-hidden="true"><span class="bubble-glyph">${q.id==='q1'?icon(deviceIcon(o.id)):`<span class="bubble-letter">${String.fromCharCode(65+index)}</span>`}</span><span class="selection-orb">${q.type==='rank'&&checked?rank:icon('check')}</span></span><span class="option-copy"><strong>${esc(o.label)}</strong>${o.help?`<span class="option-help" id="help-${esc(o.id)}">${esc(o.help)}</span>`:''}</span></label>${o.free_text&&checked?`<div class="free-field"><label for="free-${esc(o.id)}">${o.id==='other'?'请补充说明':'请填写项目名称'}</label><input id="free-${esc(o.id)}" name="free-${esc(q.id)}-${esc(o.id)}" data-free="${esc(o.id)}" autocomplete="off" maxlength="300" value="${esc(state.free[`${q.id}.${o.id}`]||'')}" placeholder="${q.id==='q1'?'例如：鸿蒙平板…':'请填写名称或简要说明…'}" aria-required="true"></div>`:''}</div>`;
+      return `<div class="option-wrap"><label class="option-label" for="option-${esc(o.id)}"><input type="${q.type==='single'?'radio':'checkbox'}" name="${esc(q.id)}" id="option-${esc(o.id)}" value="${esc(o.id)}" ${checked?'checked':''} ${o.help?`aria-describedby="help-${esc(o.id)}"`:''}><span class="option-bubble" aria-hidden="true"><span class="bubble-glyph">${q.id==='q1'?icon(deviceIcon(o.id)):''}</span><span class="selection-orb">${q.type==='rank'&&checked?rank:icon('check')}</span></span><span class="option-copy"><strong>${esc(o.label)}</strong></span></label>${o.help?`<span class="sr-only" id="help-${esc(o.id)}">${esc(o.help)}</span>${UI.infoButton('option-'+o.id,o.label,o.help,'option-info')}`:''}${o.free_text&&checked?`<div class="free-field"><label for="free-${esc(o.id)}">${o.id==='other'?'请补充说明':'请填写项目名称'}</label><input id="free-${esc(o.id)}" name="free-${esc(q.id)}-${esc(o.id)}" data-free="${esc(o.id)}" autocomplete="off" maxlength="300" value="${esc(state.free[`${q.id}.${o.id}`]||'')}" placeholder="${q.id==='q1'?'例如：鸿蒙平板…':'请填写名称或简要说明…'}" aria-required="true"></div>`:''}</div>`;
     }).join('')}</fieldset>`;
     document.title=`第 ${q.number||q.id.slice(1)} 题 · 记忆之间`;
     renderRail(q);updateControls(q);document.getElementById('form-error').hidden=true;
@@ -89,10 +79,10 @@
     content.querySelectorAll('[data-free]').forEach(el=>el.addEventListener('input',()=>{
       state.free[`${q.id}.${el.dataset.free}`]=el.value;state.complete=false;save();updateControls(q);renderRail(q);document.getElementById('form-error').hidden=true;el.removeAttribute('aria-invalid');el.removeAttribute('aria-describedby');
     }));
-    content.querySelectorAll('[data-move]').forEach(el=>el.onclick=()=>moveRank(q,el.dataset.move,Number(el.dataset.direction)));
+    content.querySelectorAll('[data-rank-menu]').forEach(el=>el.onclick=()=>openRankMenu(q,el.dataset.rankMenu));
     content.querySelectorAll('[data-remove-rank]').forEach(el=>el.onclick=()=>choose(q,el.dataset.removeRank,false));
     if(q.type==='rank')bindRankDrag(q);
-    save();setURL(q.id);
+    UI.bindInfo(content);save();setURL(q.id);
     if(animate){content.classList.remove('question-enter');requestAnimationFrame(()=>content.classList.add('question-enter'));}
     if(focus)document.getElementById('question-title').focus({preventScroll:true});
   }
@@ -118,6 +108,13 @@
     const values=[...selected(q)],i=values.indexOf(id),j=i+direction;
     if(j<0||j>=values.length)return;
     [values[i],values[j]]=[values[j],values[i]];state.answers[q.id]=values;state.complete=false;save();render();announceRank(q,id);
+  }
+  function openRankMenu(q,id){
+    const i=selected(q).indexOf(id),name=q.options.find(o=>o.id===id).label;
+    UI.dialog(name,`<div class="rank-menu-list"><button type="button" data-shift="-1" ${i===0?'disabled':''}>${icon('up')}上移</button><button type="button" data-shift="1" ${i===selected(q).length-1?'disabled':''}>${icon('down')}下移</button><button type="button" data-cancel-rank>${icon('close')}取消选择</button></div>`,el=>{
+      el.querySelectorAll('[data-shift]').forEach(button=>button.onclick=()=>{el.close();moveRank(q,id,Number(button.dataset.shift));});
+      el.querySelector('[data-cancel-rank]').onclick=()=>{el.close();choose(q,id,false);};
+    });
   }
   function bindRankDrag(q){
     let drag=null;
@@ -167,6 +164,7 @@
     if(sampleMode){document.getElementById('next-label').textContent='确认顺序';return;}
     const list=visible(),i=list.findIndex(x=>x.id===q.id);
     document.getElementById('previous').disabled=i===0;
+    document.getElementById('previous').hidden=i===0;
     // 按钮保持可用，提交时在题目旁提供具体的纠正提示。
     document.getElementById('next-label').textContent=i===list.length-1?'查看推荐':'下一题';
     document.getElementById('next').setAttribute('data-ready',String(complete(q)));
@@ -182,7 +180,7 @@
   }
   form.addEventListener('submit',event=>{
     event.preventDefault();const q=byId[state.current];if(!validate(q))return;
-    if(sampleMode){UI.toast('顺序已确认，您可以继续调整。');return;}
+    if(sampleMode){UI.toast('已确认');return;}
     const list=visible(),i=list.findIndex(x=>x.id===q.id);
     if(i<list.length-1)go(list[i+1]);else{const missing=firstIncomplete();if(missing)go(missing);else finish();}
   });
@@ -202,7 +200,7 @@
     const missing=firstIncomplete();if(missing){go(missing);return;}
     const conflicts=findConflicts(config,state.answers);
     lastResult=createRuleEngine({questionnaire:config,settings}).recommend(state.answers,projects,{free:state.free});
-    state.complete=true;save();form.hidden=true;document.getElementById('question-reassurance').hidden=true;
+    state.complete=true;save();form.hidden=true;
     renderRail(byId[state.current],true);setURL('done');document.title='为您找到的记忆库 · 记忆之间';
     const out=document.getElementById('completion');out.hidden=false;
     out.innerHTML=`<div class="completion-orb">${icon('check')}</div><h1 class="question-heading" id="completion-title" tabindex="-1">${lastResult.results.length?'让记忆，从这里延续。':'再调整一点，找到更多可能。'}</h1><p class="completion-intro">${lastResult.results.length?`为您挑出 ${lastResult.results.length} 个记忆项目。每一个选择，都有依据。`:'当前条件下，没有匹配的记忆项目。您可以回看回答，尝试调整入口、部署方式或预算。'}</p>${conflicts.length?`<h2 style="font-size:16px;font-weight:500">这些回答之间需要再确认</h2><ul class="conflict-list">${conflicts.map(c=>`<li>${esc(c.message)}</li>`).join('')}</ul>`:''}${lastResult.notices.length?`<details class="review-hint"><summary>关于您的使用入口，有 ${lastResult.notices.length} 项提醒</summary>${lastResult.notices.map(n=>`<p>${esc(n)}</p>`).join('')}</details>`:''}<div class="completion-actions"><button class="primary-button" id="review-answers">回看与修改${icon('back')}</button><button class="secondary-button" id="download-answers">${icon('download')}下载答卷</button><button class="secondary-button" id="download-results">下载推荐</button></div>${lastResult.results.map(r=>{const url=UI.repoLink(r.repo_url);return `<article class="result-card"><h2>${esc(r.name)}${url?`<a href="${url}" target="_blank" rel="noopener noreferrer">查看项目${icon('diagonal')}</a>`:''}</h2><p>${esc(r.summary)}</p>${r.reasons.length?`<ul>${r.reasons.map(reason=>`<li>${esc(reason)}</li>`).join('')}</ul>`:''}${r.cautions.length||r.unknowns.length?`<details><summary>使用门槛与注意事项</summary><ul>${[...r.cautions,...r.unknowns.map(x=>'需要自行确认：'+x)].map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:''}</article>`;}).join('')}${lastResult.relax.length?`<details class="review-hint"><summary>调整哪些条件，可以多一些选择？</summary><ul>${lastResult.relax.map(r=>`<li>${esc(r.label)} · ${r.count} 个可能匹配的项目</li>`).join('')}</ul></details>`:''}<details class="review-hint"><summary>查看被筛去的项目及原因 · ${lastResult.excluded.length} 个</summary>${lastResult.excluded.map(r=>`<p>${esc(r.name)}：${esc(r.reason)}</p>`).join('')}</details><p class="review-hint">资料来自 2026 年 10 月的 README 与代码仓库，未经实际安装验证。项目能力与费用请以最新官方说明为准。</p>`;

@@ -1,4 +1,4 @@
-// Codex 生成 · 只验证本轮样张：浅色、戳气泡、已选置顶和整行拖拽。
+// Codex 生成 · 手机样张：精简文案、按需信息、戳气泡及整行拖拽。
 import {spawn} from 'node:child_process';
 import {writeFile,mkdir} from 'node:fs/promises';
 import {fileURLToPath,pathToFileURL} from 'node:url';
@@ -20,7 +20,7 @@ try{
   const cdp=(method,params={})=>new Promise((resolve,reject)=>{const id=++nextId;pending.set(id,{resolve,reject});ws.send(JSON.stringify({id,method,params}));});
   const evaluate=async expression=>{const r=await cdp('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(JSON.stringify(r.exceptionDetails));return r.result.value;};
   const wait=async expression=>{for(let i=0;i<120;i++){if(await evaluate(expression))return;await delay(50);}throw new Error('Timeout: '+expression);};
-  const navigate=async file=>{await cdp('Page.navigate',{url:pathToFileURL(path.join(dir,file)).href});await wait('document.readyState === "complete" && !!window.MemoryUI');await delay(50);};
+  const navigate=async file=>{const [name,query]=file.split('?');const url=pathToFileURL(path.join(dir,name));if(query)url.search=query;await cdp('Page.navigate',{url:url.href});await wait('document.readyState === "complete" && !!window.MemoryUI');await delay(50);};
   const click=async selector=>{await evaluate(`document.querySelector(${JSON.stringify(selector)}).click()`);await delay(40);};
   const screenshot=async name=>{await delay(240);const shot=await cdp('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});await writeFile(path.join(artifacts,name+'.png'),Buffer.from(shot.data,'base64'));};
   const viewport=async(width,height)=>{await cdp('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:1,mobile:width<600});await cdp('Emulation.setTouchEmulationEnabled',{enabled:width<600,maxTouchPoints:1});};
@@ -43,7 +43,17 @@ try{
   await cdp('Runtime.enable');await cdp('Page.enable');await viewport(1440,1000);
   await navigate('index.html');await evaluate('localStorage.clear()');await navigate('index.html');
   check(await evaluate('getComputedStyle(document.documentElement).colorScheme === "light" && !document.querySelector(".theme-toggle")'),'One light theme only');
+  check(await evaluate('document.body.getBoundingClientRect().width<=440'),'Desktop preview retains phone width');
+  check(await evaluate('!document.querySelector(".journey,.hero-description,.brand-caption,.privacy-line")'),'Redundant home copy is removed from markup');
   await screenshot('home-desktop-light');await noOverflow('Desktop homepage');
+  await viewport(390,844);await screenshot('home-mobile-light');
+  check(await evaluate('document.getElementById("start-link").getBoundingClientRect().bottom<=innerHeight'),'Home primary action fits on a phone screen');
+  await click('[popovertarget="info-general"]');await wait('document.getElementById("info-general").matches(":popover-open")');
+  check(await evaluate('document.querySelector("[popovertarget=info-general]").getAttribute("aria-expanded")==="true"'),'Info toggle exposes expanded state');
+  check(await evaluate('document.getElementById("info-general").getBoundingClientRect().right<=innerWidth'),'Information popup stays inside phone viewport');
+  await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});await cdp('Input.dispatchKeyEvent',{type:'keyUp',key:'Escape',code:'Escape'});
+  await wait('!document.getElementById("info-general").matches(":popover-open")');
+  check(true,'Information popup dismisses with Escape');
   await navigate('quiz.html');
   check(await evaluate('document.querySelectorAll(".option-bubble").length===7'),'Each device option is a circular bubble');
   const before=await evaluate('getComputedStyle(document.querySelector(".option-bubble")).boxShadow');
@@ -54,7 +64,21 @@ try{
   await click('#option-iphone');check(!(await evaluate('document.getElementById("option-iphone").checked')),'Poking selected multi bubble again releases it');await click('#option-iphone');
   await screenshot('quiz-desktop-light');await noOverflow('Desktop bubble question');
   await viewport(390,844);await screenshot('quiz-mobile-light');await noOverflow('390px bubble question');
+  check(await evaluate('document.getElementById("next").getBoundingClientRect().bottom<=innerHeight'),'Next action stays visible at phone bottom');
+  check(await evaluate('!document.querySelector(".question-reassurance,.question-subtitle,.question-help,.sidebar-note")'),'Question explanations are not permanently displayed');
+  const tree=await cdp('Accessibility.getFullAXTree');
+  check(tree.nodes.some(n=>n.role?.value==='checkbox'&&n.name?.value==='iPhone 或 iPad'),'Native choice retains a concise accessible name');
+  await click('[popovertarget="info-question"]');await wait('document.getElementById("info-question").matches(":popover-open")');
+  await delay(300);check(await evaluate('document.getElementById("info-question").matches(":popover-open")'),'Information remains open until dismissed');
+  check(await evaluate('document.getElementById("info-question").textContent.includes("可选择多项")'),'Question instructions remain available on demand');
+  await screenshot('question-info-mobile');await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'Escape',code:'Escape'});
+  for(const width of [320,375,430]){await viewport(width,844);await noOverflow(width+'px phone');}
   await viewport(375,812);await noOverflow('375px bubble question');
+  await click('#next');await click('#option-anthropic');await click('#next');
+  await click('[popovertarget="info-option-official"]');await wait('document.getElementById("info-option-official").matches(":popover-open")');
+  check(await evaluate('!document.getElementById("option-official").checked'),'Option info can open without selecting the option');
+  check(await evaluate('document.getElementById("info-option-official").textContent.includes("ChatGPT")'),'Option explanation remains available on demand');
+  await navigate('quiz.html?q=q1');
   const savedBefore=await evaluate('localStorage.getItem("codex-memory-between-quiz-v6")');
   await viewport(1440,1000);await navigate('ranking-sample.html');
   check((await rankOrder()).join(',')==='companion,work','Rank sample opens with selected items at top');
@@ -66,16 +90,20 @@ try{
   await drag(0,2);
   check((await rankOrder()).join(',')==='work,coding,companion','Whole row mouse drag changes order');
   check(await evaluate('!document.body.classList.contains("rank-drag-active")'),'Mouse drag cleans up drag state');
-  await viewport(390,1000);await evaluate('window.scrollTo(0,0)');await drag(2,0,true);
+  await viewport(390,844);await evaluate('window.scrollTo(0,0)');await drag(2,0,true);
   check((await rankOrder()).join(',')==='companion,work,coding','Whole row touch drag changes order');
   await screenshot('ranking-mobile-light');await noOverflow('Mobile ranking sample');
-  await click('[data-move="coding"][data-direction="-1"]');check((await rankOrder())[1]==='coding','Keyboard alternative remains available');
+  await click('[data-rank-menu="coding"]');await click('[data-shift="-1"]');check((await rankOrder())[1]==='coding','Rank menu provides a non-drag alternative');
+  await evaluate('document.querySelector("[data-rank=coding]").focus()');
+  await cdp('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowUp',code:'ArrowUp'});
+  check((await rankOrder())[0]==='coding','Keyboard arrow reorders the focused row');
   await click('[data-remove-rank="coding"]');check(await evaluate('!!document.getElementById("option-coding")'),'Poking selected rank bubble returns item to unselected grid');
   check(savedBefore===await evaluate('localStorage.getItem("codex-memory-between-quiz-v6")'),'Ranking sample does not overwrite saved answers');
   await navigate('ranking-sample.html');check((await rankOrder()).join(',')==='companion,work','Refresh restores ranking sample');
   await cdp('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
   check(await evaluate('getComputedStyle(document.querySelector(".option-bubble")).transitionDuration === "0s"'),'Reduced-motion preference disables animations');
-  await viewport(375,812);await navigate('index.html');await screenshot('home-mobile-light');await noOverflow('375px homepage');
+  await viewport(375,812);await navigate('index.html');await noOverflow('375px homepage');
+  await click('#restart-home');check(await evaluate('document.querySelector("dialog").textContent.includes("无法恢复")'),'Reset keeps an explicit irreversible consequence warning');await click('#keep-progress');
   check(errors.length===0,'No uncaught browser exceptions');
   await writeFile(path.join(artifacts,'qa-samples-report.json'),JSON.stringify({passed:checks.length,checks,errors},null,2));
   console.log(JSON.stringify({passed:checks.length,artifacts},null,2));await cdp('Browser.close').catch(()=>{});
