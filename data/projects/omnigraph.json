@@ -414,6 +414,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：图数据库本身不调用模型；若在配置里接外部向量化服务，那部分另计"
     },
+    "usage_form": {
+      "value": [
+        "library",
+        "service"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

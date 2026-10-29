@@ -388,6 +388,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：每一轮要多调用一次模型生成内心独白，费用随之增加；README 的测试里换成 flash-lite 后没再撞到免费额度上限"
     },
+    "usage_form": {
+      "value": [
+        "guide"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

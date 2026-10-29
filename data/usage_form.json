@@ -1,0 +1,867 @@
+{
+ "_note": "使用方式：用户怎么用上这个项目，只用于结果页显示和搭配方案，推荐规则不读。第一个值是主要方式。2026-10-28 由 access、项目定位推出初值，再按简介和 README 逐条核对",
+ "_labels": {
+  "plugin_chat": "聊天软件插件",
+  "plugin_agent": "Agent 插件",
+  "service": "独立服务",
+  "proxy": "转发服务",
+  "chat_app": "自带聊天界面的应用",
+  "app": "独立应用",
+  "bot": "聊天机器人",
+  "cli": "命令行工具",
+  "library": "开发者代码包",
+  "guide": "教程或文档",
+  "method": "做法",
+  "model": "模型"
+ },
+ "0compactmem": [
+  "plugin_agent"
+ ],
+ "a-mem": [
+  "library"
+ ],
+ "acheron-mcp-server": [
+  "service"
+ ],
+ "acontext": [
+  "library"
+ ],
+ "aelios": [
+  "proxy",
+  "service"
+ ],
+ "afair": [
+  "service"
+ ],
+ "agent-memory": [
+  "plugin_agent",
+  "service"
+ ],
+ "agent-zero": [
+  "chat_app"
+ ],
+ "agentic-recall": [
+  "service"
+ ],
+ "agentmemory": [
+  "service",
+  "plugin_agent"
+ ],
+ "agentrecall": [
+  "plugin_agent",
+  "service"
+ ],
+ "ai-companion-cot-emotion": [
+  "guide"
+ ],
+ "ai-companion-telegram-guide": [
+  "guide"
+ ],
+ "ai-daily-rules-tutorial": [
+  "guide"
+ ],
+ "ai-pocket-chat": [
+  "chat_app"
+ ],
+ "aigne-framework": [
+  "library"
+ ],
+ "alaya": [
+  "library",
+  "service"
+ ],
+ "alethech": [
+  "library",
+  "service"
+ ],
+ "anytype-mcp": [
+  "service"
+ ],
+ "archon-memory-core": [
+  "library"
+ ],
+ "astrbot-plugin-livingmemory": [
+  "plugin_chat"
+ ],
+ "astrbot-plugin-private-companion": [
+  "plugin_chat"
+ ],
+ "astrbot-plugin-proactive-chat": [
+  "plugin_chat"
+ ],
+ "astrbot-plugin-self-learning": [
+  "plugin_chat"
+ ],
+ "atmem": [
+  "plugin_agent"
+ ],
+ "aurasdk": [
+  "library",
+  "service",
+  "app"
+ ],
+ "automem": [
+  "service"
+ ],
+ "ayushagrawal288-memex": [
+  "service",
+  "library"
+ ],
+ "basic-memory": [
+  "service"
+ ],
+ "being": [
+  "service",
+  "library"
+ ],
+ "birkin-mnemosyne": [
+  "service",
+  "library"
+ ],
+ "bitbonsai-mcp-obsidian": [
+  "service"
+ ],
+ "bitterbot-desktop": [
+  "chat_app"
+ ],
+ "caura": [
+  "service",
+  "plugin_agent"
+ ],
+ "causal-memory": [
+  "plugin_agent",
+  "service"
+ ],
+ "celiums-memory": [
+  "service",
+  "library"
+ ],
+ "central-intelligence": [
+  "service"
+ ],
+ "chatnest-ui": [
+  "chat_app"
+ ],
+ "chord-affect-anchors": [
+  "guide"
+ ],
+ "claude-find": [
+  "service"
+ ],
+ "claude-handoff": [
+  "cli"
+ ],
+ "claude-imprint": [
+  "service",
+  "bot"
+ ],
+ "claude-mem": [
+  "plugin_agent"
+ ],
+ "claude-soul": [
+  "plugin_agent",
+  "service"
+ ],
+ "claudex": [
+  "app",
+  "service"
+ ],
+ "cloud-and-island": [
+  "guide"
+ ],
+ "cognee": [
+  "service",
+  "library"
+ ],
+ "cometline": [
+  "chat_app"
+ ],
+ "companion-emergence": [
+  "chat_app"
+ ],
+ "compartment": [
+  "service",
+  "app"
+ ],
+ "connectome-host": [
+  "bot"
+ ],
+ "context-keeper": [
+  "service"
+ ],
+ "context-manager": [
+  "library"
+ ],
+ "context-memory": [
+  "plugin_agent",
+  "service"
+ ],
+ "context-slim": [
+  "cli"
+ ],
+ "contextlattice": [
+  "service"
+ ],
+ "cosmos-mcp": [
+  "service"
+ ],
+ "crbro-memory": [
+  "plugin_agent",
+  "service"
+ ],
+ "cyanheads-obsidian-mcp-server": [
+  "service"
+ ],
+ "cyberboss": [
+  "bot"
+ ],
+ "daemonkey-agent": [
+  "chat_app",
+  "bot"
+ ],
+ "deja-vu": [
+  "cli",
+  "service"
+ ],
+ "dreams": [
+  "library"
+ ],
+ "dreamvault": [
+  "library"
+ ],
+ "drivesoid": [
+  "service"
+ ],
+ "dudulove-memory": [
+  "service"
+ ],
+ "dylan-heartbeat": [
+  "proxy"
+ ],
+ "echo-mistik": [
+  "chat_app"
+ ],
+ "emotion-system": [
+  "library"
+ ],
+ "engram-rs": [
+  "service"
+ ],
+ "eros-engine": [
+  "library"
+ ],
+ "eventide": [
+  "library"
+ ],
+ "everos": [
+  "library"
+ ],
+ "extension-summaryception": [
+  "plugin_chat"
+ ],
+ "fable": [
+  "service"
+ ],
+ "facthouse": [
+  "plugin_agent",
+  "service"
+ ],
+ "fbisiri-engram": [
+  "service"
+ ],
+ "fluctlightdb": [
+  "library",
+  "service"
+ ],
+ "forge-reload": [
+  "cli"
+ ],
+ "gbrain": [
+  "service"
+ ],
+ "genome": [
+  "service"
+ ],
+ "goodmemory": [
+  "service",
+  "library"
+ ],
+ "graph-memory": [
+  "service"
+ ],
+ "graphiti": [
+  "library",
+  "service"
+ ],
+ "hbarefoot-engram": [
+  "service"
+ ],
+ "headlong": [
+  "chat_app",
+  "bot"
+ ],
+ "hindsight": [
+  "service",
+  "library"
+ ],
+ "hipocampo": [
+  "service",
+  "library"
+ ],
+ "hms": [
+  "library"
+ ],
+ "honcho": [
+  "service",
+  "plugin_agent"
+ ],
+ "honey-os": [
+  "chat_app",
+  "bot"
+ ],
+ "hyperconsciousness": [
+  "service",
+  "library"
+ ],
+ "iai-personal-memory-engine": [
+  "plugin_agent",
+  "service"
+ ],
+ "imprint-memory": [
+  "plugin_agent",
+  "service"
+ ],
+ "insight": [
+  "service"
+ ],
+ "inspeximus": [
+  "service",
+  "library"
+ ],
+ "internalbeyond-mobile": [
+  "chat_app"
+ ],
+ "jarvis-orb": [
+  "service",
+  "app"
+ ],
+ "keep-the-crow": [
+  "guide"
+ ],
+ "ki-co": [
+  "chat_app"
+ ],
+ "kin-mind": [
+  "library"
+ ],
+ "kiwi-mem": [
+  "proxy"
+ ],
+ "kremis": [
+  "service",
+  "library"
+ ],
+ "kybase": [
+  "service"
+ ],
+ "langmem": [
+  "library"
+ ],
+ "langstate": [
+  "library"
+ ],
+ "lean-memory": [
+  "library",
+  "service"
+ ],
+ "letta": [
+  "chat_app",
+  "cli"
+ ],
+ "life": [
+  "service"
+ ],
+ "lightmem": [
+  "library",
+  "service"
+ ],
+ "llmcompressor": [
+  "cli"
+ ],
+ "lmc-5": [
+  "plugin_agent",
+  "library"
+ ],
+ "localkeep": [
+  "service"
+ ],
+ "loci": [
+  "plugin_agent"
+ ],
+ "longhand": [
+  "plugin_agent",
+  "service"
+ ],
+ "lore": [
+  "service"
+ ],
+ "loreroom": [
+  "plugin_agent",
+  "bot"
+ ],
+ "lumimuse": [
+  "chat_app"
+ ],
+ "machine-studio": [
+  "service"
+ ],
+ "magnemo": [
+  "service"
+ ],
+ "markuspfundstein-mcp-obsidian": [
+  "service"
+ ],
+ "mastra": [
+  "library"
+ ],
+ "mcp-agent-memory": [
+  "service",
+  "library"
+ ],
+ "mcp-logseq": [
+  "service"
+ ],
+ "mcp-memory-service": [
+  "service"
+ ],
+ "mem0": [
+  "library",
+  "plugin_agent"
+ ],
+ "mem0-mcp-selfhosted": [
+  "service"
+ ],
+ "mem9": [
+  "plugin_agent"
+ ],
+ "memanto": [
+  "cli",
+  "service"
+ ],
+ "memengine": [
+  "library"
+ ],
+ "memex-lab-memex": [
+  "app"
+ ],
+ "memforge": [
+  "service",
+  "library"
+ ],
+ "memgres": [
+  "service",
+  "library"
+ ],
+ "memheaven": [
+  "service"
+ ],
+ "memkeeper": [
+  "service"
+ ],
+ "memmachine": [
+  "service",
+  "library"
+ ],
+ "memo": [
+  "plugin_agent",
+  "service"
+ ],
+ "memobase": [
+  "library"
+ ],
+ "memocall": [
+  "service"
+ ],
+ "memora": [
+  "service",
+  "library"
+ ],
+ "memori": [
+  "plugin_agent"
+ ],
+ "memorix": [
+  "service"
+ ],
+ "memory": [
+  "plugin_agent"
+ ],
+ "memory-lancedb-pro": [
+  "plugin_agent"
+ ],
+ "memory-mcp": [
+  "plugin_agent",
+  "service"
+ ],
+ "memory-mcp-1file": [
+  "service"
+ ],
+ "memorybear": [
+  "service",
+  "library"
+ ],
+ "memoryconstellations": [
+  "library"
+ ],
+ "memorymesh": [
+  "service"
+ ],
+ "memoryos": [
+  "service"
+ ],
+ "memoryz": [
+  "service"
+ ],
+ "memos": [
+  "library",
+  "plugin_agent"
+ ],
+ "mempalace": [
+  "plugin_agent",
+  "service"
+ ],
+ "memtether": [
+  "service"
+ ],
+ "memu": [
+  "plugin_agent"
+ ],
+ "mengram": [
+  "plugin_agent",
+  "service"
+ ],
+ "method-note-vault": [
+  "method"
+ ],
+ "method-notion": [
+  "method"
+ ],
+ "midas": [
+  "service"
+ ],
+ "mimir": [
+  "library"
+ ],
+ "mindmap-mcp-server": [
+  "service"
+ ],
+ "mira-oss": [
+  "chat_app"
+ ],
+ "mirix": [
+  "library"
+ ],
+ "mneme": [
+  "plugin_agent"
+ ],
+ "mnemo-cortex": [
+  "service"
+ ],
+ "mnemo-mcp": [
+  "service"
+ ],
+ "mnemory": [
+  "service",
+  "plugin_chat"
+ ],
+ "mnemos": [
+  "library"
+ ],
+ "mnemostack": [
+  "service"
+ ],
+ "mnemosyne-agentmemory-engine-openclaw-hermes": [
+  "plugin_agent"
+ ],
+ "mochibot": [
+  "bot"
+ ],
+ "moraine-home": [
+  "app",
+  "service"
+ ],
+ "moread": [
+  "chat_app"
+ ],
+ "myco": [
+  "service"
+ ],
+ "nemolore": [
+  "plugin_chat"
+ ],
+ "neotoma": [
+  "plugin_agent",
+  "service"
+ ],
+ "nocturne-memory": [
+  "service"
+ ],
+ "not-fade-away": [
+  "guide"
+ ],
+ "ocean": [
+  "chat_app"
+ ],
+ "ombre-brain": [
+  "service"
+ ],
+ "omega-memory": [
+  "plugin_agent",
+  "service"
+ ],
+ "omemo": [
+  "proxy"
+ ],
+ "omnidimen-emotion": [
+  "model"
+ ],
+ "omnigraph": [
+  "library",
+  "service"
+ ],
+ "open-webui-memory": [
+  "plugin_chat"
+ ],
+ "openher": [
+  "chat_app",
+  "bot"
+ ],
+ "openmemory": [
+  "plugin_agent",
+  "service"
+ ],
+ "openviking": [
+  "plugin_agent",
+  "service"
+ ],
+ "optmem": [
+  "cli"
+ ],
+ "paramecium": [
+  "proxy",
+  "library"
+ ],
+ "pawwake": [
+  "proxy"
+ ],
+ "people-context": [
+  "plugin_agent",
+  "service"
+ ],
+ "personal-understanding": [
+  "plugin_agent"
+ ],
+ "piia-engram": [
+  "service"
+ ],
+ "pilulier": [
+  "library"
+ ],
+ "powermem": [
+  "service",
+  "plugin_agent"
+ ],
+ "prism-mcp": [
+  "plugin_agent",
+  "service"
+ ],
+ "project-tessera": [
+  "service"
+ ],
+ "psycheros": [
+  "chat_app",
+  "service"
+ ],
+ "python-sdk": [
+  "library"
+ ],
+ "reme": [
+  "plugin_agent"
+ ],
+ "remembra": [
+  "service",
+  "cli"
+ ],
+ "remnic": [
+  "plugin_agent",
+  "service"
+ ],
+ "resonant": [
+  "chat_app"
+ ],
+ "resonant-mind": [
+  "service"
+ ],
+ "respark": [
+  "cli"
+ ],
+ "retaindb": [
+  "service"
+ ],
+ "rikkahub-auto-compress": [
+  "chat_app"
+ ],
+ "roampal-core": [
+  "plugin_agent",
+  "service"
+ ],
+ "rolling-memory": [
+  "proxy",
+  "library"
+ ],
+ "sapphire": [
+  "chat_app"
+ ],
+ "second-me": [
+  "chat_app"
+ ],
+ "serein": [
+  "service",
+  "proxy"
+ ],
+ "servers": [
+  "service"
+ ],
+ "shadowgraph": [
+  "plugin_agent"
+ ],
+ "shared-diary-mcp": [
+  "service"
+ ],
+ "shodh-memory": [
+  "service"
+ ],
+ "sillytavern-memorybooks": [
+  "plugin_chat"
+ ],
+ "sillytavern-messagesummarize": [
+  "plugin_chat"
+ ],
+ "sillytavern-presence": [
+  "plugin_chat"
+ ],
+ "sillytavern-rememory": [
+  "plugin_chat"
+ ],
+ "simplemem": [
+  "service",
+  "library"
+ ],
+ "smart-memory": [
+  "plugin_chat"
+ ],
+ "smith-and-web-obsidian-mcp-server": [
+  "service"
+ ],
+ "st-qdrant-memory": [
+  "plugin_chat"
+ ],
+ "statelessagent": [
+  "service"
+ ],
+ "statewave": [
+  "library"
+ ],
+ "supermemory": [
+  "service",
+  "plugin_agent"
+ ],
+ "swap-tutorial": [
+  "guide"
+ ],
+ "synapse": [
+  "plugin_agent",
+  "service"
+ ],
+ "synthetic-heart": [
+  "chat_app",
+  "bot"
+ ],
+ "talamus": [
+  "service"
+ ],
+ "taosmd": [
+  "service",
+  "library"
+ ],
+ "telemem": [
+  "library",
+  "service"
+ ],
+ "tencentdb-agent-memory": [
+  "plugin_agent",
+  "proxy"
+ ],
+ "text2mem": [
+  "library"
+ ],
+ "three-days-no-sleep": [
+  "chat_app"
+ ],
+ "tidefall": [
+  "service"
+ ],
+ "timeline-memory": [
+  "plugin_chat"
+ ],
+ "tokenmizer": [
+  "proxy",
+  "plugin_agent"
+ ],
+ "tree-ring-memory": [
+  "plugin_agent"
+ ],
+ "tstockham96-engram": [
+  "service"
+ ],
+ "utsuwa": [
+  "chat_app"
+ ],
+ "vcptoolbox": [
+  "proxy",
+  "library"
+ ],
+ "vecthare": [
+  "plugin_chat"
+ ],
+ "weighted-compact": [
+  "service"
+ ],
+ "widemem-ai": [
+  "service",
+  "library"
+ ],
+ "wrenwen": [
+  "guide"
+ ],
+ "xinchao-nian": [
+  "service"
+ ],
+ "yoji": [
+  "chat_app"
+ ],
+ "yorishiro": [
+  "app"
+ ],
+ "yourmemory": [
+  "service",
+  "proxy"
+ ],
+ "yuralume-core": [
+  "chat_app",
+  "bot"
+ ],
+ "zenbrain": [
+  "library",
+  "service"
+ ]
+}

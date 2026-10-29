@@ -416,6 +416,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：训练要在 RunPod 租云 GPU，账户需充 10–25 美元；A100 约 1.6 美元／小时、A5000 约 0.5 美元／小时；README 称不需要 API 和订阅"
     },
+    "usage_form": {
+      "value": [
+        "cli"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

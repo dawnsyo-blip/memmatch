@@ -486,6 +486,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：默认配置设计在各家免费额度内，正常个人使用不用绑卡；向量也可用本地 Ollama"
     },
+    "usage_form": {
+      "value": [
+        "plugin_agent",
+        "service"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

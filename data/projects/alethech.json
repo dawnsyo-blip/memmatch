@@ -412,6 +412,14 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：没有发现收费或需要另付的接口"
     },
+    "usage_form": {
+      "value": [
+        "library",
+        "service"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

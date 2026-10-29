@@ -393,6 +393,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：只是架构文档、没有代码，照着自建时要自备模型接口"
     },
+    "usage_form": {
+      "value": [
+        "guide"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -419,6 +419,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：README 提到 6 月 15 日起通过 -p 参数或 Agent SDK 的非交互调用改按量计费，常驻会话仍走订阅"
     },
+    "usage_form": {
+      "value": [
+        "guide"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -410,6 +410,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：只是教程，用的是您本来就在用的聊天应用；作者用 Claude Opus，换别的模型要自己调提示词"
     },
+    "usage_form": {
+      "value": [
+        "guide"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

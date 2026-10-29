@@ -474,6 +474,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：记忆处理的模型费约 7 美元／月，这是 README 的估算，可用 OpenRouter、DeepSeek、Gemini"
     },
+    "usage_form": {
+      "value": [
+        "library"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

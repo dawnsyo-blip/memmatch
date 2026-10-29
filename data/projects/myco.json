@@ -417,6 +417,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README＋docs/guides/GETTING_STARTED.md）：只要在电脑上装 Rust、Node.js、Python 并接到 Claude Code 或 Claude 桌面版；记忆由您用的 Claude 自己整理，不另配模型接口"
     },
+    "usage_form": {
+      "value": [
+        "service"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

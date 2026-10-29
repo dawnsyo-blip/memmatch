@@ -39,6 +39,7 @@ OVERRIDES = ROOT / "data/normalization_overrides.json"
 VERIFICATION = ROOT / "data/readme_verification.json"
 SAFETY_NOTES = ROOT / "data/safety_notes.json"
 SPEND_REVIEW = ROOT / "data/spend_review.json"
+USAGE_FORM = ROOT / "data/usage_form.json"
 REVIEW_MD = ROOT / "docs/review-normalization.md"
 REVIEW_XLSX = ROOT / "docs/review-normalization.xlsx"
 
@@ -102,6 +103,7 @@ MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "me
 
 
 SPEND_DATA = json.loads(SPEND_REVIEW.read_text(encoding="utf-8")) if SPEND_REVIEW.exists() else {}
+USAGE_DATA = json.loads(USAGE_FORM.read_text(encoding="utf-8")) if USAGE_FORM.exists() else {}
 
 
 def snippet(text, m, width=60):
@@ -847,6 +849,7 @@ def normalize(doc, overrides, verification=None):
             uncertainties.append({"field": f, "label": FIELD_LABELS[f], "note": uncertainty_note(n["basis"])})
     norm = {f: out[f] for f in FIELDS}
     norm["spend_note"] = spend_note
+    norm["usage_form"] = n_usage_form(doc["id"], norm)
     rel = RELATED.get(doc["id"], [])
     norm["pairs_with"] = res([i for i, _ in rel], "auto",
                              "；".join(f"{i}：{n}" for i, n in rel) or "没有记录设计上搭配使用的项目")
@@ -854,6 +857,25 @@ def normalize(doc, overrides, verification=None):
     if tax:
         norm["paper_taxonomy"] = tax
     return norm, uncertainties
+
+
+def n_usage_form(pid, norm):
+    """使用方式（只给结果页显示和搭配方案用）：逐条核对过的在 data/usage_form.json；新项目按接入方式推出初值，标 auto。"""
+    if pid in USAGE_DATA:
+        return res(USAGE_DATA[pid], "verified", "逐条核对，见 data/usage_form.json")
+    role, acc = norm["project_role"]["value"], norm["access"]["value"] or []
+    clients = set(norm["compatible_clients"]["value"] or [])
+    if role in ("guide", "method"):
+        return res([role], "auto", "按项目定位")
+    vals = []
+    if "gateway" in acc: vals.append("proxy")
+    if "host_plugin" in acc:
+        vals.append("plugin_chat" if clients & {"sillytavern", "astrbot", "open_webui", "rikkahub", "kelivo"} else "plugin_agent")
+    if "standalone_app" in acc or role == "companion_app": vals.append("chat_app")
+    if "mcp" in acc: vals.append("service")
+    if "cli_tool" in acc: vals.append("cli")
+    if "library" in acc or role == "dev_framework": vals.append("library")
+    return res(vals[:3] or ["service"], "auto", "按接入方式推出，未核对；核对后写进 data/usage_form.json")
 
 
 def uncertainty_note(basis):

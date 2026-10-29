@@ -424,6 +424,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README＋mcp.polarity-lab.com）：记忆存在 Polarity 的托管服务上，README 和官网都只写了登录、生成密钥，没写收费、套餐或额度；以后是否收费不确定。据目录网站，后端也能自己部署到 Cloudflare，属二手信息"
     },
+    "usage_form": {
+      "value": [
+        "service"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

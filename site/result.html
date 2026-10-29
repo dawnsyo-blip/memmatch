@@ -229,6 +229,7 @@
   const OUT = `<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1.5h6.5V8M10.5 1.5 2 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
 
   const cfg = await fetch("../data/questionnaire/questions.json").then((r) => r.json());
+  const usage = await fetch("../data/usage_form.json").then((r) => r.json()).catch(() => ({}));
   const byQ = Object.fromEntries(cfg.questions.map((q) => [q.id, q]));
   let st = { answers: {}, free: {} };
   try { st = { ...st, ...JSON.parse(localStorage.getItem("memsite-quiz-v2")) }; } catch (e) {}
@@ -251,6 +252,14 @@
   const edges = edgeLines(r.results, byId);
   const advice = adviceItems(answers, cfg, r.results, byId);
   const val = (id, f) => byId[id]?.normalized?.[f]?.value;
+  // 名字下面那行写使用方式（最多两种），聊天软件插件只接一种软件时写出软件名；没有这个字段时退回类别
+  const PLUGIN_HOST = { sillytavern: "酒馆插件", astrbot: "AstrBot 插件", open_webui: "Open WebUI 插件" };
+  function formText(x) {
+    const forms = [].concat(val(x.id, "usage_form") || []);
+    if (!forms.length) return catText(x.category);
+    const hosts = [].concat(val(x.id, "compatible_clients") || []).filter((c) => PLUGIN_HOST[c]);
+    return forms.slice(0, 2).map((f) => (f === "plugin_chat" && hosts.length === 1 ? PLUGIN_HOST[hosts[0]] : usage._labels?.[f] || f)).join("、");
+  }
 
   /* ---------- 搭配方案的说明句 ---------- */
   // 只写数据里有的，不夸大配合程度
@@ -388,7 +397,7 @@
     return h;
   }
   const head = (x, i, folded) => `<div class="pick-head"><span class="rank">${pad(i + 1)}</span><div class="pick-title"><h3>${nm(x.name)}</h3>` +
-    (folded ? `<span class="brief">${esc(sentence(x.summary))}</span>` : `<span class="cat caption-zh">${esc(catText(x.category))}</span>`) + `</div>${folded ? `<span class="chev">${ARROW}</span>` : ""}</div>`;
+    (folded ? `<span class="brief">${esc(sentence(x.summary))}</span>` : `<span class="cat caption-zh">${esc(formText(x))}</span>`) + `</div>${folded ? `<span class="chev">${ARROW}</span>` : ""}</div>`;
 
   /* ---------- 概况 ---------- */
   const alone = r.narrowed_by.filter((x) => x.only > 0);

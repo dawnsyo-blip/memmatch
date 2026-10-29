@@ -434,6 +434,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：README 称 Gemini 免费档约每分钟 20 次、每天 1500 次，个人轻用够；频繁使用建议换付费 Key"
     },
+    "usage_form": {
+      "value": [
+        "service"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

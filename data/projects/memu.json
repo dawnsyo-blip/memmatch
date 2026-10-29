@@ -445,6 +445,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
     },
+    "usage_form": {
+      "value": [
+        "plugin_agent"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

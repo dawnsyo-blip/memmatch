@@ -471,6 +471,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：用已有的 Claude Code 订阅驱动，README 称不用另配 API Key"
     },
+    "usage_form": {
+      "value": [
+        "chat_app"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

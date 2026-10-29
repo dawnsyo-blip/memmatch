@@ -216,7 +216,8 @@
         "media_recall",
         "multi_agent",
         "spend",
-        "spend_note"
+        "spend_note",
+        "usage_form"
       ],
       "properties": {
         "access": {
@@ -391,6 +392,10 @@
         "spend_note": {
           "$ref": "#/$defs/normalizedField",
           "description": "给用户看的一句话：需要一些额外花销来搭配这个项目，含 README 写明的金额"
+        },
+        "usage_form": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "使用方式（可多选，第一个是主要方式）：plugin_chat 聊天软件插件、plugin_agent Agent 插件、service 独立服务、proxy 转发服务、chat_app 自带聊天界面的应用、app 独立应用、bot 聊天机器人、cli 命令行工具、library 开发者代码包、guide 教程或文档、method 做法、model 模型。只给结果页显示和搭配方案用，推荐规则不读；核对值在 data/usage_form.json"
         },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",

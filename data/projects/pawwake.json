@@ -488,6 +488,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：可部署在 Render、Zeabur 的免费额度内；模型按调用付费"
     },
+    "usage_form": {
+      "value": [
+        "proxy"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

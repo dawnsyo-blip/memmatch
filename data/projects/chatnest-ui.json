@@ -459,6 +459,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，README）：自己用可走 Claude Code 订阅；对外提供服务必须改用按量付费的 API Key"
     },
+    "usage_form": {
+      "value": [
+        "chat_app"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

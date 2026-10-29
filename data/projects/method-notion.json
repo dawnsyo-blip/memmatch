@@ -424,6 +424,13 @@
       "status": "verified",
       "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版即可用 MCP；商业版、企业版的请求上限更高"
     },
+    "usage_form": {
+      "value": [
+        "method"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/usage_form.json"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
