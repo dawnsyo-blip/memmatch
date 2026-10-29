@@ -32,6 +32,7 @@
   --bubble-size: 44px;
   --option-gap: 16px;
   --row-inset: 12px;
+  --action-height: 56px;
   font-family: system-ui, -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", "Noto Sans CJK SC", sans-serif;
   background: #dfe8ec;
 }
@@ -126,9 +127,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, summary:focus-visibl
 .free-field input, .search-field { width: 100%; min-width: 0; background: var(--bg); color: var(--ink); border: 1px solid var(--line); border-radius: 12px; padding: 12px; font-size: 16px; box-shadow: inset 2px 2px 6px var(--shadow), inset -2px -2px 6px var(--light); scroll-margin-block: 80px 140px; }
 .free-field input::placeholder, .search-field::placeholder { color: var(--secondary); }
 .question-controls { position: fixed; z-index: 10; bottom: 0; left: 50%; transform: translateX(-50%); width: min(100%, 440px); display: flex; align-items: center; gap: var(--space-sm); padding: var(--unit-inline) var(--page-gutter) calc(var(--unit-inline) + env(safe-area-inset-bottom, 0px)); border-top: 1px solid #d4e0e5; background: var(--bg); }
-.back-button { width: 48px; height: 48px; border-radius: 50%; box-shadow: 3px 3px 8px var(--shadow), -3px -3px 8px var(--light); }
+.back-button { width: var(--action-height); height: var(--action-height); flex-shrink: 0; border-radius: 50%; box-shadow: 3px 3px 8px var(--shadow), -3px -3px 8px var(--light); }
 .back-button:disabled { opacity: .35; box-shadow: none; }
-.next-button { flex: 1; justify-content: space-between; }
+.next-button { flex: 1; height: var(--action-height); min-height: var(--action-height); justify-content: flex-end; gap: var(--space-sm); }
+.question-controls .primary-button:hover { transform: none; }
 .question-enter { animation: question-enter .2s ease-out; }
 @keyframes question-enter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
