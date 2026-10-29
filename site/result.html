@@ -253,8 +253,8 @@
   const val = (id, f) => byId[id]?.normalized?.[f]?.value;
 
   /* ---------- 搭配方案的说明句 ---------- */
-  // 写给普通用户：少用术语，书面、直接；只写数据里有的，不夸大配合程度
-  const STAGE = { capture: "记下", consolidate: "整理", retrieve: "想起", forget: "遗忘", review: "查看修改" };
+  // 只写数据里有的，不夸大配合程度
+  const STAGE = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
   const gist = (id) => String(byId[id]?.info?.summary?.value || "").split(/[：；，。]/)[0];
   const stageList = (arr) => arr.map((s) => STAGE[s]).join("、");
   const N = (p) => splitName(p.name)[0];
@@ -278,7 +278,7 @@
     if (c.type === "current" && c.base === "native") return `继续用现在的客户端，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 8 题选的“${c.label}”` : "");
     const add = c.via === "addon" ? `${B} ${roleDo(last)}` : `再配上${saidPaired ? " " : "为它设计的 "}${B}`;
     if (c.type === "current") return c.via === "addon" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${add}` : `您正在用的 ${base.map(N).join("、")}，${add}`;
-    if (c.type === "complete") return `${N(parts[0])} 一个项目从记下到查看修改都能包办，${add}`;
+    if (c.type === "complete") return `${N(parts[0])} 一个项目包办写入到查看修改，${add}`;
     if (c.via === "pairs") return parts.map((p) => `${N(p)} ${gist(p.id)}`).join("，");
     return `${N(parts[0])} 负责记忆，` + parts.slice(1).map((p) => `${N(p)} ${roleDo(p)}`).join("，");
   }
@@ -287,7 +287,7 @@
   function comboWhy(c) {
     const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
     const has = (id, f, v) => [].concat(val(id, f) || []).includes(v);
-    if (c.base === "notes") return `笔记库要靠您自己动手记，${N(last)} ${last.stages.includes("capture") ? "能自动记下、需要时自动想起" : "帮您管理记忆"}`;
+    if (c.base === "notes") return `笔记库要靠您自己动手记，${N(last)} ${last.stages.includes("capture") ? "能自动写入、按需召回" : "帮您管理记忆"}`;
     if (c.base === "native") {
       if (has(last.id, "cross_client", "yes")) return `客户端自带的记忆只在这个客户端里有效，${N(last)} 的记忆可以在几个入口共用`;
       if (["dashboard", "files"].some((v) => has(last.id, "human_review", v))) return `客户端自带的记忆难以查看和修改，${N(last)} 的记忆可以随时打开查看和修改`;
@@ -334,9 +334,9 @@
     if (x.keep && !y.keep) out.push("不用换掉现在用的");
     if (!x.keep && y.keep) out.push("另起一套");
     if (x.installs < y.installs) out.push(`只装 ${x.installs} 个项目`);
-    if (x.stages === 5 && y.stages < 5) out.push("从记下到查看修改都有");
-    else if (x.stages > y.stages) out.push("顾到的环节更多");
-    if (x.paired && !y.paired) out.push("作者设计的一组");
+    if (x.stages === 5 && y.stages < 5) out.push("覆盖全流程");
+    else if (x.stages > y.stages) out.push("覆盖的环节更多");
+    if (x.paired && !y.paired) out.push("设计上搭配使用");
     if (x.diff < y.diff) out.push("门槛更低");
     if (x.free && !y.free) out.push("不用额外花钱");
     if (!out.length && x.installs > y.installs) out.push("分工更细");
@@ -351,7 +351,7 @@
     const edge = comboEdge(c, other);
     const lack = stagesIn(other).filter((s) => !stagesIn(c).includes(s));
     const tail = lack.length ? `；比${PLAN[1 - i]}少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
-    return (edge.length ? edge.join("、") + "：" : "") + comboBody(c, edge.includes("作者设计的一组")) + tail + "。";
+    return (edge.length ? edge.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
   }
   const comboMore = (c) => [comboWhy(c), comboFit(c)].filter(Boolean).map((s) => s + "。");
   const comboText = (c, i) => comboLead(c, i) + comboMore(c).join("");

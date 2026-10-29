@@ -492,7 +492,7 @@
   },
   "safety_note": {
     "level": "info",
-    "note": "选“云”模式时，记忆会上传到 Moorcheh 的服务器；选本地 Docker 加 Ollama 的模式则不外传。",
+    "note": "选“云”模式时记忆会上传到 Moorcheh 的服务器；选本地 Docker＋Ollama 模式则不外传。",
     "checked": "2026-10-26"
   }
 }

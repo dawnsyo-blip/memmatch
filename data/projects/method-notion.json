@@ -417,12 +417,12 @@
         "none"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版就能连；商业版、企业版每分钟能处理的请求更多"
+      "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版即可用 MCP；商业版、企业版的请求上限更高"
     },
     "spend_note": {
-      "value": "不需要额外花钱。Notion 免费版就能连；商业版、企业版每分钟能处理的请求更多。可选花销，不付也能用：Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 里连 Notion 要付费套餐，Plus 可用。",
+      "value": "不需要额外花钱。Notion 免费版即可用 MCP；商业版、企业版的请求上限更高。可选花销，不付也能用：Claude 免费版能添加 1 个自定义连接器，付费版能加多个；ChatGPT 里连 Notion 要付费套餐，Plus 可用。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版就能连；商业版、企业版每分钟能处理的请求更多"
+      "basis": "Claude 核实（2026-10-28，Notion 官方开发者文档）：Notion 免费版即可用 MCP；商业版、企业版的请求上限更高"
     },
     "pairs_with": {
       "value": [],

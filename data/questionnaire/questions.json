@@ -7,12 +7,12 @@
   "field_labels": {
     "compatible_clients": "能配合哪些入口", "runs_on": "运行位置", "os": "支持的系统", "difficulty": "上手门槛",
     "cost": "费用", "spend": "额外花销", "accounts_needed": "需要的账号", "phone_access": "手机能否连上", "setup_device": "只用手机能否装好", "data_passes_through": "数据经过谁的服务器",
-    "model_api_key": "大模型服务的密钥", "claude_subscription": "Claude 付费套餐", "github": "GitHub 账号",
+    "model_api_key": "大模型接口密钥", "claude_subscription": "Claude 付费套餐", "github": "GitHub 账号",
     "vendor_account": "项目方账号", "cloudflare": "Cloudflare 账号", "render": "Render 账号", "telegram": "Telegram 机器人",
-    "model_api": "大模型服务的用量费", "subscription": "付费订阅", "hosting": "服务器或云平台费用", "product_fee": "项目本身收费",
+    "model_api": "LLM 或向量化接口的用量费", "subscription": "付费订阅", "hosting": "服务器或云平台费用", "product_fee": "项目本身收费",
     "difficulty:low": "低，下载安装或一键安装即可", "difficulty:medium": "中，需照着教程敲几条命令", "difficulty:high": "高，要改较多配置或写代码",
     "settings_ui": "可以在界面里改设置", "config_file": "可以改配置文件", "prompts": "可以改提示词", "plain_data": "记忆是普通文件，可以直接改",
-    "plugin_api": "可以加装插件", "small_code": "代码小巧，方便自己改"
+    "plugin_api": "留了插件接口", "small_code": "代码小巧，方便自己改"
   },
   "parts": [
     {"label": "第一部分", "title": "LLM、设备与入口", "questions": ["q1", "q2", "q3", "q3a", "q3b", "q3c", "q4", "q5"]},
@@ -37,7 +37,7 @@
       ],
       "rules": [
         {"when": {"question": "q1", "selected_none": ["windows", "mac", "linux", "server"]},
-         "exclude_any": {"setup_device": ["needs_computer"]}, "reason": "安装时要用电脑"}
+         "exclude_any": {"setup_device": ["needs_computer"]}, "reason": "安装或部署时要用电脑"}
       ]
     },
     {
@@ -59,7 +59,7 @@
         {"when": {"question": "q2", "selected_none": ["anthropic"]}, "exclude_any": {"model_lock": ["claude_only"]},
          "reason": "只能配合 Claude 使用"},
         {"when": {"question": "q2", "selected_only_within": ["local"]},
-         "score": [{"if": {"local_model": ["yes", "no_model_needed"]}, "points": 2, "reason": "可以只用装在自己电脑上的模型"}]}
+         "score": [{"if": {"local_model": ["yes", "no_model_needed"]}, "points": 2, "reason": "可以只用本地模型"}]}
       ]
     },
     {
@@ -99,12 +99,12 @@
            {"when": {"question": "q5", "selected_any": ["hosted"]}, "require": {"phone_access": ["cloud"]}},
            {"when": {"question": "q5", "selected_any": ["cloud_free"]}, "require": {"runs_on": ["own_cloud_account"]}}
          ],
-         "reason": "手机连不上这个记忆库", "note": "要自己用 Cloudflare Tunnel 或 Tailscale 这类工具，让手机能连到它", "note_if": {"phone_access": ["needs_tunnel"]}},
+         "reason": "手机连不上这个记忆库", "note": "要自己用 Cloudflare Tunnel 或 Tailscale 让手机连上", "note_if": {"phone_access": ["needs_tunnel"]}},
         {"when": {"all": [{"question": "q3", "selected_any": ["sillytavern"]}, {"question": "q3c", "selected_none": ["no"]}]},
-         "note": "酒馆要先装社区扩展 SillyTavern-MCP-Client 和它要求的服务器插件，再在采样设置里打开函数调用，才能连上这个记忆库；所用的模型服务要支持调用工具",
+         "note": "酒馆要先装社区扩展 SillyTavern-MCP-Client 及它要求的服务端插件，并在采样设置里打开函数调用，才能接这个 MCP 记忆库；所用的模型接口要支持工具调用",
          "note_if": {"compatible_clients": ["any_mcp_client"]}, "note_unless": {"compatible_clients": ["sillytavern"]}},
         {"when": {"question": "q3", "selected_any": ["sillytavern"]},
-         "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "本身就是酒馆扩展，不用另装连接扩展"}]},
+         "score": [{"if": {"compatible_clients": ["sillytavern"]}, "points": 10, "reason": "原生支持酒馆，不用另装 MCP 扩展"}]},
         {"when": {"all": [{"question": "q3", "selected_any": ["official"]}, {"question": "q2", "selected_any": ["openai"]}]},
          "note": "ChatGPT 里要在网页上进“设置 → 插件”找到 Notion 连接，连好后手机 App 也能用；需要 ChatGPT 付费套餐，Plus 实测可用。连接时如果提示“此应用目前不提供浏览器设置 URL”，换从设置里的插件页连",
          "note_if": {"id": ["method-notion"]}}
@@ -183,7 +183,7 @@
       ],
       "rules": [
         {"when": {"question": "q4", "selected_any": ["same_agent", "shared", "per_agent"]},
-         "note": "文档没写能否在几个入口共用，不过这类记忆服务一般可以同时连几个入口", "note_if": {"cross_client": ["not_mentioned"]},
+         "note": "文档没写能否多端共用，不过 MCP 服务一般可以同时给几个入口用", "note_if": {"cross_client": ["not_mentioned"]},
          "score": [{"if": {"cross_client": ["yes"]}, "points": 2, "reason": "写明了能在几个入口共用同一份记忆"}]},
         {"when": {"question": "q4", "selected_any": ["shared"]},
          "score": [{"if": {"multi_agent": ["shared"]}, "points": 2, "reason": "写明了几个 Agent 能共用同一份记忆"}]},
@@ -210,9 +210,9 @@
       ],
       "rules": [
         {"when": {"question": "q5", "selected_none": ["hosted"]}, "exclude_only": {"data_passes_through": ["third_party"]},
-         "unless_project": {"project_role": ["method"]}, "reason": "只能用项目方提供的在线服务"},
+         "unless_project": {"project_role": ["method"]}, "reason": "只能用项目方的托管服务"},
         {"when": {"question": "q5", "selected_none": ["hosted"]},
-         "note": "默认用项目方的在线服务，您需要改成装在自己的电脑或服务器上", "note_if": {"runs_on": ["third_party_hosted"]}, "note_unless": {"project_role": ["method"]}},
+         "note": "默认用托管服务，需改为自己部署", "note_if": {"runs_on": ["third_party_hosted"]}, "note_unless": {"project_role": ["method"]}},
         {"when": {"question": "q5", "selected_none": ["hosted"]},
          "note": "记忆存在 Notion 的服务器上。Notion 不是记忆库项目方，内容由您自己写，随时能看能改；介意的话请改用本地笔记库",
          "note_if": {"project_role": ["method"], "runs_on": ["third_party_hosted"]}}
@@ -229,7 +229,7 @@
       "text": "您常和 LLM 共同进行什么活动？",
       "options": [
         {"id": "companion", "label": "聊天与陪伴", "effect": {"score": [
-          {"if": {"persona_continuity": ["yes"]}, "points": 1, "reason": "开新窗口、换模型后，还是同一个 TA"},
+          {"if": {"persona_continuity": ["yes"]}, "points": 1, "reason": "换窗、换模型后还是同一个 TA"},
           {"if": {"emotion_handling": ["tags", "weighting", "ai_state", "user_mood"]}, "points": 1, "reason": "会记住和处理情绪"},
           {"if": {"proactive": ["yes"]}, "points": 1, "reason": "会主动找您"},
           {"if": {"relationship_stage": ["yes"]}, "points": 1, "reason": "记录关系的进展"}]}},
@@ -263,7 +263,7 @@
       "rules": [
         {"when": {"question": "q6", "selected_any": ["notes"]},
          "score": [{"if": {"human_review": ["files"], "export": ["markdown"]}, "unless": {"project_role": ["method"]}, "points": 2,
-                    "reason": "记忆存成 Obsidian 等笔记软件能直接打开的文件，可以放进您的笔记库直接看和改"}]}
+                    "reason": "记忆存成 Markdown 文件，能放进您的笔记库直接看和改"}]}
       ]
     },
     {
@@ -274,8 +274,8 @@
       "options": [
         {"id": "entry_hallucination", "label": "录入幻觉", "help": "LLM 说“记住了”，其实没有记", "effect": {"score": [
           {"if": {"human_review": ["*"]}, "points": 0.5, "reason": "随时能看到记了什么"},
-          {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看要记的内容，您确认后才存"},
-          {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "记下后会明确告诉您记了什么"}]}},
+          {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看候选再入库"},
+          {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "写入后会明确回执"}]}},
         {"id": "window_loss", "label": "换窗失忆", "help": "开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
           {"if": {"window_handoff": ["yes"]}, "points": 1, "reason": "开新窗口能接上之前的内容"},
           {"if": {"cross_client": ["yes"]}, "points": 1, "reason": "几个入口共用一份记忆"}]}},
@@ -283,7 +283,7 @@
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "新事实取代旧事实时保留历史，能纠错"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "记得每件事是什么时候的"}]}},
         {"id": "no_priority", "label": "轻重不分", "help": "忘记不常提起但重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
-          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要程度、新旧等几个方面，决定先想起什么"},
+          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要性、新旧等多个维度决定先想起什么"},
           {"if": {"ranking_signals": ["importance"]}, "points": 1, "reason": "会给记忆打重要性分"},
           {"if": {"emotion_handling": ["weighting"]}, "points": 1, "reason": "情绪重的记忆记得更牢"},
           {"if": {"sensitive_suppression": ["yes"]}, "points": 1, "reason": "能压住您不想再提的事"}]}},
@@ -314,8 +314,8 @@
       "options": [
         {"id": "entry_hallucination", "label": "录入幻觉", "help": "LLM 说“记住了”，其实没有记", "effect": {"score": [
           {"if": {"human_review": ["*"]}, "points": 0.5, "reason": "随时能看到记了什么"},
-          {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看要记的内容，您确认后才存"},
-          {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "记下后会明确告诉您记了什么"}]}},
+          {"if": {"write_mode": ["review_first"]}, "points": 2, "reason": "先给您看候选再入库"},
+          {"if": {"write_receipt": ["yes"]}, "points": 2, "reason": "写入后会明确回执"}]}},
         {"id": "window_loss", "label": "换窗失忆", "help": "开启新窗口以后需要复述之前讲过的问题", "effect": {"score": [
           {"if": {"window_handoff": ["yes"]}, "points": 1, "reason": "开新窗口能接上之前的内容"},
           {"if": {"cross_client": ["yes"]}, "points": 1, "reason": "几个入口共用一份记忆"}]}},
@@ -323,7 +323,7 @@
           {"if": {"error_guard": ["yes"]}, "points": 1, "reason": "新事实取代旧事实时保留历史，能纠错"},
           {"if": {"time_awareness": ["yes"]}, "points": 1, "reason": "记得每件事是什么时候的"}]}},
         {"id": "no_priority", "label": "轻重不分", "help": "忘记不常提起但重要的事，或者在不合适的时候提起错误的事", "effect": {"score": [
-          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要程度、新旧等几个方面，决定先想起什么"},
+          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合重要性、新旧等多个维度决定先想起什么"},
           {"if": {"ranking_signals": ["importance"]}, "points": 1, "reason": "会给记忆打重要性分"},
           {"if": {"emotion_handling": ["weighting"]}, "points": 1, "reason": "情绪重的记忆记得更牢"},
           {"if": {"sensitive_suppression": ["yes"]}, "points": 1, "reason": "能压住您不想再提的事"}]}},
@@ -368,17 +368,17 @@
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会自动整理、合并记忆"}]}},
         {"id": "auto_review", "label": "LLM 自动录入，我事后审查", "help": "录入时不中断对话，需要时我能打开检查并修正", "effect": {"score": [
           {"if": {"write_mode": ["auto"], "human_review": ["*"]}, "points": 2, "reason": "自动记，您能随时打开检查修正"},
-          {"if": {"human_review": ["dashboard"]}, "points": 1, "reason": "有管理网页，可以查看和修改记忆"},
+          {"if": {"human_review": ["dashboard"]}, "points": 1, "reason": "有网页面板可以查看修改"},
           {"if": {"pinning": ["yes"]}, "points": 1, "reason": "能把重要的记忆钉住"},
           {"if": {"customization": ["plain_data"]}, "points": 1, "reason": "记忆是普通文件，可以直接改"}]}},
         {"id": "review_first", "label": "我审查后再录入", "help": "记忆更精简、更准，但要在录入时或定期花时间审查", "effect": {"score": [
           {"if": {"write_mode": ["review_first"]}, "points": 4, "reason": "先给您审核，您同意了才记"},
-          {"if": {"human_review": ["dashboard"]}, "points": 1, "reason": "有管理网页，可以查看和修改记忆"},
+          {"if": {"human_review": ["dashboard"]}, "points": 1, "reason": "有网页面板可以查看修改"},
           {"if": {"pinning": ["yes"]}, "points": 1, "reason": "能把重要的记忆钉住"},
           {"if": {"customization": ["plain_data"]}, "points": 1, "reason": "记忆是普通文件，可以直接改"}]}},
         {"id": "review_then_llm", "label": "录入时由我审查，入库后交给 LLM 整理", "effect": {"score": [
           {"if": {"write_mode": ["review_first"]}, "points": 4, "reason": "先给您审核，您同意了才记"},
-          {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "存下后会自动整理、合并重复的记忆"}]}}
+          {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "入库后会自动整理、合并记忆"}]}}
       ]
     },
     {
@@ -387,7 +387,7 @@
       "show_if": {"question": "q6", "selected_none": ["none"]},
       "options": [
         {"id": "chat", "label": "对话的 LLM 自己记录", "help": "掌握窗口内的上下文，最清楚什么重要；\n但记的时候会占用对话回合，并且消耗对应的 token", "effect": {"score": [
-          {"if": {"memory_writer": ["chat_agent"]}, "points": 1.5, "reason": "由陪您聊天的 AI 自己决定记什么"}]}},
+          {"if": {"memory_writer": ["chat_agent"]}, "points": 1.5, "reason": "由聊天的 LLM 自己决定记什么"}]}},
         {"id": "background", "label": "交给其它 LLM 记录", "help": "选择便宜的模型可以节省 token；\n后台记录，不打断聊天；\n需要把对话内容发给该 LLM；\n该 LLM 看不到完整上下文，未必能够准确判断重要内容", "effect": {"score": [
           {"if": {"memory_writer": ["background"]}, "points": 1.5, "reason": "后台整理，不打断聊天"},
           {"if": {"dream_consolidation": ["yes"]}, "points": 0.5, "reason": "空闲时会自动整理记忆"}]}},
@@ -438,14 +438,14 @@
       "help": "检索时间越长，并不一定检索得越准，但理论上越久越可以找到更多相关信息。",
       "options": [
         {"id": "fast", "label": "尽量别让我等", "effect": {"score": [
-          {"if": {"recall_uses_llm": ["no_llm"]}, "points": 1, "reason": "想起记忆时不用再调用大模型，回应更快"},
-          {"if": {"recall_uses_llm": ["llm"]}, "points": -1, "reason": "想起记忆时要再调用一次大模型，会慢一些"}]}},
+          {"if": {"recall_uses_llm": ["no_llm"]}, "points": 1, "reason": "召回时不调用大模型，响应快"},
+          {"if": {"recall_uses_llm": ["llm"]}, "points": -1, "reason": "召回时要调用大模型，会慢一些"}]}},
         {"id": "few", "label": "可以多等两三秒", "effect": {"score": [
-          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "挑记忆时综合考虑重要程度、新旧等几个方面"},
-          {"if": {"retrieval_postprocess": ["rerank", "dedup", "budget", "threshold"]}, "points": 1, "reason": "找出记忆后还会重新排序，筛掉不相关的"}]}},
+          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合多个维度挑选记忆"},
+          {"if": {"retrieval_postprocess": ["rerank", "dedup", "budget", "threshold"]}, "points": 1, "reason": "召回后还会重排、筛选"}]}},
         {"id": "long", "label": "多等十几秒也行", "effect": {"score": [
-          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "挑记忆时综合考虑重要程度、新旧等几个方面"},
-          {"if": {"recall_uses_llm": ["llm"]}, "points": 1, "reason": "会让大模型帮忙仔细翻找记忆"}]}}
+          {"if": {"multi_factor": ["multi"]}, "points": 1, "reason": "综合多个维度挑选记忆"},
+          {"if": {"recall_uses_llm": ["llm"]}, "points": 1, "reason": "会让模型帮忙深入翻找记忆"}]}}
       ]
     },
     {
@@ -531,7 +531,7 @@
       ],
       "rules": [
         {"when": {"question": "q18", "selected_any": ["zero"]},
-         "note": "要用装在自己电脑上的模型代替付费服务，对电脑配置有要求", "note_if": {"spend": ["model_api"]}}
+         "note": "要用本地模型代替付费接口，对电脑配置有要求", "note_if": {"spend": ["model_api"]}}
       ],
       "relax": [
         {"label": "每月 10 元以内", "set": "ten"},
@@ -553,10 +553,10 @@
       "text": "以后换记忆库或换 LLM 时，您希望能把记忆导出来带走吗？",
       "options": [
         {"id": "must", "label": "一定要能导出", "effect": {"score": [
-          {"if": {"export": ["markdown", "json"]}, "points": 2, "reason": "记忆能导出成通用的文件格式，换别的工具也能用"},
+          {"if": {"export": ["markdown", "json"]}, "points": 2, "reason": "记忆能导出成 Markdown 或 JSON 等通用格式"},
           {"if": {"customization": ["plain_data"]}, "points": 1, "reason": "记忆是普通文件，直接就能拷走"}]}},
         {"id": "prefer", "label": "最好能", "effect": {"score": [
-          {"if": {"export": ["markdown", "json"]}, "points": 1, "reason": "记忆能导出成通用的文件格式，换别的工具也能用"}]}},
+          {"if": {"export": ["markdown", "json"]}, "points": 1, "reason": "记忆能导出成 Markdown 或 JSON 等通用格式"}]}},
         {"id": "any", "label": "无所谓", "effect": {}}
       ]
     }
@@ -564,7 +564,7 @@
   "warnings": [
     {"question": "q2", "option": "local", "by_question": "q1",
      "when": {"all": [{"question": "q2", "selected_only_within": ["local"]}, {"question": "q1", "selected_none": ["windows", "mac", "linux", "server"]}]},
-     "message": "第 2 题只选了本地运行的开源 LLM，但第 1 题没有电脑或服务器：这类模型一般要装在电脑或服务器上"},
+     "message": "第 2 题只选了本地运行的开源 LLM，但第 1 题没有电脑或服务器：本地模型一般要装在电脑或服务器上"},
     {"question": "q16", "option": "low", "by_question": "q3",
      "when": {"all": [{"question": "q3", "selected_any": ["remote_control", "programmatic"]}, {"question": "q16", "selected_any": ["low"]}]},
      "message": "第 3 题选了远程连接电脑上的 Agent 或把 Agent 接进聊天软件，这类用法本身要在电脑上敲命令配置；第 16 题选“点几下就能用”会排除大部分配合它们的记忆库"},
@@ -573,29 +573,29 @@
      "message": "第 3 题用的 Agent 跑在电脑上，记忆库一般也装在那台电脑上；第 5 题只选了“只用手机”，可以加选“一台经常开着的电脑”"},
     {"question": "q5", "option": "hosted", "by_question": "q17",
      "when": {"all": [{"question": "q5", "selected_any": ["hosted"]}, {"question": "q17", "selected_none": ["vendor"]}]},
-     "message": "第 5 题接受项目方的托管服务，但第 17 题没勾“记忆库项目方自己的账号”：用项目方的在线服务都要注册项目方账号，这类项目会被排除"}
+     "message": "第 5 题接受项目方的托管服务，但第 17 题没勾“记忆库项目方自己的账号”：用托管服务都要注册项目方账号，托管版会被排除"}
   ],
   "preferences": [
-    {"if": {"verbatim": ["yes"]}, "points": 0.5, "reason": "保留原话，可以查到出处", "overridden_by": []},
-    {"if": {"error_guard": ["yes"]}, "points": 0.5, "reason": "记错了能改，也能查到出处", "overridden_by": []},
+    {"if": {"verbatim": ["yes"]}, "points": 0.5, "reason": "保留原始记录，可追溯", "overridden_by": []},
+    {"if": {"error_guard": ["yes"]}, "points": 0.5, "reason": "能纠错、追溯来源", "overridden_by": []},
     {"if": {"forgetting": ["archive"]}, "points": 0.5, "reason": "删掉的记忆只是归档，还能找回", "overridden_by": ["q13"]},
     {"if": {"scoring_stages": ["forget"]}, "points": 0.5, "reason": "遗忘时看重要程度，不只看时间", "overridden_by": ["q13"]},
-    {"if": {"multi_factor": ["multi"]}, "points": 0.5, "reason": "挑记忆时综合考虑重要程度、新旧等几个方面", "overridden_by": ["q14"]},
+    {"if": {"multi_factor": ["multi"]}, "points": 0.5, "reason": "综合多个维度挑选记忆", "overridden_by": ["q14"]},
     {"if": {"memory_layers": ["layered"]}, "points": 0.5, "reason": "记忆分层管理", "overridden_by": []},
     {"if": {"reflection": ["yes"]}, "points": 0.5, "reason": "会从零散记忆里总结出更深的认识", "overridden_by": [],
      "when_answers": {"all": [{"question": "q8", "selected_none": ["fabrication"]}, {"question": "q8n", "selected_none": ["fabrication"]}]}},
     {"if": {"chinese_support": ["zh_docs", "zh_retrieval"]}, "points": 0.5, "reason": "有中文说明", "overridden_by": ["q19"]},
-    {"if": {"chinese_support": ["zh_retrieval"]}, "points": 0.5, "reason": "中文搜索做过优化", "overridden_by": []},
+    {"if": {"chinese_support": ["zh_retrieval"]}, "points": 0.5, "reason": "中文检索做过优化", "overridden_by": []},
     {"if": {"customization": ["*"]}, "points": 0.5, "reason": "方便以后自己改", "overridden_by": []},
     {"if": {"forgetting": ["auto_decay", "archive"]}, "points": 0.5, "reason": "有遗忘机制，记忆库不会越堆越乱", "overridden_by": ["q13"]},
-    {"if": {"retrieval_postprocess": ["rerank", "dedup", "budget", "threshold"]}, "points": 0.5, "reason": "找出记忆后还会重新排序，筛掉不相关的", "overridden_by": ["q14"]},
-    {"if": {"lifecycle_complete": ["complete"]}, "points": 0.5, "reason": "记下、整理、想起、遗忘、查看修改这几步都有", "overridden_by": []},
+    {"if": {"retrieval_postprocess": ["rerank", "dedup", "budget", "threshold"]}, "points": 0.5, "reason": "召回后还会重排、筛选", "overridden_by": ["q14"]},
+    {"if": {"lifecycle_complete": ["complete"]}, "points": 0.5, "reason": "写入、整理、召回、遗忘、查看修改全流程都有", "overridden_by": []},
     {"if": {"project_role": ["memory_component"]}, "points": -2, "reason": "只做记忆的其中一环，要和别的记忆库搭配使用", "overridden_by": []},
     {"if": {"project_role": ["method"]}, "points": -2, "reason": "不会自动记、自动找，要靠 LLM 按您写的规则读写笔记", "overridden_by": [],
      "when_answers": {"question": "q12m", "selected_none": ["active"]}}
   ],
   "addons": [
-    {"id": "context_tool", "title": "长对话接续工具", "why": "您的聊天软件聊久了会丢前文，这类工具负责长对话不断线，可以和记忆库一起用。",
+    {"id": "context_tool", "title": "上下文延续工具", "why": "您的聊天软件聊久了会丢前文，这类工具负责长对话不断线，可以和记忆库一起用。",
      "when": {"all": [{"question": "q15", "selected_any": ["no", "unknown"]},
                       {"question": "q3", "selected_any": ["remote_control", "programmatic", "mcp_client", "sillytavern"]}]},
      "require": {"project_role": ["context_tool"]}, "pick": 2},

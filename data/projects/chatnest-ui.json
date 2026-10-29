@@ -452,12 +452,12 @@
         "subscription"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：自己用可以走 Claude Code 订阅；对外提供服务时必须改用按量付费的密钥"
+      "basis": "Claude 核实（2026-10-28，README）：自己用可走 Claude Code 订阅；对外提供服务必须改用按量付费的 API Key"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。自己用可以走 Claude Code 订阅；对外提供服务时必须改用按量付费的密钥。",
+      "value": "需要一些额外花销来搭配这个项目：要已有的付费订阅，如 Claude Pro，约 20 美元／月起，很多人本来就在付。自己用可走 Claude Code 订阅；对外提供服务必须改用按量付费的 API Key。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：自己用可以走 Claude Code 订阅；对外提供服务时必须改用按量付费的密钥"
+      "basis": "Claude 核实（2026-10-28，README）：自己用可走 Claude Code 订阅；对外提供服务必须改用按量付费的 API Key"
     },
     "pairs_with": {
       "value": [],

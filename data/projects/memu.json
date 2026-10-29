@@ -438,12 +438,12 @@
         "model_api"
       ],
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；装在自己的服务器上时，要自己准备大模型服务的密钥"
+      "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
     },
     "spend_note": {
-      "value": "需要一些额外花销来搭配这个项目：要另外开通大模型服务，按用量付费。memu.so 在线版 README 标注免费、不限量；装在自己的服务器上时，要自己准备大模型服务的密钥。",
+      "value": "需要一些额外花销来搭配这个项目：要自备模型或向量化接口，按调用量付费。memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥。",
       "status": "verified",
-      "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；装在自己的服务器上时，要自己准备大模型服务的密钥"
+      "basis": "Claude 核实（2026-10-28，README）：memu.so 在线版 README 标注免费、不限量；自己部署需自备模型密钥"
     },
     "pairs_with": {
       "value": [],
