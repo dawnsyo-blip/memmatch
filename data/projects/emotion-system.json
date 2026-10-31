@@ -416,6 +416,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：每轮调用一次 Jev 模型，约 8000–9000 token"
+    },
+    "token_background": {
+      "value": "per_message",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：每轮调用一次 Jev 模型，约 8000–9000 token"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

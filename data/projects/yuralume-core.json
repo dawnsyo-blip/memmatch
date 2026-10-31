@@ -477,6 +477,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：每轮后后台处理，另有每天的日程规划"
+    },
+    "token_background": {
+      "value": "per_message",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：每轮后后台处理，另有每天的日程规划"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

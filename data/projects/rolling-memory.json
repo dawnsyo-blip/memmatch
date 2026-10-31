@@ -441,6 +441,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "capped",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：摘要每轮全量带入，长度有上限；滑出窗口的消息分批调用大模型整理"
+    },
+    "token_background": {
+      "value": "per_message",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：摘要每轮全量带入，长度有上限；滑出窗口的消息分批调用大模型整理"
+    },
     "pairs_with": {
       "value": [
         "lmc-5"

@@ -217,7 +217,9 @@
         "multi_agent",
         "spend",
         "spend_note",
-        "usage_form"
+        "usage_form",
+        "token_inject",
+        "token_background"
       ],
       "properties": {
         "access": {
@@ -396,6 +398,14 @@
         "usage_form": {
           "$ref": "#/$defs/normalizedField",
           "description": "使用方式（可多选，第一个是主要方式）：plugin_chat 聊天软件插件、plugin_agent Agent 插件、service 独立服务、proxy 转发服务、chat_app 自带聊天界面的应用、app 独立应用、bot 聊天机器人、cli 命令行工具、library 开发者代码包、guide 教程或文档、method 做法、model 模型。只给结果页显示和搭配方案用，推荐规则不读；核对值在 data/usage_form.json"
+        },
+        "token_inject": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "每轮带进对话的记忆量会不会随存的记忆变多：bounded 不会（按需检索只取若干条，或有固定上限）、capped 可设上限（默认会变多，但能限制）、grows 会、not_mentioned 未提及。核对值在 data/token_usage.json"
+        },
+        "token_background": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "后台另外调用大模型的频率：none 不另外调用（由聊天模型或用户写入）、scheduled 定时、per_message 每轮或每次写入、not_mentioned 未提及。核对值在 data/token_usage.json"
         },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",

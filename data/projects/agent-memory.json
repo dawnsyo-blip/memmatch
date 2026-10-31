@@ -438,6 +438,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：身份和当前任务两层常驻，约 700 token"
+    },
+    "token_background": {
+      "value": "none",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：身份和当前任务两层常驻，约 700 token"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

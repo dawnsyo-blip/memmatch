@@ -1,12 +1,12 @@
 {
-  "version": "v6-2026-10-28",
+  "version": "v6-2026-10-30",
   "note": "按《记忆库推荐问卷 v6》编写（负责人 2026-10-28 定稿的文字稿）。网站和推荐引擎只读这个文件；格式说明见 docs/questionnaire-format.md。",
   "rank_weights": [3, 2, 1],
   "rank_rest": 1,
   "result": {"top_n": 8, "min_results": 3, "unknown_penalty": 1},
   "field_labels": {
     "compatible_clients": "能配合哪些入口", "runs_on": "运行位置", "os": "支持的系统", "difficulty": "上手门槛",
-    "cost": "费用", "spend": "额外花销", "accounts_needed": "需要的账号", "phone_access": "手机能否连上", "setup_device": "只用手机能否装好", "data_passes_through": "数据经过谁的服务器",
+    "cost": "费用", "spend": "额外花销", "token_inject": "带进对话的记忆量", "token_background": "后台调用大模型", "accounts_needed": "需要的账号", "phone_access": "手机能否连上", "setup_device": "只用手机能否装好", "data_passes_through": "数据经过谁的服务器",
     "model_api_key": "大模型接口密钥", "claude_subscription": "Claude 付费套餐", "github": "GitHub 账号",
     "vendor_account": "项目方账号", "cloudflare": "Cloudflare 账号", "render": "Render 账号", "telegram": "Telegram 机器人",
     "model_api": "LLM 或向量化接口的用量费", "subscription": "付费订阅", "hosting": "服务器或云平台费用", "product_fee": "项目本身收费",
@@ -18,7 +18,7 @@
     {"label": "第一部分", "title": "LLM、设备与入口", "questions": ["q1", "q2", "q3", "q3a", "q3b", "q3c", "q4", "q5"]},
     {"label": "第二部分", "title": "使用习惯", "questions": ["q7", "q6", "q8", "q8n"]},
     {"label": "第三部分", "title": "记忆运作过程", "questions": ["q9", "q10", "q11", "q12m", "q13", "q14"]},
-    {"label": "第四部分", "title": "环境与预算", "questions": ["q15", "q16", "q17", "q18", "q19", "q20"]}
+    {"label": "第四部分", "title": "环境与预算", "questions": ["q15", "q16", "q17", "q18", "q18t", "q19", "q20"]}
   ],
   "questions": [
     {
@@ -88,7 +88,6 @@
            {"require": {"compatible_clients": ["sillytavern", "openai_compatible"]}, "exclude_any": {"category": ["自带记忆的应用"]}},
            {"when": {"question": "q3c", "selected_none": ["no"]}, "require": {"compatible_clients": ["any_mcp_client"]}, "exclude_any": {"category": ["自带记忆的应用"]}}
          ]}},
-        {"id": "none_yet", "label": "还没有固定使用的 Agent/LLM", "exclusive": true, "effect": {}},
         {"id": "other", "label": "其它", "free_text": true, "effect": {}}
       ],
       "rules": [
@@ -112,7 +111,7 @@
       "relax": [
         {"label": "改用手机远程连接电脑上的 Agent", "add": ["remote_control"]},
         {"label": "改用 Kelivo 这类支持 MCP 的客户端", "add": ["mcp_client"]},
-        {"label": "不限定入口，看看所有选择（包括自带记忆的应用）", "add": ["none_yet"]}
+        {"label": "不限定入口，看看所有选择（包括自带记忆的应用）", "set": []}
       ]
     },
     {
@@ -256,7 +255,6 @@
         {"id": "native", "label": "官端或其它客户端自带的记忆功能", "help": "比如 ChatGPT 的记忆，或 Kelivo 自带的记忆功能"},
         {"id": "notes", "label": "连接 Obsidian、Notion 等笔记类软件"},
         {"id": "open_source", "label": "开源的记忆项目", "help": "请填写您所用的项目，比如各类记忆 MCP、酒馆的记忆扩展", "free_text": true},
-        {"id": "other", "label": "用过其它类型的记忆项目", "free_text": true, "help": "请填写您所用过的记忆项目"},
         {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "free_text": true, "exclusive": true, "help": "请填写您所知道的记忆项目"},
         {"id": "none", "label": "没用过，也不太了解", "exclusive": true}
       ],
@@ -341,12 +339,13 @@
           {"if": {"lifecycle": ["consolidate"]}, "points": 1, "reason": "会合并重复的记忆"}]}},
         {"id": "fabrication", "label": "凭空编造", "help": "LLM 自己“反思”之后，编出没发生过的事", "effect": {"score": [
           {"if": {"reflection": ["yes"], "error_guard": ["yes"]}, "points": 2, "reason": "反思得出的结论能追溯到原话"},
-          {"if": {"reflection": ["yes"]}, "unless": {"error_guard": ["yes"]}, "points": -1, "reason": "会自己反思总结，但结论追溯不到原话"}]}}
+          {"if": {"reflection": ["yes"]}, "unless": {"error_guard": ["yes"]}, "points": -1, "reason": "会自己反思总结，但结论追溯不到原话"}]}},
+        {"id": "other", "label": "其它", "free_text": true}
       ]
     },
     {
       "id": "q9", "kind": "preference", "type": "multi", "short": "图片语音视频",
-      "text": "您发给 LLM 的图片、语音或视频，希望记忆库存下原件，以后还能找回来吗？",
+      "text": "您发给 LLM 的图片、语音或视频，希望以后还能找回原件吗？",
       "options": [
         {"id": "image", "label": "要，需要保留图片", "effect": {"score": [
           {"if": {"media_recall": ["image"]}, "points": 3, "reason": "能存下原图，以后还能找回来"}]}},
@@ -452,7 +451,7 @@
       "id": "q15", "kind": "info", "type": "single", "short": "上下文工程",
       "text": "您目前的交互中有自带或者匹配的上下文工程吗？",
       "help": "滑动窗口、压缩或摘要、换窗召回这类功能都属于上下文工程。",
-      "show_if": {"question": "q3", "not_only_within": ["official", "none_yet"]},
+      "show_if": {"question": "q3", "not_only_within": ["official"]},
       "options": [
         {"id": "yes", "label": "有", "help": "比如 Kelivo 的自动摘要与换窗"},
         {"id": "no", "label": "没有，聊久了前面的就丢了"},
@@ -540,7 +539,29 @@
       ]
     },
     {
-      "id": "q19", "kind": "preference", "type": "single", "short": "中文说明",
+      "id": "q18t", "number": "19", "kind": "preference", "type": "single", "short": "token 用量",
+      "text": "对于记忆库所消耗的 token，您预期希望用量在什么程度？",
+      "help": "token 用量更多取决于记忆库自身的容量，但部分设计可以帮助限制上限。",
+      "show_if": {"question": "q2", "not_only_within": ["local"]},
+      "options": [
+        {"id": "thrifty", "label": "越省越好", "default_if": {"question": "q18", "selected_any": ["zero"]}, "effect": {"score": [
+          {"if": {"token_inject": ["bounded"]}, "points": 1.5, "reason": "每轮只带有限的记忆进对话，记忆变多也不会更费 token"},
+          {"if": {"token_inject": ["grows"]}, "points": -3},
+          {"if": {"token_background": ["none"]}, "points": 1, "reason": "不在后台另外调用大模型"},
+          {"if": {"token_background": ["scheduled"]}, "points": -0.5},
+          {"if": {"token_background": ["per_message"]}, "points": -2}]}},
+        {"id": "stable", "label": "用量最好保持稳定", "effect": {"score": [
+          {"if": {"token_inject": ["bounded"]}, "points": 1, "reason": "每轮只带有限的记忆进对话，记忆变多也不会更费 token"},
+          {"if": {"token_inject": ["grows"]}, "points": -2}]}},
+        {"id": "any", "label": "不在意用量，记得多更重要", "effect": {}}
+      ],
+      "rules": [
+        {"when": {"question": "q18t", "selected_any": ["thrifty", "stable"]},
+         "note": "带进对话的记忆量默认会随记忆变多，用之前先设好上限", "note_if": {"token_inject": ["capped"]}}
+      ]
+    },
+    {
+      "id": "q19", "number": "20", "kind": "preference", "type": "single", "short": "中文说明",
       "text": "记忆库的界面和说明文档是英文的话，您能接受吗？",
       "options": [
         {"id": "ok", "label": "能接受，可以借助翻译", "effect": {}},
@@ -549,7 +570,7 @@
       ]
     },
     {
-      "id": "q20", "kind": "preference", "type": "single", "short": "导出",
+      "id": "q20", "number": "21", "kind": "preference", "type": "single", "short": "导出",
       "text": "以后换记忆库或换 LLM 时，您希望能把记忆导出来带走吗？",
       "options": [
         {"id": "must", "label": "一定要能导出", "effect": {"score": [

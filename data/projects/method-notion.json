@@ -431,6 +431,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：取决于您怎么组织页面"
+    },
+    "token_background": {
+      "value": "none",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：取决于您怎么组织页面"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

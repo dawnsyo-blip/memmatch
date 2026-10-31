@@ -1,0 +1,357 @@
+{
+  "_note": "token 用量两项：inject＝每轮带进对话的记忆量会不会随存量变多；background＝后台另外调用大模型的频率。逐条核对过的写在这里，没列的由 normalize 按已有字段推出、状态 auto",
+  "_labels": {
+    "inject": {
+      "bounded": "不随记忆变多",
+      "capped": "可设上限",
+      "grows": "随记忆变多",
+      "not_mentioned": "未提及"
+    },
+    "background": {
+      "none": "不另外调用",
+      "scheduled": "定时调用",
+      "per_message": "每轮或每次写入都调用",
+      "not_mentioned": "未提及"
+    }
+  },
+  "ombre-brain": {
+    "inject": "capped",
+    "background": "none",
+    "note": "按需检索；目录模式每个记忆桶占一行，桶越多越长，可用 max_tokens 限制"
+  },
+  "nocturne-memory": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "新对话只载入您指定的几条，其余由聊天模型按需调取"
+  },
+  "mcp-memory-service": {
+    "inject": "bounded",
+    "background": "not_mentioned"
+  },
+  "memorix": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "大模型可选，默认不调用"
+  },
+  "basic-memory": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "kiwi-mem": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "每晚整理和生成摘要"
+  },
+  "agentmemory": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "只取 top-K，默认不调用大模型"
+  },
+  "piia-engram": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "支持 token_budget"
+  },
+  "machine-studio": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "搜索默认最多返回 5 条"
+  },
+  "method-notion": {
+    "inject": "not_mentioned",
+    "background": "none",
+    "note": "取决于您怎么组织页面"
+  },
+  "method-note-vault": {
+    "inject": "not_mentioned",
+    "background": "none",
+    "note": "取决于您写的读写规则"
+  },
+  "remembra": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "memanto": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "每天合并、标出矛盾"
+  },
+  "aelios": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "每晚整理对话"
+  },
+  "shared-diary-mcp": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "midas": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "写入和找回都不调用大模型"
+  },
+  "claude-mem": {
+    "inject": "capped",
+    "background": "per_message",
+    "note": "每次工具调用都由整理程序压缩"
+  },
+  "memheaven": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "memory-mcp-1file": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "crbro-memory": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "读取有固定上限"
+  },
+  "moraine-home": {
+    "inject": "bounded",
+    "background": "not_mentioned",
+    "note": "明确不把整段历史发给模型"
+  },
+  "psycheros": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "按日、周、月汇总摘要"
+  },
+  "mnemory": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "每次写入调用一次大模型提取"
+  },
+  "personal-understanding": {
+    "inject": "not_mentioned",
+    "background": "not_mentioned"
+  },
+  "memforge": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "空闲时让大模型复查记忆"
+  },
+  "cognee": {
+    "inject": "bounded",
+    "background": "not_mentioned",
+    "note": "整理资料时调用模型，不是每轮对话"
+  },
+  "imprint-memory": {
+    "inject": "bounded",
+    "background": "scheduled"
+  },
+  "caura": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "每次写入由大模型分类、打分"
+  },
+  "remnic": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "定期用大模型提炼记忆"
+  },
+  "astrbot-plugin-proactive-chat": {
+    "inject": "not_mentioned",
+    "background": "scheduled",
+    "note": "主动消息按时间触发，会调用聊天模型"
+  },
+  "smart-memory": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "默认记忆预算 3750 token；每隔若干条消息提取一次"
+  },
+  "dylan-heartbeat": {
+    "inject": "not_mentioned",
+    "background": "scheduled",
+    "note": "定时唤醒伴侣，会调用模型"
+  },
+  "mindmap-mcp-server": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "不需要大模型"
+  },
+  "lmc-5": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "要每天用定时任务运行整理"
+  },
+  "powermem": {
+    "inject": "bounded",
+    "background": "scheduled"
+  },
+  "mneme": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "supermemory": {
+    "inject": "not_mentioned",
+    "background": "not_mentioned",
+    "note": "默认用官方在线服务"
+  },
+  "simplemem": {
+    "inject": "bounded",
+    "background": "not_mentioned",
+    "note": "默认用作者的在线服务"
+  },
+  "internalbeyond-mobile": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "置顶的每轮常驻，最多 20 条"
+  },
+  "rolling-memory": {
+    "inject": "capped",
+    "background": "per_message",
+    "note": "摘要每轮全量带入，长度有上限；滑出窗口的消息分批调用大模型整理"
+  },
+  "sillytavern-presence": {
+    "inject": "not_mentioned",
+    "background": "none"
+  },
+  "project-tessera": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "paramecium": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "不用大模型提取"
+  },
+  "mnemo-mcp": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "central-intelligence": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "mengram": {
+    "inject": "not_mentioned",
+    "background": "per_message",
+    "note": "每轮后自动提取"
+  },
+  "pawwake": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "默认每轮提取一次，可改成每 N 轮"
+  },
+  "ayushagrawal288-memex": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "agent-memory": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "身份和当前任务两层常驻，约 700 token"
+  },
+  "agent-zero": {
+    "inject": "not_mentioned",
+    "background": "not_mentioned"
+  },
+  "archon-memory-core": {
+    "inject": "not_mentioned",
+    "background": "scheduled",
+    "note": "每晚用本地模型整理"
+  },
+  "birkin-mnemosyne": {
+    "inject": "capped",
+    "background": "none",
+    "note": "可选常驻索引，会随记忆变长"
+  },
+  "bitterbot-desktop": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "空闲时整理记忆"
+  },
+  "cometline": {
+    "inject": "not_mentioned",
+    "background": "not_mentioned"
+  },
+  "cyberboss": {
+    "inject": "not_mentioned",
+    "background": "scheduled",
+    "note": "随机时间唤醒，会调用模型"
+  },
+  "deja-vu": {
+    "inject": "not_mentioned",
+    "background": "none"
+  },
+  "emotion-system": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "每轮调用一次 Jev 模型，约 8000–9000 token"
+  },
+  "fable": {
+    "inject": "bounded",
+    "background": "none",
+    "note": "可设 token 预算"
+  },
+  "gbrain": {
+    "inject": "bounded",
+    "background": "not_mentioned"
+  },
+  "hipocampo": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "hyperconsciousness": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "mem0": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "每次写入调用大模型提取"
+  },
+  "memora": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "memory": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "常驻层不超过 2400 token；可设定时整理"
+  },
+  "mira-oss": {
+    "inject": "not_mentioned",
+    "background": "per_message",
+    "note": "每轮结束后后台分析对话"
+  },
+  "mnemostack": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "可选用大模型重排检索结果"
+  },
+  "omemo": {
+    "inject": "capped",
+    "background": "not_mentioned",
+    "note": "全量注入模式下记忆越多越费，可改用按需检索模式"
+  },
+  "omnigraph": {
+    "inject": "bounded",
+    "background": "none"
+  },
+  "prism-mcp": {
+    "inject": "bounded",
+    "background": "not_mentioned"
+  },
+  "reme": {
+    "inject": "bounded",
+    "background": "scheduled"
+  },
+  "roampal-core": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "Claude Code 每轮让主模型给记忆打分"
+  },
+  "taosmd": {
+    "inject": "bounded",
+    "background": "scheduled",
+    "note": "每天归档压缩"
+  },
+  "yuralume-core": {
+    "inject": "bounded",
+    "background": "per_message",
+    "note": "每轮后后台处理，另有每天的日程规划"
+  }
+}

@@ -436,6 +436,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "auto",
+      "basis": "AI 按需调用检索工具，每次返回若干条"
+    },
+    "token_background": {
+      "value": "not_mentioned",
+      "status": "auto",
+      "basis": "没有核对"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

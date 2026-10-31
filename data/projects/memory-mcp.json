@@ -434,6 +434,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "auto",
+      "basis": "AI 按需调用检索工具，每次返回若干条"
+    },
+    "token_background": {
+      "value": "none",
+      "status": "auto",
+      "basis": "由聊天模型或用户写入，没有另外的后台调用"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

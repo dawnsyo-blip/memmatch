@@ -406,7 +406,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     // 第 7 题：用户现在用的是什么。填了项目名的按名字对上收录的项目
     function currentSetup() {
       const used = [].concat(answers.q6 || []);
-      const text = ["open_source", "other"].filter((o) => used.includes(o)).map((o) => free[`q6.${o}`] || "").join("、");
+      const text = used.includes("open_source") ? free["q6.open_source"] || "" : "";
       if (text) {
         const norm = (s) => String(s).toLowerCase().replace(/[\s\-_·.]/g, "");
         const GENERIC = new Set(["memory", "memories", "context", "recall", "remember"]);

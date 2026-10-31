@@ -104,6 +104,8 @@ MULTI = {"access", "compatible_clients", "runs_on", "os", "accounts_needed", "me
 
 SPEND_DATA = json.loads(SPEND_REVIEW.read_text(encoding="utf-8")) if SPEND_REVIEW.exists() else {}
 USAGE_DATA = json.loads(USAGE_FORM.read_text(encoding="utf-8")) if USAGE_FORM.exists() else {}
+TOKEN_USAGE = ROOT / "data/token_usage.json"
+TOKEN_DATA = json.loads(TOKEN_USAGE.read_text(encoding="utf-8")) if TOKEN_USAGE.exists() else {}
 
 
 def snippet(text, m, width=60):
@@ -850,6 +852,7 @@ def normalize(doc, overrides, verification=None):
     norm = {f: out[f] for f in FIELDS}
     norm["spend_note"] = spend_note
     norm["usage_form"] = n_usage_form(doc["id"], norm)
+    norm["token_inject"], norm["token_background"] = n_token(doc["id"], norm)
     rel = RELATED.get(doc["id"], [])
     norm["pairs_with"] = res([i for i, _ in rel], "auto",
                              "；".join(f"{i}：{n}" for i, n in rel) or "没有记录设计上搭配使用的项目")
@@ -876,6 +879,36 @@ def n_usage_form(pid, norm):
     if "cli_tool" in acc: vals.append("cli")
     if "library" in acc or role == "dev_framework": vals.append("library")
     return res(vals[:3] or ["service"], "auto", "按接入方式推出，未核对；核对后写进 data/usage_form.json")
+
+
+def n_token(pid, norm):
+    """token 用量：每轮带进对话的量会不会随记忆变多（token_inject）、后台另外调用大模型的频率（token_background）。
+    核对过的在 data/token_usage.json；其余按已有字段推出，标 auto。"""
+    if pid in TOKEN_DATA:
+        t = TOKEN_DATA[pid]
+        basis = "逐条核对，见 data/token_usage.json" + (f"：{t['note']}" if t.get("note") else "")
+        return res(t["inject"], "verified", basis), res(t["background"], "verified", basis)
+    v = lambda f: norm[f]["value"]
+    lst = lambda f: set(v(f) or []) if isinstance(v(f), list) else {v(f)}
+    role, acc, pp = v("project_role"), lst("access"), lst("retrieval_postprocess")
+    writer, wm, rl = lst("memory_writer"), lst("write_mode"), lst("recall_uses_llm")
+    if role in ("guide", "method"):
+        inj = res("not_mentioned", "auto", "教程或做法，取决于怎么用")
+    elif pp & {"budget", "threshold"}:
+        inj = res("bounded", "auto", "检索后有条数或 token 上限")
+    elif role == "state_engine":
+        inj = res("bounded", "auto", "只带一段固定长度的状态")
+    elif "mcp" in acc and "on_request" in wm:
+        inj = res("bounded", "auto", "AI 按需调用检索工具，每次返回若干条")
+    else:
+        inj = res("not_mentioned", "auto", "没有核对")
+    if "llm" in rl:
+        bg = res("per_message", "auto", "召回时调用大模型")
+    elif writer and writer <= {"chat_agent", "user"} and v("dream_consolidation") != "yes":
+        bg = res("none", "auto", "由聊天模型或用户写入，没有另外的后台调用")
+    else:
+        bg = res("not_mentioned", "auto", "没有核对")
+    return inj, bg
 
 
 def uncertainty_note(basis):

@@ -440,6 +440,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：定时唤醒伴侣，会调用模型"
+    },
+    "token_background": {
+      "value": "scheduled",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：定时唤醒伴侣，会调用模型"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -435,6 +435,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：默认记忆预算 3750 token；每隔若干条消息提取一次"
+    },
+    "token_background": {
+      "value": "per_message",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：默认记忆预算 3750 token；每隔若干条消息提取一次"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -480,6 +480,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "capped",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：全量注入模式下记忆越多越费，可改用按需检索模式"
+    },
+    "token_background": {
+      "value": "not_mentioned",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：全量注入模式下记忆越多越费，可改用按需检索模式"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

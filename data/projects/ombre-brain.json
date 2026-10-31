@@ -506,6 +506,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "capped",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：按需检索；目录模式每个记忆桶占一行，桶越多越长，可用 max_tokens 限制"
+    },
+    "token_background": {
+      "value": "none",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：按需检索；目录模式每个记忆桶占一行，桶越多越长，可用 max_tokens 限制"
+    },
     "pairs_with": {
       "value": [
         "machine-studio",

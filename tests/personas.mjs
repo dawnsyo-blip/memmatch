@@ -65,8 +65,8 @@ export const PERSONAS = [
   },
   {
     id: "novice_phone_free",
-    title: "新手，只有安卓手机，只能 0 元，还没有固定使用的入口",
-    answers: { q2: ["deepseek"], q1: ["android"], q3: ["none_yet"], q4: "single", q5: ["phone"], q6: "none",
+    title: "新手，只有安卓手机，只能 0 元，入口选了“其它”",
+    answers: { q2: ["deepseek"], q1: ["android"], q3: ["other"], q4: "single", q5: ["phone"], q6: "none",
                q16: "low", q17: ["none"], q18: "zero" },
     expect: "结果很少，给出放宽建议（如准备 API Key、放宽安装门槛）",
   },

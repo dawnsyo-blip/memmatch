@@ -151,3 +151,22 @@ test("只提示的前后矛盾（warnings）：本地 LLM 却没有电脑，远�
   assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone"], q2: ["local", "deepseek"] }), [], "还用别家 LLM 时不提示");
   assert.deepEqual(findConflicts(questionnaire, { q3: ["remote_control"], q16: "low" }).map((c) => c.question), ["q16"]);
 });
+
+test("token 用量题（q18t）：越省越好时“不随记忆变多”的加分、每轮都调用大模型的减分，可设上限的带提醒", () => {
+  const { projects: all, questionnaire, settings } = loadAll();
+  const wide = createRuleEngine({ questionnaire: { ...questionnaire, result: { ...questionnaire.result, top_n: 999 } }, settings });
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const val = (id, f) => byId[id].normalized[f].value;
+  const pick = (r) => Object.fromEntries(r.results.map((x) => [x.id, x]));
+  const a = pick(wide.recommend({ ...multiBase, q18t: "any" }, all)), b = pick(wide.recommend({ ...multiBase, q18t: "thrifty" }, all));
+  let up = 0, down = 0;
+  for (const id of Object.keys(a)) {
+    const exp = (val(id, "token_inject") === "bounded" ? 1.5 : val(id, "token_inject") === "grows" ? -3 : 0)
+      + ({ none: 1, scheduled: -0.5, per_message: -2 }[val(id, "token_background")] || 0);
+    assert.ok(Math.abs(b[id].score - a[id].score - exp) < 0.11, `${id} 分数变化应为 ${exp}`);
+    if (exp > 0) up++; if (exp < 0) down++;
+  }
+  assert.ok(up > 10 && down > 3, `加分 ${up} 个、减分 ${down} 个，太少`);
+  assert.ok(b["ombre-brain"].cautions.some((c) => c.includes("先设好上限")), "可设上限的项目要提醒");
+  assert.ok(!a["ombre-brain"].cautions.some((c) => c.includes("先设好上限")), "不在意用量时不提醒");
+});

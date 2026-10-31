@@ -497,6 +497,16 @@
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"
     },
+    "token_inject": {
+      "value": "bounded",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：每晚整理对话"
+    },
+    "token_background": {
+      "value": "scheduled",
+      "status": "verified",
+      "basis": "逐条核对，见 data/token_usage.json：每晚整理对话"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
