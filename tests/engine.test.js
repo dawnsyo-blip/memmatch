@@ -170,3 +170,31 @@ test("token 用量题（q18t）：越省越好时“不随记忆变多”的加�
   assert.ok(b["ombre-brain"].cautions.some((c) => c.includes("先设好上限")), "可设上限的项目要提醒");
   assert.ok(!a["ombre-brain"].cautions.some((c) => c.includes("先设好上限")), "不在意用量时不提醒");
 });
+
+test("搭配方案按使用方式排除装不到一起的：最多一个转发服务、一个自带聊天界面的应用，聊天软件插件只和同一宿主的搭", () => {
+  const { projects: all, engine: real, questionnaire } = loadAll();
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const HOSTS = ["sillytavern", "astrbot", "open_webui", "rikkahub", "kelivo"];
+  let seed = 11; const rand = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+  const pick = (a) => a[Math.floor(rand() * a.length)];
+  let checked = 0;
+  for (let i = 0; i < 150; i++) {
+    const a = {};
+    for (const q of questionnaire.questions) {
+      if (q.type === "single") { a[q.id] = pick(q.options).id; continue; }
+      a[q.id] = q.options.filter((o) => !o.exclusive).sort(() => rand() - 0.5).slice(0, 1 + Math.floor(rand() * 3)).map((o) => o.id);
+    }
+    for (const c of real.recommend(a, all).combos || []) {
+      if (c.via === "pairs") continue;
+      const ids = c.parts.filter((p) => p.id).map((p) => p.id);
+      const main = ids.map((id) => byId[id].normalized.usage_form.value[0]);
+      const n = (f) => main.filter((x) => x === f).length;
+      assert.ok(n("proxy") <= 1 && n("chat_app") <= 1, `两个转发服务或两个聊天应用：${ids}`);
+      assert.ok(!(n("plugin_chat") && (n("chat_app") || n("plugin_agent"))), `聊天软件插件接不上：${ids}`);
+      const hosts = ids.filter((_, j) => main[j] === "plugin_chat").map((id) => [].concat(byId[id].normalized.compatible_clients.value).filter((x) => HOSTS.includes(x)));
+      for (let j = 1; j < hosts.length; j++) assert.ok(hosts[j].some((x) => hosts[0].includes(x)), `宿主不同的聊天软件插件：${ids}`);
+      checked++;
+    }
+  }
+  assert.ok(checked > 30, `检查的方案太少：${checked}`);
+});

@@ -378,10 +378,23 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const stageLabel = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
     const stagesOf = (id) => ALL_STAGES.filter((s) => (projById[id] ? fieldValues(projById[id], "lifecycle") : []).includes(s));
     const pairsOf = (id) => (projById[id] ? fieldValues(projById[id], "pairs_with") : []);
+    const formsOf = (id) => (projById[id] ? fieldValues(projById[id], "usage_form") : []);
     const part = (r, extra = {}) => {
       const stages = stagesOf(r.id);
-      return { id: r.id, name: r.name, stages, desc: stages.length ? "负责" + stages.map((s) => stageLabel[s]).join("、") : "", ...extra };
+      return { id: r.id, name: r.name, stages, forms: formsOf(r.id), desc: stages.length ? "负责" + stages.map((s) => stageLabel[s]).join("、") : "", ...extra };
     };
+    // 按使用方式判断装不到一起的：消息只会经过一个转发服务；用户不会同时在两个自带聊天界面的应用里聊；
+    // 插件要装进各自的宿主软件：聊天软件插件接不到自带界面的应用或 Agent 里，两个聊天软件插件的宿主也得是同一个
+    const CHAT_HOSTS = ["sillytavern", "astrbot", "open_webui", "rikkahub", "kelivo"];
+    const hostsOf = (id) => (projById[id] ? fieldValues(projById[id], "compatible_clients") : []).filter((c) => CHAT_HOSTS.includes(c));
+    function clash(ids) {
+      const main = ids.map((id) => formsOf(id)[0]);
+      const n = (f) => main.filter((x) => x === f).length;
+      if (n("proxy") > 1 || n("chat_app") > 1) return true;
+      if (n("plugin_chat") && (n("chat_app") || n("plugin_agent"))) return true;
+      const chatPlugins = ids.filter((id, i) => main[i] === "plugin_chat").map(hostsOf);
+      return chatPlugins.some((h, i) => chatPlugins.slice(i + 1).some((g) => !h.some((x) => g.includes(x))));
+    }
 
     // 第 8 题排第一的问题
     const concernId = [].concat(answers.q8 || [], answers.q8n || []).find((v) => v !== "other" && v !== "no_problem");
@@ -399,7 +412,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       const pid = baseIds.flatMap(pairsOf).find((id) => byCandId[id])
         || allCand.find((r) => baseIds.some((id) => pairsOf(r.id).includes(id)))?.id;
       if (pid) return { r: byCandId[pid], via: "pairs" };
-      const ext = addonItems.find((x) => !exclude.has(x.id));
+      const ext = addonItems.find((x) => !exclude.has(x.id) && !clash([...baseIds, x.id]));
       return ext ? { r: ext, via: "addon", label: ext.addon_title } : null;
     }
 
@@ -456,10 +469,16 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
         const mates = memories.filter((o) => o.id !== r.id && !o.lifecycle_complete && (pairsOf(r.id).includes(o.id) || pairsOf(o.id).includes(r.id))).slice(0, 2);
         if (mates.length) return { type: "group", title: "几个项目互相配合", via: "pairs", parts: [r, ...mates].map((x) => part(x)) };
       }
-      const tools = Object.values(addons).map((a) => a.items[0]).filter(Boolean).slice(0, 2);
       const libs = memories.filter((r) => ["full_memory", "companion_app", "memory_component"].includes(r.role));
       const lib = libs.find((r) => !avoid.has(r.id)) || libs[0];
-      if (!lib || !tools.length) return null;
+      if (!lib) return null;
+      // 每类部件挑第一个和记忆库、已选部件都装得到一起的
+      const tools = [];
+      for (const a of Object.values(addons)) {
+        const t = a.items.find((x) => !clash([lib.id, ...tools.map((y) => y.id), x.id]));
+        if (t && tools.length < 2) tools.push(t);
+      }
+      if (!tools.length) return null;
       return { type: "group", title: "记忆库加补充部件", via: "roles", parts: [part(lib), ...tools.map((x) => part(x))] };
     }
 
