@@ -4,7 +4,7 @@
 import { checkCondition, findConflicts } from "../../engine/index.js";
 
 const CONFIG_URL = "../data/questionnaire/questions.json";
-const KEY = "memsite-quiz-v2";
+const KEY = "memsite-quiz-v3";
 const NS = "http://www.w3.org/2000/svg";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const TYPE_NOTE = { single: "单选", multi: "多选", rank: "多选 · 排序" };

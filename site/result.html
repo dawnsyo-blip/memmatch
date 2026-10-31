@@ -232,7 +232,7 @@
   const usage = await fetch("../data/usage_form.json").then((r) => r.json()).catch(() => ({}));
   const byQ = Object.fromEntries(cfg.questions.map((q) => [q.id, q]));
   let st = { answers: {}, free: {} };
-  try { st = { ...st, ...JSON.parse(localStorage.getItem("memsite-quiz-v2")) }; } catch (e) {}
+  try { st = { ...st, ...JSON.parse(localStorage.getItem("memsite-quiz-v3")) }; } catch (e) {}
 
   let data;
   try {

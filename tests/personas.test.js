@@ -79,14 +79,14 @@ test("AstrBot 机器人：推荐 AstrBot 插件，不推荐 OpenClaw 专用插�
   assert.ok(!kept.includes("memory-lancedb-pro"));
 });
 
-test("新手、只有手机、0 元、入口选了其它：结果很少，给出放宽建议", () => {
+test("新手、只有手机、不准备账号、入口选了其它：结果很少，给出放宽建议", () => {
   const r = run("novice_phone_free");
   assert.ok(r.total_kept < 3);
   assert.ok(r.relax.length > 0);
   for (const x of r.results) assert.equal(x.category, "自带记忆的应用");
 });
 
-test("只用本地模型、0 元、不注册账号：都免费或能用本地模型，不需要账号", () => {
+test("只用本地模型、不注册账号：都免费或能用本地模型，不需要账号", () => {
   const r = run("privacy_local_free");
   assert.ok(r.total_kept > 10);
   for (const x of r.results) {

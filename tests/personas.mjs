@@ -65,14 +65,14 @@ export const PERSONAS = [
   },
   {
     id: "novice_phone_free",
-    title: "新手，只有安卓手机，只能 0 元，入口选了“其它”",
+    title: "新手，只有安卓手机，不想准备任何账号，入口选了“其它”",
     answers: { q2: ["deepseek"], q1: ["android"], q3: ["other"], q4: "single", q5: ["phone"], q6: "none",
                q16: "low", q17: ["none"] },
     expect: "结果很少，给出放宽建议（如准备 API Key、放宽安装门槛）",
   },
   {
     id: "privacy_local_free",
-    title: "只用本地开源模型、Linux 电脑、只能 0 元、不想注册任何账号",
+    title: "只用本地开源模型、Linux 电脑、不想注册任何账号",
     answers: { q2: ["local"], q1: ["android", "linux"], q3: ["programmatic"], q3a: ["other"], q4: "single",
                q5: ["computer"], q16: "high", q17: ["none"] },
     expect: "推荐的都免费，或者能用本地模型；不推荐只能托管的；不需要任何账号",
