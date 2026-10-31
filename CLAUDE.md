@@ -67,6 +67,7 @@
 
 阶段 5（前端）：
 - 前端的页面清单、风格简报模板、之后的设计规范放在 `docs/前端/`
+- Codex 做的浅色气泡问卷样张（2026-10-30 负责人定：不参考它的设计，但要留着）不在主分支：放在分支 `codex-bubble-prototype`，并用 git worktree 检出在仓库旁边的 `../记忆库推荐-codex样张/generated-codex-bubble-questionnaire/`（截图、字体源文件、浏览器临时配置也搬到了那里，不进 git）。它带一份引擎和项目数据的旧快照，不随数据更新。改正式页面不要读它；不再需要时 `git worktree remove` 再删分支
 - **正式网站在 `site/`**（2026-10-27 起）：`index.html` 首页、`quiz.html` 答题页、`result.html` 结果页（目前是占位，只列出答卷）；共用 `site/assets/tokens.css`、`theme.js`，答题逻辑在 `site/assets/quiz.js`。样张（`docs/前端/样张/`）是定稿前的试验场，改正式页面改 `site/`
 - 预览：`npm run site` 后打开 http://localhost:5173/site/ （网站要 fetch `data/` 下的问卷配置、import `engine/`，直接双击 html 打不开）
 - 结果页在浏览器里跑推荐引擎，项目数据由 `node scripts/build_site_data.mjs` 打包成 `site/data/projects.json`（不进仓库，`npm run site` 会先打包；只留 value、status，结果和完整数据一致）。改了项目数据要重新打包
