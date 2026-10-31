@@ -73,14 +73,14 @@ test("文档没写的字段不排除，只标“需自行确认”并略微靠�
 
 test("正式问卷：没显示的题（第 3a 题）不影响结果", () => {
   const { projects: all, engine: real } = loadAll();
-  const base = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["mcp_client"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
+  const base = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["mcp_client"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"] };
   const a = real.recommend(base, all);
   const b = real.recommend({ ...base, q3a: ["openclaw"] }, all); // 第 3 题没选遥控或程序化，第 3a 题不显示
   assert.deepEqual(a.results.map((x) => x.id), b.results.map((x) => x.id));
 });
 
 // 遥控电脑上的 Claude Code、多端共用，门槛和预算都放开
-const multiBase = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["remote_control"], q3a: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q17: ["api_key"], q18: "more" };
+const multiBase = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["remote_control"], q3a: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q17: ["api_key"] };
 const has = (p, field, v) => [].concat(p.normalized[field].value).includes(v);
 
 test("第 4 题：要各 Agent 分开记忆时，能分开的排在前面", () => {

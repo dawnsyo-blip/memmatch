@@ -18,7 +18,7 @@
     {"label": "第一部分", "title": "LLM、设备与入口", "questions": ["q1", "q2", "q3", "q3a", "q3b", "q3c", "q4", "q5"]},
     {"label": "第二部分", "title": "使用习惯", "questions": ["q7", "q6", "q8", "q8n"]},
     {"label": "第三部分", "title": "记忆运作过程", "questions": ["q9", "q10", "q11", "q12m", "q13", "q14"]},
-    {"label": "第四部分", "title": "环境与预算", "questions": ["q15", "q16", "q17", "q18", "q18t", "q19", "q20"]}
+    {"label": "第四部分", "title": "环境与预算", "questions": ["q15", "q16", "q17", "q18t", "q19", "q20"]}
   ],
   "questions": [
     {
@@ -506,45 +506,12 @@
       ]
     },
     {
-      "id": "q18", "kind": "hard", "type": "single", "short": "预算",
-      "text": "每个月为记忆库新增的花费，您能接受多少？",
-      "help": "只算为记忆库新增的强制性花销",
-      "exclude_reason": "超出您的预算",
-      "combine": "allow",
-      "constraint": {
-        "field": "spend", "always_allowed": ["none"],
-        "extra_allow": [
-          {"when": {"question": "q17", "selected_any": ["subscription"]}, "allow": ["subscription"]},
-          {"when": {"question": "q18", "selected_any": ["zero"]}, "when_project": {"local_model": ["yes"]}, "allow": ["model_api"]}
-        ]
-      },
-      "options": [
-        {"id": "zero", "label": "0 元", "help": "只用不花钱的项目，或用本地模型代替接口费", "values": {"spend": []},
-         "disables": [{"question": "q5", "options": ["vps_new"], "note": "新买 VPS 每月要花钱"},
-                      {"question": "q5", "options": ["hosted"], "unless_project": {"spend": ["none"]}, "note": "只保留不收费的托管，如 Notion"},
-                      {"question": "q17", "options": ["api_key"], "unless_project": {"local_model": ["yes"]}, "note": "API Key 按用量付费，只保留能改用本地模型的项目"}]},
-        {"id": "ten", "label": "10 元以内", "help": "LLM 或向量化接口的用量费，一般每月几元", "values": {"spend": ["model_api"]},
-         "disables": [{"question": "q5", "options": ["vps_new"], "note": "新买 VPS 每月约 20–50 元，超出 10 元"}]},
-        {"id": "fifty", "label": "50 元以内", "help": "再加一台 VPS，最低约 50 元／月左右", "values": {"spend": ["model_api", "hosting"]}},
-        {"id": "more", "label": "更多也可以", "values": {"spend": ["model_api", "hosting", "subscription", "product_fee"]}}
-      ],
-      "rules": [
-        {"when": {"question": "q18", "selected_any": ["zero"]},
-         "note": "要用本地模型代替付费接口，对电脑配置有要求", "note_if": {"spend": ["model_api"]}}
-      ],
-      "relax": [
-        {"label": "每月 10 元以内", "set": "ten"},
-        {"label": "每月 50 元以内", "set": "fifty"},
-        {"label": "可以付订阅或托管服务", "set": "more"}
-      ]
-    },
-    {
-      "id": "q18t", "number": "19", "kind": "preference", "type": "single", "short": "token 用量",
-      "text": "对于记忆库所消耗的 token，您预期希望用量在什么程度？",
+      "id": "q18t", "number": "18", "kind": "preference", "type": "single", "short": "token 用量",
+      "text": "对于记忆库所消耗的 token，您预期用量在什么程度？",
       "help": "token 用量更多取决于记忆库自身的容量，但部分设计可以帮助限制上限。",
       "show_if": {"question": "q2", "not_only_within": ["local"]},
       "options": [
-        {"id": "thrifty", "label": "越省越好", "default_if": {"question": "q18", "selected_any": ["zero"]}, "effect": {"score": [
+        {"id": "thrifty", "label": "越省越好", "effect": {"score": [
           {"if": {"token_inject": ["bounded"]}, "points": 1.5, "reason": "每轮只带有限的记忆进对话，记忆变多也不会更费 token"},
           {"if": {"token_inject": ["grows"]}, "points": -3},
           {"if": {"token_background": ["none"]}, "points": 1, "reason": "不在后台另外调用大模型"},
@@ -561,7 +528,7 @@
       ]
     },
     {
-      "id": "q19", "number": "20", "kind": "preference", "type": "single", "short": "中文说明",
+      "id": "q19", "number": "19", "kind": "preference", "type": "single", "short": "中文说明",
       "text": "记忆库的界面和说明文档是英文的话，您能接受吗？",
       "options": [
         {"id": "ok", "label": "能接受，可以借助翻译", "effect": {}},
@@ -570,7 +537,7 @@
       ]
     },
     {
-      "id": "q20", "number": "21", "kind": "preference", "type": "single", "short": "导出",
+      "id": "q20", "number": "20", "kind": "preference", "type": "single", "short": "导出",
       "text": "以后换记忆库或换 LLM 时，您希望能把记忆导出来带走吗？",
       "options": [
         {"id": "must", "label": "一定要能导出", "effect": {"score": [

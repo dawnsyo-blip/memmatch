@@ -527,7 +527,9 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
           }
         }
       }
-      relax.sort((x, y) => y.count - x.count);
+      // 单条放宽只改一处，比两条组合容易做到，先列单条
+      const combo = (x) => (x.question.includes("+") ? 1 : 0);
+      relax.sort((x, y) => combo(x) - combo(y) || y.count - x.count);
       relax.splice(6);
     }
 
