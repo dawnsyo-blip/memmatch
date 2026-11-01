@@ -63,7 +63,7 @@ const CONFIG = {
   ],
 
   flowSpeed: 0.26,           // 带子被抽进瓶颈的速度：每秒走过沙漏高度的几分之一
-  turnRate: 6,               // 弧度/秒，被抽的那一节转向竖直的最快速度
+  turnRate: 3,               // 弧度/秒，被拖向瓶颈的那一节最快转多快；越小转得越缓
   minUpperWords: 40,         // 上半部分低于这个数就补下一句
   maxLowerWords: 12,         // 下半部分最多保留几个清楚的词
   initialLowerCount: 12,     // 页面打开时下半部分预置几个清楚的词
@@ -79,7 +79,7 @@ const CONFIG = {
   // 下半部分的旧词褪成很淡的痕迹留在原处，新词压在上面，慢慢把下半部分的轮廓撑出来
   trace: {
     alpha: 0.16,             // 痕迹的不透明度
-    max: 20,                 // 最多保留多少个痕迹，超过时最老的淡掉
+    max: 16,                 // 最多保留多少个痕迹，超过时最老的淡掉
     initial: 10,             // 页面打开时预置多少个痕迹
     retire: 2.5,             // 秒，最老的痕迹淡掉所用的时间
     clearance: 0.08,         // 痕迹堆到离通道出口这么近（÷ 沙漏高度）时，最老的痕迹先淡掉
@@ -88,8 +88,8 @@ const CONFIG = {
   // 一句话是一条软带子；每个词再切成几节，长词也能弯
   ribbon: {
     gap: 0.38,               // 词与词的间距 ÷ 最大字号（也是句子显示时的词距）
-    segChars: 4,             // 每节大约几个字母；不超过 segChars + 1 个字母的词不切
-    softness: 0.03,          // 词弯了以后弹回去的力，越小越软（约 0.01～0.2）
+    segChars: 3,             // 每节大约几个字母；不超过 segChars + 1 个字母的词不切。越小切得越细、越能弯，但物体越多
+    softness: 0.03,          // 词弯了以后弹回去的力，越小越软（约 0.02～0.2）；太小词会折成几截、读不出来
     stiffness: 0.3,          // 词与词之间的带子拉紧时的硬度
     holdTime: 3,             // 秒，句子落下后带子保持拉紧多久；之后放松，静静堆着的词才不会互相拉扯发抖
     reel: 0,                 // 带子拉紧后每秒收短多少（÷ 沙漏高度）；0 表示保持拉紧那一刻的长度，收短会把整句往一起拽，被吃之前弹一下
@@ -511,10 +511,6 @@ function updateActive(dt) {
 
 /* ---------- 瓶颈：带子从开头往里抽 ---------- */
 
-function nearestAngle(target, a) {
-  return target + 2 * Math.PI * Math.round((a - target) / (2 * Math.PI));
-}
-
 // 为最早落下的那一句排好吃的顺序：离瓶颈口最近的词先吃，往左吃到句首（右端朝下进通道），
 // 再从它右边的词往右吃到句尾（左端朝下）。横着落下的句子，中间的词往往离瓶颈最近
 function planSentence() {
@@ -534,66 +530,87 @@ function planSentence() {
   for (let i = best + 1; i < ws.length; i++) for (const g of ws[i].segs) plan.push({ g, angle: ENTER_ANGLE });
 }
 
-// 下一节交给程序：不再受物理影响，也不碰任何东西
+// 下一节交给程序：不再受物理影响，也不碰任何东西。
+// 程序只拖它朝前的那一端（lead），另一端（trail）顺着拖动方向跟过来，像拖着一根棍子走，
+// 不再有单独的旋转动作。往右吃时左端在前，往左吃时右端在前
 function takeLeader() {
   if (!plan.length) planSentence();
   while (plan.length && !plan[0].g.body) plan.shift();
   const item = plan.shift();
   if (!item) return null;
   const g = item.g, b = g.body, v = CONFIG.flowSpeed * G.S;
+  const sgn = item.angle === ENTER_ANGLE ? -1 : 1;
+  const lo = rot((sgn * g.w) / 2, 0, b.angle), to = rot((-sgn * g.w) / 2, 0, b.angle);
+  const l = { g, base: item.angle, sgn,
+    lead: { x: b.position.x + lo.x, y: b.position.y + lo.y },
+    dir: { x: (to.x - lo.x) / g.w, y: (to.y - lo.y) / g.w } };
   if (follow && follow.g === g) {
-    Body.setStatic(b, true);
-    b.collisionFilter.mask = 0;
-    Body.setPosition(b, { x: G.cx, y: follow.y });
-    Body.setAngle(b, item.angle);
-    follow = null;
-    return { g, base: item.angle, phase: "enter", target: item.angle, speed: v };
+    // 同一个词的下一节：前端紧贴着上一节的尾巴，速度不变，词在通道里不断开
+    l.lead = { x: follow.x, y: follow.y };
+    l.speed = v;
+  } else {
+    l.speed = Math.min(v, Math.hypot(b.velocity.x, b.velocity.y) * 60);
   }
   follow = null;
-  const speed = Math.hypot(b.velocity.x, b.velocity.y) * 60;
   Body.setStatic(b, true);
   b.collisionFilter.mask = 0;
-  return { g, base: item.angle, phase: "approach", target: nearestAngle(item.angle, b.angle), speed: Math.min(speed, v) };
+  return l;
 }
 
 function updateFlow(dt) {
   if (!leader) leader = takeLeader();
   drainSid = leader ? leader.g.word.sid : -1;
   if (!leader) return;
-  const g = leader.g, b = g.body, v = CONFIG.flowSpeed * G.S;
+  const l = leader, g = l.g, b = g.body, v = CONFIG.flowSpeed * G.S;
   // 从这一节原来的速度慢慢加到带子的速度，不会猛地一拽
-  leader.speed = Math.min(v, leader.speed + (v / 0.4) * dt);
-  let move = leader.speed * dt;
-  let x = b.position.x, y = b.position.y, a = b.angle;
-  const turn = CONFIG.turnRate * dt;
-  a += Math.max(-turn, Math.min(turn, leader.target - a));
-  const aligned = Math.abs(leader.target - a) < 1e-3;
-  if (leader.phase === "approach") {
-    // 匀速滑向瓶颈口，一边滑一边转成竖直；转到位了才往里钻
-    const tx = G.cx, ty = G.neckTop - g.w / 2;
-    const d = Math.hypot(tx - x, ty - y);
+  l.speed = Math.min(v, l.speed + (v / 0.4) * dt);
+  let move = l.speed * dt;
+  // 前端先滑到瓶颈口正上方，再竖直往下进通道：竖着拖一段，词在进口之前就已经顺直了
+  const lead = l.lead;
+  const above = G.neckTop - g.w * 1.5;
+  while (move > 0 && lead.y < G.neckTop) {
+    const ty = lead.y < above && Math.abs(lead.x - G.cx) > 0.5 ? above : G.neckTop;
+    const dx = G.cx - lead.x, dy = ty - lead.y, d = Math.hypot(dx, dy);
     if (d <= move) {
-      x = tx;
-      y = ty;
+      lead.x = G.cx;
+      lead.y = ty;
       move -= d;
-      if (aligned) leader.phase = "enter";
-      else move = 0;
     } else {
-      x += ((tx - x) * move) / d;
-      y += ((ty - y) * move) / d;
+      lead.x += (dx * move) / d;
+      lead.y += (dy * move) / d;
       move = 0;
     }
   }
-  if (leader.phase === "enter") {
-    // 开头朝下钻进通道；普通词边进边淡，这一节整个进去时正好消失
-    y += move;
-    const p = y + g.w / 2 - G.neckTop;
-    if (!g.word.isKey) g.alpha = Math.max(0, 1 - p / g.w);
-    if (p >= g.w) {
-      swallow(g, y, leader.base);
-      leader = null;
-      return;
-    }
+  if (lead.y >= G.neckTop) {
+    lead.y += move;
+    lead.x = lerp(lead.x, G.cx, 0.2);
+  }
+  // 后端顺着拖过来；进了通道以后边走边慢慢顺直。转动有上限，不会突然甩一下，也不在口子上停下来转
+  const trail = { x: lead.x + l.dir.x * g.w, y: lead.y + l.dir.y * g.w };
+  let dx = trail.x - lead.x, dy = trail.y - lead.y;
+  const d = Math.hypot(dx, dy) || 1;
+  dx /= d;
+  dy /= d;
+  const depth = Math.max(0, lead.y - G.neckTop);
+  const f = Math.min(1, depth / g.w), s = f * f * (3 - 2 * f);
+  const want = Math.atan2(lerp(dy, -1, s), lerp(dx, 0, s));
+  const cur = Math.atan2(l.dir.y, l.dir.x);
+  let turn = want - cur;
+  turn = Math.atan2(Math.sin(turn), Math.cos(turn));
+  const lim = CONFIG.turnRate * dt;
+  const ang = cur + Math.max(-lim, Math.min(lim, turn));
+  dx = Math.cos(ang);
+  dy = Math.sin(ang);
+  l.dir = { x: dx, y: dy };
+  l.trail = { x: lead.x + dx * g.w, y: lead.y + dy * g.w };
+  if (!g.word.isKey) g.alpha = Math.max(0, 1 - depth / g.w);
+  const x = (lead.x + l.trail.x) / 2, y = (lead.y + l.trail.y) / 2;
+  // 词的 x 轴从左端指向右端：左端在前时就是从前端指向后端
+  const a = l.sgn < 0 ? Math.atan2(dy, dx) : Math.atan2(-dy, -dx);
+  if (depth >= g.w) {
+    swallow(g, l, a);
+    leader = null;
+    return;
   }
   Body.setPosition(b, { x, y });
   Body.setAngle(b, a);
@@ -609,11 +626,12 @@ function updateFlow(dt) {
 }
 
 // 这一节整个进了通道：普通词就此消失，关键词的各节继续往下走
-function swallow(g, y, angle) {
+function swallow(g, l, a) {
   queue.splice(queue.indexOf(g), 1);
-  const w = g.word;
+  const w = g.word, angle = l.base;
+  const x = (l.lead.x + l.trail.x) / 2, y = (l.lead.y + l.trail.y) / 2;
   const nx = plan[0] && plan[0].g;
-  if (nx && nx.word === w && (nx === g.prev || nx === g.next)) follow = { g: nx, y: y - g.w / 2 - nx.w / 2 };
+  if (nx && nx.word === w && (nx === g.prev || nx === g.next)) follow = { g: nx, x: l.trail.x, y: l.trail.y };
   w.gone.add(g.part);
   removeSeg(g);
   if (w.isKey) {
@@ -622,7 +640,7 @@ function swallow(g, y, angle) {
       c = { word: w, angle, pieces: [] };
       chute.push(c);
     }
-    c.pieces.push({ seg: g, y });
+    c.pieces.push({ seg: g, x, y, a: angle + Math.atan2(Math.sin(a - angle), Math.cos(a - angle)) });
     if (!w.segs.length) c.complete = true;
   }
   // 叫醒上半部分，压在带子上的词才会落下来，不会悬在半空
@@ -632,7 +650,12 @@ function swallow(g, y, angle) {
 function updateChute(dt) {
   const v = CONFIG.flowSpeed * G.S;
   for (const c of chute) {
-    for (const p of c.pieces) p.y += v * dt;
+    const lim = CONFIG.turnRate * dt;
+    for (const p of c.pieces) {
+      p.y += v * dt;
+      p.x = lerp(p.x, G.cx, 0.15);
+      p.a += Math.max(-lim, Math.min(lim, c.angle - p.a));
+    }
     // 整个词都出了通道，变回能弯的几节落下去
     const top = tail(c.pieces);
     if (c.complete && top.y - top.seg.w / 2 >= G.neckBot + 2 * G.k) {
@@ -996,8 +1019,8 @@ function draw() {
   }
   for (const c of chute) {
     for (const p of c.pieces) {
-      const o = rot(p.seg.tx, 0, c.angle);
-      drawText(p.seg.text, c.word.size, G.cx + o.x, p.y + o.y, c.angle, 1);
+      const o = rot(p.seg.tx, 0, p.a);
+      drawText(p.seg.text, c.word.size, p.x + o.x, p.y + o.y, p.a, 1);
     }
   }
   if (active) {
