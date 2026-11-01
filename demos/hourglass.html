@@ -171,6 +171,7 @@ let walls = [];
 let words = [];          // 在物理世界里的词（上半部分、下半部分）
 let queue = [];          // 上半部分的节，按被抽进瓶颈的先后排好（先来的句子在前，句内按顺序）
 let chute = [];          // 正在通道里往下走的关键词 { word, pieces: [{ seg, y }], complete }
+let plan = [];           // 正在被吃的那一句接下来的顺序 [{ g, angle }]：先从离瓶颈最近的词往左吃到句首，再往右吃到句尾
 let leader = null;       // 正被抽进瓶颈的那一节
 let follow = null;       // 同一个词的下一节：前一节一进通道就紧贴着接上，词在通道里不断开
 let active = null;       // 正在上方显示的句子
@@ -280,23 +281,25 @@ function splitText(text) {
 }
 
 function makeWord(text, isKey, sid, sizeRef, zone, born) {
-  return { text, isKey, sid, sizeRef, zone, born, segs: [], skipped: 0 };
+  return { text, isKey, sid, sizeRef, zone, born, segs: [], gone: new Set() };
 }
 
 // 把词的各节摆成一条直线，中心在 (x, y)、方向 angle，建好刚体并连好词内部的节。
-// 已经被瓶颈吃掉的前几节（skipped）不再建
+// 已经被瓶颈吃掉的节（gone）不再建
 function buildBodies(w, x, y, angle) {
   w.size = w.sizeRef * G.k;
   w.h = w.size * 1.08;
   const pad = w.size * 0.14;
   const parts = splitText(w.text);
   const segs = [];
-  for (let i = w.skipped; i < parts.length; i++) {
+  for (let i = 0; i < parts.length; i++) {
+    if (w.gone.has(i)) continue;
     const [s, e] = parts[i];
     const tw = measure(w.text.slice(0, e), w.size) - measure(w.text.slice(0, s), w.size);
     const first = i === 0, end = i === parts.length - 1;
     segs.push({
       word: w,
+      part: i,
       text: w.text.slice(s, e),
       w: tw + (first ? pad : 0) + (end ? pad : 0),
       tx: (first ? pad / 2 : 0) - (end ? pad / 2 : 0), // 文字相对节中心的偏移
@@ -512,24 +515,45 @@ function nearestAngle(target, a) {
   return target + 2 * Math.PI * Math.round((a - target) / (2 * Math.PI));
 }
 
-// 带子最前面的一节交给程序：不再受物理影响，也不碰任何东西
+// 为最早落下的那一句排好吃的顺序：离瓶颈口最近的词先吃，往左吃到句首（右端朝下进通道），
+// 再从它右边的词往右吃到句尾（左端朝下）。横着落下的句子，中间的词往往离瓶颈最近
+function planSentence() {
+  const head = queue[0];
+  if (!head) return;
+  const sid = head.word.sid;
+  const ws = [];
+  for (const g of queue) if (g.word.sid === sid && !ws.includes(g.word)) ws.push(g.word);
+  let best = 0, bd = Infinity;
+  ws.forEach((w, i) => {
+    for (const g of w.segs) {
+      const d = Math.hypot(g.body.position.x - G.cx, g.body.position.y - G.neckTop);
+      if (d < bd) { bd = d; best = i; }
+    }
+  });
+  for (let i = best; i >= 0; i--) for (const g of ws[i].segs.slice().reverse()) plan.push({ g, angle: -ENTER_ANGLE });
+  for (let i = best + 1; i < ws.length; i++) for (const g of ws[i].segs) plan.push({ g, angle: ENTER_ANGLE });
+}
+
+// 下一节交给程序：不再受物理影响，也不碰任何东西
 function takeLeader() {
-  const g = queue[0];
-  if (!g) return null;
-  const b = g.body;
+  if (!plan.length) planSentence();
+  while (plan.length && !plan[0].g.body) plan.shift();
+  const item = plan.shift();
+  if (!item) return null;
+  const g = item.g, b = g.body, v = CONFIG.flowSpeed * G.S;
   if (follow && follow.g === g) {
     Body.setStatic(b, true);
     b.collisionFilter.mask = 0;
     Body.setPosition(b, { x: G.cx, y: follow.y });
-    Body.setAngle(b, ENTER_ANGLE);
+    Body.setAngle(b, item.angle);
     follow = null;
-    return { g, phase: "enter", target: ENTER_ANGLE, speed: CONFIG.flowSpeed * G.S };
+    return { g, base: item.angle, phase: "enter", target: item.angle, speed: v };
   }
   follow = null;
   const speed = Math.hypot(b.velocity.x, b.velocity.y) * 60;
   Body.setStatic(b, true);
   b.collisionFilter.mask = 0;
-  return { g, phase: "approach", target: nearestAngle(ENTER_ANGLE, b.angle), speed: Math.min(speed, CONFIG.flowSpeed * G.S) };
+  return { g, base: item.angle, phase: "approach", target: nearestAngle(item.angle, b.angle), speed: Math.min(speed, v) };
 }
 
 function updateFlow(dt) {
@@ -566,31 +590,36 @@ function updateFlow(dt) {
     const p = y + g.w / 2 - G.neckTop;
     if (!g.word.isKey) g.alpha = Math.max(0, 1 - p / g.w);
     if (p >= g.w) {
-      swallow(g, y);
+      swallow(g, y, leader.base);
       leader = null;
       return;
     }
   }
   Body.setPosition(b, { x, y });
   Body.setAngle(b, a);
-  // 静态物体转动时约束的挂点不会跟着转，手动更新
+  // 静态物体转动时约束的挂点不会跟着转，手动更新（往左吃时后面跟着的是前一节）
   if (g.link) {
     g.link.pointA = rot(g.w / 2, 0, a);
     g.link.angleA = a;
   }
+  if (g.prev && g.prev.link) {
+    g.prev.link.pointB = rot(-g.w / 2, 0, a);
+    g.prev.link.angleB = a;
+  }
 }
 
 // 这一节整个进了通道：普通词就此消失，关键词的各节继续往下走
-function swallow(g, y) {
-  queue.shift();
+function swallow(g, y, angle) {
+  queue.splice(queue.indexOf(g), 1);
   const w = g.word;
-  if (g.next && g.next.word === w) follow = { g: g.next, y: y - g.w / 2 - g.next.w / 2 };
-  w.skipped++;
+  const nx = plan[0] && plan[0].g;
+  if (nx && nx.word === w && (nx === g.prev || nx === g.next)) follow = { g: nx, y: y - g.w / 2 - nx.w / 2 };
+  w.gone.add(g.part);
   removeSeg(g);
   if (w.isKey) {
     let c = chute.find((c) => c.word === w);
     if (!c) {
-      c = { word: w, pieces: [] };
+      c = { word: w, angle, pieces: [] };
       chute.push(c);
     }
     c.pieces.push({ seg: g, y });
@@ -607,7 +636,7 @@ function updateChute(dt) {
     // 整个词都出了通道，变回能弯的几节落下去
     const top = tail(c.pieces);
     if (c.complete && top.y - top.seg.w / 2 >= G.neckBot + 2 * G.k) {
-      dropWord(c.word, top.y - top.seg.w / 2);
+      dropWord(c.word, top.y - top.seg.w / 2, c.angle);
       c.done = true;
     }
   }
@@ -615,14 +644,14 @@ function updateChute(dt) {
 }
 
 // 关键词竖着离开通道：给一点随机转动，再随机让一节更重，每个词落下的姿态都不一样
-function dropWord(w, topY) {
+function dropWord(w, topY, angle) {
   w.zone = "lower";
   w.born = simTime;
-  w.skipped = 0;
+  w.gone = new Set();
   w.alpha = undefined;
   const size = w.sizeRef * G.k;
   const L = measure(w.text, size) + size * 0.28;
-  buildBodies(w, G.cx, topY + L / 2, ENTER_ANGLE);
+  buildBodies(w, G.cx, topY + L / 2, angle);
   const heavy = w.segs[Math.floor(Math.random() * w.segs.length)];
   Body.setDensity(heavy.body, 0.0015 * rand(...CONFIG.heavyRange));
   const spin = (Math.random() < 0.5 ? -1 : 1) * rand(0.4, 1) * CONFIG.exitSpin;
@@ -813,6 +842,7 @@ function resize() {
     leader = null;
   }
   follow = null;
+  plan = [];
   // 每个词按原来的中心和方向重建成直的；带子的前后关系照旧
   const f = G.S / old.S;
   const order = [];
@@ -843,7 +873,7 @@ function resize() {
   // 通道里的关键词：已经整个进去的直接从出口落下，没进完的等剩下的几节
   for (const c of chute) {
     if (c.complete) {
-      dropWord(c.word, G.neckBot + 2 * G.k);
+      dropWord(c.word, G.neckBot + 2 * G.k, c.angle);
       c.done = true;
     } else {
       c.pieces = [];
@@ -966,8 +996,8 @@ function draw() {
   }
   for (const c of chute) {
     for (const p of c.pieces) {
-      const o = rot(p.seg.tx, 0, ENTER_ANGLE);
-      drawText(p.seg.text, c.word.size, G.cx + o.x, p.y + o.y, ENTER_ANGLE, 1);
+      const o = rot(p.seg.tx, 0, c.angle);
+      drawText(p.seg.text, c.word.size, G.cx + o.x, p.y + o.y, c.angle, 1);
     }
   }
   if (active) {
