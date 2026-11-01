@@ -173,6 +173,7 @@ let queue = [];          // 上半部分的节，按被抽进瓶颈的先后排�
 let chute = [];          // 正在通道里往下走的关键词 { word, pieces: [{ seg, y }], complete }
 let plan = [];           // 正在被吃的那一句接下来的顺序 [{ g, angle }]：先从离瓶颈最近的词往左吃到句首，再往右吃到句尾
 let leader = null;       // 正被抽进瓶颈的那一节
+let crumbs = [];         // 被强制吃掉时还露在瓶颈口外的字母，原地很快淡掉
 let follow = null;       // 同一个词的下一节：前一节一进通道就紧贴着接上，词在通道里不断开
 let active = null;       // 正在上方显示的句子
 let sentenceIdx = 0;
@@ -603,11 +604,12 @@ function updateFlow(dt) {
   dy = Math.sin(ang);
   l.dir = { x: dx, y: dy };
   l.trail = { x: lead.x + dx * g.w, y: lead.y + dy * g.w };
-  if (!g.word.isKey) g.alpha = Math.max(0, 1 - depth / g.w);
+  if (!g.word.isKey) g.eating = true;
   const x = (lead.x + l.trail.x) / 2, y = (lead.y + l.trail.y) / 2;
   // 词的 x 轴从左端指向右端：左端在前时就是从前端指向后端
   const a = l.sgn < 0 ? Math.atan2(dy, dx) : Math.atan2(-dy, -dx);
-  if (depth >= g.w) {
+  // 后端也过了瓶颈口才算吃完；斜着进去时前端会多走一段，但不超出通道
+  if (depth >= g.w && (l.trail.y >= G.neckTop - 0.5 || lead.y >= G.neckBot - g.w)) {
     swallow(g, l, a);
     leader = null;
     return;
@@ -633,6 +635,9 @@ function swallow(g, l, a) {
   const nx = plan[0] && plan[0].g;
   if (nx && nx.word === w && (nx === g.prev || nx === g.next)) follow = { g: nx, x: l.trail.x, y: l.trail.y };
   w.gone.add(g.part);
+  if (!w.isKey) {
+    for (const c of eatenLetters(g, w)) if (c.k > 0.01) crumbs.push({ ...c, alpha: c.k });
+  }
   removeSeg(g);
   if (w.isKey) {
     let c = chute.find((c) => c.word === w);
@@ -645,6 +650,11 @@ function swallow(g, l, a) {
   }
   // 叫醒上半部分，压在带子上的词才会落下来，不会悬在半空
   wake("upper");
+}
+
+function updateCrumbs(dt) {
+  for (const c of crumbs) c.alpha -= dt / 0.25;
+  if (crumbs.some((c) => c.alpha <= 0)) crumbs = crumbs.filter((c) => c.alpha > 0);
 }
 
 function updateChute(dt) {
@@ -861,7 +871,7 @@ function resize() {
   if (!old) return;
   clearPushers();
   if (leader) {
-    leader.g.alpha = undefined;
+    leader.g.eating = false;
     leader = null;
   }
   follow = null;
@@ -972,6 +982,7 @@ function step(dt) {
   if (active) updateActive(dt);
   updateFlow(dt);
   updateChute(dt);
+  updateCrumbs(dt);
   updateLower(dt);
   movePushers();
   updateRibbons(dt);
@@ -1001,6 +1012,31 @@ function drawDebug() {
   }
 }
 
+// 正被吃的非关键词逐个字母消失：哪个字母越过了瓶颈口，哪个字母就很快淡掉
+function eatenLetters(g, w) {
+  const b = g.body, a = b.angle, size = w.size;
+  if (!g.chars) {
+    ctx.font = fontStr(size);
+    let x = g.tx - ctx.measureText(g.text).width / 2;
+    g.chars = [...g.text].map((ch) => {
+      const cw = ctx.measureText(ch).width;
+      const c = { ch, off: x + cw / 2 };
+      x += cw;
+      return c;
+    });
+  }
+  const fadeLen = size * 0.2;
+  return g.chars.map((c) => {
+    const o = rot(c.off, 0, a);
+    const x = b.position.x + o.x, y = b.position.y + o.y;
+    return { ch: c.ch, size, x, y, a, k: Math.max(0, Math.min(1, 1 - (y - G.neckTop) / fadeLen)) };
+  });
+}
+
+function drawEaten(g, w, alpha) {
+  for (const c of eatenLetters(g, w)) if (c.k > 0.01) drawText(c.ch, c.size, c.x, c.y, c.a, alpha * c.k);
+}
+
 function draw() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.globalAlpha = 1;
@@ -1013,10 +1049,15 @@ function draw() {
   for (const w of words) {
     const wa = w.alpha === undefined ? 1 : w.alpha;
     for (const g of w.segs) {
+      if (g.eating) {
+        drawEaten(g, w, wa);
+        continue;
+      }
       const b = g.body, o = rot(g.tx, 0, b.angle);
-      drawText(g.text, w.size, b.position.x + o.x, b.position.y + o.y, b.angle, wa * (g.alpha === undefined ? 1 : g.alpha));
+      drawText(g.text, w.size, b.position.x + o.x, b.position.y + o.y, b.angle, wa);
     }
   }
+  for (const c of crumbs) drawText(c.ch, c.size, c.x, c.y, c.a, c.alpha);
   for (const c of chute) {
     for (const p of c.pieces) {
       const o = rot(p.seg.tx, 0, p.a);
