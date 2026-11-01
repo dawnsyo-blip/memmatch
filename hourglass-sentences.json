@@ -1,0 +1,170 @@
+{
+  "sentences": [
+    {
+      "id": 1,
+      "text": "I've seen things you wouldn't believe",
+      "keywords": ["seen"],
+      "source": "Blade Runner (1982)",
+      "speaker": "Roy Batty",
+      "note": "缩编，原文多一个 people"
+    },
+    {
+      "id": 2,
+      "text": "I watched C-beams glitter in the dark",
+      "keywords": ["C-beams", "glitter"],
+      "source": "Blade Runner (1982)",
+      "speaker": "Roy Batty",
+      "note": "缩编，去掉 near the Tannhäuser Gate"
+    },
+    {
+      "id": 3,
+      "text": "like tears in rain",
+      "keywords": ["tears", "rain"],
+      "source": "Blade Runner (1982)",
+      "speaker": "Roy Batty",
+      "note": "原句"
+    },
+    {
+      "id": 4,
+      "text": "I want more life",
+      "keywords": ["life"],
+      "source": "Blade Runner (1982)",
+      "speaker": "Roy Batty",
+      "note": "原句"
+    },
+    {
+      "id": 5,
+      "text": "meet me in Montauk",
+      "keywords": ["Montauk"],
+      "source": "Eternal Sunshine of the Spotless Mind (2004)",
+      "speaker": "Joel / Clementine",
+      "note": "原句"
+    },
+    {
+      "id": 6,
+      "text": "I loved you on this day",
+      "keywords": ["day"],
+      "source": "Eternal Sunshine of the Spotless Mind (2004)",
+      "speaker": "Joel Barish",
+      "note": "原句前半"
+    },
+    {
+      "id": 7,
+      "text": "I love this memory",
+      "keywords": ["memory"],
+      "source": "Eternal Sunshine of the Spotless Mind (2004)",
+      "speaker": "Joel Barish",
+      "note": "原句后半"
+    },
+    {
+      "id": 8,
+      "text": "you can erase someone from your mind",
+      "keywords": ["erase", "mind"],
+      "source": "Eternal Sunshine of the Spotless Mind (2004)",
+      "speaker": "旁白",
+      "note": "影片核心概念缩编"
+    },
+    {
+      "id": 9,
+      "text": "we all need mirrors to know who we are",
+      "keywords": ["mirrors"],
+      "source": "Memento (2000)",
+      "speaker": "Leonard Shelby",
+      "note": "缩编，原句 to remind ourselves who we are"
+    },
+    {
+      "id": 10,
+      "text": "when my eyes are closed",
+      "keywords": ["eyes"],
+      "source": "Memento (2000)",
+      "speaker": "Leonard Shelby",
+      "note": "原句前半，与 #11 成对"
+    },
+    {
+      "id": 11,
+      "text": "the world is still there",
+      "keywords": ["world"],
+      "source": "Memento (2000)",
+      "speaker": "Leonard Shelby",
+      "note": "原句后半，与 #10 成对"
+    },
+    {
+      "id": 12,
+      "text": "I looked into his eyes and saw recognition",
+      "keywords": ["eyes", "recognition"],
+      "source": "Memento (2000)",
+      "speaker": "Leonard Shelby",
+      "note": "缩编"
+    },
+    {
+      "id": 13,
+      "text": "I used to think this was your story",
+      "keywords": ["story"],
+      "source": "Arrival (2016)",
+      "speaker": "Louise Banks",
+      "note": "缩编，原文 the beginning of your story"
+    },
+    {
+      "id": 14,
+      "text": "memory doesn't work like I thought",
+      "keywords": ["memory"],
+      "source": "Arrival (2016)",
+      "speaker": "Louise Banks",
+      "note": "缩编，原文 like I thought it did"
+    },
+    {
+      "id": 15,
+      "text": "we are so bound by time",
+      "keywords": ["time"],
+      "source": "Arrival (2016)",
+      "speaker": "Louise Banks",
+      "note": "缩编，原文后有 by its order"
+    },
+    {
+      "id": 16,
+      "text": "each time you hear a sad guitar",
+      "keywords": ["guitar"],
+      "source": "Coco (2017)",
+      "speaker": "Héctor",
+      "note": "歌词 Remember Me 中的一句"
+    },
+    {
+      "id": 17,
+      "text": "the memories I value most don't fade",
+      "keywords": ["memories", "fade"],
+      "source": "Never Let Me Go (Kazuo Ishiguro, 2005)",
+      "speaker": "Kathy H.",
+      "note": "缩编"
+    },
+    {
+      "id": 18,
+      "text": "I could recall every leaf on every tree",
+      "keywords": ["leaf", "tree"],
+      "source": "Funes, His Memory (Jorge Luis Borges, 1942)",
+      "speaker": "叙述者 / Funes",
+      "note": "改编自原文对 Funes 记忆能力的描述"
+    },
+    {
+      "id": 19,
+      "text": "I keep dreaming of a house by the sea",
+      "keywords": ["dreaming", "house", "sea"],
+      "source": "Solaris (1972) / Inception (2010)",
+      "speaker": "综合改编",
+      "note": "融合两部作品中反复出现的记忆中的居所意象"
+    },
+    {
+      "id": 20,
+      "text": "your voice was the last thing I lost",
+      "keywords": ["voice", "lost"],
+      "source": "原创",
+      "speaker": "—",
+      "note": "原创补充句，风格统一"
+    }
+  ],
+  "config_notes": {
+    "initial_bottom_words": ["tears", "rain", "mirrors", "Montauk", "glitter", "life"],
+    "total_keywords": 24,
+    "recommended_max_bottom": 12,
+    "recommended_drop_interval_seconds": 3
+  }
+}
