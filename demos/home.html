@@ -138,6 +138,14 @@ const CONFIG = {
     clearance: 0.08,         // 痕迹堆到离通道出口这么近（÷ 沙漏高度）时，最老的痕迹先淡掉
   },
 
+  // 上半部分怎么往瓶颈流
+  flow: {
+    order: "nearest",        // "nearest"：谁离瓶颈最近先吃谁，一个词吃完再挑下一个，像沙子一样从底下漏；
+                             // "sentence"：一句一句吃（从离瓶颈最近的词开始，先往左到句首、再往右到句尾），要把句子从词堆里拽出来，词堆容易被顶得弹起来。
+                             // 模拟里 nearest 往上弹的词少一半多，大幅弹起少八成
+    upperAir: 0.06,          // 上半部分的空气阻力：越大落得越慢、越不弹。0.012 会弹；0.06 时最快约每秒 310px，像沙子缓缓落下；0.08 更稳但像慢动作
+  },
+
   // 一句话是一条软带子；每个词再切成几节，长词也能弯
   ribbon: {
     gap: 0.38,               // 词与词的间距 ÷ 最大字号（也是句子显示时的词距）
@@ -206,6 +214,7 @@ if ((navigator.hardwareConcurrency || 8) <= CONFIG.lowPower.cores) {
 // 同一个词里相邻的两节不互相碰撞，靠中间的弹簧保持形状；
 // 正在被抽进瓶颈的那一句不碰别的句子，能从词堆里滑出来，不会推得整堆乱晃
 let drainSid = -1;
+let drainWord = null;
 const canCollideDefault = Detector.canCollide;
 Detector.canCollide = (fa, fb) => {
   const a = fa.seg, b = fb.seg;
@@ -214,6 +223,7 @@ Detector.canCollide = (fa, fb) => {
     const wa = a.word, wb = b.word;
     if (wa.zone === "upper" && wb.zone === "upper" && wa.sid !== wb.sid &&
         (wa.sid === drainSid || wb.sid === drainSid)) return false;
+    if (wa !== wb && wa.zone === "upper" && wb.zone === "upper" && (wa === drainWord || wb === drainWord)) return false;
   }
   return canCollideDefault(fa, fb);
 };
@@ -398,7 +408,7 @@ function makeBody(g, x, y, angle) {
     angle,
     friction: 0.45,
     frictionStatic: 0.9,
-    frictionAir: 0.012,
+    frictionAir: w.zone === "upper" ? CONFIG.flow.upperAir : 0.012,
     restitution: 0.02,
     density: 0.0015,
     chamfer: { radius: Math.min(w.h * 0.2, g.w * 0.3, 3 * G.k + 1) },
@@ -476,7 +486,7 @@ function updateRibbons(dt) {
     if (w.zone !== "upper" || !w.segs.length) continue;
     const c = tail(w.segs).link;
     if (!c || !c.outer) continue;
-    const on = w.sid === head || simTime - w.born < CONFIG.ribbon.holdTime;
+    const on = (CONFIG.flow.order === "sentence" && w.sid === head) || simTime - w.born < CONFIG.ribbon.holdTime;
     if (!on) {
       c.stiffness = 0;
       c.damping = 0;
@@ -608,8 +618,25 @@ function planSentence() {
 // 下一节交给程序：不再受物理影响，也不碰任何东西。
 // 程序只拖它朝前的那一端（lead），另一端（trail）顺着拖动方向跟过来，像拖着一根棍子走，
 // 不再有单独的旋转动作。往右吃时左端在前，往左吃时右端在前
+// 谁离瓶颈口最近先吃谁：比较每个词两端到瓶颈口的距离，从近的那一端吃起，一个词吃完再挑下一个
+function planNearest() {
+  const mouth = { x: G.cx, y: G.neckTop };
+  let best = null, bd = Infinity, fromLeft = true;
+  for (const w of words) {
+    if (w.zone !== "upper" || !w.segs.length || simTime - w.born < 0.3) continue;
+    for (const [g, side] of [[w.segs[0], -1], [tail(w.segs), 1]]) {
+      const b = g.body, o = rot((side * g.w) / 2, 0, b.angle);
+      const d = Math.hypot(b.position.x + o.x - mouth.x, b.position.y + o.y - mouth.y);
+      if (d < bd) { bd = d; best = w; fromLeft = side < 0; }
+    }
+  }
+  if (!best) return;
+  if (fromLeft) for (const g of best.segs) plan.push({ g, angle: ENTER_ANGLE });
+  else for (const g of best.segs.slice().reverse()) plan.push({ g, angle: -ENTER_ANGLE });
+}
+
 function takeLeader() {
-  if (!plan.length) planSentence();
+  if (!plan.length) (CONFIG.flow.order === "sentence" ? planSentence : planNearest)();
   while (plan.length && !plan[0].g.body) plan.shift();
   const item = plan.shift();
   if (!item) return null;
@@ -634,7 +661,8 @@ function takeLeader() {
 
 function updateFlow(dt) {
   if (!leader) leader = takeLeader();
-  drainSid = leader ? leader.g.word.sid : -1;
+  drainSid = leader && CONFIG.flow.order === "sentence" ? leader.g.word.sid : -1;
+  drainWord = leader && CONFIG.flow.order !== "sentence" ? leader.g.word : null;
   if (!leader) return;
   const l = leader, g = l.g, b = g.body, v = CONFIG.flowSpeed * G.S;
   // 从这一节原来的速度慢慢加到带子的速度，不会猛地一拽
@@ -703,7 +731,8 @@ function updateFlow(dt) {
 
 // 这一节整个进了通道：普通词就此消失，关键词的各节继续往下走
 function swallow(g, l, a) {
-  queue.splice(queue.indexOf(g), 1);
+  const qi = queue.indexOf(g);
+  if (qi >= 0) queue.splice(qi, 1);
   const w = g.word, angle = l.base;
   const x = (l.lead.x + l.trail.x) / 2, y = (l.lead.y + l.trail.y) / 2;
   const nx = plan[0] && plan[0].g;
