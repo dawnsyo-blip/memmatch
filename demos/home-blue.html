@@ -6,7 +6,7 @@
 <title>记忆库推荐 · 蓝色主题</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
   /* 蓝色主题（负责人 2026-11-02 定）：所有文字都用一种蓝，层次靠字重和记号——首页关键词加粗，问卷页选中的答案加粗、记号填满。
@@ -14,6 +14,10 @@
      浅蓝 oklch(0.72 0.09 265)、弱文字 oklch(0.62 0.11 265)、细线 oklch(0.84 0.03 265)。
      对纸色的对比度：蓝 5.1、弱文字 2.8、浅蓝 1.9（装饰用）。之前的蓝色版（纸 #F2FAFF、蓝 #1C75BE）见提交 8ecb371 */
   :root {
+    /* 字体：打字机等宽（负责人 2026-11-02 要求换成开源的印刷体）。英文 IBM Plex Mono，中文思源黑体 Noto Sans SC，都是 OFL 授权 */
+    /* 英文字体列表里不写通用的 monospace：写了的话，中文会先落到系统的等宽中文字体上，字距很松，轮不到后面的思源黑体 */
+    --font-en: "IBM Plex Mono", Consolas, Menlo;
+    --font-zh: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     --color-bg: #E0E1E1;
     --color-text: #1546EC;
     --color-soft: #1546EC;
@@ -45,9 +49,7 @@
   }
   .find:hover { transform: translate(calc(-50% + 4px), -50%); opacity: .7; }
   .find:focus-visible { outline: 1px solid var(--color-text); outline-offset: 2px; }
-  @font-face { font-family: "Home Serif SC"; font-weight: 400; font-display: swap; src: url("fonts/home-zh-400.woff2") format("woff2"); }
-  @font-face { font-family: "Home Serif SC"; font-weight: 600; font-display: swap; src: url("fonts/home-zh-600.woff2") format("woff2"); }
-  .drawer { font-family: "Home Serif SC", var(--font-zh); }
+  .drawer { font-family: var(--font-zh); }
   @media (prefers-reduced-motion: reduce) {
     .find { transition: opacity .3s ease; }
     .find:hover { transform: translate(-50%, -50%); }
@@ -116,11 +118,11 @@ const CONFIG = {
 
   colors: { background: "#E0E1E1", text: "#1546EC", accent: "#1546EC" }, // 全部用主题蓝，关键词靠加粗区分
   font: {
-    family: '"Cormorant Garamond", Georgia, serif',
+    family: '"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace',
     weight: 400,             // 普通字母的字重
     keyWeight: 600,          // 关键词字母的字重：重一点，句子显示时和打散后都更醒目
-    sizeMin: 20,             // 字号：沙漏高 800px 时的像素值，随沙漏大小等比缩放；两个值相同，所有字母同一个字号
-    sizeMax: 20,
+    sizeMin: 17,             // 字号：沙漏高 800px 时的像素值，随沙漏大小等比缩放；两个值相同，所有字母同一个字号。
+    sizeMax: 17,             //   等宽字体同字号下比 Cormorant 大、宽，所以从 20 降到 17
     minPx: 12,               // 屏幕上的最小字号（px）
   },
 

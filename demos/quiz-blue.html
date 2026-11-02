@@ -6,7 +6,7 @@
 <title>问卷 · 记忆库推荐（蓝色主题）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
   /* 问卷页样张：一题一屏。延续首页：衬线体、米白底、近黑字、大量留白；
@@ -139,6 +139,10 @@
      浅蓝 oklch(0.72 0.09 265)、弱文字 oklch(0.62 0.11 265)、细线 oklch(0.84 0.03 265)。
      对纸色的对比度：蓝 5.1、弱文字 2.8、浅蓝 1.9（装饰用）。之前的蓝色版（纸 #F2FAFF、蓝 #1C75BE）见提交 8ecb371 */
   :root {
+    /* 字体：打字机等宽（负责人 2026-11-02 要求换成开源的印刷体）。英文 IBM Plex Mono，中文思源黑体 Noto Sans SC，都是 OFL 授权 */
+    /* 英文字体列表里不写通用的 monospace：写了的话，中文会先落到系统的等宽中文字体上，字距很松，轮不到后面的思源黑体 */
+    --font-en: "IBM Plex Mono", Consolas, Menlo;
+    --font-zh: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     --color-bg: #E0E1E1;
     --color-text: #1546EC;
     --color-soft: #1546EC;
