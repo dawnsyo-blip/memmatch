@@ -9,20 +9,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  /* 蓝色主题（负责人 2026-11-02 定）：所有文字都用主题蓝，层次靠字重和记号——首页关键词加粗，问卷页选中的答案加粗、记号填满。
-     试过“要读的字用深墨色、蓝色只标关键词和选中的答案”，负责人不要。和 quiz-blue.html 共用这套颜色。颜色在 OKLCH 里推导，整页只有一种色相：
-     纸 oklch(0.98 0.012 240)、墨 oklch(0.29 0.05 249)、次要说明 oklch(0.47 0.06 249)、主题蓝 oklch(0.55 0.139 249)、
-     浅蓝 oklch(0.77 0.055 249)、弱文字 oklch(0.68 0.05 249)、细线 oklch(0.9 0.022 249)。
-     对纸色的对比度：墨 13.4、次要说明 6.4、主题蓝 4.6、弱文字 2.7、浅蓝 2.0（装饰用） */
+  /* 蓝色主题（负责人 2026-11-02 定）：所有文字都用一种蓝，层次靠字重和记号——首页关键词加粗，问卷页选中的答案加粗、记号填满。
+     配色取自负责人给的海报参考图（浅冷灰的纸、饱和的群青蓝）：纸 #E0E1E1 oklch(0.909 0.001 197)、蓝 #1546EC oklch(0.492 0.251 265)；
+     浅蓝 oklch(0.72 0.09 265)、弱文字 oklch(0.62 0.11 265)、细线 oklch(0.84 0.03 265)。
+     对纸色的对比度：蓝 5.1、弱文字 2.8、浅蓝 1.9（装饰用）。之前的蓝色版（纸 #F2FAFF、蓝 #1C75BE）见提交 8ecb371 */
   :root {
-    --color-bg: #F2FAFF;
-    --color-text: #1C75BE;
-    --color-soft: #1C75BE;   /* 全部用蓝色：说明文字也用主题蓝，再浅就读不清了（主题蓝对纸色 4.6） */
-    --color-accent: #1C75BE;
-    --color-light: #9AB8D6;
-    --color-faint: #819BB6;
-    --color-muted: #819BB6;
-    --color-line: #D3E0EC;
+    --color-bg: #E0E1E1;
+    --color-text: #1546EC;
+    --color-soft: #1546EC;
+    --color-accent: #1546EC;
+    --color-light: #89A4DE;
+    --color-faint: #6584C9;
+    --color-muted: #6584C9;
+    --color-line: #C1CBDF;
   }
   a.find { color: var(--color-accent); }   /* 写成 a.find，比后面 .find 的颜色规则更具体，不会被它盖掉 */
   /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
@@ -90,7 +89,7 @@ const CONFIG = {
   ],
 
   pass: "all",               // "all"：所有字母都漏到下面；"keywords"：只有关键词的字母能通过，其余在瓶颈口被吃掉
-  gray: "#9AB8D6",           // 非关键词的字母过了瓶颈口变成这个浅蓝
+  gray: "#89A4DE",           // 非关键词的字母过了瓶颈口变成这个浅蓝
   flowRate: 14,              // 每秒最多放几个字母进瓶颈
   flowSpeed: 0.32,           // 字母在瓶颈里走的速度：每秒走过沙漏高度的几分之一
   eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
@@ -115,7 +114,7 @@ const CONFIG = {
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
 
-  colors: { background: "#F2FAFF", text: "#1C75BE", accent: "#1C75BE" }, // 全部用主题蓝，关键词靠加粗区分
+  colors: { background: "#E0E1E1", text: "#1546EC", accent: "#1546EC" }, // 全部用主题蓝，关键词靠加粗区分
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
     weight: 400,             // 普通字母的字重

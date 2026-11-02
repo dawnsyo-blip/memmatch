@@ -134,17 +134,19 @@
     .go:not(:disabled):hover { transform: none; }
   }
 
-  /* ---------- 蓝色主题（和 home-blue.html 共用）：所有文字都用主题蓝。主题蓝对纸色只有 4.6，没法再用更浅的蓝区分主次，
-     所以选中的答案靠加粗和填满的记号区分，没选的选项不再变浅；题数这类提示仍用浅蓝 ---------- */
+  /* 蓝色主题（负责人 2026-11-02 定）：所有文字都用一种蓝，层次靠字重和记号——首页关键词加粗，问卷页选中的答案加粗、记号填满。
+     配色取自负责人给的海报参考图（浅冷灰的纸、饱和的群青蓝）：纸 #E0E1E1 oklch(0.909 0.001 197)、蓝 #1546EC oklch(0.492 0.251 265)；
+     浅蓝 oklch(0.72 0.09 265)、弱文字 oklch(0.62 0.11 265)、细线 oklch(0.84 0.03 265)。
+     对纸色的对比度：蓝 5.1、弱文字 2.8、浅蓝 1.9（装饰用）。之前的蓝色版（纸 #F2FAFF、蓝 #1C75BE）见提交 8ecb371 */
   :root {
-    --color-bg: #F2FAFF;
-    --color-text: #1C75BE;
-    --color-soft: #1C75BE;   /* 全部用蓝色：说明文字也用主题蓝，再浅就读不清了（主题蓝对纸色 4.6） */
-    --color-accent: #1C75BE;
-    --color-light: #9AB8D6;
-    --color-faint: #819BB6;
-    --color-muted: #819BB6;
-    --color-line: #D3E0EC;
+    --color-bg: #E0E1E1;
+    --color-text: #1546EC;
+    --color-soft: #1546EC;
+    --color-accent: #1546EC;
+    --color-light: #89A4DE;
+    --color-faint: #6584C9;
+    --color-muted: #6584C9;
+    --color-line: #C1CBDF;
   }
   .opt .mark { color: var(--color-text); }
   .options.picked .opt[aria-checked="false"] { color: var(--color-text); }
