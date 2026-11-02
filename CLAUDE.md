@@ -25,6 +25,7 @@ demos/               新前端样张
   home.html          首页（字母沙漏）
   home-blue.html、quiz-blue.html     蓝色主题的首页和问卷页（和黑白版对照）
   home-purple.html、quiz-purple.html 紫色主题的首页和问卷页（做法同蓝色主题，只换颜色）
+  fonts-compare.html 字体对比：Cormorant Garamond、Inter、IBM Plex Mono、Source Serif 4 四种方案排同样的内容
   quiz.html          问卷页
   catalog.html、about.html   项目目录页、关于页（占位）
   site.css、drawer.js、fonts/   共用的样式、抽屉脚本、首页中文子集字体
