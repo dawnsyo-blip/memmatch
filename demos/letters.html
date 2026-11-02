@@ -110,7 +110,9 @@ const CONFIG = {
   hourglass: {
     heightRatio: 0.8, shortScreen: 560, shortHeightRatio: 0.84,
     topShare: 0.38, findAt: 0.42,
-    sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，手机上也保持 16 : 9
+    sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，比例不变
+    // 手机（屏幕宽不超过 phoneMaxWidth）上高 : 宽改成 phoneAspect：上口和底座按同一倍数加宽
+    phoneMaxWidth: 600, phoneAspect: 3 / 2,
     // 总高 : 最宽处约 16 : 9；上口窄，下半部分宽、更有分量
     upperHeight: 0.44, neckLength: 0.14, lowerHeight: 0.42,
     upperWidth: 0.44, lowerWidth: 0.5625, neckWidth: 0.03,
@@ -171,7 +173,9 @@ function computeGeometry() {
   const hg = CONFIG.hourglass;
   const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
   const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
-  const widest = Math.max(hg.upperWidth, hg.lowerWidth);
+  // 下面的宽度按 16 : 9 设定；手机上按 phoneAspect 等比加宽
+  const ws = W <= hg.phoneMaxWidth ? 16 / 9 / hg.phoneAspect : 1;
+  const widest = Math.max(hg.upperWidth, hg.lowerWidth) * ws;
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
   const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
   const slim = Math.min(1, avail / (S * widest));
@@ -183,14 +187,14 @@ function computeGeometry() {
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
     S, k, fk,
-    cap: (S * hg.upperWidth * slim * S * hg.upperHeight) / fk ** 2 / CONFIG.capRef,
+    cap: (S * hg.upperWidth * ws * slim * S * hg.upperHeight) / fk ** 2 / CONFIG.capRef,
     cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
     neckHalf,
     exitHalf: Math.max(neckHalf, CONFIG.font.sizeMax * fk * 0.5),
-    maxHalf: (S * hg.upperWidth * slim) / 2,
-    baseHalf: (S * hg.lowerWidth * slim) / 2,
+    maxHalf: (S * hg.upperWidth * ws * slim) / 2,
+    baseHalf: (S * hg.lowerWidth * ws * slim) / 2,
   };
 }
 
