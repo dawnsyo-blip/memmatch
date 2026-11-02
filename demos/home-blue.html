@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>记忆库推荐 · 普鲁士蓝</title>
+<title>记忆库推荐 · 蓝</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  /* 普鲁士蓝配色（和 home.html 只差颜色）：深墨蓝印在暖一点的纸上，整页只有一种色相。
-     颜色在 OKLCH 里推导：纸 oklch(0.962 0.012 85)、墨 oklch(0.31 0.072 243)、说明文字 oklch(0.5 0.06 243)、
-     普通字母 oklch(0.74 0.035 240)、细线 oklch(0.88 0.015 240)。对纸色的对比度：墨 11.7，说明文字 5.3 */
+  /* 蓝色配色（和 home.html 只差颜色）：明亮的钴蓝印在很浅的暖米白上，整页只有一种色相（参考负责人 2026-11-02 给的蓝色渐变图）。
+     颜色在 OKLCH 里推导：纸 oklch(0.975 0.014 95)、墨 oklch(0.47 0.165 257)、说明文字 oklch(0.52 0.11 257)、
+     普通字母 oklch(0.76 0.068 252)、弱文字 oklch(0.7 0.07 254)、细线 oklch(0.91 0.025 252)。对纸色的对比度：墨 6.5，说明文字 5.2 */
   :root {
-    --color-bg: #F6F2EA;
-    --color-text: #033351;
-    --color-soft: #446783;
-    --color-faint: #859CAC;
-    --color-muted: #859CAC;
-    --color-line: #CFD9E1;
+    --color-bg: #FAF7EC;
+    --color-text: #0356B4;
+    --color-soft: #3D69A7;
+    --color-faint: #80A1CA;
+    --color-muted: #80A1CA;
+    --color-line: #D6E3F2;
   }
   /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
      单词版留在 experiments/home-words.html */
@@ -85,7 +85,7 @@ const CONFIG = {
   ],
 
   pass: "all",               // "all"：所有字母都漏到下面；"keywords"：只有关键词的字母能通过，其余在瓶颈口被吃掉
-  gray: "#98AEBF",           // 非关键词的字母过了瓶颈口变成这个颜色；关键词的字母保持墨蓝色
+  gray: "#92B4DC",           // 非关键词的字母过了瓶颈口变成这个颜色；关键词的字母保持墨蓝色
   flowRate: 14,              // 每秒最多放几个字母进瓶颈
   flowSpeed: 0.32,           // 字母在瓶颈里走的速度：每秒走过沙漏高度的几分之一
   eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
@@ -110,7 +110,7 @@ const CONFIG = {
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
 
-  colors: { background: "#F6F2EA", text: "#033351" },
+  colors: { background: "#FAF7EC", text: "#0356B4" },
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
     weight: 400,             // 普通字母的字重
