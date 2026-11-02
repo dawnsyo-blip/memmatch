@@ -86,6 +86,7 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
 <script type="module">
 /* ================= 可调参数 ================= */
+const PHI = (1 + Math.sqrt(5)) / 2; // 黄金比例 φ ≈ 1.618，沙漏的比例和在屏幕上的位置都按它来定
 const CONFIG = {
   // 句子从 sentencesUrl 读取（每句的 keywords 能通过瓶颈）；读不到时（比如直接双击打开文件）用下面这份备用。
   // 备用句子里方括号标出能通过的词，显示时不带方括号
@@ -116,7 +117,7 @@ const CONFIG = {
   flowSpeed: 0.3,            // 带子被抽进瓶颈的速度：每秒走过沙漏高度的几分之一
   eatLine: 0.04,             // 被过滤的词在瓶颈口往下多深处被逐个字母吃掉（÷ 沙漏高度）；放低一点，被吃的字母不会和上面的词堆混在一起
   turnRate: 3,               // 弧度/秒，被拖向瓶颈的那一节最快转多快；越小转得越缓
-  minUpperWords: 40,         // 上半部分低于这个数就补下一句
+  minUpperWords: 54,         // 上半部分低于这个数就补下一句
   maxLowerWords: 12,         // 下半部分最多保留几个清楚的词
   initialLowerCount: 12,     // 页面打开时下半部分预置几个清楚的词
   initialLowerWords: ["tears", "rain", "mirrors", "Montauk", "glitter", "life"], // 预置词，不够时接着用句子里的关键词
@@ -160,28 +161,32 @@ const CONFIG = {
     family: '"Cormorant Garamond", Georgia, serif',
     weights: [300, 400, 500, 600], // 每个词随机取一种字重，堆起来有颗粒感
     // 字号范围：沙漏高 800px 时的像素值，随沙漏大小等比缩放
-    sizeMin: 15,
-    sizeMax: 23,
+    sizeMin: 16,
+    sizeMax: 25,
   },
 
   // 以下比例都是相对整个沙漏的高度
   hourglass: {
-    heightRatio: 0.86,       // 沙漏的尺寸基准（÷ 屏幕高度）；实际高度是它乘三段高度之和
+    // 版面按黄金比例：
+    //   沙漏总高 = 屏幕高 ÷ φ（宽度不够时按宽度缩小）；
+    //   上方留白 : 下方留白 = 1 : φ，“find yours →”在下方留白的黄金分割点上（见 computeGeometry）；
+    //   上半部分 : 下半部分的高 = φ : 1；
+    //   上半部分的外框宽 : 高 = φ : 1，下半部分宽 : 高 = φ² : 1，算下来上口和底座一样宽
+    heightRatio: 1 / PHI,    // 沙漏总高占屏幕高度的比例
     maxWidthOfScreen: 0.94,  // 竖屏时沙漏最宽处不超过屏幕宽度的比例
-    upperHeight: 0.46,       // 上半部分（U 形漏斗）的高度
-    neckLength: 0.08,        // 中间细通道的长度；越短上下两半越近
-    lowerHeight: 0.34,       // 下半部分的高度。三段加起来就是沙漏实际的高，在屏幕上居中
-    upperWidth: 0.68,        // 上口宽度
-    lowerWidth: 0.72,        // 下半部分底宽
+    upperHeight: 0.5,        // 上半部分（U 形漏斗）的高度
+    neckLength: 0.07,        // 中间细通道的长度；越短上下两半越近
+    lowerHeight: 0.5 / PHI,  // 下半部分的高度
+    upperWidth: 0.5 * PHI,   // 上口宽度
+    lowerWidth: 0.5 * PHI,   // 下半部分底宽（= 下半部分的高 × φ²）
     neckWidth: 0.03,         // 通道宽度
     upperCurve: 2.6,         // 上半部分轮廓：1 是直的 V 字，越大越像底部圆圆的 U 字
     lowerCurve: 1.2,         // 下半部分轮廓：1 是直的 ∧ 字，越大越像底部摊开的沙堆
   },
 
-  findGap: 0.09,             // “find yours →”在沙漏底部往下多远（÷ 沙漏高度），屏幕下方放不下时往上收
 
   // 性能较弱的设备（CPU 核数不超过 lowPower.cores）同时存在的词少一些
-  lowPower: { cores: 4, upperWords: 28, lowerWords: 9, traces: 10 },
+  lowPower: { cores: 4, upperWords: 36, lowerWords: 9, traces: 10 },
 
   pointerRadius: 0.024,      // 手指或鼠标推词的半径 ÷ 沙漏高度
   gravity: 1.6,
@@ -263,10 +268,11 @@ function measure(text, size, weight) {
 
 function computeGeometry() {
   const hg = CONFIG.hourglass;
-  const S = Math.min(H * hg.heightRatio, (W * hg.maxWidthOfScreen) / Math.max(hg.upperWidth, hg.lowerWidth));
+  const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
+  const S = Math.min((H * hg.heightRatio) / frac, (W * hg.maxWidthOfScreen) / Math.max(hg.upperWidth, hg.lowerWidth));
   const k = S / 800;
-  const total = S * (hg.upperHeight + hg.neckLength + hg.lowerHeight);
-  const top = (H - total) / 2;
+  // 上方留白 : 下方留白 = 1 : φ
+  const top = (H - S * frac) / (1 + PHI);
   const neckTop = top + S * hg.upperHeight;
   const neckBot = neckTop + S * hg.neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
@@ -274,7 +280,7 @@ function computeGeometry() {
     S, k,
     cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
-    eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.05),
+    eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
     neckHalf,
     // 通道出口要容得下一个竖着的词
     exitHalf: Math.max(neckHalf, CONFIG.font.sizeMax * k * 0.75),
@@ -985,11 +991,11 @@ function resize() {
   if (active) layoutActive();
 }
 
-// 入口放在沙漏底部往下一点；屏幕下方留白不够时，放在留白的正中
+// 入口放在沙漏下方留白的黄金分割点上
 const find = document.getElementById("find");
 function placeFind() {
-  const room = H - G.bottom;
-  find.style.top = `${G.bottom + Math.min(G.S * CONFIG.findGap, room / 2)}px`;
+  // 下方留白的黄金分割点：离沙漏近、离屏幕底边远
+  find.style.top = `${G.bottom + (H - G.bottom) / (PHI * PHI)}px`;
 }
 
 let resizeTimer = 0;

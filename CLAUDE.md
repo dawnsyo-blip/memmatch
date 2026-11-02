@@ -93,7 +93,12 @@
   - 文件都在 `demos/`，正式网站 `site/` 没动：`home.html`、`quiz.html`、`catalog.html` 和 `about.html`（占位）、共用的 `site.css` 和 `drawer.js`、`fonts/`。`home.html` 由 `hourglass.html` 复制后改，`hourglass.html` 本身不动。要用 `npm run site` 打开，比如 http://localhost:5173/demos/home.html 。
   - 首页：
     - 入口是沙漏下方的“find yours →”，用 HTML 叠在画布上，位置由 `placeFind` 按沙漏底部算。
-    - 沙漏形状（负责人 2026-11-02 改）：上半部分从 V 形改成 U 形（`upperCurve` 2.6，`upperWidth` 0.68，`upperHeight` 0.46）。中间通道从 0.16 缩短到 0.08，上下两半更近。下半部分有自己的高度 `lowerHeight`（0.34），不再是“剩下的部分”，所以缩短通道后整个沙漏变矮，下半部分和“find yours”之间拉开了。
+    - 沙漏形状（负责人 2026-11-02 改）：上半部分从 V 形改成 U 形（`upperCurve` 2.6），中间通道缩短，上下两半更近；下半部分有自己的高度 `lowerHeight`，不再是“剩下的部分”。
+    - 版面按黄金比例（负责人 2026-11-02 要求，常量 `PHI`）：
+      - 沙漏总高是屏幕高的 1/φ，宽度不够时按宽度缩小。
+      - 上方留白 : 下方留白 = 1 : φ，“find yours →”在下方留白的黄金分割点上（`computeGeometry`、`placeFind`）。
+      - 上半部分 : 下半部分的高 = φ : 1。上半部分外框宽 : 高 = φ : 1，下半部分宽 : 高 = φ² : 1，所以上口和底座一样宽。
+      - U 形的底比 V 形宽，40 个词只堆到上半部分的下半截，所以 `minUpperWords` 调到 54，性能较弱的设备调到 36。字号也调大了一点（16～25）。电脑上每步约 2.4 毫秒。
     - 沙漏里的词改用 Cormorant Garamond，每个词随机取 300～600 中的一种字重（`w.weight`）。
     - 句子从 `../hourglass-sentences.json` 读，把每句的 `keywords` 换成方括号格式；读不到时用 `CONFIG.sentences` 里的备用句子。
     - Matter.js 用 `defer` 加载，页面脚本是模块，不挡首屏。
