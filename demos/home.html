@@ -118,8 +118,8 @@ const CONFIG = {
   turnRate: 3,               // 弧度/秒，被拖向瓶颈的那一节最快转多快；越小转得越缓
   // 以下词数按黄金比例宽度的沙漏来定；沙漏收窄或字号到了下限时，按装得下的面积等比减少（G.cap）
   minUpperWords: 54,         // 上半部分低于这个数就补下一句
-  maxLowerWords: 12,         // 下半部分最多保留几个清楚的词
-  initialLowerCount: 12,     // 页面打开时下半部分预置几个清楚的词
+  maxLowerWords: 18,         // 下半部分最多保留几个清楚的词
+  initialLowerCount: 18,     // 页面打开时下半部分预置几个清楚的词：多一些，下面才压得住，不会头重脚轻
   initialLowerWords: ["tears", "rain", "mirrors", "Montauk", "glitter", "life"], // 预置词，不够时接着用句子里的关键词
 
   sentenceHold: 1.2,         // 秒，新句子完整显示多久后松开
@@ -132,8 +132,8 @@ const CONFIG = {
   // 下半部分的旧词褪成很淡的痕迹留在原处，新词压在上面，慢慢把下半部分的轮廓撑出来
   trace: {
     alpha: 0.16,             // 痕迹的不透明度
-    max: 16,                 // 最多保留多少个痕迹，超过时最老的淡掉
-    initial: 10,             // 页面打开时预置多少个痕迹
+    max: 24,                 // 最多保留多少个痕迹，超过时最老的淡掉
+    initial: 18,             // 页面打开时预置多少个痕迹
     retire: 2.5,             // 秒，最老的痕迹淡掉所用的时间
     clearance: 0.08,         // 痕迹堆到离通道出口这么近（÷ 沙漏高度）时，最老的痕迹先淡掉
   },
@@ -144,8 +144,6 @@ const CONFIG = {
                              // "sentence"：一句一句吃（从离瓶颈最近的词开始，先往左到句首、再往右到句尾），要把句子从词堆里拽出来，词堆容易被顶得弹起来。
                              // 模拟里 nearest 往上弹的词少一半多，大幅弹起少八成
     upperAir: 0.08,          // 上半部分的空气阻力：越大落得越慢、越不弹。0.012 会弹；0.06 时最快约每秒 310px；修长的沙漏词堆更深，用 0.08 才压得住弹跳
-    pour: 1,                 // 新句子居中出现，松开后像被风吹着斜飘向杯壁（一句往左、一句往右），侧向的力 ÷ 重力；0 是笔直落下
-    pourTime: 1.4,           // 秒，松开后侧向的力持续多久
     // 真实沙漏的表面是凹的：出口正上方那一柱沙子沉得最快，四周的沙子顺着坡滑进去。
     // 这里让瓶颈正上方一柱里的词摩擦小、多受一点向下的力；两侧的词摩擦大，慢慢滑进坑里
     funnel: {
@@ -209,7 +207,7 @@ const CONFIG = {
 
 
   // 性能较弱的设备（CPU 核数不超过 lowPower.cores）同时存在的词少一些
-  lowPower: { cores: 4, upperWords: 36, lowerWords: 9, traces: 10 },
+  lowPower: { cores: 4, upperWords: 36, lowerWords: 13, traces: 15 },
 
   pointerRadius: 0.024,      // 手指或鼠标推词的半径 ÷ 沙漏高度
   gravity: 1.6,
@@ -826,18 +824,6 @@ function dropWord(w, topY, angle) {
   words.push(w);
 }
 
-// 新句子松开后的一小段时间里受一个侧向的力，斜飘向杯壁：一句往左、一句往右
-function pourSideways() {
-  const f = CONFIG.flow;
-  if (!f.pour) return;
-  const gs = engine.gravity.y * engine.gravity.scale * f.pour;
-  for (const w of words) {
-    if (w.zone !== "upper" || simTime - w.born > f.pourTime || w.sid < 0) continue;
-    const side = w.sid % 2 ? -1 : 1;
-    for (const g of w.segs) if (!g.body.isStatic) Body.applyForce(g.body, g.body.position, { x: side * g.body.mass * gs, y: 0 });
-  }
-}
-
 // 中间一柱沉得快：摩擦小、多一点向下的力；两侧摩擦大。表面因此凹下去
 function funnelFlow() {
   const f = CONFIG.flow.funnel;
@@ -1169,7 +1155,6 @@ function step(dt) {
   updateLower(dt);
   movePushers();
   funnelFlow();
-  pourSideways();
   updateRibbons(dt);
   Engine.update(engine, 1000 / 60);
   clampSegs();
