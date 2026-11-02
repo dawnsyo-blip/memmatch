@@ -80,7 +80,7 @@ const CONFIG = {
   eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
 
   // 字母数按沙漏能装下的面积折算（见 G.cap）
-  upperLetters: 200,         // 上半部分低于这个数就补下一句
+  upperLetters: 280,         // 上半部分低于这个数就补下一句（负责人 2026-11-02 要求上泡多铺一些字母，勾出玻璃泡的形状；原来 200）
   lowerLetters: 280,         // 下半部分最多保留多少个字母，超过时从沙堆最底下的开始淡掉、移走（下泡比上泡大，比黑白版的 200 多）
   lowerInitial: 280,         // 页面打开时下半部分预置多少个字母
   // 下半部分不留痕迹：字母太多时，从沙堆最底下的开始淡掉移走，整堆跟着缓缓下沉；不会留下空洞，也不会悬空
@@ -671,24 +671,47 @@ function settle(steps, each) {
 }
 
 function prefill() {
-  // 上半部分：一句句打散落下
-  let guard = 0;
-  while (count("upper") < capN(CONFIG.upperLetters) && guard++ < 60) {
-    const items = nextItems();
-    layoutItems(items);
-    for (const it of items) shatter(it);
-    settle(30);
-  }
-  settle(60);
-
-  // 下半部分：先铺一层痕迹，再落一层清楚的字母
+  // 开场的字母从句子里随机取，关键词和非关键词按句子里的比例混着
   const pool = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => t.key).map((t) => t.text)).join("");
   const others = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => !t.key).map((t) => t.text)).join("");
+  const keyShare = pool.length / CONFIG.sentences.join("").replace(/[\[\]\s]/g, "").length;
+  const pickChar = () => {
+    const key = Math.random() < keyShare;
+    const src = key ? pool : others;
+    return { ch: src[Math.floor(Math.random() * src.length)], key };
+  };
+
+  // 上半部分：从瓶颈口往上一层层铺，每层按那个高度的玻璃泡宽度从左排到右。
+  // 字母贴着喉部、圆底和侧壁铺开，一开场就勾出上泡的形状；从上面落下的话，字母会滑到中间堆成窄窄的 V 形
+  {
+    const n = capN(CONFIG.upperLetters);
+    const size = randSize() * G.fk, rowH = size * 0.9;
+    let made = 0;
+    for (let r = 0; made < n; r++) {
+      const y = G.neckTop - rowH * (r + 0.6);
+      if (y < G.top + rowH * 2) break;
+      const half = halfAt(y) - size * 0.55;
+      if (half < size * 0.3) { // 喉部最窄处只放中间一个
+        if (half > -size * 0.2) { const c = pickChar(); makeLetter(c.ch, randSize(), weightOf(c.key), c.key, "upper", G.cx, y, 0); made++; }
+        continue;
+      }
+      let x = G.cx - half + rand(0, size * 0.4);
+      while (x < G.cx + half && made < n) {
+        const c = pickChar();
+        const L = makeLetter(c.ch, randSize(), weightOf(c.key), c.key, "upper", x, y + rand(-1, 1) * size * 0.08, rand(-0.35, 0.35));
+        L.born = simTime - 1;
+        x += L.w + size * rand(0.08, 0.3);
+        made++;
+      }
+    }
+    settle(90);
+  }
+
+  // 下半部分：先铺一层痕迹，再落一层清楚的字母
   // 直接一层层铺在碗底：从最底下开始，每层按那个高度的碗宽从左排到右，排满再往上铺一层。
   // 从上面落下来的话，圆底很滑，字母全滑到中间堆成一座小山，看不出碗有多宽（负责人 2026-11-02 指出）
   // 关键词和非关键词的字母按句子里的比例混着
   const nLive = capN(CONFIG.lowerInitial);
-  const keyShare = pool.length / CONFIG.sentences.join("").replace(/[\[\]\s]/g, "").length;
   const size = randSize() * G.fk, rowH = size * 0.9;
   let made = 0;
   for (let r = 0; made < nLive; r++) {
@@ -697,9 +720,7 @@ function prefill() {
     const half = halfAt(y) - size * 0.6;
     let x = G.cx - half + rand(0, size * 0.4);
     while (x < G.cx + half && made < nLive) {
-      const key = Math.random() < keyShare;
-      const src = key ? pool : others;
-      const ch = src[Math.floor(Math.random() * src.length)];
+      const { ch, key } = pickChar();
       const L = makeLetter(ch, randSize(), weightOf(key), key, "lower", x, y + rand(-1, 1) * size * 0.08, rand(-0.35, 0.35));
       // 预置的关键词字母各自已经留了一阵，保留期错开到期，开场不会先淡掉它们，也不会一起淡掉
       L.born = simTime - rand(0, CONFIG.dissolve.keyHold);
