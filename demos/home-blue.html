@@ -3,23 +3,28 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-<title>记忆库推荐 · 蓝</title>
+<title>记忆库推荐 · 蓝色主题</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  /* 蓝色配色（和 home.html 只差颜色）：负责人 2026-11-02 指定文字 #3588D3、底色 #EFF3F6，随后要求底色再浅一点（改成 #F6F9FB），文字按对比度调深（改成 #1C75BE，色相、彩度不变）；其余在 OKLCH 里按同一色相推导，整页只有一种色相。
-     底色 oklch(0.98 0.004 240)、文字 oklch(0.55 0.139 249)；说明文字 oklch(0.5 0.11 249)、普通字母 oklch(0.77 0.055 249)、
-     弱文字 oklch(0.72 0.06 249)、细线 oklch(0.9 0.022 249)。对底色的对比度：文字 4.58，说明文字 5.7 */
+  /* 蓝色主题（负责人 2026-11-02 定方向）：蓝色是主题色，只标“被留下的东西”——首页是关键词，问卷页是选中的答案；
+     要读的字用带蓝调的深墨色。和 quiz-blue.html 共用这套颜色。颜色在 OKLCH 里推导，整页只有一种色相：
+     纸 oklch(0.98 0.012 240)、墨 oklch(0.29 0.05 249)、次要说明 oklch(0.47 0.06 249)、主题蓝 oklch(0.55 0.139 249)、
+     浅蓝 oklch(0.77 0.055 249)、弱文字 oklch(0.68 0.05 249)、细线 oklch(0.9 0.022 249)。
+     对纸色的对比度：墨 13.4、次要说明 6.4、主题蓝 4.6、弱文字 2.7、浅蓝 2.0（装饰用） */
   :root {
-    --color-bg: #F6F9FB;
-    --color-text: #1C75BE;
-    --color-soft: #29669F;
-    --color-faint: #88A8C9;
-    --color-muted: #88A8C9;
+    --color-bg: #F2FAFF;
+    --color-text: #162D43;
+    --color-soft: #405E7B;
+    --color-accent: #1C75BE;
+    --color-light: #9AB8D6;
+    --color-faint: #819BB6;
+    --color-muted: #819BB6;
     --color-line: #D3E0EC;
   }
+  a.find { color: var(--color-accent); }   /* 写成 a.find，比后面 .find 的颜色规则更具体，不会被它盖掉 */
   /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
      单词版留在 experiments/home-words.html */
   html, body { margin: 0; height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--color-bg); }
@@ -53,7 +58,7 @@
 <body>
 <h1 class="visually-hidden">记忆库推荐</h1>
 <canvas id="c" aria-hidden="true"></canvas>
-<a class="find" id="find" href="quiz.html" lang="en" aria-label="开始问卷">find yours →</a>
+<a class="find" id="find" href="quiz-blue.html" lang="en" aria-label="开始问卷">find yours →</a>
 <button type="button" class="menu-btn" id="menuBtn" aria-label="关于" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7h14M3 13h14" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-labelledby="drawerTitle" inert>
@@ -85,7 +90,7 @@ const CONFIG = {
   ],
 
   pass: "all",               // "all"：所有字母都漏到下面；"keywords"：只有关键词的字母能通过，其余在瓶颈口被吃掉
-  gray: "#9AB8D6",           // 非关键词的字母过了瓶颈口变成这个颜色；关键词的字母保持墨蓝色
+  gray: "#9AB8D6",           // 非关键词的字母过了瓶颈口变成这个浅蓝
   flowRate: 14,              // 每秒最多放几个字母进瓶颈
   flowSpeed: 0.32,           // 字母在瓶颈里走的速度：每秒走过沙漏高度的几分之一
   eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
@@ -110,7 +115,7 @@ const CONFIG = {
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
 
-  colors: { background: "#F6F9FB", text: "#1C75BE" },
+  colors: { background: "#F2FAFF", text: "#162D43", accent: "#1C75BE" }, // 普通字母用墨色，关键词的字母用主题蓝
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
     weight: 400,             // 普通字母的字重
@@ -708,13 +713,18 @@ function draw() {
   ctx.textBaseline = "middle";
   for (const L of letters) {
     const b = L.body;
-    ctx.fillStyle = !L.isKey && (L.zone === "lower" || (L.zone === "neck" && b.position.y > G.eatY)) ? CONFIG.gray : CONFIG.colors.text;
+    ctx.fillStyle = L.isKey ? CONFIG.colors.accent
+      : L.zone === "lower" || (L.zone === "neck" && b.position.y > G.eatY) ? CONFIG.gray : CONFIG.colors.text;
     drawText(L.ch, L.size, b.position.x, b.position.y + L.size * 0.04, b.angle, L.alpha, L.weight);
   }
   ctx.fillStyle = CONFIG.colors.text;
   if (active) {
     const alpha = Math.min(1, active.t / 0.35);
-    for (const it of active.items) if (!it.released) drawText(it.text, it.size, it.x, it.y, 0, alpha, it.weight);
+    for (const it of active.items) {
+      if (it.released) continue;
+      ctx.fillStyle = it.isKey ? CONFIG.colors.accent : CONFIG.colors.text;
+      drawText(it.text, it.size, it.x, it.y, 0, alpha, it.weight);
+    }
   }
   if (DEBUG) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
