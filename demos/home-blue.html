@@ -9,11 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  /* 蓝色配色（和 home.html 只差颜色）：负责人 2026-11-02 指定底色 #EFF3F6、文字 #3588D3，其余在 OKLCH 里按同一色相推导，整页只有一种色相。
-     底色 oklch(0.962 0.006 240)、文字 oklch(0.612 0.139 249)；说明文字 oklch(0.5 0.11 249)、普通字母 oklch(0.77 0.055 249)、
-     弱文字 oklch(0.72 0.06 249)、细线 oklch(0.9 0.022 249)。对底色的对比度：文字 3.35（低于正文要求的 4.5，大字要求的 3 刚过），说明文字 5.4 */
+  /* 蓝色配色（和 home.html 只差颜色）：负责人 2026-11-02 指定文字 #3588D3、底色 #EFF3F6，随后要求底色再浅一点，改成 #F6F9FB；其余在 OKLCH 里按同一色相推导，整页只有一种色相。
+     底色 oklch(0.98 0.004 240)、文字 oklch(0.612 0.139 249)；说明文字 oklch(0.5 0.11 249)、普通字母 oklch(0.77 0.055 249)、
+     弱文字 oklch(0.72 0.06 249)、细线 oklch(0.9 0.022 249)。对底色的对比度：文字 3.54（低于正文要求的 4.5，大字要求的 3 刚过），说明文字 5.7 */
   :root {
-    --color-bg: #EFF3F6;
+    --color-bg: #F6F9FB;
     --color-text: #3588D3;
     --color-soft: #29669F;
     --color-faint: #88A8C9;
@@ -110,7 +110,7 @@ const CONFIG = {
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
 
-  colors: { background: "#EFF3F6", text: "#3588D3" },
+  colors: { background: "#F6F9FB", text: "#3588D3" },
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
     weight: 400,             // 普通字母的字重
