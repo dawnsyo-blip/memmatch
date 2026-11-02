@@ -134,19 +134,20 @@
     .go:not(:disabled):hover { transform: none; }
   }
 
-  /* ---------- 蓝色主题（和 home-blue.html 共用）：要读的字用深墨色，主题蓝只标“被留下的东西”，也就是选中的答案。
-     主次大约 60-30-10：纸色铺底，墨色是题目和选项，主题蓝只出现在选中的选项、记号、“继续 →”和交互提示上 ---------- */
+  /* ---------- 蓝色主题（和 home-blue.html 共用）：所有文字都用主题蓝。主题蓝对纸色只有 4.6，没法再用更浅的蓝区分主次，
+     所以选中的答案靠加粗和填满的记号区分，没选的选项不再变浅；题数这类提示仍用浅蓝 ---------- */
   :root {
     --color-bg: #F2FAFF;
-    --color-text: #162D43;
-    --color-soft: #405E7B;
+    --color-text: #1C75BE;
+    --color-soft: #1C75BE;   /* 全部用蓝色：说明文字也用主题蓝，再浅就读不清了（主题蓝对纸色 4.6） */
     --color-accent: #1C75BE;
     --color-light: #9AB8D6;
     --color-faint: #819BB6;
     --color-muted: #819BB6;
     --color-line: #D3E0EC;
   }
-  .opt .mark { color: var(--color-soft); }
+  .opt .mark { color: var(--color-text); }
+  .options.picked .opt[aria-checked="false"] { color: var(--color-text); }
   .opt[aria-checked="true"], .opt[aria-checked="true"] .mark { color: var(--color-accent); }
   .opt[aria-checked="true"] .num { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-bg); }
   .go { color: var(--color-accent); }

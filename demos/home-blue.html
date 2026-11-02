@@ -9,15 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  /* 蓝色主题（负责人 2026-11-02 定方向）：蓝色是主题色，只标“被留下的东西”——首页是关键词，问卷页是选中的答案；
-     要读的字用带蓝调的深墨色。和 quiz-blue.html 共用这套颜色。颜色在 OKLCH 里推导，整页只有一种色相：
+  /* 蓝色主题（负责人 2026-11-02 定）：所有文字都用主题蓝，层次靠字重和记号——首页关键词加粗，问卷页选中的答案加粗、记号填满。
+     试过“要读的字用深墨色、蓝色只标关键词和选中的答案”，负责人不要。和 quiz-blue.html 共用这套颜色。颜色在 OKLCH 里推导，整页只有一种色相：
      纸 oklch(0.98 0.012 240)、墨 oklch(0.29 0.05 249)、次要说明 oklch(0.47 0.06 249)、主题蓝 oklch(0.55 0.139 249)、
      浅蓝 oklch(0.77 0.055 249)、弱文字 oklch(0.68 0.05 249)、细线 oklch(0.9 0.022 249)。
      对纸色的对比度：墨 13.4、次要说明 6.4、主题蓝 4.6、弱文字 2.7、浅蓝 2.0（装饰用） */
   :root {
     --color-bg: #F2FAFF;
-    --color-text: #162D43;
-    --color-soft: #405E7B;
+    --color-text: #1C75BE;
+    --color-soft: #1C75BE;   /* 全部用蓝色：说明文字也用主题蓝，再浅就读不清了（主题蓝对纸色 4.6） */
     --color-accent: #1C75BE;
     --color-light: #9AB8D6;
     --color-faint: #819BB6;
@@ -115,7 +115,7 @@ const CONFIG = {
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
 
-  colors: { background: "#F2FAFF", text: "#162D43", accent: "#1C75BE" }, // 普通字母用墨色，关键词的字母用主题蓝
+  colors: { background: "#F2FAFF", text: "#1C75BE", accent: "#1C75BE" }, // 全部用主题蓝，关键词靠加粗区分
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
     weight: 400,             // 普通字母的字重
