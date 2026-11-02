@@ -1,4 +1,4 @@
-"""阶段 3：按标准决定每个项目的收录状态，写回项目 JSON 的 inclusion 字段，并生成 docs/inclusion-report.md。
+"""阶段 3：按标准决定每个项目的收录状态，写回项目 JSON 的 inclusion 字段，并生成 docs/报告/inclusion-report.md。
 
 状态：included（收录）/ flagged（收录但加风险提示）/ excluded（排除，附原因代码）/ pending（证据不足，待定）。
 所有判断基于说明文档、仓库内容和阶段 2 的检查结果，没有实际安装。
@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SETTINGS = json.loads((ROOT / "data/settings.json").read_text(encoding="utf-8"))
 PROJECTS = ROOT / "data/projects"
-REPORT = ROOT / "docs/inclusion-report.md"
+REPORT = ROOT / "docs/报告/inclusion-report.md"
 TODAY = date.today().isoformat()
 
 EXCLUSION_CODES = {
@@ -84,7 +84,7 @@ def write_report(docs):
     cat_count = Counter((d["candidate"]["category"], d["inclusion"]["status"]) for d in docs)
     lines = [
         "# 阶段 3 收录状态报告", "",
-        f"> 由 `scripts/decide_inclusion.py` 生成，判定日期 {TODAY}。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。", "",
+        f"> 由 `scripts/decide_inclusion.py` 生成，判定日期 {TODAY}。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/报告/health-report.md`），**没有实际安装验证**。", "",
         "## 判定规则", "",
         "- **排除 C**：仓库已归档。只是长期没有提交、但没有“跑不通”的证据的，不排除，只加风险提示（仓库问题反馈没有逐个查看）。",
         "- **排除 B**（核心闭源、只能用托管）已在候选表阶段排除，此处不再出现；**排除 D**（无导出且格式不开放）目前没有项目被确认“无导出”，暂未触发。",

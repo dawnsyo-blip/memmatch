@@ -10,15 +10,18 @@
 | `data/schema/` | 数据结构定义 |
 | `data/questionnaire/` | 网站读取的问卷配置 |
 | `data/candidates/` | 候选项目筛选表 |
+| `data/hourglass-sentences.json` | 首页沙漏的句子 |
 | `engine/` | 推荐引擎（浏览器和 Node 都能跑） |
 | `tests/` | 引擎和虚构用户的自动测试 |
 | `scripts/` | 导入、规范化、检查、推荐等脚本（`prototype/` 是早期原型，只作参考） |
 | `sources/snapshots/` | 来源清单的 README 快照 |
 | `sources/负责人材料/` | 负责人给的原始材料（只读） |
-| `docs/` | 脚本生成的各类报告、问卷配置格式说明 |
-| `docs/前端/` | 页面清单、风格简报模板，以及之后的设计规范 |
-| `docs/历史问卷/` | 问卷 v1–v4（旧版，不再修改） |
-| `site/` | 网站（首页、答题页已完成，结果页待做）；预览用 `npm run site` |
+| `docs/` | 问卷配置格式说明 |
+| `docs/报告/` | 脚本生成的各类报告、安全审查 |
+| `docs/前端/` | 页面清单、结果页文档、首页与答题页需求；`旧版/` 是已作废的旧版前端资料 |
+| `docs/历史问卷/` | 问卷 v1–v5（旧版，不再修改） |
+| `site/` | 正式网站（还是旧版前端）；预览用 `npm run site` |
+| `demos/` | 新前端样张：首页、问卷页等；`experiments/` 是不再使用的试验品 |
 | `server/` | 推荐入口的接收服务（待建） |
 | `deploy/` | 部署配置（待建） |
 | `cache/` | 下载的 README 和仓库缓存（不进 git，可重新生成） |

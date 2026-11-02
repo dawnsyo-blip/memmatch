@@ -1,5 +1,5 @@
 // 生成阶段 4 测试报告：每个虚构用户的答卷摘要、期望和实际推荐结果。
-// 用法：npm run report（输出 docs/阶段4-推荐测试报告.md）
+// 用法：npm run report（输出 docs/报告/阶段4-推荐测试报告.md）
 import { writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { loadAll, ROOT } from "../engine/load-node.js";
@@ -35,5 +35,5 @@ for (const p of PERSONAS) {
   out.push(`## ${p.title}`, "", `**期望**：${p.expect}`, "", "<details><summary>答卷</summary>", "", answerSummary(answers), "", "</details>", "",
     formatResult(r, { showExcluded: 4 }), "", "---", "");
 }
-writeFileSync(join(ROOT, "docs/阶段4-推荐测试报告.md"), out.join("\n"), "utf8");
-console.log("已生成 docs/阶段4-推荐测试报告.md");
+writeFileSync(join(ROOT, "docs/报告/阶段4-推荐测试报告.md"), out.join("\n"), "utf8");
+console.log("已生成 docs/报告/阶段4-推荐测试报告.md");

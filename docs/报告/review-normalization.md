@@ -1,6 +1,6 @@
 # 阶段 1 规范化结果与待补充清单
 
-> 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，
+> 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/报告/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，
 > 然后运行 `python -X utf8 scripts/normalize.py --apply-review`。确认值存入 `data/normalization_overrides.json`，以后重新生成也会保留。
 > 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, gateway`）；留空表示暂不处理。
 

@@ -1,6 +1,6 @@
 // 答题页：读问卷配置（data/questionnaire/questions.json），一题一题地问。
 // 跳题（show_if）和默认勾选（default_if）用推荐引擎同一个条件判断函数；答卷只存在浏览器里。
-// 交互和视觉见 docs/前端/样张/答题页.html（样张阶段的定稿）。
+// 交互和视觉见 docs/前端/旧版/样张/答题页.html（样张阶段的定稿）。
 import { checkCondition, findConflicts } from "../../engine/index.js";
 
 const CONFIG_URL = "../data/questionnaire/questions.json";

@@ -1,4 +1,4 @@
-"""阶段 2：检查每个项目的维护情况和许可证，写回项目 JSON 的 health 字段，并生成 docs/health-report.md。
+"""阶段 2：检查每个项目的维护情况和许可证，写回项目 JSON 的 health 字段，并生成 docs/报告/health-report.md。
 
 不用 GitHub 接口（未登录每小时只有 60 次）：
   - git 克隆近一年的提交记录（不下载文件内容）→ 最后提交日期、近一年提交数、贡献人数、仓库里的许可证文件
@@ -30,7 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent
 PROJECTS = ROOT / "data/projects"
 CACHE = ROOT / "cache/repos"
 SETTINGS = json.loads((ROOT / "data/settings.json").read_text(encoding="utf-8"))
-REPORT = ROOT / "docs/health-report.md"
+REPORT = ROOT / "docs/报告/health-report.md"
 TODAY = date.today()
 # 只按作者邮箱判断机器人账号；不能用 “bot@” 这类宽泛写法，会误伤名字里带 bot 的真人或 agent 账号
 BOT = re.compile(r"\[bot\]|^(?:noreply@github\.com|github-actions@github\.com|actions@github\.com)$|dependabot|renovate", re.I)

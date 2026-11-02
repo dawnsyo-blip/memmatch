@@ -173,7 +173,7 @@
 
 ## 能用的字段
 
-`normalized` 里的全部字段都能用。可选值见 `docs/review-normalization.md` 开头的表，以及：
+`normalized` 里的全部字段都能用。可选值见 `docs/报告/review-normalization.md` 开头的表，以及：
 - `scripts/feature_rules.py`：19 个用户在意的特性
 - `scripts/dimension_rules.py`：打分、情绪、定位、搭配、中文、手机可达等维度字段
 

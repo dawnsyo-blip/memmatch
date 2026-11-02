@@ -4,12 +4,46 @@
 
 ## 目录
 
-- `data/candidates/` 候选项目筛选（阶段 0 之前加的一步）：`个人记忆库候选表.xlsx` 由脚本生成，不要手改
-- `scripts/candidate_review.py` 人工筛选结论（改结论改这里）；负责人对各分组的决定写在其中的 `GROUP_POLICY`；`scripts/build_candidates.py` 生成候选表
-- `sources/snapshots/` 来源清单的 README 快照（2026-10-10；2026-10-24 补充 awesome-ai-companion、上下文工程、RAG、酒馆插件合集），生成脚本从这里解析
-- `sources/负责人材料/` 负责人给的原始材料，只读：`记忆框架开源情况.xlsx`（原始整理表）、`独立事实记忆层_使用流程.md`（50 个项目的使用流程整理）
+2026-11-02 整理过一次（负责人要求）：新前端样张集中在 `demos/`，试验品进 `demos/experiments/`；脚本生成的报告归到 `docs/报告/`；旧版前端资料归到 `docs/前端/旧版/`；句子数据移到 `data/`。新加文件按下面的分法放，不要散在根目录。
 
-- `data/projects/<id>.json` 每个项目一个文件，结构见 `data/schema/project.schema.json`；`raw` 保存各来源原文，不要改
+```
+（根目录）           README.md、ROADMAP.md、CLAUDE.md、package.json
+                     记忆库推荐问卷 v6.md、记忆库推荐问卷 v6 文字稿.md（负责人在这里改题，留在根目录）
+data/
+  projects/<id>.json 每个项目一个文件，结构见 schema/project.schema.json；raw 保存各来源原文，不要改
+  schema/            数据结构定义
+  questionnaire/     网站读的问卷配置 questions.json
+  candidates/        候选表 个人记忆库候选表.xlsx（脚本生成，不要手改）、repo_meta.json
+  hourglass-sentences.json  首页沙漏的句子（负责人维护，keywords 是能通过瓶颈的词）
+  *.json             人工核对的数据：readme_verification、normalization_overrides、safety_notes、spend_review、
+                     token_usage、usage_form、display_names、display_summaries；可调设置 settings.json
+engine/              推荐引擎（浏览器和 Node 都能跑）
+tests/               引擎和虚构用户的自动测试
+scripts/             导入、规范化、检查、推荐、打包网站数据、本地预览、首页字体子集等脚本；prototype/ 是早期原型，只作参考
+site/                正式网站（还是旧版前端，等新样张定稿后替换）；site/data/ 由脚本生成，不进 git
+demos/               新前端样张
+  home.html          首页（字母沙漏）
+  quiz.html          问卷页
+  catalog.html、about.html   项目目录页、关于页（占位）
+  site.css、drawer.js、fonts/   共用的样式、抽屉脚本、首页中文子集字体
+  experiments/       不再使用、留作备查：hourglass.html（最早的单词沙漏演示）、home-words.html（单词版首页）
+docs/
+  questionnaire-format.md   问卷配置格式说明
+  报告/              脚本生成的报告：health-report、inclusion-report、review-normalization（.md/.xlsx）、spend-report、
+                     阶段4-推荐测试报告；人工写的 security-audit、推荐结果示例
+  前端/              页面清单、风格简报模板、结果页文档（内容草稿、模拟、LLM 提示词）、首页与答题页需求（负责人写）
+    旧版/            已作废的旧版前端：旧版前端记录、网站风格简报v1、样张/、参考图/，只作历史参考
+  历史问卷/          问卷 v1–v5（不再修改）
+  做法/              给用户看的说明（笔记软件当记忆）
+sources/
+  snapshots/         来源清单的 README 快照（2026-10-10；2026-10-24 补充 awesome-ai-companion、上下文工程、RAG、酒馆插件合集），生成脚本从这里解析
+  负责人材料/        负责人给的原始材料，只读：记忆框架开源情况.xlsx、独立事实记忆层_使用流程.md
+server/、deploy/     推荐入口的接收服务、部署配置（待建）
+cache/               下载的 README 和仓库缓存（不进 git，可重新生成）
+.claude/skills/      项目 skill：zh-web-typography（中文排版）
+```
+
+- `scripts/candidate_review.py` 人工筛选结论（改结论改这里）；负责人对各分组的决定写在其中的 `GROUP_POLICY`；`scripts/build_candidates.py` 生成候选表
 
 重新生成候选表：`python -X utf8 scripts/build_candidates.py`
 重新导入项目 JSON（阶段 0）：`python -X utf8 scripts/import_projects.py`（只覆盖/删除 source 为 initial 的文件）
@@ -24,7 +58,7 @@
 
 阶段 1（字段规范化）：
 - `python -X utf8 scripts/fetch_readmes.py` 把 README 缓存到 `cache/readmes/`（不进仓库）
-- `python -X utf8 scripts/normalize.py` 写入各项目的 `normalized`，生成 `docs/review-normalization.md/.xlsx`
+- `python -X utf8 scripts/normalize.py` 写入各项目的 `normalized`，生成 `docs/报告/review-normalization.md/.xlsx`
 - 负责人在 xlsx「负责人确认值」填「同意」或英文代码后：`python -X utf8 scripts/normalize.py --apply-review`，确认值存进 `data/normalization_overrides.json`
 - 完整顺序：import_projects → normalize（导入会保留已有的 normalized）
 - 负责人 2026-10-11 决定：有建议值的采用建议值（`--accept-suggestions`，已执行，存进 overrides 并注明原依据）；无建议值的记为 `unknown`，原因写进项目的 `uncertainties` 备注。以后新增的待审核项按同样规则处理前先问负责人
@@ -42,9 +76,9 @@
 - v6 配置的题号：第 1 题是设备（id `q1`）、第 2 题是 LLM 厂商（`q2`），和 v5 对调；第 8 题两个版本是 `q8`（用过的）和 `q8n`（没用过的），配置里用 `"number": "8"` 让页面显示同一个题号；原 q8a→q9，q9＋q12→q10，q10→q11，q11→q12。预算题 `q18` 已于 2026-10-30 按负责人要求删去，花销不再作为硬条件，只在结果卡片上写 `spend_note`；放宽建议改为单条放宽排在两条组合前面（原来按能多出几个排序，删去预算后组合挤掉了“注册 GitHub 账号”这类只需一步的建议）
 - 配置格式（条件、作用、合并方式、选项失效、放宽建议、加分、补充部件）见 `docs/questionnaire-format.md`
 - 推荐引擎在 `engine/`（JavaScript ES 模块，无依赖，浏览器和 Node 都能跑）：`rule-engine.js` 是规则实现，`index.js` 写明统一接口（换外部模型时另写一个实现即可），`load-node.js` 给测试和命令行加载数据
-- 命令：`npm test`（10 个虚构用户＋引擎测试，用户和期望在 `tests/personas.mjs`）；`npm run report` 生成 `docs/阶段4-推荐测试报告.md`；`node scripts/recommend.mjs 答卷.json` 跑单份答卷
+- 命令：`npm test`（10 个虚构用户＋引擎测试，用户和期望在 `tests/personas.mjs`）；`npm run report` 生成 `docs/报告/阶段4-推荐测试报告.md`；`node scripts/recommend.mjs 答卷.json` 跑单份答卷
 - 改了问卷配置、字段或规则后都要跑 `npm test`；测试失败时先判断是期望写错还是推荐变差，别为了通过而改期望
-- `scripts/prototype/` 是正式引擎之前的 Python 原型，只作参考；`docs/推荐结果示例.md` 是原型阶段的模拟记录
+- `scripts/prototype/` 是正式引擎之前的 Python 原型，只作参考；`docs/报告/推荐结果示例.md` 是原型阶段的模拟记录
 - 组合推荐用的“设计上搭配使用”关系在 `dimension_rules.py` 的 `RELATED`，normalize 写进 `normalized.pairs_with`（双向）
 - 2026-10-25 配置里新增的规则（未改题目文字，负责人同意，已同步到问卷 v4.md）：第 2 题没有电脑也没有服务器时排除 `setup_device` = `needs_computer`；第 3a 题选了某个 Agent 时，它的原生插件加分（AstrBot 插件加 5 分）；第 17 题放宽建议加“注册 GitHub 账号”；引擎在单独放宽哪条都不够时，试两条一起放宽
 - 2026-10-27 负责人同意：第 3 题选酒馆时也保留 MCP 记忆库（酒馆装社区扩展 SillyTavern-MCP-Client 后能连 MCP），这些项目带“先装扩展”的注意事项（规则用新键 `note_unless` 排除原生酒馆扩展）；原生酒馆扩展加 10 分
@@ -60,14 +94,14 @@
   - ChatGPT 自定义 GPT（Actions）：手机 App 能用已有的 GPT，但个人账号（Free、Go、Plus、Pro）已不能新建，OpenAI 计划 2026-12-11 前后让自定义 GPT 退役、改为 Plugins（据 OpenAI 帮助页搜索摘要和多家二手报道，官方页面无法直接抓取）。所以不作为问卷入口；数据里的 `chatgpt_gpt` 只作记录
 
 阶段 2、3：
-- `python -X utf8 scripts/check_health.py [--resume|--only a,b]` 写入各项目 `health`，生成 `docs/health-report.md`；网络故障记 `status=error`，用 `--resume` 续跑；检查逻辑改动时把 `CHECKER_VERSION` 加 1
-- `python -X utf8 scripts/decide_inclusion.py` 写入 `inclusion`，生成 `docs/inclusion-report.md`（之后停下等负责人审核）
+- `python -X utf8 scripts/check_health.py [--resume|--only a,b]` 写入各项目 `health`，生成 `docs/报告/health-report.md`；网络故障记 `status=error`，用 `--resume` 续跑；检查逻辑改动时把 `CHECKER_VERSION` 加 1
+- `python -X utf8 scripts/decide_inclusion.py` 写入 `inclusion`，生成 `docs/报告/inclusion-report.md`（之后停下等负责人审核）
 - 可调设置在 `data/settings.json`（停更天数等）
 - 负责人 2026-10-28 定：教程（`project_role` = `guide`）和上下文工具（`context_tool`）写完就用，不提示“超过 N 天没有提交”（`decide_inclusion.py` 的 `FINISHED_ROLES`）。`project_role` 是单值字段，值是字符串，别用 `set()` 去套
 
 阶段 5（前端）：
-- **2026-10-30 负责人决定前端全部推翻重做**（拟物风格太难做）。旧版的视觉风格、动效、组件造型、配色字体全部作废，原来的定稿记录移到 `docs/前端/旧版前端记录.md`，只作历史参考，不要沿用。新风格先和负责人确认方向、做样张，再改正式页面。下面是新前端仍要遵守的
-- `docs/前端/` 放页面清单（`页面清单.md`）、风格简报模板（`风格简报模板.md`）和结果页的内容文档（`结果页内容草稿.md`、`结果页模拟.md`、`结果页LLM提示词.md`）。其中 `网站风格简报v1.md`、`样张/`、`参考图/` 属于旧版风格（包括 2026-10-30 时未提交的三张旅行者号轨道线稿、土星环标注图，负责人确认是旧版用的，新版不参考）
+- **2026-10-30 负责人决定前端全部推翻重做**（拟物风格太难做）。旧版的视觉风格、动效、组件造型、配色字体全部作废，原来的定稿记录移到 `docs/前端/旧版/旧版前端记录.md`，只作历史参考，不要沿用。新风格先和负责人确认方向、做样张，再改正式页面。下面是新前端仍要遵守的
+- `docs/前端/` 放页面清单（`页面清单.md`）、风格简报模板（`风格简报模板.md`）、结果页的内容文档（`结果页内容草稿.md`、`结果页模拟.md`、`结果页LLM提示词.md`）和负责人写的 `首页与答题页需求.md`。旧版风格的 `网站风格简报v1.md`、`样张/`、`参考图/` 在 `docs/前端/旧版/`（参考图里有三张一直没进 git 的旅行者号轨道线稿、土星环标注图，负责人确认是旧版用的，新版不参考）
 - Codex 做的浅色气泡问卷样张（2026-10-30 负责人定：不参考它的设计，但要留着）不在主分支：放在分支 `codex-bubble-prototype`，并用 git worktree 检出在仓库旁边的 `../记忆库推荐-codex样张/generated-codex-bubble-questionnaire/`（截图、字体源文件、浏览器临时配置也搬到了那里，不进 git）。它带一份引擎和项目数据的旧快照，不随数据更新。改正式页面不要读它；不再需要时 `git worktree remove` 再删分支
 - **正式网站在 `site/`**：现有 `index.html` 首页、`quiz.html` 答题页、`result.html` 结果页、`assets/` 下的样式和脚本都是旧版，重做时可以整体重写；`assets/result-text.js` 里生成推荐文字的规则（“相比其它几个”、改进建议、搭配方案说明、`splitName`）和页面风格无关，新页面可以直接复用
 - 预览：`npm run site` 后打开 http://localhost:5173/site/ （网站要 fetch `data/` 下的问卷配置、import `engine/`，直接双击 html 打不开）
@@ -86,12 +120,12 @@
 - 每页完成后用 web-design-guidelines 审一遍
 - 负责人 2026-10-25 定：网站称呼用户统一用“您”；全站不使用 emoji（要图形提示用 SVG 线条图标）。例外：首页用“你”（负责人 2026-10-30 定，新首页沿用旧首页的做法）
 - 新前端只做浅色一种配色（负责人 2026-10-30 定）；组件仍只引用语义变量，以后加深色模式时每种模式文字对底色的对比度都要过 4.5
-- 文字沙漏动效演示（2026-11-01，负责人要求，独立单文件）：`demos/hourglass.html`，Matter.js（cdnjs 0.20.0）＋Canvas，可调参数集中在文件开头的 `CONFIG`，句子来自根目录 `hourglass-sentences.json`（方括号标能通过的词）；网址加 `?debug` 画出看不见的墙。负责人要的效果：一句话是一条软带子，被瓶颈按顺序吃掉（从离瓶颈最近的词开始，先往左吃到句首、再往右吃到句尾；强求从第一个词吃起，整句会被拽得弹起来），普通词在通道口逐个字母被吃掉（`drawEaten`：字母越过瓶颈口往下一点的那条线就淡掉，线的位置是 `eatLine`；放在瓶颈口正上会和词堆混在一起看不出来；斜着进去被强制吃完时，露在外面的字母原地 0.25 秒淡掉，`crumbs`），关键词顺着流下去、竖着出通道后随意翻落；长词要软。做法：每个词按约 3～4 个字母切成几节（`ribbon.segChars`），节与节之间是铰链加中心弹簧（`ribbon.softness`，越小越软，低于约 0.02 词会折成几截、读不出来），同一个词相邻两节不碰撞；瓶颈用静态塞子堵死，`planSentence` 排好顺序，轮到的那一节改成静态、由程序移进通道（`updateFlow`；往左吃时右端朝下进）：程序只拖它朝前的那一端，另一端顺着拖动方向跟过来，转动限速（`turnRate`），先到瓶颈口正上方再竖直往下，进口时不要求竖直、进去后边走边顺直；按固定速度硬转、或停在口子上等转正，负责人都觉得僵硬，同一个词的下一节紧贴着接上（`follow`），后面的靠约束拖着走；`clampSegs` 把越界的节拉回各自那一半，所以拖动不会破坏过滤。词与词之间的带子只在句子刚落下和正在被吃时拉紧（`updateRibbons`），且以拉紧那一刻的长度为准、不收短（`ribbon.reel` = 0）：收短会把整句往一起拽，被吃之前弹一下（实测平均跳 38px，不收短后约 20px，改成从最近的词吃起后约 16px）；一直拉紧词堆会抖。正在被吃的那一句不碰别的句子（改写 `Detector.canCollide`）。下半部分的旧词褪成淡痕迹（`CONFIG.trace`）撑出轮廓；`trace.clearance` 按整个沙漏高度算，设大了会把正常的堆误判成太高、把痕迹全淡掉。性能：切节后物体变多，墙段数、迭代次数、痕迹上限都调低过，电脑上每步约 1.7 毫秒。测手感前用 Node 加载 matter.min.js 跑同一份脚本模拟（无界面浏览器的时钟不走，截不到动画）
+- 文字沙漏动效演示（2026-11-01，负责人要求，独立单文件）：`demos/experiments/hourglass.html`（2026-11-02 起不再使用），Matter.js（cdnjs 0.20.0）＋Canvas，可调参数集中在文件开头的 `CONFIG`，句子抄自 `data/hourglass-sentences.json`，写在页面里（方括号标能通过的词）；网址加 `?debug` 画出看不见的墙。负责人要的效果：一句话是一条软带子，被瓶颈按顺序吃掉（从离瓶颈最近的词开始，先往左吃到句首、再往右吃到句尾；强求从第一个词吃起，整句会被拽得弹起来），普通词在通道口逐个字母被吃掉（`drawEaten`：字母越过瓶颈口往下一点的那条线就淡掉，线的位置是 `eatLine`；放在瓶颈口正上会和词堆混在一起看不出来；斜着进去被强制吃完时，露在外面的字母原地 0.25 秒淡掉，`crumbs`），关键词顺着流下去、竖着出通道后随意翻落；长词要软。做法：每个词按约 3～4 个字母切成几节（`ribbon.segChars`），节与节之间是铰链加中心弹簧（`ribbon.softness`，越小越软，低于约 0.02 词会折成几截、读不出来），同一个词相邻两节不碰撞；瓶颈用静态塞子堵死，`planSentence` 排好顺序，轮到的那一节改成静态、由程序移进通道（`updateFlow`；往左吃时右端朝下进）：程序只拖它朝前的那一端，另一端顺着拖动方向跟过来，转动限速（`turnRate`），先到瓶颈口正上方再竖直往下，进口时不要求竖直、进去后边走边顺直；按固定速度硬转、或停在口子上等转正，负责人都觉得僵硬，同一个词的下一节紧贴着接上（`follow`），后面的靠约束拖着走；`clampSegs` 把越界的节拉回各自那一半，所以拖动不会破坏过滤。词与词之间的带子只在句子刚落下和正在被吃时拉紧（`updateRibbons`），且以拉紧那一刻的长度为准、不收短（`ribbon.reel` = 0）：收短会把整句往一起拽，被吃之前弹一下（实测平均跳 38px，不收短后约 20px，改成从最近的词吃起后约 16px）；一直拉紧词堆会抖。正在被吃的那一句不碰别的句子（改写 `Detector.canCollide`）。下半部分的旧词褪成淡痕迹（`CONFIG.trace`）撑出轮廓；`trace.clearance` 按整个沙漏高度算，设大了会把正常的堆误判成太高、把痕迹全淡掉。性能：切节后物体变多，墙段数、迭代次数、痕迹上限都调低过，电脑上每步约 1.7 毫秒。测手感前用 Node 加载 matter.min.js 跑同一份脚本模拟（无界面浏览器的时钟不走，截不到动画）
 - 新风格方向（2026-10-30）：我提了三个平面方向（技术手册线稿、编辑出版式、清爽工具式），负责人说之后一起讨论，还没定
 - 首页和问卷页样张（2026-11-02）：
-  - 依据：负责人写的 `prompt-for-claude-code.md`。2026-11-01 做过一版样张，负责人撤销了，提交是 7983d2c 和撤销它的 b745477，不要沿用那一版。
-  - 文件都在 `demos/`，正式网站 `site/` 没动：`home.html`、`quiz.html`、`catalog.html` 和 `about.html`（占位）、共用的 `site.css` 和 `drawer.js`、`fonts/`。`home.html` 由 `hourglass.html` 复制后改，`hourglass.html` 本身不动。要用 `npm run site` 打开，比如 http://localhost:5173/demos/home.html 。
-  - 首页：
+  - 依据：负责人写的 `docs/前端/首页与答题页需求.md`（原来放在根目录，叫 `prompt-for-claude-code.md`）。2026-11-01 做过一版样张，负责人撤销了，提交是 7983d2c 和撤销它的 b745477，不要沿用那一版。
+  - 文件都在 `demos/`，正式网站 `site/` 没动：首页 `home.html`（字母版）、问卷页 `quiz.html`、占位的 `catalog.html` 和 `about.html`、共用的 `site.css` 和 `drawer.js`、`fonts/`。要用 `npm run site` 打开，比如 http://localhost:5173/demos/home.html 。
+  - 单词版首页 `demos/experiments/home-words.html`（由最早的沙漏演示复制后改；2026-11-02 改用字母版后不再使用，留作备查。入口、比例、字体、加载、抽屉这些做法字母版沿用）：
     - 入口是沙漏下方的“find yours →”，用 HTML 叠在画布上，位置由 `placeFind` 按沙漏底部算。
     - 沙漏形状（负责人 2026-11-02 改）：上半部分从 V 形改成 U 形（`upperCurve` 2.6），中间通道缩短，上下两半更近；下半部分有自己的高度 `lowerHeight`，不再是“剩下的部分”。
     - 比例和尺寸（负责人 2026-11-02 几经调整后的结果；中途试过黄金比例的版面，负责人觉得不够修长，已改掉，不必拘泥黄金比例）：
@@ -121,19 +155,19 @@
       - 测量办法：把上半部分横向分成 7 栏，取每栏最高的词，比较中间栏和第 2、6 栏的高度。同一设置跑两次会差约 1 个百分点。
     - 下半部分（负责人 2026-11-02 觉得头重脚轻）：开场时清楚的词从 12 个加到 18 个，痕迹从 10 个加到 18 个、上限 24 个。
     - 沙漏里的词改用 Cormorant Garamond。原来每个词随机取 300～600 中的一种字重，现在统一为 400。
-    - 句子从 `../hourglass-sentences.json` 读，把每句的 `keywords` 换成方括号格式；读不到时用 `CONFIG.sentences` 里的备用句子。
+    - 句子从 `data/hourglass-sentences.json` 读，把每句的 `keywords` 换成方括号格式；读不到时用 `CONFIG.sentences` 里的备用句子。
     - Matter.js 用 `defer` 加载，页面脚本是模块，不挡首屏。
     - CPU 核数不超过 4 的设备，词数上限调低（`CONFIG.lowPower`）。
     - 系统设了减少动态效果时，只画一帧堆好的沙漏。
-    - 左上角按钮打开左侧抽屉，负责人 2026-11-02 定抽屉要放说明、项目目录页入口、关于页入口和作者。作者的名字和链接还没给，暂写“待填”。`docs/前端/网站风格简报v1.md` 已作废，不要参考。
-  - 字母沙漏样张 `demos/letters.html`（负责人 2026-11-02 要求另做一版；同日负责人认为单词版怎么调都会弹，决定改用字母版继续改）：
+    - 左上角按钮打开左侧抽屉，负责人 2026-11-02 定抽屉要放说明、项目目录页入口、关于页入口和作者。作者的名字和链接还没给，暂写“待填”。`docs/前端/旧版/网站风格简报v1.md` 已作废，不要参考。
+  - 字母版首页 `demos/home.html`（原名 `letters.html`，2026-11-02 整理目录时改名；负责人当天要求另做一版；同日负责人认为单词版怎么调都会弹，决定改用字母版继续改）：
     - 单词版弹起的根源：一个词是几节长条，整句又用绳子串起来，吃的时候要把整句从词堆里拽进瓶颈，长条会撬动周围的词。字母一粒粒的，抽走一个只影响附近几个，所以顺。
     - 句子居中显示，松开时每个词打散成字母。所有字母同一字号（20）、同一字重（400）。每个字母是一个物体，物体比字形大一圈（宽加 0.1、高 0.86 个字号），字形不会叠在一起。
     - 离瓶颈口最近的字母先进瓶颈（`pickNearest`），每秒最多 `flowRate` 个，在通道里排成一串。中间一柱摩擦小、多一点向下的力（`funnel`，push 0.4），所以中间先塌，表面凹约 4%～6%。push 0.25 时几乎不凹。
     - 非关键词的字母过了瓶颈口变灰（`gray`），关键词的字母保持黑色。`pass` 改成 "keywords" 时，只有关键词的字母能通过。
     - 下半部分不留痕迹：字母超过 `lowerLetters`，或者堆到离出口 `dissolve.clearance` 以内时，从沙堆最底下的字母开始淡掉、移走（`updateLower`），整堆跟着下沉。
     - 以前有痕迹时出过两个问题：痕迹改成了静止物体，它下面的字母退场后，痕迹悬在空中，上面的字母架在几乎看不见的痕迹上，看起来是空白；静止的痕迹还一路堆到出口，新字母出来挤成一团。改成从底部退场后，悬空的字母从 7.3% 降到 0。
-    - 比例：电脑上高 : 宽 = 16 : 9；手机（屏幕宽不超过 600px）上 3 : 2（负责人 2026-11-02 先要求手机也用 16 : 9，看过后改成 3 : 2；`phoneAspect`、`phoneMaxWidth`，上口和底座按同一倍数加宽）。`minSlender` 设为 1，宽度放不下时整体等比缩小，比例不变。390×844 的手机上沙漏高 513px、宽 342px，约占屏幕高的 61%。单词版 `home.html` 仍是 0.75，手机上约 2 : 1。电脑上每步约 3.3～4 毫秒，开场准备约 0.6 秒。
+    - 比例：电脑上高 : 宽 = 16 : 9；手机（屏幕宽不超过 600px）上 3 : 2（负责人 2026-11-02 先要求手机也用 16 : 9，看过后改成 3 : 2；`phoneAspect`、`phoneMaxWidth`，上口和底座按同一倍数加宽）。`minSlender` 设为 1，宽度放不下时整体等比缩小，比例不变。390×844 的手机上沙漏高 513px、宽 342px，约占屏幕高的 61%。单词版仍是 0.75，手机上约 2 : 1。电脑上每步约 3.3～4 毫秒，开场准备约 0.6 秒。
     - 模拟时可以量：字母之间的重叠深度（`engine.pairs.list` 的 `collision.depth` ÷ 字号）、悬空比例（下半部分静止的字母正下方 1.6 个字高内有没有别的字母）。
   - 首页中文用子集字体 `demos/fonts/home-zh-400/600.woff2`，每个约 15 KB，向 Google Fonts 要的 Noto Serif SC，也就是思源宋体。改了首页的中文后重跑 `python -X utf8 scripts/subset_home_font.py`。
   - 问卷页：
@@ -146,9 +180,9 @@
   - 问卷页加载 Google Fonts 的 Noto Serif SC 400 和 600（负责人 2026-11-02 要求试试网络字体）。Google 会按字符范围分片，只下载页面上用到的那几片。
   - 右上角题数的颜色用 #aaa，对比度只有 2.2，负责人 2026-11-02 定保持这个颜色。
 
-安全审查（2026-10-26）：结论见 `docs/security-audit.md`，未发现恶意项目；需提醒用户的情况写在 `data/safety_notes.json`，normalize 写入各项目的 `safety_note`（推荐结果页要显示）。新增项目也要查一遍；akephalos 因仓库 404 已移除。
+安全审查（2026-10-26）：结论见 `docs/报告/security-audit.md`，未发现恶意项目；需提醒用户的情况写在 `data/safety_notes.json`，normalize 写入各项目的 `safety_note`（推荐结果页要显示）。新增项目也要查一遍；akephalos 因仓库 404 已移除。
 
-多智能体记忆（2026-10-26，负责人要求补收评测好或 Star 多的）：旧规则 F5“多智能体不面向个人用户”不再一刀切排除。已改为纳入：Cognee、MIRIX、Memanto、PowerMem、deja、agentmemory、Caura，新增 Memorix、A-MEM（见 `candidate_review.py` 第 6 批 `NEW`）。Cipher 因仓库已归档、许可证 Elastic 2.0 排除。负责人 2026-10-26 同意调整 F5：评测突出或 Star 多的例外，其余多智能体项目（Star 均不足 20，无评测）仍排除。这 9 项已于同日逐项对照 README 核实（记在 `data/readme_verification.json`；MIRIX 现在的上手方式是 Docker＋Python 客户端，归开发者向；A-MEM 的 1003 Star 仓库只是论文复现代码，可用的库是 WujiangXu/A-mem-sys）；安全审查见 `docs/security-audit.md` 末节。
+多智能体记忆（2026-10-26，负责人要求补收评测好或 Star 多的）：旧规则 F5“多智能体不面向个人用户”不再一刀切排除。已改为纳入：Cognee、MIRIX、Memanto、PowerMem、deja、agentmemory、Caura，新增 Memorix、A-MEM（见 `candidate_review.py` 第 6 批 `NEW`）。Cipher 因仓库已归档、许可证 Elastic 2.0 排除。负责人 2026-10-26 同意调整 F5：评测突出或 Star 多的例外，其余多智能体项目（Star 均不足 20，无评测）仍排除。这 9 项已于同日逐项对照 README 核实（记在 `data/readme_verification.json`；MIRIX 现在的上手方式是 Docker＋Python 客户端，归开发者向；A-MEM 的 1003 Star 仓库只是论文复现代码，可用的库是 WujiangXu/A-mem-sys）；安全审查见 `docs/报告/security-audit.md` 末节。
 
 AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“记忆”标签的条目与原表 50 项一致，没有新增；对约 24 个站点更新日期较新的项目重跑了 `check_health --only`，并按 README／CHANGELOG 复核字段（改动记在 `readme_verification.json`，备注以“2026-10-27 复核”开头）。另从未打记忆标签的条目里新增 LumiMuse（有完整记忆系统）和 Shared Diary MCP（负责人指定，是共写日记而非自动记忆库；2026-10-28 负责人确认它没有按相关度召回，定位改为 `memory_component`，并给所有记忆部件加了 -2 分的推荐偏好，因为它条件宽、在随机答卷里约 15% 进前 8）；排除 WakeTrace（明说不建记忆库）、Wake Bridge（自称无记忆系统）、Villa Bridge（只做会话桥接）、MIRROW（需宿主的组件，记忆库未公开）。站点首页写“180 个项目”，页面实际约 224 张卡片，数字对不上。
 
@@ -156,7 +190,7 @@ AI Companion Atlas 站点复核（2026-10-27，负责人要求）：站点上“
 
 多智能体共用字段 `multi_agent`（2026-10-26，为问卷第 4a 题新增）：值 `shared`（写明几个不同的 Agent 或工具读写同一份记忆）、`per_agent`（能给每个 Agent 分开记忆空间或权限，只共享一部分），可两者都有，或 `not_mentioned`。同一个 Agent 换设备不算（那是 `cross_client`），项目内部由几个子智能体分管记忆（如 MIRIX、agent-zero 的子 agent）也不算；`namespace` 只按项目或用户分的不算 `per_agent`。和 `media_recall` 一样只靠逐项核实：扫 README 里多 agent、共享、agent_id、namespace 等词，逐条看原文判断。写明几个 Agent 共用、原来 `cross_client` 是“未提及”的 10 个顺手改成了 yes。结果：共用 64 个、能分开 29 个。
 
-额外花费字段 `spend`＋`spend_note`（2026-10-28，负责人要求）：与粗分三档的 `cost` 不同，`spend` 可多选，说明具体花在哪：`none`、`model_api`（自备模型／向量接口，按量付费）、`subscription`（已有的付费订阅，如 Claude Pro）、`hosting`（服务器、云平台、租 GPU）、`product_fee`（项目本身收费，目前没有项目属于此类）。**只统计强制花销**（不付就用不了的，负责人 2026-10-28 要求）：付费托管版、云部署的收费档位（如 Render Starter）、赞助等可选花销不进 `spend`，写在 `spend_note` 的“可选花销，不付也能用：”后面，数据里是 `data/spend_review.json` 的 `optional`。`spend_note` 是给用户看的一句话，项目只要需要另付接口或订阅等就以“需要一些额外花销来搭配这个项目”开头，含 README 写明的金额。逐项核实写在 `data/spend_review.json`（41 个：全部有托管版或收费线索的项目、订阅类、租 GPU、几个费用原文未识别的）；没列入的按“需要的账号”和 `cost` 自动推出，状态为 auto，其中收费情况没有逐项看过。金额只写 README 写明的，没写的注“README 没写，以官网为准”；Mem0 的价格是 Mengram README 对比表里的二手信息。`python -X utf8 scripts/spend_report.py` 生成 `docs/spend-report.md`。新增项目要查一遍定价线索再决定；myco、cosmos-mcp 两个仍是 unknown。预算题已删去（2026-10-30），`spend` 只用于结果卡片的花销说明。
+额外花费字段 `spend`＋`spend_note`（2026-10-28，负责人要求）：与粗分三档的 `cost` 不同，`spend` 可多选，说明具体花在哪：`none`、`model_api`（自备模型／向量接口，按量付费）、`subscription`（已有的付费订阅，如 Claude Pro）、`hosting`（服务器、云平台、租 GPU）、`product_fee`（项目本身收费，目前没有项目属于此类）。**只统计强制花销**（不付就用不了的，负责人 2026-10-28 要求）：付费托管版、云部署的收费档位（如 Render Starter）、赞助等可选花销不进 `spend`，写在 `spend_note` 的“可选花销，不付也能用：”后面，数据里是 `data/spend_review.json` 的 `optional`。`spend_note` 是给用户看的一句话，项目只要需要另付接口或订阅等就以“需要一些额外花销来搭配这个项目”开头，含 README 写明的金额。逐项核实写在 `data/spend_review.json`（41 个：全部有托管版或收费线索的项目、订阅类、租 GPU、几个费用原文未识别的）；没列入的按“需要的账号”和 `cost` 自动推出，状态为 auto，其中收费情况没有逐项看过。金额只写 README 写明的，没写的注“README 没写，以官网为准”；Mem0 的价格是 Mengram README 对比表里的二手信息。`python -X utf8 scripts/spend_report.py` 生成 `docs/报告/spend-report.md`。新增项目要查一遍定价线索再决定；myco、cosmos-mcp 两个仍是 unknown。预算题已删去（2026-10-30），`spend` 只用于结果卡片的花销说明。
 
 token 用量字段 `token_inject`＋`token_background`（2026-10-30，负责人要求，问卷第 18 题 `q18t` 用它加减分）：用户的总用量取决于存了多少记忆、聊得多勤，没法比数字，所以只比设计。`token_inject` 是每轮带进对话的记忆量会不会随存量变多：`bounded`（按需检索只取若干条或有固定上限）、`capped`（默认会变多但能设上限，如 Ombre Brain 的目录模式每个记忆桶占一行，可用 `max_tokens` 限制）、`grows`、`not_mentioned`；`token_background` 是后台另外调用大模型的频率：`none`（由聊天模型或用户写入）、`scheduled`、`per_message`（每轮或每次写入）、`not_mentioned`。由聊天模型自己调用工具写入的算 `none`：token 花在对话里，没有另外的调用。核对值在 `data/token_usage.json`（最常被推荐的约 50 个，加 README 里有“全量注入”“catalog”等字样的约 30 个，逐条看过 README），normalize 写进 `normalized`；其余按已有字段推出、状态 auto（检索后处理有 budget/threshold、MCP 按需检索算 `bounded`；召回调用大模型算 `per_message`），没逐条看过。社区说 Ombre Brain 跑一次约 8 万 token，README 里没有这个数，没写进数据。新增项目要在 `token_usage.json` 补一条。
 

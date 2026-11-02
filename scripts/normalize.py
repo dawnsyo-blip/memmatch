@@ -3,13 +3,13 @@
 依据（按优先级）：负责人确认值 > 原表结构化字段（raw.记忆项目总表）> info 里的说明 > README 关键词。
 每个字段输出 {value, status, basis}：
   status = confirmed（负责人确认）| auto（规则有把握）| needs_review（拿不准，不猜，进待审核清单）
-同时生成待审核清单 docs/review-normalization.md 和可填写的 docs/review-normalization.xlsx。
+同时生成待审核清单 docs/报告/review-normalization.md 和可填写的 docs/报告/review-normalization.xlsx。
 
 用法（在仓库根目录）：
   python -X utf8 scripts/fetch_readmes.py           先缓存 README（只需一次）
   python -X utf8 scripts/normalize.py               生成规范化结果和待审核清单
   python -X utf8 scripts/normalize.py --apply-review
-      读回 docs/review-normalization.xlsx「待补充」页的「负责人确认值」，存入
+      读回 docs/报告/review-normalization.xlsx「待补充」页的「负责人确认值」，存入
       data/normalization_overrides.json，再重新生成
   python -X utf8 scripts/normalize.py --accept-suggestions
       把当前所有待审核项的建议值记为负责人确认（负责人 2026-10-11 决定）
@@ -40,8 +40,8 @@ VERIFICATION = ROOT / "data/readme_verification.json"
 SAFETY_NOTES = ROOT / "data/safety_notes.json"
 SPEND_REVIEW = ROOT / "data/spend_review.json"
 USAGE_FORM = ROOT / "data/usage_form.json"
-REVIEW_MD = ROOT / "docs/review-normalization.md"
-REVIEW_XLSX = ROOT / "docs/review-normalization.xlsx"
+REVIEW_MD = ROOT / "docs/报告/review-normalization.md"
+REVIEW_XLSX = ROOT / "docs/报告/review-normalization.xlsx"
 
 # 字段 -> 可选值（中文说明）。schema 与审核清单都引用这里。
 ENUMS = {
@@ -953,7 +953,7 @@ def write_review(docs):
     lines = [
         "# 阶段 1 规范化结果与待补充清单",
         "",
-        "> 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，",
+        "> 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/报告/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，",
         "> 然后运行 `python -X utf8 scripts/normalize.py --apply-review`。确认值存入 `data/normalization_overrides.json`，以后重新生成也会保留。",
         "> 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, gateway`）；留空表示暂不处理。",
         "",

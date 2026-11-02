@@ -1,6 +1,6 @@
 # 阶段 3 收录状态报告
 
-> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-28。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/health-report.md`），**没有实际安装验证**。
+> 由 `scripts/decide_inclusion.py` 生成，判定日期 2026-10-28。依据说明文档、仓库内容和阶段 2 的检查结果（`docs/报告/health-report.md`），**没有实际安装验证**。
 
 ## 判定规则
 

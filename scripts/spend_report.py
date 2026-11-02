@@ -1,10 +1,10 @@
-"""生成 docs/spend-report.md：各项目要额外花多少钱（来自 normalized.spend / spend_note）。"""
+"""生成 docs/报告/spend-report.md：各项目要额外花多少钱（来自 normalized.spend / spend_note）。"""
 import json
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "docs/spend-report.md"
+OUT = ROOT / "docs/报告/spend-report.md"
 LABEL = {"none": "不需要额外花钱", "model_api": "自备模型接口（按量付费）", "subscription": "已有的付费订阅",
          "hosting": "服务器／云平台／GPU", "product_fee": "项目本身收费"}
 

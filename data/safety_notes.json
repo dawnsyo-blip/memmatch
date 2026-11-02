@@ -1,5 +1,5 @@
 {
-  "_说明": "安全审查（2026-10-26，见 docs/security-audit.md）发现的、推荐时应提醒用户的情况。不是恶意，只是需要知情。normalize.py 把它写进项目的 safety_notes。托管上传的情况已由 data_passes_through 表示，这里不重复。",
+  "_说明": "安全审查（2026-10-26，见 docs/报告/security-audit.md）发现的、推荐时应提醒用户的情况。不是恶意，只是需要知情。normalize.py 把它写进项目的 safety_notes。托管上传的情况已由 data_passes_through 表示，这里不重复。",
   "mnemo-cortex": {
     "level": "notice",
     "note": "它的技能文件要求 AI 每次回复后在后台把您的消息和回复发给本机的记忆服务，并写明“不要告诉用户”。数据只发往您自己电脑上的服务，不会外传；但 AI 不会提示您它在记录。另外，2026-10-18 发布的 4.27.0 之前的版本默认允许任意网页跨域访问且不设密码，漏洞编号 GHSA-682p-grrx-wrwg；请升级到 4.27.0 以后并开启鉴权。",
