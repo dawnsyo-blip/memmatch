@@ -144,6 +144,15 @@ const CONFIG = {
                              // "sentence"：一句一句吃（从离瓶颈最近的词开始，先往左到句首、再往右到句尾），要把句子从词堆里拽出来，词堆容易被顶得弹起来。
                              // 模拟里 nearest 往上弹的词少一半多，大幅弹起少八成
     upperAir: 0.06,          // 上半部分的空气阻力：越大落得越慢、越不弹。0.012 会弹；0.06 时最快约每秒 310px，像沙子缓缓落下；0.08 更稳但像慢动作
+    sideDrop: true,          // 新句子一句靠左、一句靠右落下，贴着杯壁补进来（见 layoutItems）
+    // 真实沙漏的表面是凹的：出口正上方那一柱沙子沉得最快，四周的沙子顺着坡滑进去。
+    // 这里让瓶颈正上方一柱里的词摩擦小、多受一点向下的力；两侧的词摩擦大，慢慢滑进坑里
+    funnel: {
+      width: 0.35,           // 中间一柱的半宽 ÷ 该高度上沙漏内壁的半宽
+      push: 0.5,             // 中间一柱里的词额外受到的向下的力 ÷ 重力
+      friction: 0.02,        // 中间一柱里的词的摩擦
+      sideFriction: 0.8,     // 两侧的词的摩擦：大一些，坡才立得住，坑才凹得下去
+    },
   },
 
   // 一句话是一条软带子；每个词再切成几节，长词也能弯
@@ -547,8 +556,10 @@ function layoutActive() {
   layoutItems(active.items);
 }
 
-// 把一句话排成居中的一行，放不下时折行
+// 把一句话排成一行，放不下时折行。flow.sideDrop 打开时一句靠左、一句靠右（按句子编号轮流），
+// 落下时贴着杯壁补进来，中间从瓶颈漏走，表面就凹下去；关掉时居中
 function layoutItems(items) {
+  const side = CONFIG.flow.sideDrop && items.length ? (items[0].sid % 2 ? -1 : 1) : 0;
   const k = G.k;
   for (const it of items) {
     it.size = it.sizeRef * k;
@@ -568,7 +579,7 @@ function layoutItems(items) {
   let y = G.top + lineH * 0.6;
   for (const line of lines) {
     const total = line.reduce((s, it) => s + it.w, 0) + gap * (line.length - 1);
-    let x = G.cx - total / 2;
+    let x = side < 0 ? G.cx - maxW / 2 : side > 0 ? G.cx + maxW / 2 - total : G.cx - total / 2;
     for (const it of line) {
       it.x = x + it.w / 2;
       it.y = y;
@@ -799,6 +810,26 @@ function dropWord(w, topY, angle) {
     Body.setAngularVelocity(g.body, spin);
   }
   words.push(w);
+}
+
+// 中间一柱沉得快：摩擦小、多一点向下的力；两侧摩擦大。表面因此凹下去
+function funnelFlow() {
+  const f = CONFIG.flow.funnel;
+  if (!f) return;
+  const gs = engine.gravity.y * engine.gravity.scale * f.push;
+  for (const w of words) {
+    if (w.zone !== "upper") continue;
+    for (const g of w.segs) {
+      const b = g.body;
+      if (b.isStatic) continue;
+      const inside = Math.abs(b.position.x - G.cx) < halfAt(b.position.y) * f.width;
+      b.friction = inside ? f.friction : f.sideFriction;
+      if (inside && f.push) {
+        if (b.isSleeping) Sleeping.set(b, false);
+        Body.applyForce(b, b.position, { x: 0, y: b.mass * gs });
+      }
+    }
+  }
 }
 
 /* ---------- 下半部分 ---------- */
@@ -1111,6 +1142,7 @@ function step(dt) {
   updateCrumbs(dt);
   updateLower(dt);
   movePushers();
+  funnelFlow();
   updateRibbons(dt);
   Engine.update(engine, 1000 / 60);
   clampSegs();
