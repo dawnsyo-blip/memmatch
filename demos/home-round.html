@@ -115,8 +115,12 @@ const CONFIG = {
     heightRatio: 0.8, shortScreen: 560, shortHeightRatio: 0.84,
     topShare: 0.38, findAt: 0.42,
     sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，比例不变
-    // 手机（屏幕宽不超过 phoneMaxWidth）上高 : 宽改成 phoneAspect：上口和底座按同一倍数加宽
-    phoneMaxWidth: 600, phoneAspect: 3 / 2,
+    // 手机（屏幕宽不超过 phoneMaxWidth）上：先把上口和底座按同一倍数加宽到高 : 宽 = phoneAspect，
+    // 再缩短上下泡之间的瓶颈，让总高变矮到 phoneTarget（负责人 2026-11-02 要求手机上 4 : 3，通过缩短距离、不再加宽）
+    phoneMaxWidth: 600, phoneAspect: 3 / 2, phoneTarget: 4 / 3,
+    minNeck: 0.08,           // 瓶颈最短留多长（÷ 沙漏总高）。再短的话，瓶颈口附近存不住字母，流量会掉：
+                             // 模拟里瓶颈 0.08 时每秒约 9 个字母，0.06 时 7.5 个，0.03 时只剩 5.5 个
+                             // 瓶颈缩到最短还不够时，再缩下泡顶上那段空着的竖直壁（字母都堆在碗底里）
     // 总高 : 最宽处约 16 : 9。下面的玻璃泡比上面的大一圈（负责人 2026-11-02 要求）：
     // 上泡宽 0.40、高 0.40，下泡宽 0.5625、高 0.46，下泡碗底的半径约是上泡的 1.4 倍
     upperHeight: 0.40, neckLength: 0.14, lowerHeight: 0.46,
@@ -183,11 +187,17 @@ function measure(text, size, weight) {
 
 function computeGeometry() {
   const hg = CONFIG.hourglass;
-  const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
   const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
   // 下面的宽度按 16 : 9 设定；手机上按 phoneAspect 等比加宽
-  const ws = W <= hg.phoneMaxWidth ? 16 / 9 / hg.phoneAspect : 1;
+  const phone = W <= hg.phoneMaxWidth;
+  const ws = phone ? 16 / 9 / hg.phoneAspect : 1;
   const widest = Math.max(hg.upperWidth, hg.lowerWidth) * ws;
+  // 手机上缩短瓶颈，总高 : 最宽处 = phoneTarget
+  const full = hg.upperHeight + hg.neckLength + hg.lowerHeight;
+  const cut = phone ? Math.max(0, full - widest * hg.phoneTarget) : 0;
+  const neckLength = Math.max(hg.minNeck, hg.neckLength - cut);
+  const lowerHeight = Math.max(hg.lowerHeight - (cut - (hg.neckLength - neckLength)), Math.max(hg.lowerWidth * ws / 2 * hg.lowerRound, 0) + 0.02);
+  const frac = hg.upperHeight + neckLength + lowerHeight;
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
   const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
   const slim = Math.min(1, avail / (S * widest));
@@ -195,12 +205,12 @@ function computeGeometry() {
   const fk = Math.max(k, CONFIG.font.minPx / CONFIG.font.sizeMin);
   const top = (H - S * frac) * hg.topShare;
   const neckTop = top + S * hg.upperHeight;
-  const neckBot = neckTop + S * hg.neckLength;
+  const neckBot = neckTop + S * neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
     S, k, fk,
     cap: (S * hg.upperWidth * ws * slim * S * hg.upperHeight) / fk ** 2 / CONFIG.capRef,
-    cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
+    cx: W / 2, top, bottom: neckBot + S * lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
     neckHalf,
