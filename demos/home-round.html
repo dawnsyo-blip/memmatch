@@ -124,6 +124,10 @@ const CONFIG = {
     // 轮廓（负责人 2026-11-02 要求改成半圆，像沙漏的玻璃泡）：上下两部分都是“竖直的壁＋半圆的碗底”。
     // 上半部分的碗底朝下收进瓶颈；下半部分的碗底在最下面，中间最低、两边往上翘
     upperRound: 1,           // 上半部分碗底的半径 ÷ 上口半宽；1 是正好半圆，越小碗底越浅、竖直的壁越长
+    // 喉部（负责人 2026-11-02 要求把收窄的地方画出来）：上泡的碗底不直接收进瓶颈，先收到 throatWidth，
+    // 再沿一条平滑的曲线收窄到瓶颈的宽度，进瓶颈时是竖直的；字母会填进这一段，收窄的形状就看得出来
+    throatHeight: 0.08,      // 喉部的高度 ÷ 沙漏总高，从上泡里分出来
+    throatWidth: 0.45,       // 碗底和喉部交界处的半宽 ÷ 上口半宽
     lowerRound: 1,           // 下半部分碗底的半径 ÷ 底座半宽
   },
   capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
@@ -211,12 +215,23 @@ function halfAt(y) {
   if (y <= g.top) return g.maxHalf;
   if (y >= g.bottom) return 0;
   if (y < g.neckTop) {
-    // 上半部分：圆心在瓶颈口正上方 R 处，碗底以上是竖直的壁
-    const R = Math.min(g.maxHalf * hg.upperRound, g.neckTop - g.top);
-    const cy = g.neckTop - R;
+    // 上半部分：竖直的壁 → 半圆碗底 → 喉部 → 瓶颈
+    const R = g.maxHalf * hg.upperRound, off = g.maxHalf - R;
+    const th = G.S * hg.throatHeight, yT = g.neckTop - th;
+    const wT = Math.max(g.neckHalf, g.maxHalf * hg.throatWidth);
+    // 圆心放在让碗底在 yT 处正好收到 wT 的位置
+    const dT = Math.sqrt(Math.max(0, R * R - (wT - off) ** 2));
+    const cy = yT - dT;
     if (y <= cy) return g.maxHalf;
-    const d = y - cy;
-    return Math.max(g.neckHalf, g.maxHalf - R + Math.sqrt(Math.max(0, R * R - d * d)));
+    if (y <= yT) {
+      const d = y - cy;
+      return off + Math.sqrt(Math.max(0, R * R - d * d));
+    }
+    // 喉部：三次 Hermite 曲线，起点的斜率接上碗底，终点竖直进瓶颈
+    const v = (y - yT) / th;
+    const m0 = Math.max(-(dT / Math.max(1e-6, wT - off)) * th, -2.9 * (wT - g.neckHalf)); // 太陡会冲过头，限一下
+    const h00 = 2 * v ** 3 - 3 * v * v + 1, h10 = v ** 3 - 2 * v * v + v, h01 = -2 * v ** 3 + 3 * v * v;
+    return Math.max(g.neckHalf, h00 * wT + h10 * m0 + h01 * g.neckHalf);
   }
   if (y <= g.neckBot) return g.neckHalf;
   // 下半部分：圆心在底边正上方 R 处，碗底以上是竖直的壁
@@ -246,7 +261,7 @@ function segmentWalls(pts, side, T) {
 function buildWalls() {
   if (walls.length) Composite.remove(world, walls);
   walls = [];
-  const g = G, T = Math.max(40, g.S * 0.08), N = 28; // 段数多一些，弧线才圆
+  const g = G, T = Math.max(40, g.S * 0.08), N = 40; // 段数多一些，弧线和喉部才圆
   for (const side of [-1, 1]) {
     const up = [{ x: g.cx + side * g.maxHalf, y: -T * 2 }];
     for (let i = 0; i <= N; i++) {
