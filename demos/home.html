@@ -126,22 +126,6 @@ const CONFIG = {
   // 性能较弱的设备（CPU 核数不超过 cores）字母数乘 scale
   lowPower: { cores: 4, scale: 0.6 },
 
-  // 绕着沙漏的一条亮蓝色螺旋线，强调沙漏的体积。上窄下宽、上细下粗，表现上轻下重；
-  // 转到沙漏后面的那段画在字母下面（被字母挡住，更细更淡），转到前面的那段画在字母上面
-  ring: {
-    show: true,
-    color: "#127EEE",        // oklch(0.6 0.19 255)，对底色的对比度约 4
-    from: 0.12, to: 1,       // 从沙漏顶端往下几成开始、到几成结束（÷ 沙漏总高）
-    turns: [-0.45, -2.55],   // 起点和终点的角度（× π）：-0.5 在左边，-1 在正后方，-1.5 在右边，-2 在正前方
-    ease: 1.8,               // 角度先慢后快：上半部分沿左侧慢慢下来，瓶颈处在正后方，到下半部分才转到右边、再从沙堆前面横过
-    rTop: 1.05,              // 起点处的半径 ÷ 上口半宽
-    rBottom: 1.15,           // 终点处的半径 ÷ 底座半宽
-    tilt: 0.12,              // 从斜上方看过去，转到前面的点往下偏多少（÷ 半径）
-    widthTop: 1.2,           // 线宽（px，沙漏高 800px 时），上细
-    widthBottom: 3.4,        //   下粗
-    back: { alpha: 0.45, width: 0.6 }, // 后面那段的透明度、线宽倍数
-  },
-
   pointerRadius: 0.024,      // 手指或鼠标推字母的半径 ÷ 沙漏高度
   gravity: 1.6,
   maxPixelRatio: 2,
@@ -703,47 +687,6 @@ function drawText(text, size, x, y, angle, alpha, weight) {
   ctx.fillText(text, 0, 0);
 }
 
-// 螺旋线上的点：沿着沙漏往下，角度均匀转，半径从上口渐变到底座；depth > 0 表示在沙漏前面
-function ringPoints() {
-  const r = CONFIG.ring, n = 180, pts = [];
-  const y0 = G.top + G.S * r.from, y1 = G.top + G.S * r.to;
-  for (let i = 0; i <= n; i++) {
-    const u = i / n;
-    const phi = Math.PI * (r.turns[0] + (r.turns[1] - r.turns[0]) * u ** r.ease);
-    const rad = Math.min(W / 2 - 8, (G.maxHalf * r.rTop) + (G.baseHalf * r.rBottom - G.maxHalf * r.rTop) * u ** 1.4);
-    const depth = Math.cos(phi);
-    // 两头收尖
-    const taper = Math.min(1, u / 0.06, (1 - u) / 0.06);
-    pts.push({ x: G.cx + rad * Math.sin(phi), y: y0 + (y1 - y0) * u + rad * r.tilt * depth, depth,
-      w: (r.widthTop + (r.widthBottom - r.widthTop) * u) * G.k * taper });
-  }
-  return pts;
-}
-
-let ringCache = null;
-function drawRing(front) {
-  const r = CONFIG.ring;
-  if (!r.show) return;
-  if (!ringCache || ringCache.G !== G) ringCache = { G, pts: ringPoints() };
-  const pts = ringCache.pts;
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.strokeStyle = r.color;
-  ctx.lineCap = "round";
-  for (let i = 0; i < pts.length - 1; i++) {
-    const a = pts[i], b = pts[i + 1], d = (a.depth + b.depth) / 2;
-    if ((d > 0) !== front) continue;
-    // 转到侧面时粗细、深浅渐变，不会在前后交界处突然跳一下
-    const f = Math.min(1, Math.max(0, (d + 0.3) / 0.6)), e = f * f * (3 - 2 * f);
-    ctx.globalAlpha = r.back.alpha + (1 - r.back.alpha) * e;
-    ctx.lineWidth = Math.max(0.5, ((a.w + b.w) / 2) * (r.back.width + (1 - r.back.width) * e));
-    ctx.beginPath();
-    ctx.moveTo(a.x, a.y);
-    ctx.lineTo(b.x, b.y);
-    ctx.stroke();
-  }
-  ctx.globalAlpha = 1;
-}
-
 function draw() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.globalAlpha = 1;
@@ -752,13 +695,11 @@ function draw() {
   ctx.fillStyle = CONFIG.colors.text;
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  drawRing(false);
   for (const L of letters) {
     const b = L.body;
     ctx.fillStyle = !L.isKey && (L.zone === "lower" || (L.zone === "neck" && b.position.y > G.eatY)) ? CONFIG.gray : CONFIG.colors.text;
     drawText(L.ch, L.size, b.position.x, b.position.y + L.size * 0.04, b.angle, L.alpha, L.weight);
   }
-  drawRing(true);
   ctx.fillStyle = CONFIG.colors.text;
   if (active) {
     const alpha = Math.min(1, active.t / 0.35);
