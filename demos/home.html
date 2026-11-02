@@ -87,6 +87,8 @@ const CONFIG = {
   dissolve: {
     time: 0.8,               // 秒，最底下的字母淡掉所用的时间
     clearance: 0.07,         // 沙堆堆到离通道出口这么近（÷ 沙漏高度）时，底下多退几个
+    keyHold: 20,             // 秒，关键词的字母漏下来以后这么久内不会被选去淡掉，先淡掉它旁边的普通字母
+    keyTime: 1.6,            // 秒，关键词的字母淡掉所用的时间，比普通字母慢
   },
 
   sentenceHold: 1.2,         // 秒，新句子完整显示多久后松开
@@ -459,13 +461,15 @@ function updateLower(dt) {
   const tooHigh = live.some((L) => L.body.speed < rest && L.body.position.y - L.h / 2 < limitY);
   const want = live.length - capN(CONFIG.lowerLetters) + (tooHigh ? 4 : 0);
   if (want > 0) {
-    live.sort((a, b) => b.body.position.y - a.body.position.y);
+    // 从最底下的开始；还在保留期里的关键词字母排到最后，只有实在没有别的可退时才轮到
+    const held = (L) => L.isKey && simTime - L.born < d.keyHold;
+    live.sort((a, b) => held(a) - held(b) || b.body.position.y - a.body.position.y);
     for (let i = 0; i < Math.min(want, live.length); i++) { live[i].dissolving = true; live[i].fadeT = 0; }
   }
   for (const L of letters.slice()) {
     if (!L.dissolving) continue;
     L.fadeT += dt;
-    L.alpha = Math.max(0, 1 - L.fadeT / d.time);
+    L.alpha = Math.max(0, 1 - L.fadeT / (L.isKey ? d.keyTime : d.time));
     if (L.alpha <= 0) {
       const p = L.body.position;
       removeLetter(L);
@@ -639,7 +643,8 @@ function prefill() {
       const src = key ? pool : others;
       const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), weightOf(key), key, "lower",
         G.cx + rand(-0.8, 0.8) * halfAt(y), y, rand(-1, 1));
-      L.born = -1000 + made.length;
+      // 预置的关键词字母各自已经留了一阵，保留期错开到期，开场不会先淡掉它们，也不会一起淡掉
+      L.born = simTime - rand(0, CONFIG.dissolve.keyHold);
       made.push(L);
     }
   });
