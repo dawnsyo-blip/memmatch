@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  /* 蓝色配色（和 home.html 只差颜色）：明亮的钴蓝印在很浅的暖米白上，整页只有一种色相（参考负责人 2026-11-02 给的蓝色渐变图）。
-     颜色在 OKLCH 里推导：纸 oklch(0.975 0.014 95)、墨 oklch(0.47 0.165 257)、说明文字 oklch(0.52 0.11 257)、
-     普通字母 oklch(0.76 0.068 252)、弱文字 oklch(0.7 0.07 254)、细线 oklch(0.91 0.025 252)。对纸色的对比度：墨 6.5，说明文字 5.2 */
+  /* 蓝色配色（和 home.html 只差颜色）：负责人 2026-11-02 指定底色 #EFF3F6、文字 #3588D3，其余在 OKLCH 里按同一色相推导，整页只有一种色相。
+     底色 oklch(0.962 0.006 240)、文字 oklch(0.612 0.139 249)；说明文字 oklch(0.5 0.11 249)、普通字母 oklch(0.77 0.055 249)、
+     弱文字 oklch(0.72 0.06 249)、细线 oklch(0.9 0.022 249)。对底色的对比度：文字 3.35（低于正文要求的 4.5，大字要求的 3 刚过），说明文字 5.4 */
   :root {
-    --color-bg: #FAF7EC;
-    --color-text: #0356B4;
-    --color-soft: #3D69A7;
-    --color-faint: #80A1CA;
-    --color-muted: #80A1CA;
-    --color-line: #D6E3F2;
+    --color-bg: #EFF3F6;
+    --color-text: #3588D3;
+    --color-soft: #29669F;
+    --color-faint: #88A8C9;
+    --color-muted: #88A8C9;
+    --color-line: #D3E0EC;
   }
   /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
      单词版留在 experiments/home-words.html */
@@ -85,7 +85,7 @@ const CONFIG = {
   ],
 
   pass: "all",               // "all"：所有字母都漏到下面；"keywords"：只有关键词的字母能通过，其余在瓶颈口被吃掉
-  gray: "#92B4DC",           // 非关键词的字母过了瓶颈口变成这个颜色；关键词的字母保持墨蓝色
+  gray: "#9AB8D6",           // 非关键词的字母过了瓶颈口变成这个颜色；关键词的字母保持墨蓝色
   flowRate: 14,              // 每秒最多放几个字母进瓶颈
   flowSpeed: 0.32,           // 字母在瓶颈里走的速度：每秒走过沙漏高度的几分之一
   eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
@@ -110,7 +110,7 @@ const CONFIG = {
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
 
-  colors: { background: "#FAF7EC", text: "#0356B4" },
+  colors: { background: "#EFF3F6", text: "#3588D3" },
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
     weight: 400,             // 普通字母的字重
