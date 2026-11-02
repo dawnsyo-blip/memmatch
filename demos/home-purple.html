@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>记忆库推荐 · 紫色主题</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* 紫色主题（负责人 2026-11-02 要求另做一版，给了一张蓝紫色文字排成形状的参考图）：做法和蓝色主题相同，所有文字一种颜色，
+     层次靠字重和记号。颜色取自参考图（文字平均约 #493BB3，底色 #F8F8FA），在 OKLCH 里按同一色相 281° 推导：
+     底色 oklch(0.98 0.004 281)、文字 oklch(0.45 0.18 281)、浅紫 oklch(0.78 0.07 281)、弱文字 oklch(0.7 0.08 281)、细线 oklch(0.91 0.025 281)。
+     对底色的对比度：文字 7.6、弱文字 2.6、浅紫 1.9（装饰用） */
+  :root {
+    --color-bg: #F8F8FB;
+    --color-text: #4A3DB4;
+    --color-soft: #4A3DB4;
+    --color-accent: #4A3DB4;
+    --color-light: #AFB3E4;
+    --color-faint: #9599D0;
+    --color-muted: #9599D0;
+    --color-line: #DEE0F2;
+  }
+  a.find { color: var(--color-accent); }   /* 写成 a.find，比后面 .find 的颜色规则更具体，不会被它盖掉 */
+  /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
+     单词版留在 experiments/home-words.html */
+  html, body { margin: 0; height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--color-bg); }
+  body {
+    position: fixed; inset: 0;
+    touch-action: none;
+    -webkit-user-select: none; user-select: none;
+    -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; }
+  canvas:active { cursor: grabbing; }
+  .find {
+    position: fixed; left: 50%; top: 95%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-en); font-weight: 400; font-size: 20px; line-height: 1;
+    color: var(--color-text); text-decoration: none; white-space: nowrap;
+    padding: 12px 8px; touch-action: manipulation;
+    transition: transform .3s ease, opacity .3s ease;
+  }
+  .find:hover { transform: translate(calc(-50% + 4px), -50%); opacity: .7; }
+  .find:focus-visible { outline: 1px solid var(--color-text); outline-offset: 2px; }
+  @font-face { font-family: "Home Serif SC"; font-weight: 400; font-display: swap; src: url("fonts/home-zh-400.woff2") format("woff2"); }
+  @font-face { font-family: "Home Serif SC"; font-weight: 600; font-display: swap; src: url("fonts/home-zh-600.woff2") format("woff2"); }
+  .drawer { font-family: "Home Serif SC", var(--font-zh); }
+  @media (prefers-reduced-motion: reduce) {
+    .find { transition: opacity .3s ease; }
+    .find:hover { transform: translate(-50%, -50%); }
+  }
+</style>
+</head>
+<body>
+<h1 class="visually-hidden">记忆库推荐</h1>
+<canvas id="c" aria-hidden="true"></canvas>
+<a class="find" id="find" href="quiz-purple.html" lang="en" aria-label="开始问卷">find yours →</a>
+<button type="button" class="menu-btn" id="menuBtn" aria-label="关于" aria-expanded="false" aria-controls="drawer"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 7h14M3 13h14" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></button>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-labelledby="drawerTitle" inert>
+  <button type="button" class="drawer-close" id="drawerClose" aria-label="关闭"><span aria-hidden="true">×</span></button>
+  <h2 id="drawerTitle">记忆库推荐</h2>
+  <p>从两百多个开源记忆项目里，挑出适合你的几个。</p>
+  <p>20 道题，约 5 分钟。设备和所用的 LLM 决定哪些能用，对记忆的偏好决定先后。</p>
+  <p>项目信息来自各项目的 README，2026 年 10 月逐项核实，没有实际安装验证。答卷只保存在你的浏览器里。</p>
+  <nav class="drawer-links" aria-label="其它页面">
+    <a href="catalog.html">全部项目</a>
+    <a href="about.html">关于</a>
+  </nav>
+  <p class="drawer-author">作者 <span>待填</span></p>
+</aside>
+<script src="drawer.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+<script type="module">
+/* ================= 可调参数 ================= */
+const CONFIG = {
+  // 句子从 sentencesUrl 读取；读不到时（比如直接双击打开文件）用下面这份备用，方括号是关键词
+  sentencesUrl: "../data/hourglass-sentences.json",
+  sentences: [
+    "I've [seen] things you wouldn't believe",
+    "like [tears] in [rain]",
+    "meet me in [Montauk]",
+    "I love this [memory]",
+    "we all need [mirrors] to know who we are",
+    "the [memories] I value most don't [fade]",
+  ],
+
+  pass: "all",               // "all"：所有字母都漏到下面；"keywords"：只有关键词的字母能通过，其余在瓶颈口被吃掉
+  gray: "#AFB3E4",           // 非关键词的字母过了瓶颈口变成这个浅紫
+  flowRate: 14,              // 每秒最多放几个字母进瓶颈
+  flowSpeed: 0.32,           // 字母在瓶颈里走的速度：每秒走过沙漏高度的几分之一
+  eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
+
+  // 字母数按沙漏能装下的面积折算（见 G.cap）
+  upperLetters: 200,         // 上半部分低于这个数就补下一句
+  lowerLetters: 200,         // 下半部分最多保留多少个字母，超过时从沙堆最底下的开始淡掉、移走
+  lowerInitial: 200,         // 页面打开时下半部分预置多少个字母
+  // 下半部分不留痕迹：字母太多时，从沙堆最底下的开始淡掉移走，整堆跟着缓缓下沉；不会留下空洞，也不会悬空
+  dissolve: {
+    time: 0.8,               // 秒，最底下的字母淡掉所用的时间
+    clearance: 0.07,         // 沙堆堆到离通道出口这么近（÷ 沙漏高度）时，底下多退几个
+    keyHold: 20,             // 秒，关键词的字母漏下来以后这么久内不会被选去淡掉，先淡掉它旁边的普通字母
+    keyTime: 1.6,            // 秒，关键词的字母淡掉所用的时间，比普通字母慢
+  },
+
+  sentenceHold: 1.2,         // 秒，新句子完整显示多久后松开
+  wordReleaseStagger: 0.06,  // 秒，从第一个词开始逐个松开的间隔
+  scatter: 0.5,              // 松开时字母各自散开的随机速度（px/帧，按沙漏大小缩放）
+
+  upperAir: 0.08,            // 上半部分的空气阻力：越大落得越慢、越不弹
+  // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
+  funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
+
+  colors: { background: "#F8F8FB", text: "#4A3DB4", accent: "#4A3DB4" }, // 全部用蓝紫色，关键词靠加粗区分
+  font: {
+    family: '"Cormorant Garamond", Georgia, serif',
+    weight: 400,             // 普通字母的字重
+    keyWeight: 600,          // 关键词字母的字重：重一点，句子显示时和打散后都更醒目
+    sizeMin: 20,             // 字号：沙漏高 800px 时的像素值，随沙漏大小等比缩放；两个值相同，所有字母同一个字号
+    sizeMax: 20,
+    minPx: 12,               // 屏幕上的最小字号（px）
+  },
+
+  // 以下比例都是相对沙漏总高（S）
+  hourglass: {
+    heightRatio: 0.8, shortScreen: 560, shortHeightRatio: 0.84,
+    topShare: 0.38, findAt: 0.42,
+    sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，比例不变
+    // 手机（屏幕宽不超过 phoneMaxWidth）上高 : 宽改成 phoneAspect：上口和底座按同一倍数加宽
+    phoneMaxWidth: 600, phoneAspect: 3 / 2,
+    // 总高 : 最宽处约 16 : 9；上口窄，下半部分宽、更有分量
+    upperHeight: 0.44, neckLength: 0.14, lowerHeight: 0.42,
+    upperWidth: 0.44, lowerWidth: 0.5625, neckWidth: 0.03,
+    upperCurve: 2.6, lowerCurve: 1.2,
+  },
+  capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
+
+  // 性能较弱的设备（CPU 核数不超过 cores）字母数乘 scale
+  lowPower: { cores: 4, scale: 0.6 },
+
+  pointerRadius: 0.024,      // 手指或鼠标推字母的半径 ÷ 沙漏高度
+  gravity: 1.6,
+  maxPixelRatio: 2,
+  debug: false,              // true 或网址加 ?debug 时画出看不见的墙
+};
+/* =========================================== */
+
+const { Engine, Bodies, Body, Composite, Sleeping } = Matter;
+
+const canvas = document.getElementById("c");
+const ctx = canvas.getContext("2d");
+const find = document.getElementById("find");
+const DEBUG = CONFIG.debug || /[?&]debug/.test(location.search);
+const LOW = (navigator.hardwareConcurrency || 8) <= CONFIG.lowPower.cores ? CONFIG.lowPower.scale : 1;
+
+const engine = Engine.create({ enableSleeping: true });
+engine.positionIterations = 6;
+engine.velocityIterations = 4;
+engine.constraintIterations = 1;
+const world = engine.world;
+
+const STEP = 1 / 60;
+const LETTER = 0x0002;   // 字母的碰撞类别；墙和手指是默认的 0x0001
+let W = 0, H = 0, dpr = 1, G = null;
+let walls = [];
+// 字母：{ ch, size, weight, isKey, zone, born, w, h, body, alpha, dissolving, fadeT }
+let letters = [];        // 在物理世界里的字母（上半部分、下半部分）
+let stream = [];         // 正在被送进瓶颈的字母
+let active = null;       // 正在上方显示的句子
+let sentenceIdx = 0;
+let simTime = 0, lastFeed = 0;
+const pushers = new Map();
+
+const rand = (a, b) => a + Math.random() * (b - a);
+const fontStr = (size, weight = 400) => `${weight} ${size.toFixed(1)}px ${CONFIG.font.family}`;
+const weightOf = (isKey) => (isKey ? CONFIG.font.keyWeight : CONFIG.font.weight);
+const randSize = () => rand(CONFIG.font.sizeMin, CONFIG.font.sizeMax);
+const capN = (n) => Math.max(10, Math.round(n * G.cap * LOW));
+
+function measure(text, size, weight) {
+  ctx.font = fontStr(size, weight);
+  return ctx.measureText(text).width;
+}
+
+/* ---------- 几何（和 home.html 相同） ---------- */
+
+function computeGeometry() {
+  const hg = CONFIG.hourglass;
+  const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
+  const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
+  // 下面的宽度按 16 : 9 设定；手机上按 phoneAspect 等比加宽
+  const ws = W <= hg.phoneMaxWidth ? 16 / 9 / hg.phoneAspect : 1;
+  const widest = Math.max(hg.upperWidth, hg.lowerWidth) * ws;
+  const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
+  const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
+  const slim = Math.min(1, avail / (S * widest));
+  const k = S / 800;
+  const fk = Math.max(k, CONFIG.font.minPx / CONFIG.font.sizeMin);
+  const top = (H - S * frac) * hg.topShare;
+  const neckTop = top + S * hg.upperHeight;
+  const neckBot = neckTop + S * hg.neckLength;
+  const neckHalf = (S * hg.neckWidth) / 2;
+  return {
+    S, k, fk,
+    cap: (S * hg.upperWidth * ws * slim * S * hg.upperHeight) / fk ** 2 / CONFIG.capRef,
+    cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
+    neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
+    eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
+    neckHalf,
+    exitHalf: Math.max(neckHalf, CONFIG.font.sizeMax * fk * 0.5),
+    maxHalf: (S * hg.upperWidth * ws * slim) / 2,
+    baseHalf: (S * hg.lowerWidth * ws * slim) / 2,
+  };
+}
+
+function halfAt(y) {
+  const g = G, hg = CONFIG.hourglass;
+  if (y <= g.top) return g.maxHalf;
+  if (y >= g.bottom) return g.baseHalf;
+  if (y < g.neckTop) {
+    const v = (y - g.top) / (g.neckTop - g.top);
+    return g.neckHalf + (g.maxHalf - g.neckHalf) * (1 - Math.pow(v, hg.upperCurve));
+  }
+  if (y <= g.neckBot) return g.neckHalf;
+  const v = (y - g.neckBot) / (g.bottom - g.neckBot);
+  return g.exitHalf + (g.baseHalf - g.exitHalf) * Math.pow(v, hg.lowerCurve);
+}
+
+function segmentWalls(pts, side, T) {
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i], b = pts[i + 1];
+    const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy);
+    if (len < 0.5) continue;
+    let nx = dy / len, ny = -dx / len;
+    if (nx * side < 0) { nx = -nx; ny = -ny; }
+    walls.push(Bodies.rectangle(
+      (a.x + b.x) / 2 + (nx * T) / 2, (a.y + b.y) / 2 + (ny * T) / 2,
+      len + T * 0.2, T,
+      { isStatic: true, angle: Math.atan2(dy, dx), friction: 0.2 },
+    ));
+  }
+}
+
+function buildWalls() {
+  if (walls.length) Composite.remove(world, walls);
+  walls = [];
+  const g = G, T = Math.max(40, g.S * 0.08), N = 14;
+  for (const side of [-1, 1]) {
+    const up = [{ x: g.cx + side * g.maxHalf, y: -T * 2 }];
+    for (let i = 0; i <= N; i++) {
+      const y = g.top + ((g.neckTop - g.top) * i) / N;
+      up.push({ x: g.cx + side * halfAt(y), y });
+    }
+    segmentWalls(up, side, T);
+    const low = [];
+    for (let i = 0; i <= N; i++) {
+      const y = g.neckBot + ((g.bottom - g.neckBot) * i) / N;
+      low.push({ x: g.cx + side * halfAt(y), y });
+    }
+    segmentWalls(low, side, T);
+  }
+  // 瓶颈处的塞子：上下两边都过不去，只有程序能把字母送过去
+  walls.push(Bodies.rectangle(g.cx, g.mid, Math.max(g.neckHalf, g.exitHalf) * 2 + T, g.neckLen, { isStatic: true, friction: 0.2 }));
+  walls.push(Bodies.rectangle(g.cx, g.bottom + T / 2, g.baseHalf * 2 + T * 2, T, { isStatic: true }));
+  walls.push(Bodies.rectangle(W / 2, -T / 2, W + T * 4, T, { isStatic: true }));
+  Composite.add(world, walls);
+}
+
+/* ---------- 字母 ---------- */
+
+function makeLetter(ch, sizeRef, weight, isKey, zone, x, y, angle) {
+  const size = sizeRef * G.fk;
+  const w = Math.max(measure(ch, size, weight), size * 0.28) + size * 0.1;
+  const h = size * 0.86;
+  const L = { ch, sizeRef, size, weight, isKey, zone, born: simTime, w, h, alpha: 1 };
+  const b = Bodies.rectangle(x, y, w, h, {
+    angle,
+    friction: 0.45, frictionStatic: 0.9,
+    frictionAir: zone === "upper" ? CONFIG.upperAir : 0.012,
+    restitution: 0.02,
+    density: 0.0015,
+    chamfer: { radius: Math.min(w, h) * 0.3 },
+    sleepThreshold: 45,
+    collisionFilter: { category: LETTER },
+  });
+  L.body = b;
+  Composite.add(world, b);
+  letters.push(L);
+  return L;
+}
+
+function removeLetter(L) {
+  Composite.remove(world, L.body);
+  const i = letters.indexOf(L);
+  if (i >= 0) letters.splice(i, 1);
+}
+
+// 把一个词打散成字母，每个字母放在它在词里原来的位置
+function shatter(it) {
+  const chars = [...it.text];
+  let x = it.x - it.w / 2;
+  const s = CONFIG.scatter * G.k;
+  for (const ch of chars) {
+    const cw = measure(ch, it.size, it.weight);
+    const L = makeLetter(ch, it.sizeRef, it.weight, it.isKey, "upper", x + cw / 2, it.y, 0);
+    Body.setVelocity(L.body, { x: rand(-s, s), y: rand(0, s) });
+    Body.setAngularVelocity(L.body, rand(-0.02, 0.02));
+    x += cw;
+  }
+}
+
+function count(zone) {
+  let n = 0;
+  for (const L of letters) if (L.zone === zone && !L.dissolving) n++;
+  return n;
+}
+
+function wake(zone) {
+  for (const L of letters) if (L.zone === zone) Sleeping.set(L.body, false);
+}
+
+/* ---------- 句子 ---------- */
+
+function parseSentence(s) {
+  return s.trim().split(/\s+/).map((tok) => {
+    const m = tok.match(/^(.*)\[(.+?)\](.*)$/);
+    return m ? { text: m[1] + m[2] + m[3], key: true } : { text: tok, key: false };
+  });
+}
+
+function nextItems() {
+  const s = CONFIG.sentences[sentenceIdx++ % CONFIG.sentences.length];
+  return parseSentence(s).map((t) => ({ text: t.text, isKey: t.key, sizeRef: randSize(), weight: weightOf(t.key), released: false }));
+}
+
+// 把一句话排成居中的一行，放不下时折行
+function layoutItems(items) {
+  const k = G.fk;
+  for (const it of items) {
+    it.size = it.sizeRef * k;
+    it.w = measure(it.text, it.size, it.weight);
+  }
+  const gap = CONFIG.font.sizeMax * k * 0.38;
+  const maxW = G.maxHalf * 2 * 0.9;
+  const lines = [[]];
+  let lw = 0;
+  for (const it of items) {
+    const line = lines[lines.length - 1];
+    const add = (line.length ? gap : 0) + it.w;
+    if (line.length && lw + add > maxW) { lines.push([it]); lw = it.w; }
+    else { line.push(it); lw += add; }
+  }
+  const lineH = CONFIG.font.sizeMax * k * 1.5;
+  let y = G.top + lineH * 0.6;
+  for (const line of lines) {
+    const total = line.reduce((s, it) => s + it.w, 0) + gap * (line.length - 1);
+    let x = G.cx - total / 2;
+    for (const it of line) {
+      it.x = x + it.w / 2;
+      it.y = y;
+      x += it.w + gap;
+    }
+    y += lineH;
+  }
+}
+
+function startDisplay() {
+  active = { items: nextItems(), t: 0, next: 0 };
+  layoutItems(active.items);
+}
+
+function updateActive(dt) {
+  active.t += dt;
+  const items = active.items;
+  while (active.next < items.length && active.t >= CONFIG.sentenceHold + active.next * CONFIG.wordReleaseStagger) {
+    const it = items[active.next++];
+    it.released = true;
+    shatter(it);
+  }
+  if (active.next >= items.length) active = null;
+}
+
+/* ---------- 瓶颈：离瓶颈口最近的字母先漏下去 ---------- */
+
+function pickNearest() {
+  let best = null, bd = Infinity;
+  for (const L of letters) {
+    if (L.zone !== "upper" || L.body.isStatic || simTime - L.born < 0.3) continue;
+    const d = Math.hypot(L.body.position.x - G.cx, L.body.position.y - G.neckTop);
+    if (d < bd) { bd = d; best = L; }
+  }
+  return best;
+}
+
+function feed() {
+  // 前一个字母还没完全进通道，就先不放下一个，字母在通道里一个接一个
+  const lastIn = stream[stream.length - 1];
+  if (lastIn && lastIn.body.position.y < G.neckTop + lastIn.h) return;
+  if (simTime - lastFeed < 1 / CONFIG.flowRate) return;
+  const L = pickNearest();
+  if (!L) return;
+  lastFeed = simTime;
+  Body.setStatic(L.body, true);
+  L.body.collisionFilter.mask = 0;
+  L.zone = "neck";
+  stream.push(L);
+  wake("upper");
+}
+
+function updateStream(dt) {
+  const v = CONFIG.flowSpeed * G.S;
+  for (const L of stream.slice()) {
+    const b = L.body;
+    let move = v * dt;
+    let x = b.position.x, y = b.position.y;
+    // 先滑到瓶颈口正上方，再竖直往下
+    if (y < G.neckTop) {
+      const dx = G.cx - x, dy = G.neckTop - y, d = Math.hypot(dx, dy);
+      if (d <= move) { x = G.cx; y = G.neckTop; move -= d; }
+      else { x += (dx * move) / d; y += (dy * move) / d; move = 0; }
+    }
+    if (y >= G.neckTop) { x += (G.cx - x) * 0.3; y += move; }
+    Body.setPosition(b, { x, y });
+    Body.setAngle(b, b.angle * 0.85);
+    if (CONFIG.pass === "keywords" && !L.isKey) {
+      L.alpha = Math.max(0, 1 - (y - G.eatY) / (L.size * 0.4));
+      if (L.alpha <= 0) {
+        stream.splice(stream.indexOf(L), 1);
+        removeLetter(L);
+      }
+      continue;
+    }
+    // 出了通道：变回会掉落的字母，落进下半部分
+    if (y >= G.neckBot + L.h) {
+      stream.splice(stream.indexOf(L), 1);
+      Body.setStatic(b, false);
+      b.collisionFilter.mask = 0xFFFFFFFF;
+      b.frictionAir = 0.012;
+      b.friction = 0.45;
+      L.zone = "lower";
+      L.born = simTime;
+      Body.setVelocity(b, { x: rand(-0.3, 0.3) * G.k, y: v / 60 });
+      Body.setAngularVelocity(b, rand(-0.05, 0.05));
+    }
+  }
+}
+
+// 出口正上方一柱的字母摩擦小、多一点向下的力；两侧摩擦大，坡立得住
+function funnelFlow() {
+  const f = CONFIG.funnel;
+  const gs = engine.gravity.y * engine.gravity.scale * f.push;
+  for (const L of letters) {
+    if (L.zone !== "upper") continue;
+    const b = L.body;
+    if (b.isStatic) continue;
+    const inside = Math.abs(b.position.x - G.cx) < halfAt(b.position.y) * f.width;
+    b.friction = inside ? f.friction : f.sideFriction;
+    if (inside && f.push) {
+      if (b.isSleeping) Sleeping.set(b, false);
+      Body.applyForce(b, b.position, { x: 0, y: b.mass * gs });
+    }
+  }
+}
+
+/* ---------- 下半部分：字母堆，旧的褪成痕迹 ---------- */
+
+// 字母多了，或者堆到出口附近：从最底下的字母开始淡掉、移走，上面的跟着往下沉
+function updateLower(dt) {
+  const d = CONFIG.dissolve;
+  const live = letters.filter((L) => L.zone === "lower" && !L.dissolving);
+  const limitY = G.neckBot + G.S * d.clearance;
+  const rest = 0.2 * G.k;
+  const tooHigh = live.some((L) => L.body.speed < rest && L.body.position.y - L.h / 2 < limitY);
+  const want = live.length - capN(CONFIG.lowerLetters) + (tooHigh ? 4 : 0);
+  if (want > 0) {
+    // 从最底下的开始；还在保留期里的关键词字母排到最后，只有实在没有别的可退时才轮到
+    const held = (L) => L.isKey && simTime - L.born < d.keyHold;
+    live.sort((a, b) => held(a) - held(b) || b.body.position.y - a.body.position.y);
+    for (let i = 0; i < Math.min(want, live.length); i++) { live[i].dissolving = true; live[i].fadeT = 0; }
+  }
+  for (const L of letters.slice()) {
+    if (!L.dissolving) continue;
+    L.fadeT += dt;
+    L.alpha = Math.max(0, 1 - L.fadeT / (L.isKey ? d.keyTime : d.time));
+    if (L.alpha <= 0) {
+      const p = L.body.position;
+      removeLetter(L);
+      // 底下空了一块，压在上面的字母要能落下来
+      for (const o of letters) if (o.zone === "lower" && Math.abs(o.body.position.x - p.x) < G.S * 0.06 && o.body.position.y < p.y) Sleeping.set(o.body, false);
+    }
+  }
+}
+
+/* ---------- 交互 ---------- */
+
+function movePushers() {
+  const maxStep = G.S * 0.035;
+  for (const p of pushers.values()) {
+    const b = p.body;
+    const ox = b.position.x, oy = b.position.y;
+    const dx = p.tx - ox, dy = p.ty - oy, d = Math.hypot(dx, dy);
+    const s = d > maxStep ? maxStep / d : 1;
+    const nx = ox + dx * s, ny = oy + dy * s;
+    Body.setPosition(b, { x: nx, y: ny });
+    // 静态物体不会自己更新上一帧位置，手动设好，碰撞才会带出推力
+    b.positionPrev.x = ox;
+    b.positionPrev.y = oy;
+    b.velocity.x = nx - ox;
+    b.velocity.y = ny - oy;
+    b.speed = Math.hypot(b.velocity.x, b.velocity.y);
+    const reach = p.r + G.S * 0.06;
+    for (const L of letters) {
+      const q = L.body.position;
+      if (Math.abs(q.x - nx) < reach && Math.abs(q.y - ny) < reach) Sleeping.set(L.body, false);
+    }
+  }
+}
+
+canvas.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  canvas.setPointerCapture(e.pointerId);
+  const r = G.S * CONFIG.pointerRadius;
+  const body = Bodies.circle(e.clientX, e.clientY, r, { isStatic: true, friction: 0.3 });
+  Composite.add(world, body);
+  pushers.set(e.pointerId, { body, r, tx: e.clientX, ty: e.clientY });
+});
+canvas.addEventListener("pointermove", (e) => {
+  const p = pushers.get(e.pointerId);
+  if (!p) return;
+  p.tx = e.clientX;
+  p.ty = e.clientY;
+});
+function endPointer(e) {
+  const p = pushers.get(e.pointerId);
+  if (!p) return;
+  Composite.remove(world, p.body);
+  pushers.delete(e.pointerId);
+}
+canvas.addEventListener("pointerup", endPointer);
+canvas.addEventListener("pointercancel", endPointer);
+canvas.addEventListener("lostpointercapture", endPointer);
+function clearPushers() {
+  for (const p of pushers.values()) Composite.remove(world, p.body);
+  pushers.clear();
+}
+
+// 禁止滚动、下拉刷新、双指缩放
+const stop = (e) => e.preventDefault();
+document.addEventListener("touchmove", stop, { passive: false });
+document.addEventListener("touchstart", (e) => { if (e.touches.length > 1) e.preventDefault(); }, { passive: false });
+document.addEventListener("gesturestart", stop);
+document.addEventListener("dblclick", stop);
+document.addEventListener("contextmenu", stop);
+document.addEventListener("wheel", (e) => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
+
+/* ---------- 兜底：交互不能破坏过滤，字母不出沙漏 ---------- */
+
+function clampLetters() {
+  const g = G, maxV = g.S * 0.05;
+  for (const L of letters) {
+    const b = L.body;
+    if (b.isStatic) continue;
+    const m = L.h / 2;
+    const v = b.velocity, sp = Math.hypot(v.x, v.y);
+    if (sp > maxV) Body.setVelocity(b, { x: (v.x * maxV) / sp, y: (v.y * maxV) / sp });
+    const p = b.position;
+    let x = p.x, y = p.y;
+    if (L.zone === "upper") { y = Math.min(y, g.neckTop - m * 0.5); y = Math.max(y, m); }
+    else { y = Math.max(y, g.neckBot + m * 0.5); y = Math.min(y, g.bottom - m * 0.5); }
+    const half = halfAt(y);
+    if (Math.abs(x - g.cx) > half + 1) x = g.cx + Math.sign(x - g.cx) * Math.max(0, half - m);
+    x = Math.min(Math.max(x, m), W - m);
+    if (x !== p.x || y !== p.y) {
+      Body.setPosition(b, { x, y });
+      Body.setVelocity(b, { x: 0, y: 0 });
+    }
+  }
+}
+
+/* ---------- 尺寸 ---------- */
+
+function placeFind() {
+  find.style.top = `${G.bottom + (H - G.bottom) * CONFIG.hourglass.findAt}px`;
+}
+
+function resize() {
+  W = window.innerWidth;
+  H = window.innerHeight;
+  dpr = Math.min(window.devicePixelRatio || 1, CONFIG.maxPixelRatio);
+  canvas.width = Math.round(W * dpr);
+  canvas.height = Math.round(H * dpr);
+  const old = G;
+  G = computeGeometry();
+  engine.gravity.scale = 0.001 * G.k * CONFIG.gravity;
+  buildWalls();
+  placeFind();
+  if (!old) return;
+  clearPushers();
+  // 每个字母按比例挪到新位置，字号跟着变；瓶颈里的字母直接落到下面
+  const f = G.S / old.S;
+  for (const L of stream) { L.zone = "lower"; }
+  stream = [];
+  for (const L of letters.slice()) {
+    const p = L.body.position;
+    const x = G.cx + (p.x - old.cx) * f, y = G.mid + (p.y - old.mid) * f;
+    const angle = L.body.angle;
+    Composite.remove(world, L.body);
+    letters.splice(letters.indexOf(L), 1);
+    const N = makeLetter(L.ch, L.sizeRef, L.weight, L.isKey, L.zone, x, L.zone === "lower" ? Math.max(y, G.neckBot + 10) : y, angle);
+    Object.assign(N, { born: L.born, alpha: L.alpha, dissolving: L.dissolving, fadeT: L.fadeT });
+  }
+  if (active) layoutItems(active.items);
+}
+
+let resizeTimer = 0;
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(resize, 120);
+});
+
+/* ---------- 开场：上半部分堆好，下半部分预置字母堆 ---------- */
+
+function settle(steps, each) {
+  for (let i = 0; i < steps; i++) {
+    if (each) each(i);
+    simTime += STEP;
+    funnelFlow();
+    Engine.update(engine, 1000 / 60);
+    clampLetters();
+  }
+}
+
+function prefill() {
+  // 上半部分：一句句打散落下
+  let guard = 0;
+  while (count("upper") < capN(CONFIG.upperLetters) && guard++ < 60) {
+    const items = nextItems();
+    layoutItems(items);
+    for (const it of items) shatter(it);
+    settle(30);
+  }
+  settle(60);
+
+  // 下半部分：先铺一层痕迹，再落一层清楚的字母
+  const pool = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => t.key).map((t) => t.text)).join("");
+  const others = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => !t.key).map((t) => t.text)).join("");
+  // 每帧落 6 个；关键词和非关键词的字母按句子里的比例混着
+  const nLive = capN(CONFIG.lowerInitial);
+  const made = [];
+  const keyShare = pool.length / CONFIG.sentences.join("").replace(/[\[\]\s]/g, "").length;
+  settle(Math.ceil(nLive / 6) + 120, () => {
+    for (let j = 0; j < 6 && made.length < nLive; j++) {
+      const y = G.neckBot + G.S * rand(0.05, 0.12);
+      const key = Math.random() < keyShare;
+      const src = key ? pool : others;
+      const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), weightOf(key), key, "lower",
+        G.cx + rand(-0.8, 0.8) * halfAt(y), y, rand(-1, 1));
+      // 预置的关键词字母各自已经留了一阵，保留期错开到期，开场不会先淡掉它们，也不会一起淡掉
+      L.born = simTime - rand(0, CONFIG.dissolve.keyHold);
+      made.push(L);
+    }
+  });
+}
+
+/* ---------- 句子数据 ---------- */
+
+async function loadSentences() {
+  try {
+    const data = await (await fetch(CONFIG.sentencesUrl)).json();
+    const list = data.sentences.map((s) => s.text.split(/\s+/).map((tok) => {
+      const bare = tok.replace(/^[^\w]+|[^\w]+$/g, "");
+      return s.keywords.includes(bare) ? tok.replace(bare, `[${bare}]`) : tok;
+    }).join(" "));
+    if (list.length) CONFIG.sentences = list;
+  } catch (e) {}
+}
+
+/* ---------- 主循环 ---------- */
+
+function step(dt) {
+  simTime += dt;
+  if (!active && count("upper") < capN(CONFIG.upperLetters)) startDisplay();
+  if (active) updateActive(dt);
+  feed();
+  updateStream(dt);
+  updateLower(dt);
+  movePushers();
+  funnelFlow();
+  Engine.update(engine, 1000 / 60);
+  clampLetters();
+}
+
+function drawText(text, size, x, y, angle, alpha, weight) {
+  ctx.globalAlpha = alpha;
+  ctx.font = fontStr(size, weight);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.fillText(text, 0, 0);
+}
+
+function draw() {
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = CONFIG.colors.background;
+  ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = CONFIG.colors.text;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (const L of letters) {
+    const b = L.body;
+    ctx.fillStyle = L.isKey ? CONFIG.colors.accent
+      : L.zone === "lower" || (L.zone === "neck" && b.position.y > G.eatY) ? CONFIG.gray : CONFIG.colors.text;
+    drawText(L.ch, L.size, b.position.x, b.position.y + L.size * 0.04, b.angle, L.alpha, L.weight);
+  }
+  ctx.fillStyle = CONFIG.colors.text;
+  if (active) {
+    const alpha = Math.min(1, active.t / 0.35);
+    for (const it of active.items) {
+      if (it.released) continue;
+      ctx.fillStyle = it.isKey ? CONFIG.colors.accent : CONFIG.colors.text;
+      drawText(it.text, it.size, it.x, it.y, 0, alpha, it.weight);
+    }
+  }
+  if (DEBUG) {
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.globalAlpha = 0.35;
+    ctx.strokeStyle = "#c33";
+    for (const b of [...walls, ...[...pushers.values()].map((p) => p.body)]) {
+      ctx.beginPath();
+      b.vertices.forEach((v, i) => (i ? ctx.lineTo(v.x, v.y) : ctx.moveTo(v.x, v.y)));
+      ctx.closePath();
+      ctx.stroke();
+    }
+  }
+  ctx.globalAlpha = 1;
+}
+
+let last = performance.now(), acc = 0;
+function frame(now) {
+  acc += Math.min((now - last) / 1000, 0.1);
+  last = now;
+  let n = 0;
+  while (acc >= STEP && n < 4) { step(STEP); acc -= STEP; n++; }
+  if (n === 4) acc = 0;
+  draw();
+  requestAnimationFrame(frame);
+}
+
+// 先等字体和句子；系统设了减少动态效果时只画堆好的一帧
+const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+await Promise.race([
+  Promise.all([loadSentences(), ...[CONFIG.font.weight, CONFIG.font.keyWeight].map((w) => document.fonts.load(fontStr(20, w), "Aa"))]).catch(() => {}),
+  new Promise((r) => setTimeout(r, 2000)),
+]);
+resize();
+prefill();
+if (REDUCE) {
+  draw();
+  window.addEventListener("resize", () => setTimeout(draw, 200));
+} else {
+  startDisplay();
+  requestAnimationFrame((t) => { last = t; frame(t); });
+}
+</script>
+</body>
+</html>
