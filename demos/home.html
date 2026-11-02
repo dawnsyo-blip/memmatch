@@ -72,14 +72,15 @@
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-labelledby="drawerTitle" inert>
   <button type="button" class="drawer-close" id="drawerClose" aria-label="关闭"><span aria-hidden="true">×</span></button>
-  <h2 id="drawerTitle">关于</h2>
+  <h2 id="drawerTitle">记忆库推荐</h2>
   <p>从两百多个开源记忆项目里，挑出适合你的几个。</p>
   <p>20 道题，约 5 分钟。设备和所用的 LLM 决定哪些能用，对记忆的偏好决定先后。</p>
-  <p>项目信息来自各项目的 README，2026 年 10 月逐项核实，没有实际安装验证。</p>
-  <p>答卷只保存在你的浏览器里。</p>
+  <p>项目信息来自各项目的 README，2026 年 10 月逐项核实，没有实际安装验证。答卷只保存在你的浏览器里。</p>
   <nav class="drawer-links" aria-label="其它页面">
-    <a href="catalog.html">浏览全部</a>
+    <a href="catalog.html">全部项目</a>
+    <a href="about.html">关于</a>
   </nav>
+  <p class="drawer-author">作者 <span>待填</span></p>
 </aside>
 <script src="drawer.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
@@ -165,18 +166,19 @@ const CONFIG = {
 
   // 以下比例都是相对整个沙漏的高度
   hourglass: {
-    heightRatio: 0.82,       // 沙漏高度占屏幕高度的比例（底下要留出“find yours →”的位置）
+    heightRatio: 0.86,       // 沙漏的尺寸基准（÷ 屏幕高度）；实际高度是它乘三段高度之和
     maxWidthOfScreen: 0.94,  // 竖屏时沙漏最宽处不超过屏幕宽度的比例
-    upperHeight: 0.5,        // 上半部分（杯形漏斗）的高度
-    neckLength: 0.16,        // 中间细通道的长度；剩下的是下半部分
-    upperWidth: 0.62,        // 上口宽度
+    upperHeight: 0.46,       // 上半部分（U 形漏斗）的高度
+    neckLength: 0.08,        // 中间细通道的长度；越短上下两半越近
+    lowerHeight: 0.34,       // 下半部分的高度。三段加起来就是沙漏实际的高，在屏幕上居中
+    upperWidth: 0.68,        // 上口宽度
     lowerWidth: 0.72,        // 下半部分底宽
     neckWidth: 0.03,         // 通道宽度
-    upperCurve: 1.4,         // 上半部分轮廓：1 是直的 V 字，越大杯底越圆
+    upperCurve: 2.6,         // 上半部分轮廓：1 是直的 V 字，越大越像底部圆圆的 U 字
     lowerCurve: 1.2,         // 下半部分轮廓：1 是直的 ∧ 字，越大越像底部摊开的沙堆
   },
 
-  findGap: 0.045,            // “find yours →”在沙漏底部往下多远（÷ 沙漏高度），屏幕下方放不下时往上收
+  findGap: 0.09,             // “find yours →”在沙漏底部往下多远（÷ 沙漏高度），屏幕下方放不下时往上收
 
   // 性能较弱的设备（CPU 核数不超过 lowPower.cores）同时存在的词少一些
   lowPower: { cores: 4, upperWords: 28, lowerWords: 9, traces: 10 },
@@ -263,13 +265,14 @@ function computeGeometry() {
   const hg = CONFIG.hourglass;
   const S = Math.min(H * hg.heightRatio, (W * hg.maxWidthOfScreen) / Math.max(hg.upperWidth, hg.lowerWidth));
   const k = S / 800;
-  const top = (H - S) / 2;
+  const total = S * (hg.upperHeight + hg.neckLength + hg.lowerHeight);
+  const top = (H - total) / 2;
   const neckTop = top + S * hg.upperHeight;
   const neckBot = neckTop + S * hg.neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
     S, k,
-    cx: W / 2, top, bottom: top + S,
+    cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.05),
     neckHalf,

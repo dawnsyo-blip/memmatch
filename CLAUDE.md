@@ -90,24 +90,26 @@
 - 新风格方向（2026-10-30）：我提了三个平面方向（技术手册线稿、编辑出版式、清爽工具式），负责人说之后一起讨论，还没定
 - 首页和问卷页样张（2026-11-02）：
   - 依据：负责人写的 `prompt-for-claude-code.md`。2026-11-01 做过一版样张，负责人撤销了，提交是 7983d2c 和撤销它的 b745477，不要沿用那一版。
-  - 文件都在 `demos/`，正式网站 `site/` 没动：`home.html`、`quiz.html`、`catalog.html`（占位）、共用的 `site.css` 和 `drawer.js`、`fonts/`。`home.html` 由 `hourglass.html` 复制后改，`hourglass.html` 本身不动。要用 `npm run site` 打开，比如 http://localhost:5173/demos/home.html 。
+  - 文件都在 `demos/`，正式网站 `site/` 没动：`home.html`、`quiz.html`、`catalog.html` 和 `about.html`（占位）、共用的 `site.css` 和 `drawer.js`、`fonts/`。`home.html` 由 `hourglass.html` 复制后改，`hourglass.html` 本身不动。要用 `npm run site` 打开，比如 http://localhost:5173/demos/home.html 。
   - 首页：
-    - 入口是沙漏下方的“find yours →”，用 HTML 叠在画布上，位置由 `placeFind` 按沙漏底部算。为了留出这一行，`heightRatio` 从 0.86 降到 0.82。
+    - 入口是沙漏下方的“find yours →”，用 HTML 叠在画布上，位置由 `placeFind` 按沙漏底部算。
+    - 沙漏形状（负责人 2026-11-02 改）：上半部分从 V 形改成 U 形（`upperCurve` 2.6，`upperWidth` 0.68，`upperHeight` 0.46）。中间通道从 0.16 缩短到 0.08，上下两半更近。下半部分有自己的高度 `lowerHeight`（0.34），不再是“剩下的部分”，所以缩短通道后整个沙漏变矮，下半部分和“find yours”之间拉开了。
     - 沙漏里的词改用 Cormorant Garamond，每个词随机取 300～600 中的一种字重（`w.weight`）。
     - 句子从 `../hourglass-sentences.json` 读，把每句的 `keywords` 换成方括号格式；读不到时用 `CONFIG.sentences` 里的备用句子。
     - Matter.js 用 `defer` 加载，页面脚本是模块，不挡首屏。
     - CPU 核数不超过 4 的设备，词数上限调低（`CONFIG.lowPower`）。
     - 系统设了减少动态效果时，只画一帧堆好的沙漏。
-    - 问卷说明放在左上角按钮打开的左侧抽屉里（负责人 2026-11-01 说过要这样放），“浏览全部”也在抽屉里。
+    - 左上角按钮打开左侧抽屉，负责人 2026-11-02 定抽屉要放说明、项目目录页入口、关于页入口和作者。作者的名字和链接还没给，暂写“待填”。`docs/前端/网站风格简报v1.md` 已作废，不要参考。
   - 首页中文用子集字体 `demos/fonts/home-zh-400/600.woff2`，每个约 15 KB，向 Google Fonts 要的 Noto Serif SC，也就是思源宋体。改了首页的中文后重跑 `python -X utf8 scripts/subset_home_font.py`。
   - 问卷页：
-    - 一题一屏，选项是纯文字，选中的字重从 400 变成 600，选了以后没选的变浅。
+    - 一题一屏。题目左上角用小字写题型：单选、多选、排序。
+    - 选项前面有记号（负责人 2026-11-02 要求加回）：单选是圆圈，多选是方框里打勾，排序是方框里写名次。选中的记号填上、字重从 400 变成 600，没选的变浅。
     - 单选题点一下就进入下一题；多选题和排序题点“继续 →”。最后一题，以及改完互斥的题要回去时，单选题也显示这个按钮。
     - 左上角“←”是返回上一题，第一题时回首页；右上角写“3 / 18”，题数按当前要答的题来数，所以“去第 N 题修改”里的 N 也这样数。
     - 排序题的说明直接显示，其余题目的说明收进 i 图标；选项的说明直接显示成小字。
     - 答题逻辑照搬 `site/assets/quiz.js`，答卷格式不变（`memsite-quiz-v3`）。答完进入旧版结果页 `site/result.html`。
-  - 中文字体照 prompt 写的回退链，问卷页没有加载网络中文字体，Windows 上显示的是宋体。
-  - 右上角题数的颜色照 prompt 用 #aaa，对比度只有 2.2，低于 4.5，已告诉负责人。
+  - 问卷页加载 Google Fonts 的 Noto Serif SC 400 和 600（负责人 2026-11-02 要求试试网络字体）。Google 会按字符范围分片，只下载页面上用到的那几片。
+  - 右上角题数的颜色用 #aaa，对比度只有 2.2，负责人 2026-11-02 定保持这个颜色。
 
 安全审查（2026-10-26）：结论见 `docs/security-audit.md`，未发现恶意项目；需提醒用户的情况写在 `data/safety_notes.json`，normalize 写入各项目的 `safety_note`（推荐结果页要显示）。新增项目也要查一遍；akephalos 因仓库 404 已移除。
 

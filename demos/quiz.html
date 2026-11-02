@@ -6,11 +6,11 @@
 <title>问卷 · 记忆库推荐</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
   /* 问卷页样张：一题一屏。延续首页：衬线体、米白底、近黑字、大量留白；
-     不用卡片、阴影、圆角、彩色标签、进度条。选中只靠字重和明暗 */
+     不用卡片、阴影、圆角、彩色标签、进度条。选中：前面的记号填上、字重变粗，没选的变浅 */
 
   /* ---------- 左上角返回、右上角题数 ---------- */
   .back {
@@ -42,6 +42,8 @@
   .card.out { opacity: 0; transform: translateY(-16px); }   /* 答完往上淡出 */
   .card.in { opacity: 0; transform: translateY(16px); transition: none; }   /* 下一题从下面淡入 */
 
+  /* 题型写在题目左上角 */
+  .qtype { margin: 0 0 8px; font-family: var(--font-zh); font-size: 13px; line-height: 1.6; letter-spacing: .12em; color: var(--color-soft); }
   .title-row { display: flex; align-items: flex-start; gap: 4px; }
   h1 {
     margin: 0;
@@ -72,7 +74,7 @@
   .options { list-style: none; margin: 40px 0 0; padding: 0; }
   .opt {
     position: relative;
-    display: block; width: 100%;
+    display: flex; align-items: flex-start; gap: 14px; width: 100%;
     min-height: 44px;
     padding: 9px 0;
     text-align: left;
@@ -81,20 +83,25 @@
     font-weight: 400;
     transition: color .25s ease, opacity .2s ease;
   }
+  .opt .mark { flex: none; width: 16px; height: 1.6em; display: grid; place-items: center; color: var(--color-text); }
+  .opt .mark svg { display: block; width: 16px; height: 16px; overflow: visible; }
+  .opt .mark .on { opacity: 0; transition: opacity .15s; }
+  .opt[aria-checked="true"] .mark .on { opacity: 1; }
+  .opt .num { width: 16px; height: 16px; border: 1px solid currentColor; font-family: var(--font-en); font-size: 12px; font-weight: 600; line-height: 14px; text-align: center; font-variant-numeric: lining-nums; }
+  .opt[aria-checked="true"] .num { background: var(--color-text); color: var(--color-bg); }
+  .opt .text { display: flex; flex-direction: column; }
   .opt .help { display: block; margin-top: 1px; font-family: var(--font-zh); font-size: 14px; line-height: 1.6; color: var(--color-soft); font-weight: 400; white-space: pre-line; }
   .opt:hover { opacity: .7; }
   /* 选中：字重 400 → 600；选了以后没选的变浅，像被筛掉 */
   .opt[aria-checked="true"] .label { font-weight: 600; }
   .options.picked .opt[aria-checked="false"] { color: var(--color-soft); }
   .options.leaving .opt[aria-checked="false"] { opacity: 0; }
-  /* 排序题：选中的在前面写名次 */
-  .opt .rank { position: absolute; left: -1.3em; width: 1em; text-align: right; font-family: var(--font-en); font-weight: 600; font-variant-numeric: lining-nums; color: var(--color-text); }
   .clash { margin-left: 8px; font-family: var(--font-zh); font-size: 13px; color: var(--color-soft); font-weight: 400; }
   .clash::before { content: "· "; }
   /* 填空：选中带填空的选项后出现在它下面，只有一条细线 */
   .free {
-    display: block; width: 100%; max-width: 22em;
-    margin: -2px 0 8px;
+    display: block; width: calc(100% - 30px); max-width: 22em;
+    margin: -2px 0 8px 30px;
     padding: 4px 0 6px;
     font-family: var(--font-zh); font-size: 16px; color: var(--color-text);
     background: transparent;
@@ -135,6 +142,7 @@
 
 <main>
   <div class="card" id="card">
+    <p class="qtype" id="qtype"></p>
     <div class="title-row">
       <h1 id="qtitle"></h1>
       <button type="button" class="info" id="infoBtn" aria-label="说明" aria-expanded="false" aria-controls="tip" hidden>
@@ -161,6 +169,7 @@ import { checkCondition, findConflicts } from "../engine/index.js";
 const KEY = "memsite-quiz-v3";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (id) => document.getElementById(id);
+const TYPE_TEXT = { single: "单选", multi: "多选", rank: "排序" };
 
 /* ---------- 配置 ---------- */
 const cfg = await fetch("../data/questionnaire/questions.json").then((r) => r.json());
@@ -213,7 +222,7 @@ function renderMarks() {
   [...$("options").children].forEach((li, k) => {
     const o = q.options[k], on = s.includes(o.id);
     li.querySelector(".opt").setAttribute("aria-checked", on);
-    const r = li.querySelector(".rank");
+    const r = li.querySelector(".num");
     if (r) r.textContent = on ? s.indexOf(o.id) + 1 : "";
     const f = li.querySelector(".free");
     if (f) f.hidden = !on;
@@ -245,6 +254,32 @@ function renderConflicts() {
     li.querySelector(".clash")?.remove();
     if (clashed.has(curQ().options[k].id)) li.querySelector(".label").after(Object.assign(document.createElement("span"), { className: "clash", textContent: "互斥" }));
   });
+}
+
+/* ---------- 选项前的记号：单选是圆圈，多选是方框里打勾，排序是方框里写名次 ---------- */
+const NS = "http://www.w3.org/2000/svg";
+function svg(tag, attrs, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function markFor(type) {
+  const span = Object.assign(document.createElement("span"), { className: "mark" });
+  span.setAttribute("aria-hidden", "true");
+  if (type === "rank") {
+    span.appendChild(Object.assign(document.createElement("span"), { className: "num" }));
+    return span;
+  }
+  const s = svg("svg", { viewBox: "0 0 16 16" }, span);
+  if (type === "single") {
+    svg("circle", { cx: 8, cy: 8, r: 7.5, fill: "none", stroke: "currentColor", "stroke-width": 1 }, s);
+    svg("circle", { class: "on", cx: 8, cy: 8, r: 3.6, fill: "currentColor" }, s);
+  } else {
+    svg("rect", { x: .5, y: .5, width: 15, height: 15, fill: "none", stroke: "currentColor", "stroke-width": 1 }, s);
+    svg("path", { class: "on", d: "M3.8 8.3l2.8 2.8 5.6-6", fill: "none", stroke: "currentColor", "stroke-width": 1.5 }, s);
+  }
+  return span;
 }
 
 /* ---------- 渲染一道题 ---------- */
@@ -279,6 +314,7 @@ function render() {
   $("count").textContent = `${idx + 1} / ${list.length}`;
   $("count").setAttribute("aria-label", `第 ${idx + 1} 题，共 ${list.length} 题`);
   $("back").setAttribute("aria-label", idx > 0 ? "上一题" : "返回首页");
+  $("qtype").textContent = TYPE_TEXT[q.type];
   $("qtitle").textContent = q.text;
   // 排序题的说明直接显示，其余题目的说明收进 i 图标
   const tip = q.type !== "rank" && q.help;
@@ -299,10 +335,11 @@ function render() {
     b.type = "button";
     b.className = "opt";
     b.setAttribute("role", q.type === "single" ? "radio" : "checkbox");
-    if (q.type === "rank") b.innerHTML = '<span class="rank" aria-hidden="true"></span>';
-    const label = Object.assign(document.createElement("span"), { className: "label", textContent: o.label });
-    b.appendChild(label);
-    if (o.help && !o.free) b.appendChild(Object.assign(document.createElement("span"), { className: "help", textContent: o.help }));
+    b.appendChild(markFor(q.type));
+    const text = Object.assign(document.createElement("span"), { className: "text" });
+    text.appendChild(Object.assign(document.createElement("span"), { className: "label", textContent: o.label }));
+    if (o.help && !o.free) text.appendChild(Object.assign(document.createElement("span"), { className: "help", textContent: o.help }));
+    b.appendChild(text);
     b.addEventListener("click", () => choose(k, "click"));
     li.appendChild(b);
     if (o.free) {
