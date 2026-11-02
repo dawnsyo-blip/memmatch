@@ -74,21 +74,19 @@ const CONFIG = {
   ],
 
   pass: "all",               // "all"：所有字母都漏到下面；"keywords"：只有关键词的字母能通过，其余在瓶颈口被吃掉
+  gray: "#A3A19B",           // 非关键词的字母过了瓶颈口变成这个颜色；关键词的字母保持黑色
   flowRate: 14,              // 每秒最多放几个字母进瓶颈
   flowSpeed: 0.32,           // 字母在瓶颈里走的速度：每秒走过沙漏高度的几分之一
-  eatLine: 0.04,             // pass 为 "keywords" 时，不通过的字母在瓶颈口往下多深处淡掉（÷ 沙漏高度）
+  eatLine: 0.04,             // 非关键词的字母在瓶颈口往下多深处变灰（pass 为 "keywords" 时是淡掉）（÷ 沙漏高度）
 
   // 字母数按沙漏能装下的面积折算（见 G.cap）
   upperLetters: 200,         // 上半部分低于这个数就补下一句
-  lowerLetters: 110,         // 下半部分最多保留多少个清楚的字母，超过时最旧的褪成痕迹
-  lowerInitial: 110,         // 页面打开时下半部分预置多少个清楚的字母
-  trace: {
-    alpha: 0.16,             // 痕迹的不透明度
-    max: 110,                // 最多保留多少个痕迹，超过时最老的淡掉
-    initial: 90,             // 页面打开时预置多少个痕迹
-    fade: 2.5,               // 秒，清楚的字母褪成痕迹所用的时间
-    retire: 1.5,             // 秒，最老的痕迹淡掉所用的时间
-    clearance: 0.07,         // 字母堆到离通道出口这么近（÷ 沙漏高度）时，最老的痕迹先淡掉
+  lowerLetters: 200,         // 下半部分最多保留多少个字母，超过时从沙堆最底下的开始淡掉、移走
+  lowerInitial: 200,         // 页面打开时下半部分预置多少个字母
+  // 下半部分不留痕迹：字母太多时，从沙堆最底下的开始淡掉移走，整堆跟着缓缓下沉；不会留下空洞，也不会悬空
+  dissolve: {
+    time: 0.8,               // 秒，最底下的字母淡掉所用的时间
+    clearance: 0.07,         // 沙堆堆到离通道出口这么近（÷ 沙漏高度）时，底下多退几个
   },
 
   sentenceHold: 1.2,         // 秒，新句子完整显示多久后松开
@@ -102,19 +100,20 @@ const CONFIG = {
   colors: { background: "#F4F3EF", text: "#111111" },
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
-    weights: [300, 400, 500, 600], // 每个词随机取一种字重，打散后字母沿用
-    sizeMin: 16,             // 字号范围：沙漏高 800px 时的像素值，随沙漏大小等比缩放
-    sizeMax: 25,
+    weights: [400],          // 所有字母同一种字重
+    sizeMin: 20,             // 字号：沙漏高 800px 时的像素值，随沙漏大小等比缩放；两个值相同，所有字母同一个字号
+    sizeMax: 20,
     minPx: 12,               // 屏幕上的最小字号（px）
   },
 
-  // 以下比例都是相对沙漏总高（S），和 home.html 相同
+  // 以下比例都是相对沙漏总高（S）
   hourglass: {
     heightRatio: 0.8, shortScreen: 560, shortHeightRatio: 0.84,
     topShare: 0.38, findAt: 0.42,
     sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 0.75,
-    upperHeight: 0.52, neckLength: 0.12, lowerHeight: 0.36,
-    upperWidth: 0.56, lowerWidth: 0.6, neckWidth: 0.03,
+    // 总高 : 最宽处约 16 : 9；上口窄，下半部分宽、更有分量
+    upperHeight: 0.44, neckLength: 0.14, lowerHeight: 0.42,
+    upperWidth: 0.44, lowerWidth: 0.5625, neckWidth: 0.03,
     upperCurve: 2.6, lowerCurve: 1.2,
   },
   capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
@@ -138,8 +137,8 @@ const DEBUG = CONFIG.debug || /[?&]debug/.test(location.search);
 const LOW = (navigator.hardwareConcurrency || 8) <= CONFIG.lowPower.cores ? CONFIG.lowPower.scale : 1;
 
 const engine = Engine.create({ enableSleeping: true });
-engine.positionIterations = 4;
-engine.velocityIterations = 3;
+engine.positionIterations = 6;
+engine.velocityIterations = 4;
 engine.constraintIterations = 1;
 const world = engine.world;
 
@@ -147,7 +146,7 @@ const STEP = 1 / 60;
 const LETTER = 0x0002;   // 字母的碰撞类别；墙和手指是默认的 0x0001
 let W = 0, H = 0, dpr = 1, G = null;
 let walls = [];
-// 字母：{ ch, size, weight, isKey, zone, born, w, h, body, alpha, fading, trace, retiring }
+// 字母：{ ch, size, weight, isKey, zone, born, w, h, body, alpha, dissolving, fadeT }
 let letters = [];        // 在物理世界里的字母（上半部分、下半部分）
 let stream = [];         // 正在被送进瓶颈的字母
 let active = null;       // 正在上方显示的句子
@@ -252,8 +251,8 @@ function buildWalls() {
 
 function makeLetter(ch, sizeRef, weight, isKey, zone, x, y, angle) {
   const size = sizeRef * G.fk;
-  const w = Math.max(measure(ch, size, weight), size * 0.28);
-  const h = size * 0.78;
+  const w = Math.max(measure(ch, size, weight), size * 0.28) + size * 0.1;
+  const h = size * 0.86;
   const L = { ch, sizeRef, size, weight, isKey, zone, born: simTime, w, h, alpha: 1 };
   const b = Bodies.rectangle(x, y, w, h, {
     angle,
@@ -293,7 +292,7 @@ function shatter(it) {
 
 function count(zone) {
   let n = 0;
-  for (const L of letters) if (L.zone === zone && !L.fading && !L.trace) n++;
+  for (const L of letters) if (L.zone === zone && !L.dissolving) n++;
   return n;
 }
 
@@ -446,48 +445,27 @@ function funnelFlow() {
 
 /* ---------- 下半部分：字母堆，旧的褪成痕迹 ---------- */
 
-// 褪成痕迹的字母改成静止物体：只当底座，不再参与运动计算，省下大部分开销
-function makeTrace(L) {
-  L.fading = false;
-  L.trace = true;
-  L.alpha = CONFIG.trace.alpha;
-  Body.setStatic(L.body, true);
-}
-
+// 字母多了，或者堆到出口附近：从最底下的字母开始淡掉、移走，上面的跟着往下沉
 function updateLower(dt) {
-  const tr = CONFIG.trace;
-  const live = letters.filter((L) => L.zone === "lower" && !L.fading && !L.trace);
-  const maxLive = capN(CONFIG.lowerLetters);
-  if (live.length > maxLive) {
-    live.sort((a, b) => a.born - b.born);
-    for (let i = 0; i < live.length - maxLive; i++) { live[i].fading = true; live[i].fadeT = 0; }
-  }
-  const traces = letters.filter((L) => L.trace && !L.retiring).sort((a, b) => a.born - b.born);
-  const limitY = G.neckBot + G.S * tr.clearance;
+  const d = CONFIG.dissolve;
+  const live = letters.filter((L) => L.zone === "lower" && !L.dissolving);
+  const limitY = G.neckBot + G.S * d.clearance;
   const rest = 0.2 * G.k;
-  const tooHigh = letters.some((L) => L.zone === "lower" && (L.trace || L.body.speed < rest) && L.body.position.y - L.h / 2 < limitY);
-  const retiring = letters.filter((L) => L.retiring).length;
-  const maxTr = capN(tr.max);
-  // 痕迹多出上限多少，就同时让多少个退场；堆得太高时一次多退几个
-  const want = Math.max(traces.length - maxTr, tooHigh ? 8 : 0) - retiring;
-  for (let i = 0; i < Math.min(want, traces.length); i++) {
-    traces[i].retiring = true;
-    traces[i].fadeT = 0;
+  const tooHigh = live.some((L) => L.body.speed < rest && L.body.position.y - L.h / 2 < limitY);
+  const want = live.length - capN(CONFIG.lowerLetters) + (tooHigh ? 4 : 0);
+  if (want > 0) {
+    live.sort((a, b) => b.body.position.y - a.body.position.y);
+    for (let i = 0; i < Math.min(want, live.length); i++) { live[i].dissolving = true; live[i].fadeT = 0; }
   }
   for (const L of letters.slice()) {
-    if (L.fading) {
-      L.fadeT += dt;
-      const u = Math.min(1, L.fadeT / tr.fade);
-      L.alpha = 1 + (tr.alpha - 1) * u;
-      if (u >= 1) makeTrace(L);
-    } else if (L.retiring) {
-      L.fadeT += dt;
-      L.alpha = tr.alpha * Math.max(0, 1 - L.fadeT / tr.retire);
-      if (L.fadeT >= tr.retire) {
-        removeLetter(L);
-        // 底座少了一块，压在附近的字母要能落下来
-        for (const o of letters) if (o.zone === "lower" && !o.body.isStatic && Math.abs(o.body.position.x - L.body.position.x) < G.S * 0.08) Sleeping.set(o.body, false);
-      }
+    if (!L.dissolving) continue;
+    L.fadeT += dt;
+    L.alpha = Math.max(0, 1 - L.fadeT / d.time);
+    if (L.alpha <= 0) {
+      const p = L.body.position;
+      removeLetter(L);
+      // 底下空了一块，压在上面的字母要能落下来
+      for (const o of letters) if (o.zone === "lower" && Math.abs(o.body.position.x - p.x) < G.S * 0.06 && o.body.position.y < p.y) Sleeping.set(o.body, false);
     }
   }
 }
@@ -608,7 +586,7 @@ function resize() {
     Composite.remove(world, L.body);
     letters.splice(letters.indexOf(L), 1);
     const N = makeLetter(L.ch, L.sizeRef, L.weight, L.isKey, L.zone, x, L.zone === "lower" ? Math.max(y, G.neckBot + 10) : y, angle);
-    Object.assign(N, { born: L.born, alpha: L.alpha, fading: L.fading, fadeT: L.fadeT, trace: L.trace, retiring: L.retiring });
+    Object.assign(N, { born: L.born, alpha: L.alpha, dissolving: L.dissolving, fadeT: L.fadeT });
   }
   if (active) layoutItems(active.items);
 }
@@ -644,20 +622,22 @@ function prefill() {
 
   // 下半部分：先铺一层痕迹，再落一层清楚的字母
   const pool = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => t.key).map((t) => t.text)).join("");
-  // 每帧落 6 个，先落的是痕迹，后落的是清楚的字母；痕迹落定后再改成静止
-  const nTrace = capN(CONFIG.trace.initial), nLive = capN(CONFIG.lowerInitial);
+  const others = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => !t.key).map((t) => t.text)).join("");
+  // 每帧落 6 个；关键词和非关键词的字母按句子里的比例混着
+  const nLive = capN(CONFIG.lowerInitial);
   const made = [];
-  settle(Math.ceil((nTrace + nLive) / 6) + 120, () => {
-    for (let j = 0; j < 6 && made.length < nTrace + nLive; j++) {
+  const keyShare = pool.length / CONFIG.sentences.join("").replace(/[\[\]\s]/g, "").length;
+  settle(Math.ceil(nLive / 6) + 120, () => {
+    for (let j = 0; j < 6 && made.length < nLive; j++) {
       const y = G.neckBot + G.S * rand(0.05, 0.12);
-      const L = makeLetter(pool[Math.floor(Math.random() * pool.length)], randSize(), randWeight(), true, "lower",
+      const key = Math.random() < keyShare;
+      const src = key ? pool : others;
+      const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), randWeight(), key, "lower",
         G.cx + rand(-0.8, 0.8) * halfAt(y), y, rand(-1, 1));
       L.born = -1000 + made.length;
-      if (made.length < nTrace) L.alpha = CONFIG.trace.alpha;
       made.push(L);
     }
   });
-  for (const L of made.slice(0, nTrace)) makeTrace(L);
 }
 
 /* ---------- 句子数据 ---------- */
@@ -707,8 +687,10 @@ function draw() {
   ctx.textBaseline = "middle";
   for (const L of letters) {
     const b = L.body;
+    ctx.fillStyle = !L.isKey && (L.zone === "lower" || (L.zone === "neck" && b.position.y > G.eatY)) ? CONFIG.gray : CONFIG.colors.text;
     drawText(L.ch, L.size, b.position.x, b.position.y + L.size * 0.04, b.angle, L.alpha, L.weight);
   }
+  ctx.fillStyle = CONFIG.colors.text;
   if (active) {
     const alpha = Math.min(1, active.t / 0.35);
     for (const it of active.items) if (!it.released) drawText(it.text, it.size, it.x, it.y, 0, alpha, it.weight);
