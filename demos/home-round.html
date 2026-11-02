@@ -126,8 +126,8 @@ const CONFIG = {
     upperRound: 1,           // 上半部分碗底的半径 ÷ 上口半宽；1 是正好半圆，越小碗底越浅、竖直的壁越长
     // 喉部（负责人 2026-11-02 要求把收窄的地方画出来）：上泡的碗底不直接收进瓶颈，先收到 throatWidth，
     // 再沿一条平滑的曲线收窄到瓶颈的宽度，进瓶颈时是竖直的；字母会填进这一段，收窄的形状就看得出来
-    throatHeight: 0.08,      // 喉部的高度 ÷ 沙漏总高，从上泡里分出来
-    throatWidth: 0.45,       // 碗底和喉部交界处的半宽 ÷ 上口半宽
+    throatHeight: 0.12,      // 喉部的高度 ÷ 沙漏总高，从上泡里分出来（负责人要求再长一点，原来 0.08）
+    throatWidth: 0.6,        // 碗底和喉部交界处的半宽 ÷ 上口半宽（负责人要求再宽一点，原来 0.45）
     lowerRound: 1,           // 下半部分碗底的半径 ÷ 底座半宽
   },
   capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
@@ -672,22 +672,30 @@ function prefill() {
   // 下半部分：先铺一层痕迹，再落一层清楚的字母
   const pool = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => t.key).map((t) => t.text)).join("");
   const others = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => !t.key).map((t) => t.text)).join("");
-  // 每帧落 6 个；关键词和非关键词的字母按句子里的比例混着
+  // 直接一层层铺在碗底：从最底下开始，每层按那个高度的碗宽从左排到右，排满再往上铺一层。
+  // 从上面落下来的话，圆底很滑，字母全滑到中间堆成一座小山，看不出碗有多宽（负责人 2026-11-02 指出）
+  // 关键词和非关键词的字母按句子里的比例混着
   const nLive = capN(CONFIG.lowerInitial);
-  const made = [];
   const keyShare = pool.length / CONFIG.sentences.join("").replace(/[\[\]\s]/g, "").length;
-  settle(Math.ceil(nLive / 6) + 120, () => {
-    for (let j = 0; j < 6 && made.length < nLive; j++) {
-      const y = G.neckBot + G.S * rand(0.05, 0.12);
+  const size = randSize() * G.fk, rowH = size * 0.9;
+  let made = 0;
+  for (let r = 0; made < nLive; r++) {
+    const y = G.bottom - rowH * (r + 0.6);
+    if (y < G.neckBot + G.S * CONFIG.dissolve.clearance * 2) break;
+    const half = halfAt(y) - size * 0.6;
+    let x = G.cx - half + rand(0, size * 0.4);
+    while (x < G.cx + half && made < nLive) {
       const key = Math.random() < keyShare;
       const src = key ? pool : others;
-      const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), weightOf(key), key, "lower",
-        G.cx + rand(-0.8, 0.8) * halfAt(y), y, rand(-1, 1));
+      const ch = src[Math.floor(Math.random() * src.length)];
+      const L = makeLetter(ch, randSize(), weightOf(key), key, "lower", x, y + rand(-1, 1) * size * 0.08, rand(-0.35, 0.35));
       // 预置的关键词字母各自已经留了一阵，保留期错开到期，开场不会先淡掉它们，也不会一起淡掉
       L.born = simTime - rand(0, CONFIG.dissolve.keyHold);
-      made.push(L);
+      x += L.w + size * rand(0.08, 0.3);
+      made++;
     }
-  });
+  }
+  settle(120);
 }
 
 /* ---------- 句子数据 ---------- */
