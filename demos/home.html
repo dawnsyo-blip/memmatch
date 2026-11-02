@@ -6,7 +6,7 @@
 <title>记忆库推荐</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
   /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
@@ -100,7 +100,8 @@ const CONFIG = {
   colors: { background: "#F4F3EF", text: "#111111" },
   font: {
     family: '"Cormorant Garamond", Georgia, serif',
-    weights: [400],          // 所有字母同一种字重
+    weight: 400,             // 普通字母的字重
+    keyWeight: 600,          // 关键词字母的字重：重一点，句子显示时和打散后都更醒目
     sizeMin: 20,             // 字号：沙漏高 800px 时的像素值，随沙漏大小等比缩放；两个值相同，所有字母同一个字号
     sizeMax: 20,
     minPx: 12,               // 屏幕上的最小字号（px）
@@ -158,7 +159,7 @@ const pushers = new Map();
 
 const rand = (a, b) => a + Math.random() * (b - a);
 const fontStr = (size, weight = 400) => `${weight} ${size.toFixed(1)}px ${CONFIG.font.family}`;
-const randWeight = () => CONFIG.font.weights[Math.floor(Math.random() * CONFIG.font.weights.length)];
+const weightOf = (isKey) => (isKey ? CONFIG.font.keyWeight : CONFIG.font.weight);
 const randSize = () => rand(CONFIG.font.sizeMin, CONFIG.font.sizeMax);
 const capN = (n) => Math.max(10, Math.round(n * G.cap * LOW));
 
@@ -315,7 +316,7 @@ function parseSentence(s) {
 
 function nextItems() {
   const s = CONFIG.sentences[sentenceIdx++ % CONFIG.sentences.length];
-  return parseSentence(s).map((t) => ({ text: t.text, isKey: t.key, sizeRef: randSize(), weight: randWeight(), released: false }));
+  return parseSentence(s).map((t) => ({ text: t.text, isKey: t.key, sizeRef: randSize(), weight: weightOf(t.key), released: false }));
 }
 
 // 把一句话排成居中的一行，放不下时折行
@@ -636,7 +637,7 @@ function prefill() {
       const y = G.neckBot + G.S * rand(0.05, 0.12);
       const key = Math.random() < keyShare;
       const src = key ? pool : others;
-      const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), randWeight(), key, "lower",
+      const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), weightOf(key), key, "lower",
         G.cx + rand(-0.8, 0.8) * halfAt(y), y, rand(-1, 1));
       L.born = -1000 + made.length;
       made.push(L);
@@ -727,7 +728,7 @@ function frame(now) {
 // 先等字体和句子；系统设了减少动态效果时只画堆好的一帧
 const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
 await Promise.race([
-  Promise.all([loadSentences(), ...CONFIG.font.weights.map((w) => document.fonts.load(fontStr(20, w), "Aa"))]).catch(() => {}),
+  Promise.all([loadSentences(), ...[CONFIG.font.weight, CONFIG.font.keyWeight].map((w) => document.fonts.load(fontStr(20, w), "Aa"))]).catch(() => {}),
   new Promise((r) => setTimeout(r, 2000)),
 ]);
 resize();
