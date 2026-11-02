@@ -86,7 +86,6 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
 <script type="module">
 /* ================= 可调参数 ================= */
-const PHI = (1 + Math.sqrt(5)) / 2; // 黄金比例 φ ≈ 1.618，沙漏的比例和在屏幕上的位置都按它来定
 const CONFIG = {
   // 句子从 sentencesUrl 读取（每句的 keywords 能通过瓶颈）；读不到时（比如直接双击打开文件）用下面这份备用。
   // 备用句子里方括号标出能通过的词，显示时不带方括号
@@ -144,8 +143,9 @@ const CONFIG = {
     order: "nearest",        // "nearest"：谁离瓶颈最近先吃谁，一个词吃完再挑下一个，像沙子一样从底下漏；
                              // "sentence"：一句一句吃（从离瓶颈最近的词开始，先往左到句首、再往右到句尾），要把句子从词堆里拽出来，词堆容易被顶得弹起来。
                              // 模拟里 nearest 往上弹的词少一半多，大幅弹起少八成
-    upperAir: 0.06,          // 上半部分的空气阻力：越大落得越慢、越不弹。0.012 会弹；0.06 时最快约每秒 310px，像沙子缓缓落下；0.08 更稳但像慢动作
-    sideDrop: true,          // 新句子一句靠左、一句靠右落下，贴着杯壁补进来（见 layoutItems）
+    upperAir: 0.08,          // 上半部分的空气阻力：越大落得越慢、越不弹。0.012 会弹；0.06 时最快约每秒 310px；修长的沙漏词堆更深，用 0.08 才压得住弹跳
+    pour: 1,                 // 新句子居中出现，松开后像被风吹着斜飘向杯壁（一句往左、一句往右），侧向的力 ÷ 重力；0 是笔直落下
+    pourTime: 1.4,           // 秒，松开后侧向的力持续多久
     // 真实沙漏的表面是凹的：出口正上方那一柱沙子沉得最快，四周的沙子顺着坡滑进去。
     // 这里让瓶颈正上方一柱里的词摩擦小、多受一点向下的力；两侧的词摩擦大，慢慢滑进坑里
     funnel: {
@@ -185,28 +185,27 @@ const CONFIG = {
   },
 
   // 以下比例都是相对整个沙漏的高度
+  // 以下比例都是相对沙漏总高（S）；沙漏要修长：总高约是最宽处的 1.7～1.8 倍
   hourglass: {
-    // 版面按黄金比例：
-    //   沙漏总高 = 屏幕高 ÷ φ（宽度不够时按宽度缩小）；
-    //   上方留白 : 下方留白 = 1 : φ，“find yours →”在下方留白的黄金分割点上（见 computeGeometry）；
-    //   上半部分 : 下半部分的高 = φ : 1；
-    //   上半部分的外框宽 : 高 = φ : 1，下半部分宽 : 高 = φ² : 1，算下来上口和底座一样宽
-    heightRatio: 1 / PHI,    // 沙漏总高占屏幕高度的比例
-    shortScreen: 560,        // 屏幕矮于这个高度（px，如手机横屏）时，留白太挤，沙漏改占屏幕高的 shortHeightRatio
-    shortHeightRatio: 0.74,
-    // 竖屏放不下黄金比例的宽度时，只收窄宽度、不缩小高度：手机上是一个更修长的沙漏
+    heightRatio: 0.8,        // 沙漏总高占屏幕高度的比例
+    shortScreen: 560,        // 屏幕矮于这个高度（px，如手机横屏）时改用 shortHeightRatio
+    shortHeightRatio: 0.84,
+    topShare: 0.38,          // 上下留白里上方占几成；下方多留一些放“find yours →”
+    findAt: 0.42,            // “find yours →”在下方留白从上往下几成的位置
     sideMargin: 24,          // 沙漏最宽处离屏幕左右边缘至少多少 px
     maxWidthOfScreen: 0.94,  // 沙漏最宽处不超过屏幕宽度的比例
-    minSlender: 0.6,         // 宽度最多收窄到黄金比例宽度的几成；再窄就整体缩小
-    upperHeight: 0.5,        // 上半部分（U 形漏斗）的高度
-    neckLength: 0.07,        // 中间细通道的长度；越短上下两半越近
-    lowerHeight: 0.5 / PHI,  // 下半部分的高度
-    upperWidth: 0.5 * PHI,   // 上口宽度
-    lowerWidth: 0.5 * PHI,   // 下半部分底宽（= 下半部分的高 × φ²）
+    minSlender: 0.75,        // 屏幕太窄时宽度最多收窄到几成；再窄就整体缩小
+    upperHeight: 0.52,       // 上半部分（U 形漏斗）的高度
+    neckLength: 0.12,        // 中间细通道的长度
+    lowerHeight: 0.36,       // 下半部分的高度；三段加起来是 1
+    upperWidth: 0.56,        // 上口宽度
+    lowerWidth: 0.6,         // 下半部分底宽：比上口略宽，看起来稳
     neckWidth: 0.03,         // 通道宽度
     upperCurve: 2.6,         // 上半部分轮廓：1 是直的 V 字，越大越像底部圆圆的 U 字
     lowerCurve: 1.2,         // 下半部分轮廓：1 是直的 ∧ 字，越大越像底部摊开的沙堆
   },
+  // 词数的基准：上半部分的面积 ÷ 字号缩放的平方等于这个数时，词数照 CONFIG 原值；面积小了按比例减少（G.cap）
+  capRef: 258880,
 
 
   // 性能较弱的设备（CPU 核数不超过 lowPower.cores）同时存在的词少一些
@@ -299,22 +298,21 @@ function computeGeometry() {
   const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
   // 高度定尺寸；宽度放不下时先收窄（最多到 minSlender），还不够再整体缩小
   const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
-  const golden = Math.max(hg.upperWidth, hg.lowerWidth);
+  const widest = Math.max(hg.upperWidth, hg.lowerWidth);
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
-  const S = Math.min((H * ratio) / frac, avail / (golden * hg.minSlender));
-  const slim = Math.min(1, avail / (S * golden));
+  const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
+  const slim = Math.min(1, avail / (S * widest));
   const k = S / 800;
   // 字号的缩放：跟着沙漏，但不小于 font.minPx
   const fk = Math.max(k, CONFIG.font.minPx / CONFIG.font.sizeMin);
-  // 上方留白 : 下方留白 = 1 : φ
-  const top = (H - S * frac) / (1 + PHI);
+  const top = (H - S * frac) * hg.topShare;
   const neckTop = top + S * hg.upperHeight;
   const neckBot = neckTop + S * hg.neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
     S, k, fk,
-    // 装得下的词数 ÷ 黄金比例宽度、字号不设下限时的词数
-    cap: slim * (k / fk) ** 2,
+    // 上半部分装得下多少词，相对 CONFIG 里词数的基准
+    cap: (S * hg.upperWidth * slim * S * hg.upperHeight) / fk ** 2 / 640000 / (CONFIG.capRef / 640000),
     cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
@@ -574,10 +572,8 @@ function layoutActive() {
   layoutItems(active.items);
 }
 
-// 把一句话排成一行，放不下时折行。flow.sideDrop 打开时一句靠左、一句靠右（按句子编号轮流），
-// 落下时贴着杯壁补进来，中间从瓶颈漏走，表面就凹下去；关掉时居中
+// 把一句话排成居中的一行，放不下时折行
 function layoutItems(items) {
-  const side = CONFIG.flow.sideDrop && items.length ? (items[0].sid % 2 ? -1 : 1) : 0;
   const k = G.fk;
   for (const it of items) {
     it.size = it.sizeRef * k;
@@ -597,7 +593,7 @@ function layoutItems(items) {
   let y = G.top + lineH * 0.6;
   for (const line of lines) {
     const total = line.reduce((s, it) => s + it.w, 0) + gap * (line.length - 1);
-    let x = side < 0 ? G.cx - maxW / 2 : side > 0 ? G.cx + maxW / 2 - total : G.cx - total / 2;
+    let x = G.cx - total / 2;
     for (const it of line) {
       it.x = x + it.w / 2;
       it.y = y;
@@ -828,6 +824,18 @@ function dropWord(w, topY, angle) {
     Body.setAngularVelocity(g.body, spin);
   }
   words.push(w);
+}
+
+// 新句子松开后的一小段时间里受一个侧向的力，斜飘向杯壁：一句往左、一句往右
+function pourSideways() {
+  const f = CONFIG.flow;
+  if (!f.pour) return;
+  const gs = engine.gravity.y * engine.gravity.scale * f.pour;
+  for (const w of words) {
+    if (w.zone !== "upper" || simTime - w.born > f.pourTime || w.sid < 0) continue;
+    const side = w.sid % 2 ? -1 : 1;
+    for (const g of w.segs) if (!g.body.isStatic) Body.applyForce(g.body, g.body.position, { x: side * g.body.mass * gs, y: 0 });
+  }
 }
 
 // 中间一柱沉得快：摩擦小、多一点向下的力；两侧摩擦大。表面因此凹下去
@@ -1070,11 +1078,10 @@ function resize() {
   if (active) layoutActive();
 }
 
-// 入口放在沙漏下方留白的黄金分割点上
+// 入口放在沙漏下方的留白里，离沙漏近一些
 const find = document.getElementById("find");
 function placeFind() {
-  // 下方留白的黄金分割点：离沙漏近、离屏幕底边远
-  find.style.top = `${G.bottom + (H - G.bottom) / (PHI * PHI)}px`;
+  find.style.top = `${G.bottom + (H - G.bottom) * CONFIG.hourglass.findAt}px`;
 }
 
 let resizeTimer = 0;
@@ -1162,6 +1169,7 @@ function step(dt) {
   updateLower(dt);
   movePushers();
   funnelFlow();
+  pourSideways();
   updateRibbons(dt);
   Engine.update(engine, 1000 / 60);
   clampSegs();
