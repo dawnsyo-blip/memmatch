@@ -98,9 +98,10 @@ const CONFIG = {
 
   // 字母数按沙漏能装下的面积折算（见 G.cap）
   upperLetters: 200,         // 上半部分低于这个数就补下一句
-  lowerLetters: 200,         // 下半部分最多保留多少个字母，超过时从沙堆最底下的开始淡掉、移走
-  lowerInitial: 200,         // 页面打开时下半部分预置多少个字母
+  lowerLetters: 280,         // 下半部分最多保留多少个字母，超过时从沙堆最底下的开始淡掉、移走（下泡比上泡大，比黑白版的 200 多）
+  lowerInitial: 280,         // 页面打开时下半部分预置多少个字母
   // 下半部分不留痕迹：字母太多时，从沙堆最底下的开始淡掉移走，整堆跟着缓缓下沉；不会留下空洞，也不会悬空
+  wallSlide: 0.6,            // 贴着下泡侧壁的字母受到的往中间推的力 ÷ 重力，让它们顺着圆底滑下来
   dissolve: {
     time: 0.8,               // 秒，最底下的字母淡掉所用的时间
     clearance: 0.07,         // 沙堆堆到离通道出口这么近（÷ 沙漏高度）时，底下多退几个
@@ -131,12 +132,26 @@ const CONFIG = {
     heightRatio: 0.8, shortScreen: 560, shortHeightRatio: 0.84,
     topShare: 0.38, findAt: 0.42,
     sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，比例不变
-    // 手机（屏幕宽不超过 phoneMaxWidth）上高 : 宽改成 phoneAspect：上口和底座按同一倍数加宽
-    phoneMaxWidth: 600, phoneAspect: 3 / 2,
-    // 总高 : 最宽处约 16 : 9；上口窄，下半部分宽、更有分量
-    upperHeight: 0.44, neckLength: 0.14, lowerHeight: 0.42,
-    upperWidth: 0.44, lowerWidth: 0.5625, neckWidth: 0.03,
-    upperCurve: 2.6, lowerCurve: 1.2,
+    // 手机（屏幕宽不超过 phoneMaxWidth）上：先把上口和底座按同一倍数加宽到高 : 宽 = phoneAspect，
+    // 再缩短上下泡之间的瓶颈，让总高变矮到 phoneTarget（负责人 2026-11-02 要求手机上 4 : 3，通过缩短距离、不再加宽）。
+    // 电脑上不加宽，直接缩短到 desktopTarget
+    phoneMaxWidth: 600, phoneAspect: 3 / 2, phoneTarget: 4 / 3,
+    desktopTarget: 3 / 2,    // 电脑上的高 : 宽（负责人 2026-11-02 要求从 16 : 9 改成 3 : 2，同样靠缩短距离，不加宽）
+    minNeck: 0.08,           // 瓶颈最短留多长（÷ 沙漏总高）。再短的话，瓶颈口附近存不住字母，流量会掉：
+                             // 模拟里瓶颈 0.08 时每秒约 9 个字母，0.06 时 7.5 个，0.03 时只剩 5.5 个
+                             // 瓶颈缩到最短还不够时，再缩下泡顶上那段空着的竖直壁（字母都堆在碗底里）
+    // 总高 : 最宽处约 16 : 9。下面的玻璃泡比上面的大一圈（负责人 2026-11-02 要求）：
+    // 上泡宽 0.40、高 0.40，下泡宽 0.5625、高 0.46，下泡碗底的半径约是上泡的 1.4 倍
+    upperHeight: 0.40, neckLength: 0.14, lowerHeight: 0.46,
+    upperWidth: 0.40, lowerWidth: 0.5625, neckWidth: 0.03,
+    // 轮廓（负责人 2026-11-02 要求改成半圆，像沙漏的玻璃泡）：上下两部分都是“竖直的壁＋半圆的碗底”。
+    // 上半部分的碗底朝下收进瓶颈；下半部分的碗底在最下面，中间最低、两边往上翘
+    upperRound: 1,           // 上半部分碗底的半径 ÷ 上口半宽；1 是正好半圆，越小碗底越浅、竖直的壁越长
+    // 喉部（负责人 2026-11-02 要求把收窄的地方画出来）：上泡的碗底不直接收进瓶颈，先收到 throatWidth，
+    // 再沿一条平滑的曲线收窄到瓶颈的宽度，进瓶颈时是竖直的；字母会填进这一段，收窄的形状就看得出来
+    throatHeight: 0.12,      // 喉部的高度 ÷ 沙漏总高，从上泡里分出来（负责人要求再长一点，原来 0.08）
+    throatWidth: 0.6,        // 碗底和喉部交界处的半宽 ÷ 上口半宽（负责人要求再宽一点，原来 0.45）
+    lowerRound: 1,           // 下半部分碗底的半径 ÷ 底座半宽
   },
   capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
 
@@ -191,11 +206,17 @@ function measure(text, size, weight) {
 
 function computeGeometry() {
   const hg = CONFIG.hourglass;
-  const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
   const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
   // 下面的宽度按 16 : 9 设定；手机上按 phoneAspect 等比加宽
-  const ws = W <= hg.phoneMaxWidth ? 16 / 9 / hg.phoneAspect : 1;
+  const phone = W <= hg.phoneMaxWidth;
+  const ws = phone ? 16 / 9 / hg.phoneAspect : 1;
   const widest = Math.max(hg.upperWidth, hg.lowerWidth) * ws;
+  // 手机上缩短瓶颈，总高 : 最宽处 = phoneTarget
+  const full = hg.upperHeight + hg.neckLength + hg.lowerHeight;
+  const cut = Math.max(0, full - widest * (phone ? hg.phoneTarget : hg.desktopTarget));
+  const neckLength = Math.max(hg.minNeck, hg.neckLength - cut);
+  const lowerHeight = Math.max(hg.lowerHeight - (cut - (hg.neckLength - neckLength)), Math.max(hg.lowerWidth * ws / 2 * hg.lowerRound, 0) + 0.02);
+  const frac = hg.upperHeight + neckLength + lowerHeight;
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
   const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
   const slim = Math.min(1, avail / (S * widest));
@@ -203,12 +224,12 @@ function computeGeometry() {
   const fk = Math.max(k, CONFIG.font.minPx / CONFIG.font.sizeMin);
   const top = (H - S * frac) * hg.topShare;
   const neckTop = top + S * hg.upperHeight;
-  const neckBot = neckTop + S * hg.neckLength;
+  const neckBot = neckTop + S * neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
     S, k, fk,
     cap: (S * hg.upperWidth * ws * slim * S * hg.upperHeight) / fk ** 2 / CONFIG.capRef,
-    cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
+    cx: W / 2, top, bottom: neckBot + S * lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
     neckHalf,
@@ -221,14 +242,33 @@ function computeGeometry() {
 function halfAt(y) {
   const g = G, hg = CONFIG.hourglass;
   if (y <= g.top) return g.maxHalf;
-  if (y >= g.bottom) return g.baseHalf;
+  if (y >= g.bottom) return 0;
   if (y < g.neckTop) {
-    const v = (y - g.top) / (g.neckTop - g.top);
-    return g.neckHalf + (g.maxHalf - g.neckHalf) * (1 - Math.pow(v, hg.upperCurve));
+    // 上半部分：竖直的壁 → 半圆碗底 → 喉部 → 瓶颈
+    const R = g.maxHalf * hg.upperRound, off = g.maxHalf - R;
+    const th = G.S * hg.throatHeight, yT = g.neckTop - th;
+    const wT = Math.max(g.neckHalf, g.maxHalf * hg.throatWidth);
+    // 圆心放在让碗底在 yT 处正好收到 wT 的位置
+    const dT = Math.sqrt(Math.max(0, R * R - (wT - off) ** 2));
+    const cy = yT - dT;
+    if (y <= cy) return g.maxHalf;
+    if (y <= yT) {
+      const d = y - cy;
+      return off + Math.sqrt(Math.max(0, R * R - d * d));
+    }
+    // 喉部：三次 Hermite 曲线，起点的斜率接上碗底，终点竖直进瓶颈
+    const v = (y - yT) / th;
+    const m0 = Math.max(-(dT / Math.max(1e-6, wT - off)) * th, -2.9 * (wT - g.neckHalf)); // 太陡会冲过头，限一下
+    const h00 = 2 * v ** 3 - 3 * v * v + 1, h10 = v ** 3 - 2 * v * v + v, h01 = -2 * v ** 3 + 3 * v * v;
+    return Math.max(g.neckHalf, h00 * wT + h10 * m0 + h01 * g.neckHalf);
   }
   if (y <= g.neckBot) return g.neckHalf;
-  const v = (y - g.neckBot) / (g.bottom - g.neckBot);
-  return g.exitHalf + (g.baseHalf - g.exitHalf) * Math.pow(v, hg.lowerCurve);
+  // 下半部分：圆心在底边正上方 R 处，碗底以上是竖直的壁
+  const R = Math.min(g.baseHalf * hg.lowerRound, g.bottom - g.neckBot);
+  const cy = g.bottom - R;
+  if (y <= cy) return g.baseHalf;
+  const d = y - cy;
+  return g.baseHalf - R + Math.sqrt(Math.max(0, R * R - d * d));
 }
 
 function segmentWalls(pts, side, T) {
@@ -241,7 +281,8 @@ function segmentWalls(pts, side, T) {
     walls.push(Bodies.rectangle(
       (a.x + b.x) / 2 + (nx * T) / 2, (a.y + b.y) / 2 + (ny * T) / 2,
       len + T * 0.2, T,
-      { isStatic: true, angle: Math.atan2(dy, dx), friction: 0.2 },
+      // 墙面很滑：圆底的弧面上字母能顺着滑到底，不会停在看不见的弧形墙上像悬着一样
+      { isStatic: true, angle: Math.atan2(dy, dx), friction: 0.02, frictionStatic: 0.05 },
     ));
   }
 }
@@ -249,7 +290,7 @@ function segmentWalls(pts, side, T) {
 function buildWalls() {
   if (walls.length) Composite.remove(world, walls);
   walls = [];
-  const g = G, T = Math.max(40, g.S * 0.08), N = 14;
+  const g = G, T = Math.max(40, g.S * 0.08), N = 40; // 段数多一些，弧线和喉部才圆
   for (const side of [-1, 1]) {
     const up = [{ x: g.cx + side * g.maxHalf, y: -T * 2 }];
     for (let i = 0; i <= N; i++) {
@@ -476,6 +517,17 @@ function updateLower(dt) {
   const limitY = G.neckBot + G.S * d.clearance;
   const rest = 0.2 * G.k;
   const tooHigh = live.some((L) => L.body.speed < rest && L.body.position.y - L.h / 2 < limitY);
+  // 贴着下泡侧壁、几乎不动的字母，往中间、往下推一点，顺着弧面滑进沙堆。
+  // 物理引擎的静摩擦取接触双方里较大的（字母是 0.9），光把墙面调滑不够，字母还会停在陡的弧面上，墙看不见，就像悬着
+  const slide = engine.gravity.y * engine.gravity.scale * CONFIG.wallSlide;
+  for (const L of live) {
+    const b = L.body, p = b.position;
+    if (b.speed > 0.5 * G.k || p.y > G.bottom - L.h * 1.5) continue;
+    const gap = halfAt(p.y) - Math.abs(p.x - G.cx);
+    if (gap > L.h * 2.5) continue;
+    Sleeping.set(b, false);
+    Body.applyForce(b, p, { x: Math.sign(G.cx - p.x) * b.mass * slide, y: b.mass * slide * 0.5 });
+  }
   const want = live.length - capN(CONFIG.lowerLetters) + (tooHigh ? 4 : 0);
   if (want > 0) {
     // 从最底下的开始；还在保留期里的关键词字母排到最后，只有实在没有别的可退时才轮到
@@ -649,22 +701,30 @@ function prefill() {
   // 下半部分：先铺一层痕迹，再落一层清楚的字母
   const pool = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => t.key).map((t) => t.text)).join("");
   const others = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => !t.key).map((t) => t.text)).join("");
-  // 每帧落 6 个；关键词和非关键词的字母按句子里的比例混着
+  // 直接一层层铺在碗底：从最底下开始，每层按那个高度的碗宽从左排到右，排满再往上铺一层。
+  // 从上面落下来的话，圆底很滑，字母全滑到中间堆成一座小山，看不出碗有多宽（负责人 2026-11-02 指出）
+  // 关键词和非关键词的字母按句子里的比例混着
   const nLive = capN(CONFIG.lowerInitial);
-  const made = [];
   const keyShare = pool.length / CONFIG.sentences.join("").replace(/[\[\]\s]/g, "").length;
-  settle(Math.ceil(nLive / 6) + 120, () => {
-    for (let j = 0; j < 6 && made.length < nLive; j++) {
-      const y = G.neckBot + G.S * rand(0.05, 0.12);
+  const size = randSize() * G.fk, rowH = size * 0.9;
+  let made = 0;
+  for (let r = 0; made < nLive; r++) {
+    const y = G.bottom - rowH * (r + 0.6);
+    if (y < G.neckBot + G.S * CONFIG.dissolve.clearance * 2) break;
+    const half = halfAt(y) - size * 0.6;
+    let x = G.cx - half + rand(0, size * 0.4);
+    while (x < G.cx + half && made < nLive) {
       const key = Math.random() < keyShare;
       const src = key ? pool : others;
-      const L = makeLetter(src[Math.floor(Math.random() * src.length)], randSize(), weightOf(key), key, "lower",
-        G.cx + rand(-0.8, 0.8) * halfAt(y), y, rand(-1, 1));
+      const ch = src[Math.floor(Math.random() * src.length)];
+      const L = makeLetter(ch, randSize(), weightOf(key), key, "lower", x, y + rand(-1, 1) * size * 0.08, rand(-0.35, 0.35));
       // 预置的关键词字母各自已经留了一阵，保留期错开到期，开场不会先淡掉它们，也不会一起淡掉
       L.born = simTime - rand(0, CONFIG.dissolve.keyHold);
-      made.push(L);
+      x += L.w + size * rand(0.08, 0.3);
+      made++;
     }
-  });
+  }
+  settle(120);
 }
 
 /* ---------- 句子数据 ---------- */

@@ -116,8 +116,10 @@ const CONFIG = {
     topShare: 0.38, findAt: 0.42,
     sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，比例不变
     // 手机（屏幕宽不超过 phoneMaxWidth）上：先把上口和底座按同一倍数加宽到高 : 宽 = phoneAspect，
-    // 再缩短上下泡之间的瓶颈，让总高变矮到 phoneTarget（负责人 2026-11-02 要求手机上 4 : 3，通过缩短距离、不再加宽）
+    // 再缩短上下泡之间的瓶颈，让总高变矮到 phoneTarget（负责人 2026-11-02 要求手机上 4 : 3，通过缩短距离、不再加宽）。
+    // 电脑上不加宽，直接缩短到 desktopTarget
     phoneMaxWidth: 600, phoneAspect: 3 / 2, phoneTarget: 4 / 3,
+    desktopTarget: 3 / 2,    // 电脑上的高 : 宽（负责人 2026-11-02 要求从 16 : 9 改成 3 : 2，同样靠缩短距离，不加宽）
     minNeck: 0.08,           // 瓶颈最短留多长（÷ 沙漏总高）。再短的话，瓶颈口附近存不住字母，流量会掉：
                              // 模拟里瓶颈 0.08 时每秒约 9 个字母，0.06 时 7.5 个，0.03 时只剩 5.5 个
                              // 瓶颈缩到最短还不够时，再缩下泡顶上那段空着的竖直壁（字母都堆在碗底里）
@@ -194,7 +196,7 @@ function computeGeometry() {
   const widest = Math.max(hg.upperWidth, hg.lowerWidth) * ws;
   // 手机上缩短瓶颈，总高 : 最宽处 = phoneTarget
   const full = hg.upperHeight + hg.neckLength + hg.lowerHeight;
-  const cut = phone ? Math.max(0, full - widest * hg.phoneTarget) : 0;
+  const cut = Math.max(0, full - widest * (phone ? hg.phoneTarget : hg.desktopTarget));
   const neckLength = Math.max(hg.minNeck, hg.neckLength - cut);
   const lowerHeight = Math.max(hg.lowerHeight - (cut - (hg.neckLength - neckLength)), Math.max(hg.lowerWidth * ws / 2 * hg.lowerRound, 0) + 0.02);
   const frac = hg.upperHeight + neckLength + lowerHeight;
