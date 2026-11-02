@@ -25,6 +25,7 @@ demos/               新前端样张
   home.html          首页（字母沙漏）
   home-blue.html、quiz-blue.html     蓝色主题的首页和问卷页（和黑白版对照）
   home-purple.html、quiz-purple.html 紫色主题的首页和问卷页（做法同蓝色主题，只换颜色）
+  home-dark.html、quiz-dark.html     黑白版的深色模式（只换颜色）
   fonts-compare.html 字体对比：Cormorant Garamond、Inter、IBM Plex Mono、Source Serif 4 四种方案排同样的内容
   quiz.html          问卷页
   catalog.html、about.html   项目目录页、关于页（占位）
@@ -181,6 +182,7 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
     - 字体（负责人 2026-11-02 要求换成开源的印刷体，选了打字机等宽；看过 `fonts-compare.html` 的四种方案后确定用它）：英文 IBM Plex Mono，中文思源黑体 Noto Sans SC，都从 Google Fonts 加载 400 和 600，都是 OFL 授权。只在蓝色主题两页的 `:root` 里改 `--font-en`、`--font-zh`，首页画布的 `CONFIG.font.family` 也换了。等宽字体同字号下更大、更宽，沙漏里的字号从 20 降到 17。首页抽屉不再用思源宋体的子集字体。
     - 坑：`--font-en` 里不能写通用的 `monospace`。页面上是 `font-family: var(--font-en), var(--font-zh)`，写了的话中文会先落到系统的等宽中文字体上，字距很松，轮不到后面的思源黑体。
     - 试过但负责人不要的：要读的字用深墨色 `#162D43`、主题蓝只标关键词和选中的答案（提交 b768abe）。
+  - 深色模式 `demos/home-dark.html`、`demos/quiz-dark.html`（负责人 2026-11-02 要求把黑白版做成深色看看；原来定过“新前端只做浅色”，这是对照样张）：由 `home.html`、`quiz.html` 复制，在样式最后覆盖颜色变量，再改 CONFIG 的 `colors`、`gray` 和两页之间的链接。颜色在 OKLCH 里推导，保留浅色版米白纸的暖调（色相约 95°）：底 `#141412`（不用纯黑）、文字 `#E9E8E2`（不用纯白，对比度 15.0）、说明文字 `#ACABA5`（8.0）、题数 `#7B7A76`（4.3）、过了瓶颈的普通字母 `#64635F`（3.1）、细线 `#2E2E2B`。抽屉遮罩改成 `rgb(0 0 0 / .55)`，浅色版的淡遮罩在深底上看不出来；`color-scheme: dark` 让滚动条、输入框也变成深色。
   - 紫色主题 `demos/home-purple.html`、`demos/quiz-purple.html`（负责人 2026-11-02 要求另做一版，给了一张蓝紫色文字排成形状的参考图，`images/9.jpg`）：由蓝色主题的两页复制，只换颜色变量、CONFIG 的 `colors`、`gray` 和两页之间的链接。颜色从参考图取（文字平均约 `#493BB3`，底色 `#F8F8FA`），在 OKLCH 里按同一色相 281° 推导：底色 `#F8F8FB`、文字 `#4A3DB4`（对比度 7.6，比蓝色版的 4.6 好读）、浅紫 `#AFB3E4`（过了瓶颈的普通字母）、弱文字 `#9599D0`、细线 `#DEE0F2`。
     - `quiz-blue.html` 由 `quiz.html` 复制，只在样式最后加了一段颜色覆盖，并把返回首页的链接指向 `home-blue.html`。改问卷的功能时两个文件要一起改，定下来以后合并成一个。
     - 负责人问过“蓝色版在手机上底色透着暖色”：截图读出底色像素确实是冷色。原因多半是手机的护眼、原彩显示，或者大片饱和的蓝让近中性的浅色看起来偏暖（同时对比），所以纸色改成更带蓝意的 `#F2FAFF`。
