@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>答题 · 记忆库推荐</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="book.css">
+<style>
+  /* 书页式答题页（样张）：一屏一题，没有卡片和边框，靠字号、留白和选中后的明暗分层 */
+
+  /* ---------- 进度：顶部一根细线 ---------- */
+  .progress { position: fixed; z-index: 20; top: 0; left: 0; right: 0; height: 2px; background: var(--rule); }
+  .progress i { display: block; height: 100%; width: 0; background: var(--ink); transition: width .5s var(--ease-out); }
+
+  .page {
+    max-width: calc(36rem + var(--gutter) * 2);
+    margin: 0 auto;
+    padding: clamp(72px, 14vh, 144px) var(--gutter) 0;
+    min-height: 100svh;
+    display: flex; flex-direction: column;
+  }
+  .card { transition: opacity .2s var(--ease-out), transform .2s var(--ease-out); }
+  .card.out { opacity: 0; transform: translateY(-8px); }
+  .card.in { opacity: 0; transform: translateY(8px); transition: none; }
+
+  /* ---------- 题目 ---------- */
+  .part { margin: 0 0 var(--s-3); font-size: 14px; line-height: 21px; color: var(--ink-soft); }
+  .part[hidden] { display: none; }
+  .num { margin: 0; font-family: var(--font-num); font-size: 28px; line-height: 36px; color: var(--ink-soft); font-variant-numeric: lining-nums; }
+  .title-row { position: relative; display: flex; align-items: flex-start; gap: var(--s-1); margin-top: var(--s-1); }
+  h1 {
+    margin: 0;
+    font-family: var(--font-serif); font-weight: 600;
+    font-size: 24px; line-height: 36px;
+    letter-spacing: .02em;
+  }
+  @media (min-width: 640px) { h1 { font-size: 28px; line-height: 42px; } }
+
+  /* 题目的补充说明：标题后面一个 i 图标，点按（电脑上也可悬停）后在标题下方展开 */
+  .info { flex: none; width: var(--tap); height: var(--tap); margin: -4px -12px 0 0; display: grid; place-items: center; color: var(--ink-soft); }
+  @media (min-width: 640px) { .info { margin-top: -1px; } }
+  .info svg { display: block; width: 18px; height: 18px; }
+  .info[aria-expanded="true"], .info:hover { color: var(--ink); }
+  .info[hidden] { display: none; }
+  .tip {
+    margin: var(--s-2) 0 0; padding: var(--s-2) var(--s-2) var(--s-2) var(--s-3);
+    border-left: 1px solid var(--ink);
+    font-size: 14px; line-height: 24px; color: var(--ink-soft);
+    white-space: pre-line;
+    max-width: 32em;
+  }
+  .tip[hidden] { display: none; }
+  /* 必须读的提示（排序题按什么排、预先选好了）直接显示 */
+  .note { margin: var(--s-2) 0 0; font-size: 14px; line-height: 21px; color: var(--ink-soft); }
+  .note[hidden] { display: none; }
+
+  /* ---------- 选项 ---------- */
+  .options { list-style: none; margin: var(--s-4) 0 0; padding: 0; }
+  .opt {
+    display: flex; align-items: flex-start; gap: var(--s-2);
+    width: 100%; min-height: var(--tap);
+    padding: 10px 0;
+    text-align: left;
+    transition: color .2s var(--ease-out), opacity .15s var(--ease-out);
+  }
+  .opt .mark { flex: none; width: 18px; height: 24px; display: grid; place-items: center; }
+  .opt .mark svg { display: block; width: 18px; height: 18px; overflow: visible; }
+  .opt .mark .on { opacity: 0; transition: opacity .15s; }
+  .opt[aria-checked="true"] .mark .on { opacity: 1; }
+  .opt .rank {
+    width: 18px; height: 18px; border: 1.5px solid currentColor;
+    font-family: var(--font-num); font-size: 12px; line-height: 15px; text-align: center;
+  }
+  .opt[aria-checked="true"] .rank { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .opt .text { display: flex; flex-direction: column; }
+  .opt .ohelp { font-size: 14px; line-height: 21px; color: var(--ink-soft); white-space: pre-line; margin-top: 2px; }
+  /* 选了以后，没选的那些变浅，像被过滤掉；仍能读清、随时能改选 */
+  .options.picked .opt[aria-checked="false"] { color: var(--ink-soft); }
+  .options.picked .opt[aria-checked="false"]:hover { color: var(--ink); }
+  .options.leaving .opt[aria-checked="false"] { opacity: 0; }
+  .clash { margin-left: var(--s-1); padding: 0 4px; border: 1px solid var(--rule); font-size: 12px; line-height: 18px; color: var(--ink-soft); white-space: nowrap; vertical-align: 2px; }
+  /* 填空：选中带填空的选项后出现在它下面 */
+  .free {
+    display: block;
+    width: calc(100% - 30px); max-width: 24em;
+    margin: -4px 0 var(--s-1) 30px;
+    padding: 6px 0;
+    font: inherit; color: var(--ink);
+    background: transparent;
+    border: 0; border-bottom: 1px solid var(--ink-soft); border-radius: 0;
+  }
+  .free::placeholder { color: var(--ink-soft); }
+  .free:focus { outline: none; border-bottom-color: var(--ink); box-shadow: 0 1px 0 var(--ink); }
+  .free[hidden] { display: none; }
+
+  /* 前后矛盾 */
+  .conflict { margin: var(--s-3) 0 0; font-size: 14px; line-height: 21px; color: var(--ink-soft); }
+  .conflict p { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: var(--s-2); }
+  .conflict p + p { margin-top: var(--s-1); }
+  .conflict[hidden] { display: none; }
+  .textlink { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; padding: 11px 0; margin: -11px 0; }
+  .textlink[hidden] { display: none; }
+
+  /* ---------- 底部：上一题、下一题；手机上贴在屏幕底部 ---------- */
+  .foot {
+    position: sticky; bottom: 0;
+    display: flex; align-items: center; gap: var(--s-3);
+    margin-top: var(--s-5);
+    padding: var(--s-3) 0 max(var(--s-3), env(safe-area-inset-bottom));
+    background: linear-gradient(transparent, var(--paper) 35%);
+  }
+  .foot .spacer { flex: 1; }
+  .back { display: inline-flex; align-items: center; gap: 6px; min-height: var(--tap); color: var(--ink-soft); }
+  .back:hover { color: var(--ink); }
+  .back[hidden] { visibility: hidden; display: inline-flex; }
+  .next {
+    display: inline-flex; align-items: center; gap: var(--s-1);
+    min-height: var(--tap); padding: 0 20px;
+    background: var(--ink); color: var(--paper);
+    border-radius: 2px;
+    transition: background .2s, color .2s;
+  }
+  .next:disabled { background: var(--rule); color: var(--ink-soft); cursor: default; }
+  .back svg, .next svg { display: block; width: 16px; height: 16px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card, .opt, .progress i { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" role="progressbar" aria-label="答题进度" aria-valuemin="0"><i id="bar"></i></div>
+
+<button type="button" class="menu-btn" id="menuBtn" aria-label="关于这份问卷" aria-expanded="false" aria-controls="drawer">
+  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5h14M3 13.5h9" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+</button>
+
+<main class="page">
+  <div class="card" id="card">
+    <p class="part" id="part" hidden></p>
+    <p class="num" id="num"></p>
+    <div class="title-row">
+      <h1 id="qtitle"></h1>
+      <button type="button" class="info" id="infoBtn" aria-label="这道题的说明" aria-expanded="false" aria-controls="tip" hidden>
+        <svg viewBox="0 0 18 18" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="9" cy="9" r="7.5"/><path d="M9 8v5"/></g><circle cx="9" cy="5.4" r=".9" fill="currentColor"/></svg>
+      </button>
+    </div>
+    <p class="tip" id="tip" hidden></p>
+    <p class="note" id="rankNote" hidden></p>
+    <p class="note" id="defnote" hidden>已按您前面的回答预先选好，可以修改。</p>
+    <ul class="options" id="options"></ul>
+    <div class="conflict" id="conflict" role="status" aria-live="polite" hidden></div>
+  </div>
+
+  <nav class="foot" aria-label="翻页">
+    <button type="button" class="back" id="prev">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>上一题
+    </button>
+    <span class="spacer"></span>
+    <button type="button" class="textlink" id="backLatest" hidden></button>
+    <button type="button" class="next" id="next">
+      <span id="nextText">下一题</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </nav>
+</main>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-labelledby="drawerTitle" inert>
+  <button type="button" class="drawer-close" id="drawerClose" aria-label="关闭">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 4.5l11 11M15.5 4.5l-11 11" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+  </button>
+  <h2 id="drawerTitle">关于这份问卷</h2>
+  <p>从两百多个开源记忆项目里，挑出适合您的几个。</p>
+  <p>您的设备和所用的 LLM、入口决定哪些项目能用；您对记忆的偏好决定它们的先后。</p>
+  <p>答卷只保存在您的浏览器里，可以随时离开，下次接着答。</p>
+  <div class="drawer-actions" id="drawerActions">
+    <a href="home.html">返回首页</a>
+    <a href="../site/result.html" id="lastResult" hidden>查看上次的结果</a>
+    <button type="button" id="resetBtn" data-confirm="清空已经填的答案，从第 1 题重新开始？">清空答卷</button>
+  </div>
+</aside>
+
+<script type="module" src="drawer.js"></script>
+<script type="module">
+// 答题页样张：读问卷配置，一屏一题。答题逻辑（跳题、默认勾选、前后矛盾、存档、改完互斥的题回到出发的那道题）照搬 site/assets/quiz.js
+import { checkCondition, findConflicts } from "../engine/index.js";
+
+const KEY = "memsite-quiz-v3";
+const NS = "http://www.w3.org/2000/svg";
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (id) => document.getElementById(id);
+
+/* ---------- 配置 ---------- */
+const cfg = await fetch("../data/questionnaire/questions.json").then((r) => r.json());
+const partOf = {};
+cfg.parts.forEach((p, k) => p.questions.forEach((id) => { partOf[id] = k; }));
+const QS = cfg.questions.map((q) => ({
+  id: q.id,
+  number: q.number || q.id.slice(1),
+  part: partOf[q.id],
+  type: q.type,
+  text: q.text,
+  help: q.help,
+  show_if: q.show_if,
+  options: q.options.map((o) => ({ id: o.id, label: o.label, help: o.help, free: !!o.free_text, exclusive: !!o.exclusive, def: o.default_if })),
+}));
+const byId = Object.fromEntries(QS.map((q) => [q.id, q]));
+const numText = (q) => `第 ${q.number} 题`;
+
+/* ---------- 答卷 ---------- */
+let state = { cur: QS[0].id, answers: {}, free: {}, seen: {} };
+try {
+  const s = JSON.parse(localStorage.getItem(KEY));
+  if (s && s.answers) state = { ...state, ...s, cur: byId[s.cur] ? s.cur : (QS.find((q) => !s.answers[q.id]) || QS[0]).id };
+} catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const sel = (qid) => state.answers[qid] || [];
+const visible = () => QS.filter((q) => !q.show_if || checkCondition(q.show_if, state.answers));
+const curQ = () => byId[state.cur];
+const latest = () => visible().filter((q) => state.seen[q.id]).pop();
+
+/* ---------- 进度：答到的最远处为准，往回翻不倒退 ---------- */
+function drawProgress() {
+  const list = visible(), q = curQ(), idx = list.indexOf(q), far = latest();
+  const floor = far ? list.indexOf(far) + (sel(far.id).length ? 1 : 0) : 0;
+  const v = Math.max(floor, idx + (sel(q.id).length ? 1 : 0));
+  $("bar").style.width = (v / list.length * 100).toFixed(2) + "%";
+  const p = $("progress");
+  p.setAttribute("aria-valuemax", list.length);
+  p.setAttribute("aria-valuenow", v);
+  p.setAttribute("aria-valuetext", `${numText(q)}，共 ${list.length} 题`);
+}
+
+/* ---------- 选项的记号：单选圆圈、多选方框、排序方框里写名次 ---------- */
+function svg(tag, attrs, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function markFor(type) {
+  const span = document.createElement("span");
+  span.className = "mark";
+  span.setAttribute("aria-hidden", "true");
+  if (type === "rank") {
+    span.innerHTML = '<span class="rank"></span>';
+    return span;
+  }
+  const s = svg("svg", { viewBox: "0 0 18 18" }, span);
+  if (type === "single") {
+    svg("circle", { cx: 9, cy: 9, r: 7.75, fill: "none", stroke: "currentColor", "stroke-width": 1.5 }, s);
+    svg("circle", { class: "on", cx: 9, cy: 9, r: 4, fill: "currentColor" }, s);
+  } else {
+    svg("rect", { x: 1.25, y: 1.25, width: 15.5, height: 15.5, fill: "none", stroke: "currentColor", "stroke-width": 1.5 }, s);
+    svg("path", { class: "on", d: "M4.5 9.2l3 3 6-6.4", fill: "none", stroke: "currentColor", "stroke-width": 1.7 }, s);
+  }
+  return span;
+}
+
+/* ---------- 选择 ---------- */
+function choose(idx, via) {
+  const q = curQ(), o = q.options[idx];
+  let s = [...sel(q.id)];
+  if (q.type === "single") s = [o.id];
+  else if (s.includes(o.id)) s = s.filter((x) => x !== o.id);
+  else if (o.exclusive) s = [o.id];
+  else s = s.filter((x) => !q.options.find((p) => p.id === x)?.exclusive).concat(o.id);
+  state.answers[q.id] = s;
+  $("defnote").hidden = true;
+  save();
+  renderMarks();
+  drawProgress();
+  renderConflicts();
+  updateNav();
+  if (o.free && s.includes(o.id) && via !== "input") $("options").children[idx].querySelector(".free")?.focus();
+}
+
+function renderMarks() {
+  const q = curQ(), s = sel(q.id);
+  $("options").classList.toggle("picked", s.length > 0);
+  [...$("options").children].forEach((li, k) => {
+    const o = q.options[k], on = s.includes(o.id);
+    li.querySelector(".opt").setAttribute("aria-checked", on);
+    const r = li.querySelector(".rank");
+    if (r) r.textContent = on ? s.indexOf(o.id) + 1 : "";
+    const f = li.querySelector(".free");
+    if (f) f.hidden = !on;
+  });
+}
+
+// 前后矛盾：只写“与历史选项互斥”和去那道题修改的按钮，被排斥的选项后面标“互斥”；完整原因留到结果页
+function renderConflicts() {
+  const box = $("conflict"), id = state.cur;
+  const cs = findConflicts(cfg, state.answers).filter((c) => c.by_question === id || c.question === id);
+  const others = new Map();
+  for (const c of cs) {
+    const o = c.question === id ? c.by_question : c.question;
+    others.set(o, (others.has(o) ? others.get(o) : true) && c.partial);
+  }
+  box.replaceChildren(...[...others].map(([o, partial]) => {
+    const p = document.createElement("p");
+    p.append(partial ? "与历史选项部分互斥" : "与历史选项互斥");
+    if (o !== state.detour) {
+      const b = Object.assign(document.createElement("button"), { type: "button", className: "textlink", textContent: `去${numText(byId[o])}修改` });
+      b.addEventListener("click", () => jump(o));
+      p.append(b);
+    }
+    return p;
+  }));
+  box.hidden = !others.size;
+  const clashed = new Set(cs.filter((c) => c.question === id).map((c) => c.option));
+  [...$("options").children].forEach((li, k) => {
+    li.querySelector(".clash")?.remove();
+    if (clashed.has(curQ().options[k].id)) li.querySelector(".label").after(Object.assign(document.createElement("span"), { className: "clash", textContent: "互斥" }));
+  });
+}
+
+/* ---------- 渲染一道题 ---------- */
+function applyDefaults(q) {
+  if (state.seen[q.id] || sel(q.id).length) return false;
+  state.seen[q.id] = true;
+  const picks = q.options.filter((o) => o.def && checkCondition(o.def, state.answers)).map((o) => o.id);
+  if (!picks.length) return false;
+  state.answers[q.id] = q.type === "single" ? picks.slice(0, 1) : picks;
+  save();
+  return true;
+}
+
+function setTip(open) {
+  $("tip").hidden = !open;
+  $("infoBtn").setAttribute("aria-expanded", open);
+}
+
+function render() {
+  const q = curQ(), list = visible(), idx = list.indexOf(q);
+  const defaulted = applyDefaults(q);
+  state.seen[q.id] = true;
+  save();
+  // 每一部分的第一题上方写部分名称
+  const firstOfPart = idx === 0 || list[idx - 1].part !== q.part;
+  $("part").hidden = !firstOfPart;
+  $("part").textContent = cfg.parts[q.part].title;
+  $("num").textContent = q.number;
+  $("num").setAttribute("aria-hidden", "true");
+  $("qtitle").textContent = q.text;
+  $("qtitle").setAttribute("aria-label", `${numText(q)}：${q.text}`);
+  // 排序题的说明（按什么排）必须读，直接显示；其余题目的说明收进 i 图标
+  const inline = q.type === "rank";
+  $("rankNote").hidden = !(inline && q.help);
+  $("rankNote").textContent = inline ? q.help || "" : "";
+  $("infoBtn").hidden = inline || !q.help;
+  $("tip").textContent = inline ? "" : q.help || "";
+  setTip(false);
+  $("defnote").hidden = !defaulted;
+
+  const ul = $("options");
+  ul.replaceChildren();
+  ul.setAttribute("role", q.type === "single" ? "radiogroup" : "group");
+  ul.setAttribute("aria-labelledby", "qtitle");
+  q.options.forEach((o, k) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "opt";
+    b.setAttribute("role", q.type === "single" ? "radio" : "checkbox");
+    b.appendChild(markFor(q.type));
+    const text = document.createElement("span");
+    text.className = "text";
+    text.innerHTML = '<span class="label-line"><span class="label"></span></span>';
+    text.querySelector(".label").textContent = o.label;
+    if (o.help && !o.free) {
+      const h = document.createElement("span");
+      h.className = "ohelp";
+      h.textContent = o.help;
+      text.appendChild(h);
+    }
+    b.appendChild(text);
+    b.addEventListener("click", () => choose(k, "click"));
+    li.appendChild(b);
+    if (o.free) {
+      // 填空：有说明小字的，说明当作输入框的提示文字
+      const key = `${q.id}.${o.id}`;
+      const inp = document.createElement("input");
+      inp.className = "free";
+      inp.value = state.free[key] || "";
+      inp.placeholder = o.help || "请填写";
+      inp.setAttribute("aria-label", `${o.label}：${o.help || "请填写"}`);
+      inp.addEventListener("input", () => {
+        state.free[key] = inp.value;
+        save();
+      });
+      li.appendChild(inp);
+    }
+    ul.appendChild(li);
+  });
+  renderMarks();
+  drawProgress();
+  renderConflicts();
+  updateNav();
+}
+
+function returnTarget() {
+  const list = visible();
+  if (state.detour && list.some((q) => q.id === state.detour)) return state.detour;
+  return latest()?.id;
+}
+
+function updateNav() {
+  const list = visible(), idx = list.indexOf(curQ()), answered = sel(state.cur).length > 0;
+  const back = returnTarget(), backIdx = list.findIndex((q) => q.id === back);
+  const detour = state.detour === back && backIdx > idx;
+  $("prev").hidden = idx <= 0;
+  $("next").disabled = !answered;
+  $("nextText").textContent = detour ? `回到${numText(byId[back])}` : idx === list.length - 1 ? "查看结果" : "下一题";
+  const link = $("backLatest");
+  link.hidden = detour || !(backIdx > idx + 1);
+  link.disabled = !answered;
+  if (!link.hidden) link.textContent = `回到${numText(byId[back])}`;
+}
+
+/* ---------- 翻页：没选的先淡出，选中的停一下，再换题 ---------- */
+let busy = false;
+function show(id) {
+  if (busy) return;
+  const card = $("card");
+  const swap = () => {
+    state.cur = id;
+    if (state.detour === id) delete state.detour;
+    save();
+    render();
+    scrollTo({ top: 0 });
+  };
+  if (reduce) return swap();
+  busy = true;
+  $("options").classList.add("leaving");
+  setTimeout(() => {
+    card.classList.add("out");
+    setTimeout(() => {
+      swap();
+      card.classList.remove("out");
+      card.classList.add("in");
+      requestAnimationFrame(() => requestAnimationFrame(() => { card.classList.remove("in"); busy = false; }));
+    }, 200);
+  }, sel(state.cur).length ? 150 : 0);
+}
+
+function jump(id) {
+  if (!state.detour) state.detour = state.cur;
+  save();
+  show(id);
+}
+
+function go(d) {
+  const list = visible(), idx = list.indexOf(curQ());
+  if (d > 0 && state.detour) {
+    const k = list.findIndex((q) => q.id === state.detour);
+    if (k > idx) return show(state.detour);
+    delete state.detour;
+  }
+  const n = idx + d;
+  if (n < 0) return;
+  if (n >= list.length) {
+    state.done = true;
+    save();
+    location.href = "../site/result.html";
+    return;
+  }
+  show(list[n].id);
+}
+$("prev").addEventListener("click", () => go(-1));
+$("next").addEventListener("click", () => go(1));
+$("backLatest").addEventListener("click", () => { const t = returnTarget(); if (t) show(t); });
+
+/* ---------- 说明：点按开关；电脑上悬停也能看；Esc 或点别处收起 ---------- */
+const fine = matchMedia("(hover: hover) and (pointer: fine)").matches;
+let pinned = false;
+$("infoBtn").addEventListener("click", () => { pinned = !pinned || $("tip").hidden; setTip(pinned); });
+if (fine) {
+  $("infoBtn").addEventListener("mouseenter", () => setTip(true));
+  $("infoBtn").addEventListener("mouseleave", () => { if (!pinned) setTip(false); });
+}
+document.addEventListener("click", (e) => {
+  if (!$("tip").hidden && !e.target.closest("#infoBtn, #tip")) { pinned = false; setTip(false); }
+});
+
+/* ---------- 键盘：数字键选第几个选项，回车进入下一题 ---------- */
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !$("tip").hidden) { pinned = false; setTip(false); $("infoBtn").focus(); return; }
+  if (e.target.closest("input, textarea, .drawer") || e.metaKey || e.ctrlKey || e.altKey) return;
+  const n = Number(e.key);
+  if (n >= 1 && n <= 9 && n <= curQ().options.length) {
+    e.preventDefault();
+    choose(n - 1, "key");
+    $("options").children[n - 1].querySelector(".opt").focus();
+  } else if (e.key === "Enter" && !e.target.closest("button, a") && !$("next").disabled) {
+    e.preventDefault();
+    go(1);
+  }
+});
+
+render();
+</script>
+</body>
+</html>
