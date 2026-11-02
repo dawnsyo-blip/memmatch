@@ -117,6 +117,7 @@ const CONFIG = {
   flowSpeed: 0.3,            // 带子被抽进瓶颈的速度：每秒走过沙漏高度的几分之一
   eatLine: 0.04,             // 被过滤的词在瓶颈口往下多深处被逐个字母吃掉（÷ 沙漏高度）；放低一点，被吃的字母不会和上面的词堆混在一起
   turnRate: 3,               // 弧度/秒，被拖向瓶颈的那一节最快转多快；越小转得越缓
+  // 以下词数按黄金比例宽度的沙漏来定；沙漏收窄或字号到了下限时，按装得下的面积等比减少（G.cap）
   minUpperWords: 54,         // 上半部分低于这个数就补下一句
   maxLowerWords: 12,         // 下半部分最多保留几个清楚的词
   initialLowerCount: 12,     // 页面打开时下半部分预置几个清楚的词
@@ -180,6 +181,7 @@ const CONFIG = {
     // 字号范围：沙漏高 800px 时的像素值，随沙漏大小等比缩放
     sizeMin: 16,
     sizeMax: 25,
+    minPx: 12,               // 屏幕上的最小字号（px）：沙漏缩得很小（手机横屏）时字不再跟着缩
   },
 
   // 以下比例都是相对整个沙漏的高度
@@ -190,7 +192,12 @@ const CONFIG = {
     //   上半部分 : 下半部分的高 = φ : 1；
     //   上半部分的外框宽 : 高 = φ : 1，下半部分宽 : 高 = φ² : 1，算下来上口和底座一样宽
     heightRatio: 1 / PHI,    // 沙漏总高占屏幕高度的比例
-    maxWidthOfScreen: 0.94,  // 竖屏时沙漏最宽处不超过屏幕宽度的比例
+    shortScreen: 560,        // 屏幕矮于这个高度（px，如手机横屏）时，留白太挤，沙漏改占屏幕高的 shortHeightRatio
+    shortHeightRatio: 0.74,
+    // 竖屏放不下黄金比例的宽度时，只收窄宽度、不缩小高度：手机上是一个更修长的沙漏
+    sideMargin: 24,          // 沙漏最宽处离屏幕左右边缘至少多少 px
+    maxWidthOfScreen: 0.94,  // 沙漏最宽处不超过屏幕宽度的比例
+    minSlender: 0.6,         // 宽度最多收窄到黄金比例宽度的几成；再窄就整体缩小
     upperHeight: 0.5,        // 上半部分（U 形漏斗）的高度
     neckLength: 0.07,        // 中间细通道的长度；越短上下两半越近
     lowerHeight: 0.5 / PHI,  // 下半部分的高度
@@ -275,7 +282,9 @@ const rot = (x, y, a) => ({ x: x * Math.cos(a) - y * Math.sin(a), y: x * Math.si
 const fontStr = (size, weight = 400) => `${weight} ${size.toFixed(1)}px ${CONFIG.font.family}`;
 const randWeight = () => CONFIG.font.weights[Math.floor(Math.random() * CONFIG.font.weights.length)];
 const randSize = () => rand(CONFIG.font.sizeMin, CONFIG.font.sizeMax);
-const chainGap = () => CONFIG.font.sizeMax * G.k * CONFIG.ribbon.gap;
+const chainGap = () => CONFIG.font.sizeMax * G.fk * CONFIG.ribbon.gap;
+// 按沙漏能装下的面积折算词数
+const capN = (n) => Math.max(3, Math.round(n * G.cap));
 const tail = (arr) => arr[arr.length - 1];
 
 function measure(text, size, weight) {
@@ -288,23 +297,32 @@ function measure(text, size, weight) {
 function computeGeometry() {
   const hg = CONFIG.hourglass;
   const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
-  const S = Math.min((H * hg.heightRatio) / frac, (W * hg.maxWidthOfScreen) / Math.max(hg.upperWidth, hg.lowerWidth));
+  // 高度定尺寸；宽度放不下时先收窄（最多到 minSlender），还不够再整体缩小
+  const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
+  const golden = Math.max(hg.upperWidth, hg.lowerWidth);
+  const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
+  const S = Math.min((H * ratio) / frac, avail / (golden * hg.minSlender));
+  const slim = Math.min(1, avail / (S * golden));
   const k = S / 800;
+  // 字号的缩放：跟着沙漏，但不小于 font.minPx
+  const fk = Math.max(k, CONFIG.font.minPx / CONFIG.font.sizeMin);
   // 上方留白 : 下方留白 = 1 : φ
   const top = (H - S * frac) / (1 + PHI);
   const neckTop = top + S * hg.upperHeight;
   const neckBot = neckTop + S * hg.neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
-    S, k,
+    S, k, fk,
+    // 装得下的词数 ÷ 黄金比例宽度、字号不设下限时的词数
+    cap: slim * (k / fk) ** 2,
     cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
     neckHalf,
     // 通道出口要容得下一个竖着的词
-    exitHalf: Math.max(neckHalf, CONFIG.font.sizeMax * k * 0.75),
-    maxHalf: (S * hg.upperWidth) / 2,
-    baseHalf: (S * hg.lowerWidth) / 2,
+    exitHalf: Math.max(neckHalf, CONFIG.font.sizeMax * fk * 0.75),
+    maxHalf: (S * hg.upperWidth * slim) / 2,
+    baseHalf: (S * hg.lowerWidth * slim) / 2,
   };
 }
 
@@ -381,7 +399,7 @@ function makeWord(text, isKey, sid, sizeRef, zone, born, weight = randWeight()) 
 // 把词的各节摆成一条直线，中心在 (x, y)、方向 angle，建好刚体并连好词内部的节。
 // 已经被瓶颈吃掉的节（gone）不再建
 function buildBodies(w, x, y, angle) {
-  w.size = w.sizeRef * G.k;
+  w.size = w.sizeRef * G.fk;
   w.h = w.size * 1.08;
   const pad = w.size * 0.14;
   const parts = splitText(w.text);
@@ -560,7 +578,7 @@ function layoutActive() {
 // 落下时贴着杯壁补进来，中间从瓶颈漏走，表面就凹下去；关掉时居中
 function layoutItems(items) {
   const side = CONFIG.flow.sideDrop && items.length ? (items[0].sid % 2 ? -1 : 1) : 0;
-  const k = G.k;
+  const k = G.fk;
   for (const it of items) {
     it.size = it.sizeRef * k;
     it.w = measure(it.text, it.size, it.weight);
@@ -796,7 +814,7 @@ function dropWord(w, topY, angle) {
   w.born = simTime;
   w.gone = new Set();
   w.alpha = undefined;
-  const size = w.sizeRef * G.k;
+  const size = w.sizeRef * G.fk;
   const L = measure(w.text, size, w.weight) + size * 0.28;
   buildBodies(w, G.cx, topY + L / 2, angle);
   const heavy = w.segs[Math.floor(Math.random() * w.segs.length)];
@@ -837,9 +855,9 @@ function funnelFlow() {
 function updateLower(dt) {
   const tr = CONFIG.trace;
   const live = words.filter((w) => w.zone === "lower" && !w.fading && !w.trace);
-  if (live.length > CONFIG.maxLowerWords) {
+  if (live.length > capN(CONFIG.maxLowerWords)) {
     live.sort((a, b) => a.born - b.born);
-    for (let i = 0; i < live.length - CONFIG.maxLowerWords; i++) {
+    for (let i = 0; i < live.length - capN(CONFIG.maxLowerWords); i++) {
       live[i].fading = true;
       live[i].fadeT = 0;
     }
@@ -852,7 +870,8 @@ function updateLower(dt) {
   const tooHigh = words.some((w) => w.zone === "lower" && w.segs.some((g) =>
     (w.trace || g.body.speed < rest) && g.body.position.y - w.h / 2 < limitY));
   const retiring = words.filter((w) => w.retiring).length;
-  if (traces.length && (traces.length > tr.max || tooHigh) && retiring < (tooHigh || traces.length > tr.max + 2 ? 3 : 1)) {
+  const trMax = capN(tr.max);
+  if (traces.length && (traces.length > trMax || tooHigh) && retiring < (tooHigh || traces.length > trMax + 2 ? 3 : 1)) {
     traces[0].retiring = true;
     traces[0].fadeT = 0;
   }
@@ -1079,7 +1098,7 @@ function prefill() {
 
   // 上半部分：一句句从上面落下去，自然堆成一堆软带子
   let guard = 0;
-  while (count("upper") < CONFIG.minUpperWords && guard++ < 50) {
+  while (count("upper") < capN(CONFIG.minUpperWords) && guard++ < 50) {
     const items = nextTokens().map((t) => ({ text: t.text, isKey: t.key, sid: t.sid, sizeRef: randSize(), weight: randWeight() }));
     layoutItems(items);
     let prev = null;
@@ -1094,7 +1113,7 @@ function prefill() {
 
   // 下半部分先铺一层旧痕迹
   const keys = CONFIG.sentences.flatMap((s) => parseSentence(s).filter((t) => t.key).map((t) => t.text));
-  for (let i = 0; i < CONFIG.trace.initial; i++) {
+  for (let i = 0; i < capN(CONFIG.trace.initial); i++) {
     const w = makeWord(keys[i % keys.length], true, -1, randSize(), "lower", -1000 + i);
     const y = G.bottom - rand(0.02, 0.14) * G.S;
     buildBodies(w, G.cx + rand(-0.7, 0.7) * halfAt(y), y, rand(-0.5, 0.5));
@@ -1105,7 +1124,7 @@ function prefill() {
 
   // 预置的词从不同位置一个个落到痕迹上
   const pool = [...CONFIG.initialLowerWords, ...keys];
-  const n = CONFIG.initialLowerCount;
+  const n = capN(CONFIG.initialLowerCount);
   settle(n * 12 + 90, (i) => {
     if (i % 12 || i / 12 >= n) return;
     const j = i / 12;
@@ -1135,7 +1154,7 @@ async function loadSentences() {
 
 function step(dt) {
   simTime += dt;
-  if (!active && count("upper") < CONFIG.minUpperWords) startDisplay();
+  if (!active && count("upper") < capN(CONFIG.minUpperWords)) startDisplay();
   if (active) updateActive(dt);
   updateFlow(dt);
   updateChute(dt);
