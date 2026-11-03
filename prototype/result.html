@@ -168,7 +168,8 @@ function comboFit(c) {
   if (odd.length) return `配合程度需自行确认：${odd.map(N).join("、")} 的说明里没写能否和别的项目一起用`;
   return "配合程度较好：各自分工不同，不会争着处理同一份记忆，可以同时使用";
 }
-const PLAN = ["方案一", "方案二"];
+// 说明句里提到另一个方案时的叫法，和标题的编号 01、02 对应
+const PLAN = ["方案 01", "方案 02"];
 const DIFF = { low: 0, medium: 1, high: 2 };
 const stagesIn = (c) => Object.keys(STAGE).filter((s) => c.parts.some((p) => p.stages.includes(s)));
 function comboFacts(c) {
@@ -202,7 +203,7 @@ function comboLead(c, i) {
   if (!other) return comboBody(c) + "。";
   const edge = comboEdge(c, other);
   const lack = stagesIn(other).filter((s) => !stagesIn(c).includes(s));
-  const tail = lack.length ? `；比${PLAN[1 - i]}少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
+  const tail = lack.length ? `；比${PLAN[1 - i]} 少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
   return (edge.length ? edge.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
 }
 const comboMore = (c) => [comboWhy(c), comboFit(c)].filter(Boolean).map((s) => s + "。");
@@ -296,8 +297,6 @@ function prefButton() {
 
 /* ---------- 概况 ---------- */
 const now = stamp();
-const alone = r.narrowed_by.filter((x) => x.only > 0);
-const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
 let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} 个记忆类项目`] : ["暂时没有", "完全符合的"]);
 // 页眉：粗分隔线下面先是编号和日期（同一组，行间不留空），再隔半行是默认推荐偏好的按钮
 html += `<div class="meta">${L(rule("=", W_S), "small")}` +
@@ -315,9 +314,10 @@ if (r.results.length) {
 
 /* ---------- 搭配方案 ---------- */
 if (combos.length) {
-  html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<div>` +
-    P((combos.length > 1 ? `${PLAN[i]}：` : "") + comboNames(c), "p h") +
-    `<div class="stack half">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c))}</div></div></div>`).join(""));
+  // 和推荐项目同一格式：“01 名字”用二级标题，正文缩进 3 格；主句是正文，补充说明归在“注意”
+  html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<article>` +
+    hang(3, `${pad2(i + 1)} ${comboNames(c)}`, "h") +
+    `<div class="body stack half">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c))}</div></div></article>`).join(""));
 }
 
 
@@ -325,11 +325,6 @@ if (combos.length) {
 // 小节：二级标题，下面的条目用辅助字号
 const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list small">${body}</div></div>`;
 let why = "";
-if (narrow.length) {
-  why += grp("排除较多的条件", narrow.map((x) =>
-    hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
-      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`))).join(""));
-}
 if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
 if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc(t)}`)).join(""));
 if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
