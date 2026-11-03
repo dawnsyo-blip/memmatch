@@ -151,7 +151,11 @@ const CONFIG = {
     // 再沿一条平滑的曲线收窄到瓶颈的宽度，进瓶颈时是竖直的；字母会填进这一段，收窄的形状就看得出来
     throatHeight: 0.12,      // 喉部的高度 ÷ 沙漏总高，从上泡里分出来（负责人要求再长一点，原来 0.08）
     throatWidth: 0.6,        // 碗底和喉部交界处的半宽 ÷ 上口半宽（负责人要求再宽一点，原来 0.45）
-    lowerRound: 1,           // 下半部分碗底的半径 ÷ 底座半宽
+    // 下泡（负责人 2026-11-02 给了真沙漏的参考图：底下不是半圆，是碗状的）：
+    // 从瓶颈出口沿 S 形曲线鼓出去，到最宽处变竖直；再往下用超椭圆收成平底、圆角的碗
+    lowerMaxAt: 0.62,        // 最宽处在下泡高度的几成处（从瓶颈出口往下量）
+    lowerBowl: 3.2,          // 碗底的平度：超椭圆的指数，2 是正圆，越大底越平、圆角越小
+    minLowerHeight: 0.30,    // 缩短上下泡距离时，下泡最矮留多少（÷ 沙漏总高）
   },
   capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
 
@@ -215,7 +219,7 @@ function computeGeometry() {
   const full = hg.upperHeight + hg.neckLength + hg.lowerHeight;
   const cut = Math.max(0, full - widest * (phone ? hg.phoneTarget : hg.desktopTarget));
   const neckLength = Math.max(hg.minNeck, hg.neckLength - cut);
-  const lowerHeight = Math.max(hg.lowerHeight - (cut - (hg.neckLength - neckLength)), Math.max(hg.lowerWidth * ws / 2 * hg.lowerRound, 0) + 0.02);
+  const lowerHeight = Math.max(hg.lowerHeight - (cut - (hg.neckLength - neckLength)), hg.minLowerHeight);
   const frac = hg.upperHeight + neckLength + lowerHeight;
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
   const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
@@ -263,12 +267,17 @@ function halfAt(y) {
     return Math.max(g.neckHalf, h00 * wT + h10 * m0 + h01 * g.neckHalf);
   }
   if (y <= g.neckBot) return g.neckHalf;
-  // 下半部分：圆心在底边正上方 R 处，碗底以上是竖直的壁
-  const R = Math.min(g.baseHalf * hg.lowerRound, g.bottom - g.neckBot);
-  const cy = g.bottom - R;
-  if (y <= cy) return g.baseHalf;
-  const d = y - cy;
-  return g.baseHalf - R + Math.sqrt(Math.max(0, R * R - d * d));
+  // 下半部分：肩部 → 最宽处 → 碗底
+  const yMax = g.neckBot + (g.bottom - g.neckBot) * hg.lowerMaxAt;
+  if (y <= yMax) {
+    // 肩部：三次 Hermite 曲线，两端的切线都是竖直的，从瓶颈出口平滑鼓到最宽
+    const v = (y - g.neckBot) / (yMax - g.neckBot);
+    const s = v * v * (3 - 2 * v);
+    return g.exitHalf + (g.baseHalf - g.exitHalf) * s;
+  }
+  // 碗底：超椭圆，比正圆平，底部平缓、两边圆角
+  const t = Math.min(1, (y - yMax) / (g.bottom - yMax));
+  return g.baseHalf * Math.pow(Math.max(0, 1 - Math.pow(t, hg.lowerBowl)), 1 / hg.lowerBowl);
 }
 
 function segmentWalls(pts, side, T) {
