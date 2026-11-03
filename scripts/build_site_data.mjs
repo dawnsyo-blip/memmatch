@@ -21,6 +21,8 @@ const slim = projects
     info: { summary: { value: displaySummaries[p.id] || p.info?.summary?.value || "" } },
     normalized: Object.fromEntries(Object.entries(p.normalized).map(([k, f]) => [k, { value: f.value, status: f.status }])),
     ...(p.safety_note ? { safety_note: p.safety_note.note } : {}),
+    // 项目库按 Star 数排序用（check_health 读的仓库网页）
+    ...(typeof p.health?.stars === "number" ? { stars: p.health.stars } : {}),
   }));
 
 const dir = join(ROOT, "site/data");

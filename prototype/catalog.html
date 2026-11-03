@@ -21,7 +21,7 @@
 .item + .item { margin-top: var(--lh); }
 .item .intro { margin-top: calc(var(--lh) * .25); }
 /* 名字后面的作者、旧名不加粗 */
-.item .note { font-weight: 400; }
+.item .note { font-weight: 400; font-size: var(--fs-s); }
 footer .bar { margin-top: calc(var(--lh) * .5); }
 </style>
 </head>
@@ -74,10 +74,12 @@ const oneLine = (s) => { const t = String(s ?? "").trim(); const k = t.indexOf("
 // 仓库地址：去掉 https:// 和末尾的斜杠；做法类条目链接到说明文档，写“查看做法说明”
 const repoText = (u) => String(u ?? "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 
+const noteText = (n) => (/[\u4e00-\u9fff]/.test(n) ? n : `作者 ${n}`);
 function item(p) {
   const [name, note] = splitName(p.name);
   const isMethod = [].concat(p.normalized?.project_role?.value || []).includes("method");
-  return `<article class="item">${P(`${esc(name)}${note ? ` <span class="note">${esc(note)}</span>` : ""}`, "p h")}` +
+  // 名字后面括号里的是作者或说明，用辅助字号，免得看成名字的一部分；纯英文的是作者名，写成“作者 xxx”
+  return `<article class="item">${P(`${esc(name)}${note ? ` <span class="note">${esc(noteText(note))}</span>` : ""}`, "p h")}` +
     S(tagsText(formTagsOf(p, labels))) +
     (p.info?.summary?.value ? P(esc(oneLine(p.info.summary.value)), "p intro") : "") +
     (p.repo_url ? P(`<a class="repo" href="${esc(p.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(isMethod ? "查看自主管理说明" : repoText(p.repo_url))}</span> ${OUT}</a>`, "p small intro") : "") +
@@ -92,12 +94,16 @@ for (const p of data.projects) {
   const f = [].concat(p.normalized?.usage_form?.value || [])[0];
   (groups.get(f) || other).push(p);
 }
-// 英文名在前，按字母不分大小写；中文名在后，按拼音
+// 组内按 Star 数从多到少（负责人 2026-11-03 定）；Star 数相同按名字：英文在前、不分大小写，中文按拼音；
+// 没有 Star 数的（自主管理的两条做法）排在最后。名字开头的符号（如 /memory）不参与排序
 const zh = new Intl.Collator("zh-Hans-CN-u-co-pinyin", { sensitivity: "base" }), en = new Intl.Collator("en", { sensitivity: "base" });
-const byName = (a, b) => {
-  const x = splitName(a.name)[0], y = splitName(b.name)[0], ax = /^[\x00-\x7f]/.test(x), ay = /^[\x00-\x7f]/.test(y);
+const bare = (p) => splitName(p.name)[0].replace(/^[^\p{L}\p{N}]+/u, "");
+function byName(a, b) {
+  const d = (b.stars ?? -1) - (a.stars ?? -1);
+  if (d) return d;
+  const x = bare(a), y = bare(b), ax = /^[A-Za-z0-9]/.test(x), ay = /^[A-Za-z0-9]/.test(y);
   return ax !== ay ? (ax ? -1 : 1) : ax ? en.compare(x, y) : zh.compare(x, y);
-};
+}
 
 const now = stamp();
 let html = titleHTML(["完整项目库"]);
