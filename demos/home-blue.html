@@ -28,8 +28,8 @@
     --color-line: #C1CBDF;
   }
   a.find { color: var(--color-accent); }   /* 写成 a.find，比后面 .find 的颜色规则更具体，不会被它盖掉 */
-  /* 入口字号（负责人 2026-11-02 要求蓝色版小一点）：等宽字体同字号下比 Cormorant 大，和沙漏里的字母一样从 20 降到 17 */
-  a.find { font-size: min(17px, calc((100vw - 48px) / 18.6)); }
+  /* 入口字号（负责人 2026-11-02 要求蓝色版小一点）：等宽字体同字号下比 Cormorant 大，先降到 17，又降到 15 */
+  a.find { font-size: min(15px, calc((100vw - 48px) / 18.6)); }
   /* 首页样张（字母沙漏）：句子落下后打散成字母，中间的字母先漏下去，下半部分堆成字母堆。
      单词版留在 experiments/home-words.html */
   html, body { margin: 0; height: 100%; overflow: hidden; overscroll-behavior: none; background: var(--color-bg); }
