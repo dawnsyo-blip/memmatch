@@ -34,6 +34,8 @@
 /* 正文缩进标题字号的 3 格，和“01 ”后面的项目名对齐 */
 .body { padding-left: calc(var(--fs-h) * 1.5); }
 .in2 { padding-left: var(--fs); }
+.repo svg { display: inline-block; width: .75em; height: .75em; vertical-align: -.05em; }
+.repo:hover .link { text-decoration-thickness: .15em; }
 /* 页眉：标题下空一行；分隔线到编号、编号日期到按钮各空半行；页眉到第一个部分空一行（比部分之间的 1.5 行近，页眉和内容是一体的） */
 .meta { margin-top: var(--lh); }
 .meta-lines, .meta-act { margin-top: calc(var(--lh) * .5); }
@@ -102,6 +104,8 @@ const catText = (c) => CAT[c] || String(c ?? "").replace(/（(.+)）$/, "，$1")
 const repoText = (u) => String(u ?? "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
 // 汉字和英文、数字之间补一个空格，再转义
 const mixSpace = (s) => esc(String(s).replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, "$1 $2").replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, "$1 $2"));
+// 外链箭头，跟在仓库地址后面
+const OUT = `<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1.5h6.5V8M10.5 1.5 2 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
 const P = (t, cls = "p") => `<p class="${cls}">${t}</p>`;
 const hang = (h, t, cls = "") => `<p class="hang${cls ? " " + cls : ""}" style="--h:${h}">${t}</p>`;
 // 小字段落
@@ -154,7 +158,9 @@ function comboWhy(c) {
   const A = real[0];
   if (c.via === "pairs") {
     if (c.type === "group") return "两者的分工由作者定好，单用其中一个只能顾到一部分";
-    return `单用 ${N(A)} 也能${c.type === "complete" ? "完整" : ""}使用；加上 ${N(last)}，${gist(last.id)}`;
+    // 完整系统的主句已经说了“一个项目包办”，这里不再重复“单用也能完整使用”
+    if (c.type === "complete") return `加上 ${N(last)}，${gist(last.id)}`;
+    return `单用 ${N(A)} 也能使用；加上 ${N(last)}，${gist(last.id)}`;
   }
   const gaps = real.map((p) => ROLE_GAP[roleOf(p)]).filter(Boolean);
   return gaps.length ? `单用 ${N(A)} 时，${gaps.join("，")}` : "";
@@ -204,15 +210,25 @@ function comboLead(c, i) {
   const edge = comboEdge(c, other);
   const lack = stagesIn(other).filter((s) => !stagesIn(c).includes(s));
   const tail = lack.length ? `；比${PLAN[1 - i]} 少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
-  return (edge.length ? edge.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
+  // 在现有的上面补的方案，正文会说“继续用现在的……”，句首不再写“不用换掉现在用的”
+  const said = edge.filter((e) => !(e === "不用换掉现在用的" && c.type === "current"));
+  return (said.length ? said.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
 }
-const comboMore = (c) => [comboWhy(c), comboFit(c)].filter(Boolean).map((s) => s + "。");
-const comboText = (c, i) => comboLead(c, i) + comboMore(c).join("");
+// 主句已写“设计上搭配使用”时，不再补一句“配合程度高，说明里写了两者怎么一起用”
+const comboMore = (c, i) => {
+  const lead = comboLead(c, i);
+  return [comboWhy(c), comboFit(c)].filter(Boolean)
+    .filter((t) => !(c.via === "pairs" && t.startsWith("配合程度高") && lead.includes("设计上搭配使用")))
+    .map((t) => t + "。");
+};
+const comboText = (c, i) => comboLead(c, i) + comboMore(c, i).join("");
 
 /* ---------- 一张卡片 ---------- */
 // 门槛、花销、需要、注意不用句号：句号和分号处都换行（负责人 2026-11-03 定），换行前用“；”，最后一句不加标点
 const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split(/[。；;]/))
   .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
+// 比较两段话是不是在说同一件事：看共有的英文词（4 个字母以上）
+const latinWords = (t) => new Set((String(t ?? "").match(/[A-Za-z]{4,}/g) || []).map((w) => w.toLowerCase()));
 const NOT_ACCOUNT = new Set(["none", "model_api_key", "claude_subscription"]);
 function factsOf(x) {
   const diff = [], warn = [];
@@ -224,6 +240,8 @@ function factsOf(x) {
   if (x.unknowns.length) warn.push(`说明里没写清，需自行确认：${x.unknowns.join("、")}`);
   const safety = byId[x.id]?.safety_note;
   if (safety) warn.push(safety);
+  const sameAsSummary = (t) => { const ref = latinWords(x.summary); return [...latinWords(t)].filter((w) => ref.has(w)).length >= 2; };
+  for (let k = warn.length - 1; k >= 0; k--) if (sameAsSummary(warn[k])) warn.splice(k, 1);
   const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
   // 账号：只列要注册的账号（负责人 2026-11-03 定）；接口密钥、付费套餐在“花销”里已经写了，不重复列
   const accounts = [].concat(val(x.id, "accounts_needed") || []).filter((v) => !NOT_ACCOUNT.has(v)).map((v) => cfg.field_labels?.[v] || v);
@@ -246,7 +264,7 @@ function cardBody(x) {
   const facts = [...(pros.length ? [["优势", pros]] : []), ...factsOf(x)];
   if (facts.length) h += `<div class="list">${facts.map(([k, v]) => factHTML(k, v)).join("")}</div>`;
   if (x.parts?.length) h += S(`可以搭配的连接工具：${x.parts.map((p) => nm(p.name)).join("、")}`);
-  if (x.repo_url) h += S(`<a class="link" href="${esc(x.repo_url)}" target="_blank" rel="noopener">${esc(x.role === "method" ? "查看做法说明" : repoText(x.repo_url))}</a>`);
+  if (x.repo_url) h += S(`<a class="repo" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(x.role === "method" ? "查看做法说明" : repoText(x.repo_url))}</span> ${OUT}</a>`);
   return h;
 }
 
@@ -317,14 +335,22 @@ if (combos.length) {
   // 和推荐项目同一格式：“01 名字”用二级标题，正文缩进 3 格；主句是正文，补充说明归在“注意”
   html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<article>` +
     hang(3, `${pad2(i + 1)} ${comboNames(c)}`, "h") +
-    `<div class="body stack half">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c))}</div></div></article>`).join(""));
+    `<div class="body stack half">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c, i))}</div></div></article>`).join(""));
 }
 
 
 /* ---------- 排除原因 ---------- */
 // 小节：二级标题，下面的条目用辅助字号
 const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list small">${body}</div></div>`;
+const alone = r.narrowed_by.filter((x) => x.only > 0);
+const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
 let why = "";
+// 排除较多的条件直接列在部分标题下，不另加小标题（和“排除原因”重复）
+if (narrow.length) {
+  why += `<div class="list small">${narrow.map((x) =>
+    hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
+      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`))).join("")}</div>`;
+}
 if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
 if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc(t)}`)).join(""));
 if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
@@ -332,10 +358,15 @@ if (why) html += section("排除原因", `<div class="stack">${why}</div>`, fals
 
 /* ---------- 后续补丁 ---------- */
 // 改进建议按第 8 题的排序；再加可以加装的部件、相关的做法和教程
+// 正文第一句已经包含问题说明的开头（如“LLM 说‘记住了’”）时，去掉这一句
+function adviceText(a) {
+  const first = String(a.text).split("。")[0], head = String(a.help || "").split(/[，,]/)[0];
+  return head && first.includes(head) && first.length < a.text.length - 1 ? a.text.slice(first.length + 1).trim() : a.text;
+}
 const addons = Object.values(r.addons || {});
 if (advice.length || addons.length || r.guides.length) {
   const items = [
-    ...advice.map((a, i) => `<div>${hang(3, `${pad2(i + 1)} ${esc(a.label)}`, "h")}<div class="body stack">${S(esc(a.help))}${P(esc(a.text))}` +
+    ...advice.map((a, i) => `<div>${hang(3, `${pad2(i + 1)} ${esc(a.label)}`, "h")}<div class="body stack">${S(esc(a.help))}${P(esc(adviceText(a)))}` +
       // 整行同一字重，都加粗（负责人 2026-11-03 定）
       P(esc(a.examples.length ? `推荐项目中的相关项目：${a.examples.map((n) => splitName(n).filter(Boolean).join(" ")).join("、")}` : "推荐项目中还没有专门做这一点的。"), "p small b") + `</div></div>`),
     ...addons.map((ad) => `<div class="stack">${P(esc(ad.title), "p h")}${ad.why ? S(esc(ad.why)) : ""}${restList(ad.items)}</div>`),
