@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="thermal.css">
 <style>
 /* 完整结果页：和 receipt.html 同一套出票口、纸和 32 格网格。
-   结构沿用旧版 site/result.html（2026-10-28 定）：概况和默认推荐偏好 → 推荐 → 搭配方案 → 排除原因 → 后续补丁（原“改进建议”）→ 页脚；每个部分都能展开收起。
+   结构沿用旧版 site/result.html（2026-10-28 定）：概况和默认推荐偏好 → 推荐 → 搭配方案 → 排除原因 → 强化补丁（原“改进建议”）→ 页脚；每个部分都能展开收起。
    字体子集包含全部项目数据里的字，比答题页的大，由 scripts/subset_receipt_font.py 一起生成 */
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
@@ -387,7 +387,7 @@ if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc
 if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
 if (why) html += section("排除原因", `<div class="stack">${why}</div>`, false);
 
-/* ---------- 后续补丁 ---------- */
+/* ---------- 强化补丁 ---------- */
 // 改进建议按第 8 题的排序；再加可以加装的部件、相关的做法和教程
 // 正文第一句已经包含问题说明的开头（如“LLM 说‘记住了’”）时，去掉这一句
 function adviceText(a) {
@@ -403,7 +403,7 @@ if (advice.length || addons.length || r.guides.length) {
     ...addons.map((ad) => `<div class="stack">${P(esc(ad.title), "p h")}${ad.why ? S(esc(ad.why)) : ""}${restList(ad.items)}</div>`),
     ...(r.guides.length ? [`<div class="stack">${P("相关的做法和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
   ];
-  html += section("后续补丁", `<div class="stack">${S("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
+  html += section("强化补丁", `<div class="stack">${S("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
 }
 
 /* ---------- 页脚 ---------- */
