@@ -186,9 +186,9 @@ button, a { cursor: pointer; }
 .title { font-size: calc(var(--fs-h) * 2); line-height: calc(var(--lh-h) * 2); font-weight: 700; }
 .title .ln { display: block; height: calc(var(--lh-h) * 2); }
 
-/* 反白长条按钮：比 32 格两边各多出 1 格，字仍在网格上 */
+/* 反白长条按钮：左右正好对齐纸的页边距，不往外伸（负责人 2026-11-03 要求页边距对齐） */
 .bar {
-  display: block; width: calc(100% + 2ch); margin: 0 -1ch;
+  display: block; width: 100%; margin: 0;
   padding: calc(var(--lh) * .25) 1ch;
   background: var(--ink); color: var(--paper);
   font-weight: 700; text-align: center; white-space: pre;

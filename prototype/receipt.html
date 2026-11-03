@@ -27,9 +27,9 @@
 /* 当前题目比其它标题再大一级：一行 28 格 */
 .q-title { margin-top: calc(var(--lh) * .5); font-size: var(--fs-t1); line-height: var(--lh-t1); }
 .opts { display: grid; margin-top: calc(var(--lh) * .5); }
-/* [ ] 文字：续行缩进 4 格，和文字对齐；选项说明再缩进 2 格 */
+/* [ ] 文字：反白条左右对齐页边距，字从第 1 格开始；续行缩进 4 格，和文字对齐；选项说明再缩进 2 格 */
 .opt {
-  display: block; width: calc(100% + 2ch); margin: 0 -1ch;
+  display: block; width: 100%; margin: 0;
   padding: calc(var(--lh) * .25) 1ch calc(var(--lh) * .25) 5ch; text-indent: -4ch;
   text-align: left; white-space: pre-wrap; line-break: strict; overflow-wrap: anywhere;
 }
@@ -56,7 +56,7 @@
 .opt[aria-checked="true"] .tx { text-decoration: none; }
 /* 填空：接在选中的选项下面，同样反白，和选项连成一块；输入框只有一条下划线，聚焦时加粗 */
 .free {
-  margin: 0 -1ch; padding: 0 1ch calc(var(--lh) * .5) 5ch;
+  margin: 0; padding: 0 1ch calc(var(--lh) * .5) 5ch;
   background: var(--ink); color: var(--paper);
 }
 .free input {
