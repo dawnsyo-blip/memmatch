@@ -137,6 +137,9 @@ const CONFIG = {
     // 上窄下宽（负责人 2026-11-02 定上泡 : 下泡 1 : 1.08）：下泡的宽和高都是上泡的 lowerScale 倍。
     // 高 : 最宽处电脑上 3 : 2、手机上 4 : 3（负责人要求沿用之前的比例）：瓶颈长度不变，两个泡按比例压矮、加宽
     lowerScale: 1.08,
+    // 上泡和下泡一样大（负责人 2026-11-02 要求）：下泡照 1 : 1.08 那版不变，上泡放大到和它一样宽、一样高，形状不变。
+    // 只把 lowerScale 改成 1 的话，变的是下泡（缩到和上泡一样），负责人不要
+    upperMatchesLower: true,
     desktopAspect: 3 / 2, phoneAspect: 4 / 3, phoneMaxWidth: 600,
     phoneUpperOfScreen: 0.5,  // 手机上上泡宽占屏幕宽的几成，高度不变（负责人 2026-11-02 要求试 1/2），0 表示不收窄
     // 瓶颈不能像参考图那样只是一个点：短于 0.08 时瓶颈口附近存不住字母，流量会掉
@@ -207,17 +210,23 @@ function computeGeometry() {
   // 总高记为 1：瓶颈之外的高度按 1 : lowerScale 分给上下泡；最宽处（下泡）= 总高 ÷ 高宽比
   const phone = W <= hg.phoneMaxWidth;
   const aspect = phone ? hg.phoneAspect : hg.desktopAspect;
-  const upperHeight = (1 - hg.neckLength) / (1 + hg.lowerScale);
+  let upperHeight = (1 - hg.neckLength) / (1 + hg.lowerScale);
   const lowerHeight = upperHeight * hg.lowerScale;
   let lowerWidth = 1 / aspect, upperWidth = lowerWidth / hg.lowerScale;
   let widest = lowerWidth;
-  const frac = 1;
+  let frac = 1;
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
   const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
   // 手机上高度照 4 : 3 算出来不变，只把上泡收窄到屏幕宽的 phoneUpperOfScreen，下泡跟着按 lowerScale 变
   if (phone && hg.phoneUpperOfScreen) {
     upperWidth = Math.min(upperWidth, (W * hg.phoneUpperOfScreen) / S);
     lowerWidth = widest = upperWidth * hg.lowerScale;
+  }
+  // 下泡照上面算好的不动，上泡放大到和下泡一样宽、一样高，往上长出去
+  if (hg.upperMatchesLower) {
+    upperWidth = lowerWidth;
+    upperHeight = lowerHeight;
+    frac = upperHeight + hg.neckLength + lowerHeight;
   }
   const slim = Math.min(1, avail / (S * widest));
   const k = S / 800;
