@@ -1,8 +1,9 @@
 /* 小票原型共用的样式：出票口、纸、字符网格。答题页 receipt.html 和完整结果页 result.html 都引用。
    热敏打印的规则（负责人 2026-11-03 定，全站遵守）：
    - 纸上只有一种墨色 --ink，不用灰色文字和灰色线条
-   - 层级靠字号、加粗、下划线、反白区分；字号分四级（负责人 2026-11-03 定，取代原来“只有正常和倍高倍宽”）：
-     大标题（倍高倍宽）＞ 标题（一行 32 格）＞ 正文（36 格）＞ 小字（44 格，已答摘要、说明、页眉）
+   - 层级靠字号、加粗、下划线、反白区分（负责人 2026-11-03 定，取代原来“只有正常和倍高倍宽”）。字号分五级，同一级的字号、字重一致：
+     大标题（倍高倍宽）＞ 一级标题（一行 28 格，加粗；结果页部分标题反白，答题页是当前题目）
+     ＞ 二级标题（32 格，加粗：项目名、建议名、方案、小节标题）＞ 正文（36 格）＞ 辅助（44 格：标签、细节、说明、页眉、已答摘要）
    - 每一级在同一纸宽里放整数个半角格，汉字占两格；分隔线、点线都由字符拼成，正好一行
    字体 @font-face 写在各页面里：两页用到的字差得多，各自子集化（scripts/subset_receipt_font.py） */
 :root {
@@ -15,9 +16,11 @@
   --pad-x: 16px;
   /* 字号阶梯：每级一行放整数个格（thermal.js 的 W_H、W、W_S）；中文行高标题 1.4、正文和小字 1.6 */
   --cw: calc(var(--paper-w) - 2 * var(--pad-x));
-  --fs-h: calc(var(--cw) / 16);   /* 标题：32 格 */
+  --fs-t1: calc(var(--cw) / 14);  /* 一级标题：28 格 */
+  --fs-h: calc(var(--cw) / 16);   /* 二级标题：32 格 */
   --fs: calc(var(--cw) / 18);     /* 正文：36 格 */
   --fs-s: calc(var(--cw) / 22);   /* 小字：44 格 */
+  --lh-t1: calc(var(--fs-t1) * 1.4);
   --lh-h: calc(var(--fs-h) * 1.4);
   --lh: calc(var(--fs) * 1.6);
   --lh-s: calc(var(--fs-s) * 1.6);
@@ -171,6 +174,7 @@ button, a { cursor: pointer; }
 .half { margin-top: calc(var(--lh) * .5); }
 /* 随机几行墨色淡 10% */
 .faint { opacity: .9; }
+.t1 { font-size: var(--fs-t1); line-height: var(--lh-t1); font-weight: 700; }
 .h { font-size: var(--fs-h); line-height: var(--lh-h); font-weight: 700; }
 .small { font-size: var(--fs-s); line-height: var(--lh-s); }
 

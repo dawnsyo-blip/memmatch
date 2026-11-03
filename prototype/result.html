@@ -19,13 +19,15 @@
    卡片里的几组（简介、理由、细节、链接）之间半行；同一组的条目之间 0.25 行，一条折行时不留空 */
 .stack > * + * { margin-top: calc(var(--lh) * .5); }
 .list > * + * { margin-top: calc(var(--lh) * .25); }
+/* 小节：二级标题到它的条目 0.25 行，比小节之间的半行近 */
+.grp > * + * { margin-top: calc(var(--lh) * .25); }
 .sec { margin-top: calc(var(--lh) * 1.5); }
 .sec-h { display: flex; justify-content: space-between; align-items: baseline; padding-top: calc(var(--lh) * .25); }
 .sec-h:hover .tog, summary:hover .tog { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .sec-body { padding-top: calc(var(--lh) * .5); }
 .sep { margin-block: calc(var(--lh) * .75); }
 .tog { font-weight: 400; }
-.sec-h .h { white-space: pre; }
+.sec-h .t1 { white-space: pre; }
 /* 正文缩进标题字号的 3 格，和“01 ”后面的项目名对齐 */
 .body { padding-left: calc(var(--fs-h) * 1.5); }
 .in2 { padding-left: var(--fs); }
@@ -95,6 +97,8 @@ const sentence = (s) => { s = String(s ?? "").trim(); return !s || /[。！？]$
 const CAT = { "需写代码（开发者向）": "开发者向，需要写代码", "边缘项（存的不是对话记忆）": "边缘项，存的不是对话记忆", "做法（笔记软件当记忆）": "做法：用笔记软件当记忆" };
 const catText = (c) => CAT[c] || String(c ?? "").replace(/（(.+)）$/, "，$1");
 const repoText = (u) => String(u ?? "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+// 汉字和英文、数字之间补一个空格，再转义
+const mixSpace = (s) => esc(String(s).replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, "$1 $2").replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, "$1 $2"));
 const P = (t, cls = "p") => `<p class="${cls}">${t}</p>`;
 const hang = (h, t, cls = "") => `<p class="hang${cls ? " " + cls : ""}" style="--h:${h}">${t}</p>`;
 // 小字段落
@@ -102,11 +106,11 @@ const S = (t) => P(t, "p small");
 
 // 名字后面的标签写使用方式（最多两种），聊天软件插件只接一种软件时写出软件名；没有这个字段时退回类别
 const PLUGIN_HOST = { sillytavern: "酒馆插件", astrbot: "AstrBot 插件", open_webui: "Open WebUI 插件" };
-function formText(x) {
+function formTags(x) {
   const forms = [].concat(val(x.id, "usage_form") || []);
-  if (!forms.length) return catText(x.category);
+  if (!forms.length) return [catText(x.category)];
   const hosts = [].concat(val(x.id, "compatible_clients") || []).filter((c) => PLUGIN_HOST[c]);
-  return forms.slice(0, 2).map((f) => (f === "plugin_chat" && hosts.length === 1 ? PLUGIN_HOST[hosts[0]] : usage._labels?.[f] || f)).join("、");
+  return forms.slice(0, 2).map((f) => (f === "plugin_chat" && hosts.length === 1 ? PLUGIN_HOST[hosts[0]] : usage._labels?.[f] || f));
 }
 
 /* ---------- 搭配方案的说明句（照搬 site/result.html） ---------- */
@@ -248,11 +252,12 @@ function foldLine(text, w = W, cls = "") {
 // 一个部分：粗分隔线，反白的名字，右边展开／收起
 function section(title, body, open = true) {
   return `<section class="sec" aria-label="${esc(title)}">${L(rule("=", W_S), "small")}` +
-    `<details${open ? " open" : ""}><summary class="sec-h"><span class="h"><span class="inv"> ${esc(title)} </span></span>${TOG}</summary>` +
+    `<details${open ? " open" : ""}><summary class="sec-h"><span class="t1"><span class="inv"> ${esc(title)} </span></span>${TOG}</summary>` +
     `<div class="sec-body">${body}</div></details></section>`;
 }
 const sep = () => `<div class="sep">${L(rule("-", W_S), "small")}</div>`;
-const tagLine = (x) => S(`[${esc(formText(x))}]`);
+// 标签：每个一对方括号，空一格隔开
+const tagLine = (x) => S(formTags(x).map((t) => `[${esc(t)}]`).join(" "));
 const restList = (list) => `<div class="list">${list.map((x) =>
   `<div>${hang(2, `- <a class="link" href="${esc(x.repo_url)}" target="_blank" rel="noopener">${esc(splitName(x.name)[0])}</a>`)}${P(esc(sentence(x.summary)), "p small in2")}</div>`).join("")}</div>`;
 
@@ -303,26 +308,27 @@ if (r.results.length) {
 /* ---------- 搭配方案 ---------- */
 if (combos.length) {
   html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<div>` +
-    (combos.length > 1 ? `<span class="l"><span class="inv"> ${PLAN[i]} </span></span>` : "") +
-    P(comboNames(c), "p h") +
+    P((combos.length > 1 ? `${PLAN[i]}：` : "") + comboNames(c), "p h") +
     `<div class="stack half">${P(esc(comboLead(c, i)))}${comboMore(c).map((s) => S(esc(s))).join("")}</div></div>`).join(""));
 }
 
 
 /* ---------- 排除原因 ---------- */
+// 小节：二级标题，下面的条目用辅助字号
+const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list small">${body}</div></div>`;
 let why = P(`收录的 ${data.projects.length} 个项目里，符合您条件的有 ${r.total_kept} 个。`);
 if (narrow.length) {
-  why += `<div>${P("排除较多的条件：")}<div class="list">` + narrow.map((x) =>
-    hang(2, `- 第 ${esc(x.number)} 题“${esc(x.short)}”` + (x.selected.length ? `，您选了${esc(x.selected.join("、"))}` : "") +
-      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`, "small")).join("") + `</div></div>`;
+  why += grp("排除较多的条件", narrow.map((x) =>
+    hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
+      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`))).join(""));
 }
-if (r.conflicts.length) why += `<div class="list">${r.conflicts.map((c) => hang(6, `<b>矛盾</b>  ${esc(c.message)}`, "small")).join("")}</div>`;
-if (r.notices.length) why += `<div class="list">${r.notices.map((t) => hang(2, `- ${esc(t)}`, "small")).join("")}</div>`;
-if (r.relax.length) why += `<div>${P("放宽这些条件，就能多出一些选择：")}<div class="small">${r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join("")}</div></div>`;
+if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
+if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc(t)}`)).join(""));
+if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
 if (r.excluded.length) {
   const groups = {};
   for (const e of r.excluded) (groups[e.reason] ||= []).push(e.name);
-  why += `<details class="fold"><summary>${foldLine(`被排除的 ${r.excluded.length} 个项目`)}</summary><div class="small stack half">` +
+  why += `<details class="fold"><summary>${foldLine(`被排除的 ${r.excluded.length} 个项目`, W_H, "h")}</summary><div class="small stack half">` +
     Object.entries(groups).sort((a, b) => b[1].length - a[1].length).map(([reason, names]) =>
       `<div>${hang(2, `<b>- ${esc(reason)}，${names.length} 个</b>`)}${hang(2, sp(2) + names.map((n) => esc(splitName(n)[0])).join("、"))}</div>`).join("") +
     `</div></details>`;
@@ -348,7 +354,7 @@ const stars = "#".repeat((W_S - cols(now.date) - 2) / 2);
 html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
   `<a class="bar half" href="receipt.html">返回修改问卷</a>` +
   `<p class="btns half"><button type="button" class="tbtn" id="saveAnswers">[下载答卷]</button>  <button type="button" class="tbtn" id="saveResults">[下载推荐结果]</button></p>` +
-  `<details class="fold half"><summary>${foldLine("您的答卷")}</summary><div class="small half" id="answers"></div></details>` +
+  `<details class="fold half"><summary>${foldLine("您的答卷", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
   `<div class="half">${L(rule("-", W_S), "small")}</div><div aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
   barcode(fnv(key), 38, "barcode") + L(center(codeOf(key), W_S), "small") + `</footer>`;
 sheet.innerHTML = html;
