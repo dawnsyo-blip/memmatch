@@ -231,13 +231,13 @@ function factHTML(k, v) {
   const segs = segsOf(v);
   return `<div>${segs.map((s, i) => hang(6, `${i ? sp(6) : `<b>${k}</b>  `}${esc(s)}${i < segs.length - 1 ? "；" : ""}`, "small")).join("")}</div>`;
 }
-// 卡片正文分几组：简介（正文）、理由（正文列表）、门槛花销等细节（小字列表）、搭配和仓库链接（小字）
+// 卡片正文分几组：简介（正文）、优势和门槛花销等细节（小字，标签在左）、搭配和仓库链接（小字）
 function cardBody(x) {
   let h = "";
   if (x.summary) h += P(esc(sentence(x.summary)));
-  const lines = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];
-  if (lines.length) h += `<div class="list">${lines.map((t) => hang(2, `- ${esc(String(t).replace(/。$/, ""))}`)).join("")}</div>`;
-  const facts = factsOf(x);
+  // 推荐理由作为“优势”，和门槛、花销同样的格式：每条一行，分号隔开（负责人 2026-11-03 定）
+  const pros = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];
+  const facts = [...(pros.length ? [["优势", pros]] : []), ...factsOf(x)];
   if (facts.length) h += `<div class="list">${facts.map(([k, v]) => factHTML(k, v)).join("")}</div>`;
   if (x.parts?.length) h += S(`可以搭配的连接工具：${x.parts.map((p) => nm(p.name)).join("、")}`);
   if (x.repo_url) h += S(`<a class="link" href="${esc(x.repo_url)}" target="_blank" rel="noopener">${esc(x.role === "method" ? "查看做法说明" : repoText(x.repo_url))}</a>`);
