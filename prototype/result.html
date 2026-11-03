@@ -312,7 +312,7 @@ if (r.results.length) {
 if (combos.length) {
   html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<div>` +
     P((combos.length > 1 ? `${PLAN[i]}：` : "") + comboNames(c), "p h") +
-    `<div class="stack half">${P(esc(comboLead(c, i)))}<div class="list small">${comboMore(c).map((s) => hang(2, `- ${esc(s)}`)).join("")}</div></div></div>`).join(""));
+    `<div class="stack half">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c))}</div></div></div>`).join(""));
 }
 
 
