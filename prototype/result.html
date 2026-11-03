@@ -319,7 +319,8 @@ if (combos.length) {
 /* ---------- 排除原因 ---------- */
 // 小节：二级标题，下面的条目用辅助字号
 const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list small">${body}</div></div>`;
-let why = P(`收录的 ${data.projects.length} 个项目里，符合您条件的有 ${r.total_kept} 个。`);
+// 部分标题下的说明一律用辅助字号（和“后续补丁”的说明一样）
+let why = S(`收录的 ${data.projects.length} 个项目里，符合您条件的有 ${r.total_kept} 个。`);
 if (narrow.length) {
   why += grp("排除较多的条件", narrow.map((x) =>
     hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
@@ -328,14 +329,6 @@ if (narrow.length) {
 if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
 if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc(t)}`)).join(""));
 if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
-if (r.excluded.length) {
-  const groups = {};
-  for (const e of r.excluded) (groups[e.reason] ||= []).push(e.name);
-  why += `<details class="fold"><summary>${foldLine(`被排除的 ${r.excluded.length} 个项目`, W_H, "h")}</summary><div class="small stack half">` +
-    Object.entries(groups).sort((a, b) => b[1].length - a[1].length).map(([reason, names]) =>
-      `<div>${hang(2, `<b>- ${esc(reason)}，${names.length} 个</b>`)}${hang(2, sp(2) + names.map((n) => esc(splitName(n)[0])).join("、"))}</div>`).join("") +
-    `</div></details>`;
-}
 html += section("排除原因", `<div class="stack">${why}</div>`, false);
 
 /* ---------- 后续补丁 ---------- */
