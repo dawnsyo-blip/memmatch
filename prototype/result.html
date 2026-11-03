@@ -34,6 +34,9 @@
 /* 正文缩进标题字号的 3 格，和“01 ”后面的项目名对齐 */
 .body { padding-left: calc(var(--fs-h) * 1.5); }
 .in2 { padding-left: var(--fs); }
+/* 推荐项目和搭配方案的正文：简介（主句）和前后的标签、细节之间空一行，比细节各项之间的半行大 */
+.cbody { margin-top: var(--lh); }
+.cbody > * + * { margin-top: var(--lh); }
 .repo svg { display: inline-block; width: .75em; height: .75em; vertical-align: -.05em; }
 .repo:hover .link { text-decoration-thickness: .15em; }
 /* 页眉：标题下空一行；分隔线到编号、编号日期到按钮各空半行；页眉到第一个部分空一行（比部分之间的 1.5 行近，页眉和内容是一体的） */
@@ -255,12 +258,40 @@ function factHTML(k, v) {
   if (k === "注意") segs = segs.map((t) => t.replace(/[：:]\s*/g, "，"));
   return `<div class="fact">${segs.map((s, i) => hang(6, `${i ? sp(6) : `<b>${k}</b>  `}${esc(s)}${i < segs.length - 1 ? "；" : ""}`, "small")).join("")}</div>`;
 }
+// 优势强调和其它推荐项目相比的长处：“这 N 个里只有它……”排在最前；简介里已经说过的点跳过（负责人 2026-11-03 定）。
+// 按意思归类比较：理由属于某一类，简介里又出现这一类的说法，就算说过了
+const SAME = [
+  [/情绪/, /情绪/],
+  [/原话/, /原话|原文/],
+  [/普通文件|Markdown/, /文件|Markdown/],
+  [/面板/, /面板/],
+  [/打重要性分/, /打分|重要性/],
+  [/换窗|换模型|同一个 TA/, /换窗|换模型|不同模型|身份/],
+  [/几个入口共用|共用一份/, /共用|几个入口|不同聊天软件/],
+  [/分开记忆/, /分开/],
+  [/不想再提/, /不想再提|拒绝过/],
+  [/新窗口/, /新对话|新窗口|换对话窗口/],
+  [/淡忘|遗忘/, /淡化|忘|归档/],
+  [/不调用大模型/, /不调用大模型|不用大模型/],
+  [/分层/, /分层|三级|一级级/],
+];
+const saidIn = (t, sum) => SAME.some(([a, b]) => a.test(t) && b.test(sum));
+function prosOf(x) {
+  const sum = String(x.summary || ""), out = [], e = edges[x.id];
+  if (e) {
+    const k = e.indexOf("：");
+    const items = e.slice(k + 1).split("；").filter((t) => !saidIn(t, sum));
+    if (items.length) out.push(e.slice(0, k + 1) + items.join("；"));
+  }
+  for (const t of x.reasons) if (!saidIn(t, sum)) out.push(t);
+  return out;
+}
 // 卡片正文分几组：简介（正文）、优势和门槛花销等细节（小字，标签在左）、搭配和仓库链接（小字）
 function cardBody(x) {
   let h = "";
   if (x.summary) h += P(esc(sentence(x.summary)));
   // 推荐理由作为“优势”，和门槛、花销同样的格式：每条一行，分号隔开（负责人 2026-11-03 定）
-  const pros = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];
+  const pros = prosOf(x);
   const facts = [...(pros.length ? [["优势", pros]] : []), ...factsOf(x)];
   if (facts.length) h += `<div class="list">${facts.map(([k, v]) => factHTML(k, v)).join("")}</div>`;
   if (x.parts?.length) h += S(`可以搭配的连接工具：${x.parts.map((p) => nm(p.name)).join("、")}`);
@@ -326,8 +357,8 @@ if (!r.results.length) html += P("您的条件放在一起，收录的项目里�
 // 前 3 个展开，其余折叠；项目名用标题字号，正文缩进 3 格和名字对齐
 if (r.results.length) {
   html += section("推荐项目", r.results.map((x, i) => (i ? sep() : "") + (i < 3
-    ? `<article>${hang(3, `${pad2(i + 1)} ${nm(x.name)}`, "h")}<div class="body">${tagLine(x)}</div><div class="body stack half">${cardBody(x)}</div></article>`
-    : `<details class="pick"><summary>${foldLine(`${pad2(i + 1)} ${splitName(x.name)[0]}`, W_H, "h")}</summary><div class="body"><div class="stack">${tagLine(x)}</div><div class="stack half">${cardBody(x)}</div></div></details>`)).join(""));
+    ? `<article>${hang(3, `${pad2(i + 1)} ${nm(x.name)}`, "h")}<div class="body">${tagLine(x)}</div><div class="body cbody">${cardBody(x)}</div></article>`
+    : `<details class="pick"><summary>${foldLine(`${pad2(i + 1)} ${splitName(x.name)[0]}`, W_H, "h")}</summary><div class="body">${tagLine(x)}<div class="cbody">${cardBody(x)}</div></div></details>`)).join(""));
 }
 
 /* ---------- 搭配方案 ---------- */
@@ -335,7 +366,7 @@ if (combos.length) {
   // 和推荐项目同一格式：“01 名字”用二级标题，正文缩进 3 格；主句是正文，补充说明归在“注意”
   html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<article>` +
     hang(3, `${pad2(i + 1)} ${comboNames(c)}`, "h") +
-    `<div class="body stack half">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c, i))}</div></div></article>`).join(""));
+    `<div class="body cbody">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c, i))}</div></div></article>`).join(""));
 }
 
 
