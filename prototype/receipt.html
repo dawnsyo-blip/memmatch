@@ -1,0 +1,899 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>记忆库小票</title>
+<link rel="preload" href="fonts/sarasa-mono-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/sarasa-mono-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="thermal.css">
+<style>
+/* 更纱黑体等宽版的子集，由 scripts/subset_receipt_font.py 生成；改了页面或问卷上的字要重跑 */
+@font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+
+#resume { text-align: center; margin-top: calc(var(--lh) * .5); }
+
+/* 已答条目 */
+.log { list-style: none; padding: 0; }
+/* 已答摘要用小字，按 44 格拼行 */
+.row { display: block; width: 100%; text-align: left; font-size: var(--fs-s); line-height: var(--lh-s); }
+
+/* 当前题 */
+.q.top { padding-top: var(--lh); }
+.nowrap { white-space: nowrap; }
+/* 题目后面的 i 图标比题目字号小一级 */
+.q-title .info svg { width: var(--fs-h); height: var(--fs-h); }
+/* 当前题目比其它标题再大一级：一行 28 格 */
+.q-title { margin-top: calc(var(--lh) * .5); font-size: calc(var(--cw) / 14); line-height: 1.4; }
+.opts { display: grid; margin-top: calc(var(--lh) * .5); }
+/* [ ] 文字：续行缩进 4 格，和文字对齐；选项说明再缩进 2 格 */
+.opt {
+  display: block; width: calc(100% + 2ch); margin: 0 -1ch;
+  padding: calc(var(--lh) * .25) 1ch calc(var(--lh) * .25) 5ch; text-indent: -4ch;
+  text-align: left; white-space: pre-wrap; line-break: strict; overflow-wrap: anywhere;
+}
+/* 选项说明：选中后才展开，字号小一级（负责人 2026-11-03 定） */
+/* 排序题：选中的按名次排到最上面，右边出现拖动手柄 */
+.opt { position: relative; }
+.rank .opt { padding-right: 3ch; }
+.grip {
+  display: none; position: absolute; top: 0; right: 0; bottom: 0; width: 3ch;
+  align-items: center; justify-content: center; text-indent: 0;
+  touch-action: none; cursor: grab;
+}
+.grip svg { width: 1em; height: 1em; display: block; }
+.rank .opt[aria-checked="true"] .grip { display: flex; }
+.rank .oi { position: relative; transition: transform 160ms var(--ease-out); }
+/* 选中的几行连成一块时用 2px 纸色隔开，看得出是几项 */
+.rank .oi + .oi { margin-top: 2px; }
+.rank .oi.dragging { transition: none; z-index: 2; }
+.rank .oi.dragging .grip { cursor: grabbing; }
+.oh { display: none; text-indent: 0; padding-left: 2ch; font-size: var(--fs-s); line-height: var(--lh-s); }
+.opt[aria-checked="true"] .oh { display: block; }
+.opt:hover .tx, .clash { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+.opt[aria-checked="true"] { background: var(--ink); color: var(--paper); }
+.opt[aria-checked="true"] .tx { text-decoration: none; }
+/* 填空：接在选中的选项下面，同样反白，和选项连成一块；输入框只有一条下划线，聚焦时加粗 */
+.free {
+  margin: 0 -1ch; padding: 0 1ch calc(var(--lh) * .5) 5ch;
+  background: var(--ink); color: var(--paper);
+}
+.free input {
+  display: block; width: 100%; height: var(--lh);
+  border-bottom: 2px solid currentColor; border-radius: 0; caret-color: currentColor;
+}
+.free input:focus-visible { outline: 0; border-bottom-width: 4px; }
+.conf { margin-top: calc(var(--lh) * .5); }
+.q .go { margin-top: calc(var(--lh) * .5); }
+
+/* 结果 */
+.res .bar { margin-block: calc(var(--lh) * .5); }
+.tear { margin-top: var(--lh); }
+.tear .tbtn { vertical-align: top; }
+.tear svg { display: inline-block; width: 2ch; height: 1em; vertical-align: -.15em; }
+
+/* 打印：一行字从左到右一顿一顿地出现 */
+.ink { clip-path: inset(0 100% 0 0); }
+.ink.on { clip-path: inset(0 0 0 0); transition: clip-path .18s steps(10, end); }
+.title .ink.on { transition-duration: .3s; transition-timing-function: steps(6, end); }
+
+/* 调试面板（?debug） */
+.dbg {
+  position: fixed; right: 12px; bottom: 12px; z-index: 20;
+  width: min(300px, calc(100vw - 24px)); max-height: calc(100vh - 24px); overflow: auto;
+  background: rgba(255,255,255,.96); color: var(--ink);
+  box-shadow: 0 4px 20px rgba(0,0,0,.18);
+  font: 400 13px/20px var(--font);
+}
+.dbg summary { padding: 8px 12px; cursor: pointer; font-weight: 700; }
+.dbg-body { padding: 0 12px 12px; display: grid; gap: 6px; }
+.dbg label { display: grid; grid-template-columns: 6.5em 1fr 3.6em; align-items: center; gap: 8px; }
+.dbg output { text-align: right; font-variant-numeric: tabular-nums; }
+.dbg input[type=range] { width: 100%; }
+.dbg .chk { display: flex; gap: 6px; }
+.dbg-btns { display: flex; gap: 6px; }
+.dbg-btns button { flex: 1; height: 32px; box-shadow: inset 0 0 0 1px var(--ink); }
+.dbg pre { margin: 0; padding: 8px; background: #f1f1ef; font-size: 12px; line-height: 17px; white-space: pre-wrap; user-select: all; }
+
+/* 减少动态效果：纸不动，新出现的字只淡入 */
+@media (prefers-reduced-motion: reduce) {
+  .ink { clip-path: none; opacity: 0; }
+  .ink.on, .title .ink.on {
+    opacity: 1;
+    transition: opacity 200ms var(--ease-out);
+    @starting-style { opacity: 0; }
+  }
+  .ink.on.faint { opacity: .9; }
+  .rank .oi { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="dock" aria-hidden="true">
+  <div class="plate"><span class="clip l"></span><span class="bezel"></span><span class="slit"></span><span class="clip r"></span></div>
+</div>
+<div class="lip" aria-hidden="true"><i></i><i class="pulse" id="pulse"></i></div>
+<div class="dock-low" aria-hidden="true">
+  <div class="plate"><span class="clip l"></span><span class="bezel"></span><span class="slit"></span><span class="clip r"></span></div>
+</div>
+
+<main class="wrap" id="wrap">
+  <div class="shadow" id="shadow" aria-hidden="true"></div>
+  <div class="paper" id="paper">
+    <div class="inner" id="inner">
+      <div class="topbars" id="topbars" aria-hidden="true"></div>
+      <div id="intro">
+        <button class="bar" id="startBtn" disabled>开始</button>
+        <p id="resume" hidden><button class="tbtn" id="resetBtn">[重新开始]</button></p>
+      </div>
+      <div id="head"></div>
+      <ol class="log" id="log" aria-label="已答"></ol>
+      <div id="stage" aria-live="polite"></div>
+    </div>
+  </div>
+</main>
+
+<div id="slack" aria-hidden="true"></div>
+<div id="tip" role="tooltip" hidden></div>
+
+<script type="module">
+import { checkCondition, findConflicts } from "../engine/index.js";
+import {
+  W, W_S, FONTS, cols, esc, sp, rule, center, L, pairHTML, pairText, faint,
+  barcode, codeOf, fnv, stamp, serialNo, titleHTML, numOf, rowLabel, answerText, pad2,
+} from "./thermal.js";
+
+// 出纸参数；加 ?debug 可以在页面右下角调
+const FEED = {
+  step: 40,        // 每段距离 px
+  dur: 110,        // 每段移动时长 ms
+  pause: 55,       // 每段之后的停顿 ms
+  ease: 0.6,       // 缓入缓出强度：0 是匀速，1 最强
+  jitter: 0.15,    // 距离、时长、停顿的随机浮动比例
+  overshoot: 0.8,  // 每段结尾越过目标再回来的距离 px
+  slotAmp: 1,      // 每段开始时槽口向上颤动的距离 px
+  shade: 0.5,      // 槽口阴影每段加深多少（0–1）
+  maxSegs: 6,      // 一次出纸最多走几段；纸长时每段加长，不让出一道题拖太久
+  slow: false,     // 0.25 倍慢放
+};
+const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+const SLOT_MS = 60;
+// 一次出纸的最后两段：距离按 step 缩短，停顿拉长
+const TAIL_STEP = [0.6, 0.35];
+const TAIL_PAUSE = [1.6, 2.2];
+
+const TITLE = ['找到', '适合你的', '记忆系统'];
+const TYPE_TEXT = { single: '单选', multi: '多选', rank: '排序' };
+// 答卷和旧版答题页存在同一个地方，完整结果页、旧版结果页都读它
+const KEY = 'memsite-quiz-v3';
+
+const $ = (s) => document.querySelector(s);
+const paper = $('#paper'), inner = $('#inner'), wrap = $('#wrap'), pulse = $('#pulse'), shadow = $('#shadow');
+const plates = [...document.querySelectorAll('.plate')];
+const log = $('#log'), stage = $('#stage'), head = $('#head');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const still = () => reduce.matches;
+const speed = () => (FEED.slow ? 0.25 : 1);
+const wait = (ms) => still() ? Promise.resolve() : new Promise((r) => setTimeout(r, ms / speed()));
+
+let busy = false;
+let NO = '0001';
+const STAMP = stamp();
+
+$('#topbars').innerHTML = barcode(20261102, 46);
+
+// ---------- 问卷配置和答卷 ----------
+let cfg = null;
+try {
+  cfg = await fetch(new URL('../data/questionnaire/questions.json', import.meta.url)).then((r) => {
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  });
+} catch (e) {}
+
+// 按“部分”的顺序排题（第 6、7 题在配置里是对调的）
+const QS = [], byId = {};
+if (cfg) cfg.parts.forEach((p, k) => p.questions.forEach((id) => {
+  const q = cfg.questions.find((x) => x.id === id);
+  if (q) { const item = { ...q, part: k }; QS.push(item); byId[id] = item; }
+}));
+
+let state = { answers: {}, free: {}, seen: {} };
+try {
+  const s = JSON.parse(localStorage.getItem(KEY));
+  if (s && s.answers) state = { ...state, ...s, free: s.free || {}, seen: s.seen || {} };
+} catch (e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+const answered = (q) => (state.answers[q.id] || []).length > 0;
+// 跳题和引擎同一套判断；进度按当前要答的题来数
+const visible = () => QS.filter((q) => !q.show_if || checkCondition(q.show_if, state.answers));
+// 已经答完的一串题，和接下来要答的那道（全答完时是 null）
+function flow() {
+  const list = visible(), i = list.findIndex((q) => !answered(q));
+  return { list, done: i < 0 ? list : list.slice(0, i), next: i < 0 ? null : list[i] };
+}
+const firstOfPart = (q, list = visible()) => { const k = list.indexOf(q); return k === 0 || list[k - 1]?.part !== q.part; };
+function partHTML(q) {
+  const p = cfg.parts[q.part];
+  return `<div class="gap"><span class="l"><span class="inv b"> ${esc(p.label)} </span> <b>${esc(p.title)}</b></span></div>`;
+}
+
+// ---------- 出纸 ----------
+// H 是纸的实际高度，hidden 是下沿还藏着多少：露出的长度 = H - hidden。
+// 出纸前一次性把高度设好、用位移把多出来的部分藏住，动画只改位移。
+let H = 0, hidden = 0;
+let lastFeed = 0;
+// 题目出纸时不挡操作：点了选项以后先等这次出纸走完，再往下
+let feeding = Promise.resolve();
+
+// 纸收短时，页面底部补同样高的空白（slack），文档总高不变，浏览器就不会因为滚动位置越界把页面往上拽一下；
+// 纸再变长时先用掉这段空白，出纸结束后把看不见的部分去掉
+const slackEl = document.getElementById('slack');
+let slack = 0;
+function setSlack(v) { slack = Math.max(0, v); slackEl.style.height = slack + 'px'; }
+function trimSlack() {
+  const need = scrollY + innerHeight - (document.documentElement.scrollHeight - slack);
+  setSlack(Math.min(slack, Math.max(0, need)));
+}
+function setH(h) { if (H) setSlack(slack + H - h); H = h; paper.style.height = h + 'px'; }
+function setHidden(r) {
+  hidden = r < 0.01 ? 0 : r;
+  r = hidden;
+  paper.style.transform = shadow.style.transform = r ? `translate3d(0,${-r}px,0)` : '';
+  inner.style.transform = r ? `translate3d(0,${r}px,0)` : '';
+}
+function natural() { return inner.offsetHeight; }
+function bottomOf(el) { return el.getBoundingClientRect().bottom - wrap.getBoundingClientRect().top; }
+
+// 让纸的下沿留在屏幕里；keep 是要保证顶部不被出票口挡住的元素
+// 出题目时页面跟着出纸滑动，让题号行停在出票口下方、屏幕高 BAND 处；上面这一段留给已答摘要，
+// 所以每道题的标题都出现在同样的高度（负责人 2026-11-03 定，暂定 15%）
+const BAND = 0.15;
+function glideTo(anchor) {
+  const from = scrollY;
+  const line = document.querySelector('.dock').getBoundingClientRect().bottom + innerHeight * BAND;
+  const to = Math.max(0, from + anchor.getBoundingClientRect().top - line);
+  const extra = to + innerHeight - document.documentElement.scrollHeight;
+  if (extra > 0) setSlack(slack + extra);
+  return (p) => scrollTo({ top: from + (to - from) * p, behavior: 'instant' });
+}
+
+function follow(keep) {
+  let delta = wrap.getBoundingClientRect().top + H - hidden - (innerHeight - 20);
+  if (keep) delta = Math.min(delta, keep.getBoundingClientRect().top - 80);
+  if (delta > 0.5) scrollBy({ top: delta, behavior: 'instant' });
+}
+
+const vary = () => 1 + (Math.random() * 2 - 1) * FEED.jitter;
+function easeInOut(u) {
+  const p = 1 + FEED.ease * 3;
+  return u < 0.5 ? Math.pow(2 * u, p) / 2 : 1 - Math.pow(2 - 2 * u, p) / 2;
+}
+const easeOut = (u) => 1 - (1 - u) * (1 - u);
+
+// 把一次出纸切成几段，像步进电机一格一格地走
+function plan(D) {
+  const step = Math.max(FEED.step, D / FEED.maxSegs);
+  const tail = TAIL_STEP.map((f) => f * step);
+  let dists;
+  if (D <= step * 0.8) dists = [D];
+  else if (D <= step * 1.6) dists = [D * 0.62, D * 0.38];
+  else {
+    const main = D - tail[0] - tail[1];
+    const n = Math.max(1, Math.round(main / step));
+    dists = Array.from({ length: n }, vary).concat(tail.map((t) => t / step * vary()));
+  }
+  const sum = dists.reduce((a, b) => a + b, 0);
+  dists = dists.map((d) => d * D / sum);
+
+  const n = dists.length;
+  let t = 0, pos = 0;
+  return dists.map((d, i) => {
+    const back = n - 1 - i;  // 0 是最后一段
+    const dur = FEED.dur * vary();
+    const pause = FEED.pause * vary() * (back < 2 && n > 1 ? TAIL_PAUSE[1 - back] : 1);
+    const seg = { t0: t, dur, pause, from: pos, to: pos + d, o: Math.min(d * 0.3, FEED.overshoot * vary()), shake: true };
+    t += dur + pause; pos += d;
+    return seg;
+  });
+}
+
+function segPos(s, lt) {
+  const u = Math.min(1, lt / s.dur);
+  const main = s.o > 0 ? 0.8 : 1;
+  const dir = Math.sign(s.to - s.from) || 1;
+  if (u <= main) return s.from + (s.to + dir * s.o - s.from) * easeInOut(u / main);
+  return s.to + dir * s.o * (1 - easeOut((u - main) / (1 - main)));
+}
+
+// 同一条时间轴：每一帧算出纸露出多少、槽口位移、阴影深浅；
+// marks 里的行在纸经过它时开始打印
+function play(segs, r0, keep, marks = [], glide = null) {
+  return new Promise((done) => {
+    const end = segs.at(-1).t0 + segs.at(-1).dur + segs.at(-1).pause;
+    let t = 0, prev = null;
+    const frame = (now) => {
+      if (prev !== null) t += (now - prev) * speed();
+      prev = now;
+      let k = 0;
+      while (k + 1 < segs.length && segs[k + 1].t0 <= t) k++;
+      const s = segs[k], lt = t - s.t0;
+      const v = lt >= s.dur ? s.to : segPos(s, lt);
+      const slot = s.shake && lt < SLOT_MS ? -FEED.slotAmp * Math.sin(Math.PI * lt / SLOT_MS) : 0;
+      const shade = s.shake && lt < s.dur ? FEED.shade * Math.sin(Math.PI * lt / s.dur) : 0;
+
+      setHidden(Math.max(0, r0 - v));
+      const tf = slot ? `translate3d(0,${slot.toFixed(2)}px,0)` : '';
+      plates.forEach((p) => { p.style.transform = tf; });
+      pulse.style.opacity = shade.toFixed(3);
+      if (glide) glide(Math.min(1, Math.max(0, (r0 - hidden) / r0)));
+      else follow(keep);
+      const shown = H - hidden;
+      for (const m of marks) if (!m.done && shown >= m.y) { m.el.classList.add('on'); m.done = true; }
+
+      if (t < end) requestAnimationFrame(frame);
+      else {
+        plates.forEach((p) => { p.style.transform = ''; });
+        pulse.style.opacity = 0;
+        marks.forEach((m) => m.el.classList.add('on'));
+        done();
+      }
+    };
+    requestAnimationFrame(frame);
+  });
+}
+
+async function feedTo(target, keep, inks = []) {
+  target = Math.ceil(Math.min(target, natural()));
+  const marks = inks.map((el) => ({ el, y: bottomOf(el) + 4 }));
+  const anchor = keep?.querySelector?.('.qmeta');
+  const shown = H - hidden;
+  const D = target - shown;
+  if (D > 0) setH(target);
+  if (D <= 0 || still()) {
+    setHidden(0);
+    inks.forEach((el) => el.classList.add('on'));
+    if (anchor) glideTo(anchor)(1);
+    else if (D > 0) follow(keep);
+    trimSlack();
+    return;
+  }
+  setHidden(D);
+  lastFeed = D;
+  await play(plan(D), D, keep, marks, anchor ? glideTo(anchor) : null);
+  trimSlack();
+}
+
+// 出一次纸，把这几行一起带出来
+async function emit(inks, pause = 160) {
+  await feedTo(bottomOf(inks.at(-1)) + 12, null, inks);
+  await wait(pause);
+}
+
+// 收回：一段平滑地缩回去，结束后再改实际高度
+async function pullTo(target) {
+  const P = H - hidden - target;
+  if (P > 0 && !still()) {
+    await play([{ t0: 0, dur: FEED.dur * 2, pause: 0, from: 0, to: -P, o: 0, shake: false }], hidden);
+  }
+  setH(target);
+  setHidden(0);
+}
+
+async function replay() {
+  if (busy || !lastFeed || still()) return;
+  busy = true;
+  await feeding;
+  const D = Math.min(lastFeed, H - 40);
+  setHidden(D);
+  await play(plan(D), D);
+  busy = false;
+}
+
+// ---------- 首页 ----------
+const startBtn = $('#startBtn');
+if (!cfg) {
+  startBtn.textContent = '读不到问卷';
+  $('#intro').insertAdjacentHTML('beforeend', '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
+} else {
+  startBtn.disabled = false;
+  // 上次答过：接着答，另给一个从头开始
+  if (Object.keys(state.answers).length) { startBtn.textContent = '接着上次答'; $('#resume').hidden = false; }
+}
+startBtn.addEventListener('click', start);
+$('#resetBtn').addEventListener('click', () => {
+  if (busy || !confirm('清空已经填的答案，从第 1 题重新开始？')) return;
+  state = { answers: {}, free: {}, seen: {} };
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  start();
+});
+setH(natural());
+FONTS.then(() => { if (!head.childElementCount) setH(natural()); });
+
+async function start() {
+  if (busy) return;
+  busy = true;
+  await FONTS;
+  NO = serialNo(true);
+  $('#intro').remove();
+  head.innerHTML = `
+    ${titleHTML(TITLE, 'ink')}
+    <div class="ink gap">${L(rule('=', W_S), 'small')}</div>
+    <div class="ink">${L(center(`记忆系统配对单 No.${NO}`, W_S), 'small')}</div>
+    <div class="ink">${L(center(STAMP.full, W_S), 'small')}</div>
+    <div class="ink">${L(rule('-', W_S), 'small')}</div>`;
+  faint(head);
+  await emit([...head.querySelectorAll('.ink')], 200);
+  const { done, next } = flow();
+  if (done.length) {
+    const lis = done.map(entry);
+    log.append(...lis);
+    await emit(lis, 120);
+  }
+  if (next) await showQuestion(next);
+  else await showResult();
+  busy = false;
+}
+
+
+// ---------- 答题 ----------
+const ICON_GRIP = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M3 5h10M3 8h10M3 11h10"/></svg>';
+const ICON_INFO = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.2M8 4.6v.1" stroke-linecap="round"/></svg>';
+
+async function showQuestion(q, preset) {
+  const list = visible(), idx = list.indexOf(q);
+  let sel = [...(preset || state.answers[q.id] || [])];
+  // 第一次来到这道题、还没答时，按前面的回答预先勾上
+  let defaulted = false;
+  if (!sel.length && !state.seen[q.id]) {
+    const picks = q.options.filter((o) => o.default_if && checkCondition(o.default_if, state.answers)).map((o) => o.id);
+    if (picks.length) { sel = q.type === 'single' ? picks.slice(0, 1) : picks; defaulted = true; }
+  }
+  state.seen[q.id] = true;
+  save();
+  const free = {};
+  q.options.forEach((o) => { if (o.free_text) free[o.id] = state.free[`${q.id}.${o.id}`] || ''; });
+
+  const el = document.createElement('section');
+  const part = firstOfPart(q, list);
+  el.className = `q ${q.type}${part ? '' : ' top'}`;
+  const role = q.type === 'single' ? 'radio' : 'checkbox';
+  // 题号一行：反白的 Q1、题型，右边是进度。排序题的说明直接写出来，其余的收进题目后面的提示图标（占两格）
+  const tip = q.type !== 'rank' && q.help;
+  const left = ` Q${numOf(q)} `, type = ` ${TYPE_TEXT[q.type]}`, n = `${idx + 1}/${list.length}`;
+  const used = cols(left) + cols(type) + cols(n);
+  el.innerHTML = `
+    ${part ? partHTML(q) : ''}
+    <div class="l small qmeta${part ? ' half' : ''}"><span class="inv b">${left}</span>${type}${sp(W_S - used)}${n}</div>
+    <h2 class="q-title p h">${tip ? `${esc(q.text.slice(0, -1))}<span class="nowrap">${esc(q.text.slice(-1))} <button class="info" aria-expanded="false" data-tip="${esc(q.help)}" aria-label="说明：${esc(q.help)}">${ICON_INFO}</button></span>` : esc(q.text)}</h2>
+    ${q.type === 'rank' && q.help ? `<p class="p small">${esc(q.help)}</p>` : ''}
+    ${defaulted ? '<p class="p small">已按前面的回答预选，可以改。</p>' : ''}
+    <div class="conf small" hidden></div>
+    <div class="opts" role="${q.type === 'single' ? 'radiogroup' : 'group'}">
+      ${q.options.map((o) => `<div class="oi" data-id="${o.id}"><button class="opt" role="${role}" data-id="${o.id}"><span class="mk">[ ]</span> <span class="tx">${esc(o.label)}</span><span class="cl"></span>${o.help ? `<span class="oh">${esc(o.help)}</span>` : ''}${q.type === 'rank' ? `<span class="grip" aria-hidden="true">${ICON_GRIP}</span>` : ''}</button>` +
+        (o.free_text ? `<div class="free" data-for="${o.id}" hidden><input type="text" aria-label="${esc(o.label)}，请填写" value="${esc(free[o.id])}"></div>` : '') + '</div>').join('')}
+    </div>
+    <button class="bar go">${idx === list.length - 1 ? '完成 →' : '继续 →'}</button>`;
+  const go = el.querySelector('.go');
+  const optOf = (id) => q.options.find((o) => o.id === id);
+
+  // 前后矛盾：和这道题有关的才提示；被排斥的选项后面标“互斥”，完整原因留到结果页
+  const paintConflicts = () => {
+    const cs = findConflicts(cfg, { ...state.answers, [q.id]: sel }).filter((c) => c.by_question === q.id || c.question === q.id);
+    const box = el.querySelector('.conf');
+    const lines = [];
+    const others = new Map();
+    for (const c of cs) {
+      if (c.warning) { lines.push(`<p class="hang" style="--h:6">提醒  ${esc(c.message)}</p>`); continue; }
+      const o = c.question === q.id ? c.by_question : c.question;
+      others.set(o, (others.has(o) ? others.get(o) : true) && c.partial);
+    }
+    for (const [o, partial] of others) {
+      const inLog = log.querySelector(`li[data-q="${o}"]`);
+      lines.push(`<p class="p">${partial ? '与历史选项部分互斥' : '与历史选项互斥'}${inLog ? ` <button class="tbtn u" data-edit="${o}">[去第 ${esc(numOf(byId[o]))} 题修改]</button>` : ''}</p>`);
+    }
+    box.innerHTML = lines.join('');
+    box.hidden = !lines.length;
+    const clashed = new Set(cs.filter((c) => c.question === q.id && !c.warning).map((c) => c.option));
+    el.querySelectorAll('.opt').forEach((b) => { b.querySelector('.cl').innerHTML = clashed.has(b.dataset.id) ? ' <span class="clash">互斥</span>' : ''; });
+  };
+
+  const paint = () => {
+    el.querySelectorAll('.opt').forEach((b) => {
+      const k = sel.indexOf(b.dataset.id);
+      b.setAttribute('aria-checked', k >= 0);
+      b.querySelector('.mk').textContent = k < 0 ? '[ ]' : q.type === 'rank' ? `[${k + 1}]` : '[√]';
+    });
+    el.querySelectorAll('.free').forEach((f) => { f.hidden = !sel.includes(f.dataset.for); });
+    // 单选题也要点“继续”才进入下一题（负责人 2026-11-03 定）
+    go.disabled = !sel.length;
+    paintConflicts();
+    reorder();
+    refit();
+  };
+  // 排序题：选中的按名次排到最上面，没选的按原来的顺序跟在后面；换位置时从原处平移过去
+  const opts = el.querySelector('.opts');
+  const reorder = () => {
+    if (q.type !== 'rank') return;
+    const items = [...opts.children];
+    const byOpt = (id) => items.find((i) => i.dataset.id === id);
+    const want = [...sel.map(byOpt), ...q.options.filter((o) => !sel.includes(o.id)).map((o) => byOpt(o.id))];
+    const first = new Map(items.map((i) => [i, i.getBoundingClientRect().top]));
+    const act = document.activeElement;
+    items.forEach((i) => { i.style.transition = 'none'; i.style.transform = ''; });
+    opts.append(...want);
+    if (act && act !== document.activeElement && opts.contains(act)) act.focus({ preventScroll: true });
+    for (const i of want) {
+      const d = first.get(i) - i.getBoundingClientRect().top;
+      if (Math.abs(d) > 0.5 && !still()) i.animate([{ transform: `translateY(${d}px)` }, { transform: 'none' }], { duration: 220, easing: EASE_OUT });
+    }
+    requestAnimationFrame(() => items.forEach((i) => { i.style.transition = ''; }));
+  };
+
+  // 拖动手柄调整名次：被拖的这项跟着手指走，其余的让出位置，松手后按位置重排
+  let drag = null;
+  opts.addEventListener('pointerdown', (e) => {
+    const g = e.target.closest('.grip');
+    if (!g || busy) return;
+    const it = g.closest('.oi');
+    if (!sel.includes(it.dataset.id)) return;
+    e.preventDefault();
+    const list = [...opts.children].filter((i) => sel.includes(i.dataset.id));
+    const from = list.indexOf(it);
+    drag = { it, y0: e.clientY, list, rects: list.map((i) => i.getBoundingClientRect()), from, to: from };
+    try { g.setPointerCapture(e.pointerId); } catch (err) {}
+    it.classList.add('dragging');
+  });
+  opts.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    const { it, list, rects, from } = drag, r = rects[from];
+    const dy = Math.min(rects.at(-1).bottom - r.bottom, Math.max(rects[0].top - r.top, e.clientY - drag.y0));
+    const mid = r.top + r.height / 2 + dy;
+    drag.to = rects.filter((x, k) => k !== from && x.top + x.height / 2 < mid).length;
+    it.style.transform = `translateY(${dy}px)`;
+    list.forEach((x, k) => {
+      if (x === it) return;
+      const step = r.height + 2;
+      const shift = from < drag.to && k > from && k <= drag.to ? -step : from > drag.to && k >= drag.to && k < from ? step : 0;
+      x.style.transform = shift ? `translateY(${shift}px)` : '';
+    });
+  });
+  const drop = () => {
+    if (!drag) return;
+    const { it, from, to } = drag;
+    drag = null;
+    it.classList.remove('dragging');
+    sel.splice(to, 0, sel.splice(from, 1)[0]);
+    paint();
+  };
+  opts.addEventListener('pointerup', drop);
+  opts.addEventListener('pointercancel', drop);
+  // 键盘：选中的项按 Alt+上／下方向键挪一位
+  opts.addEventListener('keydown', (e) => {
+    const b = e.target.closest('.opt');
+    if (q.type !== 'rank' || !b || !e.altKey || !['ArrowUp', 'ArrowDown'].includes(e.key)) return;
+    const k = sel.indexOf(b.dataset.id), to = k + (e.key === 'ArrowUp' ? -1 : 1);
+    if (k < 0 || to < 0 || to >= sel.length) return;
+    e.preventDefault();
+    sel.splice(to, 0, sel.splice(k, 1)[0]);
+    paint();
+  });
+  // 选中后展开说明和填空，纸跟着变长（再出一小段纸）或收短
+  const refit = () => {
+    if (!el.isConnected) return;
+    feeding = feeding.then(() => {
+      if (!el.isConnected) return;
+      const h = natural();
+      if (h > H) return feedTo(h);
+      if (h < H) setH(h);
+    });
+  };
+  paint();
+  faint(el);
+
+  const next = async () => {
+    if (busy || !sel.length) return;
+    busy = true;
+    await feeding;
+    el.querySelectorAll('.free input').forEach((inp) => { free[inp.parentElement.dataset.for] = inp.value.trim(); });
+    await commit(q, sel, free);
+    busy = false;
+  };
+
+  el.querySelector('.opts').addEventListener('click', async (e) => {
+    const b = e.target.closest('.opt');
+    if (!b || busy || e.target.closest('.grip')) return;
+    const id = b.dataset.id, o = optOf(id);
+    if (q.type === 'single') sel = [id];
+    else if (sel.includes(id)) sel = sel.filter((x) => x !== id);
+    else if (o.exclusive) sel = [id];
+    else sel = sel.filter((x) => !optOf(x)?.exclusive).concat(id);
+    paint();
+    if (o.free_text && sel.includes(id)) { el.querySelector(`.free[data-for="${id}"] input`).focus(); return; }
+  });
+  el.querySelectorAll('.free input').forEach((inp) => {
+    inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); next(); } });
+  });
+  el.querySelector('.conf').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-edit]');
+    if (b) editAt(log.querySelector(`li[data-q="${b.dataset.edit}"]`));
+  });
+  go.addEventListener('click', next);
+
+  stage.replaceChildren(el);
+  // 不等出纸走完就返回，选项马上可以点
+  feeding = feedTo(natural(), el).then(() => {
+    if (el.isConnected && !el.contains(document.activeElement)) {
+      (el.querySelector('[aria-checked="true"]') || el.querySelector('.opt')).focus({ preventScroll: true });
+    }
+  });
+}
+
+function entry(q) {
+  const v = answerText(q, state.answers[q.id], state.free);
+  const li = document.createElement('li');
+  li.className = 'ink';
+  li.dataset.q = q.id;
+  li.innerHTML = (firstOfPart(q) ? partHTML(q) : '') +
+    `<button class="row" aria-label="修改第 ${esc(numOf(q))} 题：${esc(v)}">${pairHTML(rowLabel(q), v, W_S)}</button>`;
+  faint(li);
+  return li;
+}
+
+// 这道题压成条目：题目淡出，纸收回到条目下面，再打印条目
+async function fold(q) {
+  const sec = stage.firstElementChild;
+  const li = entry(q);
+  log.append(li);
+  sec.style.display = 'none';
+  const target = natural();
+  sec.style.display = '';
+  li.remove();
+  if (!still()) {
+    sec.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160 / speed(), easing: EASE_OUT, fill: 'forwards' });
+    await wait(160);
+    await pullTo(Math.min(target, H));
+  }
+  stage.replaceChildren();
+  log.append(li);
+  setH(target);
+  setHidden(0);
+  li.classList.add('on');
+  await wait(120);
+}
+
+async function commit(q, sel, free) {
+  state.answers[q.id] = [...sel];
+  for (const [id, v] of Object.entries(free)) {
+    const key = `${q.id}.${id}`;
+    if (v && sel.includes(id)) state.free[key] = v; else delete state.free[key];
+  }
+  save();
+  await fold(q);
+  // 改过前面的题以后，后面已答的条目重新打印；跳题条件变了的，按新的显示
+  const { done, next } = flow();
+  const again = done.slice(done.indexOf(q) + 1).map(entry);
+  if (again.length) {
+    log.append(...again);
+    await emit(again, 120);
+  }
+  if (next) await showQuestion(next);
+  else await showResult();
+}
+
+// 点已答条目：这一行和之后的都收回，回到这道题
+async function editAt(li) {
+  if (!li || busy) return;
+  busy = true;
+  await feeding;
+  const k = [...log.children].indexOf(li);
+  const gone = [...log.children].slice(k).concat([...stage.children]);
+  gone.forEach((n) => { n.style.display = 'none'; });
+  const target = natural();
+  gone.forEach((n) => { n.style.display = ''; });
+  await pullTo(target);
+  gone.forEach((n) => n.remove());
+  setH(natural());
+  await showQuestion(byId[li.dataset.q]);
+  busy = false;
+}
+log.addEventListener('click', (e) => { const b = e.target.closest('.row'); if (b) editAt(b.closest('li')); });
+
+// ---------- 结果 ----------
+// 跑真实引擎（sample.js 读的就是上面存的答卷），完整结果页用同一份
+async function realPicks() {
+  try {
+    const { run } = await import('./sample.js');
+    const { r } = await run();
+    const list = r.results.slice(0, 3).map((x) => ({ name: x.name.replace(/（.+）$/, ''), score: x.score }));
+    return { list, total: r.results.length };
+  } catch (e) {
+    return {};
+  }
+}
+
+let last = null;
+
+async function showResult() {
+  state.done = true;
+  save();
+  const key = JSON.stringify(state.answers);
+  last = { ...(await realPicks()), h: fnv(key), code: codeOf(key) };
+  const el = document.createElement('section');
+  el.className = 'res';
+  // 撕票一行：剪刀两格 + 空格 + 虚线 + 两个空格 + 下载图标两格
+  const dashes = '- '.repeat(W).slice(0, W - 2 - 1 - 2 - 2);
+  const stars = '#'.repeat((W_S - cols(STAMP.date) - 2) / 2);
+  const rows = !last.list ? '<div class="ink"><p class="p">读不到项目数据，请用 npm run site 打开。</p></div>'
+    : last.list.length ? last.list.map((p, n) => `<div class="ink">${pairHTML(`${pad2(n + 1)} ${p.name}`, `${p.score} 分`)}</div>`).join('')
+    : '<div class="ink"><p class="p">暂时没有完全符合的。完整结果里写了放宽哪些条件就能有选择。</p></div>';
+  el.innerHTML = `
+    <div class="ink gap">${L(rule('=', W_S), 'small')}</div>
+    <div class="ink"><span class="l h"><span class="inv"> 推荐结果 </span></span></div>
+    ${rows}
+    <div class="ink">${L(rule('-', W_S), 'small')}</div>
+    <div class="ink">${pairHTML('小计', `${last.total ?? 0} 个`)}</div>
+    <a class="bar ink" href="result.html">完整结果 →</a>
+    <div class="ink">${L(rule('-', W_S), 'small')}</div>
+    <div class="ink" aria-hidden="true">${L(`${stars} ${STAMP.date} ${stars}`, 'small')}</div>
+    <div class="ink">${barcode(last.h, 38, 'barcode')}</div>
+    <div class="ink">${L(center(last.code, W_S), 'small')}</div>
+    <div class="l tear ink"><button class="tbtn" id="tearBtn" aria-label="复制小票文字"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg> ${dashes}</button>  <button class="tbtn" id="dlBtn" data-tip="将问卷下载为文本" aria-label="将问卷下载为文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></button></div>`;
+  faint(el);
+  stage.replaceChildren(el);
+  await feedTo(natural(), null, [...el.querySelectorAll('.ink')]);
+  $('#tearBtn').addEventListener('click', tear);
+  $('#dlBtn').addEventListener('click', download);
+}
+
+// 文字版小票：和纸上同一套 32 格
+function receiptText() {
+  return [
+    TITLE.join(''), rule('='), center(`记忆系统配对单 No.${NO}`), center(STAMP.full), rule('-'),
+    ...flow().done.flatMap((q) => pairText(rowLabel(q), answerText(q, state.answers[q.id], state.free))),
+    rule('='), '推荐结果',
+    ...(last.list || []).flatMap((p, n) => pairText(`${pad2(n + 1)} ${p.name}`, `${p.score} 分`)),
+    rule('-'), ...pairText('小计', `${last.total ?? 0} 个`), rule('-'), center(last.code), '',
+  ].map((s) => s.trimEnd()).join('\n');
+}
+
+async function tear() {
+  const btn = $('#tearBtn');
+  const text = receiptText();
+  let ok = true;
+  try { await navigator.clipboard.writeText(text); }
+  catch {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.append(ta); ta.select();
+    ok = document.execCommand('copy'); ta.remove();
+  }
+  // 连点时不重播，免得纸从半路跳回原位
+  if (!still() && !wrap.getAnimations().length) {
+    wrap.animate([
+      { transform: 'none' },
+      { transform: 'translateY(6px) rotate(-.5deg)' },
+      { transform: 'translateY(-1px) rotate(.15deg)' },
+      { transform: 'none' },
+    ], { duration: 420, easing: EASE_OUT });
+  }
+  flash(btn, ok ? '已复制小票文字' : '复制失败');
+}
+
+// 点了以后用提示框说一声，1.6 秒后收起
+function flash(btn, text) {
+  showTip(btn, false, text);
+  setTimeout(() => { if (tipOf === btn) hideTip(); }, 1600);
+}
+
+function download() {
+  const url = URL.createObjectURL(new Blob([receiptText()], { type: 'text/plain;charset=utf-8' }));
+  const a = document.createElement('a');
+  a.href = url; a.download = `记忆库小票-${last.code.replace(/ /g, '')}.txt`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  flash($('#dlBtn'), '已下载');
+}
+
+// ---------- 提示框 ----------
+// 鼠标经过、键盘聚焦时临时显示；点一下 i 图标钉住，再点一下收起（点别处、按 Esc 也收起）
+const tip = $('#tip');
+let tipOf = null, pinned = false;
+function showTip(t, pin = false, text = t.dataset.tip) {
+  pinned = pin;
+  if (tipOf === t && !tip.hidden && tip.textContent === text) return;
+  tipOf?.classList.remove('on');
+  tipOf = t;
+  t.classList.add('on');
+  if (t.classList.contains('info')) t.setAttribute('aria-expanded', 'true');
+  tip.textContent = text;
+  tip.hidden = false;
+  placeTip();
+  // 每次打开都重播一遍出现的动画
+  tip.classList.remove('in');
+  void tip.offsetWidth;
+  tip.classList.add('in');
+}
+function placeTip() {
+  const r = tipOf.getBoundingClientRect(), w = tip.offsetWidth;
+  tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + 'px';
+  tip.style.top = (r.bottom + 8) + 'px';
+}
+function hideTip() {
+  tip.hidden = true;
+  pinned = false;
+  if (!tipOf) return;
+  tipOf.classList.remove('on');
+  if (tipOf.classList.contains('info')) tipOf.setAttribute('aria-expanded', 'false');
+  tipOf = null;
+}
+document.addEventListener('pointerover', (e) => {
+  const t = e.target.closest('[data-tip]');
+  if (t && e.pointerType === 'mouse' && !pinned) showTip(t);
+});
+document.addEventListener('pointerout', (e) => {
+  const t = e.target.closest('[data-tip]');
+  if (t && t === tipOf && !pinned && !t.contains(e.relatedTarget)) hideTip();
+});
+document.addEventListener('focusin', (e) => {
+  const t = e.target.closest('[data-tip]');
+  if (t) { if (!pinned) showTip(t); } else if (!pinned) hideTip();
+});
+document.addEventListener('click', (e) => {
+  const t = e.target.closest('.info');
+  if (t) { if (t === tipOf && pinned) hideTip(); else showTip(t, true); return; }
+  if (pinned) hideTip();
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && tipOf) hideTip(); });
+// 滚动时提示跟着图标走；图标被滚出屏幕或已经不在页面上时收起
+addEventListener('scroll', () => {
+  if (!tipOf) return;
+  const r = tipOf.getBoundingClientRect();
+  if (!tipOf.isConnected || r.bottom < 0 || r.top > innerHeight) hideTip(); else placeTip();
+}, { passive: true });
+
+// ---------- 调试面板 ----------
+if (new URLSearchParams(location.search).has('debug')) {
+  const SLIDERS = [
+    ['step', '每段距离', 10, 120, 1, 'px'],
+    ['dur', '每段时长', 40, 300, 5, 'ms'],
+    ['pause', '停顿时长', 0, 300, 5, 'ms'],
+    ['ease', '缓动强度', 0, 1, 0.05, ''],
+    ['jitter', '随机浮动', 0, 0.5, 0.01, ''],
+    ['overshoot', '过冲幅度', 0, 4, 0.1, 'px'],
+    ['slotAmp', '槽口颤动', 0, 4, 0.1, 'px'],
+    ['shade', '阴影变化', 0, 1, 0.05, ''],
+    ['maxSegs', '最多段数', 2, 16, 1, ''],
+  ];
+  const box = document.createElement('details');
+  box.className = 'dbg';
+  box.open = true;
+  box.innerHTML = `<summary>出纸参数</summary><div class="dbg-body">
+    ${SLIDERS.map(([k, label, min, max, st]) => `<label><span>${label}</span><input type="range" data-k="${k}" min="${min}" max="${max}" step="${st}" value="${FEED[k]}"><output></output></label>`).join('')}
+    <label class="chk"><input type="checkbox" data-k="slow">0.25 倍慢放</label>
+    <div class="dbg-btns"><button id="dbgReplay">重播</button><button id="dbgCopy">复制 JSON</button></div>
+    <pre id="dbgJson"></pre></div>`;
+  document.body.append(box);
+  const json = box.querySelector('#dbgJson');
+  const show = () => {
+    box.querySelectorAll('input[type=range]').forEach((inp) => {
+      const s = SLIDERS.find((x) => x[0] === inp.dataset.k);
+      inp.nextElementSibling.textContent = FEED[s[0]] + s[5];
+    });
+    json.textContent = JSON.stringify(FEED, null, 2);
+  };
+  box.addEventListener('input', (e) => {
+    const k = e.target.dataset.k;
+    if (!k) return;
+    FEED[k] = e.target.type === 'checkbox' ? e.target.checked : +e.target.value;
+    show();
+  });
+  box.querySelector('#dbgReplay').addEventListener('click', replay);
+  box.querySelector('#dbgCopy').addEventListener('click', () => navigator.clipboard.writeText(json.textContent));
+  show();
+}
+</script>
+</body>
+</html>

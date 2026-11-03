@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>推荐结果</title>
+<link rel="preload" href="fonts/sarasa-result-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/sarasa-result-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="thermal.css">
+<style>
+/* 完整结果页：和 receipt.html 同一套出票口、纸和 32 格网格。
+   结构沿用旧版 site/result.html（2026-10-28 定）：概况和默认推荐偏好 → 推荐 → 搭配方案 → 排除原因 → 可增加补丁（原“改进建议”）→ 页脚；每个部分都能展开收起。
+   字体子集包含全部项目数据里的字，比答题页的大，由 scripts/subset_receipt_font.py 一起生成 */
+@font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+
+/* 纵向节奏都是正文行高 --lh 的倍数（据项目的中文排版规范：标题离下文比离上文近）：
+   部分之间 1.5 行；部分标题到内容半行；卡片之间是细分隔线，上下各 0.75 行；
+   卡片里的几组（简介、理由、细节、链接）之间半行；同一组的条目之间 0.25 行，一条折行时不留空 */
+.stack > * + * { margin-top: calc(var(--lh) * .5); }
+.list > * + * { margin-top: calc(var(--lh) * .25); }
+.sec { margin-top: calc(var(--lh) * 1.5); }
+.sec-h { display: flex; justify-content: space-between; align-items: baseline; padding-top: calc(var(--lh) * .25); }
+.sec-h:hover .tog, summary:hover .tog { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+.sec-body { padding-top: calc(var(--lh) * .5); }
+.sep { margin-block: calc(var(--lh) * .75); }
+.tog { font-weight: 400; }
+.sec-h .h { white-space: pre; }
+/* 正文缩进标题字号的 3 格，和“01 ”后面的项目名对齐 */
+.body { padding-left: calc(var(--fs-h) * 1.5); }
+.in2 { padding-left: var(--fs); }
+.pref-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
+.btns { text-align: center; }
+footer .bar { margin-top: calc(var(--lh) * .5); }
+</style>
+</head>
+<body>
+
+<div class="dock" aria-hidden="true">
+  <div class="plate"><span class="clip l"></span><span class="bezel"></span><span class="slit"></span><span class="clip r"></span></div>
+</div>
+<div class="lip" aria-hidden="true"><i></i></div>
+<div class="dock-low" aria-hidden="true">
+  <div class="plate"><span class="clip l"></span><span class="bezel"></span><span class="slit"></span><span class="clip r"></span></div>
+</div>
+
+<main class="wrap">
+  <div class="shadow" aria-hidden="true"></div>
+  <div class="paper">
+    <div class="inner">
+      <div class="topbars" id="topbars" aria-hidden="true"></div>
+      <div id="sheet"><p class="p">正在挑选……</p></div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { checkCondition } from "../engine/index.js";
+import { edgeLines, adviceItems, splitName } from "../site/assets/result-text.js";
+import { run } from "./sample.js";
+import {
+  W, W_H, W_S, FONTS, cols, esc, sp, rule, center, spread, wrapCols, L, pairHTML, faint,
+  barcode, codeOf, fnv, stamp, serialNo, titleHTML, numOf, rowLabel, answerText, pad2,
+} from "./thermal.js";
+
+const sheet = document.getElementById("sheet");
+document.getElementById("topbars").innerHTML = barcode(20261102, 46);
+
+let ctx;
+try {
+  ctx = await run();
+} catch (e) {
+  sheet.innerHTML = `<p class="p">读不到项目数据。请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/result.html</p>`;
+  throw e;
+}
+await FONTS;
+const { cfg, data, usage, st, answers, byQ, r, sample } = ctx;
+const byId = Object.fromEntries(data.projects.map((p) => [p.id, p]));
+const edges = edgeLines(r.results, byId);
+const advice = adviceItems(answers, cfg, r.results, byId);
+const val = (id, f) => byId[id]?.normalized?.[f]?.value;
+
+// 名字：括号里的作者、旧名拆出来，名字加粗、备注不加粗
+const nm = (n) => { const [a, b] = splitName(n); return `<b>${esc(a)}</b>` + (b ? ` ${esc(b)}` : ""); };
+const nmPlain = (n) => { const [a, b] = splitName(n); return b ? `${a} · ${b}` : a; };
+const sentence = (s) => { s = String(s ?? "").trim(); return !s || /[。！？]$/.test(s) ? s : s + "。"; };
+const CAT = { "需写代码（开发者向）": "开发者向，需要写代码", "边缘项（存的不是对话记忆）": "边缘项，存的不是对话记忆", "做法（笔记软件当记忆）": "做法：用笔记软件当记忆" };
+const catText = (c) => CAT[c] || String(c ?? "").replace(/（(.+)）$/, "，$1");
+const repoText = (u) => String(u ?? "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+const P = (t, cls = "p") => `<p class="${cls}">${t}</p>`;
+const hang = (h, t, cls = "") => `<p class="hang${cls ? " " + cls : ""}" style="--h:${h}">${t}</p>`;
+// 小字段落
+const S = (t) => P(t, "p small");
+
+// 名字后面的标签写使用方式（最多两种），聊天软件插件只接一种软件时写出软件名；没有这个字段时退回类别
+const PLUGIN_HOST = { sillytavern: "酒馆插件", astrbot: "AstrBot 插件", open_webui: "Open WebUI 插件" };
+function formText(x) {
+  const forms = [].concat(val(x.id, "usage_form") || []);
+  if (!forms.length) return catText(x.category);
+  const hosts = [].concat(val(x.id, "compatible_clients") || []).filter((c) => PLUGIN_HOST[c]);
+  return forms.slice(0, 2).map((f) => (f === "plugin_chat" && hosts.length === 1 ? PLUGIN_HOST[hosts[0]] : usage._labels?.[f] || f)).join("、");
+}
+
+/* ---------- 搭配方案的说明句（照搬 site/result.html） ---------- */
+const STAGE = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
+const gist = (id) => String(byId[id]?.info?.summary?.value || "").split(/[：；，。]/)[0];
+const stageList = (arr) => arr.map((s) => STAGE[s]).join("、");
+const N = (p) => splitName(p.name)[0];
+const ROLE_DO = { context_tool: "让长对话不断线", state_engine: "给 AI 加上会变化的情绪或身体状态" };
+const ROLE_GAP = { context_tool: "长对话聊久了仍会丢前文", state_engine: "AI 的情绪和状态不会随时间变化" };
+const roleOf = (p) => [].concat(val(p.id, "project_role") || [])[0];
+const roleDo = (p) => ROLE_DO[[].concat(val(p.id, "project_role") || [])[0]] || gist(p.id);
+const fitsOthers = (p) => [].concat(val(p.id, "pairing") || []).some((v) => v === "standard_interface" || v === "designed_to_pair");
+function comboNames(c) {
+  const cur = c.parts.filter((p) => p.current), add = c.parts.filter((p) => !p.current);
+  const curHtml = cur.length ? cur.map((p) => (p.id ? nm(p.name) : `<b>${esc(p.name)}</b>`)).join("、") + (cur[0].id ? ` <span class="u">您在用</span>` : "") : "";
+  return [curHtml, ...add.map((p) => nm(p.name))].filter(Boolean).join(" + ");
+}
+function comboBody(c, saidPaired = false) {
+  const parts = c.parts, last = parts[parts.length - 1], B = N(last);
+  const base = parts.filter((p) => p.current);
+  if (c.type === "current" && c.base === "notes") return `保留您的笔记库，再加 ${B}` + (c.via === "markdown" ? "，它把记忆存成 Markdown 文件，可以和笔记放在一起" : "");
+  if (c.type === "current" && c.base === "native") return `继续用现在的客户端，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 8 题选的“${c.label}”` : "");
+  const add = c.via === "addon" ? `${B} ${roleDo(last)}` : `再配上${saidPaired ? " " : "为它设计的 "}${B}`;
+  if (c.type === "current") return c.via === "addon" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${add}` : `您正在用的 ${base.map(N).join("、")}，${add}`;
+  if (c.type === "complete") return `${N(parts[0])} 一个项目包办写入到查看修改，${add}`;
+  if (c.via === "pairs") return parts.map((p) => `${N(p)} ${gist(p.id)}`).join("，");
+  return `${N(parts[0])} 负责记忆，` + parts.slice(1).map((p) => `${N(p)} ${roleDo(p)}`).join("，");
+}
+function comboWhy(c) {
+  const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
+  const has = (id, f, v) => [].concat(val(id, f) || []).includes(v);
+  if (c.base === "notes") return `笔记库要靠您自己动手记，${N(last)} ${last.stages.includes("capture") ? "能自动写入、按需召回" : "帮您管理记忆"}`;
+  if (c.base === "native") {
+    if (has(last.id, "cross_client", "yes")) return `客户端自带的记忆只在这个客户端里有效，${N(last)} 的记忆可以在几个入口共用`;
+    if (["dashboard", "files"].some((v) => has(last.id, "human_review", v))) return `客户端自带的记忆难以查看和修改，${N(last)} 的记忆可以随时打开查看和修改`;
+    return "";
+  }
+  const A = real[0];
+  if (c.via === "pairs") {
+    if (c.type === "group") return "两者的分工由作者定好，单用其中一个只能顾到一部分";
+    return `单用 ${N(A)} 也能${c.type === "complete" ? "完整" : ""}使用；加上 ${N(last)}，${gist(last.id)}`;
+  }
+  const gaps = real.map((p) => ROLE_GAP[roleOf(p)]).filter(Boolean);
+  return gaps.length ? `单用 ${N(A)} 时，${gaps.join("，")}` : "";
+}
+function comboFit(c) {
+  const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
+  if (c.base === "native") return `配合程度一般：客户端自带的记忆和 ${N(last)} 各记各的，互不相通，建议以 ${N(last)} 为准`;
+  if (c.base === "notes") return c.via === "markdown" ? `配合程度高：${N(last)} 的记忆文件可以放进笔记库，在笔记软件里直接查看和修改` : `配合程度一般：${N(last)} 不把记忆存进笔记库，两边各管各的`;
+  if (c.via === "pairs") return "配合程度高：说明里写了两者怎么一起用";
+  const odd = real.filter((p) => !p.current && !fitsOthers(p));
+  if (odd.length) return `配合程度需自行确认：${odd.map(N).join("、")} 的说明里没写能否和别的项目一起用`;
+  return "配合程度较好：各自分工不同，不会争着处理同一份记忆，可以同时使用";
+}
+const PLAN = ["方案一", "方案二"];
+const DIFF = { low: 0, medium: 1, high: 2 };
+const stagesIn = (c) => Object.keys(STAGE).filter((s) => c.parts.some((p) => p.stages.includes(s)));
+function comboFacts(c) {
+  const adds = c.parts.filter((p) => p.id && !p.current);
+  return {
+    keep: c.type === "current",
+    installs: adds.length,
+    stages: stagesIn(c).length,
+    paired: c.via === "pairs",
+    diff: Math.max(...adds.map((p) => DIFF[val(p.id, "difficulty")] ?? 1)),
+    free: adds.every((p) => [].concat(val(p.id, "spend") || []).includes("none")),
+  };
+}
+function comboEdge(c, other) {
+  const x = comboFacts(c), y = comboFacts(other), out = [];
+  if (x.keep && !y.keep) out.push("不用换掉现在用的");
+  if (!x.keep && y.keep) out.push("另起一套");
+  if (x.installs < y.installs) out.push(`只装 ${x.installs} 个项目`);
+  if (x.stages === 5 && y.stages < 5) out.push("覆盖全流程");
+  else if (x.stages > y.stages) out.push("覆盖的环节更多");
+  if (x.paired && !y.paired) out.push("设计上搭配使用");
+  if (x.diff < y.diff) out.push("门槛更低");
+  if (x.free && !y.free) out.push("不用额外花钱");
+  if (!out.length && x.installs > y.installs) out.push("分工更细");
+  return out;
+}
+const combos = r.combos.length === 2 && comboEdge(r.combos[0], r.combos[1]).length && comboEdge(r.combos[1], r.combos[0]).length
+  ? r.combos : r.combos.slice(0, 1);
+function comboLead(c, i) {
+  const other = combos[1 - i];
+  if (!other) return comboBody(c) + "。";
+  const edge = comboEdge(c, other);
+  const lack = stagesIn(other).filter((s) => !stagesIn(c).includes(s));
+  const tail = lack.length ? `；比${PLAN[1 - i]}少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
+  return (edge.length ? edge.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
+}
+const comboMore = (c) => [comboWhy(c), comboFit(c)].filter(Boolean).map((s) => s + "。");
+const comboText = (c, i) => comboLead(c, i) + comboMore(c).join("");
+
+/* ---------- 一张卡片 ---------- */
+// 门槛、花销、需要、注意不用句号：句号处换行，换行前用“；”，最后一句不加标点
+const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split("。"))
+  .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
+function factsOf(x) {
+  const diff = [], need = [], warn = [];
+  for (const c of x.cautions) {
+    if (c.startsWith("上手门槛：")) diff.push(c.slice(5));
+    else if (c.startsWith("需要：")) need.push(c.slice(3));
+    else warn.push(c);
+  }
+  if (x.unknowns.length) warn.push(`说明里没写清，需自行确认：${x.unknowns.join("、")}`);
+  const safety = byId[x.id]?.safety_note;
+  if (safety) warn.push(safety);
+  const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
+  return [["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["需要", need], ["注意", warn]].filter(([, v]) => v.length);
+}
+// 门槛  第一句；
+//       第二句
+function factHTML(k, v) {
+  const segs = segsOf(v);
+  return `<div>${segs.map((s, i) => hang(6, `${i ? sp(6) : `<b>${k}</b>  `}${esc(s)}${i < segs.length - 1 ? "；" : ""}`, "small")).join("")}</div>`;
+}
+// 卡片正文分几组：简介（正文）、理由（正文列表）、门槛花销等细节（小字列表）、搭配和仓库链接（小字）
+function cardBody(x) {
+  let h = "";
+  if (x.summary) h += P(esc(sentence(x.summary)));
+  const lines = [...x.reasons, ...(edges[x.id] ? [edges[x.id]] : [])];
+  if (lines.length) h += `<div class="list">${lines.map((t) => hang(2, `+ ${esc(String(t).replace(/。$/, ""))}`)).join("")}</div>`;
+  const facts = factsOf(x);
+  if (facts.length) h += `<div class="list">${facts.map(([k, v]) => factHTML(k, v)).join("")}</div>`;
+  if (x.parts?.length) h += S(`可以搭配的连接工具：${x.parts.map((p) => nm(p.name)).join("、")}`);
+  if (x.repo_url) h += S(`<a class="link" href="${esc(x.repo_url)}" target="_blank" rel="noopener">${esc(x.role === "method" ? "查看做法说明" : repoText(x.repo_url))}</a>`);
+  return h;
+}
+
+// 展开／收起用 [+]／[-]，各占 3 格，跟着 details 的开合换（负责人 2026-11-03 定，不写文字）
+const TOG = `<span class="tog"><span class="when-closed" aria-label="展开">[+]</span><span class="when-open" aria-label="收起">[-]</span></span>`;
+// 折叠的一行：左边文字，行尾展开／收起；放不下时折行，按钮跟在最后一行
+function foldLine(text, w = W, cls = "") {
+  const lines = wrapCols(text, w - 4);
+  const last = lines.pop() || "";
+  return lines.map((t) => L(t, cls)).join("") + `<span class="l${cls ? " " + cls : ""}">${esc(last)}${sp(w - cols(last) - 3)}${TOG}</span>`;
+}
+// 一个部分：粗分隔线，反白的名字，右边展开／收起
+function section(title, body, open = true) {
+  return `<section class="sec" aria-label="${esc(title)}">${L(rule("=", W_S), "small")}` +
+    `<details${open ? " open" : ""}><summary class="sec-h"><span class="h"><span class="inv"> ${esc(title)} </span></span>${TOG}</summary>` +
+    `<div class="sec-body">${body}</div></details></section>`;
+}
+const sep = () => `<div class="sep">${L(rule("-", W_S), "small")}</div>`;
+const tagLine = (x) => S(`[${esc(formText(x))}]`);
+const restList = (list) => `<div class="list">${list.map((x) =>
+  `<div>${hang(2, `- <a class="link" href="${esc(x.repo_url)}" target="_blank" rel="noopener">${esc(splitName(x.name)[0])}</a>`)}${P(esc(sentence(x.summary)), "p small in2")}</div>`).join("")}</div>`;
+
+// 默认推荐偏好：照 docs/前端/默认排序偏好.md（负责人 2026-11-03 给的标准）
+const PREF_LEAD = "用户答案优先。但当评分相近，有以下特征的项目优先。";
+const PREFS = [
+  ["可追溯性与可控性", ["保留原始信息。", "具备时间感知能力，如记忆附带时间戳，可按时间检索或排序。", "具备纠错防护，如写入前确认、冲突检测、软删除而非直接覆盖。", "用户可查看、修改、撤回记忆。"]],
+  ["遗忘与衰减机制", ["有遗忘机制优于没有遗忘机制，便于用户后期自主删除或调整遗忘机制。", "软删除优于硬删除。", "衰减速率随重要性自适应调整，而非单纯按时间衰减。"]],
+  ["检索质量", ["检索时综合情感关联、重要性、语义相似度等标准优于仅按频率或时间排序。", "有检索后处理优于直接将原始检索结果送入模型。"]],
+  ["记忆结构", ["层级记忆优于单层记忆；但层级数不额外加分，因为层级过多也会增加复杂度和调试难度。", "有反思系统优于没有反思系统，便于用户后期自主删除或调整反思机制。"]],
+  ["中文支持", ["有中文检索优化或有中文说明文档。"]],
+  ["灵活性", ["支持用户自定义优先，如可调整记忆策略、可替换模型、可修改提示词。"]],
+  ["组合推荐规则", ["按覆盖完整记忆周期推荐，覆盖完整生命周期的项目单独推荐；仅覆盖部分环节的项目，根据项目分类将可搭配的部件拼出完整流程后一并推荐。"], true],
+];
+function prefHTML() {
+  let n = 0;
+  const group = ([title, items, restart]) => {
+    if (restart) n = 0;
+    return `<div>${P(`${esc(title)}：`, "p b")}${items.map((t) => hang(4, `${`${++n}.`.padEnd(4)}${esc(t)}`)).join("")}</div>`;
+  };
+  return `<div class="pref-body small stack" id="prefBody" hidden>${P(PREF_LEAD)}${PREFS.map(group).join("")}</div>`;
+}
+// 配对单编号下面一行，和页眉同样的小字、居中；下划线表示能点开，内容展开在页眉的分隔线下面
+function prefButton() {
+  const label = "默认推荐偏好", left = Math.floor((W_S - cols(label)) / 2);
+  return `<span class="l small">${sp(left)}<button type="button" class="tbtn u" id="prefBtn" aria-expanded="false" aria-controls="prefBody">${label}</button></span>`;
+}
+
+/* ---------- 概况 ---------- */
+const now = stamp();
+const alone = r.narrowed_by.filter((x) => x.only > 0);
+const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
+let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} 个记忆类项目`] : ["暂时没有", "完全符合的"]);
+html += `<div class="gap">${L(rule("=", W_S), "small")}${L(center(`记忆系统配对单 No.${serialNo()}`, W_S), "small")}${prefButton()}` +
+  `${L(center(now.full, W_S), "small")}${L(rule("-", W_S), "small")}${prefHTML()}</div>`;
+if (sample || !r.results.length) {
+  html += `<div class="stack half">`;
+  if (sample) html += `<span class="l"><span class="inv"> 示例答卷 </span></span>`;
+  if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。");
+  html += `</div>`;
+}
+
+/* ---------- 推荐 ---------- */
+// 前 3 个展开，其余折叠；项目名用标题字号，正文缩进 3 格和名字对齐
+if (r.results.length) {
+  html += section("推荐", r.results.map((x, i) => (i ? sep() : "") + (i < 3
+    ? `<article>${hang(3, `${pad2(i + 1)} ${nm(x.name)}`, "h")}<div class="body">${tagLine(x)}</div><div class="body stack half">${cardBody(x)}</div></article>`
+    : `<details class="pick"><summary>${foldLine(`${pad2(i + 1)} ${splitName(x.name)[0]}`, W_H, "h")}</summary><div class="body"><div class="stack">${tagLine(x)}</div><div class="stack half">${cardBody(x)}</div></div></details>`)).join(""));
+}
+
+/* ---------- 搭配方案 ---------- */
+if (combos.length) {
+  html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<div>` +
+    (combos.length > 1 ? `<span class="l"><span class="inv"> ${PLAN[i]} </span></span>` : "") +
+    P(comboNames(c), "p h") +
+    `<div class="stack half">${P(esc(comboLead(c, i)))}${comboMore(c).map((s) => S(esc(s))).join("")}</div></div>`).join(""));
+}
+
+
+/* ---------- 排除原因 ---------- */
+let why = P(`收录的 ${data.projects.length} 个项目里，符合您条件的有 ${r.total_kept} 个。`);
+if (narrow.length) {
+  why += `<div>${P("排除较多的条件：")}<div class="list">` + narrow.map((x) =>
+    hang(2, `- 第 ${esc(x.number)} 题“${esc(x.short)}”` + (x.selected.length ? `，您选了${esc(x.selected.join("、"))}` : "") +
+      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`, "small")).join("") + `</div></div>`;
+}
+if (r.conflicts.length) why += `<div class="list">${r.conflicts.map((c) => hang(6, `<b>矛盾</b>  ${esc(c.message)}`, "small")).join("")}</div>`;
+if (r.notices.length) why += `<div class="list">${r.notices.map((t) => hang(2, `- ${esc(t)}`, "small")).join("")}</div>`;
+if (r.relax.length) why += `<div>${P("放宽这些条件，就能多出一些选择：")}<div class="small">${r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join("")}</div></div>`;
+if (r.excluded.length) {
+  const groups = {};
+  for (const e of r.excluded) (groups[e.reason] ||= []).push(e.name);
+  why += `<details class="fold"><summary>${foldLine(`被排除的 ${r.excluded.length} 个项目`)}</summary><div class="small stack half">` +
+    Object.entries(groups).sort((a, b) => b[1].length - a[1].length).map(([reason, names]) =>
+      `<div>${hang(2, `<b>- ${esc(reason)}，${names.length} 个</b>`)}${hang(2, sp(2) + names.map((n) => esc(splitName(n)[0])).join("、"))}</div>`).join("") +
+    `</div></details>`;
+}
+html += section("排除原因", `<div class="stack">${why}</div>`, false);
+
+/* ---------- 可增加补丁 ---------- */
+// 改进建议按第 8 题的排序；再加可以加装的部件、相关的做法和教程
+const addons = Object.values(r.addons || {});
+if (advice.length || addons.length || r.guides.length) {
+  const items = [
+    ...advice.map((a, i) => `<div>${hang(3, `${pad2(i + 1)} ${esc(a.label)}`, "h")}<div class="body stack">${S(esc(a.help))}${P(esc(a.text))}` +
+      S(a.examples.length ? `推荐里做到的：${a.examples.map(nm).join("、")}` : "推荐里还没有专门做这一点的。") + `</div></div>`),
+    ...addons.map((ad) => `<div class="stack">${P(esc(ad.title), "p h")}${ad.why ? S(esc(ad.why)) : ""}${restList(ad.items)}</div>`),
+    ...(r.guides.length ? [`<div class="stack">${P("相关的做法和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
+  ];
+  html += section("可增加补丁", `<div class="stack">${S("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
+}
+
+/* ---------- 页脚 ---------- */
+const key = JSON.stringify(st.answers);
+const stars = "#".repeat((W_S - cols(now.date) - 2) / 2);
+html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
+  `<a class="bar half" href="receipt.html">返回修改问卷</a>` +
+  `<p class="btns half"><button type="button" class="tbtn" id="saveAnswers">[下载答卷]</button>  <button type="button" class="tbtn" id="saveResults">[下载推荐结果]</button></p>` +
+  `<details class="fold half"><summary>${foldLine("您的答卷")}</summary><div class="small half" id="answers"></div></details>` +
+  `<div class="half">${L(rule("-", W_S), "small")}</div><div aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
+  barcode(fnv(key), 38, "barcode") + L(center(codeOf(key), W_S), "small") + `</footer>`;
+sheet.innerHTML = html;
+const prefBtn = document.getElementById("prefBtn"), prefBody = document.getElementById("prefBody");
+prefBtn.addEventListener("click", () => {
+  prefBody.hidden = !prefBody.hidden;
+  prefBtn.setAttribute("aria-expanded", String(!prefBody.hidden));
+});
+faint(sheet);
+
+/* ---------- 答卷 ---------- */
+// 和答题页的已答条目一样：题号、简称 ........ 答案；顺序按问卷的“部分”
+const plain = [];
+let ah = "";
+cfg.parts.forEach((p) => p.questions.forEach((id) => {
+  const q = byQ[id];
+  if (!q || (q.show_if && !checkCondition(q.show_if, st.answers))) return;
+  const txt = answerText(q, st.answers[id], st.free) || "未回答";
+  ah += pairHTML(rowLabel(q), txt, W_S);
+  plain.push(`第 ${numOf(q)} 题　${q.text}`, `　　${txt}`);
+}));
+document.getElementById("answers").innerHTML = ah;
+
+/* ---------- 下载 ---------- */
+function saveText(lines, file) {
+  const url = URL.createObjectURL(new Blob([lines.join("\r\n") + "\r\n"], { type: "text/plain;charset=utf-8" }));
+  const link = Object.assign(document.createElement("a"), { href: url, download: file });
+  document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+document.getElementById("saveAnswers").addEventListener("click", () => {
+  saveText(["记忆库推荐 · 答卷", `下载于 ${now.date}`, "", ...plain], `记忆库推荐答卷-${now.date}.txt`);
+});
+document.getElementById("saveResults").addEventListener("click", () => {
+  const out = ["记忆库推荐 · 推荐结果", `下载于 ${now.date}；项目描述基于 README 生成，核实于 2026 年 10 月`, ""];
+  if (r.results.length) {
+    out.push(`【为您挑出 ${r.results.length} 个记忆类项目】`);
+    r.results.forEach((x, i) => out.push("", `${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`,
+      ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []),
+      ...factsOf(x).map(([k, v]) => `　　${k}：${segsOf(v).join("；")}`), `　　${x.repo_url}`));
+    if (combos.length) out.push("", "【搭配方案】", ...combos.flatMap((c, i) => [
+      `${combos.length > 1 ? PLAN[i] + "：" : ""}${c.parts.map((p) => nmPlain(p.name)).join(" ＋ ")}`, `　　${comboText(c, i)}`]));
+  } else {
+    out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
+  }
+  if (advice.length) out.push("", "【改进建议】", ...advice.flatMap((a, i) => [`${i + 1}. ${a.label}：${a.text}`, ...(a.examples.length ? [`　　推荐里做到的：${a.examples.map(nmPlain).join("、")}`] : [])]));
+  saveText(out, `记忆库推荐结果-${now.date}.txt`);
+});
+</script>
+</body>
+</html>

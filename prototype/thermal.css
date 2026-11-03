@@ -1,0 +1,229 @@
+/* 小票原型共用的样式：出票口、纸、字符网格。答题页 receipt.html 和完整结果页 result.html 都引用。
+   热敏打印的规则（负责人 2026-11-03 定，全站遵守）：
+   - 纸上只有一种墨色 --ink，不用灰色文字和灰色线条
+   - 层级靠字号、加粗、下划线、反白区分；字号分四级（负责人 2026-11-03 定，取代原来“只有正常和倍高倍宽”）：
+     大标题（倍高倍宽）＞ 标题（一行 32 格）＞ 正文（36 格）＞ 小字（44 格，已答摘要、说明、页眉）
+   - 每一级在同一纸宽里放整数个半角格，汉字占两格；分隔线、点线都由字符拼成，正好一行
+   字体 @font-face 写在各页面里：两页用到的字差得多，各自子集化（scripts/subset_receipt_font.py） */
+:root {
+  --ink: #1c1b19;
+  --paper: #f6f4ee;
+  --wall: #d9d9d6;
+
+  /* 纸宽最大 340px；字号由纸宽推出来，保证一行正好 32 格 */
+  --paper-w: min(340px, calc(100vw - 32px));
+  --pad-x: 16px;
+  /* 字号阶梯：每级一行放整数个格（thermal.js 的 W_H、W、W_S）；中文行高标题 1.4、正文和小字 1.6 */
+  --cw: calc(var(--paper-w) - 2 * var(--pad-x));
+  --fs-h: calc(var(--cw) / 16);   /* 标题：32 格 */
+  --fs: calc(var(--cw) / 18);     /* 正文：36 格 */
+  --fs-s: calc(var(--cw) / 22);   /* 小字：44 格 */
+  --lh-h: calc(var(--fs-h) * 1.4);
+  --lh: calc(var(--fs) * 1.6);
+  --lh-s: calc(var(--fs-s) * 1.6);
+
+  /* 出票口比纸左右各宽 16px */
+  --plate-w: calc(var(--paper-w) + 32px);
+  --bezel-w: calc(var(--paper-w) + 14px);
+  --slit-w: calc(var(--paper-w) + 6px);
+  --clip-w: 6px;
+  --clip-inset: 2px;
+
+  /* 出票口的几个高度：顶部留白、金属板高、纸从板上哪条线伸出 */
+  --dock-pad: 12px;
+  --plate-h: 48px;
+  --cut: 26px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --font: "Sarasa Mono SC", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { background: var(--wall); }
+body {
+  min-height: 100vh;
+  padding-bottom: 96px;
+  overflow-x: clip;
+  background: var(--wall);
+  color: var(--ink);
+  font: 400 16px/24px var(--font);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+button, a, input { font: inherit; color: inherit; background: none; border: 0; padding: 0; text-decoration: none; }
+button, a { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+[hidden] { display: none !important; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- 出票口 ---------- */
+/* 金属板画两遍：上半截盖在纸上面，下半截垫在纸后面，纸就像从槽里伸出来 */
+.dock, .dock-low { display: flex; justify-content: center; overflow: hidden; pointer-events: none; }
+.dock {
+  position: sticky; top: 0; z-index: 5;
+  height: calc(var(--dock-pad) + var(--cut));
+  padding-top: var(--dock-pad);
+  background: var(--wall);
+}
+.dock-low {
+  position: sticky; top: calc(var(--dock-pad) + var(--cut)); z-index: 1;
+  height: calc(var(--plate-h) - var(--cut) + 10px);
+}
+.dock-low .plate { margin-top: calc(-1 * var(--cut)); }
+/* 槽口下沿投在纸上的阴影；pulse 那层随每段出纸加深一下 */
+.lip { position: sticky; top: calc(var(--dock-pad) + var(--cut)); z-index: 4; height: 0; pointer-events: none; }
+.lip i {
+  position: absolute; top: 0; left: 50%;
+  width: var(--paper-w); height: 30px; transform: translateX(-50%);
+  background:
+    linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,0) 4px),
+    radial-gradient(60% 100% at 50% 0, rgba(0,0,0,.16), rgba(0,0,0,0) 72%);
+}
+.lip .pulse {
+  opacity: 0; will-change: opacity;
+  background:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,0) 10px),
+    radial-gradient(60% 100% at 50% 0, rgba(0,0,0,.16), rgba(0,0,0,0) 72%);
+}
+
+.plate {
+  position: relative; flex: none;
+  width: var(--plate-w); height: var(--plate-h);
+  border-radius: 8px;
+  will-change: transform;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='48'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .9' numOctaves='2' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  .7 0 0 0 -.28'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23b)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='48'%3E%3Cfilter id='d'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006 1.2' numOctaves='2' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  .5 0 0 0 -.22'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23d)'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #f8f8f6 0, #dcdddb 9%, #c5c6c4 40%, #d4d5d3 63%, #b3b4b2 90%, #a2a3a1 100%);
+  background-size: 600px 48px, 600px 48px, auto;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 -1px 0 rgba(0,0,0,.22),
+    inset 0 0 0 1px rgba(0,0,0,.07),
+    0 6px 10px -5px rgba(0,0,0,.4);
+}
+.bezel {
+  position: absolute; left: 50%; top: 9px; transform: translateX(-50%);
+  width: var(--bezel-w); height: 30px; border-radius: 15px;
+  background: linear-gradient(#a3a4a2, #d6d7d5 55%, #eeefed);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.75);
+}
+.slit {
+  position: absolute; left: 50%; top: 17px; transform: translateX(-50%);
+  width: var(--slit-w); height: 14px; border-radius: 7px;
+  background: linear-gradient(#000, #161616 60%, #2a2a2a);
+  box-shadow: inset 0 3px 4px rgba(0,0,0,.9), 0 1px 0 rgba(255,255,255,.6);
+}
+.clip {
+  position: absolute; top: 6px; bottom: 6px; width: var(--clip-w);
+  border-radius: 2px;
+  background: linear-gradient(90deg, #8b8c8a, #e6e7e5 42%, #b9bab8 70%, #9a9b99);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.7), 0 1px 2px rgba(0,0,0,.25);
+}
+.clip.l { left: var(--clip-inset); }
+.clip.r { right: var(--clip-inset); }
+.clip::after {
+  content: ""; position: absolute; left: 50%; top: 50%;
+  width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #b5b6b3 60%, #80817e);
+  box-shadow: 0 0 0 .5px rgba(0,0,0,.45);
+}
+
+/* ---------- 纸 ---------- */
+/* 出纸时 .paper 往上移、.inner 往下移同样的距离：字不动，只有锯齿下沿往下走 */
+.wrap {
+  position: relative; z-index: 3;
+  width: var(--paper-w);
+  margin: calc(var(--cut) - var(--plate-h) - 10px) auto 0;
+}
+/* 投影单独一层，跟着纸的下沿移动；不用 drop-shadow，免得每帧重画 */
+.shadow {
+  position: absolute; inset: 0 0 3px; pointer-events: none;
+  will-change: transform;
+  box-shadow: 0 1px 2px rgba(0,0,0,.12), 0 12px 18px -2px rgba(0,0,0,.16);
+}
+.paper {
+  position: relative; overflow: hidden;
+  will-change: transform;
+  /* 底边锯齿：每 12px 一个齿，齿深 6px */
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%;
+          mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 12px 100%;
+}
+.inner {
+  position: relative;
+  padding: var(--lh) var(--pad-x) calc(var(--lh) + 6px);
+  font-size: var(--fs); line-height: var(--lh);
+  will-change: transform;
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25  0 0 0 0 .22  0 0 0 0 .16  0 0 0 .11 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- 字符网格 ---------- */
+/* .l 是拼好的一行，正好 32 格，用 pre 保留空格；.p 是让浏览器按 32 格折行的段落（左对齐，两端对齐会打乱网格）；
+   .hang 是带悬挂缩进的段落，--h 是缩进的格数 */
+.l { display: block; white-space: pre; overflow: hidden; }
+.p, .hang { white-space: pre-wrap; line-break: strict; overflow-wrap: anywhere; }
+.hang { padding-left: calc(var(--h, 2) * 1ch); text-indent: calc(var(--h, 2) * -1ch); }
+.b, b { font-weight: 700; }
+.u, .link { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+.inv { background: var(--ink); color: var(--paper); }
+.gap { margin-top: var(--lh); }
+.half { margin-top: calc(var(--lh) * .5); }
+/* 随机几行墨色淡 10% */
+.faint { opacity: .9; }
+.h { font-size: var(--fs-h); line-height: var(--lh-h); font-weight: 700; }
+.small { font-size: var(--fs-s); line-height: var(--lh-s); }
+
+.topbars { margin-bottom: var(--lh); }
+.topbars svg { width: 100%; height: calc(var(--lh) * .5); display: block; }
+.barcode { display: block; width: 100%; height: calc(var(--lh) * 2); margin: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
+
+/* 倍高倍宽的大标题 */
+.title { font-size: calc(var(--fs-h) * 2); line-height: calc(var(--lh-h) * 2); font-weight: 700; }
+.title .ln { display: block; height: calc(var(--lh-h) * 2); }
+
+/* 反白长条按钮：比 32 格两边各多出 1 格，字仍在网格上 */
+.bar {
+  display: block; width: calc(100% + 2ch); margin: 0 -1ch;
+  padding: calc(var(--lh) * .25) 1ch;
+  background: var(--ink); color: var(--paper);
+  font-weight: 700; text-align: center; white-space: pre;
+}
+.bar:disabled { background: none; color: var(--ink); font-weight: 400; cursor: default; }
+/* 文字按钮：[下载答卷] 这种，悬停加下划线 */
+.tbtn { white-space: pre; padding-block: calc(var(--lh) * .25); }
+.bar:not(:disabled):hover, .tbtn:hover, a.link:hover, .row:hover .l, summary:hover .l { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+.bar, .tbtn, .info { transition: transform 160ms var(--ease-out); }
+.bar:active:not(:disabled), .tbtn:active, .info:active { transform: scale(0.97); }
+
+/* 折叠：summary 里放一行 .l，结尾的 [+]／[-] 跟着开合换 */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] > summary .when-closed, details:not([open]) > summary .when-open { display: none; }
+
+.info { display: inline-flex; width: 2ch; height: var(--lh); align-items: center; justify-content: center; vertical-align: top; }
+.info svg { width: 1em; height: 1em; display: block; }
+/* 提示打开时（鼠标经过、点开）图标反白：i 图标的圆填上墨色、i 变成纸色；其它带提示的图标按钮整块反白 */
+.info circle, .info path { transition: fill 160ms var(--ease-out), stroke 160ms var(--ease-out); }
+.info.on circle { fill: var(--ink); }
+.info.on path { stroke: var(--paper); }
+.tbtn[data-tip] { transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out); }
+.tbtn[data-tip].on { background: var(--ink); color: var(--paper); }
+/* 提示框从图标处往下出来 */
+#tip.in { animation: tip-in 180ms var(--ease-out); }
+@keyframes tip-in { from { opacity: 0; transform: translateY(-4px); } }
+
+#tip {
+  position: fixed; z-index: 10; max-width: 260px;
+  padding: 4px 8px;
+  background: var(--ink); color: var(--paper);
+  font: 400 14px/21px var(--font);
+  white-space: pre-line;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar, .tbtn, .tbtn[data-tip], .info, .info circle, .info path { transition: none; }
+  #tip.in { animation: none; }
+  .bar:active:not(:disabled), .tbtn:active, .info:active { transform: none; }
+}
