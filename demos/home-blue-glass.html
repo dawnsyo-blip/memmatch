@@ -133,16 +133,21 @@ const CONFIG = {
     topShare: 0.38, findAt: 0.42,
     sideMargin: 24, maxWidthOfScreen: 0.94, minSlender: 1, // minSlender 为 1：宽度放不下时整体等比缩小，比例不变
     // 形状按负责人 2026-11-02 给的玻璃沙漏参考图：上泡是圆肩、往下一路收窄到瓶颈，没有竖直的壁；
-    // 下泡从瓶颈慢慢鼓出，最宽处靠下，底部是平的、两边圆角。手机和电脑同一个比例，高约为宽的两倍。
-    // 在参考图的基础上上窄下宽（负责人要求上泡 : 下泡约 1 : 1.2）：下泡的宽和高都是上泡的 1.2 倍。
+    // 下泡从瓶颈慢慢鼓出，最宽处靠下，底部是平的、两边圆角。
+    // 上窄下宽（负责人 2026-11-02 定上泡 : 下泡 1 : 1.08）：下泡的宽和高都是上泡的 lowerScale 倍。
+    // 高 : 最宽处电脑上 3 : 2、手机上 4 : 3（负责人要求沿用之前的比例）：瓶颈长度不变，两个泡按比例压矮、加宽
+    lowerScale: 1.08,
+    desktopAspect: 3 / 2, phoneAspect: 4 / 3, phoneMaxWidth: 600,
     // 瓶颈不能像参考图那样只是一个点：短于 0.08 时瓶颈口附近存不住字母，流量会掉
-    upperHeight: 0.418, neckLength: 0.08, lowerHeight: 0.502,
-    upperWidth: 0.42, lowerWidth: 0.504, neckWidth: 0.03,
+    neckLength: 0.08, neckWidth: 0.03,
     // 轮廓：[在这个泡里的高度位置（0 是泡顶，1 是泡底）, 半宽 ÷ 这个泡最宽处的半宽]，从参考图上量的，点之间用平滑曲线连起来。
-    // 上泡顶上要留口子让句子落进来，所以从 0.86 起，往下到 0.25 处最宽；最后一点收到瓶颈宽度
-    upperShape: [[0, 0.86], [0.1, 0.97], [0.25, 1], [0.4, 0.95], [0.55, 0.8], [0.7, 0.6], [0.83, 0.39], [0.92, 0.22], [1, 0]],
-    // 下泡第一点是瓶颈出口的宽度，最后一点是平底的宽度
-    lowerShape: [[0, 0], [0.11, 0.24], [0.2, 0.43], [0.3, 0.64], [0.4, 0.81], [0.5, 0.92], [0.61, 0.99], [0.72, 1], [0.84, 0.95], [0.93, 0.82], [0.98, 0.66], [1, 0.55]],
+    // 上泡顶上要留口子让句子落进来，所以从 0.86 起，往下到 0.25 处最宽。
+    // 喉部（负责人要求画出来）：靠近瓶颈的一段越收越缓，像喇叭口，最后竖直地接进瓶颈，字母会填进这一段
+    upperShape: [[0, 0.86], [0.1, 0.97], [0.25, 1], [0.4, 0.95], [0.55, 0.8], [0.65, 0.62], [0.73, 0.44], [0.8, 0.28],
+      [0.86, 0.16], [0.91, 0.08], [0.95, 0.03], [1, 0]],
+    // 下泡第一点是瓶颈出口的宽度，开头同样是喇叭口；最后一点是平底的宽度
+    lowerShape: [[0, 0], [0.05, 0.03], [0.1, 0.08], [0.16, 0.17], [0.23, 0.31], [0.3, 0.47], [0.4, 0.68], [0.5, 0.85],
+      [0.61, 0.96], [0.72, 1], [0.84, 0.95], [0.93, 0.82], [0.98, 0.66], [1, 0.55]],
   },
   capRef: 258880,            // 上半部分面积 ÷ 字号缩放的平方等于这个数时，字母数照上面的原值
 
@@ -198,27 +203,32 @@ function measure(text, size, weight) {
 function computeGeometry() {
   const hg = CONFIG.hourglass;
   const avail = Math.min(W * hg.maxWidthOfScreen, W - 2 * hg.sideMargin);
-  const widest = Math.max(hg.upperWidth, hg.lowerWidth);
-  const frac = hg.upperHeight + hg.neckLength + hg.lowerHeight;
+  // 总高记为 1：瓶颈之外的高度按 1 : lowerScale 分给上下泡；最宽处（下泡）= 总高 ÷ 高宽比
+  const aspect = W <= hg.phoneMaxWidth ? hg.phoneAspect : hg.desktopAspect;
+  const upperHeight = (1 - hg.neckLength) / (1 + hg.lowerScale);
+  const lowerHeight = upperHeight * hg.lowerScale;
+  const lowerWidth = 1 / aspect, upperWidth = lowerWidth / hg.lowerScale;
+  const widest = lowerWidth;
+  const frac = 1;
   const ratio = H < hg.shortScreen ? hg.shortHeightRatio : hg.heightRatio;
   const S = Math.min((H * ratio) / frac, avail / (widest * hg.minSlender));
   const slim = Math.min(1, avail / (S * widest));
   const k = S / 800;
   const fk = Math.max(k, CONFIG.font.minPx / CONFIG.font.sizeMin);
   const top = (H - S * frac) * hg.topShare;
-  const neckTop = top + S * hg.upperHeight;
+  const neckTop = top + S * upperHeight;
   const neckBot = neckTop + S * hg.neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
     S, k, fk,
-    cap: (S * hg.upperWidth * slim * S * hg.upperHeight) / fk ** 2 / CONFIG.capRef,
-    cx: W / 2, top, bottom: neckBot + S * hg.lowerHeight,
+    cap: (S * upperWidth * slim * S * upperHeight) / fk ** 2 / CONFIG.capRef,
+    cx: W / 2, top, bottom: neckBot + S * lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
     eatY: Math.min(neckTop + S * CONFIG.eatLine, neckBot - S * 0.025),
     neckHalf,
     exitHalf: Math.max(neckHalf, CONFIG.font.sizeMax * fk * 0.5),
-    maxHalf: (S * hg.upperWidth * slim) / 2,
-    baseHalf: (S * hg.lowerWidth * slim) / 2,
+    maxHalf: (S * upperWidth * slim) / 2,
+    baseHalf: (S * lowerWidth * slim) / 2,
   };
 }
 
