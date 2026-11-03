@@ -209,18 +209,21 @@ const comboText = (c, i) => comboLead(c, i) + comboMore(c).join("");
 // 门槛、花销、需要、注意不用句号：句号和分号处都换行（负责人 2026-11-03 定），换行前用“；”，最后一句不加标点
 const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split(/[。；]/))
   .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
+const NOT_ACCOUNT = new Set(["none", "model_api_key", "claude_subscription"]);
 function factsOf(x) {
-  const diff = [], need = [], warn = [];
+  const diff = [], warn = [];
   for (const c of x.cautions) {
     if (c.startsWith("上手门槛：")) diff.push(c.slice(5));
-    else if (c.startsWith("需要：")) need.push(c.slice(3));
+    else if (c.startsWith("需要：")) continue;
     else warn.push(c);
   }
   if (x.unknowns.length) warn.push(`说明里没写清，需自行确认：${x.unknowns.join("、")}`);
   const safety = byId[x.id]?.safety_note;
   if (safety) warn.push(safety);
   const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
-  return [["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["需要", need], ["注意", warn]].filter(([, v]) => v.length);
+  // 账号：只列要注册的账号（负责人 2026-11-03 定）；接口密钥、付费套餐在“花销”里已经写了，不重复列
+  const accounts = [].concat(val(x.id, "accounts_needed") || []).filter((v) => !NOT_ACCOUNT.has(v)).map((v) => cfg.field_labels?.[v] || v);
+  return [["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["账号", accounts.length ? [accounts.join("、")] : []], ["注意", warn]].filter(([, v]) => v.length);
 }
 // 门槛  第一句；
 //       第二句
@@ -309,7 +312,7 @@ if (r.results.length) {
 if (combos.length) {
   html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<div>` +
     P((combos.length > 1 ? `${PLAN[i]}：` : "") + comboNames(c), "p h") +
-    `<div class="stack half">${P(esc(comboLead(c, i)))}${comboMore(c).map((s) => S(esc(s))).join("")}</div></div>`).join(""));
+    `<div class="stack half">${P(esc(comboLead(c, i)))}<div class="list small">${comboMore(c).map((s) => hang(2, `- ${esc(s)}`)).join("")}</div></div></div>`).join(""));
 }
 
 
