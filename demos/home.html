@@ -88,6 +88,7 @@ const CONFIG = {
   dissolve: {
     time: 0.8,               // 秒，最底下的字母淡掉所用的时间
     clearance: 0.07,         // 沙堆堆到离通道出口这么近（÷ 沙漏高度）时，底下多退几个
+    edgeKeep: 0.8,           // 退场时离中线每远 1px，就当它高 0.8px：两边和碗角的字母留得久，碗的形状看得出来
     keyHold: 20,             // 秒，关键词的字母漏下来以后这么久内不会被选去淡掉，先淡掉它旁边的普通字母
     keyTime: 1.6,            // 秒，关键词的字母淡掉所用的时间，比普通字母慢
   },
@@ -126,7 +127,7 @@ const CONFIG = {
     // 总高 : 最宽处约 16 : 9。下面的玻璃泡比上面的大一圈（负责人 2026-11-02 要求）：
     // 上泡宽 0.40、高 0.40，下泡宽 0.5625、高 0.46，下泡碗底的半径约是上泡的 1.4 倍
     upperHeight: 0.40, neckLength: 0.14, lowerHeight: 0.46,
-    upperWidth: 0.40, lowerWidth: 0.5625, neckWidth: 0.03,
+    upperWidth: 0.40, lowerWidth: 0.52, neckWidth: 0.03, // 下泡宽约是上泡的 1.3 倍（负责人 2026-11-02 觉得下泡太宽太大，原来 0.5625）
     // 轮廓（负责人 2026-11-02 要求改成半圆，像沙漏的玻璃泡）：上下两部分都是“竖直的壁＋半圆的碗底”。
     // 上半部分的碗底朝下收进瓶颈；下半部分的碗底在最下面，中间最低、两边往上翘
     upperRound: 1,           // 上半部分碗底的半径 ÷ 上口半宽；1 是正好半圆，越小碗底越浅、竖直的壁越长
@@ -512,11 +513,13 @@ function updateLower(dt) {
   // 贴着下泡侧壁、几乎不动的字母，往中间、往下推一点，顺着弧面滑进沙堆。
   // 物理引擎的静摩擦取接触双方里较大的（字母是 0.9），光把墙面调滑不够，字母还会停在陡的弧面上，墙看不见，就像悬着
   const slide = engine.gravity.y * engine.gravity.scale * CONFIG.wallSlide;
+  // 只推肩部（最宽处以上的斜坡）；碗底的两角让字母留着，平底和圆角才填得出来，碗的形状才看得见
+  const yWidest = G.neckBot + (G.bottom - G.neckBot) * CONFIG.hourglass.lowerMaxAt;
   for (const L of live) {
     const b = L.body, p = b.position;
     if (b.speed > 0.5 * G.k || p.y > G.bottom - L.h * 1.5) continue;
     const gap = halfAt(p.y) - Math.abs(p.x - G.cx);
-    if (gap > L.h * 2.5) continue;
+    if (gap > L.h * 2.5 || p.y > yWidest) continue;
     Sleeping.set(b, false);
     Body.applyForce(b, p, { x: Math.sign(G.cx - p.x) * b.mass * slide, y: b.mass * slide * 0.5 });
   }
@@ -524,7 +527,10 @@ function updateLower(dt) {
   if (want > 0) {
     // 从最底下的开始；还在保留期里的关键词字母排到最后，只有实在没有别的可退时才轮到
     const held = (L) => L.isKey && simTime - L.born < d.keyHold;
-    live.sort((a, b) => held(a) - held(b) || b.body.position.y - a.body.position.y);
+    // 碗底是平的，最低的一层横跨整个碗底；只按高低退，碗角的字母也会被退掉，碗的形状就看不出来。
+    // 所以离中线越远，越当它“高”一些：先退出口正下方的，两边和碗角的留得久
+    const depth = (L) => L.body.position.y - CONFIG.dissolve.edgeKeep * Math.abs(L.body.position.x - G.cx);
+    live.sort((a, b) => held(a) - held(b) || depth(b) - depth(a));
     for (let i = 0; i < Math.min(want, live.length); i++) { live[i].dissolving = true; live[i].fadeT = 0; }
   }
   for (const L of letters.slice()) {
