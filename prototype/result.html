@@ -206,8 +206,8 @@ const comboMore = (c) => [comboWhy(c), comboFit(c)].filter(Boolean).map((s) => s
 const comboText = (c, i) => comboLead(c, i) + comboMore(c).join("");
 
 /* ---------- 一张卡片 ---------- */
-// 门槛、花销、需要、注意不用句号：句号处换行，换行前用“；”，最后一句不加标点
-const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split("。"))
+// 门槛、花销、需要、注意不用句号：句号和分号处都换行（负责人 2026-11-03 定），换行前用“；”，最后一句不加标点
+const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split(/[。；]/))
   .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
 function factsOf(x) {
   const diff = [], need = [], warn = [];
