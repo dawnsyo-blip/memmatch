@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>完整项目库</title>
+<link rel="preload" href="fonts/sarasa-result-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/sarasa-result-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="thermal.css">
+<style>
+/* 完整项目库：参与推荐的全部项目，按主要使用方式分组，组内按名字排序。
+   每个项目写名字（二级标题）、使用方式标签（辅助）、一句话介绍（正文）和仓库地址（辅助，带外链箭头）。
+   和结果页共用字体子集（全部项目数据里的字都在里面） */
+@font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
+
+.meta { margin-top: var(--lh); }
+.meta-lines { margin-top: calc(var(--lh) * .5); }
+.meta + .sec { margin-top: var(--lh); }
+/* 项目之间空一行；名字和标签紧挨着，介绍和它们隔 0.25 行 */
+.item + .item { margin-top: var(--lh); }
+.item .intro { margin-top: calc(var(--lh) * .25); }
+/* 名字后面的作者、旧名不加粗 */
+.item .note { font-weight: 400; }
+footer .bar { margin-top: calc(var(--lh) * .5); }
+</style>
+</head>
+<body>
+
+<div class="dock" aria-hidden="true">
+  <div class="plate"><span class="clip l"></span><span class="bezel"></span><span class="slit"></span><span class="clip r"></span></div>
+</div>
+<div class="lip" aria-hidden="true"><i></i></div>
+<div class="dock-low" aria-hidden="true">
+  <div class="plate"><span class="clip l"></span><span class="bezel"></span><span class="slit"></span><span class="clip r"></span></div>
+</div>
+
+<main class="wrap">
+  <div class="shadow" aria-hidden="true"></div>
+  <div class="paper">
+    <div class="inner">
+      <div class="topbars" id="topbars" aria-hidden="true"></div>
+      <div id="sheet"><p class="p">正在读取……</p></div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { splitName } from "../site/assets/result-text.js";
+import {
+  W_S, FONTS, cols, esc, rule, center, L, faint, barcode, stamp,
+  OUT, P, S, section, formTagsOf, tagsText, titleHTML,
+} from "./thermal.js";
+
+const sheet = document.getElementById("sheet");
+document.getElementById("topbars").innerHTML = barcode(20261103, 46);
+
+const json = (path) => fetch(new URL(path, import.meta.url)).then((r) => {
+  if (!r.ok) throw new Error(`${path}: ${r.status}`);
+  return r.json();
+});
+let data, usage;
+try {
+  [data, usage] = await Promise.all([json("../site/data/projects.json"), json("../data/usage_form.json").catch(() => ({}))]);
+} catch (e) {
+  sheet.innerHTML = `<p class="p">读不到项目数据。请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/catalog.html</p>`;
+  throw e;
+}
+await FONTS;
+const labels = usage._labels || {};
+
+// 一句话介绍：简介的第一句
+const oneLine = (s) => { const t = String(s ?? "").trim(); const k = t.indexOf("。"); return k < 0 ? t : t.slice(0, k + 1); };
+// 仓库地址：去掉 https:// 和末尾的斜杠；做法类条目链接到说明文档，写“查看做法说明”
+const repoText = (u) => String(u ?? "").replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "");
+
+function item(p) {
+  const [name, note] = splitName(p.name);
+  const isMethod = [].concat(p.normalized?.project_role?.value || []).includes("method");
+  return `<article class="item">${P(`${esc(name)}${note ? ` <span class="note">${esc(note)}</span>` : ""}`, "p h")}` +
+    S(tagsText(formTagsOf(p, labels))) +
+    (p.info?.summary?.value ? P(esc(oneLine(p.info.summary.value)), "p intro") : "") +
+    (p.repo_url ? P(`<a class="repo" href="${esc(p.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(isMethod ? "查看做法说明" : repoText(p.repo_url))}</span> ${OUT}</a>`, "p small intro") : "") +
+    `</article>`;
+}
+
+// 按主要使用方式（usage_form 的第一个）分组，组的顺序照 usage_form.json 里的顺序
+const groups = new Map(Object.keys(labels).map((k) => [k, []]));
+const other = [];
+for (const p of data.projects) {
+  const f = [].concat(p.normalized?.usage_form?.value || [])[0];
+  (groups.get(f) || other).push(p);
+}
+// 英文名在前，按字母不分大小写；中文名在后，按拼音
+const zh = new Intl.Collator("zh-Hans-CN-u-co-pinyin", { sensitivity: "base" }), en = new Intl.Collator("en", { sensitivity: "base" });
+const byName = (a, b) => {
+  const x = splitName(a.name)[0], y = splitName(b.name)[0], ax = /^[\x00-\x7f]/.test(x), ay = /^[\x00-\x7f]/.test(y);
+  return ax !== ay ? (ax ? -1 : 1) : ax ? en.compare(x, y) : zh.compare(x, y);
+};
+
+const now = stamp();
+let html = titleHTML(["完整项目库"]);
+html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">` +
+  L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center(now.full, W_S), "small") + `</div></div>`;
+for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(""));
+if (other.length) html += section("其它", other.sort(byName).map(item).join(""));
+
+html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="result.html">← 返回推荐结果</a></footer>`;
+sheet.innerHTML = html;
+faint(sheet, ".l, .p");
+</script>
+</body>
+</html>

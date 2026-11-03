@@ -3,7 +3,7 @@
 用法：python -X utf8 scripts/subset_receipt_font.py
 生成两套，放在 prototype/fonts/：
 - sarasa-mono-*.woff2 给答题页 receipt.html：页面和共用脚本的全文、问卷配置、项目名（小票上会显示前 3 名）
-- sarasa-result-*.woff2 给完整结果页 result.html：再加上全部项目数据、引擎和结果页文字规则里的字
+- sarasa-result-*.woff2 给完整结果页 result.html 和项目库 catalog.html：再加上全部项目数据、引擎和结果页文字规则里的字
 都另收 ASCII 可打印字符。改了页面、问卷或项目数据后重跑一次。
 项目数据读打包后的 site/data/projects.json，没有时先跑 node scripts/build_site_data.mjs。
 
@@ -62,7 +62,7 @@ def main():
     common = read("prototype/thermal.js", "data/questionnaire/questions.json")
     sets = {
         "sarasa-mono": common + read("prototype/receipt.html") + names,
-        "sarasa-result": common + read("prototype/result.html", "prototype/sample.js", "data/usage_form.json",
+        "sarasa-result": common + read("prototype/result.html", "prototype/catalog.html", "prototype/sample.js", "data/usage_form.json",
                                        "site/assets/result-text.js", "engine/rule-engine.js", "engine/index.js") + projects,
     }
     OUT.mkdir(parents=True, exist_ok=True)

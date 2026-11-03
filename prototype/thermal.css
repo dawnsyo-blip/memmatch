@@ -200,6 +200,21 @@ button, a { cursor: pointer; }
 .bar, .tbtn, .info { transition: transform 160ms var(--ease-out); }
 .bar:active:not(:disabled), .tbtn:active, .info:active { transform: scale(0.97); }
 
+/* 纵向节奏：stack 里各块之间半行，list 里各条之间 0.25 行 */
+.stack > * + * { margin-top: calc(var(--lh) * .5); }
+.list > * + * { margin-top: calc(var(--lh) * .25); }
+/* 一个部分：粗分隔线，反白的部分标题，右边 [+]／[-]；部分之间 1.5 行，部分标题到内容半行 */
+.sec { margin-top: calc(var(--lh) * 1.5); }
+.sec-h { display: flex; justify-content: space-between; align-items: baseline; padding-top: calc(var(--lh) * .25); }
+.sec-h:hover .tog, summary:hover .tog { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+.sec-body { padding-top: calc(var(--lh) * .5); }
+.sep { margin-block: calc(var(--lh) * .75); }
+.tog { font-weight: 400; }
+.sec-h .t1 { white-space: pre; }
+/* 外链：地址加下划线，后面跟一个斜箭头 */
+.repo svg { display: inline-block; width: .75em; height: .75em; vertical-align: -.05em; }
+.repo:hover .link { text-decoration-thickness: .15em; }
+
 /* 折叠：summary 里放一行 .l，结尾的 [+]／[-] 跟着开合换 */
 details > summary { list-style: none; cursor: pointer; }
 details > summary::-webkit-details-marker { display: none; }

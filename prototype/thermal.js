@@ -159,3 +159,40 @@ export function answerText(q, sel, free = {}) {
     return (o ? o.label : oid) + (f ? `：${f}` : "");
   }).join(q.type === "rank" ? " > " : "、");
 }
+
+// ---------- 结果页、项目库共用的小部件 ----------
+// 外链箭头，跟在仓库地址后面
+export const OUT = `<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M4 1.5h6.5V8M10.5 1.5 2 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="square" stroke-linejoin="miter"/></svg>`;
+export const P = (t, cls = "p") => `<p class="${cls}">${t}</p>`;
+export const hang = (h, t, cls = "") => `<p class="hang${cls ? " " + cls : ""}" style="--h:${h}">${t}</p>`;
+// 辅助字号的段落
+export const S = (t) => P(t, "p small");
+// 展开／收起用 [+]／[-]，各占 3 格，跟着 details 的开合换（负责人 2026-11-03 定，不写文字）
+export const TOG = `<span class="tog"><span class="when-closed" aria-label="展开">[+]</span><span class="when-open" aria-label="收起">[-]</span></span>`;
+// 折叠的一行：左边文字，行尾展开／收起；放不下时折行，按钮跟在最后一行
+export function foldLine(text, w = W, cls = "") {
+  const lines = wrapCols(text, w - 4);
+  const last = lines.pop() || "";
+  return lines.map((t) => L(t, cls)).join("") + `<span class="l${cls ? " " + cls : ""}">${esc(last)}${sp(w - cols(last) - 3)}${TOG}</span>`;
+}
+// 一个部分：粗分隔线，反白的名字，右边展开／收起
+export function section(title, body, open = true) {
+  return `<section class="sec" aria-label="${esc(title)}">${L(rule("=", W_S), "small")}` +
+    `<details${open ? " open" : ""}><summary class="sec-h"><span class="t1"><span class="inv"> ${esc(title)} </span></span>${TOG}</summary>` +
+    `<div class="sec-body">${body}</div></details></section>`;
+}
+export const sep = () => `<div class="sep">${L(rule("-", W_S), "small")}</div>`;
+
+// 使用方式标签：最多两种，聊天软件插件只接一种软件时写出软件名；没有这个字段时退回类别。labels 是 data/usage_form.json 的 _labels
+const PLUGIN_HOST = { sillytavern: "酒馆插件", astrbot: "AstrBot 插件", open_webui: "Open WebUI 插件" };
+const CAT = { "需写代码（开发者向）": "开发者向，需要写代码", "边缘项（存的不是对话记忆）": "边缘项，存的不是对话记忆", "做法（笔记软件当记忆）": "做法：用笔记软件当记忆" };
+export const catText = (c) => CAT[c] || String(c ?? "").replace(/（(.+)）$/, "，$1");
+export function formTagsOf(p, labels = {}) {
+  const v = (f) => [].concat(p?.normalized?.[f]?.value || []);
+  const forms = v("usage_form");
+  if (!forms.length) return [catText(p?.candidate?.category)];
+  const hosts = v("compatible_clients").filter((c) => PLUGIN_HOST[c]);
+  return forms.slice(0, 2).map((f) => (f === "plugin_chat" && hosts.length === 1 ? PLUGIN_HOST[hosts[0]] : labels[f] || f));
+}
+// 每个标签一对方括号，空一格隔开
+export const tagsText = (tags) => tags.map((t) => `[${esc(t)}]`).join(" ");
