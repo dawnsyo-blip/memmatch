@@ -115,7 +115,10 @@ const CONFIG = {
   },
 
   sentenceHold: 1.2,         // 秒，新句子完整显示多久后松开
-  wordReleaseStagger: 0.06,  // 秒，从第一个词开始逐个松开的间隔
+  wordReleaseStagger: 0.06,  // 秒，同一行里从左到右逐个松开的间隔
+  // 句子折成几行时，最下面一行先松开，上面一行隔 lineReleaseDelay 秒接着松开（负责人 2026-11-02 要求）。
+  // 两行落得一样快，间距保持不变，一起滑下去，不会停一下再落
+  lineReleaseDelay: 0.15,
   scatter: 0.5,              // 松开时字母各自散开的随机速度（px/帧，按沙漏大小缩放）
 
   // 句子落得慢一点（负责人 2026-11-02 要求）：刚打散的字母用更大的空气阻力 air，
@@ -422,32 +425,34 @@ function layoutItems(items) {
   }
   const lineH = CONFIG.font.sizeMax * k * 1.5;
   let y = G.top + lineH * 0.6;
-  for (const line of lines) {
+  lines.forEach((line, li) => {
     const total = line.reduce((s, it) => s + it.w, 0) + gap * (line.length - 1);
     let x = G.cx - total / 2;
-    for (const it of line) {
+    line.forEach((it, i) => {
       it.x = x + it.w / 2;
       it.y = y;
       x += it.w + gap;
-    }
+      // 松开的时刻：从最下面一行数起第几行 × 行间隔 ＋ 行内第几个词 × 词间隔
+      it.releaseAt = CONFIG.sentenceHold + (lines.length - 1 - li) * CONFIG.lineReleaseDelay + i * CONFIG.wordReleaseStagger;
+    });
     y += lineH;
-  }
+  });
 }
 
 function startDisplay() {
-  active = { items: nextItems(), t: 0, next: 0 };
+  active = { items: nextItems(), t: 0 };
   layoutItems(active.items);
 }
 
 function updateActive(dt) {
   active.t += dt;
-  const items = active.items;
-  while (active.next < items.length && active.t >= CONFIG.sentenceHold + active.next * CONFIG.wordReleaseStagger) {
-    const it = items[active.next++];
-    it.released = true;
-    shatter(it);
+  let left = 0;
+  for (const it of active.items) {
+    if (it.released) continue;
+    if (active.t >= it.releaseAt) { it.released = true; shatter(it); }
+    else left++;
   }
-  if (active.next >= items.length) active = null;
+  if (!left) active = null;
 }
 
 /* ---------- 瓶颈：离瓶颈口最近的字母先漏下去 ---------- */
