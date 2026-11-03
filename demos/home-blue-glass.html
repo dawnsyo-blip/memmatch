@@ -100,6 +100,8 @@ const CONFIG = {
   // 开场时上泡铺多少、液面凹多少（负责人 2026-11-02：手机上开场堆得太多，要少一点、铺开一点、液面凹）
   // phone：手机上开场的字母是 upperLetters 折算数的几成；dip：两侧比中间高多少（÷ 沙漏总高）
   upperStart: { phone: 0.7, dip: 0.12 },
+  // 电脑上上泡大，按面积折算的字母太多、太慢（负责人 2026-11-02 要求少放些）：上下泡的字母数都乘这个数
+  desktopLetters: 0.55,
   upperLetters: 280,       // 上半部分低于这个数就补下一句（负责人 2026-11-02 要求上泡多铺一些字母，勾出玻璃泡的形状；原来 200）
   lowerLetters: 280,         // 下半部分最多保留多少个字母，超过时从沙堆最底下的开始淡掉、移走（下泡比上泡大，比黑白版的 200 多）
   lowerInitial: 280,         // 页面打开时下半部分预置多少个字母
@@ -116,6 +118,9 @@ const CONFIG = {
   wordReleaseStagger: 0.06,  // 秒，从第一个词开始逐个松开的间隔
   scatter: 0.5,              // 松开时字母各自散开的随机速度（px/帧，按沙漏大小缩放）
 
+  // 句子落得慢一点（负责人 2026-11-02 要求）：刚打散的字母用更大的空气阻力 air，
+  // 落到沙堆上（速度降到 landSpeed 以下）或过了 maxTime 秒，换回 upperAir，瓶颈的流量不受影响
+  fall: { air: 0.16, landSpeed: 0.6, maxTime: 4 },
   upperAir: 0.08,            // 上半部分的空气阻力：越大落得越慢、越不弹
   // 出口正上方一柱字母摩擦小、多一点向下的力，两侧摩擦大：中间先塌下去，像沙子
   funnel: { width: 0.35, push: 0.4, friction: 0.02, sideFriction: 0.6 },
@@ -198,7 +203,7 @@ const rand = (a, b) => a + Math.random() * (b - a);
 const fontStr = (size, weight = 400) => `${weight} ${size.toFixed(1)}px ${CONFIG.font.family}`;
 const weightOf = (isKey) => (isKey ? CONFIG.font.keyWeight : CONFIG.font.weight);
 const randSize = () => rand(CONFIG.font.sizeMin, CONFIG.font.sizeMax);
-const capN = (n) => Math.max(10, Math.round(n * G.cap * LOW));
+const capN = (n) => Math.max(10, Math.round(n * G.cap * LOW * (G.phone ? 1 : CONFIG.desktopLetters)));
 
 function measure(text, size, weight) {
   ctx.font = fontStr(size, weight);
@@ -239,7 +244,7 @@ function computeGeometry() {
   const neckBot = neckTop + S * hg.neckLength;
   const neckHalf = (S * hg.neckWidth) / 2;
   return {
-    S, k, fk,
+    S, k, fk, phone,
     cap: (S * upperWidth * slim * S * upperHeight) / fk ** 2 / CONFIG.capRef,
     cx: W / 2, top, bottom: neckBot + S * lowerHeight,
     neckTop, neckBot, neckLen: neckBot - neckTop, mid: (neckTop + neckBot) / 2,
@@ -368,6 +373,8 @@ function shatter(it) {
     const L = makeLetter(ch, it.sizeRef, it.weight, it.isKey, "upper", x + cw / 2, it.y, 0);
     Body.setVelocity(L.body, { x: rand(-s, s), y: rand(0, s) });
     Body.setAngularVelocity(L.body, rand(-0.02, 0.02));
+    L.body.frictionAir = CONFIG.fall.air;
+    L.falling = true;
     x += cw;
   }
 }
@@ -516,6 +523,13 @@ function funnelFlow() {
     if (L.zone !== "upper") continue;
     const b = L.body;
     if (b.isStatic) continue;
+    if (L.falling) {
+      const age = simTime - L.born;
+      if (age > CONFIG.fall.maxTime || (age > 0.3 && b.speed < CONFIG.fall.landSpeed * G.k)) {
+        L.falling = false;
+        b.frictionAir = CONFIG.upperAir;
+      }
+    }
     const inside = Math.abs(b.position.x - G.cx) < halfAt(b.position.y) * f.width;
     b.friction = inside ? f.friction : f.sideFriction;
     if (inside && f.push) {
