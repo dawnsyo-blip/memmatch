@@ -29,6 +29,11 @@
 /* 正文缩进标题字号的 3 格，和“01 ”后面的项目名对齐 */
 .body { padding-left: calc(var(--fs-h) * 1.5); }
 .in2 { padding-left: var(--fs); }
+/* 页眉：标题下空一行；分隔线到编号、编号日期到按钮各空半行；页眉到第一个部分空一行（比部分之间的 1.5 行近，页眉和内容是一体的） */
+.meta { margin-top: var(--lh); }
+.meta-lines, .meta-act { margin-top: calc(var(--lh) * .5); }
+.meta + .sec, .meta-note { margin-top: var(--lh); }
+#prefBtn { padding-block: .15em; }
 .pref-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
 .btns { text-align: center; }
 .chip { white-space: pre; transition: transform 160ms var(--ease-out); }
@@ -270,7 +275,7 @@ function prefHTML() {
   };
   return `<div class="pref-body small stack" id="prefBody" hidden>${P(PREF_LEAD)}${PREFS.map(group).join("")}</div>`;
 }
-// 配对单编号下面一行，和页眉同样的小字、居中；反白小条（和部分标题一样），字加下划线表示能点开，内容展开在页眉下面
+// 页眉里编号、日期下面一行，和页眉同样的小字、居中；反白小条（和部分标题一样），字加下划线表示能点开，内容展开在它下面
 function prefButton() {
   const label = "默认推荐偏好", left = Math.floor((W_S - cols(label) - 2) / 2);
   return `<span class="l small">${sp(left)}<button type="button" class="chip inv" id="prefBtn" aria-expanded="false" aria-controls="prefBody"> <span class="u">${label}</span> </button></span>`;
@@ -281,14 +286,11 @@ const now = stamp();
 const alone = r.narrowed_by.filter((x) => x.only > 0);
 const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
 let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} 个记忆类项目`] : ["暂时没有", "完全符合的"]);
-html += `<div class="gap">${L(rule("=", W_S), "small")}${L(center(`记忆系统配对单 No.${serialNo()}`, W_S), "small")}${prefButton()}` +
-  `${L(center(now.full, W_S), "small")}${prefHTML()}</div>`;
-if (sample || !r.results.length) {
-  html += `<div class="stack half">`;
-  if (sample) html += `<span class="l"><span class="inv"> 示例答卷 </span></span>`;
-  if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。");
-  html += `</div>`;
-}
+// 页眉：粗分隔线下面先是编号和日期（同一组，行间不留空），再隔半行是默认推荐偏好的按钮
+html += `<div class="meta">${L(rule("=", W_S), "small")}` +
+  `<div class="meta-lines">${L(center(`记忆系统配对单 No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center("示例答卷", W_S), "small") : ""}</div>` +
+  `<div class="meta-act">${prefButton()}</div>${prefHTML()}</div>`;
+if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。", "p meta-note");
 
 /* ---------- 推荐 ---------- */
 // 前 3 个展开，其余折叠；项目名用标题字号，正文缩进 3 格和名字对齐
