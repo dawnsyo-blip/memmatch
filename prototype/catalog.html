@@ -80,12 +80,13 @@ function item(p) {
   return `<article class="item">${P(`${esc(name)}${note ? ` <span class="note">${esc(note)}</span>` : ""}`, "p h")}` +
     S(tagsText(formTagsOf(p, labels))) +
     (p.info?.summary?.value ? P(esc(oneLine(p.info.summary.value)), "p intro") : "") +
-    (p.repo_url ? P(`<a class="repo" href="${esc(p.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(isMethod ? "查看做法说明" : repoText(p.repo_url))}</span> ${OUT}</a>`, "p small intro") : "") +
+    (p.repo_url ? P(`<a class="repo" href="${esc(p.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(isMethod ? "查看自主管理说明" : repoText(p.repo_url))}</span> ${OUT}</a>`, "p small intro") : "") +
     `</article>`;
 }
 
-// 按主要使用方式（usage_form 的第一个）分组，组的顺序照 usage_form.json 里的顺序
-const groups = new Map(Object.keys(labels).map((k) => [k, []]));
+// 按主要使用方式（usage_form 的第一个）分组。组的顺序负责人 2026-11-03 定；转发服务没排进去，跟在独立服务后面
+const ORDER = ["plugin_agent", "plugin_chat", "service", "proxy", "chat_app", "app", "bot", "cli", "library", "guide", "method", "model"];
+const groups = new Map([...ORDER, ...Object.keys(labels).filter((k) => !ORDER.includes(k))].map((k) => [k, []]));
 const other = [];
 for (const p of data.projects) {
   const f = [].concat(p.normalized?.usage_form?.value || [])[0];

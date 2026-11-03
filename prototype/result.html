@@ -206,6 +206,18 @@ const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split(
   .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
 // 比较两段话是不是在说同一件事：看共有的英文词（4 个字母以上）
 const latinWords = (t) => new Set((String(t ?? "").match(/[A-Za-z]{4,}/g) || []).map((w) => w.toLowerCase()));
+// 设备（负责人 2026-11-03 要）：运行在哪里（runs_on）、支持的系统（os）、只用手机能否装好（setup_device），各一句
+const RUNS_ON = { own_computer: "自己的电脑", own_server: "自己的服务器", own_cloud_account: "自己的云平台账号", third_party_hosted: "项目方的服务器", phone: "手机" };
+const OS = { windows: "Windows", macos: "macOS", linux: "Linux", android: "安卓", ios: "iOS" };
+const SETUP = { needs_computer: "安装要用电脑", phone_ok: "只用手机就能装好" };
+function deviceText(x) {
+  const v = (f) => [].concat(val(x.id, f) || []);
+  // 按上面表里的顺序写（电脑在前），不按数据里的字母顺序
+  const runs = Object.keys(RUNS_ON).filter((k) => v("runs_on").includes(k)).map((k) => RUNS_ON[k]);
+  const os = v("os").includes("any") ? ["不限系统"] : Object.keys(OS).filter((k) => v("os").includes(k)).map((k) => OS[k]);
+  const setup = v("setup_device").map((k) => SETUP[k]).filter(Boolean);
+  return [runs.length ? `运行在${runs.join("、")}` : "", os.length ? `支持 ${os.join("、")}` : "", ...setup].filter(Boolean);
+}
 const NOT_ACCOUNT = new Set(["none", "model_api_key", "claude_subscription"]);
 function factsOf(x) {
   const diff = [], warn = [];
@@ -222,7 +234,7 @@ function factsOf(x) {
   const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
   // 账号：只列要注册的账号（负责人 2026-11-03 定）；接口密钥、付费套餐在“花销”里已经写了，不重复列
   const accounts = [].concat(val(x.id, "accounts_needed") || []).filter((v) => !NOT_ACCOUNT.has(v)).map((v) => cfg.field_labels?.[v] || v);
-  return [["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["账号", accounts.length ? [accounts.join("、")] : []], ["注意", warn]].filter(([, v]) => v.length);
+  return [["设备", deviceText(x)], ["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["账号", accounts.length ? [accounts.join("、")] : []], ["注意", warn]].filter(([, v]) => v.length);
 }
 // 门槛  第一句；
 //       第二句
@@ -270,7 +282,7 @@ function cardBody(x) {
   const facts = [...(pros.length ? [["优势", pros]] : []), ...factsOf(x)];
   if (facts.length) h += `<div class="list">${facts.map(([k, v]) => factHTML(k, v)).join("")}</div>`;
   if (x.parts?.length) h += S(`可以搭配的连接工具：${x.parts.map((p) => nm(p.name)).join("、")}`);
-  if (x.repo_url) h += S(`<a class="repo" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(x.role === "method" ? "查看做法说明" : repoText(x.repo_url))}</span> ${OUT}</a>`);
+  if (x.repo_url) h += S(`<a class="repo" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(x.role === "method" ? "查看自主管理说明" : repoText(x.repo_url))}</span> ${OUT}</a>`);
   return h;
 }
 
@@ -361,7 +373,7 @@ if (advice.length || addons.length || r.guides.length) {
       // 整行同一字重，都加粗（负责人 2026-11-03 定）
       P(esc(a.examples.length ? `推荐项目中的相关项目：${a.examples.map((n) => splitName(n).filter(Boolean).join(" ")).join("、")}` : "推荐项目中还没有专门做这一点的。"), "p small b") + `</div></div>`),
     ...addons.map((ad) => `<div class="stack">${P(esc(ad.title), "p h")}${ad.why ? S(esc(ad.why)) : ""}${restList(ad.items)}</div>`),
-    ...(r.guides.length ? [`<div class="stack">${P("相关的做法和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
+    ...(r.guides.length ? [`<div class="stack">${P("相关的自主管理方式和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
   ];
   html += section("强化补丁", `<div class="stack">${S("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
 }

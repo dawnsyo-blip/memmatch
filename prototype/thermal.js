@@ -185,7 +185,7 @@ export const sep = () => `<div class="sep">${L(rule("-", W_S), "small")}</div>`;
 
 // 使用方式标签：最多两种，聊天软件插件只接一种软件时写出软件名；没有这个字段时退回类别。labels 是 data/usage_form.json 的 _labels
 const PLUGIN_HOST = { sillytavern: "酒馆插件", astrbot: "AstrBot 插件", open_webui: "Open WebUI 插件" };
-const CAT = { "需写代码（开发者向）": "开发者向，需要写代码", "边缘项（存的不是对话记忆）": "边缘项，存的不是对话记忆", "做法（笔记软件当记忆）": "做法：用笔记软件当记忆" };
+const CAT = { "需写代码（开发者向）": "开发者向，需要写代码", "边缘项（存的不是对话记忆）": "边缘项，存的不是对话记忆", "做法（笔记软件当记忆）": "自主管理：用笔记软件当记忆" };
 export const catText = (c) => CAT[c] || String(c ?? "").replace(/（(.+)）$/, "，$1");
 export function formTagsOf(p, labels = {}) {
   const v = (f) => [].concat(p?.normalized?.[f]?.value || []);
