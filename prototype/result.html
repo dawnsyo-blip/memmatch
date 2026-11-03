@@ -324,8 +324,7 @@ if (combos.length) {
 /* ---------- 排除原因 ---------- */
 // 小节：二级标题，下面的条目用辅助字号
 const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list small">${body}</div></div>`;
-// 部分标题下的说明一律用辅助字号（和“后续补丁”的说明一样）
-let why = S(`收录的 ${data.projects.length} 个项目里，符合您条件的有 ${r.total_kept} 个。`);
+let why = "";
 if (narrow.length) {
   why += grp("排除较多的条件", narrow.map((x) =>
     hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
@@ -334,7 +333,7 @@ if (narrow.length) {
 if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
 if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc(t)}`)).join(""));
 if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
-html += section("排除原因", `<div class="stack">${why}</div>`, false);
+if (why) html += section("排除原因", `<div class="stack">${why}</div>`, false);
 
 /* ---------- 后续补丁 ---------- */
 // 改进建议按第 8 题的排序；再加可以加装的部件、相关的做法和教程
@@ -342,7 +341,8 @@ const addons = Object.values(r.addons || {});
 if (advice.length || addons.length || r.guides.length) {
   const items = [
     ...advice.map((a, i) => `<div>${hang(3, `${pad2(i + 1)} ${esc(a.label)}`, "h")}<div class="body stack">${S(esc(a.help))}${P(esc(a.text))}` +
-      S(a.examples.length ? `推荐里做到的：${a.examples.map(nm).join("、")}` : "推荐里还没有专门做这一点的。") + `</div></div>`),
+      // 整行同一字重，都加粗（负责人 2026-11-03 定）
+      P(esc(a.examples.length ? `推荐项目中的相关项目：${a.examples.map((n) => splitName(n).filter(Boolean).join(" ")).join("、")}` : "推荐项目中还没有专门做这一点的。"), "p small b") + `</div></div>`),
     ...addons.map((ad) => `<div class="stack">${P(esc(ad.title), "p h")}${ad.why ? S(esc(ad.why)) : ""}${restList(ad.items)}</div>`),
     ...(r.guides.length ? [`<div class="stack">${P("相关的做法和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
   ];
@@ -401,7 +401,7 @@ document.getElementById("saveResults").addEventListener("click", () => {
   } else {
     out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
   }
-  if (advice.length) out.push("", "【改进建议】", ...advice.flatMap((a, i) => [`${i + 1}. ${a.label}：${a.text}`, ...(a.examples.length ? [`　　推荐里做到的：${a.examples.map(nmPlain).join("、")}`] : [])]));
+  if (advice.length) out.push("", "【改进建议】", ...advice.flatMap((a, i) => [`${i + 1}. ${a.label}：${a.text}`, ...(a.examples.length ? [`　　推荐项目中的相关项目：${a.examples.map(nmPlain).join("、")}`] : [])]));
   saveText(out, `记忆库推荐结果-${now.date}.txt`);
 });
 </script>
