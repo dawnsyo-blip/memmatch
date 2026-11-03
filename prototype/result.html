@@ -21,6 +21,9 @@
 .list > * + * { margin-top: calc(var(--lh) * .25); }
 /* 小节：二级标题到它的条目 0.25 行，比小节之间的半行近 */
 .grp > * + * { margin-top: calc(var(--lh) * .25); }
+/* 门槛、花销、注意这类细节：分号分出的每一句之间留一点空（比折行宽，看得出是另一句），不同项之间空半行 */
+.fact > * + * { margin-top: calc(var(--lh-s) * .2); }
+.list > .fact + .fact { margin-top: calc(var(--lh) * .5); }
 .sec { margin-top: calc(var(--lh) * 1.5); }
 .sec-h { display: flex; justify-content: space-between; align-items: baseline; padding-top: calc(var(--lh) * .25); }
 .sec-h:hover .tog, summary:hover .tog { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
@@ -207,7 +210,7 @@ const comboText = (c, i) => comboLead(c, i) + comboMore(c).join("");
 
 /* ---------- 一张卡片 ---------- */
 // 门槛、花销、需要、注意不用句号：句号和分号处都换行（负责人 2026-11-03 定），换行前用“；”，最后一句不加标点
-const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split(/[。；]/))
+const segsOf = (texts) => [].concat(texts).flatMap((t) => String(t ?? "").split(/[。；;]/))
   .map((s) => s.trim().replace(/[。；，]+$/, "")).filter(Boolean);
 const NOT_ACCOUNT = new Set(["none", "model_api_key", "claude_subscription"]);
 function factsOf(x) {
@@ -227,9 +230,11 @@ function factsOf(x) {
 }
 // 门槛  第一句；
 //       第二句
+// “注意”里不用冒号，改成逗号（负责人 2026-11-03 定）
 function factHTML(k, v) {
-  const segs = segsOf(v);
-  return `<div>${segs.map((s, i) => hang(6, `${i ? sp(6) : `<b>${k}</b>  `}${esc(s)}${i < segs.length - 1 ? "；" : ""}`, "small")).join("")}</div>`;
+  let segs = segsOf(v);
+  if (k === "注意") segs = segs.map((t) => t.replace(/[：:]\s*/g, "，"));
+  return `<div class="fact">${segs.map((s, i) => hang(6, `${i ? sp(6) : `<b>${k}</b>  `}${esc(s)}${i < segs.length - 1 ? "；" : ""}`, "small")).join("")}</div>`;
 }
 // 卡片正文分几组：简介（正文）、优势和门槛花销等细节（小字，标签在左）、搭配和仓库链接（小字）
 function cardBody(x) {
