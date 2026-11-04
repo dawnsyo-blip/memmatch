@@ -2,7 +2,7 @@
 
 网站只有静态文件：页面、脚本、字体、问卷配置和项目数据，推荐在访客的浏览器里计算。服务器上只需要一个网页服务器程序 Caddy，不需要数据库，也不需要后端程序。
 
-下面的命令按 Debian 或 Ubuntu 写。`203.0.113.5` 换成你 VPS 的 IP，`root` 换成你登录 VPS 用的用户名。
+下面的命令按 Debian 或 Ubuntu 写。VPS 的 IP 是 `<VPS 的 IP>`（Cloudflare 的 DNS 记录里写的就是它）。`root` 是登录 VPS 的用户名，有的服务商默认叫 `ubuntu`、`admin` 或 `ecs-user`，以服务商控制台里写的为准。
 
 ## 第一次部署
 
@@ -25,7 +25,7 @@ DNS 生效一般要几分钟。在自己电脑上运行 `nslookup memmatch.fyi`�
 
 ### 2. 在 VPS 上安装 Caddy
 
-用 SSH 登录 VPS（Windows 上可以在 PowerShell 里运行 `ssh root@203.0.113.5`），然后依次运行（来自 Caddy 官方安装说明）：
+用 SSH 登录 VPS（Windows 上可以在 PowerShell 里运行 `ssh root@<VPS 的 IP>`），然后依次运行（来自 Caddy 官方安装说明）：
 
 ```bash
 sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
@@ -44,7 +44,7 @@ sudo apt install -y caddy
 把仓库里的 `deploy/Caddyfile` 传到 VPS。在自己电脑的仓库目录里运行：
 
 ```bash
-scp deploy/Caddyfile root@203.0.113.5:/etc/caddy/Caddyfile
+scp deploy/Caddyfile root@<VPS 的 IP>:/etc/caddy/Caddyfile
 ```
 
 再在 VPS 上运行：
@@ -61,7 +61,7 @@ Caddy 会自动为 memmatch.fyi 申请 HTTPS 证书，并在到期前自动续�
 在自己电脑的仓库目录里，用 Git Bash 运行：
 
 ```bash
-MEMMATCH_HOST=root@203.0.113.5 bash deploy/publish.sh
+MEMMATCH_HOST=root@<VPS 的 IP> bash deploy/publish.sh
 ```
 
 它会先打包（`npm run build`，生成 `dist/`），再上传、替换服务器上的网站。完成后打开 https://memmatch.fyi/ 看看。
@@ -73,7 +73,7 @@ MEMMATCH_HOST=root@203.0.113.5 bash deploy/publish.sh
 改了问卷、项目数据或页面以后，运行同一条命令：
 
 ```bash
-MEMMATCH_HOST=root@203.0.113.5 bash deploy/publish.sh
+MEMMATCH_HOST=root@<VPS 的 IP> bash deploy/publish.sh
 ```
 
 上一版会留在 VPS 的 `/var/www/memmatch.old`。新版有问题时，在 VPS 上运行下面这条就能退回上一版：

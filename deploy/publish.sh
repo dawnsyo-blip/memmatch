@@ -4,7 +4,7 @@
 # 做的事：npm run build 生成 dist/ → 打成一个压缩包传上去 → 在服务器上解压到新目录，再一次性替换 /var/www/memmatch，
 # 替换的那一刻之前访客看到的都是旧版，不会出现一半新一半旧。
 set -euo pipefail
-HOST="${MEMMATCH_HOST:?请先设置 MEMMATCH_HOST，例如 MEMMATCH_HOST=root@203.0.113.5}"
+HOST="${MEMMATCH_HOST:?请先设置 MEMMATCH_HOST，例如 MEMMATCH_HOST=root@<VPS 的 IP>}"
 SITE=/var/www/memmatch
 
 cd "$(dirname "$0")/.."
