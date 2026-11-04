@@ -20,7 +20,7 @@
 .menu-list { padding-block: calc(var(--lh) * .25); }
 .menu-item { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .125); }
 .menu-item + .menu-item, #resume + .menu-item { margin-top: calc(var(--lh) * .25); }
-.menu-note { padding-left: calc(var(--fs) * 3.5); line-height: 1.3; }
+.menu-note { padding-left: calc(var(--fs) * 2); line-height: 1.3; }
 .menu-item:disabled { cursor: default; }
 .menu-item:not(:disabled):hover .tx, .menu-item:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 #resume { text-align: right; }
@@ -413,8 +413,8 @@ try {
 } catch (e) {}
 await FONTS;
 const resumed = cfg && Object.keys(state.answers).length > 0;
-// 表格的列：编号从第 1 格起，项目名从第 7 格起，操作靠右
-const COL = 7;
+// 编号从第 1 格起，后面空两格接项目名（第 4 格起），操作靠右
+const COL = 4;
 function menuItem(tag, attrs, n, name, note, action) {
   const left = ` ${n}`.padEnd(COL), dots = '.'.repeat(Math.max(2, W - COL - cols(name) - cols(action) - 2));
   return `<${tag} class="menu-item" ${attrs}><span class="l">${left}<b class="tx">${esc(name)}</b> ${dots} <b>${esc(action)}</b></span>` +
