@@ -428,7 +428,7 @@ function titledRule(t, c = '=', w = W) {
   const n = w - cols(t) - 2, l = Math.floor(n / 2);
   return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
 }
-$('#store').innerHTML = L(center(`记忆系统匹配问卷 No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
+$('#store').innerHTML = L(center('找到适合你的 Agent 记忆方案', W_S), 'small') + L(center(`No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
 $('#menu').innerHTML = L(titledRule('请选择')) + `<div class="menu-list">` +
   menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '约 20 题   5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
   (resumed ? '<p id="resume"><button class="tbtn" id="resetBtn">[重新开始]</button></p>' : '') +
@@ -455,7 +455,7 @@ async function start() {
   head.innerHTML = `
     ${titleHTML(TITLE, 'ink')}
     <div class="ink gap">${L(rule('=', W_S), 'small')}</div>
-    <div class="ink">${L(center(`记忆系统匹配问卷 No.${NO}`, W_S), 'small')}</div>
+    <div class="ink">${L(center('找到适合你的 Agent 记忆方案', W_S), 'small')}${L(center(`No.${NO}`, W_S), 'small')}</div>
     <div class="ink">${L(center(STAMP.full, W_S), 'small')}</div>
     <div class="ink">${L(rule('-', W_S), 'small')}</div>`;
   faint(head);
@@ -785,7 +785,7 @@ async function showResult() {
 // 文字版小票：和纸上同一套 32 格
 function receiptText() {
   return [
-    TITLE.join(''), rule('='), center(`记忆系统匹配问卷 No.${NO}`), center(STAMP.full), rule('-'),
+    TITLE.join(''), rule('='), center('找到适合你的 Agent 记忆方案'), center(`No.${NO}`), center(STAMP.full), rule('-'),
     ...flow().done.flatMap((q) => pairText(rowLabel(q), answerText(q, state.answers[q.id], state.free))),
     rule('='), '推荐结果',
     ...(last.list || []).flatMap((p, n) => pairText(`${pad2(n + 1)} ${p.name}`, `${p.score} 分`)),
