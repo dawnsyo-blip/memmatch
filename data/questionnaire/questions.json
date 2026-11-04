@@ -65,7 +65,7 @@
     },
     {"label": "第二部分", "title": "使用习惯", "questions": ["q7", "q6", "q8", "q8n"]},
     {"label": "第三部分", "title": "记忆运作过程", "questions": ["q9", "q10", "q11", "q12m", "q13", "q14"]},
-    {"label": "第四部分", "title": "环境与预算", "questions": ["q15p", "q15", "q16", "q17d", "q18c", "q18t", "q19", "q20"]}
+    {"label": "第四部分", "title": "环境与预算", "questions": ["q15p", "q15", "q16", "q18c", "q18t", "q19", "q20"]}
   ],
   "questions": [
     {
@@ -1127,7 +1127,7 @@
       "kind": "hard",
       "type": "single",
       "short": "安装门槛",
-      "text": "安装和设置阶段需要投入的精力，您能最多能接受到什么程度？",
+      "text": "安装和设置阶段需要投入的精力，您最多能接受到什么程度？",
       "exclude_reason": "安装门槛超出您能接受的程度",
       "options": [
         {
@@ -1142,53 +1142,8 @@
       "number": "16"
     },
     {
-      "id": "q17d",
-      "number": "17",
-      "kind": "hard",
-      "type": "multi",
-      "short": "对话存在哪里",
-      "text": "您能接受对话内容存在什么地方？",
-      "exclude_reason": "对话内容存放的地方不符合您的选择",
-      "options": [
-        {
-          "id": "computer",
-          "label": "只留在我自己的电脑上",
-          "effect": {
-            "any_of": [{"require": {"runs_on": ["own_computer", "phone"], "data_passes_through": ["local_only"]}}, {"require": {"project_role": ["method"]}}]
-          }
-        },
-        {
-          "id": "own_cloud",
-          "label": "可以存在我自己的云账号/服务器里",
-          "help": "如 Cloudflare、租用 VPS",
-          "effect": {
-            "any_of": [
-              {"require": {"runs_on": ["own_server", "own_cloud_account"]}},
-              {"require": {"data_passes_through": ["own_cloud"]}},
-              {"require": {"project_role": ["method"]}}
-            ]
-          }
-        },
-        {
-          "id": "third_party",
-          "label": "项目方的第三方服务器",
-          "help": "可能涉及隐私问题",
-          "effect": {"any_of": [{"require": {"data_passes_through": ["third_party"]}}, {"require": {"project_role": ["method"]}}]}
-        }
-      ],
-      "rules": [
-        {
-          "when": {"question": "q17d", "selected_none": ["third_party"]},
-          "unless_project": {"project_role": ["method"]},
-          "exclude_only": {"data_passes_through": ["third_party"]},
-          "reason": "对话内容只能存在项目方的服务器上"
-        }
-      ],
-      "relax": [{"label": "可以存在自己的云账号或服务器里", "add": ["own_cloud"]}, {"label": "可以存在项目方的服务器上", "add": ["third_party"]}]
-    },
-    {
       "id": "q18c",
-      "number": "18",
+      "number": "17",
       "kind": "hard",
       "type": "single",
       "short": "额外费用",
@@ -1238,7 +1193,7 @@
     },
     {
       "id": "q18t",
-      "number": "19",
+      "number": "18",
       "kind": "preference",
       "type": "single",
       "short": "token 用量",
@@ -1281,7 +1236,7 @@
     },
     {
       "id": "q19",
-      "number": "20",
+      "number": "19",
       "kind": "preference",
       "type": "single",
       "short": "中文说明",
@@ -1297,7 +1252,7 @@
     },
     {
       "id": "q20",
-      "number": "21",
+      "number": "20",
       "kind": "preference",
       "type": "single",
       "short": "导出",

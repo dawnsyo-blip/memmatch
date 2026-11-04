@@ -3,7 +3,7 @@
 
 const DEFAULTS = {
   q6: "native", q7: ["companion"], q8: ["no_priority"], q10: "auto_review", q11: "any",
-  q13: "emotional", q14: "few", q15: "unknown", q17d: ["computer", "own_cloud"],
+  q13: "emotional", q14: "few", q15: "unknown",
 };
 
 export const PERSONAS = [
@@ -73,9 +73,9 @@ export const PERSONAS = [
   {
     id: "privacy_local_free",
     title: "只用本地开源模型、Linux 电脑、不想注册任何账号",
-    answers: { q1: ["android", "linux"], q3: ["bot"], q3bot: ["self_built"], q3api: ["local"], q17d: ["computer"], q4: "single",
+    answers: { q1: ["android", "linux"], q3: ["bot"], q3bot: ["self_built"], q3api: ["local"], q4: "single",
                q5: ["computer"], q16: "high", q18c: "free" },
-    expect: "推荐的都不用另外花钱，或者能用本地模型；对话只留在自己的电脑上，不推荐只能托管或存在云上的"
+    expect: "推荐的都不用另外花钱，或者能用本地模型；都能装在自己的电脑上，不推荐只能托管的"
   },
   {
     id: "codex_multi_review",

@@ -85,15 +85,15 @@ test("新手、只有手机、不准备账号、用别家官方 App：结果很�
   for (const x of r.results) assert.equal(x.category, "自带记忆的应用");
 });
 
-test("只用本地模型、只用免费、对话只留在电脑上：不用另外花钱或能用本地模型，都能装在自己电脑上", () => {
+test("只用本地模型、只用免费、只有电脑：不用另外花钱或能用本地模型，都能装在自己电脑上", () => {
   const r = run("privacy_local_free");
   assert.ok(r.total_kept > 10);
   for (const x of r.results) {
     const local = vals(x.id, "local_model").includes("yes");
     const spend = vals(x.id, "spend").filter((v) => v !== "none" && !(v === "model_api" && local));
     assert.deepEqual(spend, [], `${x.name} 要另付 ${spend}`);
-    assert.ok(vals(x.id, "runs_on").some((v) => ["own_computer", "phone"].includes(v)), `${x.name} 装不到电脑上`);
-    assert.ok(vals(x.id, "data_passes_through").includes("local_only"), `${x.name} 的对话会存到别处`);
+    assert.ok(vals(x.id, "runs_on").includes("own_computer"), `${x.name} 装不到电脑上`);
+    assert.ok(!(vals(x.id, "data_passes_through").length === 1 && vals(x.id, "data_passes_through")[0] === "third_party"), `${x.name} 只能托管`);
   }
 });
 
