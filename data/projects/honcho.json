@@ -465,12 +465,12 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned",
+        "openclaw:supplements",
         "openclaw:imports",
         "hermes:supplements"
       ],
       "status": "verified",
-      "basis": "openclaw：README 写明，openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽；hermes：README 写明，openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽"
+      "basis": "openclaw：README 写明，openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽；单独仓库 openclaw-honcho 写明 1.7.0 起不占 plugins.slots.memory，和 memory-core 并行，旧版会占；hermes：README 写明，openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽；单独仓库 openclaw-honcho 写明 1.7.0 起不占 plugins.slots.memory，和 memory-core 并行，旧版会占"
     },
     "pairs_with": {
       "value": [],

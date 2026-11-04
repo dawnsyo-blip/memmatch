@@ -950,8 +950,10 @@ HOST_MEMORY_HOSTS = ("openclaw", "hermes", "astrbot")
 
 
 def n_host_memory(pid, norm):
-    """和宿主自带记忆的关系，值写成“宿主:关系”：replaces 替换（占用宿主的记忆位置，原来的停用）、
-    supplements 并行（各存各的）、imports 能读入宿主原有的记忆、not_mentioned 没写。
+    """和宿主自带记忆的关系，值写成“宿主:关系”：replaces 替换（占用宿主的记忆插槽，原来的停用）、
+    replaces_optional 默认并行、装深度插件时替换，mixed 有几个插件、有的占插槽有的不占，
+    context_slot 占用 OpenClaw 的上下文引擎插槽（记忆插槽不动），supplements 并行（各存各的）、
+    imports 能读入宿主原有的记忆、not_mentioned 没写。
     README 写明的在 data/host_memory.json；其余按宿主的机制推断，标 auto：
     Hermes 的外部记忆提供方和自带的 MEMORY.md、USER.md 同时生效；OpenClaw 的 MCP 工具和自带记忆并存，
     插件要看是否占用记忆插槽（plugins.slots.memory），README 没写的记 not_mentioned；AstrBot 插件在自带记忆之外再加一层。"""

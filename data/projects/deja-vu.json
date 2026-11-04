@@ -471,11 +471,11 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned",
+        "openclaw:supplements",
         "hermes:supplements"
       ],
       "status": "verified",
-      "basis": "openclaw：README 写明，Hermes 插件目录里的 memory provider deja-memory；hermes：README 写明，Hermes 插件目录里的 memory provider deja-memory"
+      "basis": "openclaw：README 写明，Hermes 插件目录里的 memory provider deja-memory；OpenClaw 插件清单不声明 kind，只加工具和每轮召回；hermes：README 写明，Hermes 插件目录里的 memory provider deja-memory；OpenClaw 插件清单不声明 kind，只加工具和每轮召回"
     },
     "pairs_with": {
       "value": [],

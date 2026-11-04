@@ -462,11 +462,11 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned",
+        "openclaw:supplements",
         "hermes:supplements"
       ],
       "status": "auto",
-      "basis": "openclaw：插件，README 没写是否占用记忆插槽；hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）"
+      "basis": "openclaw：README 写明，README 写明 OpenClaw 只按需调用 MCP 工具，不挂 hooks；hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）"
     },
     "pairs_with": {
       "value": [],

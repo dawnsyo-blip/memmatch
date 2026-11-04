@@ -455,11 +455,11 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned",
+        "openclaw:replaces",
         "hermes:supplements"
       ],
       "status": "verified",
-      "basis": "openclaw：README 写明，Hermes memory provider，可选 HTTP 或嵌入式；hermes：README 写明，Hermes memory provider，可选 HTTP 或嵌入式"
+      "basis": "openclaw：README 写明，Hermes memory provider，可选 HTTP 或嵌入式；OpenClaw 插件 kind 为 memory，plugins.slots.memory 设为 reme；hermes：README 写明，Hermes memory provider，可选 HTTP 或嵌入式；OpenClaw 插件 kind 为 memory，plugins.slots.memory 设为 reme"
     },
     "pairs_with": {
       "value": [],

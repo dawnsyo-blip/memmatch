@@ -476,11 +476,11 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned",
+        "openclaw:replaces",
         "hermes:supplements"
       ],
       "status": "verified",
-      "basis": "openclaw：README 写明，Hermes 的 Supermemory memory provider；hermes：README 写明，Hermes 的 Supermemory memory provider"
+      "basis": "openclaw：README 写明，Hermes 的 Supermemory memory provider；单独仓库 openclaw-supermemory 的插件清单 kind 为 memory；hermes：README 写明，Hermes 的 Supermemory memory provider；单独仓库 openclaw-supermemory 的插件清单 kind 为 memory"
     },
     "pairs_with": {
       "value": [],

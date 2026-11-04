@@ -514,10 +514,10 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned"
+        "openclaw:mixed"
       ],
-      "status": "auto",
-      "basis": "openclaw：插件，README 没写是否占用记忆插槽"
+      "status": "verified",
+      "basis": "openclaw：README 写明，本地版 memos-local-openclaw 的 kind 为 memory，要设 plugins.slots.memory 并关掉 OpenClaw 自带的 memorySearch；云端版插件 kind 为 lifecycle，不占插槽"
     },
     "pairs_with": {
       "value": [],

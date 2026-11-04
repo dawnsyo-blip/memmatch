@@ -460,10 +460,10 @@
     },
     "host_memory": {
       "value": [
-        "openclaw:not_mentioned"
+        "openclaw:supplements"
       ],
-      "status": "auto",
-      "basis": "openclaw：插件，README 没写是否占用记忆插槽"
+      "status": "verified",
+      "basis": "openclaw：README 写明，OpenClaw 插件只是接它的 MCP 服务，不声明 kind"
     },
     "pairs_with": {
       "value": [],

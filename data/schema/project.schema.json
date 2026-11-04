@@ -415,7 +415,7 @@
         },
         "host_memory": {
           "$ref": "#/$defs/normalizedField",
-          "description": "和宿主自带记忆的关系，值写成“宿主:关系”，宿主是 openclaw、hermes、astrbot；关系 replaces 占用宿主的记忆位置并替换自带记忆、replaces_optional 默认并行而装深度插件时替换、supplements 并行、imports 能读入原有记忆、not_mentioned 没写。README 写明的在 data/host_memory.json，其余按宿主机制推断"
+          "description": "和宿主自带记忆的关系，值写成“宿主:关系”，宿主是 openclaw、hermes、astrbot；关系 replaces 占用宿主的记忆插槽并替换自带记忆、replaces_optional 默认并行而装深度插件时替换、mixed 几个插件有的占插槽有的不占、context_slot 占用 OpenClaw 的上下文引擎插槽、supplements 并行、imports 能读入原有记忆、not_mentioned 没写。README 写明的在 data/host_memory.json，其余按宿主机制推断"
         },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",

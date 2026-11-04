@@ -1,19 +1,203 @@
 {
-  "_说明": "记忆项目和宿主自带记忆的关系，只记 README 写明的（2026-11-04 核对）。值：replaces 占用宿主的记忆位置、替换自带的记忆；replaces_optional 默认并行，装深度插件时替换；supplements 和自带记忆并行；imports 能读入宿主原有的记忆；not_mentioned 没写。没列的按宿主机制推断，见 scripts/normalize.py 的 n_host_memory",
-  "agentmemory": {"value": {"openclaw": "replaces_optional", "hermes": "supplements"}, "note": "接 MCP 时和 OpenClaw 自带记忆并存，装 integrations/openclaw 插件会占用记忆插槽、自动从 memory-core 切过去；Hermes 是 memory provider，会镜像 MEMORY.md"},
-  "atmem": {"value": {"openclaw": ["replaces", "imports"]}, "note": "OpenClaw 适配器接管时先复制原有记忆，并在接管期间冻结它"},
-  "caura": {"value": {"openclaw": "replaces"}, "note": "插件占用 OpenClaw 的 memory 插槽"},
-  "memory-lancedb-pro": {"value": {"openclaw": "replaces"}, "note": "要把 plugins.slots.memory 指到它；仍可用 memory-core 的做梦整理"},
-  "neotoma": {"value": {"openclaw": "replaces"}, "note": "原生插件 kind 为 memory，填进 OpenClaw 的记忆插槽"},
-  "remnic": {"value": {"openclaw": "replaces", "hermes": "supplements"}, "note": "安装命令把 plugins.slots.memory 设成 openclaw-remnic；Hermes 用 MemoryProvider"},
-  "mem9": {"value": {"openclaw": "replaces", "hermes": "supplements"}, "note": "OpenClaw 插件 kind 为 memory；Hermes 是 memory provider 插件"},
-  "honcho": {"value": {"openclaw": ["not_mentioned", "imports"], "hermes": "supplements"}, "note": "openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽"},
-  "mnemo-cortex": {"value": {"openclaw": "supplements", "hermes": "supplements"}, "note": "README 专门说明不取代 OpenClaw 自带的 Active Memory，两者解决的问题不同"},
-  "piia-engram": {"value": {"openclaw": ["supplements", "imports"], "hermes": "supplements"}, "note": "能导入、导出 OpenClaw 的 SOUL.md、MEMORY.md、USER.md"},
-  "birkin-mnemosyne": {"value": {"openclaw": "supplements", "hermes": "supplements"}, "note": "Hermes 社区目录里的外部 memory provider"},
-  "causal-memory": {"value": {"hermes": "supplements"}, "note": "Hermes memory provider 插件"},
-  "deja-vu": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes 插件目录里的 memory provider deja-memory"},
-  "memori": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes memory provider，后台记录完整对话"},
-  "reme": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes memory provider，可选 HTTP 或嵌入式"},
-  "supermemory": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes 的 Supermemory memory provider"}
+  "_说明": "记忆项目和宿主自带记忆的关系（2026-11-04 核对：README 写明的直接记；OpenClaw 插件还克隆仓库看了插件清单 openclaw.plugin.json，kind 为 memory 或要求设 plugins.slots.memory 的算占用记忆插槽）。值：replaces 占用宿主的记忆插槽、替换自带的记忆；replaces_optional 默认并行，装深度插件时替换；mixed 有几个插件，有的占插槽、有的不占；context_slot 占用 OpenClaw 的上下文引擎插槽 contextEngine，替换自带的上下文组装，记忆插槽不动；supplements 和自带记忆并行；imports 能读入宿主原有的记忆；not_mentioned 没写。没列的按宿主机制推断，见 scripts/normalize.py 的 n_host_memory",
+  "agentmemory": {
+    "value": {
+      "openclaw": "replaces_optional",
+      "hermes": "supplements"
+    },
+    "note": "接 MCP 时和 OpenClaw 自带记忆并存，装 integrations/openclaw 插件会占用记忆插槽、自动从 memory-core 切过去；Hermes 是 memory provider，会镜像 MEMORY.md"
+  },
+  "atmem": {
+    "value": {
+      "openclaw": [
+        "replaces",
+        "imports"
+      ]
+    },
+    "note": "OpenClaw 适配器接管时先复制原有记忆，并在接管期间冻结它"
+  },
+  "caura": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "插件占用 OpenClaw 的 memory 插槽"
+  },
+  "memory-lancedb-pro": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "要把 plugins.slots.memory 指到它；仍可用 memory-core 的做梦整理"
+  },
+  "neotoma": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "原生插件 kind 为 memory，填进 OpenClaw 的记忆插槽"
+  },
+  "remnic": {
+    "value": {
+      "openclaw": "replaces",
+      "hermes": "supplements"
+    },
+    "note": "安装命令把 plugins.slots.memory 设成 openclaw-remnic；Hermes 用 MemoryProvider"
+  },
+  "mem9": {
+    "value": {
+      "openclaw": "replaces",
+      "hermes": "supplements"
+    },
+    "note": "OpenClaw 插件 kind 为 memory；Hermes 是 memory provider 插件"
+  },
+  "honcho": {
+    "value": {
+      "openclaw": [
+        "supplements",
+        "imports"
+      ],
+      "hermes": "supplements"
+    },
+    "note": "openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽；单独仓库 openclaw-honcho 写明 1.7.0 起不占 plugins.slots.memory，和 memory-core 并行，旧版会占"
+  },
+  "mnemo-cortex": {
+    "value": {
+      "openclaw": "supplements",
+      "hermes": "supplements"
+    },
+    "note": "README 专门说明不取代 OpenClaw 自带的 Active Memory，两者解决的问题不同"
+  },
+  "piia-engram": {
+    "value": {
+      "openclaw": [
+        "supplements",
+        "imports"
+      ],
+      "hermes": "supplements"
+    },
+    "note": "能导入、导出 OpenClaw 的 SOUL.md、MEMORY.md、USER.md"
+  },
+  "birkin-mnemosyne": {
+    "value": {
+      "openclaw": "supplements",
+      "hermes": "supplements"
+    },
+    "note": "Hermes 社区目录里的外部 memory provider"
+  },
+  "causal-memory": {
+    "value": {
+      "hermes": "supplements"
+    },
+    "note": "Hermes memory provider 插件"
+  },
+  "deja-vu": {
+    "value": {
+      "openclaw": "supplements",
+      "hermes": "supplements"
+    },
+    "note": "Hermes 插件目录里的 memory provider deja-memory；OpenClaw 插件清单不声明 kind，只加工具和每轮召回"
+  },
+  "memori": {
+    "value": {
+      "openclaw": "replaces",
+      "hermes": "supplements"
+    },
+    "note": "Hermes memory provider，后台记录完整对话；OpenClaw 插件清单 kind 为 memory"
+  },
+  "reme": {
+    "value": {
+      "openclaw": "replaces",
+      "hermes": "supplements"
+    },
+    "note": "Hermes memory provider，可选 HTTP 或嵌入式；OpenClaw 插件 kind 为 memory，plugins.slots.memory 设为 reme"
+  },
+  "supermemory": {
+    "value": {
+      "openclaw": "replaces",
+      "hermes": "supplements"
+    },
+    "note": "Hermes 的 Supermemory memory provider；单独仓库 openclaw-supermemory 的插件清单 kind 为 memory"
+  },
+  "claude-mem": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "OpenClaw 插件清单 kind 为 memory"
+  },
+  "mem0": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "OpenClaw 插件 kind 为 memory，README 写明记忆插件走独占插槽，要设 plugins.slots.memory"
+  },
+  "memos": {
+    "value": {
+      "openclaw": "mixed"
+    },
+    "note": "本地版 memos-local-openclaw 的 kind 为 memory，要设 plugins.slots.memory 并关掉 OpenClaw 自带的 memorySearch；云端版插件 kind 为 lifecycle，不占插槽"
+  },
+  "mengram": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "单独仓库 openclaw-mengram 的插件清单 kind 为 memory"
+  },
+  "mnemory": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "插件 kind 为 memory，用 plugins.slots.memory 启用，同时只能有一个记忆插件"
+  },
+  "tencentdb-agent-memory": {
+    "value": {
+      "openclaw": "replaces"
+    },
+    "note": "安装脚本把 plugins.slots.memory 设为 memory-tencentdb-client"
+  },
+  "openviking": {
+    "value": {
+      "openclaw": "context_slot"
+    },
+    "note": "OpenClaw 插件 kind 为 context-engine，占用 plugins.slots.contextEngine，已有别的上下文引擎时要确认才替换"
+  },
+  "people-context": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "OpenClaw 插件只是接它的 MCP 服务，不声明 kind"
+  },
+  "agent-memory": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "用 OpenClaw 的 hooks 自动记录、注入身份"
+  },
+  "iai-personal-memory-engine": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "README 写明 OpenClaw 只按需调用 MCP 工具，不挂 hooks"
+  },
+  "memory": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "用会话 hooks 记录，记忆放在 Obsidian 库里"
+  },
+  "mnemosyne-agentmemory-engine-openclaw-hermes": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "每晚整理的结果写回 OpenClaw 自己的 MEMORY.md"
+  },
+  "synapse": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "README 写明 OpenClaw 直接连它的 MCP"
+  },
+  "memu": {
+    "value": {
+      "openclaw": "supplements"
+    },
+    "note": "用 OpenClaw 的定时任务从会话记录里提取记忆，检索靠装进工作区的技能和 AGENTS.md 里的指引，不占插槽"
+  }
 }
