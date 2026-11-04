@@ -23,9 +23,6 @@
 .menu-item { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .125); }
 .menu-item + .menu-item { margin-top: calc(var(--lh) * .25); }
 .menu-note { padding-left: calc(var(--fs) * 2); line-height: 1.3; }
-/* 点线：更纱的句点是个方形大点，看着像加粗，所以缩到 0.6 倍，用字距补回每格的宽度（0.5 倍正文字号），
-   网格不乱；抬到文字中间高度（句点本来落在基线上），并在格子里居中 */
-.dots { font-size: .6em; letter-spacing: calc(1em / 3); position: relative; top: -.5em; left: calc(1em / 6); }
 /* 答到一半时第 1 项分两个按钮：上面整行是继续答题，下一行靠右是重新开始；两个反白块之间留 0.25 行 */
 .menu-row { display: block; width: 100%; text-align: left; }
 .menu-sub { display: flex; justify-content: flex-end; align-items: center; margin-top: calc(var(--lh) * .25); }
@@ -163,7 +160,7 @@
 import { checkCondition, findConflicts } from "../engine/index.js";
 import {
   W, W_S, FONTS, cols, esc, sp, rule, center, L, pairHTML, pairText, faint,
-  barcode, codeOf, fnv, stamp, serialNo, titleHTML, numOf, rowLabel, answerText, pad2,
+  barcode, codeOf, fnv, stamp, serialNo, titleHTML, titledRule, dotsRow, numOf, rowLabel, answerText, pad2,
 } from "./thermal.js";
 
 // 出纸参数；加 ?debug 可以在页面右下角调
@@ -438,11 +435,6 @@ const resumeItem = () =>
 // 店头的编号：按下“开始”时才记下来（serialNo(true)），这里先显示到时会用的那个号
 let nextNo = 1;
 try { nextNo = (+localStorage.getItem('receipt-no') || 0) + 1; } catch (e) {}
-// 嵌在分隔线里的居中标题：“==== 请选择 ====”，两侧的 = 按格数补满一行（奇数格时右边多一个）
-function titledRule(t, c = '=', w = W) {
-  const n = w - cols(t) - 2, l = Math.floor(n / 2);
-  return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
-}
 $('#store').innerHTML = L(center('找到适合你的 Agent 记忆方案', W_S), 'small') + L(center(`No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
 // “请选择”和上下两条分隔线用店头那一级小字（全页只用三种字号：标题、正文、小字）
 $('#menu').innerHTML = L(titledRule('请选择', '=', W_S), 'small') + `<div class="menu-list">` +

@@ -172,6 +172,15 @@ export const P = (t, cls = "p") => `<p class="${cls}">${t}</p>`;
 export const hang = (h, t, cls = "") => `<p class="hang${cls ? " " + cls : ""}" style="--h:${h}">${t}</p>`;
 // 辅助字号的段落
 export const S = (t) => P(t, "p small");
+// 嵌在分隔线里的居中标题：“==== 请选择 ====”，两侧的 = 按格数补满一行（奇数格时右边多一个）
+export function titledRule(t, c = "=", w = W) {
+  const n = w - cols(t) - 2, l = Math.floor(n / 2);
+  return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
+}
+// “名字 ...... 值”一行：中间是缩小的点线（thermal.css 的 .dots），右边的值可以是现成的 HTML（如反白按钮），valCols 是它占的格数
+export function dotsRow(left, val, w = W, valCols = cols(val)) {
+  return `${left} <span class="dots">${".".repeat(Math.max(2, w - cols(left) - valCols - 2))}</span> ${val}`;
+}
 // 展开／收起用 [+]／[-]，各占 3 格，跟着 details 的开合换（负责人 2026-11-03 定，不写文字）
 export const TOG = `<span class="tog"><span class="when-closed" aria-label="展开">[+]</span><span class="when-open" aria-label="收起">[-]</span></span>`;
 // 折叠的一行：左边文字，行尾展开／收起；放不下时折行，按钮跟在最后一行

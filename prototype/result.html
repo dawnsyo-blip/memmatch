@@ -30,13 +30,16 @@
 .cbody > * + * { margin-top: var(--lh); }
 /* 页眉：标题下空一行；分隔线到编号、编号日期到按钮各空半行；页眉到第一个部分空一行（比部分之间的 1.5 行近，页眉和内容是一体的） */
 .meta { margin-top: var(--lh); }
-.meta-lines, .meta-act { margin-top: calc(var(--lh) * .5); }
+.meta-act { margin-top: calc(var(--lh) * .5); }
+.meta-lines { margin-top: calc(var(--lh) * .25); }
 .meta + .sec, .meta-note { margin-top: var(--lh); }
 #prefBtn { padding-block: .15em; }
 .pref-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
 /* 页脚：分隔线之间的每一块上下各留半行；“凭此单可”的每一行是按钮，整行可点，悬停时动作名加下划线 */
 .foot-blk { padding-block: calc(var(--lh) * .5); }
-.act { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .15); }
+/* 和首页菜单一样：每行上下 0.125 行，行与行之间再空 0.25 行，反白的箭头不会贴在一起 */
+.act { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .125); }
+.act + .act { margin-top: calc(var(--lh) * .25); }
 .act:hover .tx, .act:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .chip { white-space: pre; transition: transform 160ms var(--ease-out); }
 .chip:active { transform: scale(0.97); }
@@ -69,7 +72,7 @@ import { edgeLines, adviceItems, splitName } from "../site/assets/result-text.js
 import { run } from "./sample.js";
 import {
   W, W_H, W_S, FONTS, cols, esc, sp, rule, center, spread, wrapCols, L, pairHTML, faint,
-  barcode, codeOf, fnv, stamp, serialNo, titleHTML, numOf, rowLabel, answerText, pad2,
+  barcode, codeOf, fnv, stamp, serialNo, titleHTML, titledRule, dotsRow, numOf, rowLabel, answerText, pad2,
   OUT, P, S, hang, TOG, foldLine, section, sep, formTagsOf, tagsText,
 } from "./thermal.js";
 
@@ -321,10 +324,11 @@ function prefButton() {
 /* ---------- 概况 ---------- */
 const now = stamp();
 let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} 个记忆类项目`] : ["暂时没有", "完全符合的"]);
-// 页眉：粗分隔线下面先是编号和日期（同一组，行间不留空），再隔半行是默认推荐偏好的按钮
+// 页眉：粗分隔线下面先是默认推荐偏好的按钮（在首页“找到适合你的 Agent 记忆方案”那一行的位置，负责人 2026-11-04 定），
+// 点开的内容展开在它下面；再是编号和日期（同一组，行间不留空）
 html += `<div class="meta">${L(rule("=", W_S), "small")}` +
-  `<div class="meta-lines">${L(center("找到适合你的 Agent 记忆方案", W_S), "small")}${L(center(`No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center("示例答卷", W_S), "small") : ""}</div>` +
-  `<div class="meta-act">${prefButton()}</div>${prefHTML()}</div>`;
+  `<div class="meta-act">${prefButton()}</div>${prefHTML()}` +
+  `<div class="meta-lines">${L(center(`No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center("示例答卷", W_S), "small") : ""}</div></div>`;
 if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。", "p meta-note");
 
 /* ---------- 推荐 ---------- */
@@ -352,7 +356,7 @@ const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total
 let why = "";
 // 排除较多的条件直接列在部分标题下，不另加小标题（和“排除原因”重复）
 if (narrow.length) {
-  why += `<div class="list small">${narrow.map((x) =>
+  why += `<div class="list">${narrow.map((x) =>
     hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
       `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`))).join("")}</div>`;
 }
@@ -379,30 +383,32 @@ if (advice.length || addons.length || r.guides.length) {
     ...(r.guides.length ? [`<div class="stack">${P("相关的自主管理方式和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
   ];
   patchCount = items.length;
-  html += section("强化补丁", `<div class="stack">${S("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
+  html += section("强化补丁", `<div class="stack">${P("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
 }
 
 /* ---------- 页脚 ---------- */
 // 照负责人给的小票参考图排（2026-11-03）：您的答卷 → 三个部分的数量 → 凭此单可（编号、动作、箭头） → 说明 → 日期、条形码
 const key = JSON.stringify(st.answers);
 const stars = "#".repeat((W_S - cols(now.date) - 2) / 2);
-// 一行动作：编号两格，动作名，箭头靠右；整行都能点
+// 一行动作：和首页菜单同一格式，“ 1  动作名 ...... [箭头]”，箭头反白表示能点；整行都能点（负责人 2026-11-04 定）
 function act(n, label, arrow, attrs) {
-  const left = `${n}  `, tag = attrs.startsWith("href") ? "a" : "button";
-  return `<${tag} class="act" ${attrs}><span class="l">${left}<span class="tx">${esc(label)}</span>${sp(W - cols(left) - cols(label) - cols(arrow))}${arrow}</span></${tag}>`;
+  const tag = attrs.startsWith("href") ? "a" : "button";
+  const line = dotsRow(` ${n}`.padEnd(4) + label, `<b class="inv"> ${arrow} </b>`, W, cols(arrow) + 2)
+    .replace(label, `<span class="tx">${esc(label)}</span>`);
+  return `<${tag} class="act" ${attrs}><span class="l">${line}</span></${tag}>`;
 }
 const counts = [["推荐项目", r.results.length], ["搭配方案", combos.length], ["强化补丁", patchCount]];
 html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
   `<details class="fold foot-blk"><summary>${foldLine("您的答卷", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
-  `${L(rule("-", W_S), "small")}<div class="foot-blk">${counts.map(([k, n]) => pairHTML(k, `${n} 个`)).join("")}</div>` +
-  `${L(rule("=", W_S), "small")}<div class="foot-blk">${L("凭此单可")}` +
+  `${L(rule("-", W_S), "small")}<div class="foot-blk">${counts.map(([k, n]) => `<span class="l small">${dotsRow(k, `${n} 个`, W_S)}</span>`).join("")}</div>` +
+  `${L(titledRule("凭此单可", "=", W_S), "small")}<div class="foot-blk acts">` +
   act(1, "下载答卷", "↓", 'type="button" id="saveAnswers"') +
   act(2, "下载推荐结果", "↓", 'type="button" id="saveResults"') +
   act(3, "返回修改问卷", "→", 'href="receipt.html"') +
   act(4, "查看完整项目库", "→", 'href="catalog.html"') + `</div>` +
-  `${L(rule("=", W_S), "small")}<div class="foot-blk small">` +
-  ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月", "答卷只保存在您的浏览器中"].map((t) => L(t)).join("") + `</div>` +
-  `${L(rule("-", W_S), "small")}<div class="foot-blk" aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
+  `${L(rule("=", W_S), "small")}<div class="foot-blk">` +
+  ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月", "答卷只保存在您的浏览器中"].map((t) => L(center(t, W_S), "small")).join("") + `</div>` +
+  `<div class="foot-blk" aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
   barcode(fnv(key), 38, "barcode") + L(center(codeOf(key), W_S), "small") + `</footer>`;
 sheet.innerHTML = html;
 const prefBtn = document.getElementById("prefBtn"), prefBody = document.getElementById("prefBody");
