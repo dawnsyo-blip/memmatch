@@ -12,7 +12,14 @@
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
 
-#resume { text-align: center; margin-top: calc(var(--lh) * .5); }
+/* 首页（负责人 2026-11-03 给的版式）：英文大标题一行 20 格；“请选择”下面两个入口，每个是编号加名字一行、说明 ...... 动作一行，整块可点 */
+.home-title { font-size: calc(var(--cw) / 10); line-height: 1.25; }
+.home-title .ln { height: auto; }
+.menu-blk { padding-block: calc(var(--lh) * .5); }
+.menu-item { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .25); }
+.menu-item:disabled { cursor: default; }
+.menu-item:not(:disabled):hover .tx, .menu-item:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+#resume { text-align: right; }
 
 /* 已答条目 */
 .log { list-style: none; padding: 0; }
@@ -125,8 +132,8 @@
     <div class="inner" id="inner">
       <div class="topbars" id="topbars" aria-hidden="true"></div>
       <div id="intro">
-        <button class="bar" id="startBtn" disabled>开始</button>
-        <p id="resume" hidden><button class="tbtn" id="resetBtn">[重新开始]</button></p>
+        <h1 class="title home-title"><span class="ln">The right memory</span><span class="ln">for you and your AI</span></h1>
+        <div id="menu" class="gap"></div>
       </div>
       <div id="head"></div>
       <ol class="log" id="log" aria-label="已答"></ol>
@@ -393,17 +400,25 @@ async function replay() {
 }
 
 // ---------- 首页 ----------
+// 请选择：1 答题匹配（上次答过时动作写“继续”，另给一个重新开始）、2 浏览全部项目（项目数从打包的数据里数）
+let projectCount = null;
+try {
+  const d = await fetch(new URL('../site/data/projects.json', import.meta.url)).then((r) => (r.ok ? r.json() : null));
+  projectCount = d?.projects?.length ?? null;
+} catch (e) {}
+await FONTS;
+const resumed = cfg && Object.keys(state.answers).length > 0;
+const menuItem = (tag, attrs, n, name, note, action) =>
+  `<${tag} class="menu-item" ${attrs}><span class="l"><b>${n}  <span class="tx">${esc(name)}</span></b></span>${pairHTML(`   - ${note}`, action)}</${tag}>`;
+$('#menu').innerHTML = L(rule('=')) + `<div class="menu-blk">${L('请选择')}` +
+  menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '20 题 5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
+  (resumed ? '<p id="resume"><button class="tbtn" id="resetBtn">[重新开始]</button></p>' : '') +
+  menuItem('a', 'href="catalog.html"', 2, '浏览全部项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
+  `</div>` + L(rule('=')) +
+  (cfg ? '' : '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
 const startBtn = $('#startBtn');
-if (!cfg) {
-  startBtn.textContent = '读不到问卷';
-  $('#intro').insertAdjacentHTML('beforeend', '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
-} else {
-  startBtn.disabled = false;
-  // 上次答过：接着答，另给一个从头开始
-  if (Object.keys(state.answers).length) { startBtn.textContent = '接着上次答'; $('#resume').hidden = false; }
-}
 startBtn.addEventListener('click', start);
-$('#resetBtn').addEventListener('click', () => {
+$('#resetBtn')?.addEventListener('click', () => {
   if (busy || !confirm('清空已经填的答案，从第 1 题重新开始？')) return;
   state = { answers: {}, free: {}, seen: {} };
   try { localStorage.removeItem(KEY); } catch (e) {}
