@@ -200,3 +200,58 @@ test("搭配方案按使用方式排除装不到一起的：最多一个转发�
   }
   assert.ok(checked > 30, `检查的方案太少：${checked}`);
 });
+
+test("组合方案按挂载位置：部件都接在用户的同一个工具上，最多一个转发服务、一个占插槽的插件，都写了怎么接", () => {
+  const { projects: all, engine: real, questionnaire } = loadAll();
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const slotOf = (id) => [].concat(byId[id].normalized.host_memory.value).filter((v) => /:(replaces|mixed)$/.test(v));
+  let seed = 5; const rand = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+  const pick = (a) => a[Math.floor(rand() * a.length)];
+  let checked = 0;
+  for (let i = 0; i < 300; i++) {
+    const a = {};
+    for (const q of questionnaire.questions) {
+      if (q.type === "single") { a[q.id] = pick(q.options).id; continue; }
+      a[q.id] = q.options.filter((o) => !o.exclusive).sort(() => rand() - 0.5).slice(0, 1 + Math.floor(rand() * 2)).map((o) => o.id);
+    }
+    a.q16 = "high"; a.q5 = ["computer", "server"];
+    for (const c of real.recommend(a, all).combos) {
+      if (!c.client) continue;
+      const parts = c.parts.filter((p) => p.id);
+      assert.ok(parts.every((p) => p.how), `${c.title} 有部件没写怎么接：${parts.map((p) => p.id)}`);
+      if (c.via !== "pairs") {
+        assert.ok(parts.filter((p) => p.how.includes("接口地址")).length <= 1, `两个转发服务：${parts.map((p) => p.id)}`);
+        assert.ok(parts.filter((p) => p.how.includes("插槽") && slotOf(p.id).length).length <= 1, `两个占记忆插槽的插件：${parts.map((p) => p.id)}`);
+      }
+      checked++;
+    }
+  }
+  assert.ok(checked > 50, `检查的方案太少：${checked}`);
+});
+
+test("在用 OpenClaw 自带记忆时，“在现有基础上改进”不补会替换它的项目，并写明补在哪份记忆上", () => {
+  const { projects: all, engine: real } = loadAll();
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const base = { q1: ["windows", "vps"], q3: ["bot"], q3bot: ["runtime"], q3runtime: ["openclaw"], q3api: ["cn"], q4: "single",
+    q5: ["server", "computer"], q16: "high", q17: ["api_key", "github"], q6: ["native"] };
+  let seen = 0;
+  for (const q7 of [["companion"], ["roleplay"], ["work"], ["coding"]]) for (const q10 of ["auto", "auto_review", "review_first"]) {
+    const plan = real.recommend({ ...base, q7, q10 }, all).combos.find((c) => c.type === "current");
+    if (!plan) continue;
+    seen++;
+    assert.match(plan.parts[0].name, /OpenClaw 自带的 memory-core/);
+    for (const p of plan.parts.filter((x) => x.id))
+      assert.ok(![].concat(byId[p.id].normalized.host_memory.value).some((v) => /^openclaw:(replaces|mixed)$/.test(v)), `${p.id} 会替换 OpenClaw 自带的记忆`);
+  }
+  assert.ok(seen >= 6);
+});
+
+test("推荐结果写明在用户的工具里怎么接", () => {
+  const { projects: all, engine: real } = loadAll();
+  const r = real.recommend({ q1: ["android", "vps"], q3: ["client"], q3client: ["kelivo"], q3api: ["cn"], q4: "single", q5: ["server"], q16: "high", q17: ["api_key"] }, all);
+  const all8 = [...r.results, ...r.more];
+  assert.equal(all8.find((x) => x.id === "kiwi-mem")?.how, "把 Kelivo 的接口地址改成它");
+  assert.ok(all8.every((x) => x.how), "每个推荐都应写明怎么接");
+  const oc = real.recommend({ q1: ["windows"], q3: ["bot"], q3bot: ["runtime"], q3runtime: ["openclaw"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"] }, all);
+  assert.equal([...oc.results, ...oc.more].find((x) => x.id === "memory-lancedb-pro")?.how, "装成 OpenClaw 的插件，占用它的记忆插槽");
+});

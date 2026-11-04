@@ -470,7 +470,7 @@
         "host_plugin"
       ],
       "status": "auto",
-      "basis": "按接入方式推出，未核对：接入方式含 MCP；转发服务，默认按 OpenAI 兼容接口；宿主插件，宿主见能配合的入口"
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；转发服务，能接任意 OpenAI 兼容客户端；宿主插件，宿主见能配合的入口"
     },
     "host_memory": {
       "value": [],

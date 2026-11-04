@@ -509,7 +509,7 @@
         "proxy_openai"
       ],
       "status": "auto",
-      "basis": "按接入方式推出，未核对：转发服务，默认按 OpenAI 兼容接口"
+      "basis": "按接入方式推出，未核对：转发服务，能接任意 OpenAI 兼容客户端"
     },
     "host_memory": {
       "value": [],

@@ -461,10 +461,11 @@
     "mount": {
       "value": [
         "mcp",
-        "proxy_openai"
+        "proxy_openai",
+        "proxy_anthropic"
       ],
-      "status": "auto",
-      "basis": "按接入方式推出，未核对：接入方式含 MCP；转发服务，默认按 OpenAI 兼容接口"
+      "status": "verified",
+      "basis": "逐条核对，见 data/mount.json：README 写了 API 代理有 /proxy/anthropic 和 /proxy/openai 两个地址，改 base_url 接入"
     },
     "host_memory": {
       "value": [],

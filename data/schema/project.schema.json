@@ -411,7 +411,7 @@
         },
         "mount": {
           "$ref": "#/$defs/normalizedField",
-          "description": "挂载方式（可多选）：记忆项目从哪里接进用户的工具，推荐时和问卷配置的客户端能力表 clients 对比。mcp MCP 服务、proxy_openai OpenAI 格式的转发服务（改接口地址接入）、proxy_anthropic Anthropic 格式的转发服务、host_plugin 宿主插件（宿主见 compatible_clients）、sdk 代码包、standalone 独立应用、cli 命令行工具、manual 教程或做法。多数由 access 推出，核对值在 data/mount.json"
+          "description": "挂载方式（可多选）：记忆项目从哪里接进用户的工具，推荐时和问卷配置的客户端能力表 clients 对比。mcp MCP 服务、proxy_openai OpenAI 格式的转发服务（改接口地址接入）、proxy_anthropic Anthropic 格式的转发服务、proxy_host 只给某几个客户端写的转发服务（客户端见 compatible_clients）、host_plugin 宿主插件（宿主见 compatible_clients）、sdk 代码包、standalone 独立应用、cli 命令行工具、manual 教程或做法。多数由 access 推出，核对值在 data/mount.json"
         },
         "host_memory": {
           "$ref": "#/$defs/normalizedField",

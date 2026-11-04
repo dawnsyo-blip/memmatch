@@ -1,5 +1,5 @@
 {
-  "_说明": "挂载方式里按接入方式推不准的项目（2026-11-04 核对）。值：mcp、proxy_openai（OpenAI 格式的转发服务）、proxy_anthropic（Anthropic 格式的转发服务，Claude Code 改 ANTHROPIC_BASE_URL 接入）、host_plugin、sdk、standalone、cli、manual（教程或做法，照着搭）",
+  "_说明": "挂载方式里按接入方式推不准的项目（2026-11-04 核对）。值：mcp、proxy_openai（OpenAI 格式的转发服务）、proxy_anthropic（Anthropic 格式的转发服务，Claude Code 改 ANTHROPIC_BASE_URL 接入）、proxy_host（只给某几个客户端写的转发服务，客户端见 compatible_clients）、host_plugin、sdk、standalone、cli、manual（教程或做法，照着搭）",
   "aelios": {
     "value": [
       "proxy_openai",
@@ -29,5 +29,13 @@
       "sdk"
     ],
     "note": "README 写了网关能在 Anthropic 和 OpenAI 两种格式之间互转，换中转站不用改前端"
+  },
+  "yourmemory": {
+    "value": [
+      "mcp",
+      "proxy_openai",
+      "proxy_anthropic"
+    ],
+    "note": "README 写了 API 代理有 /proxy/anthropic 和 /proxy/openai 两个地址，改 base_url 接入"
   }
 }

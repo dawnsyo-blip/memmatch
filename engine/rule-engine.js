@@ -122,7 +122,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
   const specSets = questionnaire.spec_sets || {};
 
   // 客户端能接哪些项目：fits 里任意一条满足即可。条目可以是 {字段: [值], note}、"@集合名"（见配置的 spec_sets），
-  // 或 {when, fits, note}（答卷满足 when 时才算）。返回 null 或 { note }
+  // 或 {when, fits, note}（答卷满足 when 时才算）。返回 null 或 { note, spec }（spec 是命中的那一条）
   function fitsAny(items, project, answers) {
     for (const it of items || []) {
       if (typeof it === "string") {
@@ -133,13 +133,45 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       if (it.fits) {
         if (it.when && !checkCond(it.when, answers)) continue;
         const r = fitsAny(it.fits, project, answers);
-        if (r) return { note: r.note || it.note };
+        if (r) return { note: r.note || it.note, spec: r.spec };
         continue;
       }
       const { note, ...spec } = it;
-      if (projectMatches(project, spec)) return { note };
+      if (projectMatches(project, spec)) return { note, spec };
     }
     return null;
+  }
+
+  // 挂载位置：项目接到某个客户端上时用哪种接法。
+  // kind：plugin 装成宿主插件、mcp 添加 MCP 服务、proxy_openai／proxy_anthropic 改接口地址接转发服务、sdk 写代码接入、direct 照说明连接；
+  // slot：装成插件时占用宿主的哪个独占插槽（memory 记忆插槽、context 上下文引擎插槽，mixed 看装哪个插件）
+  const ATTACH_ORDER = ["mcp", "proxy_openai", "proxy_anthropic", "sdk"];
+  function attach(project, client, answers) {
+    const r = fitsAny(client.fits, project, answers);
+    if (!r) return null;
+    const mounts = fieldValues(project, "mount");
+    // 有几种接法时，按项目的主要使用方式挑：主要是转发服务的先算改接口地址
+    const order = fieldValues(project, "usage_form")[0] === "proxy" ? ["proxy_openai", "proxy_anthropic", "mcp", "sdk"] : ATTACH_ORDER;
+    let kind;
+    if (r.spec.id) kind = "direct";
+    else if (r.spec.compatible_clients) kind = mounts.includes("host_plugin") ? "plugin" : mounts.includes("proxy_host") ? "proxy_openai"
+      : order.find((m) => mounts.includes(m)) || "plugin";
+    else kind = order.find((m) => (r.spec.mount || []).includes(m) && mounts.includes(m)) || mounts[0];
+    let slot = null;
+    const host = client.memory_host;
+    if (kind === "plugin" && host) {
+      const rel = fieldValues(project, "host_memory").filter((v) => v.startsWith(host + ":")).map((v) => v.split(":")[1]);
+      slot = rel.includes("replaces") ? "memory" : rel.includes("mixed") ? "mixed" : rel.includes("context_slot") ? "context" : null;
+    }
+    return { client, kind, slot, note: r.note };
+  }
+
+  // “怎么接”的说法，模板在配置的 mount_how
+  function howText(a) {
+    if (!a) return "";
+    const t = questionnaire.mount_how || {};
+    const key = a.kind === "plugin" && a.slot ? `plugin_${a.slot}` : a.kind;
+    return (t[key] || t[a.kind] || "").replaceAll("{client}", a.client.short || a.client.label);
   }
 
   // 用户选了哪些客户端：选项写 client（一个客户端）或 clients_from（再看另一道题选了什么）；那道题没答时用 fallback
@@ -423,6 +455,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const reasons = [];
     for (const r of s.reasons.sort((x, y) => y.points - x.points)) if (!reasons.includes(r.text)) reasons.push(r.text);
     const hostMem = hostMemory(p, item.answers);
+    const via = answerClients(item.answers).map((c) => attach(p, c, item.answers)).find(Boolean);
     const cautions = [...s.cautions, ...hostMem, ...item.notes, ...(p.inclusion?.flags || [])];
     const diff = fieldValues(p, "difficulty")[0];
     if (diff) cautions.push(`上手门槛：${labels["difficulty:" + diff] || diff}`);
@@ -441,6 +474,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       pairs_with: fieldValues(p, "pairs_with"),
       customization: fieldValues(p, "customization").filter((v) => v !== "not_mentioned").map((v) => labels[v] || v),
       host_memory: hostMem,
+      how: howText(via),
     };
   }
 
@@ -458,8 +492,42 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const formsOf = (id) => (projById[id] ? fieldValues(projById[id], "usage_form") : []);
     const part = (r, extra = {}) => {
       const stages = stagesOf(r.id);
-      return { id: r.id, name: r.name, stages, forms: formsOf(r.id), desc: stages.length ? "负责" + stages.map((s) => stageLabel[s]).join("、") : "", ...extra };
+      return { id: r.id, name: r.name, stages, forms: formsOf(r.id), desc: stages.length ? "负责" + stages.map((s) => stageLabel[s]).join("、") : "",
+        host_memory: r.host_memory || [], ...extra };
     };
+    // 方案里的部件要能接在用户的同一个工具上（锚定的工具）；用户有几个工具时按答卷里的顺序，取第一个全都接得上的。
+    // strict 时还要求：消息只经过一个转发服务，同一宿主的记忆插槽、上下文引擎插槽各只能有一个插件占用。
+    // 答卷里没有可查的工具（只选了“其它”）时不查
+    const userClients = answerClients(answers);
+    function anchorFor(ids, strict = true, only = null) {
+      if (!userClients.length) return { client: null, atts: {} };
+      for (const c of only || userClients) {
+        const atts = {};
+        if (!ids.every((id) => (atts[id] = attach(projById[id], c, answers)))) continue;
+        if (strict) {
+          const list = Object.values(atts);
+          const n = (f) => list.filter(f).length;
+          if (n((a) => a.kind === "proxy_openai" || a.kind === "proxy_anthropic") > 1) continue;
+          if (n((a) => a.slot === "memory" || a.slot === "mixed") > 1 || n((a) => a.slot === "context") > 1) continue;
+        }
+        return { client: c, atts };
+      }
+      return null;
+    }
+    // 给方案里的部件写上“怎么接”，方案记下锚定的工具
+    function finish(plan, strict = true, only = null) {
+      if (!plan) return null;
+      const ids = plan.parts.filter((p) => p.id).map((p) => p.id);
+      const anchor = anchorFor(ids, strict, only);
+      if (!anchor) return null;
+      for (const p of plan.parts) if (p.id) p.how = howText(anchor.atts[p.id]);
+      return { ...plan, client: anchor.client ? anchor.client.short || anchor.client.label : null };
+    }
+    // 用户在用宿主自带的记忆时，会替换它的项目不能算“在现有基础上补”
+    // 用户有自带记忆的宿主（OpenClaw、Hermes、AstrBot）又说在用自带记忆时，按在用这个宿主的记忆算，补的部件也要接在这个宿主上
+    const hostClient = userClients.find((c) => c.memory_host);
+    const nativeHost = hostClient?.memory_host;
+    const replacesNative = (id) => !!nativeHost && fieldValues(projById[id], "host_memory").some((v) => ["replaces", "mixed"].includes(v.split(":")[1]) && v.startsWith(nativeHost + ":"));
     // 按使用方式判断装不到一起的：消息只会经过一个转发服务；用户不会同时在两个自带聊天界面的应用里聊；
     // 插件要装进各自的宿主软件：聊天软件插件接不到自带界面的应用或 Agent 里，两个聊天软件插件的宿主也得是同一个
     const CHAT_HOSTS = ["sillytavern", "astrbot", "open_webui", "rikkahub", "kelivo"];
@@ -467,7 +535,8 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     function clash(ids) {
       const main = ids.map((id) => formsOf(id)[0]);
       const n = (f) => main.filter((x) => x === f).length;
-      if (n("proxy") > 1 || n("chat_app") > 1) return true;
+      if (!anchorFor(ids)) return true;
+      if ((!userClients.length && n("proxy") > 1) || n("chat_app") > 1) return true;
       if (n("plugin_chat") && (n("chat_app") || n("plugin_agent"))) return true;
       const chatPlugins = ids.filter((id, i) => main[i] === "plugin_chat").map(hostsOf);
       return chatPlugins.some((h, i) => chatPlugins.slice(i + 1).some((g) => !h.some((x) => g.includes(x))));
@@ -482,12 +551,16 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
 
     // 给一个记忆库补一个：只补真能配合的——作者设计的搭配（按数据里写好的顺序），或用户需要的补充部件（情绪引擎、上下文延续工具）。
     // 两个独立的记忆库各存各的，一个的遗忘、整理碰不到另一个的记忆，按环节拼起来并不成立，所以不这样补
-    const addonItems = Object.values(addons).flatMap((a) => a.items);
+    // 补充部件：页面上每类只列前几个，搭配时在这一类全部通过筛选的里，按分数找第一个装得到一起的
+    const addonPools = (questionnaire.addons || []).filter((ad) => addons[ad.id]).map((ad) => ({
+      title: ad.title, items: results.filter((r) => projectMatches(projById[r.id], ad.require)).map((x) => ({ ...x, addon_title: ad.title })) }));
+    const addonItems = addonPools.flatMap((a) => a.items);
     function companionFor(baseIds, exclude) {
       const allCand = memories.filter((r) => !exclude.has(r.id));
       const byCandId = Object.fromEntries(allCand.map((r) => [r.id, r]));
-      const pid = baseIds.flatMap(pairsOf).find((id) => byCandId[id])
-        || allCand.find((r) => baseIds.some((id) => pairsOf(r.id).includes(id)))?.id;
+      const sameTool = (id) => byCandId[id] && anchorFor([...baseIds, id], false);
+      const pid = baseIds.flatMap(pairsOf).find(sameTool)
+        || allCand.find((r) => baseIds.some((id) => pairsOf(r.id).includes(id)) && sameTool(r.id))?.id;
       if (pid) return { r: byCandId[pid], via: "pairs" };
       const ext = addonItems.find((x) => !exclude.has(x.id) && !clash([...baseIds, x.id]));
       return ext ? { r: ext, via: "addon", label: ext.addon_title } : null;
@@ -521,22 +594,31 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       if (cur.base === "project") {
         const c = companionFor(cur.ids, new Set(cur.ids));
         if (!c) return null;
-        return { type: "current", base: "project", title: "在您现在用的基础上改进", via: c.via, label: c.label,
-          parts: [...cur.ids.map((id) => part(projById[id], { current: true })), part(c.r)] };
+        return finish({ type: "current", base: "project", title: "在您现在用的基础上改进", via: c.via, label: c.label,
+          parts: [...cur.ids.map((id) => part(projById[id], { current: true })), part(c.r)] }, c.via !== "pairs");
       }
-      const md = cur.base === "notes" && pool.find((r) => projectMatches(projById[r.id], { human_review: ["files"], export: ["markdown"] }));
-      const c = md ? { r: md, via: "markdown" } : (concernRules.length && pool.find(fitsConcern) ? concern(pool.find(fitsConcern)) : (pool[0] && { r: pool[0], via: "top" }));
+      // 只补能和现有记忆同时工作、又接得上用户工具的
+      const only = cur.base === "native" && hostClient ? [hostClient] : null;
+      const ok = (r) => !(cur.base === "native" && replacesNative(r.id)) && anchorFor([r.id], true, only);
+      const cands = pool.filter(ok);
+      const md = cur.base === "notes" && cands.find((r) => projectMatches(projById[r.id], { human_review: ["files"], export: ["markdown"] }));
+      const c = md ? { r: md, via: "markdown" } : (concernRules.length && cands.find(fitsConcern) ? concern(cands.find(fitsConcern)) : (cands[0] && { r: cands[0], via: "top" }));
       if (!c) return null;
-      const baseName = cur.base === "notes" ? "您的笔记库" : "客户端自带的记忆";
-      return { type: "current", base: cur.base, title: "在您现在用的基础上改进", via: c.via, label: c.label,
-        parts: [{ id: null, name: baseName, stages: [], desc: "", current: true }, part(c.r)] };
+      const hm = questionnaire.host_memory?.hosts?.[nativeHost];
+      const baseName = cur.base === "notes" ? "您的笔记库" : hm ? `${hm.label} ${hm.memory}` : "客户端自带的记忆";
+      return finish({ type: "current", base: cur.base, title: "在您现在用的基础上改进", via: c.via, label: c.label,
+        parts: [{ id: null, name: baseName, stages: [], desc: "", current: true }, part(c.r)] }, true, only);
     }
 
+    // 前 10 名里的完整系统逐个试，第一个能配上搭配或部件、又装得到一起的
     function completePlan() {
-      const complete = memories.filter((r) => r.role === "full_memory" || r.role === "companion_app").slice(0, 10).find((r) => r.lifecycle_complete);
-      if (!complete) return null;
-      const c = companionFor([complete.id], new Set([complete.id]));
-      return c && { type: "complete", title: "完整系统＋专项补强", via: c.via, label: c.label, parts: [part(complete), part(c.r)] };
+      const list = memories.filter((r) => r.role === "full_memory" || r.role === "companion_app").slice(0, 10).filter((r) => r.lifecycle_complete && anchorFor([r.id]));
+      for (const complete of list) {
+        const c = companionFor([complete.id], new Set([complete.id]));
+        const plan = c && finish({ type: "complete", title: "完整系统＋专项补强", via: c.via, label: c.label, parts: [part(complete), part(c.r)] }, c.via !== "pairs");
+        if (plan) return plan;
+      }
+      return null;
     }
 
     // 方案二：作者设计的一组（都不完整的），或一个记忆库加上用户需要的补充部件（每类一个，最多两个）
@@ -544,19 +626,21 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       const cand = pool.filter((r) => !r.lifecycle_complete && r.role !== "context_tool" && r.role !== "state_engine");
       for (const r of cand) {
         const mates = memories.filter((o) => o.id !== r.id && !o.lifecycle_complete && (pairsOf(r.id).includes(o.id) || pairsOf(o.id).includes(r.id))).slice(0, 2);
-        if (mates.length) return { type: "group", title: "几个项目互相配合", via: "pairs", parts: [r, ...mates].map((x) => part(x)) };
+        const plan = mates.length && finish({ type: "group", title: "几个项目互相配合", via: "pairs", parts: [r, ...mates].map((x) => part(x)) }, false);
+        if (plan) return plan;
       }
-      const libs = memories.filter((r) => ["full_memory", "companion_app", "memory_component"].includes(r.role));
-      const lib = libs.find((r) => !avoid.has(r.id)) || libs[0];
-      if (!lib) return null;
-      // 每类部件挑第一个和记忆库、已选部件都装得到一起的
-      const tools = [];
-      for (const a of Object.values(addons)) {
-        const t = a.items.find((x) => !clash([lib.id, ...tools.map((y) => y.id), x.id]));
-        if (t && tools.length < 2) tools.push(t);
+      // 记忆库按排名逐个试（方案一用过的排后面），每类部件挑第一个和记忆库、已选部件都装得到一起的
+      const libs = memories.filter((r) => ["full_memory", "companion_app", "memory_component"].includes(r.role) && anchorFor([r.id])).slice(0, 10);
+      for (const lib of [...libs.filter((r) => !avoid.has(r.id)), ...libs.filter((r) => avoid.has(r.id))]) {
+        const tools = [];
+        for (const a of addonPools) {
+          const t = a.items.find((x) => !clash([lib.id, ...tools.map((y) => y.id), x.id]));
+          if (t && tools.length < 2) tools.push(t);
+        }
+        const plan = tools.length && finish({ type: "group", title: "记忆库加补充部件", via: "roles", parts: [part(lib), ...tools.map((x) => part(x))] });
+        if (plan) return plan;
       }
-      if (!tools.length) return null;
-      return { type: "group", title: "记忆库加补充部件", via: "roles", parts: [part(lib), ...tools.map((x) => part(x))] };
+      return null;
     }
 
     // 最多两个方案；只有一个时照样给（页面上不编号、不写对比）。两个方案尽量不重复用同一个推荐项目

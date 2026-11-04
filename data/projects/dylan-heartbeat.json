@@ -452,10 +452,10 @@
     },
     "mount": {
       "value": [
-        "proxy_openai"
+        "proxy_host"
       ],
       "status": "auto",
-      "basis": "按接入方式推出，未核对：转发服务，默认按 OpenAI 兼容接口"
+      "basis": "按接入方式推出，未核对：只给能配合的入口里那几个客户端写的转发服务"
     },
     "host_memory": {
       "value": [],

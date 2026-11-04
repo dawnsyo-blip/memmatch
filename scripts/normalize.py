@@ -928,8 +928,10 @@ def n_mount(pid, norm):
     vals, basis = [], []
     if "mcp" in acc:
         vals.append("mcp"); basis.append("接入方式含 MCP")
-    if "proxy" in acc:
-        vals.append("proxy_openai"); basis.append("转发服务，默认按 OpenAI 兼容接口")
+    if "proxy" in acc and clients & {"openai_compatible", "developer_built"}:
+        vals.append("proxy_openai"); basis.append("转发服务，能接任意 OpenAI 兼容客户端")
+    elif "proxy" in acc:
+        vals.append("proxy_host"); basis.append("只给能配合的入口里那几个客户端写的转发服务")
     elif "openai_compatible" in clients and "library" not in acc and "cli_tool" not in acc:
         vals.append("proxy_openai"); basis.append("能配合任意 OpenAI 兼容客户端")
     if "host_plugin" in acc:
