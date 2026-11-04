@@ -13,6 +13,8 @@
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
 
 /* 首页（负责人 2026-11-03 给的版式）：英文大标题两行（倍高倍宽），店头两行，菜单表；每个入口整块可点 */
+/* 标题最长一行 12 个字母，放大到一行 14 格 */
+.home-title { font-size: calc(var(--cw) / 7); line-height: calc(var(--cw) / 7 * 1.3); }
 .home-title .ln { height: auto; }
 /* 店头：标题下面两行辅助字号，居中 */
 .store { margin-top: var(--lh); }
