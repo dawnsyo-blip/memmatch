@@ -1,4 +1,5 @@
-// 本地预览网站：node scripts/serve.mjs [端口]，然后打开 http://localhost:5173/site/
+// 本地预览网站：node scripts/serve.mjs [端口] [目录]，然后打开 http://localhost:5173/prototype/receipt.html（小票原型，网站的样张）
+// 带目录时以那个目录为网站根，比如 npm run preview 预览打包好的 dist/
 // 网站要读取 data/ 下的问卷配置、import engine/ 的代码，直接双击 html 打开时浏览器会拦住（file:// 不能 fetch），所以需要这个小服务器。
 // 以仓库根目录为网站根目录，只读文件，没有第三方依赖。
 import { createServer } from "node:http";
@@ -6,7 +7,8 @@ import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const ROOT = fileURLToPath(new URL("..", import.meta.url));
+const REPO = fileURLToPath(new URL("..", import.meta.url));
+const ROOT = process.argv[3] ? join(REPO, process.argv[3]) : REPO;
 const PORT = Number(process.argv[2]) || 5173;
 const TYPES = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".mjs": "text/javascript; charset=utf-8",
@@ -17,7 +19,7 @@ const TYPES = {
 createServer(async (req, res) => {
   try {
     let path = decodeURIComponent(new URL(req.url, "http://x").pathname);
-    if (path === "/") { res.writeHead(302, { Location: "/site/" }); return res.end(); }
+    if (path === "/" && !process.argv[3]) { res.writeHead(302, { Location: "/prototype/receipt.html" }); return res.end(); }
     let file = normalize(join(ROOT, path));
     if (!file.startsWith(normalize(ROOT))) { res.writeHead(403); return res.end(); }   // 不允许跳出仓库目录
     if ((await stat(file)).isDirectory()) file = join(file, "index.html");
@@ -28,4 +30,4 @@ createServer(async (req, res) => {
     res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
     res.end("没有这个文件");
   }
-}).listen(PORT, () => console.log(`网站预览：http://localhost:${PORT}/site/`));
+}).listen(PORT, () => console.log(`网站预览：http://localhost:${PORT}/${process.argv[3] ? "" : "prototype/receipt.html"}`));

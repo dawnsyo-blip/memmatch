@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>完整项目库</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/sarasa-result-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/sarasa-result-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="thermal.css">
@@ -118,7 +120,10 @@ html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">
 for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()));
 if (other.length) html += section("其它", other.sort(byName).map(item).join(sep()));
 
-html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">← ${BACK.text}</a></footer>`;
+// 不单独做关于页（负责人 2026-11-04 定）：信息来源和核实情况写在页尾，和结果页页脚同样三行
+html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">← ${BACK.text}</a>` +
+  `${L(rule("=", W_S), "small")}<div class="half">` +
+  ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月"].map((t) => L(center(t, W_S), "small")).join("") + `</div></footer>`;
 sheet.innerHTML = html;
 faint(sheet, ".l, .p");
 </script>

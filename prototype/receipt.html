@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>记忆库小票</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/sarasa-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/sarasa-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="thermal.css">
@@ -762,6 +764,7 @@ async function realPicks() {
   try {
     const { run } = await import('./sample.js');
     const { r } = await run();
+    if (!r) return {};
     const list = r.results.slice(0, 3).map((x) => ({ name: x.name.replace(/（.+）$/, ''), score: x.score }));
     return { list, total: r.results.length };
   } catch (e) {

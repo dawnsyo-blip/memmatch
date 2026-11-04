@@ -11,3 +11,5 @@ env
 cache/
 # 网站用的项目数据包，由 scripts/build_site_data.mjs 生成
 site/data/
+# 打包好的网站，由 scripts/build_dist.mjs 生成（npm run build）
+dist/

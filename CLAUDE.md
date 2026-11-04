@@ -41,7 +41,8 @@ docs/
 sources/
   snapshots/         来源清单的 README 快照（2026-10-10；2026-10-24 补充 awesome-ai-companion、上下文工程、RAG、酒馆插件合集），生成脚本从这里解析
   负责人材料/        负责人给的原始材料，只读：记忆框架开源情况.xlsx、独立事实记忆层_使用流程.md
-deploy/              部署配置（待建）。推荐入口和每周处理负责人 2026-11-04 定不做，所以没有 server/
+deploy/              部署：Caddyfile、publish.sh（打包并上传到 VPS）、README.md（一步步的部署说明）。推荐入口和每周处理负责人 2026-11-04 定不做，所以没有 server/
+dist/                打包好的网站（npm run build 生成，不进 git）
 cache/               下载的 README 和仓库缓存（不进 git，可重新生成）
 .claude/skills/      项目 skill：zh-web-typography（中文排版）
 ```
@@ -212,6 +213,13 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
     - 答题逻辑照搬 `site/assets/quiz.js`，答卷格式不变（`memsite-quiz-v4`）。答完进入旧版结果页 `site/result.html`。
   - 问卷页加载 Google Fonts 的 Noto Serif SC 400 和 600（负责人 2026-11-02 要求试试网络字体）。Google 会按字符范围分片，只下载页面上用到的那几片。
   - 右上角题数的颜色用 #aaa，对比度只有 2.2，负责人 2026-11-02 定保持这个颜色。
+
+上线（2026-11-04）：
+- 域名 memmatch.fyi（Cloudflare 购买），部署在负责人的 VPS 上，只有静态文件，用 Caddy 提供。步骤在 `deploy/README.md`，上传用 `MEMMATCH_HOST=用户@IP bash deploy/publish.sh`
+- `npm run build`（`scripts/build_dist.mjs`）把小票原型打包到 `dist/`：receipt.html 改名 index.html，引擎、`site/assets/result-text.js`、问卷配置、`usage_form.json`、项目数据收进 dist，路径改写成 dist 里的位置，开发用的提示（“npm run site”）换成访客看得懂的话；最后检查不能剩下指向仓库其它目录的路径。原型里新加读别处文件的路径，要在脚本的 FILES 和 REWRITE 里补上。`npm run preview` 在 http://localhost:5174/ 预览打包结果
+- 网页图标 `prototype/favicon.svg`（小票剪影，深色标签栏自动换成纸色）和 `apple-touch-icon.png`
+- 不保留示例答卷（负责人 2026-11-04 定）：没答过题打开结果页时转回首页；`?demo` 的演示答卷照留，开发时看排除原因用
+- 关于页不单独做：信息来源、“未经实际安装验证”、核实日期写在结果页和项目库的页尾；收录与排除标准、反馈方式不做
 
 小票原型（2026-11-03，`prototype/`；2026-11-04 负责人定为网站的样张，正式网站照它搭）：
 - 热敏打印规则（负责人定，全站遵守）：纸上只有一种墨色 `#1c1b19`，不用灰字灰线；层级靠字号、加粗、下划线、反白；字号分五级（2026-11-03 负责人改定，原来“只有正常和倍高倍宽”作废），同一级字号、字重一致：大标题（倍高倍宽）＞一级标题（一行 28 格，加粗：结果页部分标题反白、答题页当前题目）＞二级标题（32 格，加粗：项目名、建议名、方案、小节标题）＞正文（36 格）＞辅助（44 格：标签、细节、说明、页眉、已答摘要），每级一行放整数个半角格（汉字两格），分隔线、点线由字符拼成正好一行；印刷痕迹只有随机约 10% 的行墨色淡 10%（大标题的点阵效果试过几版，负责人 2026-11-03 定去掉）。纸宽最大 340px，字号由纸宽推出来

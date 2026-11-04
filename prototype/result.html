@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>推荐结果</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" href="fonts/sarasa-result-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/sarasa-result-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="thermal.css">
@@ -92,6 +94,8 @@ try {
   sheet.innerHTML = `<p class="p">读不到项目数据。请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/result.html</p>`;
   throw e;
 }
+// 还没答过题：转回首页去答题（不再显示示例答卷）
+if (ctx.empty) { location.replace("receipt.html"); await new Promise(() => {}); }
 await FONTS;
 const { cfg, data, usage, st, answers, byQ, r, sample, demo } = ctx;
 const byId = Object.fromEntries(data.projects.map((p) => [p.id, p]));

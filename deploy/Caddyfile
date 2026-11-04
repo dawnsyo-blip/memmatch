@@ -1,0 +1,30 @@
+# memmatch.fyi 的网站服务器配置（Caddy）。放到 VPS 的 /etc/caddy/Caddyfile，改完运行 sudo systemctl reload caddy
+# 网站只有静态文件，放在 /var/www/memmatch（由 deploy/publish.sh 上传）。HTTPS 证书由 Caddy 自动申请和续期。
+
+memmatch.fyi {
+	root * /var/www/memmatch
+	encode zstd gzip
+	file_server
+
+	# 字体和图标不常改：浏览器缓存一个月
+	@static path /fonts/* /favicon.svg /apple-touch-icon.png
+	header @static Cache-Control "public, max-age=2592000"
+
+	# 页面、脚本、问卷和项目数据：每次都向服务器确认有没有更新，改了马上生效
+	@fresh not path /fonts/* /favicon.svg /apple-touch-icon.png
+	header @fresh Cache-Control "no-cache"
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		-Server
+	}
+
+	handle_errors {
+		redir * / 302
+	}
+}
+
+www.memmatch.fyi {
+	redir https://memmatch.fyi{uri} permanent
+}
