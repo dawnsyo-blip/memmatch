@@ -418,7 +418,7 @@ function act(n, label, arrow, attrs) {
 const counts = [["推荐项目", r.results.length], ["搭配方案", combos.length], ["强化补丁", patchCount]];
 html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
   `<details class="fold foot-blk"><summary>${foldLine("您的答卷", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
-  `${L(rule("-", W_S), "small")}<div class="foot-blk">${counts.map(([k, n]) => `<span class="l small">${dotsRow(k, `${n} 个`, W_S)}</span>`).join("")}</div>` +
+  `${L(rule("-", W_S), "small")}<div class="foot-blk">${counts.map(([k, n]) => `<span class="l small">${dotsRow(k, String(n), W_S)}</span>`).join("")}</div>` +
   `${L(titledRule("自助服务", "=", W_S), "small")}<div class="foot-blk acts">` +
   act(1, "下载答卷", "↓", 'type="button" id="saveAnswers"') +
   act(2, "下载推荐结果", "↓", 'type="button" id="saveResults"') +
