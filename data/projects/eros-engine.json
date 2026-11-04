@@ -485,6 +485,18 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "sdk"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：代码库，要写代码调用"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

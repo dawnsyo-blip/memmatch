@@ -90,8 +90,8 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
-        "mcp"
+        "mcp",
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：MCP；API 代理"
@@ -339,7 +339,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway、mcp"
+      "basis": "standard_interface：接入方式 mcp、proxy"
     },
     "customization": {
       "value": [
@@ -457,6 +457,19 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没有核对"
+    },
+    "mount": {
+      "value": [
+        "mcp",
+        "proxy_openai"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；转发服务，默认按 OpenAI 兼容接口"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

@@ -1,0 +1,19 @@
+{
+  "_说明": "记忆项目和宿主自带记忆的关系，只记 README 写明的（2026-11-04 核对）。值：replaces 占用宿主的记忆位置、替换自带的记忆；replaces_optional 默认并行，装深度插件时替换；supplements 和自带记忆并行；imports 能读入宿主原有的记忆；not_mentioned 没写。没列的按宿主机制推断，见 scripts/normalize.py 的 n_host_memory",
+  "agentmemory": {"value": {"openclaw": "replaces_optional", "hermes": "supplements"}, "note": "接 MCP 时和 OpenClaw 自带记忆并存，装 integrations/openclaw 插件会占用记忆插槽、自动从 memory-core 切过去；Hermes 是 memory provider，会镜像 MEMORY.md"},
+  "atmem": {"value": {"openclaw": ["replaces", "imports"]}, "note": "OpenClaw 适配器接管时先复制原有记忆，并在接管期间冻结它"},
+  "caura": {"value": {"openclaw": "replaces"}, "note": "插件占用 OpenClaw 的 memory 插槽"},
+  "memory-lancedb-pro": {"value": {"openclaw": "replaces"}, "note": "要把 plugins.slots.memory 指到它；仍可用 memory-core 的做梦整理"},
+  "neotoma": {"value": {"openclaw": "replaces"}, "note": "原生插件 kind 为 memory，填进 OpenClaw 的记忆插槽"},
+  "remnic": {"value": {"openclaw": "replaces", "hermes": "supplements"}, "note": "安装命令把 plugins.slots.memory 设成 openclaw-remnic；Hermes 用 MemoryProvider"},
+  "mem9": {"value": {"openclaw": "replaces", "hermes": "supplements"}, "note": "OpenClaw 插件 kind 为 memory；Hermes 是 memory provider 插件"},
+  "honcho": {"value": {"openclaw": ["not_mentioned", "imports"], "hermes": "supplements"}, "note": "openclaw honcho setup 可把原有 MEMORY.md、USER.md、IDENTITY.md 导入 Honcho，不删原文件；没写是否占用记忆插槽"},
+  "mnemo-cortex": {"value": {"openclaw": "supplements", "hermes": "supplements"}, "note": "README 专门说明不取代 OpenClaw 自带的 Active Memory，两者解决的问题不同"},
+  "piia-engram": {"value": {"openclaw": ["supplements", "imports"], "hermes": "supplements"}, "note": "能导入、导出 OpenClaw 的 SOUL.md、MEMORY.md、USER.md"},
+  "birkin-mnemosyne": {"value": {"openclaw": "supplements", "hermes": "supplements"}, "note": "Hermes 社区目录里的外部 memory provider"},
+  "causal-memory": {"value": {"hermes": "supplements"}, "note": "Hermes memory provider 插件"},
+  "deja-vu": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes 插件目录里的 memory provider deja-memory"},
+  "memori": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes memory provider，后台记录完整对话"},
+  "reme": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes memory provider，可选 HTTP 或嵌入式"},
+  "supermemory": {"value": {"openclaw": "not_mentioned", "hermes": "supplements"}, "note": "Hermes 的 Supermemory memory provider"}
+}

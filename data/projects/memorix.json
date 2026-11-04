@@ -463,6 +463,21 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：大模型可选，默认不调用"
     },
+    "mount": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements",
+        "hermes:supplements"
+      ],
+      "status": "auto",
+      "basis": "openclaw：只接 MCP，和自带记忆并存（推断）；hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

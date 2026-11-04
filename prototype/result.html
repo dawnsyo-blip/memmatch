@@ -118,7 +118,7 @@ function comboBody(c, saidPaired = false) {
   const parts = c.parts, last = parts[parts.length - 1], B = N(last);
   const base = parts.filter((p) => p.current);
   if (c.type === "current" && c.base === "notes") return `保留您的笔记库，再加 ${B}` + (c.via === "markdown" ? "，它把记忆存成 Markdown 文件，可以和笔记放在一起" : "");
-  if (c.type === "current" && c.base === "native") return `继续用现在的客户端，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 8 题选的“${c.label}”` : "");
+  if (c.type === "current" && c.base === "native") return `继续用现在的客户端，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 7 题选的“${c.label}”` : "");
   const add = c.via === "addon" ? `${B} ${roleDo(last)}` : `再配上${saidPaired ? " " : "为它设计的 "}${B}`;
   if (c.type === "current") return c.via === "addon" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${add}` : `您正在用的 ${base.map(N).join("、")}，${add}`;
   if (c.type === "complete") return `${N(parts[0])} 一个项目包办写入到查看修改，${add}`;

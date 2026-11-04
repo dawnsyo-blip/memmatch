@@ -90,8 +90,8 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
-        "host_plugin"
+        "host_plugin",
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：插件＋代理（proxy）"
@@ -325,7 +325,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway、host_plugin"
+      "basis": "standard_interface：接入方式 host_plugin、proxy"
     },
     "customization": {
       "value": [
@@ -444,6 +444,23 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没有核对"
+    },
+    "mount": {
+      "value": [
+        "host_plugin",
+        "proxy_openai",
+        "proxy_anthropic"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/mount.json：README 写了用代理接 Claude Code、CodeBuddy，只改 base URL"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:not_mentioned",
+        "hermes:supplements"
+      ],
+      "status": "auto",
+      "basis": "openclaw：插件，README 没写是否占用记忆插槽；hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）"
     },
     "pairs_with": {
       "value": [],

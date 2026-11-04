@@ -90,8 +90,8 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
-        "library"
+        "library",
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：网关（中间件）"
@@ -323,7 +323,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway"
+      "basis": "standard_interface：接入方式 proxy"
     },
     "customization": {
       "value": [
@@ -382,7 +382,7 @@
         "http_endpoint"
       ],
       "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_server"
+      "basis": "http_endpoint：转发服务可以放在 own_server"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -442,6 +442,19 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没有核对"
+    },
+    "mount": {
+      "value": [
+        "proxy_openai",
+        "sdk"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：转发服务，默认按 OpenAI 兼容接口；代码库，要写代码调用"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

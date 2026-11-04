@@ -447,6 +447,22 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:not_mentioned",
+        "hermes:supplements"
+      ],
+      "status": "auto",
+      "basis": "openclaw：插件，README 没写是否占用记忆插槽；hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -90,7 +90,7 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
+        "proxy",
         "standalone_app"
       ],
       "status": "auto",
@@ -328,7 +328,7 @@
         "self_contained"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway；self_contained：自带记忆的应用"
+      "basis": "standard_interface：接入方式 proxy；self_contained：自带记忆的应用"
     },
     "customization": {
       "value": [
@@ -444,6 +444,18 @@
       "value": "not_mentioned",
       "status": "auto",
       "basis": "没有核对"
+    },
+    "mount": {
+      "value": [
+        "standalone"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/mount.json：网关是它自己的服务端，用来管理多家模型，不是给别的客户端接的转发服务"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

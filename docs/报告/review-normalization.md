@@ -2,7 +2,7 @@
 
 > 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/报告/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，
 > 然后运行 `python -X utf8 scripts/normalize.py --apply-review`。确认值存入 `data/normalization_overrides.json`，以后重新生成也会保留。
-> 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, gateway`）；留空表示暂不处理。
+> 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, proxy`）；留空表示暂不处理。
 
 所有判断都来自说明文档（README）和原表，**没有实际安装验证**。
 
@@ -12,7 +12,7 @@
 
 | 字段 | 含义与可选值 | 规则判定 | 已确认 | 文档未说明 | 待审核 |
 |---|---|---|---|---|---|
-| `access` | `mcp` MCP（让 AI 调用外部工具的通用接口）；`gateway` 网关／代理（挂在助手和模型之间）；`host_plugin` 宿主插件（含钩子、技能）；`library` 代码库（要写代码调用）；`standalone_app` 独立应用；`cli_tool` 命令行小工具（需要时自己运行）；`guide` 教程或设计文档（照着搭） | 250 | 0 | 0 | 0 |
+| `access` | `mcp` MCP（让 AI 调用外部工具的通用接口）；`proxy` 转发服务（挂在聊天软件和模型接口之间，改接口地址接入）；`host_plugin` 宿主插件（含钩子、技能）；`library` 代码库（要写代码调用）；`standalone_app` 独立应用；`cli_tool` 命令行小工具（需要时自己运行）；`guide` 教程或设计文档（照着搭） | 250 | 0 | 0 | 0 |
 | `compatible_clients` | `claude_desktop` Claude 桌面版；`claude_web_mobile` Claude 网页／手机版；`claude_code` Claude Code；`chatgpt` ChatGPT；`chatgpt_gpt` ChatGPT 自定义 GPT（Actions 调接口；个人账号已不能新建，计划 2026-12 退役）；`openai_compatible` 任意 OpenAI 兼容客户端；`any_mcp_client` 任意 MCP 客户端；`cursor` Cursor；`codex` Codex；`gemini_cli` Gemini CLI；`opencode` OpenCode；`openclaw` OpenClaw；`hermes` Hermes；`astrbot` AstrBot；`sillytavern` SillyTavern；`open_webui` Open WebUI；`kelivo` Kelivo；`deepseek_harness` DeepSeek Harness；`telegram` Telegram；`wechat` 微信；`feishu` 飞书；`discord` Discord；`self_contained` 自带界面（不接其它助手）；`developer_built` 开发者自建的应用 | 201 | 0 | 3 | 0 |
 | `runs_on` | `own_computer` 自己的电脑；`own_server` 自己的服务器；`own_cloud_account` 自己的云账号；`phone` 手机；`third_party_hosted` 别人的服务器（托管） | 227 | 0 | 6 | 0 |
 | `os` | `windows` Windows；`macos` macOS；`linux` Linux；`android` 安卓；`ios` iOS；`any` 任何系统（浏览器即可） | 210 | 0 | 8 | 0 |

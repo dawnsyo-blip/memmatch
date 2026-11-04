@@ -90,7 +90,7 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway"
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：网关（Kelivo 的接口地址指向它）"
@@ -329,7 +329,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway"
+      "basis": "standard_interface：接入方式 proxy"
     },
     "customization": {
       "value": [
@@ -390,7 +390,7 @@
         "cloud"
       ],
       "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_server、own_cloud_account；cloud：运行位置含 own_cloud_account"
+      "basis": "http_endpoint：转发服务可以放在 own_server、own_cloud_account；cloud：运行位置含 own_cloud_account"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -449,6 +449,18 @@
       "value": "scheduled",
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：定时唤醒伴侣，会调用模型"
+    },
+    "mount": {
+      "value": [
+        "proxy_openai"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：转发服务，默认按 OpenAI 兼容接口"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

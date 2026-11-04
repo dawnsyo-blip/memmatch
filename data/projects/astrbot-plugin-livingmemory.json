@@ -499,6 +499,20 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "astrbot:supplements"
+      ],
+      "status": "auto",
+      "basis": "astrbot：插件在自带记忆之外再加一层（推断）"
+    },
     "pairs_with": {
       "value": [
         "astrbot-plugin-self-learning"

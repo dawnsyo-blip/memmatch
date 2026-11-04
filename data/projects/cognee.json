@@ -477,6 +477,21 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：整理资料时调用模型，不是每轮对话"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "sdk"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；代码库，要写代码调用"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements"
+      ],
+      "status": "auto",
+      "basis": "openclaw：只接 MCP，和自带记忆并存（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

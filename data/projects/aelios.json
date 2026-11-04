@@ -136,8 +136,8 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
-        "mcp"
+        "mcp",
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：网关＋MCP（两种都支持）；网关＋MCP（两种都支持）"
@@ -383,7 +383,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway、mcp"
+      "basis": "standard_interface：接入方式 mcp、proxy"
     },
     "customization": {
       "value": [
@@ -446,7 +446,7 @@
         "cloud"
       ],
       "status": "auto",
-      "basis": "remote_mcp：能配合 claude_web_mobile；http_endpoint：网关可以放在 own_cloud_account；cloud：运行位置含 own_cloud_account"
+      "basis": "remote_mcp：能配合 claude_web_mobile；http_endpoint：转发服务可以放在 own_cloud_account；cloud：运行位置含 own_cloud_account"
     },
     "local_model": {
       "value": "yes",
@@ -506,6 +506,20 @@
       "value": "scheduled",
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：每晚整理对话"
+    },
+    "mount": {
+      "value": [
+        "proxy_openai",
+        "proxy_anthropic",
+        "mcp"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/mount.json：README 写了 Claude Code 用 ANTHROPIC_BASE_URL、Codex 用 base_url 接它的 /coder 地址"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

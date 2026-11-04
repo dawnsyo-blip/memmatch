@@ -448,6 +448,20 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements"
+      ],
+      "status": "auto",
+      "basis": "openclaw：只接 MCP，和自带记忆并存（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

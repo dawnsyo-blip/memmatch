@@ -45,7 +45,7 @@ REVIEW_XLSX = ROOT / "docs/报告/review-normalization.xlsx"
 
 # 字段 -> 可选值（中文说明）。schema 与审核清单都引用这里。
 ENUMS = {
-    "access": {"mcp": "MCP（让 AI 调用外部工具的通用接口）", "gateway": "网关／代理（挂在助手和模型之间）",
+    "access": {"mcp": "MCP（让 AI 调用外部工具的通用接口）", "proxy": "转发服务（挂在聊天软件和模型接口之间，改接口地址接入）",
                "host_plugin": "宿主插件（含钩子、技能）", "library": "代码库（要写代码调用）", "standalone_app": "独立应用",
                "cli_tool": "命令行小工具（需要时自己运行）", "guide": "教程或设计文档（照着搭）"},
     "compatible_clients": {
@@ -106,6 +106,10 @@ SPEND_DATA = json.loads(SPEND_REVIEW.read_text(encoding="utf-8")) if SPEND_REVIE
 USAGE_DATA = json.loads(USAGE_FORM.read_text(encoding="utf-8")) if USAGE_FORM.exists() else {}
 TOKEN_USAGE = ROOT / "data/token_usage.json"
 TOKEN_DATA = json.loads(TOKEN_USAGE.read_text(encoding="utf-8")) if TOKEN_USAGE.exists() else {}
+MOUNT = ROOT / "data/mount.json"
+MOUNT_DATA = json.loads(MOUNT.read_text(encoding="utf-8")) if MOUNT.exists() else {}
+HOST_MEMORY = ROOT / "data/host_memory.json"
+HOST_MEMORY_DATA = json.loads(HOST_MEMORY.read_text(encoding="utf-8")) if HOST_MEMORY.exists() else {}
 
 
 def snippet(text, m, width=60):
@@ -156,7 +160,7 @@ def n_access(c):
     t = c.text("acc", "x:接入方式")
     found = hits(t, {
         "mcp": r"MCP",
-        "gateway": r"网关|代理|proxy",
+        "proxy": r"网关|代理|proxy|转发",
         "host_plugin": r"插件|钩子|技能|Skill|hook|SillyTavern 扩展|Open WebUI 函数",
         "library": r"代码库|Python 库|TypeScript 库|Rust 库|\bSDK\b|库＋|可嵌入|单个 Python 脚本|数据库＋|服务＋SDK|"
                    r"Node\.js (?:模块|包)|前端组件",
@@ -619,7 +623,7 @@ def n_dimensions(c, out, fixed=()):
 
     pair = dim_hits(c, "pairing", DR.PAIR_PATS)
     vals, basis = [v for v, _ in pair], [f"{v}：{b}" for v, b in pair]
-    std = [a for a in val("access") if a in ("mcp", "gateway", "host_plugin")]
+    std = [a for a in val("access") if a in ("mcp", "proxy", "host_plugin")]
     if std:
         vals.append("standard_interface")
         basis.append("standard_interface：接入方式 " + "、".join(std))
@@ -707,9 +711,9 @@ def n_dimensions(c, out, fixed=()):
             vals.append("remote_mcp")
             basis.append(f"remote_mcp：{hit[0][1]}")
     far = [r for r in runs if r in ("own_server", "own_cloud_account", "third_party_hosted")]
-    if "gateway" in acc and far:
+    if "proxy" in acc and far:
         vals.append("http_endpoint")
-        basis.append("http_endpoint：网关可以放在 " + "、".join(far))
+        basis.append("http_endpoint：转发服务可以放在 " + "、".join(far))
     cloud = [r for r in runs if r in ("own_cloud_account", "third_party_hosted")]
     if cloud:
         vals.append("cloud")
@@ -853,6 +857,8 @@ def normalize(doc, overrides, verification=None):
     norm["spend_note"] = spend_note
     norm["usage_form"] = n_usage_form(doc["id"], norm)
     norm["token_inject"], norm["token_background"] = n_token(doc["id"], norm)
+    norm["mount"] = n_mount(doc["id"], norm)
+    norm["host_memory"] = n_host_memory(doc["id"], norm)
     rel = RELATED.get(doc["id"], [])
     norm["pairs_with"] = res([i for i, _ in rel], "auto",
                              "；".join(f"{i}：{n}" for i, n in rel) or "没有记录设计上搭配使用的项目")
@@ -871,7 +877,7 @@ def n_usage_form(pid, norm):
     if role in ("guide", "method"):
         return res([role], "auto", "按项目定位")
     vals = []
-    if "gateway" in acc: vals.append("proxy")
+    if "proxy" in acc: vals.append("proxy")
     if "host_plugin" in acc:
         vals.append("plugin_chat" if clients & {"sillytavern", "astrbot", "open_webui", "rikkahub", "kelivo"} else "plugin_agent")
     if "standalone_app" in acc or role == "companion_app": vals.append("chat_app")
@@ -909,6 +915,68 @@ def n_token(pid, norm):
     else:
         bg = res("not_mentioned", "auto", "没有核对")
     return inj, bg
+
+
+def n_mount(pid, norm):
+    """挂载方式：记忆项目从哪里接进用户的工具，推荐时和问卷配置里的客户端能力表（clients）对比。
+    多数按接入方式推出，标 auto；逐条核对或推不出的（转发服务用哪种接口格式、hooks、说明文件）写在 data/mount.json。"""
+    if pid in MOUNT_DATA:
+        m = MOUNT_DATA[pid]
+        return res(m["value"], "verified", "逐条核对，见 data/mount.json" + (f"：{m['note']}" if m.get("note") else ""))
+    acc = norm["access"]["value"] or []
+    clients = set(norm["compatible_clients"]["value"] or [])
+    vals, basis = [], []
+    if "mcp" in acc:
+        vals.append("mcp"); basis.append("接入方式含 MCP")
+    if "proxy" in acc:
+        vals.append("proxy_openai"); basis.append("转发服务，默认按 OpenAI 兼容接口")
+    elif "openai_compatible" in clients and "library" not in acc and "cli_tool" not in acc:
+        vals.append("proxy_openai"); basis.append("能配合任意 OpenAI 兼容客户端")
+    if "host_plugin" in acc:
+        vals.append("host_plugin"); basis.append("宿主插件，宿主见能配合的入口")
+    if "library" in acc:
+        vals.append("sdk"); basis.append("代码库，要写代码调用")
+    if "standalone_app" in acc:
+        vals.append("standalone"); basis.append("独立应用")
+    if "cli_tool" in acc:
+        vals.append("cli"); basis.append("命令行工具")
+    if "guide" in acc or norm["project_role"]["value"] in ("guide", "method"):
+        vals.append("manual"); basis.append("教程或做法，照着搭")
+    return res(vals or ["manual"], "auto", "按接入方式推出，未核对：" + "；".join(basis))
+
+
+# 自带记忆系统的宿主：记忆项目接进去以后，和宿主原有的记忆是什么关系
+HOST_MEMORY_HOSTS = ("openclaw", "hermes", "astrbot")
+
+
+def n_host_memory(pid, norm):
+    """和宿主自带记忆的关系，值写成“宿主:关系”：replaces 替换（占用宿主的记忆位置，原来的停用）、
+    supplements 并行（各存各的）、imports 能读入宿主原有的记忆、not_mentioned 没写。
+    README 写明的在 data/host_memory.json；其余按宿主的机制推断，标 auto：
+    Hermes 的外部记忆提供方和自带的 MEMORY.md、USER.md 同时生效；OpenClaw 的 MCP 工具和自带记忆并存，
+    插件要看是否占用记忆插槽（plugins.slots.memory），README 没写的记 not_mentioned；AstrBot 插件在自带记忆之外再加一层。"""
+    clients = set(norm["compatible_clients"]["value"] or [])
+    acc = norm["access"]["value"] or []
+    hosts = [h for h in HOST_MEMORY_HOSTS if h in clients]
+    manual = HOST_MEMORY_DATA.get(pid, {})
+    vals, basis = [], []
+    for h in hosts:
+        if h in manual.get("value", {}):
+            rel = manual["value"][h]
+            vals += [f"{h}:{r}" for r in ([rel] if isinstance(rel, str) else rel)]
+            basis.append(f"{h}：README 写明" + (f"，{manual['note']}" if manual.get("note") else ""))
+        elif h == "hermes":
+            vals.append("hermes:supplements"); basis.append("hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）")
+        elif h == "astrbot":
+            vals.append("astrbot:supplements"); basis.append("astrbot：插件在自带记忆之外再加一层（推断）")
+        elif "host_plugin" not in acc:
+            vals.append("openclaw:supplements"); basis.append("openclaw：只接 MCP，和自带记忆并存（推断）")
+        else:
+            vals.append("openclaw:not_mentioned"); basis.append("openclaw：插件，README 没写是否占用记忆插槽")
+    if not hosts:
+        return res([], "auto", "不接自带记忆系统的宿主")
+    status = "verified" if manual and all(h in manual.get("value", {}) for h in hosts) else "auto"
+    return res(vals, status, "；".join(basis))
 
 
 def uncertainty_note(basis):
@@ -955,7 +1023,7 @@ def write_review(docs):
         "",
         "> 由 `scripts/normalize.py` 生成，不要手改本文件。要补充或修改，请在 `docs/报告/review-normalization.xlsx`「待补充」页的「负责人确认值」一列填写，",
         "> 然后运行 `python -X utf8 scripts/normalize.py --apply-review`。确认值存入 `data/normalization_overrides.json`，以后重新生成也会保留。",
-        "> 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, gateway`）；留空表示暂不处理。",
+        "> 填写方式：同意建议值就填「同意」；要改就填英文代码（多个用逗号分隔，如 `mcp, proxy`）；留空表示暂不处理。",
         "",
         "所有判断都来自说明文档（README）和原表，**没有实际安装验证**。",
         "",

@@ -448,6 +448,19 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：随机时间唤醒，会调用模型"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "cli"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；命令行工具"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

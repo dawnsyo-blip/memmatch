@@ -441,6 +441,20 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：常驻层不超过 2400 token；可设定时整理"
     },
+    "mount": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:not_mentioned"
+      ],
+      "status": "auto",
+      "basis": "openclaw：插件，README 没写是否占用记忆插槽"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

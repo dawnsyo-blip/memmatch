@@ -453,6 +453,22 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：可选常驻索引，会随记忆变长"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "sdk"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；代码库，要写代码调用"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements",
+        "hermes:supplements"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，Hermes 社区目录里的外部 memory provider；hermes：README 写明，Hermes 社区目录里的外部 memory provider"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

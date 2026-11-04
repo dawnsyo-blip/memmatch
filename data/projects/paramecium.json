@@ -136,8 +136,8 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
-        "library"
+        "library",
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：网关（自带对话接口）；网关（自带对话接口）"
@@ -375,7 +375,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway"
+      "basis": "standard_interface：接入方式 proxy"
     },
     "customization": {
       "value": [
@@ -434,7 +434,7 @@
         "http_endpoint"
       ],
       "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_server"
+      "basis": "http_endpoint：转发服务可以放在 own_server"
     },
     "local_model": {
       "value": "no_model_needed",
@@ -494,6 +494,20 @@
       "value": "none",
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：不用大模型提取"
+    },
+    "mount": {
+      "value": [
+        "proxy_openai",
+        "proxy_anthropic",
+        "sdk"
+      ],
+      "status": "verified",
+      "basis": "逐条核对，见 data/mount.json：README 写了网关能在 Anthropic 和 OpenAI 两种格式之间互转，换中转站不用改前端"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

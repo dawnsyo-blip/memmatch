@@ -497,6 +497,21 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements",
+        "hermes:supplements"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，README 专门说明不取代 OpenClaw 自带的 Active Memory，两者解决的问题不同；hermes：README 写明，README 专门说明不取代 OpenClaw 自带的 Active Memory，两者解决的问题不同"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

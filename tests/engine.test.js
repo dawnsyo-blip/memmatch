@@ -71,19 +71,19 @@ test("文档没写的字段不排除，只标“需自行确认”并略微靠�
   assert.ok(r.results.findIndex((x) => x.id === "c") < r.results.findIndex((x) => x.id === "e"));
 });
 
-test("正式问卷：没显示的题（第 3a 题）不影响结果", () => {
+test("正式问卷：没显示的题（第 2j 题）不影响结果", () => {
   const { projects: all, engine: real } = loadAll();
-  const base = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["mcp_client"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"] };
+  const base = { q1: ["iphone", "mac"], q3: ["client"], q3client: ["kelivo"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"] };
   const a = real.recommend(base, all);
-  const b = real.recommend({ ...base, q3a: ["openclaw"] }, all); // 第 3 题没选遥控或程序化，第 3a 题不显示
+  const b = real.recommend({ ...base, q3runtime: ["openclaw"] }, all); // 第 2 题没选消息平台，第 2j 题不显示
   assert.deepEqual(a.results.map((x) => x.id), b.results.map((x) => x.id));
 });
 
 // 遥控电脑上的 Claude Code、多端共用，门槛和预算都放开
-const multiBase = { q2: ["anthropic"], q1: ["iphone", "mac"], q3: ["remote_control"], q3a: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q17: ["api_key"] };
+const multiBase = { q1: ["iphone", "mac"], q3: ["remote"], q3remote: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q17: ["api_key"] };
 const has = (p, field, v) => [].concat(p.normalized[field].value).includes(v);
 
-test("第 4 题：要各 Agent 分开记忆时，能分开的排在前面", () => {
+test("第 3 题（q4）：要各 Agent 分开记忆时，能分开的排在前面", () => {
   const { projects: all, engine: real } = loadAll();
   const byId = Object.fromEntries(all.map((p) => [p.id, p]));
   const r = real.recommend({ ...multiBase, q4: "per_agent" }, all);
@@ -91,7 +91,7 @@ test("第 4 题：要各 Agent 分开记忆时，能分开的排在前面", () =
   assert.ok(top.filter((p) => has(p, "multi_agent", "per_agent")).length >= 4, "前 5 名大多应能按 Agent 分开记忆");
 });
 
-test("第 9 题：要找回原图时，能存原图的项目靠前；不需要时不影响结果", () => {
+test("第 8 题（q9）：要找回原图时，能存原图的项目靠前；不需要时不影响结果", () => {
   const { projects: all, engine: real } = loadAll();
   const byId = Object.fromEntries(all.map((p) => [p.id, p]));
   const r = real.recommend({ ...multiBase, q9: ["image"] }, all);
@@ -117,7 +117,7 @@ test("笔记软件当记忆：做法和记忆库一起排名，连接器只挂�
   assert.ok(r.results.indexOf(m) >= 8, "自动化程度低，不应排进前 8");
 });
 
-test("第 7 题（q6）选“连接笔记类软件”：存成 Markdown 文件的记忆库加 2 分，做法本身不加", () => {
+test("第 6 题（q6）选“连接笔记类软件”：存成 Markdown 文件的记忆库加 2 分，做法本身不加", () => {
   const { projects: all, questionnaire, settings } = loadAll();
   const wide = createRuleEngine({ questionnaire: { ...questionnaire, result: { ...questionnaire.result, top_n: 999 } }, settings });
   const byId = Object.fromEntries(all.map((p) => [p.id, p]));
@@ -133,23 +133,25 @@ test("第 7 题（q6）选“连接笔记类软件”：存成 Markdown 文件�
   assert.equal(b["method-note-vault"], a["method-note-vault"], "做法本身不应加分");
 });
 
-test("第 12 题（q12m）选“完全不想管”：笔记软件当记忆的做法被排除，原因记在这道题上", () => {
+test("第 11 题（q12m）选“完全不想管”：笔记软件当记忆的做法被排除，原因记在这道题上", () => {
   const { projects: all, questionnaire, settings } = loadAll();
   const real = createRuleEngine({ questionnaire: { ...questionnaire, result: { ...questionnaire.result, top_n: 999 } }, settings });
   const r = real.recommend({ ...multiBase, q12m: "none" }, all);
   assert.ok(!r.results.some((x) => x.id.startsWith("method-")), "不想维护的人不该看到笔记做法");
   const e = r.excluded.find((x) => x.id === "method-note-vault");
-  assert.ok(e && e.reason.includes("自己按规则维护"), `排除原因应来自第 12 题：${e?.reason}`);
+  assert.ok(e && e.reason.includes("自己按规则维护"), `排除原因应来自第 11 题：${e?.reason}`);
   assert.ok(real.recommend({ ...multiBase, q12m: "light" }, all).results.some((x) => x.id === "method-note-vault"), "偶尔检查的照常排名");
 });
 
 test("只提示的前后矛盾（warnings）：本地 LLM 却没有电脑，远程连接却要“点几下”", async () => {
   const { questionnaire } = loadAll();
   const { findConflicts } = await import("../engine/index.js");
-  assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone"], q2: ["local"] }).map((c) => c.question), ["q2"]);
-  assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone", "mac"], q2: ["local"] }), [], "有电脑时不提示");
-  assert.deepEqual(findConflicts(questionnaire, { q1: ["iphone"], q2: ["local", "deepseek"] }), [], "还用别家 LLM 时不提示");
-  assert.deepEqual(findConflicts(questionnaire, { q3: ["remote_control"], q16: "low" }).map((c) => c.question), ["q16"]);
+  const local = { q3: ["client"], q3api: ["local"] };
+  assert.deepEqual(findConflicts(questionnaire, { ...local, q1: ["iphone"] }).map((c) => c.question), ["q3api"]);
+  assert.deepEqual(findConflicts(questionnaire, { ...local, q1: ["iphone", "mac"] }), [], "有电脑时不提示");
+  assert.deepEqual(findConflicts(questionnaire, { ...local, q1: ["iphone"], q3api: ["local", "cn"] }), [], "还用别家模型时不提示");
+  assert.deepEqual(findConflicts(questionnaire, { q3: ["remote"], q16: "low" }).map((c) => c.question), ["q16"]);
+  assert.deepEqual(findConflicts(questionnaire, { q3: ["remote", "client"], q4: "single" }).map((c) => c.question), ["q4"], "几种使用方式却只在一个入口用");
 });
 
 test("token 用量题（q18t）：越省越好时“不随记忆变多”的加分、每轮都调用大模型的减分，可设上限的带提醒", () => {

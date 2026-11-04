@@ -23,11 +23,11 @@ function fieldUnknown(project, field) {
   return !!item && (item.status === "unknown" || fieldValues(project, field).length === 0);
 }
 
-// 只能在单个宿主里用、又没有 MCP 或网关的项目（多端共用时排除）
+// 只能在单个宿主里用、又没有 MCP 或转发服务的项目（多端共用时排除）
 function isSingleEntry(project) {
   const access = fieldValues(project, "access");
   const clients = fieldValues(project, "compatible_clients").filter((c) => c !== "developer_built");
-  return !access.includes("mcp") && !access.includes("gateway") && clients.length <= 1;
+  return !access.includes("mcp") && !access.includes("proxy") && clients.length <= 1;
 }
 
 const intersects = (a, b) => a.some((x) => b.includes(x));
@@ -53,6 +53,7 @@ function checkCond(cond, answers) {
   if (!cond) return true;
   if (cond.all) return cond.all.every((c) => checkCond(c, answers));
   if (cond.any) return cond.any.some((c) => checkCond(c, answers));
+  if (cond.not) return !checkCond(cond.not, answers);
   let sel = selected(answers, cond.question);
   if (cond.rank_top) sel = sel.slice(0, cond.rank_top);
   if (cond.answered !== undefined) return (sel.length > 0) === cond.answered;
@@ -60,6 +61,7 @@ function checkCond(cond, answers) {
   if (cond.selected_none) return !intersects(sel, cond.selected_none);
   if (cond.selected_only_within) return sel.length > 0 && sel.every((s) => cond.selected_only_within.includes(s));
   if (cond.not_only_within) return sel.some((s) => !cond.not_only_within.includes(s));
+  if (cond.count_at_least) return sel.length >= cond.count_at_least;
   throw new Error("不认识的条件：" + JSON.stringify(cond));
 }
 
@@ -116,6 +118,48 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
   const labels = questionnaire.field_labels || {};
   const rankWeights = questionnaire.rank_weights || [3, 2, 1];
   const rankRest = questionnaire.rank_rest ?? 1;
+  const clients = questionnaire.clients || {};
+  const specSets = questionnaire.spec_sets || {};
+
+  // 客户端能接哪些项目：fits 里任意一条满足即可。条目可以是 {字段: [值], note}、"@集合名"（见配置的 spec_sets），
+  // 或 {when, fits, note}（答卷满足 when 时才算）。返回 null 或 { note }
+  function fitsAny(items, project, answers) {
+    for (const it of items || []) {
+      if (typeof it === "string") {
+        const r = fitsAny(specSets[it.slice(1)], project, answers);
+        if (r) return r;
+        continue;
+      }
+      if (it.fits) {
+        if (it.when && !checkCond(it.when, answers)) continue;
+        const r = fitsAny(it.fits, project, answers);
+        if (r) return { note: r.note || it.note };
+        continue;
+      }
+      const { note, ...spec } = it;
+      if (projectMatches(project, spec)) return { note };
+    }
+    return null;
+  }
+
+  // 用户选了哪些客户端：选项写 client（一个客户端）或 clients_from（再看另一道题选了什么）；那道题没答时用 fallback
+  function selectedClients(spec, answers) {
+    const q = byId[spec.question];
+    const opts = q.options.filter((o) => selected(answers, spec.question).includes(o.id));
+    if (!opts.length) return spec.fallback || [];
+    return opts.flatMap((o) => (o.clients_from ? selectedClients({ question: o.clients_from, fallback: o.fallback }, answers) : [].concat(o.client || [])));
+  }
+
+  // 答卷里用到的全部客户端（看所有已选选项的 require_client），用来写“和宿主自带记忆的关系”
+  function answerClients(answers) {
+    const ids = new Set();
+    for (const q of Q) for (const o of q.options || []) {
+      if (!selected(answers, q.id).includes(o.id)) continue;
+      const rc = o.effect?.require_client;
+      if (rc) selectedClients(rc, answers).forEach((id) => ids.add(id));
+    }
+    return [...ids].map((id) => clients[id]).filter(Boolean);
+  }
 
   // 答卷预处理：去掉没显示的题；套用“选了某项就让别的选项失效”的规则
   function prepare(answers) {
@@ -150,6 +194,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
   // 一个作用对项目：{ ok, unknown: [字段], applicable }
   function applyEffect(effect, project, answers) {
     if (!effect || !Object.keys(effect).length) return { ok: true, unknown: [], applicable: true };
+    const notes = [];
     if (effect.when && !checkCond(effect.when, answers)) return { ok: true, unknown: [], applicable: false };
     if (effect.unless_project && projectMatches(project, effect.unless_project)) return { ok: true, unknown: [], applicable: true };
     if (effect.any_of) {
@@ -172,6 +217,18 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       if (fieldUnknown(project, r.field)) unknown.push(r.field);
       else if (!intersects(fieldValues(project, r.field), wanted)) return { ok: false, unknown, applicable: true, field: r.field };
     }
+    if (effect.require_client) {
+      // 用户选的客户端里，有一个能接上这个项目就行；所选客户端全都接不了外部记忆时，算作没有可用的作用（显示选项的 notice）
+      const defs = selectedClients(effect.require_client, answers).map((id) => clients[id]).filter(Boolean);
+      if (!defs.some((c) => (c.fits || []).length)) return { ok: false, unknown, applicable: true, none_applicable: true };
+      let hit = null;
+      for (const c of defs) {
+        const r = fitsAny(c.fits, project, answers);
+        if (r) { hit = { ...r, client: c }; break; }
+      }
+      if (!hit) return { ok: false, unknown, applicable: true, field: "mount" };
+      for (const n of [hit.note, hit.client.note]) if (n) notes.push(n);
+    }
     for (const [field, bad] of Object.entries(effect.exclude_any || {})) {
       if (intersects(fieldValues(project, field), bad)) return { ok: false, unknown, applicable: true, field };
     }
@@ -179,7 +236,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       const vals = fieldValues(project, field);
       if (vals.length && vals.every((v) => bad.includes(v))) return { ok: false, unknown, applicable: true, field };
     }
-    return { ok: true, unknown, applicable: true };
+    return { ok: true, unknown, applicable: true, notes };
   }
 
   // 一道硬条件题对项目：{ ok, unknown, notes }
@@ -192,6 +249,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       const r = applyEffect(rule, project, answers);
       if (!r.ok) return { ok: false, unknown, notes, why: rule.reason };
       unknown = unknown.concat(r.unknown);
+      if (r.notes) notes.push(...r.notes);
       if (r.applicable && rule.note && (!rule.note_if || projectMatches(project, rule.note_if)) && !(rule.note_unless && projectMatches(project, rule.note_unless))) notes.push(rule.note);
     }
     if (!sel.length || q.kind !== "hard") return { ok: true, unknown, notes };
@@ -244,7 +302,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     let lastNotice = null;
     for (const o of opts) {
       const r = applyEffect(o.effect, project, answers);
-      if (r.ok) return { ok: true, unknown: unknown.concat(r.unknown), notes };
+      if (r.ok) return { ok: true, unknown: unknown.concat(r.unknown), notes: notes.concat(r.notes || []) };
       if (r.none_applicable && o.notice) lastNotice = o.notice;
     }
     return { ok: false, unknown, notes, notice: lastNotice };
@@ -340,6 +398,23 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     return q.exclude_reason || `不符合“${q.short || q.text}”`;
   }
 
+  // 和宿主自带记忆的关系：用户用的客户端里有自带记忆的宿主（OpenClaw、Hermes 等），而项目正是接在这个宿主上的
+  function hostMemory(p, answers) {
+    const cfg = questionnaire.host_memory || {};
+    const out = [];
+    for (const c of answerClients(answers)) {
+      const host = c.memory_host;
+      if (!host || !fieldValues(p, "compatible_clients").includes(host)) continue;
+      const h = cfg.hosts?.[host] || {};
+      for (const v of fieldValues(p, "host_memory")) {
+        const [hh, rel] = v.split(":");
+        const t = hh === host && cfg.text?.[rel];
+        if (t) out.push(t.replaceAll("{host}", h.label || host).replaceAll("{memory}", h.memory || "自带的记忆"));
+      }
+    }
+    return [...new Set(out)];
+  }
+
   function present(item) {
     const p = item.project;
     const s = scoreProject(p, item.answers);
@@ -347,7 +422,8 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     s.score -= item.unknown.length * (questionnaire.result?.unknown_penalty ?? 0);
     const reasons = [];
     for (const r of s.reasons.sort((x, y) => y.points - x.points)) if (!reasons.includes(r.text)) reasons.push(r.text);
-    const cautions = [...s.cautions, ...item.notes, ...(p.inclusion?.flags || [])];
+    const hostMem = hostMemory(p, item.answers);
+    const cautions = [...s.cautions, ...hostMem, ...item.notes, ...(p.inclusion?.flags || [])];
     const diff = fieldValues(p, "difficulty")[0];
     if (diff) cautions.push(`上手门槛：${labels["difficulty:" + diff] || diff}`);
     const accounts = fieldValues(p, "accounts_needed").filter((v) => v !== "none");
@@ -364,6 +440,7 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
       lifecycle_complete: fieldValues(p, "lifecycle_complete")[0] === "complete",
       pairs_with: fieldValues(p, "pairs_with"),
       customization: fieldValues(p, "customization").filter((v) => v !== "not_mentioned").map((v) => labels[v] || v),
+      host_memory: hostMem,
     };
   }
 

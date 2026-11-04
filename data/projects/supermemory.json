@@ -466,6 +466,22 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：默认用官方在线服务"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:not_mentioned",
+        "hermes:supplements"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，Hermes 的 Supermemory memory provider；hermes：README 写明，Hermes 的 Supermemory memory provider"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

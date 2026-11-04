@@ -503,6 +503,18 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：空闲时整理记忆"
     },
+    "mount": {
+      "value": [
+        "standalone"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：独立应用"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

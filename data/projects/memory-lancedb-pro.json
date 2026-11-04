@@ -459,6 +459,20 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:replaces"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，要把 plugins.slots.memory 指到它；仍可用 memory-core 的做梦整理"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -219,7 +219,9 @@
         "spend_note",
         "usage_form",
         "token_inject",
-        "token_background"
+        "token_background",
+        "mount",
+        "host_memory"
       ],
       "properties": {
         "access": {
@@ -406,6 +408,14 @@
         "token_background": {
           "$ref": "#/$defs/normalizedField",
           "description": "后台另外调用大模型的频率：none 不另外调用（由聊天模型或用户写入）、scheduled 定时、per_message 每轮或每次写入、not_mentioned 未提及。核对值在 data/token_usage.json"
+        },
+        "mount": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "挂载方式（可多选）：记忆项目从哪里接进用户的工具，推荐时和问卷配置的客户端能力表 clients 对比。mcp MCP 服务、proxy_openai OpenAI 格式的转发服务（改接口地址接入）、proxy_anthropic Anthropic 格式的转发服务、host_plugin 宿主插件（宿主见 compatible_clients）、sdk 代码包、standalone 独立应用、cli 命令行工具、manual 教程或做法。多数由 access 推出，核对值在 data/mount.json"
+        },
+        "host_memory": {
+          "$ref": "#/$defs/normalizedField",
+          "description": "和宿主自带记忆的关系，值写成“宿主:关系”，宿主是 openclaw、hermes、astrbot；关系 replaces 占用宿主的记忆位置并替换自带记忆、replaces_optional 默认并行而装深度插件时替换、supplements 并行、imports 能读入原有记忆、not_mentioned 没写。README 写明的在 data/host_memory.json，其余按宿主机制推断"
         },
         "pairs_with": {
           "$ref": "#/$defs/normalizedField",

@@ -455,6 +455,22 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：支持 token_budget"
     },
+    "mount": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements",
+        "openclaw:imports",
+        "hermes:supplements"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，能导入、导出 OpenClaw 的 SOUL.md、MEMORY.md、USER.md；hermes：README 写明，能导入、导出 OpenClaw 的 SOUL.md、MEMORY.md、USER.md"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

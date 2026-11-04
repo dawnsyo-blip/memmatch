@@ -1,12 +1,12 @@
 // 小票原型和完整结果页共用：读答卷、跑推荐引擎。
-// 答卷读旧版答题页存的 memsite-quiz-v3；没有时用示例答卷
+// 答卷读旧版答题页存的 memsite-quiz-v4；没有时用示例答卷
 // （tests/personas.mjs 的 kelivo_vps，偏好题按 DEFAULTS 填，第 8 题多排了两项，好让改进建议有内容）。
 // 要用 npm run site 打开（http://localhost:5173/prototype/），直接双击 html 时浏览器不让读数据。
 import { createRuleEngine } from "../engine/index.js";
 
 export const SAMPLE = {
   answers: {
-    q2: ["deepseek"], q1: ["android", "server"], q3: ["mcp_client"], q4: ["single"], q5: ["server"],
+    q1: ["android", "vps"], q3: ["client"], q3client: ["kelivo"], q3where: ["phone"], q3api: ["cn"], q4: ["single"], q5: ["server"],
     q16: ["medium"], q17: ["api_key"],
     q6: ["native"], q7: ["companion"], q8: ["no_priority", "window_loss", "entry_hallucination"],
     q10: ["auto_review"], q11: ["any"], q13: ["emotional"], q14: ["few"], q15: ["unknown"],
@@ -26,7 +26,7 @@ export async function run() {
     json("../data/usage_form.json").catch(() => ({})),
   ]);
   let st = null;
-  try { st = JSON.parse(localStorage.getItem("memsite-quiz-v3")); } catch (e) {}
+  try { st = JSON.parse(localStorage.getItem("memsite-quiz-v4")); } catch (e) {}
   const sample = !st || !Object.keys(st.answers || {}).length;
   st = sample ? SAMPLE : { answers: {}, free: {}, ...st };
 

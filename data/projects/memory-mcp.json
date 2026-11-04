@@ -444,6 +444,19 @@
       "status": "auto",
       "basis": "由聊天模型或用户写入，没有另外的后台调用"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

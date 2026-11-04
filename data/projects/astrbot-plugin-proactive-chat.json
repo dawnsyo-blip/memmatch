@@ -443,6 +443,20 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：主动消息按时间触发，会调用聊天模型"
     },
+    "mount": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "astrbot:supplements"
+      ],
+      "status": "auto",
+      "basis": "astrbot：插件在自带记忆之外再加一层（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

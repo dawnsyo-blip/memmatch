@@ -83,7 +83,7 @@
 
 | 字段 | 含义 | 可选值（示例） |
 |---|---|---|
-| `access` | 怎么接到用户的助手上 | `mcp`（模型上下文协议，一种让 AI 应用调用外部工具的通用接口）、`gateway`（网关：挂在助手和模型之间的中转站）、`host_plugin`（某个宿主程序的插件）、`library`（代码库，要写代码调用）、`standalone_app`（独立应用） |
+| `access` | 怎么接到用户的助手上 | `mcp`（模型上下文协议，一种让 AI 应用调用外部工具的通用接口）、`proxy`（转发服务：挂在助手和模型之间的中转站，2026-11-04 由 `gateway` 改名，免得和 OpenClaw、Hermes 的消息网关混淆）、`host_plugin`（某个宿主程序的插件）、`library`（代码库，要写代码调用）、`standalone_app`（独立应用） |
 | `compatible_clients` | 能配合哪些助手或客户端 | 如 Claude 桌面版、Claude 网页／手机版、Claude Code、任意 OpenAI 兼容客户端、AstrBot、SillyTavern…… |
 | `runs_on` | 程序运行在哪里 | `own_computer`、`own_server`、`own_cloud_account`（用户自己的云账号，如 Cloudflare）、`phone`、`third_party_hosted`（别人的服务器） |
 | `os` | 支持的系统 | Windows / macOS / Linux / 安卓 / iOS |
@@ -187,7 +187,7 @@
       },
       {
         "label": "能自定义接口地址的第三方客户端",
-        "effect": { "require": { "access": ["gateway", "mcp"] } }
+        "effect": { "require": { "access": ["proxy", "mcp"] } }
       }
     ]
   }

@@ -136,7 +136,7 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway"
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：网关；网关"
@@ -373,7 +373,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "standard_interface：接入方式 gateway"
+      "basis": "standard_interface：接入方式 proxy"
     },
     "customization": {
       "value": [
@@ -489,6 +489,18 @@
       "value": "not_mentioned",
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：全量注入模式下记忆越多越费，可改用按需检索模式"
+    },
+    "mount": {
+      "value": [
+        "proxy_openai"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：转发服务，默认按 OpenAI 兼容接口"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [],

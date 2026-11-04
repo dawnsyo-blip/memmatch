@@ -90,8 +90,8 @@
   "normalized": {
     "access": {
       "value": [
-        "gateway",
-        "library"
+        "library",
+        "proxy"
       ],
       "status": "auto",
       "basis": "接入方式原文：网关（内置本地转发代理）；也可嵌入自建中转"
@@ -331,7 +331,7 @@
         "standard_interface"
       ],
       "status": "auto",
-      "basis": "designed_to_pair：README：“谁说了算？（v1.6） 有使用者反馈过这个现象： > 「配合 LMC5 的外置记忆库一起用，结果 rolling-memory 一开直接把它的记”；standard_interface：接入方式 gateway"
+      "basis": "designed_to_pair：README：“谁说了算？（v1.6） 有使用者反馈过这个现象： > 「配合 LMC5 的外置记忆库一起用，结果 rolling-memory 一开直接把它的记”；standard_interface：接入方式 proxy"
     },
     "customization": {
       "value": [
@@ -390,7 +390,7 @@
         "http_endpoint"
       ],
       "status": "auto",
-      "basis": "http_endpoint：网关可以放在 own_server"
+      "basis": "http_endpoint：转发服务可以放在 own_server"
     },
     "local_model": {
       "value": "not_mentioned",
@@ -450,6 +450,19 @@
       "value": "per_message",
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：摘要每轮全量带入，长度有上限；滑出窗口的消息分批调用大模型整理"
+    },
+    "mount": {
+      "value": [
+        "proxy_openai",
+        "sdk"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：转发服务，默认按 OpenAI 兼容接口；代码库，要写代码调用"
+    },
+    "host_memory": {
+      "value": [],
+      "status": "auto",
+      "basis": "不接自带记忆系统的宿主"
     },
     "pairs_with": {
       "value": [

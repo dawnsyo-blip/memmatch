@@ -434,6 +434,20 @@
       "status": "auto",
       "basis": "由聊天模型或用户写入，没有另外的后台调用"
     },
+    "mount": {
+      "value": [
+        "mcp"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:supplements"
+      ],
+      "status": "auto",
+      "basis": "openclaw：只接 MCP，和自带记忆并存（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

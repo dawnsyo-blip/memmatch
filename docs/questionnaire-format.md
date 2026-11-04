@@ -54,6 +54,7 @@
 | 选项的 `values` | 这个选项代表的字段值，供本题的 `union`／`allow` 合并或别的题的 `require_selected` 引用 |
 | 选项的 `disables` | 选了这项，就让别的题的某些选项失效，见下文 |
 | 选项的 `notice` | 这个选项一个项目都接不上时（比如官方 App 接不了外部记忆），给用户的提醒 |
+| 选项的 `client`、`clients_from` | 这个选项对应客户端能力表里的哪个客户端；`clients_from` 表示要再看另一道题选了什么（如“通过独立的 Agent 运行时”看第 2j 题），那道题没答时用选项的 `fallback`，见下文“客户端能力表” |
 
 ## 条件（`when`、`show_if`、`default_if` 里用）
 
@@ -64,11 +65,13 @@
 | `{"question": "q3", "selected_only_within": ["official", "mcp_client"]}` | 选了，而且只选了这些里面的 |
 | `{"question": "q3", "not_only_within": ["official", "app"]}` | 至少选了一项不在列表里的 |
 | `{"question": "q7", "rank_top": 2, "selected_any": ["companion"]}` | 排序题前 2 名里有 |
-| `{"all": [条件, …]}`、`{"any": [条件, …]}` | 同时满足／满足其一 |
+| `{"question": "q3", "count_at_least": 2}` | 至少选了几项 |
+| `{"question": "q3api", "answered": false}` | 没答（包括这道题没显示） |
+| `{"all": [条件, …]}`、`{"any": [条件, …]}`、`{"not": 条件}` | 同时满足／满足其一／不满足 |
 
 ## 硬条件的作用（`effect`、`rules`）
 
-字段名用项目 JSON 里 `normalized` 下的字段（如 `compatible_clients`、`runs_on`），另有三个虚拟字段：`category`（收录类别）、`id`、`single_entry`（只能装在单个宿主里又没有 MCP 或网关，值为 `yes`/`no`）。
+字段名用项目 JSON 里 `normalized` 下的字段（如 `compatible_clients`、`runs_on`），另有三个虚拟字段：`category`（收录类别）、`id`、`single_entry`（只能装在单个宿主里又没有 MCP 或转发服务，值为 `yes`/`no`）。
 
 | 写法 | 含义 |
 |---|---|
@@ -76,6 +79,7 @@
 | `"exclude_any": {字段: [值…]}` | 项目这个字段有任何一个值在列表里就排除 |
 | `"exclude_only": {字段: [值…]}` | 项目这个字段全部落在列表里才排除（有其它选择的保留） |
 | `"require_selected": {"question": "q3a", "field": "compatible_clients", "extra": [...], "fallback": [...]}` | 项目的字段要和另一题所选选项的 `values` 有交集；`extra` 总是允许，`fallback` 是那道题没答时用的值 |
+| `"require_client": {"question": "q3client", "fallback": ["kelivo"]}` | 那道题所选的客户端里，有一个能接上这个项目就保留；那道题没答时按 `fallback` 里的客户端算。所选客户端全都接不了外部记忆（`fits` 为空）时显示选项的 `notice` |
 | `"when": 条件` | 条件不成立时，这个作用不生效 |
 | `"unless_project": {字段: [值…]}` | 项目满足这些（每个字段都满足）时，这个作用不生效 |
 | `"any_of": [作用, …]` | 满足其中任意一个生效的作用即可；一个都不生效时视为不满足 |
@@ -122,6 +126,30 @@
 
 `set` 把这道题改成某个选项，`add` 给多选题加上某些选项。`"set": []` 把多选题清空，相当于这道题不限制（第 3 题的“不限定入口”就是这样写的）。
 
+## 客户端能力表 `clients`、`spec_sets`（2026-11-04）
+
+记忆项目能不能用，取决于用户的工具支持哪些挂载方式，以及用户实际的用法有没有保留这些挂载点。工具这一边写在问卷顶层的 `clients`，项目这一边是字段 `mount`（挂载方式）和 `compatible_clients`：
+
+```json
+"clients": {
+  "kelivo": {"label": "Kelivo", "fits": [
+    {"compatible_clients": ["kelivo"]},
+    "@phone_reach",
+    {"when": {"question": "q3where", "selected_only_within": ["computer"]}, "fits": ["@desktop"], "note": "电脑版 Kelivo 能否连只在本机运行的 MCP，需自行确认"}
+  ]},
+  "openclaw": {"label": "OpenClaw", "memory_host": "openclaw", "fits": [{"compatible_clients": ["openclaw"]}, {"mount": ["mcp", "proxy_openai"]}]}
+},
+"spec_sets": {"desktop": [{"mount": ["mcp", "proxy_openai"]}]}
+```
+
+| 键 | 含义 |
+|---|---|
+| `fits` | 能接哪些项目，满足任一条即可。每条可以是 `{字段: [值…]}`（同 `require`，可带 `note`）、`"@集合名"`（引用 `spec_sets` 里的一组）、或 `{"when": 条件, "fits": [...], "note": "…"}`（答卷满足条件时才算）。为空表示接不了外部记忆 |
+| `note` | 通过这个客户端保留下来的项目都带上这句提醒（如“需自行确认能否连接 MCP”） |
+| `memory_host` | 这个客户端是自带记忆的宿主（OpenClaw、Hermes、AstrBot），用来写和宿主记忆的关系，见下 |
+
+**和宿主自带记忆的关系 `host_memory`**（问卷顶层）：`hosts` 写各宿主的名字和它自带的记忆叫什么，`text` 是各种关系的说法模板（`{host}`、`{memory}` 会被替换）。用户用的客户端有 `memory_host`、项目又接在这个宿主上时，引擎按项目字段 `host_memory`（值如 `openclaw:replaces`）取模板，写进结果的 `host_memory` 和注意事项。
+
 ## 偏好题的加分（`score`）
 
 ```json
@@ -161,7 +189,7 @@
 
 | 键 | 含义 |
 |---|---|
-| `results` | 推荐，含理由、注意事项、需自行确认的地方、方便二改的地方。做法条目（笔记软件当记忆，`project_role` 为 `method`）也在这里一起排名，另带 `parts`：可选的笔记软件连接器；连接器本身不单独出现 |
+| `results` | 推荐，含理由、注意事项、需自行确认的地方、方便二改的地方、和宿主自带记忆的关系（`host_memory`，也已写进注意事项）。做法条目（笔记软件当记忆，`project_role` 为 `method`）也在这里一起排名，另带 `parts`：可选的笔记软件连接器；连接器本身不单独出现 |
 | `addons` | 补充部件 |
 | `guides` | 相关教程 |
 | `combos` | 组合方案，分三种：一个项目覆盖全流程；设计上就搭配使用的一对（字段 `pairs_with`）；记忆库＋补充部件 |

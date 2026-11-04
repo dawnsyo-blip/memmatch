@@ -441,6 +441,21 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：取决于您怎么组织页面"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "manual"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；教程或做法，照着搭"
+    },
+    "host_memory": {
+      "value": [
+        "hermes:supplements"
+      ],
+      "status": "auto",
+      "basis": "hermes：外部记忆和自带的 MEMORY.md、USER.md 同时生效（推断）"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

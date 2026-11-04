@@ -481,6 +481,22 @@
       "status": "verified",
       "basis": "逐条核对，见 data/token_usage.json：只取 top-K，默认不调用大模型"
     },
+    "mount": {
+      "value": [
+        "mcp",
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：接入方式含 MCP；宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:replaces_optional",
+        "hermes:supplements"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，接 MCP 时和 OpenClaw 自带记忆并存，装 integrations/openclaw 插件会占用记忆插槽、自动从 memory-core 切过去；Hermes 是 memory provider，会镜像 MEMORY.md；hermes：README 写明，接 MCP 时和 OpenClaw 自带记忆并存，装 integrations/openclaw 插件会占用记忆插槽、自动从 memory-core 切过去；Hermes 是 memory provider，会镜像 MEMORY.md"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",

@@ -452,6 +452,21 @@
       "status": "auto",
       "basis": "没有核对"
     },
+    "mount": {
+      "value": [
+        "host_plugin"
+      ],
+      "status": "auto",
+      "basis": "按接入方式推出，未核对：宿主插件，宿主见能配合的入口"
+    },
+    "host_memory": {
+      "value": [
+        "openclaw:replaces",
+        "hermes:supplements"
+      ],
+      "status": "verified",
+      "basis": "openclaw：README 写明，OpenClaw 插件 kind 为 memory；Hermes 是 memory provider 插件；hermes：README 写明，OpenClaw 插件 kind 为 memory；Hermes 是 memory provider 插件"
+    },
     "pairs_with": {
       "value": [],
       "status": "auto",
