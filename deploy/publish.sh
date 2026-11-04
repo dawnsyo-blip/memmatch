@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # 打包网站并上传到 VPS。在仓库根目录的 Git Bash 里运行：
-#   MEMMATCH_HOST=用户名@服务器IP bash deploy/publish.sh
+#   MEMMATCH_HOST=memmatch bash deploy/publish.sh
+# memmatch 是 ~/.ssh/config 里给 VPS 起的短名字（用密钥 ~/.ssh/memmatch 登录 root@<VPS 的 IP>）
 # 做的事：npm run build 生成 dist/ → 打成一个压缩包传上去 → 在服务器上解压到新目录，再一次性替换 /var/www/memmatch，
 # 替换的那一刻之前访客看到的都是旧版，不会出现一半新一半旧。
 set -euo pipefail
-HOST="${MEMMATCH_HOST:?请先设置 MEMMATCH_HOST，例如 MEMMATCH_HOST=root@<VPS 的 IP>}"
+HOST="${MEMMATCH_HOST:?请先设置 MEMMATCH_HOST，例如 MEMMATCH_HOST=memmatch}"
 SITE=/var/www/memmatch
 
 cd "$(dirname "$0")/.."

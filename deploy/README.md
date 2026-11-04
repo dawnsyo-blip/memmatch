@@ -25,7 +25,9 @@ DNS 生效一般要几分钟。在自己电脑上运行 `nslookup memmatch.fyi`�
 
 ### 2. 在 VPS 上安装 Caddy
 
-用 SSH 登录 VPS（Windows 上可以在 PowerShell 里运行 `ssh root@<VPS 的 IP>`），然后依次运行（来自 Caddy 官方安装说明）：
+**登录 VPS**：这台 VPS 只认密钥登录，不接受密码。密钥在你电脑的 `C:\Users\你的用户名\.ssh\memmatch`（2026-10-15 生成，设了口令；`memmatch.pub` 是放在服务器上的公钥）。`C:\Users\你的用户名\.ssh\config` 里给它起了短名字 `memmatch`，所以在 PowerShell 或 Git Bash 里运行 `ssh memmatch`，输密钥的口令，就能登录。口令不是 VPS 的 root 密码，root 密码只在狗云面板的 VNC 里登录时用。
+
+登录以后依次运行（来自 Caddy 官方安装说明）：
 
 ```bash
 sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
@@ -44,7 +46,7 @@ sudo apt install -y caddy
 把仓库里的 `deploy/Caddyfile` 传到 VPS。在自己电脑的仓库目录里运行：
 
 ```bash
-scp deploy/Caddyfile root@<VPS 的 IP>:/etc/caddy/Caddyfile
+scp deploy/Caddyfile memmatch:/etc/caddy/Caddyfile
 ```
 
 再在 VPS 上运行：
@@ -61,19 +63,19 @@ Caddy 会自动为 memmatch.fyi 申请 HTTPS 证书，并在到期前自动续�
 在自己电脑的仓库目录里，用 Git Bash 运行：
 
 ```bash
-MEMMATCH_HOST=root@<VPS 的 IP> bash deploy/publish.sh
+MEMMATCH_HOST=memmatch bash deploy/publish.sh
 ```
 
 它会先打包（`npm run build`，生成 `dist/`），再上传、替换服务器上的网站。完成后打开 https://memmatch.fyi/ 看看。
 
-每次上传都要输一次 VPS 的密码。嫌麻烦的话，可以设置 SSH 密钥免密登录，要的话让 Claude 帮你设。
+每次上传要输两次密钥的口令，上传一次、替换一次。嫌麻烦的话，先在 Git Bash 里运行 `eval $(ssh-agent) && ssh-add ~/.ssh/memmatch`，输一次口令，这个窗口里之后的上传就不用再输。
 
 ## 以后更新网站
 
 改了问卷、项目数据或页面以后，运行同一条命令：
 
 ```bash
-MEMMATCH_HOST=root@<VPS 的 IP> bash deploy/publish.sh
+MEMMATCH_HOST=memmatch bash deploy/publish.sh
 ```
 
 上一版会留在 VPS 的 `/var/www/memmatch.old`。新版有问题时，在 VPS 上运行下面这条就能退回上一版：

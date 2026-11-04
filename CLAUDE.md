@@ -215,7 +215,8 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
   - 右上角题数的颜色用 #aaa，对比度只有 2.2，负责人 2026-11-02 定保持这个颜色。
 
 上线（2026-11-04）：
-- 域名 memmatch.fyi（Cloudflare 购买），部署在负责人的 VPS 上，只有静态文件，用 Caddy 提供。步骤在 `deploy/README.md`，上传用 `MEMMATCH_HOST=用户@IP bash deploy/publish.sh`
+- VPS：狗云香港，Ubuntu 24.04，IP <VPS 的 IP>，只认密钥登录。密钥在负责人电脑的 `~/.ssh/memmatch`（设了口令，2026-10-15 生成），`~/.ssh/config` 里的短名字是 `memmatch`，所以 `ssh memmatch` 就能登录。Cloudflare 两条 A 记录都是“仅 DNS”
+- 域名 memmatch.fyi（Cloudflare 购买），部署在负责人的 VPS 上，只有静态文件，用 Caddy 提供。步骤在 `deploy/README.md`，上传用 `MEMMATCH_HOST=memmatch bash deploy/publish.sh`
 - `npm run build`（`scripts/build_dist.mjs`）把小票原型打包到 `dist/`：receipt.html 改名 index.html，引擎、`site/assets/result-text.js`、问卷配置、`usage_form.json`、项目数据收进 dist，路径改写成 dist 里的位置，开发用的提示（“npm run site”）换成访客看得懂的话；最后检查不能剩下指向仓库其它目录的路径。原型里新加读别处文件的路径，要在脚本的 FILES 和 REWRITE 里补上。`npm run preview` 在 http://localhost:5174/ 预览打包结果
 - 网页图标 `prototype/favicon.svg`（小票剪影，深色标签栏自动换成纸色）和 `apple-touch-icon.png`
 - 不保留示例答卷（负责人 2026-11-04 定）：没答过题打开结果页时转回首页；`?demo` 的演示答卷照留，开发时看排除原因用
