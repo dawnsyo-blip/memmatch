@@ -453,15 +453,20 @@ async function start() {
   busy = true;
   await FONTS;
   NO = serialNo(true);
-  $('#intro').remove();
-  head.innerHTML = `
-    ${titleHTML(TITLE, 'ink')}
-    <div class="ink gap">${L(rule('=', W_S), 'small')}</div>
-    <div class="ink">${L(center('找到适合你的 Agent 记忆方案', W_S), 'small')}${L(center(`No.${NO}`, W_S), 'small')}</div>
-    <div class="ink">${L(center(STAMP.full, W_S), 'small')}</div>
-    <div class="ink">${L(rule('-', W_S), 'small')}</div>`;
-  faint(head);
-  await emit([...head.querySelectorAll('.ink')], 200);
+  // 首页整段淡出、纸收回到顶上的条形码下面（和答完一题压成条目同一个收回动作），然后直接出第一部分，
+  // 不再打印标题和店头（负责人 2026-11-03 定）
+  const intro = $('#intro');
+  intro.style.display = 'none';
+  const target = natural();
+  intro.style.display = '';
+  if (!still()) {
+    intro.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 160 / speed(), easing: EASE_OUT, fill: 'forwards' });
+    await wait(160);
+    await pullTo(Math.min(target, H));
+  }
+  intro.remove();
+  setH(natural());
+  setHidden(0);
   const { done, next } = flow();
   if (done.length) {
     const lis = done.map(entry);
