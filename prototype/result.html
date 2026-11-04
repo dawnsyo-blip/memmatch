@@ -40,6 +40,8 @@
 /* 和首页菜单一样：每行上下 0.125 行，行与行之间再空 0.25 行，反白的箭头不会贴在一起 */
 .act { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .125); }
 .act + .act { margin-top: calc(var(--lh) * .25); }
+/* 排除原因每条下面的“去第 N 题修改”：靠右，紧贴上一行 */
+.edit { text-align: right; }
 .act:hover .tx, .act:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .chip { white-space: pre; transition: transform 160ms var(--ease-out); }
 .chip:active { transform: scale(0.97); }
@@ -355,14 +357,20 @@ const alone = r.narrowed_by.filter((x) => x.only > 0);
 const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
 // 负责人 2026-11-04 定的结构：前后矛盾 → 主要过滤选项（“- 选项 …… 排除 N 个”）→ 可放宽条件（“条件 …… 增加 N 个”），
 // 三个小标题都是二级标题，下面都用正文；不再列“提醒”
+// 每条后面带“去第 N 题修改”，点了回答题页的那一道题（receipt.html?edit=题目 id），小字、靠右（负责人 2026-11-04 要）
+const editLinks = (...ids) => {
+  const qs = [...new Set(ids.flatMap((id) => String(id || "").split("+")))].map((id) => byQ[id]).filter(Boolean)
+    .sort((a, b) => parseFloat(numOf(a)) - parseFloat(numOf(b)));
+  return qs.length ? `<p class="p small edit">${qs.map((q) => `<a class="tbtn u" href="receipt.html?edit=${esc(q.id)}">[去第 ${esc(numOf(q))} 题修改]</a>`).join(" ")}</p>` : "";
+};
 // 选项名太短、单看不知道说的什么（如“否”）时，前面加上题目简称
 const filterLabel = (x) => !x.selected.length ? `第 ${x.number} 题“${x.short}”`
   : x.selected.every((t) => t.length <= 2) ? `${x.short}：${x.selected.join("、")}` : x.selected.join("、");
 let why = "";
-if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
+if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => `<div>${hang(2, `- ${esc(c.message)}`)}${editLinks(c.by_question, c.question)}</div>`).join(""));
 if (narrow.length) why += grp("主要过滤选项", narrow.map((x) =>
-  dotsPairHTML(filterLabel(x), `排除 ${alone.length ? x.only : x.total} 个`, W, "- ")).join(""));
-if (r.relax.length) why += grp("可放宽条件", r.relax.map((x) => dotsPairHTML(x.label, `增加 ${x.count} 个`, W)).join(""));
+  `<div>${dotsPairHTML(filterLabel(x), `排除 ${alone.length ? x.only : x.total} 个`, W, "- ")}${editLinks(x.question)}</div>`).join(""));
+if (r.relax.length) why += grp("可放宽条件", r.relax.map((x) => `<div>${dotsPairHTML(x.label, `增加 ${x.count} 个`, W)}${editLinks(x.question)}</div>`).join(""));
 if (why) html += section("排除原因", `<div class="stack">${why}</div>`, false);
 
 /* ---------- 强化补丁 ---------- */

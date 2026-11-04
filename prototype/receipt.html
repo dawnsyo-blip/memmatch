@@ -445,7 +445,9 @@ $('#menu').innerHTML = L(titledRule('请选择', '=', W_S), 'small') + `<div cla
   `</div>` + L(rule('=', W_S), 'small') +
   (cfg ? '' : '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
 const startBtn = $('#startBtn');
-startBtn.addEventListener('click', start);
+startBtn.addEventListener('click', () => start());
+const EDIT = new URLSearchParams(location.search).get('edit');
+if (EDIT && cfg) start(EDIT);
 $('#resetBtn')?.addEventListener('click', () => {
   if (busy || !confirm('清空已经填的答案，从第 1 题重新开始？')) return;
   state = { answers: {}, free: {}, seen: {} };
@@ -455,7 +457,9 @@ $('#resetBtn')?.addEventListener('click', () => {
 setH(natural());
 FONTS.then(() => { if (!head.childElementCount) setH(natural()); });
 
-async function start() {
+// edit：要直接回到的题目 id（结果页“去第 N 题修改”带来的 ?edit=q16）。这道题答过、现在也显示时，
+// 只打出它前面的已答条目，然后停在这道题；否则照常接着答
+async function start(edit) {
   if (busy) return;
   busy = true;
   await FONTS;
@@ -475,12 +479,15 @@ async function start() {
   setH(natural());
   setHidden(0);
   const { done, next } = flow();
-  if (done.length) {
-    const lis = done.map(entry);
+  const at = typeof edit === 'string' ? done.indexOf(byId[edit]) : -1;
+  const before = at >= 0 ? done.slice(0, at) : done;
+  if (before.length) {
+    const lis = before.map(entry);
     log.append(...lis);
     await emit(lis, 120);
   }
-  if (next) await showQuestion(next);
+  if (at >= 0) await showQuestion(done[at]);
+  else if (next) await showQuestion(next);
   else await showResult();
   busy = false;
 }

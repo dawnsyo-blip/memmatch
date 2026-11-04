@@ -14,6 +14,12 @@ export const SAMPLE = {
   free: {},
 };
 
+// 演示答卷：result.html?demo 用它。会触发前后矛盾、主要过滤选项和可放宽条件，用来看“排除原因”的完整样子
+export const DEMO = {
+  answers: {"q1": ["linux", "iphone"], "q3": ["client", "web", "bot"], "q3web": ["glm"], "q3app": ["deepseek"], "q3desk": ["gemini"], "q3remote": ["kimi_cli", "claude_code", "hermes"], "q3client": ["lobechat", "nextchat", "open_webui"], "q3where": ["computer"], "q3mcp": ["yes"], "q3cli": ["kimi_cli", "deepseek_harness"], "q3bot": ["unknown", "runtime", "platform"], "q3runtime": ["openclaw", "cow", "hermes"], "q3platform": ["dify", "coze"], "q3api": ["relay", "google"], "q4": ["single"], "q5": ["computer", "server", "hosted"], "q7": ["other", "hobby"], "q6": ["open_source"], "q8": ["stereotype", "no_priority"], "q8n": ["you_me", "overwrite", "fabrication"], "q9": ["video", "audio", "image"], "q10": ["auto"], "q11": ["any"], "q12m": ["active"], "q13": ["yes"], "q14": ["fast"], "q15p": ["no"], "q15": ["unknown"], "q16": ["low"], "q17": ["github", "vendor"], "q18t": ["thrifty"], "q19": ["zh"], "q20": ["must"]},
+  free: {},
+};
+
 const json = (path) => fetch(new URL(path, import.meta.url)).then((r) => {
   if (!r.ok) throw new Error(`${path}: ${r.status}`);
   return r.json();
@@ -26,9 +32,10 @@ export async function run() {
     json("../data/usage_form.json").catch(() => ({})),
   ]);
   let st = null;
-  try { st = JSON.parse(localStorage.getItem("memsite-quiz-v4")); } catch (e) {}
+  const demo = new URLSearchParams(location.search).has("demo");
+  try { st = demo ? null : JSON.parse(localStorage.getItem("memsite-quiz-v4")); } catch (e) {}
   const sample = !st || !Object.keys(st.answers || {}).length;
-  st = sample ? SAMPLE : { answers: {}, free: {}, ...st };
+  st = demo ? DEMO : sample ? SAMPLE : { answers: {}, free: {}, ...st };
 
   const byQ = Object.fromEntries(cfg.questions.map((q) => [q.id, q]));
   const answers = Object.fromEntries(Object.entries(st.answers).map(([id, v]) => [id, byQ[id]?.type === "single" ? v[0] : v]));
