@@ -205,9 +205,14 @@ if (typeof document !== "undefined") {
     e.preventDefault();
     if (d.dataset.moving) return;
     d.dataset.moving = "1";
-    const closing = d.open, head = sum.offsetHeight;
-    if (!closing) d.open = true;
+    // 收起、展开两种状态的高度都直接量（同一帧里切换 open，不会画出来）：details 自己可能带内边距
+    // （如页脚的“您的答卷”），只量标题行会让终点矮一截，最后一帧把标题裁掉
+    const closing = d.open;
+    d.open = true;
     const full = d.offsetHeight;
+    d.open = false;
+    const head = d.offsetHeight;
+    d.open = true;
     d.style.overflow = "hidden";
     const anim = d.animate(closing ? [{ height: `${full}px` }, { height: `${head}px` }] : [{ height: `${head}px` }, { height: `${full}px` }],
       { duration: dur(full - head), easing: EASE, fill: "forwards" });
