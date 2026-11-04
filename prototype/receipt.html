@@ -431,11 +431,12 @@ function titledRule(t, c = '=', w = W) {
   return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
 }
 $('#store').innerHTML = L(center('找到适合你的 Agent 记忆方案', W_S), 'small') + L(center(`No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
-$('#menu').innerHTML = L(titledRule('请选择')) + `<div class="menu-list">` +
+// “请选择”和上下两条分隔线用店头那一级小字（全页只用三种字号：标题、正文、小字）
+$('#menu').innerHTML = L(titledRule('请选择', '=', W_S), 'small') + `<div class="menu-list">` +
   menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '约 20 题   5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
   (resumed ? '<p id="resume"><button class="tbtn" id="resetBtn">[重新开始]</button></p>' : '') +
   menuItem('a', 'href="catalog.html?from=home"', 2, '浏览收录项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
-  `</div>` + L(rule('=')) +
+  `</div>` + L(rule('=', W_S), 'small') +
   (cfg ? '' : '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
 const startBtn = $('#startBtn');
 startBtn.addEventListener('click', start);
