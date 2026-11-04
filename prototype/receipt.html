@@ -429,9 +429,9 @@ const menuLine = (n, name, action) => {
   return `<span class="l">${left}<b class="tx">${esc(name)}</b> <span class="dots">${dots}</span> <b class="inv"> ${esc(action)} </b></span>`;
 };
 function menuItem(tag, attrs, n, name, note, action) {
-  return `<${tag} class="menu-item" ${attrs}>${menuLine(n, name, action)}<span class="l small menu-note">- ${esc(note)}</span></${tag}>`;
+  return `<${tag} class="menu-item" ${attrs}>${menuLine(n, name, action)}${note ? `<span class="l small menu-note">- ${esc(note)}</span>` : ''}</${tag}>`;
 }
-// 答到一半回到首页：第 1 项的动作是“继续答题”，下面一行靠右再加一个同样反白的“重新开始”，不写“约 20 题”（负责人 2026-11-03 定）
+// 答到一半回到首页：第 1 项的动作是“继续答题”，下面一行靠右再加一个同样反白的“重新开始”，两项都不写说明（负责人 2026-11-03 定）
 const resumeItem = () =>
   `<div class="menu-item two"><button type="button" class="menu-row" id="startBtn">${menuLine(1, '答题匹配', '继续答题')}</button>` +
   `<div class="menu-sub"><button type="button" id="resetBtn"><b class="inv"> 重新开始 </b></button></div></div>`;
@@ -449,7 +449,7 @@ $('#menu').innerHTML = L(titledRule('请选择', '=', W_S), 'small') + `<div cla
   (resumed
     ? resumeItem()
     : menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '约 20 题   5 分钟' : '读不到问卷', '开始')) +
-  menuItem('a', 'href="catalog.html?from=home"', 2, '浏览收录项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
+  menuItem('a', 'href="catalog.html?from=home"', 2, '浏览收录项目', resumed ? '' : projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
   `</div>` + L(rule('=', W_S), 'small') +
   (cfg ? '' : '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
 const startBtn = $('#startBtn');
