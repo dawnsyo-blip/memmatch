@@ -623,8 +623,8 @@
       "options": [
         {"id": "native", "label": "官端或其它客户端自带的记忆功能", "help": "比如 ChatGPT 的记忆，或 Kelivo 自带的记忆功能"},
         {"id": "notes", "label": "连接 Obsidian、Notion 等笔记类软件"},
-        {"id": "open_source", "label": "开源的记忆项目", "help": "请填写您所用的项目，比如各类记忆 MCP、酒馆的记忆扩展", "free_text": true},
-        {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "free_text": true, "exclusive": true, "help": "请填写您所知道的记忆项目"},
+        {"id": "open_source", "label": "开源的记忆项目", "help": "请填写您所用的项目", "free_text": true},
+        {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "free_text": true, "exclusive": true},
         {"id": "none", "label": "没用过，也不太了解", "exclusive": true}
       ],
       "rules": [
@@ -952,7 +952,7 @@
         {
           "id": "background",
           "label": "交给其它 LLM 记录",
-          "help": "选择便宜的模型可以节省 token；\n后台记录，不打断聊天；\n需要把对话内容发给该 LLM；\n该 LLM 看不到完整上下文，未必能够准确判断重要内容",
+          "help": "选择便宜的模型可以节省 token；\n后台记录，不打断聊天；\n该 LLM 看不到完整上下文，未必能够准确判断重要内容",
           "effect": {
             "score": [
               {"if": {"memory_writer": ["background"]}, "points": 1.5, "reason": "后台整理，不打断聊天"},
@@ -1019,7 +1019,7 @@
       "type": "single",
       "short": "淡忘",
       "text": "不太重要的信息，应该慢慢淡下去吗？",
-      "help": "1. 记忆太多会降低召回和注入上下文的速度与质量；\n2. 什么是“不太重要的信息”？在大多数记忆框架下，“提及频率低”与“时间久远”会被默认为不重要的信息；\n3. “淡下去”还能找回吗？“淡下去”在大多数项目中不等于删除，只是降低优先级，需要时还能找回。",
+      "help": "1. 记忆太多会降低召回和注入上下文的速度与质量；\n2. 什么是“不太重要的信息”？：在大多数记忆框架下，“提及频率低”与“时间久远”会被默认为不重要的信息；\n3. “淡下去”还能找回吗？：“淡下去”在大多数项目中不等于删除，只是降低优先级，需要时还能找回。",
       "options": [
         {
           "id": "yes",
