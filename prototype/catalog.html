@@ -19,7 +19,7 @@
 .back { margin-top: calc(var(--lh) * .5); text-align: center; }
 .meta + .sec { margin-top: var(--lh); }
 /* 项目之间空一行；名字和标签紧挨着，介绍和它们隔 0.25 行 */
-.item + .item { margin-top: var(--lh); }
+/* 项目之间隔一条单线虚线（负责人 2026-11-04 要求），上下的空由 .sep 给 */
 .item .intro { margin-top: calc(var(--lh) * .25); }
 /* 名字后面的作者、旧名不加粗 */
 .item .note { font-weight: 400; font-size: var(--fs-s); }
@@ -50,7 +50,7 @@ footer .bar { margin-top: calc(var(--lh) * .5); }
 import { splitName } from "../site/assets/result-text.js";
 import {
   W_S, FONTS, cols, esc, rule, center, L, faint, barcode, stamp,
-  OUT, P, S, section, formTagsOf, tagsText, titleHTML,
+  OUT, P, S, section, sep, formTagsOf, tagsText, titleHTML,
 } from "./thermal.js";
 
 const sheet = document.getElementById("sheet");
@@ -115,8 +115,8 @@ html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">
   L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center(now.full, W_S), "small") + `</div>` +
   // 页面很长，顶部也放一个返回结果页的入口（底部还有一个）
   `<p class="back"><a class="tbtn" href="${BACK.href}">[← ${BACK.text}]</a></p></div>`;
-for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(""));
-if (other.length) html += section("其它", other.sort(byName).map(item).join(""));
+for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()));
+if (other.length) html += section("其它", other.sort(byName).map(item).join(sep()));
 
 html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">← ${BACK.text}</a></footer>`;
 sheet.innerHTML = html;
