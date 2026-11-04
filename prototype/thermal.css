@@ -170,7 +170,7 @@ button, a { cursor: pointer; }
 .b, b { font-weight: 700; }
 /* 点线：更纱的句点是个方形大点，看着像加粗，所以缩到 0.6 倍，用字距补回每格的宽度（0.5 倍正文字号），
    网格不乱；抬到文字中间高度（句点本来落在基线上），并在格子里居中 */
-.dots { font-size: .6em; letter-spacing: calc(1em / 3); position: relative; top: -.5em; left: calc(1em / 6); }
+.dots { font-size: .6em; letter-spacing: calc(1em / 3); position: relative; top: -.5em; left: calc(1em / 6);
 .u, .link { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .inv { background: var(--ink); color: var(--paper); }
 .gap { margin-top: var(--lh); }
