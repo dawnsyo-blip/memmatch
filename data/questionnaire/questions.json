@@ -65,7 +65,7 @@
     },
     {"label": "第二部分", "title": "使用习惯", "questions": ["q7", "q6", "q8", "q8n"]},
     {"label": "第三部分", "title": "记忆运作过程", "questions": ["q9", "q10", "q11", "q12m", "q13", "q14"]},
-    {"label": "第四部分", "title": "环境与预算", "questions": ["q15p", "q15", "q16", "q17", "q18t", "q19", "q20"]}
+    {"label": "第四部分", "title": "环境与预算", "questions": ["q15p", "q15", "q16", "q17d", "q18c", "q18t", "q19", "q20"]}
   ],
   "questions": [
     {
@@ -1093,7 +1093,7 @@
       "type": "single",
       "short": "系统提示词",
       "text": "您使用的工具是否支持自定义系统提示词？",
-      "help": "比如设置里的“自定义指令”“系统提示词”“角色设定”。",
+      "help": "比如设置里的“自定义指令”。",
       "show_if": {
         "any": [
           {"question": "q3", "selected_any": ["other"]},
@@ -1117,9 +1117,9 @@
       "type": "single",
       "short": "上下文工程",
       "text": "您目前的交互中有自带或者匹配的上下文工程吗？",
-      "help": "滑动窗口、压缩或摘要、换窗召回这类功能都属于上下文工程。",
+      "help": "比如滑动窗口、压缩或摘要、换窗召回这类功能。",
       "show_if": {"question": "q3", "not_only_within": ["web", "app"]},
-      "options": [{"id": "yes", "label": "有", "help": "比如 Kelivo 的自动摘要与换窗"}, {"id": "no", "label": "没有，聊久了前面的就丢了"}, {"id": "unknown", "label": "不清楚"}],
+      "options": [{"id": "yes", "label": "有"}, {"id": "no", "label": "没有"}, {"id": "unknown", "label": "不清楚"}],
       "number": "15"
     },
     {
@@ -1127,79 +1127,118 @@
       "kind": "hard",
       "type": "single",
       "short": "安装门槛",
-      "text": "安装和设置阶段需要投入的精力，您能接受到什么程度？",
+      "text": "安装和设置阶段需要投入的精力，您能最多能接受到什么程度？",
       "exclude_reason": "安装门槛超出您能接受的程度",
       "options": [
         {
           "id": "low",
-          "label": "想下载安装包、点几下就能用",
+          "label": "只接受有安装包或应用商店能装的",
           "effect": {"require": {"difficulty": ["low"]}, "exclude_any": {"category": ["需写代码（开发者向）", "教程与搭建指南"]}}
         },
-        {
-          "id": "medium",
-          "label": "能照着教程敲几条命令、填一些设置",
-          "effect": {"require": {"difficulty": ["low", "medium"]}, "exclude_any": {"category": ["需写代码（开发者向）"]}}
-        },
-        {"id": "high", "label": "会用 Docker、改配置文件，或者能用 Agent 写点代码", "effect": {}}
+        {"id": "medium", "label": "可以打开终端、照教程敲命令和改配置", "effect": {"exclude_any": {"category": ["需写代码（开发者向）"]}}},
+        {"id": "high", "label": "可以自己写代码或让 AI 帮我写代码来对接", "effect": {}}
       ],
-      "relax": [{"label": "能照着教程敲几条命令", "set": "medium"}, {"label": "会用 Docker、改配置，或能用 Agent 写点代码", "set": "high"}],
+      "relax": [{"label": "可以打开终端、照教程敲命令和改配置", "set": "medium"}, {"label": "可以自己写代码或让 AI 帮忙写代码来对接", "set": "high"}],
       "number": "16"
     },
     {
-      "id": "q17",
+      "id": "q17d",
+      "number": "17",
       "kind": "hard",
       "type": "multi",
-      "short": "账号",
-      "text": "下面这些账号或付费服务，您已有或者愿意准备哪些？",
-      "combine": "allow",
-      "exclude_reason": "需要您没勾选的账号",
-      "constraint": {
-        "field": "accounts_needed",
-        "always_allowed": ["none"],
-        "extra_allow": [
-          {"when": {"question": "q5", "selected_any": ["cloud_free"]}, "allow": ["cloudflare", "render"]},
-          {"when": {"question": "q3", "selected_any": ["bot"]}, "allow": ["telegram"]},
-          {"when": {"question": "q3api", "selected_only_within": ["local"]}, "when_project": {"local_model": ["yes"]}, "allow": ["model_api_key"]}
-        ],
-        "hosting_only": [
-          {
-            "value": "vendor_account",
-            "when_project": {"data_passes_through": ["local_only"], "runs_on": ["third_party_hosted"]},
-            "note": "按自己部署的方式用，不需要项目方账号"
-          }
-        ]
-      },
+      "short": "对话存在哪里",
+      "text": "您能接受对话内容存在什么地方？",
+      "exclude_reason": "对话内容存放的地方不符合您的选择",
       "options": [
-        {"id": "github", "label": "GitHub 账号", "help": "免费，部分项目用它同步或备份记忆", "values": {"accounts_needed": ["github"]}},
-        {"id": "vendor", "label": "记忆库项目方自己的账号", "help": "有免费档，但对话会存到第三方服务器", "values": {"accounts_needed": ["vendor_account"]}},
-        {"id": "api_key", "label": "LLM API Key，按用量付费", "help": "在整理和检索阶段调用，每月几元到几十元不等", "values": {"accounts_needed": ["model_api_key"]}},
         {
-          "id": "subscription",
-          "label": "LLM 订阅套餐",
-          "values": {"accounts_needed": ["claude_subscription"]},
-          "values_when": {
-            "any": [
-              {"question": "q3web", "selected_any": ["claude"]},
-              {"question": "q3app", "selected_any": ["claude"]},
-              {"question": "q3desk", "selected_any": ["claude"]},
-              {"question": "q3remote", "selected_any": ["claude_code"]},
-              {"question": "q3cli", "selected_any": ["claude_code"]},
-              {"question": "q3api", "selected_any": ["anthropic"]}
+          "id": "computer",
+          "label": "只留在我自己的电脑上",
+          "effect": {
+            "any_of": [{"require": {"runs_on": ["own_computer", "phone"], "data_passes_through": ["local_only"]}}, {"require": {"project_role": ["method"]}}]
+          }
+        },
+        {
+          "id": "own_cloud",
+          "label": "可以存在我自己的云账号/服务器里",
+          "help": "如 Cloudflare、租用 VPS",
+          "effect": {
+            "any_of": [
+              {"require": {"runs_on": ["own_server", "own_cloud_account"]}},
+              {"require": {"data_passes_through": ["own_cloud"]}},
+              {"require": {"project_role": ["method"]}}
             ]
           }
         },
-        {"id": "none", "label": "都不想，只用免费、不用注册的", "exclusive": true}
+        {
+          "id": "third_party",
+          "label": "项目方的第三方服务器",
+          "help": "可能涉及隐私问题",
+          "effect": {"any_of": [{"require": {"data_passes_through": ["third_party"]}}, {"require": {"project_role": ["method"]}}]}
+        }
       ],
-      "relax": [
-        {"label": "准备一个 LLM API Key", "add": ["api_key"]},
-        {"label": "注册一个 GitHub 账号（免费）", "add": ["github"]},
-        {"label": "注册记忆库项目方的账号", "add": ["vendor"]}
+      "rules": [
+        {
+          "when": {"question": "q17d", "selected_none": ["third_party"]},
+          "unless_project": {"project_role": ["method"]},
+          "exclude_only": {"data_passes_through": ["third_party"]},
+          "reason": "对话内容只能存在项目方的服务器上"
+        }
       ],
-      "number": "17"
+      "relax": [{"label": "可以存在自己的云账号或服务器里", "add": ["own_cloud"]}, {"label": "可以存在项目方的服务器上", "add": ["third_party"]}]
+    },
+    {
+      "id": "q18c",
+      "number": "18",
+      "kind": "hard",
+      "type": "single",
+      "short": "额外费用",
+      "text": "对于记忆方案，您愿意额外承担多少费用？",
+      "combine": "allow",
+      "exclude_reason": "要另付您不接受的费用",
+      "constraint": {
+        "field": "spend",
+        "always_allowed": ["none"],
+        "extra_allow": [
+          {"when": {"question": "q18c", "answered": true}, "when_project": {"local_model": ["yes"]}, "allow": ["model_api"]},
+          {
+            "when": {
+              "any": [
+                {"question": "q3web", "selected_any": ["claude"]},
+                {"question": "q3app", "selected_any": ["claude"]},
+                {"question": "q3desk", "selected_any": ["claude"]},
+                {"question": "q3remote", "selected_any": ["claude_code"]},
+                {"question": "q3cli", "selected_any": ["claude_code"]},
+                {"question": "q3api", "selected_any": ["anthropic"]}
+              ]
+            },
+            "allow": ["subscription"]
+          },
+          {"when": {"question": "q5", "selected_any": ["server"]}, "allow": ["hosting"]}
+        ]
+      },
+      "options": [
+        {"id": "free", "label": "只用完全免费的方案", "disables": [{"question": "q5", "options": ["vps_new"], "note": "购入 VPS 每月要另付 20–50 元"}]},
+        {
+          "id": "model_fees",
+          "label": "可以接受少量模型调用费",
+          "help": "每月几元到几十元",
+          "values": {"spend": ["model_api"]},
+          "disables": [{"question": "q5", "options": ["vps_new"], "note": "购入 VPS 每月要另付 20–50 元，属于云服务的费用"}]
+        },
+        {"id": "paid", "label": "可以接受付费云服务", "help": "每月几十元以上", "values": {"spend": ["model_api", "subscription", "hosting", "product_fee"]}}
+      ],
+      "rules": [
+        {
+          "when": {"question": "q18c", "selected_any": ["free"]},
+          "note": "要用本地模型才完全免费，用模型接口会产生调用费",
+          "note_if": {"spend": ["model_api"], "local_model": ["yes"]}
+        }
+      ],
+      "relax": [{"label": "可以接受少量模型调用费", "set": "model_fees"}, {"label": "可以接受付费云服务", "set": "paid"}]
     },
     {
       "id": "q18t",
-      "number": "18",
+      "number": "19",
       "kind": "preference",
       "type": "single",
       "short": "token 用量",
@@ -1242,7 +1281,7 @@
     },
     {
       "id": "q19",
-      "number": "19",
+      "number": "20",
       "kind": "preference",
       "type": "single",
       "short": "中文说明",
@@ -1258,7 +1297,7 @@
     },
     {
       "id": "q20",
-      "number": "20",
+      "number": "21",
       "kind": "preference",
       "type": "single",
       "short": "导出",
@@ -1305,7 +1344,7 @@
       "option": "low",
       "by_question": "q3",
       "when": {"all": [{"question": "q3", "selected_any": ["remote", "cli", "bot"]}, {"question": "q16", "selected_any": ["low"]}]},
-      "message": "第 2 题选择远程接入终端会话、命令行或消息平台。选择“点几下就能用”会排除大部分配合它们的记忆库。"
+      "message": "第 2 题选择远程接入终端会话、命令行或消息平台。选择“只接受有安装包或应用商店能装的”会排除大部分配合它们的记忆库。"
     },
     {
       "question": "q5",

@@ -73,14 +73,14 @@ test("文档没写的字段不排除，只标“需自行确认”并略微靠�
 
 test("正式问卷：没显示的题（第 2j 题）不影响结果", () => {
   const { projects: all, engine: real } = loadAll();
-  const base = { q1: ["iphone", "mac"], q3: ["client"], q3client: ["kelivo"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"] };
+  const base = { q1: ["iphone", "mac"], q3: ["client"], q3client: ["kelivo"], q4: "single", q5: ["computer"], q16: "high", q18c: "model_fees" };
   const a = real.recommend(base, all);
   const b = real.recommend({ ...base, q3runtime: ["openclaw"] }, all); // 第 2 题没选消息平台，第 2j 题不显示
   assert.deepEqual(a.results.map((x) => x.id), b.results.map((x) => x.id));
 });
 
 // 遥控电脑上的 Claude Code、多端共用，门槛和预算都放开
-const multiBase = { q1: ["iphone", "mac"], q3: ["remote"], q3remote: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q17: ["api_key"] };
+const multiBase = { q1: ["iphone", "mac"], q3: ["remote"], q3remote: ["claude_code"], q4: "same_agent", q5: ["computer"], q16: "high", q18c: "model_fees" };
 const has = (p, field, v) => [].concat(p.normalized[field].value).includes(v);
 
 test("第 3 题（q4）：要各 Agent 分开记忆时，能分开的排在前面", () => {
@@ -233,7 +233,7 @@ test("在用 OpenClaw 自带记忆时，“在现有基础上改进”不补会�
   const { projects: all, engine: real } = loadAll();
   const byId = Object.fromEntries(all.map((p) => [p.id, p]));
   const base = { q1: ["windows", "vps"], q3: ["bot"], q3bot: ["runtime"], q3runtime: ["openclaw"], q3api: ["cn"], q4: "single",
-    q5: ["server", "computer"], q16: "high", q17: ["api_key", "github"], q6: ["native"] };
+    q5: ["server", "computer"], q16: "high", q18c: "model_fees", q6: ["native"] };
   let seen = 0;
   for (const q7 of [["companion"], ["roleplay"], ["work"], ["coding"]]) for (const q10 of ["auto", "auto_review", "review_first"]) {
     const plan = real.recommend({ ...base, q7, q10 }, all).combos.find((c) => c.type === "current");
@@ -248,10 +248,10 @@ test("在用 OpenClaw 自带记忆时，“在现有基础上改进”不补会�
 
 test("推荐结果写明在用户的工具里怎么接", () => {
   const { projects: all, engine: real } = loadAll();
-  const r = real.recommend({ q1: ["android", "vps"], q3: ["client"], q3client: ["kelivo"], q3api: ["cn"], q4: "single", q5: ["server"], q16: "high", q17: ["api_key"] }, all);
+  const r = real.recommend({ q1: ["android", "vps"], q3: ["client"], q3client: ["kelivo"], q3api: ["cn"], q4: "single", q5: ["server"], q16: "high", q18c: "model_fees" }, all);
   const all8 = [...r.results, ...r.more];
   assert.equal(all8.find((x) => x.id === "kiwi-mem")?.how, "把 Kelivo 的接口地址改成它");
   assert.ok(all8.every((x) => x.how), "每个推荐都应写明怎么接");
-  const oc = real.recommend({ q1: ["windows"], q3: ["bot"], q3bot: ["runtime"], q3runtime: ["openclaw"], q4: "single", q5: ["computer"], q16: "high", q17: ["api_key"] }, all);
+  const oc = real.recommend({ q1: ["windows"], q3: ["bot"], q3bot: ["runtime"], q3runtime: ["openclaw"], q4: "single", q5: ["computer"], q16: "high", q18c: "model_fees" }, all);
   assert.equal([...oc.results, ...oc.more].find((x) => x.id === "memory-lancedb-pro")?.how, "装成 OpenClaw 的插件，占用它的记忆插槽");
 });

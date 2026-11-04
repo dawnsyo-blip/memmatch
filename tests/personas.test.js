@@ -12,16 +12,17 @@ const vals = (id, f) => [].concat(byId[id].normalized[f].value ?? []);
 const ids = (list) => list.map((x) => x.id);
 const allKept = (r) => [...r.results, ...Object.values(r.addons).flatMap((a) => a.items), ...r.guides];
 
-test("只用 Claude App、只想点几下：结果为空，给出放宽建议", () => {
+test("只用 Claude App、只想点几下：只有“Notion 当记忆”，给出放宽建议", () => {
   const r = run("claude_app_lazy");
-  assert.equal(r.total_kept, 0);
-  assert.ok(r.relax.some((x) => x.label.includes("照着教程")), "应建议放宽安装门槛");
+  // 2026-11-04 账号题删去后，要注册 Notion 账号不再排除它；Claude App 能直接连 Notion
+  assert.deepEqual(ids(r.results), ["method-notion"]);
+  assert.ok(r.relax.some((x) => x.label.includes("照教程")), "应建议放宽安装门槛");
 });
 
-test("只用 Claude App、能照教程操作、没勾 GitHub：不推荐要用电脑部署的，放宽建议里有 GitHub", () => {
+test("只用 Claude App、能照教程操作：不推荐要用电脑部署的，推荐全程在浏览器里部署的 Aelios", () => {
   const r = run("claude_app_tutorial");
   assert.ok(!ids(r.results).includes("memheaven"), "MemHeaven 要在电脑上部署");
-  assert.ok(r.relax.some((x) => x.label.includes("GitHub")));
+  assert.ok(ids(r.results).includes("aelios"));
 });
 
 test("只用 Claude App、能照教程操作、有 GitHub：推荐能被 Claude App 远程连上的记忆库", () => {
@@ -84,16 +85,15 @@ test("新手、只有手机、不准备账号、用别家官方 App：结果很�
   for (const x of r.results) assert.equal(x.category, "自带记忆的应用");
 });
 
-test("只用本地模型、不注册账号：都免费或能用本地模型，不需要账号", () => {
+test("只用本地模型、只用免费、对话只留在电脑上：不用另外花钱或能用本地模型，都能装在自己电脑上", () => {
   const r = run("privacy_local_free");
   assert.ok(r.total_kept > 10);
   for (const x of r.results) {
-    const cost = vals(x.id, "cost");
     const local = vals(x.id, "local_model").includes("yes");
-    assert.ok(!cost.length || cost.includes("free") || (local && cost.includes("model_fees_only")), `${x.name} 不免费`);
-    assert.ok(!(vals(x.id, "data_passes_through").length === 1 && vals(x.id, "data_passes_through")[0] === "third_party"));
-    const accounts = vals(x.id, "accounts_needed").filter((a) => a !== "none" && !(a === "model_api_key" && local) && a !== "vendor_account");
-    assert.deepEqual(accounts, [], `${x.name} 需要账号 ${accounts}`);
+    const spend = vals(x.id, "spend").filter((v) => v !== "none" && !(v === "model_api" && local));
+    assert.deepEqual(spend, [], `${x.name} 要另付 ${spend}`);
+    assert.ok(vals(x.id, "runs_on").some((v) => ["own_computer", "phone"].includes(v)), `${x.name} 装不到电脑上`);
+    assert.ok(vals(x.id, "data_passes_through").includes("local_only"), `${x.name} 的对话会存到别处`);
   }
 });
 
