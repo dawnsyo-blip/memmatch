@@ -12,9 +12,7 @@
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
 
-/* 首页（负责人 2026-11-03 给的版式）：英文大标题三行（倍高倍宽），店头两行，菜单表；每个入口整块可点 */
-/* 标题最长一行 22 个字母，倍高倍宽放不下，整体缩到一行正好 22 格 */
-.home-title { font-size: calc(var(--cw) / 11); line-height: calc(var(--cw) / 11 * 1.4); }
+/* 首页（负责人 2026-11-03 给的版式）：英文大标题两行（倍高倍宽），店头两行，菜单表；每个入口整块可点 */
 .home-title .ln { height: auto; }
 /* 店头：标题下面两行辅助字号，居中 */
 .store { margin-top: var(--lh); }
@@ -138,7 +136,7 @@
     <div class="inner" id="inner">
       <div class="topbars" id="topbars" aria-hidden="true"></div>
       <div id="intro">
-        <h1 class="title home-title"><span class="ln">find the memory system</span><span class="ln">for you</span><span class="ln">and your AI</span></h1>
+        <h1 class="title home-title"><span class="ln">Your Agent.</span><span class="ln">Your Memory.</span></h1>
         <div id="store" class="store"></div>
         <div id="menu" class="gap"></div>
       </div>
