@@ -192,23 +192,32 @@ export function dotsRow(left, val, w = W, valCols = cols(val)) {
 // 展开／收起用 [+]／[-]，各占 3 格，跟着 details 的开合换（负责人 2026-11-03 定，不写文字）
 export const TOG = `<span class="tog"><span class="when-closed" aria-label="展开">[+]</span><span class="when-open" aria-label="收起">[-]</span></span>`;
 // 折叠的一行：左边文字，行尾展开／收起；放不下时折行，按钮跟在最后一行
-// 点 [-] 收起时，内容往上压缩：先把整个 details 的高度从现在的高度动画到只剩标题行，再真正收起，
-// 下面的内容跟着往上走（负责人 2026-11-04 要）。只管标题行里带 [+]/[-] 的折叠；系统设了减少动态效果时直接收起
+// 点 [-] 收起时，内容往上压缩；点 [+] 展开时反过来，从标题行往下展开（负责人 2026-11-04 要）。
+// 做法：给整个 details 的高度做动画，下面的内容跟着走。只管标题行里带 [+]/[-] 的折叠；系统设了减少动态效果时照常直接开合
 if (typeof document !== "undefined") {
   const still = matchMedia("(prefers-reduced-motion: reduce)");
+  const EASE = "cubic-bezier(0.23, 1, 0.32, 1)";
+  const dur = (px) => Math.min(420, 160 + px * 0.12);
   document.addEventListener("click", (e) => {
     const sum = e.target.closest("summary");
     const d = sum?.parentElement;
-    if (!d || d.tagName !== "DETAILS" || !d.open || !sum.querySelector(".tog") || still.matches) return;
+    if (!d || d.tagName !== "DETAILS" || !sum.querySelector(".tog") || still.matches) return;
     e.preventDefault();
-    if (d.dataset.closing) return;
-    d.dataset.closing = "1";
-    const from = d.offsetHeight, to = sum.offsetHeight;
+    if (d.dataset.moving) return;
+    d.dataset.moving = "1";
+    const closing = d.open, head = sum.offsetHeight;
+    if (!closing) d.open = true;
+    const full = d.offsetHeight;
     d.style.overflow = "hidden";
-    const anim = d.animate([{ height: `${from}px` }, { height: `${to}px` }],
-      { duration: Math.min(420, 160 + (from - to) * 0.12), easing: "cubic-bezier(0.23, 1, 0.32, 1)", fill: "forwards" });
-    // 停在最后一帧，先收起再撤掉动画，免得收起前闪回原来的高度
-    anim.onfinish = () => { d.open = false; d.style.overflow = ""; delete d.dataset.closing; anim.cancel(); };
+    const anim = d.animate(closing ? [{ height: `${full}px` }, { height: `${head}px` }] : [{ height: `${head}px` }, { height: `${full}px` }],
+      { duration: dur(full - head), easing: EASE, fill: "forwards" });
+    // 停在最后一帧，收起后再撤掉动画，免得收起前闪回原来的高度
+    anim.onfinish = () => {
+      if (closing) d.open = false;
+      d.style.overflow = "";
+      delete d.dataset.moving;
+      anim.cancel();
+    };
   });
 }
 
