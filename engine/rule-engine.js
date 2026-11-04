@@ -152,26 +152,31 @@ export function createRuleEngine({ questionnaire, settings = {} }) {
     const mounts = fieldValues(project, "mount");
     // 有几种接法时，按项目的主要使用方式挑：主要是转发服务的先算改接口地址
     const order = fieldValues(project, "usage_form")[0] === "proxy" ? ["proxy_openai", "proxy_anthropic", "mcp", "sdk"] : ATTACH_ORDER;
-    let kind;
+    let kind, host = null;
     if (r.spec.id) kind = "direct";
     else if (r.spec.compatible_clients) kind = mounts.includes("host_plugin") ? "plugin" : mounts.includes("proxy_host") ? "proxy_openai"
       : order.find((m) => mounts.includes(m)) || "plugin";
     else kind = order.find((m) => (r.spec.mount || []).includes(m) && mounts.includes(m)) || mounts[0];
+    // 装成插件时写具体的宿主：客户端是“您的 bot”这类笼统的叫法时，取项目能配合的那个宿主（如 AstrBot）
+    if (kind === "plugin" && r.spec.compatible_clients) host = r.spec.compatible_clients.find((h) => fieldValues(project, "compatible_clients").includes(h));
     let slot = null;
-    const host = client.memory_host;
-    if (kind === "plugin" && host) {
-      const rel = fieldValues(project, "host_memory").filter((v) => v.startsWith(host + ":")).map((v) => v.split(":")[1]);
+    const mh = client.memory_host;
+    if (kind === "plugin" && mh) {
+      const rel = fieldValues(project, "host_memory").filter((v) => v.startsWith(mh + ":")).map((v) => v.split(":")[1]);
       slot = rel.includes("replaces") ? "memory" : rel.includes("mixed") ? "mixed" : rel.includes("context_slot") ? "context" : null;
     }
-    return { client, kind, slot, note: r.note };
+    return { client, kind, slot, host, note: r.note };
   }
 
-  // “怎么接”的说法，模板在配置的 mount_how
+  // “怎么接”的说法，模板在配置的 mount_how；汉字和英文、数字之间补空格（模板里不留，因为名字可能是中文）
   function howText(a) {
     if (!a) return "";
     const t = questionnaire.mount_how || {};
     const key = a.kind === "plugin" && a.slot ? `plugin_${a.slot}` : a.kind;
-    return (t[key] || t[a.kind] || "").replaceAll("{client}", a.client.short || a.client.label);
+    const name = a.host && a.host !== a.client.memory_host && !a.client.fits.some((f) => f.compatible_clients?.length === 1 && f.compatible_clients[0] === a.host)
+      ? clients[a.host]?.label || labels[a.host] || a.host : a.client.short || a.client.label;
+    return (t[key] || t[a.kind] || "").replaceAll("{client}", name)
+      .replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, "$1 $2").replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, "$1 $2");
   }
 
   // 用户选了哪些客户端：选项写 client（一个客户端）或 clients_from（再看另一道题选了什么）；那道题没答时用 fallback

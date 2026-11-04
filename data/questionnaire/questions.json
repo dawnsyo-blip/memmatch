@@ -38,7 +38,11 @@
     "plugin_api": "留了插件接口",
     "small_code": "代码小巧，方便自己改",
     "mount": "挂载方式",
-    "host_memory": "和宿主自带记忆的关系"
+    "host_memory": "和宿主自带记忆的关系",
+    "wechat": "微信机器人",
+    "feishu": "飞书机器人",
+    "discord": "Discord 机器人",
+    "developer_built": "您自建的应用"
   },
   "parts": [
     {
@@ -1182,13 +1186,6 @@
         },
         {"id": "paid", "label": "可以接受付费云服务", "help": "每月几十元以上", "values": {"spend": ["model_api", "subscription", "hosting", "product_fee"]}}
       ],
-      "rules": [
-        {
-          "when": {"question": "q18c", "selected_any": ["free"]},
-          "note": "要用本地模型才完全免费，用模型接口会产生调用费",
-          "note_if": {"spend": ["model_api"], "local_model": ["yes"]}
-        }
-      ],
       "relax": [{"label": "可以接受少量模型调用费", "set": "model_fees"}, {"label": "可以接受付费云服务", "set": "paid"}]
     },
     {
@@ -1458,14 +1455,14 @@
     }
   },
   "mount_how": {
-    "plugin": "装成 {client} 的插件",
-    "plugin_memory": "装成 {client} 的插件，占用它的记忆插槽",
-    "plugin_mixed": "装成 {client} 的插件，有的版本占用它的记忆插槽",
-    "plugin_context": "装成 {client} 的插件，占用它的上下文引擎插槽",
-    "mcp": "在 {client} 里添加它的 MCP 服务",
-    "proxy_openai": "把 {client} 的接口地址改成它",
-    "proxy_anthropic": "把 {client} 的 Anthropic 接口地址改成它",
-    "sdk": "写代码接进 {client}",
-    "direct": "在 {client} 里照说明连接"
+    "plugin": "装成{client}的插件",
+    "plugin_memory": "装成{client}的插件，占用它的记忆插槽",
+    "plugin_mixed": "装成{client}的插件，有的版本占用它的记忆插槽",
+    "plugin_context": "装成{client}的插件，占用它的上下文引擎插槽",
+    "mcp": "在{client}里添加它的 MCP 服务",
+    "proxy_openai": "把{client}的接口地址改成它",
+    "proxy_anthropic": "把{client}的 Anthropic 接口地址改成它",
+    "sdk": "写代码接进{client}",
+    "direct": "在{client}里照说明连接"
   }
 }

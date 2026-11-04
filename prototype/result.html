@@ -127,20 +127,22 @@ function comboBody(c, saidPaired = false) {
   const parts = c.parts, last = parts[parts.length - 1], B = N(last);
   const base = parts.filter((p) => p.current);
   if (c.type === "current" && c.base === "notes") return `保留您的笔记库，再加 ${B}` + (c.via === "markdown" ? "，它把记忆存成 Markdown 文件，可以和笔记放在一起" : "");
-  if (c.type === "current" && c.base === "native") return `继续用现在的客户端，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 7 题选的“${c.label}”` : "");
+  if (c.type === "current" && c.base === "native") return `继续用${nativeName(c) === "客户端自带的记忆" ? "现在的客户端" : " " + nativeName(c)}，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 7 题选的“${c.label}”` : "");
   const add = c.via === "addon" ? `${B} ${roleDo(last)}` : `再配上${saidPaired ? " " : "为它设计的 "}${B}`;
   if (c.type === "current") return c.via === "addon" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${add}` : `您正在用的 ${base.map(N).join("、")}，${add}`;
   if (c.type === "complete") return `${N(parts[0])} 一个项目包办写入到查看修改，${add}`;
   if (c.via === "pairs") return parts.map((p) => `${N(p)} ${gist(p.id)}`).join("，");
   return `${N(parts[0])} 负责记忆，` + parts.slice(1).map((p) => `${N(p)} ${roleDo(p)}`).join("，");
 }
+// 在现有记忆上补的方案里，现有的那份记忆叫什么
+const nativeName = (c) => c.parts.find((p) => p.current && !p.id)?.name || "客户端自带的记忆";
 function comboWhy(c) {
   const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
   const has = (id, f, v) => [].concat(val(id, f) || []).includes(v);
   if (c.base === "notes") return `笔记库要靠您自己动手记，${N(last)} ${last.stages.includes("capture") ? "能自动写入、按需召回" : "帮您管理记忆"}`;
   if (c.base === "native") {
-    if (has(last.id, "cross_client", "yes")) return `客户端自带的记忆只在这个客户端里有效，${N(last)} 的记忆可以在几个入口共用`;
-    if (["dashboard", "files"].some((v) => has(last.id, "human_review", v))) return `客户端自带的记忆难以查看和修改，${N(last)} 的记忆可以随时打开查看和修改`;
+    if (has(last.id, "cross_client", "yes")) return `${nativeName(c)}只在这一个工具里有效，${N(last)} 的记忆可以在几个入口共用`;
+    if (["dashboard", "files"].some((v) => has(last.id, "human_review", v))) return `${nativeName(c)}难以查看和修改，${N(last)} 的记忆可以随时打开查看和修改`;
     return "";
   }
   const A = real[0];
@@ -155,7 +157,7 @@ function comboWhy(c) {
 }
 function comboFit(c) {
   const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
-  if (c.base === "native") return `配合程度一般：客户端自带的记忆和 ${N(last)} 各记各的，互不相通，建议以 ${N(last)} 为准`;
+  if (c.base === "native") return `配合程度一般：${nativeName(c)}和 ${N(last)} 各记各的，互不相通，建议以 ${N(last)} 为准`;
   if (c.base === "notes") return c.via === "markdown" ? `配合程度高：${N(last)} 的记忆文件可以放进笔记库，在笔记软件里直接查看和修改` : `配合程度一般：${N(last)} 不把记忆存进笔记库，两边各管各的`;
   if (c.via === "pairs") return "配合程度高：说明里写了两者怎么一起用";
   const odd = real.filter((p) => !p.current && !fitsOthers(p));
@@ -205,10 +207,13 @@ function comboLead(c, i) {
 // 主句已写“设计上搭配使用”时，不再补一句“配合程度高，说明里写了两者怎么一起用”
 const comboMore = (c, i) => {
   const lead = comboLead(c, i);
-  return [comboWhy(c), comboFit(c)].filter(Boolean)
+  const hostMem = [...new Set(c.parts.filter((p) => p.id && !p.current).flatMap((p) => (p.host_memory || []).map((t) => `${N(p)} ${t}`)))];
+  return [comboWhy(c), comboFit(c), ...hostMem].filter(Boolean)
     .filter((t) => !(c.via === "pairs" && t.startsWith("配合程度高") && lead.includes("设计上搭配使用")))
     .map((t) => t + "。");
 };
+// 每个部件在用户的工具里怎么接（引擎按挂载位置算出，部件都接在同一个工具上）
+const comboHow = (c) => c.parts.filter((p) => p.id && p.how).map((p) => `${N(p)}：${p.how}`);
 const comboText = (c, i) => comboLead(c, i) + comboMore(c, i).join("");
 
 /* ---------- 一张卡片 ---------- */
@@ -245,7 +250,7 @@ function factsOf(x) {
   const spend = String(val(x.id, "spend_note") || "").replace(/^需要一些额外花销来搭配这个项目：/, "");
   // 账号：只列要注册的账号（负责人 2026-11-03 定）；接口密钥、付费套餐在“花销”里已经写了，不重复列
   const accounts = [].concat(val(x.id, "accounts_needed") || []).filter((v) => !NOT_ACCOUNT.has(v)).map((v) => cfg.field_labels?.[v] || v);
-  return [["设备", deviceText(x)], ["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["账号", accounts.length ? [accounts.join("、")] : []], ["注意", warn]].filter(([, v]) => v.length);
+  return [["接法", x.how ? [x.how] : []], ["设备", deviceText(x)], ["门槛", diff.slice(0, 1)], ["花销", spend ? [spend] : []], ["账号", accounts.length ? [accounts.join("、")] : []], ["注意", warn]].filter(([, v]) => v.length);
 }
 // 门槛  第一句；
 //       第二句
@@ -311,7 +316,8 @@ const PREFS = [
   ["记忆结构", ["层级记忆优于单层记忆；但层级数不额外加分，因为层级过多也会增加复杂度和调试难度。", "有反思系统优于没有反思系统，便于用户后期自主删除或调整反思机制。"]],
   ["中文支持", ["有中文检索优化或有中文说明文档。"]],
   ["灵活性", ["支持用户自定义优先，如可调整记忆策略、可替换模型、可修改提示词。"]],
-  ["组合推荐规则", ["按覆盖完整记忆周期推荐，覆盖完整生命周期的项目单独推荐；仅覆盖部分环节的项目，根据项目分类将可搭配的部件拼出完整流程后一并推荐。"], true],
+  ["组合推荐规则", ["按记忆周期覆盖程度推荐：覆盖完整生命周期的项目单独推荐；仅覆盖部分环节的项目，根据项目分类将可搭配的部件拼出完整流程后一并推荐。",
+    "优先在现有记忆方案上补充。", "优先推荐能够接在同一个工具上的组合部件。"], true],
 ];
 function prefHTML() {
   let n = 0;
@@ -350,7 +356,7 @@ if (combos.length) {
   // 和推荐项目同一格式：“01 名字”用二级标题，正文缩进 3 格；主句是正文，补充说明归在“注意”
   html += section("搭配方案", combos.map((c, i) => (i ? sep() : "") + `<article>` +
     hang(3, `${pad2(i + 1)} ${comboNames(c)}`, "h") +
-    `<div class="body cbody">${P(esc(comboLead(c, i)))}<div class="list">${factHTML("注意", comboMore(c, i))}</div></div></article>`).join(""));
+    `<div class="body cbody">${P(esc(comboLead(c, i)))}<div class="list">${comboHow(c).length ? factHTML("接法", comboHow(c)) : ""}${factHTML("注意", comboMore(c, i))}</div></div></article>`).join(""));
 }
 
 
@@ -461,7 +467,8 @@ document.getElementById("saveResults").addEventListener("click", () => {
       ...x.reasons.map((t) => `　　· ${t}`), ...(edges[x.id] ? [`　　· ${edges[x.id]}`] : []),
       ...factsOf(x).map(([k, v]) => `　　${k}：${segsOf(v).join("；")}`), `　　${x.repo_url}`));
     if (combos.length) out.push("", "【搭配方案】", ...combos.flatMap((c, i) => [
-      `${combos.length > 1 ? PLAN[i] + "：" : ""}${c.parts.map((p) => nmPlain(p.name)).join(" ＋ ")}`, `　　${comboText(c, i)}`]));
+      `${combos.length > 1 ? PLAN[i] + "：" : ""}${c.parts.map((p) => nmPlain(p.name)).join(" ＋ ")}`, `　　${comboText(c, i)}`,
+      ...(comboHow(c).length ? [`　　接法：${comboHow(c).join("；")}`] : [])]));
   } else {
     out.push("暂时没有完全符合的。放宽这些条件，就能多出一些选择：", ...r.relax.map((x) => `· ${x.label}：${x.count} 个`));
   }
