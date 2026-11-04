@@ -219,6 +219,7 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
 - `npm run build`（`scripts/build_dist.mjs`）把小票原型打包到 `dist/`：receipt.html 改名 index.html，引擎、`site/assets/result-text.js`、问卷配置、`usage_form.json`、项目数据收进 dist，路径改写成 dist 里的位置，开发用的提示（“npm run site”）换成访客看得懂的话；最后检查不能剩下指向仓库其它目录的路径。原型里新加读别处文件的路径，要在脚本的 FILES 和 REWRITE 里补上。`npm run preview` 在 http://localhost:5174/ 预览打包结果
 - 网页图标 `prototype/favicon.svg`（小票剪影，深色标签栏自动换成纸色）和 `apple-touch-icon.png`
 - 不保留示例答卷（负责人 2026-11-04 定）：没答过题打开结果页时转回首页；`?demo` 的演示答卷照留，开发时看排除原因用
+- 网站名 MemMatch，页面标题：首页“MemMatch · 找到适合你的 Agent 记忆方案”、结果页“推荐结果 · MemMatch”、项目库“完整项目库 · MemMatch”，三页带同一句网站说明（meta description）；项目详情页不做；上线前不再重跑健康检查（负责人 2026-11-04 定）
 - 关于页不单独做：信息来源、“未经实际安装验证”、核实日期写在结果页和项目库的页尾；收录与排除标准、反馈方式不做
 
 小票原型（2026-11-03，`prototype/`；2026-11-04 负责人定为网站的样张，正式网站照它搭）：
