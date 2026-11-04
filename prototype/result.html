@@ -34,12 +34,13 @@
 .meta + .sec, .meta-note { margin-top: var(--lh); }
 #prefBtn { padding-block: .15em; }
 .pref-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
-/* 页脚的几个文字按钮放在一组，一行放不下时整体居中换行 */
-.btns { display: flex; flex-wrap: wrap; justify-content: center; column-gap: 2ch; }
+/* 页脚：分隔线之间的每一块上下各留半行；“凭此单可”的每一行是按钮，整行可点，悬停时动作名加下划线 */
+.foot-blk { padding-block: calc(var(--lh) * .5); }
+.act { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .15); }
+.act:hover .tx, .act:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .chip { white-space: pre; transition: transform 160ms var(--ease-out); }
 .chip:active { transform: scale(0.97); }
 @media (prefers-reduced-motion: reduce) { .chip { transition: none; } .chip:active { transform: none; } }
-footer .bar { margin-top: calc(var(--lh) * .5); }
 </style>
 </head>
 <body>
@@ -368,6 +369,7 @@ function adviceText(a) {
   return head && first.includes(head) && first.length < a.text.length - 1 ? a.text.slice(first.length + 1).trim() : a.text;
 }
 const addons = Object.values(r.addons || {});
+let patchCount = 0;
 if (advice.length || addons.length || r.guides.length) {
   const items = [
     ...advice.map((a, i) => `<div>${hang(3, `${pad2(i + 1)} ${esc(a.label)}`, "h")}<div class="body stack">${S(esc(a.help))}${P(esc(adviceText(a)))}` +
@@ -376,17 +378,31 @@ if (advice.length || addons.length || r.guides.length) {
     ...addons.map((ad) => `<div class="stack">${P(esc(ad.title), "p h")}${ad.why ? S(esc(ad.why)) : ""}${restList(ad.items)}</div>`),
     ...(r.guides.length ? [`<div class="stack">${P("相关的自主管理方式和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
   ];
+  patchCount = items.length;
   html += section("强化补丁", `<div class="stack">${S("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
 }
 
 /* ---------- 页脚 ---------- */
+// 照负责人给的小票参考图排（2026-11-03）：您的答卷 → 三个部分的数量 → 凭此单可（编号、动作、箭头） → 说明 → 日期、条形码
 const key = JSON.stringify(st.answers);
 const stars = "#".repeat((W_S - cols(now.date) - 2) / 2);
+// 一行动作：编号两格，动作名，箭头靠右；整行都能点
+function act(n, label, arrow, attrs) {
+  const left = `${n}  `, tag = attrs.startsWith("href") ? "a" : "button";
+  return `<${tag} class="act" ${attrs}><span class="l">${left}<span class="tx">${esc(label)}</span>${sp(W - cols(left) - cols(label) - cols(arrow))}${arrow}</span></${tag}>`;
+}
+const counts = [["推荐项目", r.results.length], ["搭配方案", combos.length], ["强化补丁", patchCount]];
 html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
-  `<a class="bar half" href="receipt.html">返回修改问卷</a>` +
-  `<p class="btns half"><button type="button" class="tbtn" id="saveAnswers">[下载答卷]</button>  <button type="button" class="tbtn" id="saveResults">[下载推荐结果]</button>  <a class="tbtn" href="catalog.html">[查看完整项目库 →]</a></p>` +
-  `<details class="fold half"><summary>${foldLine("您的答卷", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
-  `<div class="half">${L(rule("-", W_S), "small")}</div><div aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
+  `<details class="fold foot-blk"><summary>${foldLine("您的答卷", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
+  `${L(rule("-", W_S), "small")}<div class="foot-blk">${counts.map(([k, n]) => pairHTML(k, `${n} 个`)).join("")}</div>` +
+  `${L(rule("=", W_S), "small")}<div class="foot-blk">${L("凭此单可")}` +
+  act(1, "下载答卷", "↓", 'type="button" id="saveAnswers"') +
+  act(2, "下载推荐结果", "↓", 'type="button" id="saveResults"') +
+  act(3, "返回修改问卷", "→", 'href="receipt.html"') +
+  act(4, "查看完整项目库", "→", 'href="catalog.html"') + `</div>` +
+  `${L(rule("=", W_S), "small")}<div class="foot-blk small">` +
+  ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月", "答卷只保存在您的浏览器中"].map((t) => L(t)).join("") + `</div>` +
+  `${L(rule("-", W_S), "small")}<div class="foot-blk" aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
   barcode(fnv(key), 38, "barcode") + L(center(codeOf(key), W_S), "small") + `</footer>`;
 sheet.innerHTML = html;
 const prefBtn = document.getElementById("prefBtn"), prefBody = document.getElementById("prefBody");
