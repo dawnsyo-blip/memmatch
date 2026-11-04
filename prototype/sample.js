@@ -40,5 +40,5 @@ export async function run() {
   const byQ = Object.fromEntries(cfg.questions.map((q) => [q.id, q]));
   const answers = Object.fromEntries(Object.entries(st.answers).map(([id, v]) => [id, byQ[id]?.type === "single" ? v[0] : v]));
   const r = createRuleEngine({ questionnaire: cfg, settings: data.settings }).recommend(answers, data.projects, { free: st.free });
-  return { cfg, data, usage, st, answers, byQ, r, sample };
+  return { cfg, data, usage, st, answers, byQ, r, sample, demo };
 }

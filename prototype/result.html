@@ -95,7 +95,7 @@ try {
   throw e;
 }
 await FONTS;
-const { cfg, data, usage, st, answers, byQ, r, sample } = ctx;
+const { cfg, data, usage, st, answers, byQ, r, sample, demo } = ctx;
 const byId = Object.fromEntries(data.projects.map((p) => [p.id, p]));
 const edges = edgeLines(r.results, byId);
 const advice = adviceItems(answers, cfg, r.results, byId);
@@ -336,7 +336,7 @@ let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} �
 // 点开的内容展开在它下面；再是编号和日期（同一组，行间不留空）
 html += `<div class="meta">${L(rule("=", W_S), "small")}` +
   `<div class="meta-act">${prefButton()}</div>${prefHTML()}` +
-  `<div class="meta-lines">${L(center(`No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center("示例答卷", W_S), "small") : ""}</div></div>`;
+  `<div class="meta-lines">${L(center(`No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center(demo ? "演示答卷，不是您的答卷" : "示例答卷", W_S), "small") : ""}</div></div>`;
 if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。", "p meta-note");
 
 /* ---------- 推荐 ---------- */
