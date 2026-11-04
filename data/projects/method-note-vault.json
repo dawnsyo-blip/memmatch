@@ -1,7 +1,7 @@
 {
   "id": "method-note-vault",
   "name": "笔记库当记忆（Obsidian 等本地 Markdown 笔记）",
-  "repo_url": "docs/做法/笔记软件当记忆.md",
+  "repo_url": "https://github.com/jaredrhod/ai-memory-vault",
   "source": "initial",
   "review_status": "reviewed",
   "candidate": {

@@ -68,6 +68,9 @@
 .rank .oi + .oi { margin-top: 2px; }
 .rank .oi.dragging { transition: none; z-index: 2; }
 .rank .oi.dragging .grip { cursor: grabbing; }
+/* 选项深浅交替：偶数位的淡一点，选中的照常是深色（负责人 2026-11-04 要求） */
+.opt.alt { opacity: .78; }
+.opt.alt[aria-checked="true"] { opacity: 1; }
 .oh { display: none; text-indent: 0; padding-left: 2ch; font-size: var(--fs-s); line-height: var(--lh-s); }
 .opt[aria-checked="true"] .oh { display: block; }
 .opt:hover .tx, .clash { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
@@ -187,7 +190,7 @@ const TAIL_PAUSE = [1.6, 2.2];
 const TITLE = ['找到', '适合你的', '记忆系统'];
 const TYPE_TEXT = { single: '单选', multi: '多选', rank: '排序' };
 // 答卷和旧版答题页存在同一个地方，完整结果页、旧版结果页都读它
-const KEY = 'memsite-quiz-v5';
+const KEY = 'memsite-quiz-v6';
 
 const $ = (s) => document.querySelector(s);
 const paper = $('#paper'), inner = $('#inner'), wrap = $('#wrap'), pulse = $('#pulse'), shadow = $('#shadow');
@@ -649,6 +652,7 @@ async function showQuestion(q, preset) {
   };
   paint();
   faint(el);
+  el.querySelectorAll('.opt').forEach((b, i) => { b.classList.remove('faint'); b.classList.toggle('alt', i % 2 === 1); });
 
   const next = async () => {
     if (busy || !sel.length) return;
@@ -874,9 +878,12 @@ function showTip(t, pin = false, text = t.dataset.tip) {
   void tip.offsetWidth;
   tip.classList.add('in');
 }
+// 浮层不超出小票纸面：最宽是纸面宽减去两边各 8px，水平位置限制在纸面里（负责人 2026-11-04 要求）
 function placeTip() {
-  const r = tipOf.getBoundingClientRect(), w = tip.offsetWidth;
-  tip.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + 'px';
+  const r = tipOf.getBoundingClientRect(), p = document.querySelector('.paper').getBoundingClientRect();
+  tip.style.maxWidth = Math.min(260, p.width - 16) + 'px';
+  const w = tip.offsetWidth;
+  tip.style.left = Math.max(p.left + 8, Math.min(p.right - w - 8, r.left + r.width / 2 - w / 2)) + 'px';
   tip.style.top = (r.bottom + 8) + 'px';
 }
 function hideTip() {

@@ -883,7 +883,7 @@ METHOD_IDS = {
     "Notion 当记忆（官方远程 MCP）": "method-notion",
 }
 METHOD_URLS = {
-    "笔记库当记忆（Obsidian 等本地 Markdown 笔记）": "docs/做法/笔记软件当记忆.md",
+    "笔记库当记忆（Obsidian 等本地 Markdown 笔记）": "https://github.com/jaredrhod/ai-memory-vault",  # 2026-11-04 负责人要求换成 GitHub 上 Star 较多的教程（730 Star）；本仓库 docs/做法/笔记软件当记忆.md 不随网站发布
     "Notion 当记忆（官方远程 MCP）": "https://developers.notion.com/docs/get-started-with-mcp",
 }
 

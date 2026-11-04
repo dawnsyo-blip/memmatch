@@ -112,13 +112,15 @@ const repoText = (u) => String(u ?? "").replace(/^https?:\/\/(www\.)?/, "").repl
 const mixSpace = (s) => esc(String(s).replace(/([\u4e00-\u9fff])([A-Za-z0-9])/g, "$1 $2").replace(/([A-Za-z0-9])([\u4e00-\u9fff])/g, "$1 $2"));
 
 
-/* ---------- 搭配方案的说明句（照搬 site/result.html） ---------- */
-const STAGE = { capture: "写入", consolidate: "整理", retrieve: "召回", forget: "遗忘", review: "查看修改" };
+/* ---------- 搭配方案的说明句 ---------- */
+// 写法（负责人 2026-11-04 定，规则全文见 docs/前端/结果页LLM提示词.md 的“搭配方案说明的写法”）：
+// 正文最多三句：怎么搭；和另一个方案相比好在哪；少管了哪件事。不用冒号、括号、破折号，用平常的说法
+const STAGE = { capture: "记下", consolidate: "整理", retrieve: "想起", forget: "淡忘", review: "查看修改" };
 const gist = (id) => String(byId[id]?.info?.summary?.value || "").split(/[：；，。]/)[0];
 const stageList = (arr) => arr.map((s) => STAGE[s]).join("、");
 const N = (p) => splitName(p.name)[0];
 const ROLE_DO = { context_tool: "让长对话不断线", state_engine: "给 AI 加上会变化的情绪或身体状态" };
-const ROLE_GAP = { context_tool: "长对话聊久了仍会丢前文", state_engine: "AI 的情绪和状态不会随时间变化" };
+const ROLE_GAP = { context_tool: "长对话聊久了还是会丢前文", state_engine: "AI 的情绪和状态不会随时间变化" };
 const roleOf = (p) => [].concat(val(p.id, "project_role") || [])[0];
 const roleDo = (p) => ROLE_DO[[].concat(val(p.id, "project_role") || [])[0]] || gist(p.id);
 const fitsOthers = (p) => [].concat(val(p.id, "pairing") || []).some((v) => v === "standard_interface" || v === "designed_to_pair");
@@ -127,46 +129,54 @@ function comboNames(c) {
   const curHtml = cur.length ? cur.map((p) => (p.id ? nm(p.name) : `<b>${esc(p.name)}</b>`)).join("、") + (cur[0].id ? ` <span class="u">您在用</span>` : "") : "";
   return [curHtml, ...add.map((p) => nm(p.name))].filter(Boolean).join(" + ");
 }
-function comboBody(c, saidPaired = false) {
+// 在现有记忆上补的方案里，现有的那份记忆叫什么
+const nativeName = (c) => c.parts.find((p) => p.current && !p.id)?.name || "客户端自带的记忆";
+const nativeSay = (c) => (nativeName(c) === "客户端自带的记忆" ? "客户端自带的记忆" : nativeName(c));
+// 第一句：这个方案怎么搭
+function comboBody(c) {
   const parts = c.parts, last = parts[parts.length - 1], B = N(last);
-  const base = parts.filter((p) => p.current);
-  if (c.type === "current" && c.base === "notes") return `保留您的笔记库，再加 ${B}` + (c.via === "markdown" ? "，它把记忆存成 Markdown 文件，可以和笔记放在一起" : "");
-  if (c.type === "current" && c.base === "native") return `继续用${nativeName(c) === "客户端自带的记忆" ? "现在的客户端" : " " + nativeName(c)}，再接上 ${B}` + (c.via === "concern" ? `，针对您在第 7 题选的“${c.label}”` : "");
-  const add = c.via === "addon" ? `${B} ${roleDo(last)}` : `再配上${saidPaired ? " " : "为它设计的 "}${B}`;
-  if (c.type === "current") return c.via === "addon" ? `在您正在用的 ${base.map(N).join("、")} 上加 ${add}` : `您正在用的 ${base.map(N).join("、")}，${add}`;
-  if (c.type === "complete") return `${N(parts[0])} 一个项目包办写入到查看修改，${add}`;
+  const base = parts.filter((p) => p.current).map(N).join("、");
+  if (c.type === "current" && c.base === "notes")
+    return `保留您的笔记库，再加上 ${B}` + (c.via === "markdown" ? `。${B} 把记忆存成 Markdown 文件，可以和笔记放在一起` : "");
+  if (c.type === "current" && c.base === "native")
+    return `继续用${nativeSay(c)}，再接上 ${B}` + (c.via === "concern" ? `。${B} 专门针对您在第 7 题选的“${c.label}”` : "");
+  if (c.type === "current")
+    return c.via === "addon" ? `在您正在用的 ${base} 上再加 ${B}，${B} ${roleDo(last)}` : `您正在用的 ${base} 再配上作者为它设计的 ${B}`;
+  if (c.type === "complete")
+    return `${N(parts[0])} 一个项目就能管好记下、整理、想起、淡忘和查看修改` +
+      (c.via === "addon" ? `，再加上 ${B}，${B} ${roleDo(last)}` : `，再配上作者为它设计的 ${B}`);
   if (c.via === "pairs") return parts.map((p) => `${N(p)} ${gist(p.id)}`).join("，");
   return `${N(parts[0])} 负责记忆，` + parts.slice(1).map((p) => `${N(p)} ${roleDo(p)}`).join("，");
 }
-// 在现有记忆上补的方案里，现有的那份记忆叫什么
-const nativeName = (c) => c.parts.find((p) => p.current && !p.id)?.name || "客户端自带的记忆";
+// “注意”里的补充：为什么合起来比单独用好
 function comboWhy(c) {
   const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
   const has = (id, f, v) => [].concat(val(id, f) || []).includes(v);
-  if (c.base === "notes") return `笔记库要靠您自己动手记，${N(last)} ${last.stages.includes("capture") ? "能自动写入、按需召回" : "帮您管理记忆"}`;
+  if (c.base === "notes") return `笔记库要靠您自己动手记，${N(last)} ${last.stages.includes("capture") ? "能自动记下，需要时自动想起" : "能帮您管理记忆"}`;
   if (c.base === "native") {
-    if (has(last.id, "cross_client", "yes")) return `${nativeName(c)}只在这一个工具里有效，${N(last)} 的记忆可以在几个入口共用`;
-    if (["dashboard", "files"].some((v) => has(last.id, "human_review", v))) return `${nativeName(c)}难以查看和修改，${N(last)} 的记忆可以随时打开查看和修改`;
+    if (has(last.id, "cross_client", "yes")) return `${nativeSay(c)}只在这一个工具里有效，${N(last)} 的记忆可以在几个工具之间共用`;
+    if (["dashboard", "files"].some((v) => has(last.id, "human_review", v))) return `${nativeSay(c)}不方便查看和修改，${N(last)} 的记忆可以随时打开查看和修改`;
     return "";
   }
   const A = real[0];
   if (c.via === "pairs") {
-    if (c.type === "group") return "两者的分工由作者定好，单用其中一个只能顾到一部分";
-    // 完整系统的主句已经说了“一个项目包办”，这里不再重复“单用也能完整使用”
-    if (c.type === "complete") return `加上 ${N(last)}，${gist(last.id)}`;
-    return `单用 ${N(A)} 也能使用；加上 ${N(last)}，${gist(last.id)}`;
+    if (c.type === "group") return "几个项目的分工是作者定好的，只用其中一个只能顾到一部分";
+    // 完整系统的第一句已经说了“一个项目就能管好”，这里不再说“只用它也可以”
+    if (c.type === "complete") return `${N(last)} ${gist(last.id)}`;
+    return `只用 ${N(A)} 也可以，加上 ${N(last)} 以后，${gist(last.id)}`;
   }
   const gaps = real.map((p) => ROLE_GAP[roleOf(p)]).filter(Boolean);
-  return gaps.length ? `单用 ${N(A)} 时，${gaps.join("，")}` : "";
+  return gaps.length ? `只用 ${N(A)} 时，${gaps.join("，")}` : "";
 }
+// “注意”里的补充：几个部件配合得怎么样
 function comboFit(c) {
   const real = c.parts.filter((p) => p.id), last = real[real.length - 1];
-  if (c.base === "native") return `配合程度一般：${nativeName(c)}和 ${N(last)} 各记各的，互不相通，建议以 ${N(last)} 为准`;
-  if (c.base === "notes") return c.via === "markdown" ? `配合程度高：${N(last)} 的记忆文件可以放进笔记库，在笔记软件里直接查看和修改` : `配合程度一般：${N(last)} 不把记忆存进笔记库，两边各管各的`;
-  if (c.via === "pairs") return "配合程度高：说明里写了两者怎么一起用";
+  if (c.base === "native") return `${nativeSay(c)}和 ${N(last)} 各记各的，不会互通，建议以 ${N(last)} 为准`;
+  if (c.base === "notes") return c.via === "markdown" ? `${N(last)} 的记忆文件可以放进笔记库，在笔记软件里直接查看和修改` : `${N(last)} 不把记忆存进笔记库，两边各管各的`;
+  if (c.via === "pairs") return "作者在说明里写了它们怎么一起用";
   const odd = real.filter((p) => !p.current && !fitsOthers(p));
-  if (odd.length) return `配合程度需自行确认：${odd.map(N).join("、")} 的说明里没写能否和别的项目一起用`;
-  return "配合程度较好：各自分工不同，不会争着处理同一份记忆，可以同时使用";
+  if (odd.length) return `${odd.map(N).join("、")} 的说明里没写能不能和别的项目一起用，要自己试一下`;
+  return `${real.length > 2 ? "几个" : "两个"}项目分工不同，不会争着改同一份记忆，可以同时用`;
 }
 // 说明句里提到另一个方案时的叫法，和标题的编号 01、02 对应
 const PLAN = ["方案 01", "方案 02"];
@@ -177,47 +187,54 @@ function comboFacts(c) {
   return {
     keep: c.type === "current",
     installs: adds.length,
-    stages: stagesIn(c).length,
+    stages: stagesIn(c),
     paired: c.via === "pairs",
     diff: Math.max(...adds.map((p) => DIFF[val(p.id, "difficulty")] ?? 1)),
     free: adds.every((p) => [].concat(val(p.id, "spend") || []).includes("none")),
   };
 }
+// 这个方案胜过另一个方案的地方，按重要程度排；装几个项目、门槛和花销变化大，排在最后
 function comboEdge(c, other) {
   const x = comboFacts(c), y = comboFacts(other), out = [];
-  if (x.keep && !y.keep) out.push("不用换掉现在用的");
-  if (!x.keep && y.keep) out.push("另起一套");
-  if (x.installs < y.installs) out.push(`只装 ${x.installs} 个项目`);
-  if (x.stages === 5 && y.stages < 5) out.push("覆盖全流程");
-  else if (x.stages > y.stages) out.push("覆盖的环节更多");
-  if (x.paired && !y.paired) out.push("设计上搭配使用");
-  if (x.diff < y.diff) out.push("门槛更低");
+  if (x.keep && !y.keep) out.push("不用换掉您现在用的记忆");
+  if (!x.keep && y.keep) out.push("从头搭一套新的，不受现在用的记忆限制");
+  if (x.paired && !y.paired) out.push("作者本来就是让它们一起用的");
+  const more = x.stages.filter((s) => !y.stages.includes(s));
+  if (x.stages.length === 5 && y.stages.length < 5) out.push("记下、整理、想起、淡忘、查看修改都能管");
+  else if (more.length) out.push(`还能${stageList(more)}`);
+  if (x.installs < y.installs) out.push(`只需要装 ${x.installs} 个项目`);
+  if (x.diff < y.diff) out.push("装起来更简单");
   if (x.free && !y.free) out.push("不用额外花钱");
-  if (!out.length && x.installs > y.installs) out.push("分工更细");
+  if (!out.length && x.installs > y.installs) out.push("分工更细，每个项目只管一件事");
   return out;
 }
 const combos = r.combos.length === 2 && comboEdge(r.combos[0], r.combos[1]).length && comboEdge(r.combos[1], r.combos[0]).length
   ? r.combos : r.combos.slice(0, 1);
+// 汉字和英文、数字之间补一个空格，两个汉字之间不留空格（拼句子时名字两边的空格不一定对）
+const tidy = (t) => t.replace(/([一-鿿])\s+(?=[一-鿿])/g, "$1")
+  .replace(/([一-鿿])([A-Za-z0-9])/g, "$1 $2").replace(/([A-Za-z0-9])([一-鿿])/g, "$1 $2");
+// 几条优势连在一起时，最后一条前面加“而且”
+const joinEdge = (a) => (a.length > 1 ? a.slice(0, -1).join("，") + "，而且" + a[a.length - 1] : a[0]);
 function comboLead(c, i) {
   const other = combos[1 - i];
-  if (!other) return comboBody(c) + "。";
-  const edge = comboEdge(c, other);
-  const lack = stagesIn(other).filter((s) => !stagesIn(c).includes(s));
-  const tail = lack.length ? `；比${PLAN[1 - i]} 少了${stageList(lack)}${lack.length > 1 ? "这几个环节" : "这一环节"}` : "";
-  // 在现有的上面补的方案，正文会说“继续用现在的……”，句首不再写“不用换掉现在用的”
-  const said = edge.filter((e) => !(e === "不用换掉现在用的" && c.type === "current"));
-  return (said.length ? said.join("、") + "：" : "") + comboBody(c, edge.includes("设计上搭配使用")) + tail + "。";
+  const body = tidy(comboBody(c) + "。");
+  if (!other) return body;
+  // 在现有记忆上补的方案，第一句已经说了“继续用”，比较时不再说“不用换掉”
+  const edge = comboEdge(c, other).filter((e) => !(e.startsWith("不用换掉") && c.type === "current"));
+  const lack = comboFacts(other).stages.filter((s) => !comboFacts(c).stages.includes(s));
+  return body + tidy((edge.length ? `和${PLAN[1 - i]}相比，这个方案${joinEdge(edge)}。` : "") +
+    (lack.length ? `不过它不管${stageList(lack)}，这一点不如${PLAN[1 - i]}。` : ""));
 }
-// 主句已写“设计上搭配使用”时，不再补一句“配合程度高，说明里写了两者怎么一起用”
+// 第一段已经说了“作者本来就是让它们一起用的”，“注意”里不再重复
 const comboMore = (c, i) => {
   const lead = comboLead(c, i);
   const hostMem = [...new Set(c.parts.filter((p) => p.id && !p.current).flatMap((p) => (p.host_memory || []).map((t) => `${N(p)} ${t}`)))];
   return [comboWhy(c), comboFit(c), ...hostMem].filter(Boolean)
-    .filter((t) => !(c.via === "pairs" && t.startsWith("配合程度高") && lead.includes("设计上搭配使用")))
-    .map((t) => t + "。");
+    .filter((t) => !(t.startsWith("作者在说明里") && lead.includes("作者本来就是让它们一起用的")))
+    .map((t) => tidy(t + "。"));
 };
 // 每个部件在用户的工具里怎么接（引擎按挂载位置算出，部件都接在同一个工具上）
-const comboHow = (c) => c.parts.filter((p) => p.id && p.how).map((p) => `${N(p)}：${p.how}`);
+const comboHow = (c) => c.parts.filter((p) => p.id && p.how).map((p) => `${N(p)}，${p.how}`);
 const comboText = (c, i) => comboLead(c, i) + comboMore(c, i).join("");
 
 /* ---------- 一张卡片 ---------- */
