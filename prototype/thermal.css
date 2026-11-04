@@ -246,3 +246,10 @@ details[open] > summary .when-closed, details:not([open]) > summary .when-open {
   #tip.in { animation: none; }
   .bar:active:not(:disabled), .tbtn:active, .info:active { transform: none; }
 }
+
+/* 静态模式（网址加 ?static，给 html.to.design 导出用）：不要出票口和投影，纸不裁切、不位移，字全部印好 */
+.static .dock, .static .dock-low, .static .lip, .static .shadow { display: none; }
+.static .wrap { margin-top: 16px; }
+.static .paper { height: auto !important; transform: none !important; overflow: visible; -webkit-mask: none; mask: none; }
+.static .inner { transform: none !important; }
+.static .ink { clip-path: none !important; opacity: 1 !important; }

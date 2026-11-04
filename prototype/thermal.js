@@ -1,6 +1,9 @@
 // 小票原型共用：字符网格（每行 32 格，汉字两格）、条形码、大标题、题目简称。
 // 用格数拼行的函数要等 FONTS 之后再调：字宽按更纱黑体实测（它的“”是半角），字体没加载上时按东亚宽字符估。
 
+// 网址加 ?static：给导出到 Figma 用的静态模式，去掉出票口、锯齿裁切、出纸位移和逐行打印（见 thermal.css 的 .static）
+if (new URLSearchParams(location.search).has("static")) document.documentElement.classList.add("static");
+
 // 每行的格数，按字号分三级（thermal.css 的 --fs-h、--fs、--fs-s）
 export const W_H = 32;  // 标题
 export const W = 36;    // 正文
