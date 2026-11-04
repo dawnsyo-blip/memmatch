@@ -197,8 +197,9 @@ button, a { cursor: pointer; }
 /* 文字按钮：[下载答卷] 这种，悬停加下划线 */
 .tbtn { white-space: pre; padding-block: calc(var(--lh) * .25); }
 .bar:not(:disabled):hover, .tbtn:hover, a.link:hover, .row:hover .l, summary:hover .l { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
-.bar, .tbtn, .info { transition: transform 160ms var(--ease-out); }
-.bar:active:not(:disabled), .tbtn:active, .info:active { transform: scale(0.97); }
+/* 按下时轻微缩小；i 图标不缩（负责人 2026-11-04：点 i 不要抖动、缩放） */
+.bar, .tbtn { transition: transform 160ms var(--ease-out); }
+.bar:active:not(:disabled), .tbtn:active { transform: scale(0.97); }
 
 /* 纵向节奏：stack 里各块之间半行，list 里各条之间 0.25 行 */
 .stack > * + * { margin-top: calc(var(--lh) * .5); }
@@ -228,9 +229,9 @@ details[open] > summary .when-closed, details:not([open]) > summary .when-open {
 .info.on path { stroke: var(--paper); }
 .tbtn[data-tip] { transition: background-color 160ms var(--ease-out), color 160ms var(--ease-out), transform 160ms var(--ease-out); }
 .tbtn[data-tip].on { background: var(--ink); color: var(--paper); }
-/* 提示框从图标处往下出来 */
+/* 提示框原地淡入，不位移 */
 #tip.in { animation: tip-in 180ms var(--ease-out); }
-@keyframes tip-in { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes tip-in { from { opacity: 0; } }
 
 #tip {
   position: fixed; z-index: 10; max-width: 260px;
@@ -244,7 +245,7 @@ details[open] > summary .when-closed, details:not([open]) > summary .when-open {
 @media (prefers-reduced-motion: reduce) {
   .bar, .tbtn, .tbtn[data-tip], .info, .info circle, .info path { transition: none; }
   #tip.in { animation: none; }
-  .bar:active:not(:disabled), .tbtn:active, .info:active { transform: none; }
+  .bar:active:not(:disabled), .tbtn:active { transform: none; }
 }
 
 /* 静态模式（网址加 ?static，给 html.to.design 导出用）：不要出票口和投影，纸不裁切、不位移，字全部印好 */
