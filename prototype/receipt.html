@@ -16,8 +16,7 @@
 .home-title .ln { height: auto; }
 /* 店头：标题下面两行辅助字号，居中 */
 .store { margin-top: var(--lh); }
-/* 菜单是一张小表：表头“编号 项目 操作”，下面每行“编号 名字 …… 动作”，副行用辅助字号缩进到名字下面 */
-.menu-head { padding-block: calc(var(--lh) * .25); }
+/* 菜单：上面是嵌着“请选择”的分隔线，下面每行“编号 名字 …… 动作”，副行用辅助字号缩进到名字下面 */
 .menu-list { padding-block: calc(var(--lh) * .25); }
 .menu-item { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .125); }
 .menu-item + .menu-item, #resume + .menu-item { margin-top: calc(var(--lh) * .25); }
@@ -424,10 +423,13 @@ function menuItem(tag, attrs, n, name, note, action) {
 // 店头的编号：按下“开始”时才记下来（serialNo(true)），这里先显示到时会用的那个号
 let nextNo = 1;
 try { nextNo = (+localStorage.getItem('receipt-no') || 0) + 1; } catch (e) {}
-const headRow = ' 编号  项目', opRow = '操作';
+// 嵌在分隔线里的居中标题：“==== 请选择 ====”，两侧的 = 按格数补满一行（奇数格时右边多一个）
+function titledRule(t, c = '=', w = W) {
+  const n = w - cols(t) - 2, l = Math.floor(n / 2);
+  return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
+}
 $('#store').innerHTML = L(center(`记忆系统配对单 No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
-$('#menu').innerHTML = L(rule('=')) + `<div class="menu-head">${L(headRow + sp(W - cols(headRow) - cols(opRow)) + opRow)}</div>` +
-  L(rule('-')) + `<div class="menu-list">` +
+$('#menu').innerHTML = L(titledRule('请选择')) + `<div class="menu-list">` +
   menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '约 20 题   5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
   (resumed ? '<p id="resume"><button class="tbtn" id="resetBtn">[重新开始]</button></p>' : '') +
   menuItem('a', 'href="catalog.html?from=home"', 2, '浏览收录项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
