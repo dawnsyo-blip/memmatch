@@ -251,5 +251,5 @@ details[open] > summary .when-closed, details:not([open]) > summary .when-open {
 .static .dock, .static .dock-low, .static .lip, .static .shadow { display: none; }
 .static .wrap { margin-top: 16px; }
 .static .paper { height: auto !important; transform: none !important; overflow: visible; -webkit-mask: none; mask: none; }
-.static .inner { transform: none !important; }
+.static .inner { transform: none !important; background-image: none; }
 .static .ink { clip-path: none !important; opacity: 1 !important; }
