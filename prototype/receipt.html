@@ -12,11 +12,14 @@
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
 
-/* 首页（负责人 2026-11-03 给的版式）：英文大标题一行 20 格；“请选择”下面两个入口，每个是编号加名字一行、说明 ...... 动作一行，整块可点 */
-.home-title { font-size: calc(var(--cw) / 10); line-height: 1.25; }
+/* 首页（负责人 2026-11-03 给的版式）：英文大标题三行（倍高倍宽）；“请选择”下面空一行，两个入口，
+   每个是“编号 名字 ...... 动作”一行加一行辅助字号的说明（缩进到名字下面），整块可点 */
 .home-title .ln { height: auto; }
 .menu-blk { padding-block: calc(var(--lh) * .5); }
+.menu-list { margin-top: var(--lh); }
 .menu-item { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .25); }
+.menu-item + .menu-item, #resume + .menu-item { margin-top: calc(var(--lh) * .5); }
+.menu-note { padding-left: calc(var(--fs) * 1.5); }
 .menu-item:disabled { cursor: default; }
 .menu-item:not(:disabled):hover .tx, .menu-item:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 #resume { text-align: right; }
@@ -132,7 +135,7 @@
     <div class="inner" id="inner">
       <div class="topbars" id="topbars" aria-hidden="true"></div>
       <div id="intro">
-        <h1 class="title home-title"><span class="ln">The right memory</span><span class="ln">for you and your AI</span></h1>
+        <h1 class="title home-title"><span class="ln">The right memory</span><span class="ln">for you</span><span class="ln">and your AI</span></h1>
         <div id="menu" class="gap"></div>
       </div>
       <div id="head"></div>
@@ -408,13 +411,16 @@ try {
 } catch (e) {}
 await FONTS;
 const resumed = cfg && Object.keys(state.answers).length > 0;
-const menuItem = (tag, attrs, n, name, note, action) =>
-  `<${tag} class="menu-item" ${attrs}><span class="l"><b>${n}  <span class="tx">${esc(name)}</span></b></span>${pairHTML(`   - ${note}`, action)}</${tag}>`;
-$('#menu').innerHTML = L(rule('=')) + `<div class="menu-blk">${L('请选择')}` +
-  menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '20 题 5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
+function menuItem(tag, attrs, n, name, note, action) {
+  const left = `${n}  `, dots = '.'.repeat(Math.max(2, W - cols(left) - cols(name) - cols(action) - 2));
+  return `<${tag} class="menu-item" ${attrs}><span class="l"><b>${left}<span class="tx">${esc(name)}</span></b> ${dots} <b>${esc(action)}</b></span>` +
+    `<span class="l small menu-note">- ${esc(note)}</span></${tag}>`;
+}
+$('#menu').innerHTML = L(rule('=')) + `<div class="menu-blk">${L('请选择')}<div class="menu-list">` +
+  menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '20 题   5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
   (resumed ? '<p id="resume"><button class="tbtn" id="resetBtn">[重新开始]</button></p>' : '') +
-  menuItem('a', 'href="catalog.html"', 2, '浏览全部项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
-  `</div>` + L(rule('=')) +
+  menuItem('a', 'href="catalog.html?from=home"', 2, '浏览收录项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
+  `</div></div>` + L(rule('=')) +
   (cfg ? '' : '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
 const startBtn = $('#startBtn');
 startBtn.addEventListener('click', start);

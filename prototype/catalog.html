@@ -106,16 +106,19 @@ function byName(a, b) {
   return ax !== ay ? (ax ? -1 : 1) : ax ? en.compare(x, y) : zh.compare(x, y);
 }
 
+// 从首页进来（?from=home）只给“返回首页”，从结果页进来给“返回推荐结果”（负责人 2026-11-03 定）
+const BACK = new URLSearchParams(location.search).get("from") === "home"
+  ? { href: "receipt.html", text: "返回首页" } : { href: "result.html", text: "返回推荐结果" };
 const now = stamp();
 let html = titleHTML(["完整项目库"]);
 html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">` +
   L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center(now.full, W_S), "small") + `</div>` +
   // 页面很长，顶部也放一个返回结果页的入口（底部还有一个）
-  `<p class="back"><a class="tbtn" href="result.html">[← 返回推荐结果]</a></p></div>`;
+  `<p class="back"><a class="tbtn" href="${BACK.href}">[← ${BACK.text}]</a></p></div>`;
 for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(""));
 if (other.length) html += section("其它", other.sort(byName).map(item).join(""));
 
-html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="result.html">← 返回推荐结果</a></footer>`;
+html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">← ${BACK.text}</a></footer>`;
 sheet.innerHTML = html;
 faint(sheet, ".l, .p");
 </script>
