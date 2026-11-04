@@ -68,9 +68,10 @@
 .rank .oi + .oi { margin-top: 2px; }
 .rank .oi.dragging { transition: none; z-index: 2; }
 .rank .oi.dragging .grip { cursor: grabbing; }
-/* 选项深浅交替：偶数位的淡一点，选中的照常是深色（负责人 2026-11-04 要求） */
-.opt.alt { opacity: .78; }
-.opt.alt[aria-checked="true"] { opacity: 1; }
+/* 排序题选中后反白的几行：按名次单数正常、双数淡一点，不随机变淡（负责人 2026-11-04 要求，只限排序题的反白行）。
+   选中的按名次排在最上面，所以用 nth-child 就能按名次交替，拖动换名次后自动跟着变 */
+.rank .opt[aria-checked="true"].faint { opacity: 1; }
+.rank .oi:nth-child(even) > .opt[aria-checked="true"] { opacity: .8; }
 .oh { display: none; text-indent: 0; padding-left: 2ch; font-size: var(--fs-s); line-height: var(--lh-s); }
 .opt[aria-checked="true"] .oh { display: block; }
 .opt:hover .tx, .clash { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
@@ -652,7 +653,6 @@ async function showQuestion(q, preset) {
   };
   paint();
   faint(el);
-  el.querySelectorAll('.opt').forEach((b, i) => { b.classList.remove('faint'); b.classList.toggle('alt', i % 2 === 1); });
 
   const next = async () => {
     if (busy || !sel.length) return;

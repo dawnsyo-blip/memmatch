@@ -527,7 +527,7 @@
           "default_if": {"question": "q1", "selected_any": ["vps", "nas"]}
         },
         {"id": "vps_new", "label": "购入一台 VPS", "values": {"runs_on": ["own_server"]}, "help": "约 20–50 元/月"},
-        {"id": "cloud_free", "label": "云平台账号", "values": {"runs_on": ["own_cloud_account"]}, "help": "免费额度内 0 元"},
+        {"id": "cloud_free", "label": "云平台账号", "values": {"runs_on": ["own_cloud_account"]}, "help": "有免费额度"},
         {"id": "phone", "label": "只用手机", "values": {"runs_on": ["phone"]}},
         {"id": "hosted", "label": "可以接受项目方提供的托管服务", "values": {"runs_on": ["third_party_hosted"]}, "help": "可能涉及隐私问题；订阅费用不等"}
       ],
