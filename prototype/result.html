@@ -355,7 +355,7 @@ if (combos.length) {
 const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list">${body}</div></div>`;
 const alone = r.narrowed_by.filter((x) => x.only > 0);
 const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
-// 负责人 2026-11-04 定的结构：前后矛盾 → 主要过滤选项（“- 选项 …… 排除 N 个”）→ 可放宽条件（“条件 …… 增加 N 个”），
+// 负责人 2026-11-04 定的结构（条目前不加“- ”）：前后矛盾 → 主要过滤选项（“选项 …… 排除 N 个”）→ 可放宽条件（“条件 …… 增加 N 个”），
 // 三个小标题都是二级标题，下面都用正文；不再列“提醒”
 // 每条后面带“去第 N 题修改”，点了回答题页的那一道题（receipt.html?edit=题目 id），小字、靠右（负责人 2026-11-04 要）
 const editLinks = (...ids) => {
@@ -367,9 +367,9 @@ const editLinks = (...ids) => {
 const filterLabel = (x) => !x.selected.length ? `第 ${x.number} 题“${x.short}”`
   : x.selected.every((t) => t.length <= 2) ? `${x.short}：${x.selected.join("、")}` : x.selected.join("、");
 let why = "";
-if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => `<div>${hang(2, `- ${esc(c.message)}`)}${editLinks(c.by_question, c.question)}</div>`).join(""));
+if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => `<div>${P(esc(c.message))}${editLinks(c.by_question, c.question)}</div>`).join(""));
 if (narrow.length) why += grp("主要过滤选项", narrow.map((x) =>
-  `<div>${dotsPairHTML(filterLabel(x), `排除 ${alone.length ? x.only : x.total} 个`, W, "- ")}${editLinks(x.question)}</div>`).join(""));
+  `<div>${dotsPairHTML(filterLabel(x), `排除 ${alone.length ? x.only : x.total} 个`, W)}${editLinks(x.question)}</div>`).join(""));
 if (r.relax.length) why += grp("可放宽条件", r.relax.map((x) => `<div>${dotsPairHTML(x.label, `增加 ${x.count} 个`, W)}${editLinks(x.question)}</div>`).join(""));
 if (why) html += section("排除原因", `<div class="stack">${why}</div>`, false);
 
@@ -391,7 +391,7 @@ if (advice.length || addons.length || r.guides.length) {
     ...(r.guides.length ? [`<div class="stack">${P("相关的自主管理方式和教程", "p h")}${S("没有代码，照着做或参考它的设计。")}${restList(r.guides)}</div>`] : []),
   ];
   patchCount = items.length;
-  html += section("强化补丁", `<div class="stack">${P("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${items.join(sep())}</div>`, false);
+  html += section("强化补丁", `<div class="stack">${P("后续针对特定问题修改记忆系统时，可提供参考思路的项目。")}${sep()}${items.join(sep())}</div>`, false);
 }
 
 /* ---------- 页脚 ---------- */
