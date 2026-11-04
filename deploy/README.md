@@ -8,16 +8,20 @@
 
 ### 1. 在 Cloudflare 上把域名指向 VPS
 
-登录 Cloudflare → 选 memmatch.fyi → 左边“DNS” → “记录” → 添加两条：
+登录 Cloudflare → 选 memmatch.fyi → 左边“DNS” → “记录”，要有两条（2026-11-04 已经加好）：
 
 | 类型 | 名称 | 内容 | 代理状态 |
 |---|---|---|---|
-| A | `@` | `203.0.113.5` | 已代理（橙色云朵） |
-| CNAME | `www` | `memmatch.fyi` | 已代理（橙色云朵） |
+| A | `memmatch.fyi` | VPS 的 IP | 仅 DNS（灰色云朵） |
+| A | `www` | VPS 的 IP | 仅 DNS（灰色云朵） |
 
-再到左边“SSL/TLS” → “概述”，把加密模式设成 **完全（严格）**。不设的话，Cloudflare 和 Caddy 会互相跳转，页面打不开（浏览器提示“重定向次数过多”）。
+第一次部署用“仅 DNS”最省事：访客直接连到 VPS，Caddy 申请证书最顺利，也不用改 SSL/TLS 的设置。
 
-DNS 生效一般要几分钟。在自己电脑上运行 `nslookup memmatch.fyi`，看到 Cloudflare 的地址（不一定是你的 IP，开了代理时显示的是 Cloudflare 的）就说明生效了。
+DNS 生效一般要几分钟。在自己电脑上运行 `nslookup memmatch.fyi`，看到的是 VPS 的 IP 就说明生效了。
+
+**如果 VPS 在中国大陆的机房**（如阿里云、腾讯云的大陆地域），域名要先做 ICP 备案，否则服务商会拦截 80、443 端口，网站打不开。香港和海外机房不用备案。
+
+**以后想用 Cloudflare 的加速和防护**：把两条记录点“编辑”改成“已代理”（橙色云朵），同时到左边“SSL/TLS” → “概述”，把加密模式设成 **完全（严格）**。不设的话，Cloudflare 和 Caddy 会互相跳转，页面打不开，浏览器提示“重定向次数过多”。
 
 ### 2. 在 VPS 上安装 Caddy
 
@@ -88,6 +92,6 @@ npm run preview
 
 ## 出问题时
 
-- **打不开，提示“重定向次数过多”**：Cloudflare 的 SSL/TLS 加密模式不是“完全（严格）”，见第 1 步。
-- **打不开，提示证书错误**：Caddy 还没申请到证书。在 VPS 上运行 `sudo journalctl -u caddy --since "10 minutes ago"` 看日志，常见原因是 80、443 端口没放开，或者 DNS 还没生效。
-- **改了内容但页面没变**：Cloudflare 可能缓存了旧文件。到 Cloudflare 的“缓存” → “配置” → “清除所有内容”。
+- **打不开，提示“重定向次数过多”**：开了橙色云朵，但 Cloudflare 的 SSL/TLS 加密模式不是“完全（严格）”，见第 1 步。
+- **打不开，提示证书错误或连接超时**：Caddy 还没申请到证书。在 VPS 上运行 `sudo journalctl -u caddy --since "10 minutes ago"` 看日志，常见原因是 80、443 端口没放开（服务商网页控制台里的安全组也要放开），DNS 还没生效，或者大陆机房的域名没有备案。
+- **改了内容但页面没变**：开了橙色云朵时，Cloudflare 可能缓存了旧文件。到 Cloudflare 的“缓存” → “配置” → “清除所有内容”。
