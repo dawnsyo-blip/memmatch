@@ -42,6 +42,12 @@
 .act + .act { margin-top: calc(var(--lh) * .25); }
 /* 排除原因每条下面的“去第 N 题修改”：靠右，紧贴上一行 */
 .edit { text-align: right; }
+/* 排除原因的条目之间空 0.75 行，比折行明显，看得出是另一条（负责人 2026-11-04 要求加大） */
+.grp .list > * + * { margin-top: calc(var(--lh) * .75); }
+/* 小标题上方的空要比条目之间大，看得出是新的一块 */
+.grp + .grp { margin-top: calc(var(--lh) * 1.5); }
+/* 凭此单可的反白箭头：箭头字形本身很细，加粗也不明显，再描一圈边让它粗一些 */
+.act .inv { -webkit-text-stroke: .06em currentColor; }
 .act:hover .tx, .act:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .chip { white-space: pre; transition: transform 160ms var(--ease-out); }
 .chip:active { transform: scale(0.97); }
