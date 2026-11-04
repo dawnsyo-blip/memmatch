@@ -1291,35 +1291,28 @@
       "when": {
         "all": [{"question": "q3api", "selected_only_within": ["local"]}, {"question": "q1", "selected_none": ["windows", "mac", "linux", "vps", "nas"]}]
       },
-      "message": "第 2l 题只选了本地运行的开源模型，但第 1 题没有电脑或服务器。本地模型一般要装在电脑或服务器上。"
+      "message": "第 2l 题选择“本地运行的开源模型”，但第 1 题没有选择“电脑”或“服务器”。本地模型一般要装在电脑或服务器上，请修改矛盾选项。"
     },
     {
       "question": "q4",
       "option": "single",
       "by_question": "q3",
       "when": {"all": [{"question": "q4", "selected_any": ["single"]}, {"question": "q3", "count_at_least": 2}]},
-      "message": "第 2 题选了多种使用方式，但第 3 题选了“只在一个入口用”。如需多种方式共用记忆，请改选多端共用。"
+      "message": "第 2 题选择多种使用方式，但第 3 题选择“只在一个入口用”。如需多种方式共用记忆，请改选多端共用。"
     },
     {
       "question": "q16",
       "option": "low",
       "by_question": "q3",
       "when": {"all": [{"question": "q3", "selected_any": ["remote", "cli", "bot"]}, {"question": "q16", "selected_any": ["low"]}]},
-      "message": "第 2 题选了远程接入终端会话、命令行或消息平台，但第 16 题选“点几下就能用”，会排除大部分配合它们的记忆库。"
+      "message": "第 2 题选择远程接入终端会话、命令行或消息平台。选择“点几下就能用”会排除大部分配合它们的记忆库。"
     },
     {
       "question": "q5",
       "option": "phone",
       "by_question": "q3",
       "when": {"all": [{"question": "q3", "selected_any": ["remote", "cli"]}, {"question": "q5", "selected_only_within": ["phone"]}]},
-      "message": "第 2 题用的 Agent 跑在电脑上，但第 4 题只选了“只用手机”。记忆库一般也装在那台电脑上，可以加选“一台经常开着的电脑”。"
-    },
-    {
-      "question": "q5",
-      "option": "hosted",
-      "by_question": "q17",
-      "when": {"all": [{"question": "q5", "selected_any": ["hosted"]}, {"question": "q17", "selected_none": ["vendor"]}]},
-      "message": "第 4 题接受项目方的托管服务，但第 17 题没勾“记忆库项目方自己的账号”。用托管服务都要注册项目方账号，否则托管版会被排除。"
+      "message": "第 2 题选择的 Agent 跑在电脑上。记忆库也可以装在那台电脑上，可以加选“一台经常开着的电脑”。"
     }
   ],
   "preferences": [
