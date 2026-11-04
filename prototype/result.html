@@ -323,7 +323,7 @@ const now = stamp();
 let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} 个记忆类项目`] : ["暂时没有", "完全符合的"]);
 // 页眉：粗分隔线下面先是编号和日期（同一组，行间不留空），再隔半行是默认推荐偏好的按钮
 html += `<div class="meta">${L(rule("=", W_S), "small")}` +
-  `<div class="meta-lines">${L(center(`记忆系统配对单 No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center("示例答卷", W_S), "small") : ""}</div>` +
+  `<div class="meta-lines">${L(center("找到适合你的 Agent 记忆方案", W_S), "small")}${L(center(`No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center("示例答卷", W_S), "small") : ""}</div>` +
   `<div class="meta-act">${prefButton()}</div>${prefHTML()}</div>`;
 if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。", "p meta-note");
 
