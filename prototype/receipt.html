@@ -23,8 +23,13 @@
 .menu-item { display: block; width: 100%; text-align: left; padding-block: calc(var(--lh) * .125); }
 .menu-item + .menu-item { margin-top: calc(var(--lh) * .25); }
 .menu-note { padding-left: calc(var(--fs) * 2); line-height: 1.3; }
+/* 答到一半时第 1 项分两个按钮：上面整行是继续答题，说明行右边是重新开始；两个反白块之间留 0.25 行 */
+.menu-row { display: block; width: 100%; text-align: left; }
+.menu-sub { display: flex; justify-content: space-between; align-items: center; margin-top: calc(var(--lh) * .25); }
+.menu-sub .menu-note, #resetBtn { white-space: pre; }
+#resetBtn:hover .inv, #resetBtn:focus-visible .inv { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 .menu-item:disabled { cursor: default; }
-.menu-item:not(:disabled):hover .tx, .menu-item:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
+.menu-item:not(:disabled):not(.two):hover .tx, .menu-item:focus-visible .tx, .menu-row:hover .tx, .menu-row:focus-visible .tx { text-decoration: underline; text-decoration-thickness: .1em; text-underline-offset: .2em; }
 
 /* 已答条目 */
 .log { list-style: none; padding: 0; }
@@ -416,11 +421,17 @@ await FONTS;
 const resumed = cfg && Object.keys(state.answers).length > 0;
 // 编号从第 1 格起，后面空两格接项目名（第 4 格起），操作靠右
 const COL = 4;
-function menuItem(tag, attrs, n, name, note, action) {
+const menuLine = (n, name, action) => {
   const left = ` ${n}`.padEnd(COL), dots = '.'.repeat(Math.max(2, W - COL - cols(name) - cols(action) - 4));
-  return `<${tag} class="menu-item" ${attrs}><span class="l">${left}<b class="tx">${esc(name)}</b> ${dots} <b class="inv"> ${esc(action)} </b></span>` +
-    `<span class="l small menu-note">- ${esc(note)}</span></${tag}>`;
+  return `<span class="l">${left}<b class="tx">${esc(name)}</b> ${dots} <b class="inv"> ${esc(action)} </b></span>`;
+};
+function menuItem(tag, attrs, n, name, note, action) {
+  return `<${tag} class="menu-item" ${attrs}>${menuLine(n, name, action)}<span class="l small menu-note">- ${esc(note)}</span></${tag}>`;
 }
+// 答到一半回到首页：第 1 项的动作是“继续答题”，说明那一行右边再加一个同样反白的“重新开始”（负责人 2026-11-03 定）
+const resumeItem = (note) =>
+  `<div class="menu-item two"><button type="button" class="menu-row" id="startBtn">${menuLine(1, '答题匹配', '继续答题')}</button>` +
+  `<div class="menu-sub"><span class="small menu-note">- ${esc(note)}</span><button type="button" id="resetBtn"><b class="inv"> 重新开始 </b></button></div></div>`;
 // 店头的编号：按下“开始”时才记下来（serialNo(true)），这里先显示到时会用的那个号
 let nextNo = 1;
 try { nextNo = (+localStorage.getItem('receipt-no') || 0) + 1; } catch (e) {}
@@ -432,12 +443,10 @@ function titledRule(t, c = '=', w = W) {
 $('#store').innerHTML = L(center('找到适合你的 Agent 记忆方案', W_S), 'small') + L(center(`No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
 // “请选择”和上下两条分隔线用店头那一级小字（全页只用三种字号：标题、正文、小字）
 $('#menu').innerHTML = L(titledRule('请选择', '=', W_S), 'small') + `<div class="menu-list">` +
-  // 答到一半回到首页：第 1 项换成“继续答题”，下面加一项同样样式的“重新开始”，浏览项目顺延成第 3 项
   (resumed
-    ? menuItem('button', 'type="button" id="startBtn"', 1, '继续答题', `已答 ${flow().done.length} 题`, '继续') +
-      menuItem('button', 'type="button" id="resetBtn"', 2, '重新开始', '清空答案，从第 1 题答起', '开始')
+    ? resumeItem('约 20 题   5 分钟')
     : menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '约 20 题   5 分钟' : '读不到问卷', '开始')) +
-  menuItem('a', 'href="catalog.html?from=home"', resumed ? 3 : 2, '浏览收录项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
+  menuItem('a', 'href="catalog.html?from=home"', 2, '浏览收录项目', projectCount ? `共 ${projectCount} 个` : '全部收录的项目', '进入') +
   `</div>` + L(rule('=', W_S), 'small') +
   (cfg ? '' : '<p class="p half">请在项目目录运行 npm run site，再打开 http://localhost:5173/prototype/receipt.html</p>');
 const startBtn = $('#startBtn');
