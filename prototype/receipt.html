@@ -13,6 +13,8 @@
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-mono-700.woff2") format("woff2"); font-weight: 700; font-display: block; }
 
 /* 首页（负责人 2026-11-03 给的版式）：英文大标题三行（倍高倍宽），店头两行，菜单表；每个入口整块可点 */
+/* 标题最长一行 22 个字母，倍高倍宽放不下，整体缩到一行正好 22 格 */
+.home-title { font-size: calc(var(--cw) / 11); line-height: calc(var(--cw) / 11 * 1.4); }
 .home-title .ln { height: auto; }
 /* 店头：标题下面两行辅助字号，居中 */
 .store { margin-top: var(--lh); }
@@ -136,7 +138,7 @@
     <div class="inner" id="inner">
       <div class="topbars" id="topbars" aria-hidden="true"></div>
       <div id="intro">
-        <h1 class="title home-title"><span class="ln">The right memory</span><span class="ln">for you</span><span class="ln">and your AI</span></h1>
+        <h1 class="title home-title"><span class="ln">find the memory system</span><span class="ln">for you</span><span class="ln">and your AI</span></h1>
         <div id="store" class="store"></div>
         <div id="menu" class="gap"></div>
       </div>
@@ -416,9 +418,9 @@ const resumed = cfg && Object.keys(state.answers).length > 0;
 // 编号从第 1 格起，后面空两格接项目名（第 4 格起），操作靠右
 const COL = 4;
 function menuItem(tag, attrs, n, name, note, action) {
-  const left = ` ${n}`.padEnd(COL), dots = '.'.repeat(Math.max(2, W - COL - cols(name) - cols(action) - 2));
-  return `<${tag} class="menu-item" ${attrs}><span class="l">${left}<b class="tx">${esc(name)}</b> ${dots} <b>${esc(action)}</b></span>` +
-    `<span class="l small menu-note">${esc(note)}</span></${tag}>`;
+  const left = ` ${n}`.padEnd(COL), dots = '.'.repeat(Math.max(2, W - COL - cols(name) - cols(action) - 4));
+  return `<${tag} class="menu-item" ${attrs}><span class="l">${left}<b class="tx">${esc(name)}</b> ${dots} <b class="inv"> ${esc(action)} </b></span>` +
+    `<span class="l small menu-note">- ${esc(note)}</span></${tag}>`;
 }
 // 店头的编号：按下“开始”时才记下来（serialNo(true)），这里先显示到时会用的那个号
 let nextNo = 1;
@@ -428,7 +430,7 @@ function titledRule(t, c = '=', w = W) {
   const n = w - cols(t) - 2, l = Math.floor(n / 2);
   return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
 }
-$('#store').innerHTML = L(center(`记忆系统配对单 No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
+$('#store').innerHTML = L(center(`记忆系统匹配问卷 No.${String(nextNo % 10000).padStart(4, '0')}`, W_S), 'small') + L(center(STAMP.full, W_S), 'small');
 $('#menu').innerHTML = L(titledRule('请选择')) + `<div class="menu-list">` +
   menuItem('button', `type="button" id="startBtn"${cfg ? '' : ' disabled'}`, 1, '答题匹配', cfg ? '约 20 题   5 分钟' : '读不到问卷', resumed ? '继续' : '开始') +
   (resumed ? '<p id="resume"><button class="tbtn" id="resetBtn">[重新开始]</button></p>' : '') +
@@ -455,7 +457,7 @@ async function start() {
   head.innerHTML = `
     ${titleHTML(TITLE, 'ink')}
     <div class="ink gap">${L(rule('=', W_S), 'small')}</div>
-    <div class="ink">${L(center(`记忆系统配对单 No.${NO}`, W_S), 'small')}</div>
+    <div class="ink">${L(center(`记忆系统匹配问卷 No.${NO}`, W_S), 'small')}</div>
     <div class="ink">${L(center(STAMP.full, W_S), 'small')}</div>
     <div class="ink">${L(rule('-', W_S), 'small')}</div>`;
   faint(head);
@@ -785,7 +787,7 @@ async function showResult() {
 // 文字版小票：和纸上同一套 32 格
 function receiptText() {
   return [
-    TITLE.join(''), rule('='), center(`记忆系统配对单 No.${NO}`), center(STAMP.full), rule('-'),
+    TITLE.join(''), rule('='), center(`记忆系统匹配问卷 No.${NO}`), center(STAMP.full), rule('-'),
     ...flow().done.flatMap((q) => pairText(rowLabel(q), answerText(q, state.answers[q.id], state.free))),
     rule('='), '推荐结果',
     ...(last.list || []).flatMap((p, n) => pairText(`${pad2(n + 1)} ${p.name}`, `${p.score} 分`)),
