@@ -72,7 +72,7 @@ import { edgeLines, adviceItems, splitName } from "../site/assets/result-text.js
 import { run } from "./sample.js";
 import {
   W, W_H, W_S, FONTS, cols, esc, sp, rule, center, spread, wrapCols, L, pairHTML, faint,
-  barcode, codeOf, fnv, stamp, serialNo, titleHTML, titledRule, dotsRow, numOf, rowLabel, answerText, pad2,
+  barcode, codeOf, fnv, stamp, serialNo, titleHTML, titledRule, dotsRow, dotsPairHTML, numOf, rowLabel, answerText, pad2,
   OUT, P, S, hang, TOG, foldLine, section, sep, formTagsOf, tagsText,
 } from "./thermal.js";
 
@@ -350,19 +350,19 @@ if (combos.length) {
 
 /* ---------- 排除原因 ---------- */
 // 小节：二级标题，下面的条目用辅助字号
-const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list small">${body}</div></div>`;
+const grp = (title, body) => `<div class="grp">${P(esc(title), "p h")}<div class="list">${body}</div></div>`;
 const alone = r.narrowed_by.filter((x) => x.only > 0);
 const narrow = (alone.length ? alone : [...r.narrowed_by].sort((x, y) => y.total - x.total)).slice(0, 3);
+// 负责人 2026-11-04 定的结构：前后矛盾 → 主要过滤选项（“- 选项 …… 排除 N 个”）→ 可放宽条件（“条件 …… 增加 N 个”），
+// 三个小标题都是二级标题，下面都用正文；不再列“提醒”
+// 选项名太短、单看不知道说的什么（如“否”）时，前面加上题目简称
+const filterLabel = (x) => !x.selected.length ? `第 ${x.number} 题“${x.short}”`
+  : x.selected.every((t) => t.length <= 2) ? `${x.short}：${x.selected.join("、")}` : x.selected.join("、");
 let why = "";
-// 排除较多的条件直接列在部分标题下，不另加小标题（和“排除原因”重复）
-if (narrow.length) {
-  why += `<div class="list">${narrow.map((x) =>
-    hang(2, mixSpace(`- 第 ${x.number} 题“${x.short}”` + (x.selected.length ? `，您选了${x.selected.join("、")}` : "") +
-      `，该选项排除了 ${alone.length ? x.only : x.total} 个项目`))).join("")}</div>`;
-}
 if (r.conflicts.length) why += grp("前后矛盾", r.conflicts.map((c) => hang(2, `- ${esc(c.message)}`)).join(""));
-if (r.notices.length) why += grp("提醒", r.notices.map((t) => hang(2, `- ${esc(t)}`)).join(""));
-if (r.relax.length) why += grp("放宽这些条件，就能多出一些选择", r.relax.map((x) => pairHTML(x.label, `${x.count} 个`, W_S)).join(""));
+if (narrow.length) why += grp("主要过滤选项", narrow.map((x) =>
+  dotsPairHTML(filterLabel(x), `排除 ${alone.length ? x.only : x.total} 个`, W, "- ")).join(""));
+if (r.relax.length) why += grp("可放宽条件", r.relax.map((x) => dotsPairHTML(x.label, `增加 ${x.count} 个`, W)).join(""));
 if (why) html += section("排除原因", `<div class="stack">${why}</div>`, false);
 
 /* ---------- 强化补丁 ---------- */

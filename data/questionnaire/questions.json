@@ -1291,35 +1291,35 @@
       "when": {
         "all": [{"question": "q3api", "selected_only_within": ["local"]}, {"question": "q1", "selected_none": ["windows", "mac", "linux", "vps", "nas"]}]
       },
-      "message": "第 2l 题只选了本地运行的开源模型，但第 1 题没有电脑或服务器：本地模型一般要装在电脑或服务器上"
+      "message": "第 2l 题只选了本地运行的开源模型，但第 1 题没有电脑或服务器。本地模型一般要装在电脑或服务器上。"
     },
     {
       "question": "q4",
       "option": "single",
       "by_question": "q3",
       "when": {"all": [{"question": "q4", "selected_any": ["single"]}, {"question": "q3", "count_at_least": 2}]},
-      "message": "第 2 题选了几种使用方式，第 3 题却选了“只在一个入口用”：几种方式要用同一份记忆的话，请改选多端共用"
+      "message": "第 2 题选了多种使用方式，但第 3 题选了“只在一个入口用”。如需多种方式共用记忆，请改选多端共用。"
     },
     {
       "question": "q16",
       "option": "low",
       "by_question": "q3",
       "when": {"all": [{"question": "q3", "selected_any": ["remote", "cli", "bot"]}, {"question": "q16", "selected_any": ["low"]}]},
-      "message": "第 2 题选了远程接入终端会话、命令行或消息平台，这类用法本身要在电脑上敲命令配置；第 16 题选“点几下就能用”会排除大部分配合它们的记忆库"
+      "message": "第 2 题选了远程接入终端会话、命令行或消息平台，但第 16 题选“点几下就能用”，会排除大部分配合它们的记忆库。"
     },
     {
       "question": "q5",
       "option": "phone",
       "by_question": "q3",
       "when": {"all": [{"question": "q3", "selected_any": ["remote", "cli"]}, {"question": "q5", "selected_only_within": ["phone"]}]},
-      "message": "第 2 题用的 Agent 跑在电脑上，记忆库一般也装在那台电脑上；第 4 题只选了“只用手机”，可以加选“一台经常开着的电脑”"
+      "message": "第 2 题用的 Agent 跑在电脑上，但第 4 题只选了“只用手机”。记忆库一般也装在那台电脑上，可以加选“一台经常开着的电脑”。"
     },
     {
       "question": "q5",
       "option": "hosted",
       "by_question": "q17",
       "when": {"all": [{"question": "q5", "selected_any": ["hosted"]}, {"question": "q17", "selected_none": ["vendor"]}]},
-      "message": "第 4 题接受项目方的托管服务，但第 17 题没勾“记忆库项目方自己的账号”：用托管服务都要注册项目方账号，托管版会被排除"
+      "message": "第 4 题接受项目方的托管服务，但第 17 题没勾“记忆库项目方自己的账号”。用托管服务都要注册项目方账号，否则托管版会被排除。"
     }
   ],
   "preferences": [
@@ -1370,9 +1370,10 @@
     }
   ],
   "clients": {
-    "claude_web": {"label": "Claude 网页和 App", "fits": [{"compatible_clients": ["claude_web_mobile"]}, "@remote_connector"]},
+    "claude_web": {"label": "Claude 网页和 App", "short": "Claude", "fits": [{"compatible_clients": ["claude_web_mobile"]}, "@remote_connector"]},
     "chatgpt_web": {
       "label": "ChatGPT 网页和 App",
+      "short": "ChatGPT",
       "fits": [
         {
           "id": ["method-notion"],
@@ -1380,12 +1381,12 @@
         }
       ]
     },
-    "gemini_web": {"label": "Gemini 网页和 App", "fits": ["@remote_connector"], "note": "Gemini 只有美国的个人账号能添加自定义 MCP，需自行确认"},
+    "gemini_web": {"label": "Gemini 网页和 App", "short": "Gemini", "fits": ["@remote_connector"], "note": "Gemini 只有美国的个人账号能添加自定义 MCP，需自行确认"},
     "no_external": {"label": "不支持接外部记忆的官方网页和 App", "fits": []},
     "claude_desktop": {"label": "Claude 桌面版", "fits": [{"compatible_clients": ["claude_desktop", "claude_web_mobile"]}, {"mount": ["mcp"]}]},
     "chatgpt_desktop": {"label": "ChatGPT 桌面版", "fits": []},
     "kimi_code_desktop": {"label": "Kimi Code Desktop", "fits": []},
-    "desktop_other": {"label": "其它桌面版", "fits": [{"mount": ["mcp"]}], "note": "需自行确认您用的工具能否连接 MCP"},
+    "desktop_other": {"label": "其它桌面版", "short": "您用的桌面版", "fits": [{"mount": ["mcp"]}], "note": "需自行确认您用的工具能否连接 MCP"},
     "claude_code": {"label": "Claude Code", "fits": [{"compatible_clients": ["claude_code"]}, {"mount": ["mcp", "proxy_anthropic"]}]},
     "codex": {"label": "Codex", "fits": [{"compatible_clients": ["codex"]}, {"mount": ["mcp", "proxy_openai"]}]},
     "gemini_cli": {"label": "Gemini CLI", "fits": [{"compatible_clients": ["gemini_cli"]}, {"mount": ["mcp"]}]},
@@ -1397,8 +1398,8 @@
     "trae": {"label": "TRAE", "fits": [{"mount": ["mcp"]}]},
     "codebuddy": {"label": "CodeBuddy Code", "fits": [{"mount": ["mcp"]}]},
     "hermes": {"label": "Hermes", "memory_host": "hermes", "fits": [{"compatible_clients": ["hermes"]}, {"mount": ["mcp", "proxy_openai"]}]},
-    "agent_other": {"label": "其它 Agent", "fits": [{"mount": ["mcp"]}], "note": "需自行确认您用的工具能否连接 MCP"},
-    "terminal_chat": {"label": "终端聊天工具", "fits": [{"mount": ["proxy_openai"]}], "note": "llm、aichat 这类工具多数只能改接口地址接转发服务，能否接 MCP 需自行确认"},
+    "agent_other": {"label": "其它 Agent", "short": "您用的 Agent", "fits": [{"mount": ["mcp"]}], "note": "需自行确认您用的工具能否连接 MCP"},
+    "terminal_chat": {"label": "终端聊天工具", "short": "终端聊天工具", "fits": [{"mount": ["proxy_openai"]}], "note": "llm、aichat 这类工具多数只能改接口地址接转发服务，能否接 MCP 需自行确认"},
     "kelivo": {"label": "Kelivo", "fits": [{"compatible_clients": ["kelivo"]}, "@phone_reach"]},
     "rikkahub": {"label": "RikkaHub", "fits": [{"compatible_clients": ["rikkahub"]}, "@phone_reach"]},
     "aru": {"label": "Aru", "fits": ["@phone_reach"]},
@@ -1410,6 +1411,7 @@
     "cherry_studio": {"label": "Cherry Studio", "fits": ["@desktop"]},
     "client_other": {
       "label": "其它聊天客户端",
+      "short": "您用的聊天客户端",
       "fits": [
         {
           "when": {"question": "q3mcp", "selected_none": ["no"]},
@@ -1422,9 +1424,10 @@
         {"mount": ["proxy_openai"], "phone_access": ["remote_mcp", "http_endpoint", "needs_tunnel"]}
       ]
     },
-    "self_bot": {"label": "自建 bot", "fits": [{"compatible_clients": ["developer_built"]}, {"mount": ["sdk", "mcp", "proxy_openai"]}]},
+    "self_bot": {"label": "自建 bot", "short": "您的 bot", "fits": [{"compatible_clients": ["developer_built"]}, {"mount": ["sdk", "mcp", "proxy_openai"]}]},
     "bot_any": {
       "label": "消息平台 bot",
+      "short": "您的 bot",
       "fits": [
         {"compatible_clients": ["astrbot", "openclaw", "hermes", "telegram", "wechat", "feishu", "discord", "developer_built"]},
         {"mount": ["mcp", "proxy_openai"]}
@@ -1439,7 +1442,7 @@
     "fastgpt": {"label": "FastGPT", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
     "n8n": {"label": "n8n", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
     "ragflow": {"label": "RAGFlow", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
-    "platform_other": {"label": "其它搭建平台", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"}
+    "platform_other": {"label": "其它搭建平台", "short": "您用的搭建平台", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"}
   },
   "spec_sets": {
     "net_reach": [
@@ -1466,5 +1469,16 @@
       "mixed": "有几种 {host} 插件，有的会占用记忆插槽、替换 {host} {memory}，有的和它同时工作，装之前看清用哪一个",
       "context_slot": "会占用 {host} 的上下文引擎插槽，替换 {host} 自带的上下文组装；{memory}照常工作"
     }
+  },
+  "mount_how": {
+    "plugin": "装成 {client} 的插件",
+    "plugin_memory": "装成 {client} 的插件，占用它的记忆插槽",
+    "plugin_mixed": "装成 {client} 的插件，有的版本占用它的记忆插槽",
+    "plugin_context": "装成 {client} 的插件，占用它的上下文引擎插槽",
+    "mcp": "在 {client} 里添加它的 MCP 服务",
+    "proxy_openai": "把 {client} 的接口地址改成它",
+    "proxy_anthropic": "把 {client} 的 Anthropic 接口地址改成它",
+    "sdk": "写代码接进 {client}",
+    "direct": "在 {client} 里照说明连接"
   }
 }

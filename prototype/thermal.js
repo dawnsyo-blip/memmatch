@@ -89,6 +89,14 @@ export function pair(k, v, W = 36) {
 export const L = (s, cls = "") => `<span class="l${cls ? " " + cls : ""}">${esc(s)}</span>`;
 export const pairHTML = (k, v, w) => pair(k, v, w).map(([a, b]) => `<span class="l">${esc(a)}<b>${esc(b)}</b></span>`).join("");
 export const pairText = (k, v, w) => pair(k, v, w).map(([a, b]) => a + b);
+// “名字 …… 值”：点线用缩小的 .dots、值不加粗；名字太长时先给值留出位置再折行，值总在最后一行的右端；
+// bullet（如“- ”）只写在第一行，折行缩进对齐
+export function dotsPairHTML(k, v, w = W, bullet = "") {
+  const b = cols(bullet), ks = wrapCols(k, w - b - cols(v) - 4), last = ks.pop() || "";
+  const lines = ks.map((t) => esc(t));
+  lines.push(`${esc(last)} <span class="dots">${".".repeat(Math.max(2, w - b - cols(last) - cols(v) - 2))}</span> ${esc(v)}`);
+  return `<div>${lines.map((t, i) => `<span class="l">${i ? sp(b) : esc(bullet)}${t}</span>`).join("")}</div>`;
+}
 
 // 随机挑几行，墨色淡 10%
 export const FAINT = 0.1;
