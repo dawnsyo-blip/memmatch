@@ -434,7 +434,7 @@
     },
     "usage_form": {
       "value": [
-        "plugin_agent"
+        "plugin_bot"
       ],
       "status": "verified",
       "basis": "逐条核对，见 data/usage_form.json"

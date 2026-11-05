@@ -1,8 +1,9 @@
 {
- "_note": "使用方式：用户怎么用上这个项目，只用于结果页显示和搭配方案，推荐规则不读。第一个值是主要方式。2026-10-28 由 access、项目定位推出初值，再按简介和 README 逐条核对",
+ "_note": "使用方式：用户怎么用上这个项目，只用于结果页显示和搭配方案，推荐规则不读。第一个值是主要方式。2026-10-28 由 access、项目定位推出初值，再按简介和 README 逐条核对 2026-11-04 负责人要求按问卷第 2 题的用法分插件：plugin_agent 编程 Agent 插件（Claude Code、Codex、Cursor 等），plugin_chat 聊天客户端插件（酒馆、Open WebUI 等），plugin_bot 聊天机器人框架插件（只接 OpenClaw、Hermes、AstrBot 的）；同时支持编程 Agent 和机器人框架的归 plugin_agent。",
  "_labels": {
-  "plugin_chat": "聊天软件插件",
-  "plugin_agent": "Agent 插件",
+  "plugin_agent": "编程 Agent 插件",
+  "plugin_chat": "聊天客户端插件",
+  "plugin_bot": "聊天机器人框架插件",
   "service": "独立服务",
   "proxy": "转发服务",
   "chat_app": "自带聊天界面的应用",
@@ -81,19 +82,19 @@
   "library"
  ],
  "astrbot-plugin-livingmemory": [
-  "plugin_chat"
+  "plugin_bot"
  ],
  "astrbot-plugin-private-companion": [
-  "plugin_chat"
+  "plugin_bot"
  ],
  "astrbot-plugin-proactive-chat": [
-  "plugin_chat"
+  "plugin_bot"
  ],
  "astrbot-plugin-self-learning": [
-  "plugin_chat"
+  "plugin_bot"
  ],
  "atmem": [
-  "plugin_agent"
+  "plugin_bot"
  ],
  "aurasdk": [
   "library",
@@ -487,7 +488,7 @@
   "library"
  ],
  "memori": [
-  "plugin_agent"
+  "plugin_bot"
  ],
  "memorix": [
   "service"
@@ -496,7 +497,7 @@
   "plugin_agent"
  ],
  "memory-lancedb-pro": [
-  "plugin_agent"
+  "plugin_bot"
  ],
  "memory-mcp": [
   "plugin_agent",
@@ -580,7 +581,7 @@
   "service"
  ],
  "mnemosyne-agentmemory-engine-openclaw-hermes": [
-  "plugin_agent"
+  "plugin_bot"
  ],
  "mochibot": [
   "bot"

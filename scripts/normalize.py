@@ -879,7 +879,11 @@ def n_usage_form(pid, norm):
     vals = []
     if "proxy" in acc: vals.append("proxy")
     if "host_plugin" in acc:
-        vals.append("plugin_chat" if clients & {"sillytavern", "astrbot", "open_webui", "rikkahub", "kelivo"} else "plugin_agent")
+        hosts = clients - {"any_mcp_client", "developer_built", "openai_compatible"}
+        if hosts and hosts <= {"astrbot", "openclaw", "hermes", "telegram", "wechat", "feishu", "discord"}:
+            vals.append("plugin_bot")  # 只接 OpenClaw、Hermes、AstrBot 这类聊天机器人框架
+        else:
+            vals.append("plugin_chat" if clients & {"sillytavern", "open_webui", "rikkahub", "kelivo"} else "plugin_agent")
     if "standalone_app" in acc or role == "companion_app": vals.append("chat_app")
     if "mcp" in acc: vals.append("service")
     if "cli_tool" in acc: vals.append("cli")

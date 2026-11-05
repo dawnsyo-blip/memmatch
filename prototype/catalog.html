@@ -105,7 +105,7 @@ function item(p) {
 }
 
 // 按主要使用方式（usage_form 的第一个）分组。组的顺序负责人 2026-11-03 定；转发服务没排进去，跟在独立服务后面
-const ORDER = ["plugin_agent", "plugin_chat", "service", "proxy", "chat_app", "app", "bot", "cli", "library", "guide", "method", "model"];
+const ORDER = ["plugin_agent", "plugin_chat", "plugin_bot", "service", "proxy", "chat_app", "app", "bot", "cli", "library", "guide", "method", "model"];
 const groups = new Map([...ORDER, ...Object.keys(labels).filter((k) => !ORDER.includes(k))].map((k) => [k, []]));
 const other = [];
 for (const p of data.projects) {
@@ -155,7 +155,7 @@ let html = `<div class="cat">${titleHTML(["完整项目库"])}</div>`;
 html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">` +
   L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center("2026-10-30", W_S), "small")  /* 收录名单定下来的日期，固定写（负责人 2026-11-04 定） */ + `</div>` +
   // 时间下面是项目收录标准（点开展开），一条单线虚线，再是返回和下载两行动作（负责人 2026-11-04 定）
-  `<div class="acts-c small"><button type="button" class="chip inv" id="stdBtn" aria-expanded="false" aria-controls="stdBody"> <span class="u">项目收录&amp;筛选&amp;排序标准</span> </button></div>` +
+  `<div class="acts-c small"><button type="button" class="chip inv" id="stdBtn" aria-expanded="false" aria-controls="stdBody"> <span class="u">项目收录标准</span> </button></div>` +
   stdHTML() + `<div class="cat-sep">${L(rule("-", W_S), "small")}</div>` +
   act(1, BACK.text, "→", `href="${BACK.href}"`) + act(2, "下载项目清单", "↓", 'type="button" id="listBtn"') + `</div>`;
 for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()));
