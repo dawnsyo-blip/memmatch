@@ -10,6 +10,7 @@
 <link rel="preload" href="fonts/sarasa-result-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/sarasa-result-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="thermal.css">
+<link rel="stylesheet" href="fonts/input.css">
 <style>
 /* 完整结果页：和 receipt.html 同一套出票口、纸和 32 格网格。
    结构沿用旧版 site/result.html（2026-10-28 定）：概况和默认推荐偏好 → 推荐 → 搭配方案 → 排除原因 → 强化补丁（原“改进建议”）→ 页脚；每个部分都能展开收起。
@@ -40,8 +41,8 @@
 .shop .ln { text-align: center; }
 .meta-c { text-align: center; }
 .meta-c > * + * { margin-top: calc(var(--lh-s) * .25); }
-/* 订购人：一条下划线，点进去就能填，只存在访客自己的浏览器里 */
-.buyer { width: 12ch; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; text-align: center; padding: 0; line-height: inherit; }
+/* 订购人：一条下划线，点进去就能填，只存在访客自己的浏览器里。访客填的字可能不在子集里，缺的字从 fonts/input.css 的切片按需下载 */
+.buyer { font-family: "Sarasa Mono SC", "Sarasa Input", monospace; font-weight: 400; width: 12ch; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; text-align: center; padding: 0; line-height: inherit; }
 .buyer:focus { outline: none; border-bottom-width: 2px; }
 #prefBtn { padding-block: .15em; }
 .pref-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }

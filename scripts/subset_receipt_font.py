@@ -5,6 +5,12 @@
 - sarasa-mono-*.woff2 给答题页 receipt.html：页面和共用脚本的全文、问卷配置、项目名（小票上会显示前 3 名）
 - sarasa-result-*.woff2 给完整结果页 result.html 和项目库 catalog.html：再加上全部项目数据、引擎和结果页文字规则里的字
 都另收 ASCII 可打印字符。改了页面、问卷或项目数据后重跑一次。
+
+另外生成结果页“订购人”输入框的备用字体（负责人 2026-11-04 要）：访客填的名字事先不知道，
+把 GB2312 的 6763 个常用字（常规字重）按码位切成每片 80 个字，放在 prototype/fonts/input/，
+prototype/fonts/input.css 给每片声明 unicode-range，字体名“Sarasa Input”。输入框的字体写成
+“Sarasa Mono SC”, “Sarasa Input”：子集里有的字照常显示，没有的字浏览器才去下载包含它的那一片（每片约 14 KB）。
+这些切片和页面内容无关，只在换源字体版本时需要重新生成，加 --input 参数才生成。
 项目数据读打包后的 site/data/projects.json，没有时先跑 node scripts/build_site_data.mjs。
 
 源字体放在 cache/fonts/（不进 git）；没有时从 GitHub 下载 Sarasa-Gothic 的 SarasaMonoSC 压缩包，
@@ -52,8 +58,65 @@ def chars_of(text):
     return "".join(sorted(set(c for c in text if c >= " ")))
 
 
+# 订购人输入框的备用字体：GB2312 的常用字按码位排序后每 80 个字一片
+INPUT_SLICE = 80
+
+
+def gb2312_chars():
+    chars = []
+    for hi in range(0xB0, 0xF8):
+        for lo in range(0xA1, 0xFF):
+            try:
+                chars.append(bytes([hi, lo]).decode("gb2312"))
+            except UnicodeDecodeError:
+                pass
+    return sorted(set(chars), key=ord)
+
+
+def ranges(chars):
+    """码位列表写成 unicode-range：连续的合并成 U+4E00-4E05。"""
+    cps, out, i = [ord(c) for c in chars], [], 0
+    while i < len(cps):
+        j = i
+        while j + 1 < len(cps) and cps[j + 1] == cps[j] + 1:
+            j += 1
+        out.append(f"U+{cps[i]:X}" if i == j else f"U+{cps[i]:X}-{cps[j]:X}")
+        i = j + 1
+    return ", ".join(out)
+
+
+def build_input_slices():
+    chars = gb2312_chars()
+    folder = OUT / "input"
+    folder.mkdir(parents=True, exist_ok=True)
+    for old in folder.glob("*.woff2"):
+        old.unlink()
+    css = ["/* 结果页“订购人”输入框的备用字体，由 scripts/subset_receipt_font.py --input 生成：",
+           "   GB2312 常用字按码位每 80 个字一片，浏览器只下载输入框里用到的字所在的那几片 */"]
+    total = 0
+    for k in range(0, len(chars), INPUT_SLICE):
+        part = chars[k:k + INPUT_SLICE]
+        opts = subset.Options()
+        opts.flavor = "woff2"
+        opts.layout_features = ["*"]
+        font = subset.load_font(str(SRC / "SarasaMonoSC-Regular.ttf"), opts)
+        sub = subset.Subsetter(opts)
+        sub.populate(text="".join(part))
+        sub.subset(font)
+        name = f"sarasa-input-{k // INPUT_SLICE:03d}.woff2"
+        subset.save_font(font, str(folder / name), opts)
+        total += (folder / name).stat().st_size
+        css.append(f'@font-face {{ font-family: "Sarasa Input"; src: url("input/{name}") format("woff2"); '
+                   f'font-weight: 400; font-display: swap; unicode-range: {ranges(part)}; }}')
+    (OUT / "input.css").write_text("\n".join(css) + "\n", encoding="utf8", newline="\n")
+    n = (len(chars) + INPUT_SLICE - 1) // INPUT_SLICE
+    print(f"订购人输入框的备用字体：{len(chars)} 个常用字，{n} 片，共 {total // 1024} KB，每片约 {total // n // 1024} KB")
+
+
 def main():
     ensure_source()
+    if "--input" in os.sys.argv:
+        build_input_slices()
     data = ROOT / "site" / "data" / "projects.json"
     if not data.exists():
         raise SystemExit("没有 site/data/projects.json，先跑 node scripts/build_site_data.mjs")
