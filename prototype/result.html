@@ -36,6 +36,13 @@
 .meta-act { margin-top: calc(var(--lh) * .5); }
 .meta-lines { margin-top: calc(var(--lh) * .25); }
 .meta + .sec, .meta-note { margin-top: var(--lh); }
+/* 页头（负责人 2026-11-04 给的示意图）：大标题和下面四行都居中 */
+.shop .ln { text-align: center; }
+.meta-c { text-align: center; }
+.meta-c > * + * { margin-top: calc(var(--lh-s) * .25); }
+/* 订购人：一条下划线，点进去就能填，只存在访客自己的浏览器里 */
+.buyer { width: 12ch; border: 0; border-bottom: 1px solid var(--ink); border-radius: 0; text-align: center; padding: 0; line-height: inherit; }
+.buyer:focus { outline: none; border-bottom-width: 2px; }
 #prefBtn { padding-block: .15em; }
 .pref-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
 /* 页脚：分隔线之间的每一块上下各留半行；“自助服务”的每一行是按钮，整行可点，悬停时动作名加下划线 */
@@ -357,12 +364,19 @@ function prefButton() {
 
 /* ---------- 概况 ---------- */
 const now = stamp();
-let html = titleHTML(r.results.length ? ["为您挑出", `${r.results.length} 个记忆类项目`] : ["暂时没有", "完全符合的"]);
-// 页眉：粗分隔线下面先是默认推荐偏好的按钮（在首页“找到适合你的 Agent 记忆方案”那一行的位置，负责人 2026-11-04 定），
-// 点开的内容展开在它下面；再是编号和日期（同一组，行间不留空）
-html += `<div class="meta">${L(rule("=", W_S), "small")}` +
-  `<div class="meta-act">${prefButton()}</div>${prefHTML()}` +
-  `<div class="meta-lines">${L(center(`No.${serialNo()}`, W_S), "small")}${L(center(now.full, W_S), "small")}${sample ? L(center(demo ? "演示答卷，不是您的答卷" : "示例答卷", W_S), "small") : ""}</div></div>`;
+// 页头（负责人 2026-11-04 给的示意图）：大标题“MEMORY SHOP / 自提清单”，下面居中写编号、订购人、时间、收银员。
+// 推荐了几个写在页脚的合计里；默认推荐偏好的按钮在收银员下面，点开的内容展开在它下面（负责人 2026-11-04 定）
+const CASHIER = { name: "@凉拌笨蕉皮", url: "https://xhslink.cn/o/t9vRpEDr4U" };
+let buyer = "";
+try { buyer = localStorage.getItem("memmatch-buyer") || ""; } catch (e) {}
+let html = `<div class="shop">${titleHTML(["MEMORY SHOP", "自提清单"])}</div>`;
+html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines meta-c small">` +
+  `<p>NO.${serialNo()}</p>` +
+  `<p><label for="buyer">订购人：</label><input id="buyer" class="buyer" maxlength="16" autocomplete="off" value="${esc(buyer)}"></p>` +
+  `<p>时间：${now.full}</p>` +
+  `<p>收银员：<a class="u" href="${CASHIER.url}" target="_blank" rel="noopener">${CASHIER.name}</a></p>` +
+  (sample ? `<p>${demo ? "演示答卷，不是您的答卷" : "示例答卷"}</p>` : "") + `</div>` +
+  `<div class="meta-act meta-c small"><button type="button" class="chip inv" id="prefBtn" aria-expanded="false" aria-controls="prefBody"> <span class="u">默认推荐偏好</span> </button></div>${prefHTML()}</div>`;
 if (!r.results.length) html += P("您的条件放在一起，收录的项目里还没有能同时满足的。下面列出放宽哪些条件就能有选择。", "p meta-note");
 
 /* ---------- 推荐 ---------- */
@@ -459,7 +473,26 @@ prefBtn.addEventListener("click", () => {
   prefBody.hidden = !prefBody.hidden;
   prefBtn.setAttribute("aria-expanded", String(!prefBody.hidden));
 });
+document.getElementById("buyer").addEventListener("input", (e) => {
+  buyer = e.target.value.trim();
+  try { localStorage.setItem("memmatch-buyer", buyer); } catch (err) {}
+});
 faint(sheet);
+
+// 从答题页点“完整结果”过来：纸从出票口重新出来（负责人 2026-11-04 定）。
+// 结果页很长，只让第一屏这段出纸：动画时先把纸截成一屏高，结束后再放开
+let unfurl = false;
+try { unfurl = sessionStorage.getItem("memmatch-unfurl") === "1"; sessionStorage.removeItem("memmatch-unfurl"); } catch (e) {}
+if (unfurl && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const paper = document.querySelector(".paper"), inner = paper.querySelector(".inner"), shadow = document.querySelector(".shadow");
+  const vis = Math.max(120, Math.min(paper.offsetHeight, innerHeight - paper.getBoundingClientRect().top));
+  paper.style.height = vis + "px";
+  const o = { duration: 1100, easing: "cubic-bezier(.3, .7, .2, 1)" };
+  const up = [{ transform: `translate3d(0,${-vis}px,0)` }, { transform: "none" }];
+  const anims = [paper.animate(up, o), inner.animate([{ transform: `translate3d(0,${vis}px,0)` }, { transform: "none" }], o)];
+  if (shadow) anims.push(shadow.animate(up, o));
+  Promise.all(anims.map((a) => a.finished)).then(() => { paper.style.height = ""; });
+}
 
 /* ---------- 答卷 ---------- */
 // 和答题页的已答条目一样：题号、简称 ........ 答案；顺序按问卷的“部分”
@@ -485,7 +518,7 @@ document.getElementById("saveAnswers").addEventListener("click", () => {
   saveText(["记忆库推荐 · 答卷", `下载于 ${now.date}`, "", ...plain], `记忆库推荐答卷-${now.date}.txt`);
 });
 document.getElementById("saveResults").addEventListener("click", () => {
-  const out = ["记忆库推荐 · 推荐结果", `下载于 ${now.date}；项目描述基于 README 生成，核实于 2026 年 10 月`, ""];
+  const out = ["记忆库推荐 · 推荐结果", ...(buyer ? [`订购人：${buyer}`] : []), `下载于 ${now.date}；项目描述基于 README 生成，核实于 2026 年 10 月`, ""];
   if (r.results.length) {
     out.push(`【为您挑出 ${r.results.length} 个记忆类项目】`);
     r.results.forEach((x, i) => out.push("", `${i + 1}. ${nmPlain(x.name)}`, `　　${sentence(x.summary)}`,

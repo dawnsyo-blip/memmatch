@@ -508,7 +508,6 @@
       "type": "multi",
       "short": "记忆库放在哪",
       "text": "可以接受记忆库放在哪里运行？",
-      "help": "大多数记忆库要在一台设备上一直运行，聊天时才能随时取用记忆。",
       "combine": "union",
       "union_field": "runs_on",
       "unless_project": [{"category": ["自带记忆的应用"]}, {"project_role": ["method"], "runs_on": ["third_party_hosted"]}],

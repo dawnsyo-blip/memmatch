@@ -93,9 +93,6 @@
 
 /* 结果 */
 .res .bar { margin-block: calc(var(--lh) * .5); }
-.tear { margin-top: var(--lh); }
-.tear .tbtn { vertical-align: top; }
-.tear svg { display: inline-block; width: 2ch; height: 1em; vertical-align: -.15em; }
 
 /* 打印：一行字从左到右一顿一顿地出现 */
 .ink { clip-path: inset(0 100% 0 0); }
@@ -397,6 +394,17 @@ async function emit(inks, pause = 160) {
   await wait(pause);
 }
 
+// 平滑地伸长一段：没有步进和槽口抖动，排序题选中后纸面变长时用
+async function growTo(target) {
+  const D = Math.ceil(target) - (H - hidden);
+  if (D <= 0) return;
+  setH(Math.ceil(target));
+  if (still()) { setHidden(0); trimSlack(); return; }
+  setHidden(D);
+  await play([{ t0: 0, dur: 260, pause: 0, from: 0, to: D, o: 0, shake: false }], D);
+  trimSlack();
+}
+
 // 收回：一段平滑地缩回去，结束后再改实际高度
 async function pullTo(target) {
   const P = H - hidden - target;
@@ -563,6 +571,7 @@ async function showQuestion(q, preset) {
   };
 
   const paint = () => {
+    const before = q.type === 'rank' ? new Map([...el.querySelector('.opts').children].map((i) => [i, i.getBoundingClientRect().top])) : null;
     el.querySelectorAll('.opt').forEach((b) => {
       const k = sel.indexOf(b.dataset.id);
       b.setAttribute('aria-checked', k >= 0);
@@ -572,24 +581,24 @@ async function showQuestion(q, preset) {
     // 单选题也要点“继续”才进入下一题（负责人 2026-11-03 定）
     go.disabled = !sel.length;
     paintConflicts();
-    reorder();
+    reorder(before);
     refit();
   };
   // 排序题：选中的按名次排到最上面，没选的按原来的顺序跟在后面；换位置时从原处平移过去
   const opts = el.querySelector('.opts');
-  const reorder = () => {
+  const reorder = (before) => {
     if (q.type !== 'rank') return;
     const items = [...opts.children];
     const byOpt = (id) => items.find((i) => i.dataset.id === id);
     const want = [...sel.map(byOpt), ...q.options.filter((o) => !sel.includes(o.id)).map((o) => byOpt(o.id))];
-    const first = new Map(items.map((i) => [i, i.getBoundingClientRect().top]));
+    const first = before || new Map(items.map((i) => [i, i.getBoundingClientRect().top]));
     const act = document.activeElement;
     items.forEach((i) => { i.style.transition = 'none'; i.style.transform = ''; });
     opts.append(...want);
     if (act && act !== document.activeElement && opts.contains(act)) act.focus({ preventScroll: true });
     for (const i of want) {
       const d = first.get(i) - i.getBoundingClientRect().top;
-      if (Math.abs(d) > 0.5 && !still()) i.animate([{ transform: `translateY(${d}px)` }, { transform: 'none' }], { duration: 220, easing: EASE_OUT });
+      if (Math.abs(d) > 0.5 && !still()) i.animate([{ transform: `translateY(${d}px)` }, { transform: 'none' }], { duration: 260, easing: EASE_OUT });
     }
     requestAnimationFrame(() => items.forEach((i) => { i.style.transition = ''; }));
   };
@@ -648,6 +657,7 @@ async function showQuestion(q, preset) {
     feeding = feeding.then(() => {
       if (!el.isConnected) return;
       const h = natural();
+      if (q.type === 'rank') return h > H ? growTo(h) : h < H ? pullTo(h) : undefined;
       if (h > H) return feedTo(h);
       if (h < H) setH(h);
     });
@@ -786,8 +796,6 @@ async function showResult() {
   last = { ...(await realPicks()), h: fnv(key), code: codeOf(key) };
   const el = document.createElement('section');
   el.className = 'res';
-  // 撕票一行：剪刀两格 + 空格 + 虚线 + 两个空格 + 下载图标两格
-  const dashes = '- '.repeat(W).slice(0, W - 2 - 1 - 2 - 2);
   const stars = '#'.repeat((W_S - cols(STAMP.date) - 2) / 2);
   const rows = !last.list ? '<div class="ink"><p class="p">读不到项目数据，请用 npm run site 打开。</p></div>'
     : last.list.length ? last.list.map((p, n) => `<div class="ink">${pairHTML(`${pad2(n + 1)} ${p.name}`, `${p.score} 分`)}</div>`).join('')
@@ -798,67 +806,41 @@ async function showResult() {
     ${rows}
     <div class="ink">${L(rule('-', W_S), 'small')}</div>
     <div class="ink">${pairHTML('小计', `${last.total ?? 0} 个`)}</div>
-    <a class="bar ink" href="result.html">完整结果 →</a>
+    <a class="bar ink" id="fullBtn" href="result.html">完整结果</a>
     <div class="ink">${L(rule('-', W_S), 'small')}</div>
     <div class="ink" aria-hidden="true">${L(`${stars} ${STAMP.date} ${stars}`, 'small')}</div>
     <div class="ink">${barcode(last.h, 38, 'barcode')}</div>
-    <div class="ink">${L(center(last.code, W_S), 'small')}</div>
-    <div class="l tear ink"><button class="tbtn" id="tearBtn" aria-label="复制小票文字"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg> ${dashes}</button>  <button class="tbtn" id="dlBtn" data-tip="将问卷下载为文本" aria-label="将问卷下载为文本"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-5-5 5 5 5-5M5 20h14"/></svg></button></div>`;
+    <div class="ink">${L(center(last.code, W_S), 'small')}</div>`;
   faint(el);
   stage.replaceChildren(el);
   await feedTo(natural(), null, [...el.querySelectorAll('.ink')]);
-  $('#tearBtn').addEventListener('click', tear);
-  $('#dlBtn').addEventListener('click', download);
+  $('#fullBtn').addEventListener('click', toResult);
 }
 
-// 文字版小票：和纸上同一套 32 格
-function receiptText() {
-  return [
-    TITLE.join(''), rule('='), center('找到适合你的 Agent 记忆方案'), center(`No.${NO}`), center(STAMP.full), rule('-'),
-    ...flow().done.flatMap((q) => pairText(rowLabel(q), answerText(q, state.answers[q.id], state.free))),
-    rule('='), '推荐结果',
-    ...(last.list || []).flatMap((p, n) => pairText(`${pad2(n + 1)} ${p.name}`, `${p.score} 分`)),
-    rule('-'), ...pairText('小计', `${last.total ?? 0} 个`), rule('-'), center(last.code), '',
-  ].map((s) => s.trimEnd()).join('\n');
-}
-
-async function tear() {
-  const btn = $('#tearBtn');
-  const text = receiptText();
-  let ok = true;
-  try { await navigator.clipboard.writeText(text); }
-  catch {
-    const ta = document.createElement('textarea');
-    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
-    document.body.append(ta); ta.select();
-    ok = document.execCommand('copy'); ta.remove();
+// 点“完整结果”：纸整段收回出票口（页面同时滚回顶上），再打开结果页，结果页从出票口重新出纸（负责人 2026-11-04 定）
+async function toResult(e) {
+  e.preventDefault();
+  if (busy) return;
+  busy = true;
+  const href = e.currentTarget.href;
+  try { sessionStorage.setItem('memmatch-unfurl', '1'); } catch (err) {}
+  if (!still()) {
+    const r0 = hidden, D = H - r0, top0 = scrollY, T = 900, t0 = performance.now();
+    await new Promise((done) => {
+      const frame = (now) => {
+        const u = Math.min(1, (now - t0) / T), k = easeInOut(u);
+        setHidden(r0 + D * k);
+        scrollTo({ top: top0 * (1 - k), behavior: 'instant' });
+        if (u < 1) requestAnimationFrame(frame); else done();
+      };
+      requestAnimationFrame(frame);
+    });
   }
-  // 连点时不重播，免得纸从半路跳回原位
-  if (!still() && !wrap.getAnimations().length) {
-    wrap.animate([
-      { transform: 'none' },
-      { transform: 'translateY(6px) rotate(-.5deg)' },
-      { transform: 'translateY(-1px) rotate(.15deg)' },
-      { transform: 'none' },
-    ], { duration: 420, easing: EASE_OUT });
-  }
-  flash(btn, ok ? '已复制小票文字' : '复制失败');
+  location.href = href;
 }
+// 从结果页按“返回”回到这一页时，浏览器可能直接拿出收回后的样子，把纸放回来
+addEventListener('pageshow', (e) => { if (e.persisted) { setHidden(0); busy = false; } });
 
-// 点了以后用提示框说一声，1.6 秒后收起
-function flash(btn, text) {
-  showTip(btn, false, text);
-  setTimeout(() => { if (tipOf === btn) hideTip(); }, 1600);
-}
-
-function download() {
-  const url = URL.createObjectURL(new Blob([receiptText()], { type: 'text/plain;charset=utf-8' }));
-  const a = document.createElement('a');
-  a.href = url; a.download = `记忆库小票-${last.code.replace(/ /g, '')}.txt`;
-  a.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-  flash($('#dlBtn'), '已下载');
-}
 
 // ---------- 提示框 ----------
 // 鼠标经过、键盘聚焦时临时显示；点一下 i 图标钉住，再点一下收起（点别处、按 Esc 也收起）
