@@ -74,6 +74,8 @@ import {
 } from "./thermal.js";
 
 const sheet = document.getElementById("sheet");
+// 链接文字：Notion 当记忆链官方的 MCP 连接说明，其余（包括链 Obsidian 官网的笔记库当记忆）显示网址（负责人 2026-11-05 定）
+const linkText = (p) => (p.id === "method-notion" ? "查看 Notion 的 MCP 连接说明" : repoText(p.repo_url));
 document.getElementById("topbars").innerHTML = barcode(20261103, 46);
 
 const json = (path) => fetch(new URL(path, import.meta.url)).then((r) => {
@@ -103,7 +105,7 @@ function item(p) {
   return `<article class="item">${P(`${esc(name)}${note ? ` <span class="note">${esc(noteText(note))}</span>` : ""}`, "p h")}` +
     S(tagsText(formTagsOf(p, labels))) +
     (p.info?.summary?.value ? P(esc(oneLine(p.info.summary.value)), "p intro") : "") +
-    (p.repo_url ? P(`<a class="repo" href="${esc(p.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(isMethod ? "查看自主管理说明" : repoText(p.repo_url))}</span> ${OUT}</a>`, "p small intro") : "") +
+    (p.repo_url ? P(`<a class="repo" href="${esc(p.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(linkText(p))}</span> ${OUT}</a>`, "p small intro") : "") +
     `</article>`;
 }
 

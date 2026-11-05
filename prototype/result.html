@@ -328,7 +328,7 @@ function cardBody(x) {
   const facts = [...(pros.length ? [["优势", pros]] : []), ...factsOf(x)];
   if (facts.length) h += `<div class="list">${facts.map(([k, v]) => factHTML(k, v)).join("")}</div>`;
   if (x.parts?.length) h += S(`可以搭配的连接工具：${x.parts.map((p) => nm(p.name)).join("、")}`);
-  if (x.repo_url) h += S(`<a class="repo" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(x.role === "method" ? "查看自主管理说明" : repoText(x.repo_url))}</span> ${OUT}</a>`);
+  if (x.repo_url) h += S(`<a class="repo" href="${esc(x.repo_url)}" target="_blank" rel="noopener"><span class="link">${esc(x.id === "method-notion" ? "查看 Notion 的 MCP 连接说明" : repoText(x.repo_url))}</span> ${OUT}</a>`);
   return h;
 }
 
