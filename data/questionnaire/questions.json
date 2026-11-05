@@ -452,7 +452,6 @@
       "type": "multi",
       "short": "模型接口",
       "text": "您用的模型接口来自哪里？",
-      "help": "用来判断能否只用本地模型，以及哪些只能配合 Claude 的项目可以用。",
       "show_if": {"question": "q3", "selected_any": ["client", "cli", "bot"]},
       "options": [
         {"id": "anthropic", "label": "Anthropic（Claude）"},
