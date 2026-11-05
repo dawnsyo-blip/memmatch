@@ -183,6 +183,10 @@ const FEED = {
   slow: false,     // 0.25 倍慢放
 };
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+// 出纸的节奏（负责人 2026-11-05 要求，首页和答题页同一套）：每段走得长而慢，段间稍停，保留一格一格的感觉但不显得卡。
+// 首页一次出整张，固定 3 段；答题时按长度定段数，短的一下送完，免得展开一行说明也要卡三下
+const INTRO = { dur: 300, pause: 120, overshoot: 0.5 };
+const segsFor = (D) => (D <= 80 ? 1 : D <= 200 ? 2 : 3);
 const SLOT_MS = 60;
 // 一次出纸的最后两段：距离按 step 缩短，停顿拉长
 const TAIL_STEP = [0.6, 0.35];
@@ -387,7 +391,7 @@ async function feedTo(target, keep, inks = []) {
   }
   setHidden(D);
   lastFeed = D;
-  await play(plan(D), D, keep, marks, anchor ? glideTo(anchor) : null);
+  await play(planIntro(D), D, keep, marks, anchor ? glideTo(anchor) : null);
   trimSlack();
 }
 
@@ -424,7 +428,7 @@ async function replay() {
   await feeding;
   const D = Math.min(lastFeed, H - 40);
   setHidden(D);
-  await play(plan(D), D);
+  await play(planIntro(D), D);
   busy = false;
 }
 
@@ -475,10 +479,7 @@ $('#resetBtn')?.addEventListener('click', () => {
 setH(natural());
 // 首页一打开：整张小票带着字从出票口一格一格吐出来，节奏和槽口颤动照答题时的出纸（负责人 2026-11-05 要求）。
 // 从结果页“去第 N 题修改”回来（?edit）和系统要求减少动态效果时不播，直接显示
-// 首页出纸的节奏：比答题时的出纸段数少、每段走得长而慢，段间稍停，保留一格一格的感觉但不显得卡（负责人 2026-11-05 要求）
-const INTRO = { segs: [4, 5], dur: 300, pause: 120, overshoot: 0.5 };
-function planIntro(D) {
-  const n = D > 500 ? INTRO.segs[1] : INTRO.segs[0];
+function planIntro(D, n = segsFor(D)) {
   let dists = Array.from({ length: n }, vary);
   const sum = dists.reduce((a, b) => a + b, 0);
   dists = dists.map((d) => d * D / sum);
@@ -497,7 +498,7 @@ async function printIn() {
   busy = true;
   slide = true;
   setHidden(H);
-  await play(planIntro(H), H, null, [], () => {});
+  await play(planIntro(H, 3), H, null, [], () => {});
   slide = false;
   setHidden(0);
   busy = false;
