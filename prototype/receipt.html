@@ -475,6 +475,21 @@ $('#resetBtn')?.addEventListener('click', () => {
 setH(natural());
 // 首页一打开：整张小票带着字从出票口一格一格吐出来，节奏和槽口颤动照答题时的出纸（负责人 2026-11-05 要求）。
 // 从结果页“去第 N 题修改”回来（?edit）和系统要求减少动态效果时不播，直接显示
+// 首页出纸的节奏：比答题时的出纸段数少、每段走得长而慢，段间稍停，保留一格一格的感觉但不显得卡（负责人 2026-11-05 要求）
+const INTRO = { segs: [4, 5], dur: 300, pause: 120, overshoot: 0.5 };
+function planIntro(D) {
+  const n = D > 500 ? INTRO.segs[1] : INTRO.segs[0];
+  let dists = Array.from({ length: n }, vary);
+  const sum = dists.reduce((a, b) => a + b, 0);
+  dists = dists.map((d) => d * D / sum);
+  let t = 0, pos = 0;
+  return dists.map((d, i) => {
+    const dur = INTRO.dur * vary(), pause = i < n - 1 ? INTRO.pause * vary() : 0;
+    const seg = { t0: t, dur, pause, from: pos, to: pos + d, o: INTRO.overshoot * vary(), shake: true };
+    t += dur + pause; pos += d;
+    return seg;
+  });
+}
 async function printIn() {
   paper.classList.remove('pre');
   shadow.classList.remove('pre');
@@ -482,7 +497,7 @@ async function printIn() {
   busy = true;
   slide = true;
   setHidden(H);
-  await play(plan(H), H, null, [], () => {});
+  await play(planIntro(H), H, null, [], () => {});
   slide = false;
   setHidden(0);
   busy = false;
