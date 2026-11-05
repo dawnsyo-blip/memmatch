@@ -81,7 +81,7 @@ export const PERSONAS = [
     id: "codex_multi_review",
     title: "GLM＋OpenAI，手机遥控电脑上的 Codex，多端共用，要先审核再入库，情感重的要留着",
     answers: { q1: ["iphone", "vps", "windows"], q3: ["cli", "remote"], q3cli: ["codex"], q3remote: ["codex"], q3api: ["cn", "openai"],
-               q4: "same_agent", q5: ["computer"], q6: "know", q7: ["work", "coding"], q8n: ["no_priority"],
+               q4: "same_agent", q5: ["computer"], q6: "none", q7: ["work", "coding"], q8n: ["no_priority"],
                q10: "review_first", q13: "emotional", q14: "long", q15: "yes",
                q16: "high", q18c: "model_fees" },
     expect: "Ombre Brain 排在前列；前 8 名里有先审核再入库的项目；组合方案里有 Ombre Brain＋Machine Studio；不推荐只能配合 Claude 的项目",

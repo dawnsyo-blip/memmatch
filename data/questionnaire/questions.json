@@ -358,7 +358,6 @@
       "type": "single",
       "short": "客户端用在哪",
       "text": "这个聊天客户端，您主要在手机上用还是在电脑上用？",
-      "help": "手机上的客户端只能连通过网络访问的记忆库，电脑上能接的更多。",
       "show_if": {"question": "q3client", "selected_any": ["other"]},
       "options": [{"id": "phone", "label": "手机或平板"}, {"id": "computer", "label": "电脑"}, {"id": "both", "label": "两种都用"}]
     },
@@ -379,7 +378,6 @@
       "type": "multi",
       "short": "命令行工具",
       "text": "您具体通过命令行或终端方式使用什么 Agent 或工具？",
-      "help": "用 claude -p、codex exec 这类命令行模式驱动别的界面，和直接在终端里用是一样的。",
       "show_if": {"question": "q3", "selected_any": ["cli"]},
       "options": [
         {"id": "claude_code", "label": "Claude Code", "client": "claude_code"},
@@ -391,7 +389,8 @@
         {"id": "zcode", "label": "ZCode", "client": "zcode"},
         {"id": "trae", "label": "TRAE", "client": "trae"},
         {"id": "hermes", "label": "Hermes", "client": "hermes"},
-        {"id": "terminal_chat", "label": "用终端聊天工具直接向模型提问", "help": "比如用 llm、aichat 等工具直接调用 API", "client": "terminal_chat"},
+        {"id": "llm", "label": "LLM", "help": "Simon Willison 开发的命令行工具，命令是 llm", "client": "llm_cli"},
+        {"id": "aichat", "label": "AIChat", "help": "sigoden 开发的命令行工具，命令是 aichat", "client": "aichat"},
         {"id": "other", "label": "其它", "free_text": true, "client": "agent_other"}
       ]
     },
@@ -626,8 +625,7 @@
         {"id": "native", "label": "官端或其它客户端自带的记忆功能", "help": "比如 ChatGPT 的记忆，或 Kelivo 自带的记忆功能"},
         {"id": "notes", "label": "连接 Obsidian、Notion 等笔记类软件"},
         {"id": "open_source", "label": "开源的记忆项目", "help": "请填写您所用的项目", "free_text": true},
-        {"id": "know", "label": "还没用过，但对 LLM 记忆有些了解", "exclusive": true},
-        {"id": "none", "label": "没用过，也不太了解", "exclusive": true}
+        {"id": "none", "label": "没用过", "exclusive": true}
       ],
       "rules": [
         {
@@ -651,7 +649,7 @@
       "short": "遇到过的记忆问题",
       "text": "在以下记忆问题中，您遇到过哪些？",
       "help": "请按排斥程度排序。",
-      "show_if": {"question": "q6", "selected_none": ["know", "none"]},
+      "show_if": {"question": "q6", "selected_none": ["none"]},
       "options": [
         {
           "id": "entry_hallucination",
@@ -760,7 +758,7 @@
       "short": "担心的记忆问题",
       "text": "如果使用记忆库，您最担心出现哪些问题？",
       "help": "请按排斥程度排序。",
-      "show_if": {"question": "q6", "selected_any": ["know", "none"]},
+      "show_if": {"question": "q6", "selected_any": ["none"]},
       "options": [
         {
           "id": "entry_hallucination",
@@ -1371,7 +1369,6 @@
     "codebuddy": {"label": "CodeBuddy Code", "fits": [{"mount": ["mcp"]}]},
     "hermes": {"label": "Hermes", "memory_host": "hermes", "fits": [{"compatible_clients": ["hermes"]}, {"mount": ["mcp", "proxy_openai"]}]},
     "agent_other": {"label": "其它 Agent", "short": "您用的 Agent", "fits": [{"mount": ["mcp"]}], "note": "需自行确认您用的工具能否连接 MCP"},
-    "terminal_chat": {"label": "终端聊天工具", "short": "终端聊天工具", "fits": [{"mount": ["proxy_openai"]}], "note": "llm、aichat 这类工具多数只能改接口地址接转发服务，能否接 MCP 需自行确认"},
     "kelivo": {"label": "Kelivo", "fits": [{"compatible_clients": ["kelivo"]}, "@phone_reach"]},
     "rikkahub": {"label": "RikkaHub", "fits": [{"compatible_clients": ["rikkahub"]}, "@phone_reach"]},
     "aru": {"label": "Aru", "fits": ["@phone_reach"]},
@@ -1414,7 +1411,9 @@
     "fastgpt": {"label": "FastGPT", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
     "n8n": {"label": "n8n", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
     "ragflow": {"label": "RAGFlow", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
-    "platform_other": {"label": "其它搭建平台", "short": "您用的搭建平台", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"}
+    "platform_other": {"label": "其它搭建平台", "short": "您用的搭建平台", "fits": ["@desktop"], "note": "搭建平台一般通过 MCP 工具或自定义模型接口接入，收录的项目很少写到这类平台，需自行确认"},
+    "llm_cli": {"label": "LLM", "short": "LLM 命令行工具", "fits": [{"mount": ["proxy_openai"]}]},
+    "aichat": {"label": "AIChat", "fits": [{"mount": ["proxy_openai", "mcp"]}]}
   },
   "spec_sets": {
     "net_reach": [

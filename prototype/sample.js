@@ -1,5 +1,5 @@
 // 小票原型和完整结果页共用：读答卷、跑推荐引擎。
-// 答卷读小票答题页存的 memsite-quiz-v6；还没答过题时返回 empty，结果页转回首页去答题
+// 答卷读小票答题页存的 memsite-quiz-v7；还没答过题时返回 empty，结果页转回首页去答题
 // （负责人 2026-11-04 定不保留示例答卷）。?demo 时用下面的演示答卷，开发时看排除原因用。
 // 要用 npm run site 打开（http://localhost:5173/prototype/），直接双击 html 时浏览器不让读数据。
 import { createRuleEngine } from "../engine/index.js";
@@ -23,7 +23,7 @@ export async function run() {
   ]);
   let st = null;
   const demo = new URLSearchParams(location.search).has("demo");
-  try { st = demo ? null : JSON.parse(localStorage.getItem("memsite-quiz-v6")); } catch (e) {}
+  try { st = demo ? null : JSON.parse(localStorage.getItem("memsite-quiz-v7")); } catch (e) {}
   const empty = !st || !Object.keys(st.answers || {}).length;
   if (empty && !demo) return { cfg, data, usage, empty: true };
   st = demo ? DEMO : { answers: {}, free: {}, ...st };
