@@ -129,11 +129,18 @@ const BACK = new URLSearchParams(location.search).get("from") === "home"
 const now = stamp();
 // 项目收录标准：照 docs/前端/项目收录标准.md（负责人 2026-11-04 写），改了 md 要同步这里
 const A = (href, text) => `<a href="${href}" target="_blank" rel="noopener">${esc(text)}</a>`;
+// 每条里的换行照 md 分行显示（white-space: pre-wrap），折行和换行都缩进到编号后面；目录站名单再缩进两格
 const STANDARDS = [
-  `在一些 conversational memory benchmark 上评分较高的项目。涉及的 benchmark 包括 LongMemEval、LoCoMo、PersonaMem、MemBench、BEAM 等。`,
-  `被收录到 ${A("https://github.com/DasterProkio/awesome-ai-companion", "awesome-ai-companion")} 和 ${A("https://www.ailover-atlas.com/", "AI Companion Atlas")} 中的记忆类、上下文工程类项目（感谢 ${A("https://github.com/DasterProkio", "@DasterProkio")} 老师和 ${A("https://github.com/See-Sol-Lab", "@See-Sol-Lab")} 老师）。仅获取事实信息，内容经过改编，分类字段、简介都已重写。`,
+  `在一些 conversational memory benchmark 上评分较高的项目。涉及的 benchmark 包括：LongMemEval、LoCoMo、PersonaMem、MemBench、BEAM 等。`,
+  `agent memory 类项目/记忆框架的目录站，包括：\n` +
+    [["https://mcpservers.org/zh-CN/category/memory", "MCP Servers"], ["https://github.com/punkpeye/awesome-mcp-servers", "awesome-mcp-servers"],
+     ["https://github.com/TeleAI-UAGI/Awesome-Agent-Memory", "Awesome-Agent-Memory"], ["https://github.com/IAAR-Shanghai/Awesome-AI-Memory", "Awesome-AI-Memory"]]
+      .map(([u, t]) => `  ${A(u, t)}`).join("\n") +
+    `\n仅获取事实信息，内容经过改编，分类字段、简介已全部重写。`,
+  `被收录到 ${A("https://github.com/DasterProkio/awesome-ai-companion", "awesome-ai-companion")} 和 ${A("https://www.ailover-atlas.com/", "ailover-atlas.com")} 中的记忆类、上下文工程类项目（感谢 ${A("https://github.com/DasterProkio", "@DasterProkio")} 老师和 ${A("https://github.com/See-Sol-Lab/ai-companion-atlas/commits?author=See-Sol-Lab", "@See-Sol-Lab")} 老师）。\n仅获取事实信息，内容经过改编，分类字段、简介已全部重写。`,
   `相关论文中提及并且已落地的记忆框架产品。`,
   `个人冲浪时观察到的在中文/英文社区讨论度比较高的项目。`,
+  `每组内部按收录时的 star 数量排序。`,
 ];
 const stdHTML = () => `<div class="std-body small stack" id="stdBody" hidden>` +
   STANDARDS.map((t, i) => hang(4, `${`${i + 1}.`.padEnd(4)}${t}`)).join("") + `</div>`;
@@ -148,7 +155,7 @@ let html = `<div class="cat">${titleHTML(["完整项目库"])}</div>`;
 html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">` +
   L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center("2026-10-30", W_S), "small")  /* 收录名单定下来的日期，固定写（负责人 2026-11-04 定） */ + `</div>` +
   // 时间下面是项目收录标准（点开展开），一条单线虚线，再是返回和下载两行动作（负责人 2026-11-04 定）
-  `<div class="acts-c small"><button type="button" class="chip inv" id="stdBtn" aria-expanded="false" aria-controls="stdBody"> <span class="u">项目收录标准</span> </button></div>` +
+  `<div class="acts-c small"><button type="button" class="chip inv" id="stdBtn" aria-expanded="false" aria-controls="stdBody"> <span class="u">项目收录&amp;筛选&amp;排序标准</span> </button></div>` +
   stdHTML() + `<div class="cat-sep">${L(rule("-", W_S), "small")}</div>` +
   act(1, BACK.text, "→", `href="${BACK.href}"`) + act(2, "下载项目清单", "↓", 'type="button" id="listBtn"') + `</div>`;
 for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()));
