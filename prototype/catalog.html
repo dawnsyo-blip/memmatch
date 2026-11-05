@@ -163,8 +163,9 @@ html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">
   `<div class="acts-c small"><button type="button" class="chip inv" id="stdBtn" aria-expanded="false" aria-controls="stdBody"> <span class="u">项目收录标准</span> </button></div>` +
   stdHTML() + `<div class="cat-sep">${L(rule("-", W_S), "small")}</div>` +
   act(1, BACK.text, "→", `href="${BACK.href}"`) + act(2, "下载项目清单", "↓", 'type="button" id="listBtn"') + `</div>`;
-for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()));
-if (other.length) html += section("其它", other.sort(byName).map(item).join(sep()));
+// 进入项目库时所有分组默认收起（负责人 2026-11-05 定）
+for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()), false);
+if (other.length) html += section("其它", other.sort(byName).map(item).join(sep()), false);
 
 // 不单独做关于页（负责人 2026-11-04 定）：信息来源和核实情况写在页尾，和结果页页脚同样三行
 html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">${BACK.text}</a>` +
