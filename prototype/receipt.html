@@ -56,6 +56,8 @@
 /* 选项说明：选中后才展开，字号小一级（负责人 2026-11-03 定） */
 /* 排序题：选中的按名次排到最上面，右边出现拖动手柄 */
 .opt { position: relative; }
+/* 首页出纸之前，纸和阴影先不显示 */
+#paper.pre, #shadow.pre { visibility: hidden; }
 .rank .opt { padding-right: 3ch; }
 .grip {
   display: none; position: absolute; top: 0; right: 0; bottom: 0; width: 3ch;
@@ -141,8 +143,8 @@
 </div>
 
 <main class="wrap" id="wrap">
-  <div class="shadow" id="shadow" aria-hidden="true"></div>
-  <div class="paper" id="paper">
+  <div class="shadow pre" id="shadow" aria-hidden="true"></div>
+  <div class="paper pre" id="paper">
     <div class="inner" id="inner">
       <div class="topbars" id="topbars" aria-hidden="true"></div>
       <div id="intro">
@@ -260,11 +262,12 @@ function trimSlack() {
   setSlack(Math.min(slack, Math.max(0, need)));
 }
 function setH(h) { if (H) setSlack(slack + H - h); H = h; paper.style.height = h + 'px'; }
+let slide = false;
 function setHidden(r) {
   hidden = r < 0.01 ? 0 : r;
   r = hidden;
   paper.style.transform = shadow.style.transform = r ? `translate3d(0,${-r}px,0)` : '';
-  inner.style.transform = r ? `translate3d(0,${r}px,0)` : '';
+  inner.style.transform = r && !slide ? `translate3d(0,${r}px,0)` : '';
 }
 function natural() { return inner.offsetHeight; }
 function bottomOf(el) { return el.getBoundingClientRect().bottom - wrap.getBoundingClientRect().top; }
@@ -470,7 +473,22 @@ $('#resetBtn')?.addEventListener('click', () => {
   start();
 });
 setH(natural());
-FONTS.then(() => { if (!head.childElementCount) setH(natural()); });
+// 首页一打开：整张小票带着字从出票口一格一格吐出来，节奏和槽口颤动照答题时的出纸（负责人 2026-11-05 要求）。
+// 从结果页“去第 N 题修改”回来（?edit）和系统要求减少动态效果时不播，直接显示
+async function printIn() {
+  paper.classList.remove('pre');
+  shadow.classList.remove('pre');
+  if (still() || (EDIT && cfg)) return;
+  busy = true;
+  slide = true;
+  setHidden(H);
+  await play(plan(H), H, null, [], () => {});
+  slide = false;
+  setHidden(0);
+  busy = false;
+}
+// ?edit 时 start 已经占着 busy，出纸直接显示
+if (EDIT && cfg) { paper.classList.remove('pre'); shadow.classList.remove('pre'); } else printIn();
 
 // edit：要直接回到的题目 id（结果页“去第 N 题修改”带来的 ?edit=q16）。这道题答过、现在也显示时，
 // 只打出它前面的已答条目，然后停在这道题；否则照常接着答
