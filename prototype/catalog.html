@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>完整项目库 · MemMatch</title>
+<title>项目收录清单 · MemMatch</title>
 <meta name="description" content="回答 20 道题，找到匹配的 AI 记忆方案">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -11,7 +11,7 @@
 <link rel="preload" href="fonts/sarasa-result-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="thermal.css">
 <style>
-/* 完整项目库：参与推荐的全部项目，按主要使用方式分组，组内按名字排序。
+/* 项目收录清单（原名“完整项目库”，负责人 2026-11-05 改名）：参与推荐的全部项目，按主要使用方式分组，组内按名字排序。
    每个项目写名字（二级标题）、使用方式标签（辅助）、一句话介绍（正文）和仓库地址（辅助，带外链箭头）。
    和结果页共用字体子集（全部项目数据里的字都在里面） */
 @font-face { font-family: "Sarasa Mono SC"; src: url("fonts/sarasa-result-400.woff2") format("woff2"); font-weight: 400; font-display: block; }
@@ -156,7 +156,7 @@ function act(n, label, arrow, attrs) {
     .replace(label, `<span class="tx">${esc(label)}</span>`);
   return `<${tag} class="act" ${attrs}><span class="l small">${line}</span></${tag}>`;
 }
-let html = `<div class="cat">${titleHTML(["完整项目库"])}</div>`;
+let html = `<div class="cat">${titleHTML(["项目收录清单"])}</div>`;
 html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">` +
   L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center("2026-10-30", W_S), "small")  /* 收录名单定下来的日期，固定写（负责人 2026-11-04 定） */ + `</div>` +
   // 时间下面是项目收录标准（点开展开），一条单线虚线，再是返回和下载两行动作（负责人 2026-11-04 定）
