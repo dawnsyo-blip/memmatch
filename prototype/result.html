@@ -465,7 +465,7 @@ html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
   act(3, "返回修改问卷", "→", 'href="receipt.html"') +
   act(4, "查看项目清单", "→", 'href="catalog.html"') + `</div>` +
   `${L(rule("=", W_S), "small")}<div class="foot-blk">` +
-  ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月", "答卷只保存在您的浏览器中"].map((t) => L(center(t, W_S), "small")).join("") + `</div>` +
+  ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月", "历史选择只保存在您的浏览器中"].map((t) => L(center(t, W_S), "small")).join("") + `</div>` +
   `<div class="foot-blk" aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
   barcode(fnv(key), 38, "barcode") + L(center(codeOf(key), W_S), "small") + `</footer>`;
 sheet.innerHTML = html;
