@@ -89,7 +89,7 @@ import { run } from "./sample.js";
 import {
   W, W_H, W_S, FONTS, cols, esc, sp, rule, center, spread, wrapCols, L, pairHTML, faint,
   barcode, codeOf, fnv, stamp, serialNo, titleHTML, titledRule, dotsRow, dotsPairHTML, numOf, rowLabel, answerText, pad2,
-  OUT, P, S, hang, TOG, foldLine, section, sep, formTagsOf, tagsText,
+  OUT, P, S, hang, TOG, foldLine, section, sep, formTagsOf, tagsText, tapToTop,
 } from "./thermal.js";
 
 const sheet = document.getElementById("sheet");
@@ -468,6 +468,7 @@ html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
   `<div class="foot-blk" aria-hidden="true">${L(`${stars} ${now.date} ${stars}`, "small")}</div>` +
   barcode(fnv(key), 38, "barcode") + L(center(codeOf(key), W_S), "small") + `</footer>`;
 sheet.innerHTML = html;
+tapToTop();
 const prefBtn = document.getElementById("prefBtn"), prefBody = document.getElementById("prefBody");
 prefBtn.addEventListener("click", () => {
   prefBody.hidden = !prefBody.hidden;

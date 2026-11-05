@@ -186,6 +186,21 @@ export function titledRule(t, c = "=", w = W) {
   return c.repeat(l) + ` ${t} ` + c.repeat(n - l);
 }
 // “名字 ...... 值”一行：中间是缩小的点线（thermal.css 的 .dots），右边的值可以是现成的 HTML（如反白按钮），valCols 是它占的格数
+// 双击（手机上连点两下）顶上的出票口，页面平滑滚回最上方（负责人 2026-11-04 要）。
+// 出票口原本不接收点击（pointer-events: none），这里打开；touch-action 关掉手机上连点两下放大页面
+export function tapToTop() {
+  const dock = document.querySelector(".dock");
+  if (!dock) return;
+  Object.assign(dock.style, { pointerEvents: "auto", touchAction: "manipulation" });
+  let last = -1e9;
+  dock.addEventListener("pointerup", (e) => {
+    if (e.timeStamp - last < 350) {
+      last = -1e9;
+      scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+    } else last = e.timeStamp;
+  });
+}
+
 export function dotsRow(left, val, w = W, valCols = cols(val)) {
   return `${left} <span class="dots">${".".repeat(Math.max(2, w - cols(left) - valCols - 2))}</span> ${val}`;
 }
