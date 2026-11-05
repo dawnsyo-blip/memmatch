@@ -19,7 +19,16 @@
 
 .meta { margin-top: var(--lh); }
 .meta-lines { margin-top: calc(var(--lh) * .5); }
-.back { margin-top: calc(var(--lh) * .5); text-align: center; }
+/* 页头（负责人 2026-11-04 定）：标题居中；返回、下载项目清单、项目收录标准三个反白按钮，和上面的“收录 N 个”同样的小字，居中排成三行 */
+.cat .ln { text-align: center; }
+.acts-c { margin-top: calc(var(--lh) * .5); text-align: center; }
+.acts-c > * + * { margin-top: calc(var(--lh-s) * .5); }
+.chip { white-space: pre; padding-block: .15em; transition: transform 160ms var(--ease-out); }
+.chip:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) { .chip { transition: none; } .chip:active { transform: none; } }
+/* 项目收录标准：点开后展开在按钮下面，格式照结果页的默认推荐偏好 */
+.std-body { padding: calc(var(--lh) * .5) 0 calc(var(--lh) * .25); }
+.std-body a { text-decoration: underline; text-underline-offset: .2em; }
 .meta + .sec { margin-top: var(--lh); }
 /* 项目之间空一行；名字和标签紧挨着，介绍和它们隔 0.25 行 */
 /* 项目之间隔一条单线虚线（负责人 2026-11-04 要求），上下的空由 .sep 给 */
@@ -53,7 +62,7 @@ footer .bar { margin-top: calc(var(--lh) * .5); }
 import { splitName } from "../site/assets/result-text.js";
 import {
   W_S, FONTS, cols, esc, rule, center, L, faint, barcode, stamp,
-  OUT, P, S, section, sep, formTagsOf, tagsText, titleHTML,
+  OUT, P, S, section, sep, formTagsOf, tagsText, titleHTML, hang,
 } from "./thermal.js";
 
 const sheet = document.getElementById("sheet");
@@ -113,20 +122,48 @@ function byName(a, b) {
 const BACK = new URLSearchParams(location.search).get("from") === "home"
   ? { href: "receipt.html", text: "返回首页" } : { href: "result.html", text: "返回推荐结果" };
 const now = stamp();
-let html = titleHTML(["完整项目库"]);
+// 项目收录标准：照 docs/前端/项目收录标准.md（负责人 2026-11-04 写），改了 md 要同步这里
+const A = (href, text) => `<a href="${href}" target="_blank" rel="noopener">${esc(text)}</a>`;
+const STANDARDS = [
+  `在一些 conversational memory benchmark 上评分较高的项目。涉及的 benchmark 包括 LongMemEval、LoCoMo、PersonaMem、MemBench、BEAM 等。`,
+  `被收录到 ${A("https://github.com/DasterProkio/awesome-ai-companion", "awesome-ai-companion")} 和 ${A("https://www.ailover-atlas.com/", "AI Companion Atlas")} 中的记忆类、上下文工程类项目（感谢 ${A("https://github.com/DasterProkio", "@DasterProkio")} 老师和 ${A("https://github.com/See-Sol-Lab", "@See-Sol-Lab")} 老师）。仅获取事实信息，内容经过改编，分类字段、简介都已重写。`,
+  `相关论文中提及并且已落地的记忆框架产品。`,
+  `个人冲浪时观察到的在中文/英文社区讨论度比较高的项目。`,
+];
+const stdHTML = () => `<div class="std-body small stack" id="stdBody" hidden>${P("项目收录标准：", "p b")}` +
+  STANDARDS.map((t, i) => hang(4, `${`${i + 1}.`.padEnd(4)}${t}`)).join("") + `</div>`;
+let html = `<div class="cat">${titleHTML(["完整项目库"])}</div>`;
 html += `<div class="meta">${L(rule("=", W_S), "small")}<div class="meta-lines">` +
   L(center(`收录 ${data.projects.length} 个记忆类项目`, W_S), "small") + L(center(now.full, W_S), "small") + `</div>` +
-  // 页面很长，顶部也放一个返回结果页的入口（底部还有一个）
-  `<p class="back"><a class="tbtn" href="${BACK.href}">[← ${BACK.text}]</a></p></div>`;
+  // 页面很长，顶部也放返回的入口（底部还有一个）
+  `<div class="acts-c small"><p><a class="chip inv" href="${BACK.href}"> ${BACK.text} </a></p>` +
+  `<p><button type="button" class="chip inv" id="listBtn"> 下载项目清单 </button></p>` +
+  `<p><button type="button" class="chip inv" id="stdBtn" aria-expanded="false" aria-controls="stdBody"> <span class="u">项目收录标准</span> </button></p></div>` +
+  stdHTML() + `</div>`;
 for (const [f, list] of groups) if (list.length) html += section(labels[f], list.sort(byName).map(item).join(sep()));
 if (other.length) html += section("其它", other.sort(byName).map(item).join(sep()));
 
 // 不单独做关于页（负责人 2026-11-04 定）：信息来源和核实情况写在页尾，和结果页页脚同样三行
-html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">← ${BACK.text}</a>` +
+html += `<footer class="sec">${L(rule("=", W_S), "small")}<a class="bar half" href="${BACK.href}">${BACK.text}</a>` +
   `${L(rule("=", W_S), "small")}<div class="half">` +
   ["项目信息据 README 整理", "未经实际安装验证", "核实于 2026 年 10 月"].map((t) => L(center(t, W_S), "small")).join("") + `</div></footer>`;
 sheet.innerHTML = html;
 faint(sheet, ".l, .p");
+
+const stdBtn = document.getElementById("stdBtn"), stdBody = document.getElementById("stdBody");
+stdBtn.addEventListener("click", () => {
+  stdBody.hidden = !stdBody.hidden;
+  stdBtn.setAttribute("aria-expanded", String(!stdBody.hidden));
+});
+// 下载项目清单：每个项目一行，名字和地址，按页面上的分组和顺序（负责人 2026-11-04 定）
+document.getElementById("listBtn").addEventListener("click", () => {
+  const all = [...groups.values(), other].flat();
+  const lines = ["MemMatch 收录的记忆类项目", `共 ${all.length} 个，下载于 ${now.date}`, "", ...all.map((p) => `${splitName(p.name)[0]}  ${p.repo_url}`)];
+  const url = URL.createObjectURL(new Blob([lines.join("\r\n") + "\r\n"], { type: "text/plain;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: `MemMatch项目清单-${now.date}.txt` });
+  document.body.append(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 </script>
 </body>
 </html>
