@@ -1,7 +1,7 @@
 {
- "_note": "使用方式：用户怎么用上这个项目，只用于结果页显示和搭配方案，推荐规则不读。第一个值是主要方式。2026-10-28 由 access、项目定位推出初值，再按简介和 README 逐条核对 2026-11-04 负责人要求按问卷第 2 题的用法分插件：plugin_agent 编程 Agent 插件（Claude Code、Codex、Cursor 等），plugin_chat 聊天客户端插件（酒馆、Open WebUI 等），plugin_bot 聊天机器人框架插件（只接 OpenClaw、Hermes、AstrBot 的）；同时支持编程 Agent 和机器人框架的归 plugin_agent。",
+ "_note": "使用方式：用户怎么用上这个项目，只用于结果页显示和搭配方案，推荐规则不读。第一个值是主要方式。2026-10-28 由 access、项目定位推出初值，再按简介和 README 逐条核对 2026-11-04 负责人要求按问卷第 2 题的用法分插件：plugin_agent Agent 插件（Claude Code、Codex、Cursor 等；负责人 2026-11-05 定不写“编程”，问卷不面向以代码记忆为主要需求的开发者），plugin_chat 聊天客户端插件（酒馆、Open WebUI 等），plugin_bot 聊天机器人框架插件（只接 OpenClaw、Hermes、AstrBot 的）；同时支持编程 Agent 和机器人框架的归 plugin_agent。",
  "_labels": {
-  "plugin_agent": "编程 Agent 插件",
+  "plugin_agent": "Agent 插件",
   "plugin_chat": "聊天客户端插件",
   "plugin_bot": "聊天机器人框架插件",
   "service": "独立服务",
