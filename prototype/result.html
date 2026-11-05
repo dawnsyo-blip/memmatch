@@ -448,19 +448,19 @@ const stars = "#".repeat((W_S - cols(now.date) - 2) / 2);
 // 一行动作：和首页菜单同一格式，“ 1  动作名 ...... [箭头]”，箭头反白表示能点；整行都能点（负责人 2026-11-04 定）
 function act(n, label, arrow, attrs) {
   const tag = attrs.startsWith("href") ? "a" : "button";
-  // 和“您的答卷”同一级：二级标题字号、700，一行 32 格（负责人 2026-11-04 定）
+  // 和“您的选购条件”（原“您的答卷”，负责人 2026-11-05 改名）同一级：二级标题字号、700，一行 32 格（负责人 2026-11-04 定）
   const line = dotsRow(` ${n}`.padEnd(4) + label, `<span class="inv"> ${arrow} </span>`, W_H, cols(arrow) + 2)
     .replace(label, `<span class="tx">${esc(label)}</span>`);
   return `<${tag} class="act" ${attrs}><span class="l h">${line}</span></${tag}>`;
 }
 const counts = [["推荐项目", r.results.length], ["搭配方案", combos.length], ["强化补丁", patchCount]];
 html += `<footer class="sec">${L(rule("=", W_S), "small")}` +
-  `<details class="fold foot-blk"><summary>${foldLine("您的答卷", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
+  `<details class="fold foot-blk"><summary>${foldLine("您的选购条件", W_H, "h")}</summary><div class="small half" id="answers"></div></details>` +
   `${L(rule("-", W_S), "small")}<div class="foot-blk">${counts.map(([k, n]) => `<span class="l small">${dotsRow(k, String(n), W_S)}</span>`).join("") +
     // 最后一行是总计，加粗
     `<span class="l small b">${dotsRow("总计", String(counts.reduce((t, [, n]) => t + n, 0)), W_S)}</span>`}</div>` +
   `${L(titledRule("自助服务", "=", W_S), "small")}<div class="foot-blk acts">` +
-  act(1, "下载答卷", "↓", 'type="button" id="saveAnswers"') +
+  act(1, "下载历史选择", "↓", 'type="button" id="saveAnswers"') +
   act(2, "下载推荐结果", "↓", 'type="button" id="saveResults"') +
   act(3, "返回修改问卷", "→", 'href="receipt.html"') +
   act(4, "查看项目清单", "→", 'href="catalog.html"') + `</div>` +
