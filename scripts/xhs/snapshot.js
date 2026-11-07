@@ -26,10 +26,10 @@ function underlined(el, root) {
   return false;
 }
 
-export function drawReceipt(root) {
+export function drawReceipt(root, fixedScale) {
   const box = root.getBoundingClientRect();
   const W = box.width + MARGIN * 2, H = box.height + MARGIN * 2 + TEETH;
-  const scale = Math.min(Math.max(2, window.devicePixelRatio || 1), 3, Math.sqrt(MAX_PIXELS / (W * H)), MAX_SIDE / H, MAX_SIDE / W);
+  const scale = fixedScale || Math.min(Math.max(2, window.devicePixelRatio || 1), 3, Math.sqrt(MAX_PIXELS / (W * H)), MAX_SIDE / H, MAX_SIDE / W);
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(W * scale);
   canvas.height = Math.round(H * scale);
@@ -165,31 +165,54 @@ async function saveImages(urls, done) {
   }
 }
 
-// 项目清单（负责人 2026-11-06 要，网站上是下载文本）：每个项目写名字和地址，照页面的分组和顺序，
-// 每张图 50 个，排成和页面一样的小票，在页面外面排好版再画，画完就删掉
-const PER_IMAGE = 50;
+// 项目清单（负责人 2026-11-06 要，网站上是下载文本）：照页面的分组和顺序，存成 4 张 3 : 4 的图（1242×1656），
+// 每张两栏；读者可能把图发给 AI 识别，长图会被缩得看不清，所以不做长图（负责人定 4 张）。
+// 每个项目一条：编号、名字（粗）、地址（去掉 https:// 和 www.，只在“/”后面折行），折行缩进到名字下面。
+// 页码：每张顶上写“第 N/4 张”和这张的编号范围，右下角再印“N / 4”。
+// 字号从 13px 往下试（画出来是 2 倍），取第一个排得下的；最小 9px 还排不下时多分一张。在页面外面排好版再画，画完就删掉
+const LIST_PAGES = 4;
+const PAGE_W = 621 - MARGIN * 2, PAGE_H = 828 - MARGIN * 2 - TEETH;  // 画出来 ×2 正好 1242×1656
 const escHTML = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const shortURL = (u) => String(u || "").replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
+const no = (k) => String(k).padStart(3, "0");
+function listPage(part, from, total, page, pages, date) {
+  const box = document.createElement("div");
+  box.style.cssText = `position:absolute;left:-10000px;top:0;width:${PAGE_W}px;height:${PAGE_H}px;padding:20px 22px 14px;` +
+    "box-sizing:border-box;display:flex;flex-direction:column;font-family:var(--font);color:var(--ink);font-weight:400";
+  box.innerHTML =
+    `<p style="text-align:center;font-weight:700;font-size:18px;line-height:26px">MemMatch 项目收录清单</p>` +
+    `<p style="text-align:center;font-size:12px;line-height:18px">第 ${page}/${pages} 张　第 ${no(from + 1)}–${no(from + part.length)} 个，共 ${total} 个　${escHTML(date)}</p>` +
+    `<div style="height:3px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:8px 0 10px"></div>` +
+    `<div class="cols" style="flex:1;min-height:0;overflow:hidden;column-count:2;column-gap:18px;column-fill:auto;-webkit-column-count:2;-webkit-column-gap:18px">` +
+    part.map(([name, url], k) => `<p style="break-inside:avoid;-webkit-column-break-inside:avoid;padding-left:4ch;text-indent:-4ch;` +
+      `overflow-wrap:break-word;word-wrap:break-word;margin:0 0 .3em">${no(from + k + 1)} <b>${escHTML(name)}</b> ` +
+      `${escHTML(shortURL(url)).replace(/\//g, "/<wbr>")}</p>`).join("") + `</div>` +
+    `<div style="height:1px;background:var(--ink);margin:8px 0 6px"></div>` +
+    `<p style="text-align:right;font-weight:700;font-size:20px;line-height:24px">${page} / ${pages}</p>`;
+  document.body.appendChild(box);
+  // 从大往小试字号：两栏装满后多出来的会排成看不见的第三栏，scrollWidth 就会变大
+  const cols = box.querySelector(".cols");
+  for (let fs = 13; fs >= 9; fs -= 0.5) {
+    cols.style.fontSize = `${fs}px`;
+    cols.style.lineHeight = `${Math.round(fs * 1.4)}px`;
+    if (cols.scrollWidth <= cols.clientWidth + 1) return box;
+  }
+  box.remove();
+  return null;
+}
 export async function saveList(items, date) {
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
-  const n = Math.ceil(items.length / PER_IMAGE), urls = [];
-  for (let i = 0; i < n; i++) {
-    const part = items.slice(i * PER_IMAGE, (i + 1) * PER_IMAGE);
-    const box = document.createElement("main");
-    box.className = "wrap";
-    box.style.cssText = "position:absolute;left:-10000px;top:0;margin:0";
-    box.innerHTML = `<div class="paper"><div class="inner">` +
-      `<p class="p b" style="text-align:center">MemMatch 项目收录清单</p>` +
-      `<p class="p small" style="text-align:center">共 ${items.length} 个　第 ${i + 1}/${n} 张　${escHTML(date)}</p>` +
-      // 小字一行正好 44 格（thermal.js 的 W_S）；多写了会画出纸外，渲染器不管 overflow 裁切
-      `<span class="l small" style="margin-bottom:8px">${"=".repeat(44)}</span>` +
-      part.map(([name, url], k) => `<div style="margin-top:${k ? 10 : 0}px">` +
-        `<p class="p b">${String(i * PER_IMAGE + k + 1).padStart(3, "0")} ${escHTML(name)}</p>` +
-        `<p class="p small" style="word-break:break-all">${escHTML(url || "")}</p></div>`).join("") +
-      `</div></div>`;
-    document.body.appendChild(box);
-    try { urls.push(drawReceipt(box.querySelector(".paper")).toDataURL("image/png")); } finally { box.remove(); }
+  for (let n = LIST_PAGES; n <= LIST_PAGES + 4; n++) {
+    const per = Math.ceil(items.length / n), urls = [];
+    let ok = true;
+    for (let i = 0; i < n && ok; i++) {
+      const box = listPage(items.slice(i * per, (i + 1) * per), i * per, items.length, i + 1, n, date);
+      if (!box) { ok = false; break; }
+      try { urls.push(drawReceipt(box, 2).toDataURL("image/png")); } finally { box.remove(); }
+    }
+    if (ok) return saveImages(urls, `项目清单已存成 ${n} 张图片，按第 1 到第 ${n} 张的顺序保存到相册。`);
   }
-  await saveImages(urls, `项目清单已存成 ${n} 张图片，保存到相册。`);
+  throw new Error("清单排不下");
 }
 
 function preview(urls) {
