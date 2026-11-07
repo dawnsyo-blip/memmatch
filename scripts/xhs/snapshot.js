@@ -168,7 +168,7 @@ async function saveImages(urls, done) {
 // 项目清单（负责人 2026-11-06 要，网站上是下载文本）：照页面的分组和顺序，存成 4 张 3 : 4 的图（1242×1656），
 // 每张两栏；读者可能把图发给 AI 识别，长图会被缩得看不清，所以不做长图（负责人定 4 张）。
 // 每个项目一条：编号、名字（粗）、地址（去掉 https:// 和 www.，只在“/”后面折行），折行缩进到名字下面。
-// 页码：每张顶上写“第 N/4 张”和这张的编号范围，右下角再印“N / 4”。
+// 页码：每张顶上只写“第 N/4 张”（负责人 2026-11-06 定）。
 // 字号从 13px 往下试（画出来是 2 倍），取第一个排得下的；最小 9px 还排不下时多分一张。在页面外面排好版再画，画完就删掉
 const LIST_PAGES = 4;
 const PAGE_W = 621 - MARGIN * 2, PAGE_H = 828 - MARGIN * 2 - TEETH;  // 画出来 ×2 正好 1242×1656
@@ -181,14 +181,12 @@ function listPage(part, from, total, page, pages, date) {
     "box-sizing:border-box;display:flex;flex-direction:column;font-family:var(--font);color:var(--ink);font-weight:400";
   box.innerHTML =
     `<p style="text-align:center;font-weight:700;font-size:18px;line-height:26px">MemMatch 项目收录清单</p>` +
-    `<p style="text-align:center;font-size:12px;line-height:18px">第 ${page}/${pages} 张　第 ${no(from + 1)}–${no(from + part.length)} 个，共 ${total} 个　${escHTML(date)}</p>` +
+    `<p style="text-align:center;font-size:12px;line-height:18px">第 ${page}/${pages} 张</p>` +
     `<div style="height:3px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);margin:8px 0 10px"></div>` +
     `<div class="cols" style="flex:1;min-height:0;overflow:hidden;column-count:2;column-gap:18px;column-fill:auto;-webkit-column-count:2;-webkit-column-gap:18px">` +
     part.map(([name, url], k) => `<p style="break-inside:avoid;-webkit-column-break-inside:avoid;padding-left:4ch;text-indent:-4ch;` +
       `overflow-wrap:break-word;word-wrap:break-word;margin:0 0 .3em">${no(from + k + 1)} <b>${escHTML(name)}</b> ` +
-      `${escHTML(shortURL(url)).replace(/\//g, "/<wbr>")}</p>`).join("") + `</div>` +
-    `<div style="height:1px;background:var(--ink);margin:8px 0 6px"></div>` +
-    `<p style="text-align:right;font-weight:700;font-size:20px;line-height:24px">${page} / ${pages}</p>`;
+      `${escHTML(shortURL(url)).replace(/\//g, "/<wbr>")}</p>`).join("") + `</div>`;
   document.body.appendChild(box);
   // 从大往小试字号：两栏装满后多出来的会排成看不见的第三栏，scrollWidth 就会变大
   const cols = box.querySelector(".cols");
