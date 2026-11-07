@@ -147,27 +147,61 @@ export function drawReceipt(root) {
 // 存进相册：先写成临时文件（大图建议这样），再保存。不在小红书里（电脑浏览器预览）时，在页面上盖一层显示这张图
 export async function saveReceipt(root) {
   if (document.fonts && document.fonts.ready) await document.fonts.ready;
-  const url = drawReceipt(root).toDataURL("image/png");
+  await saveImages([drawReceipt(root).toDataURL("image/png")], "小票已保存到相册。");
+}
+
+async function saveImages(urls, done) {
   const tool = window.xhs && window.xhs.miniTool;
-  if (!tool || typeof tool.saveImageToPhotosAlbum !== "function") return preview(url);
+  if (!tool || typeof tool.saveImageToPhotosAlbum !== "function") return preview(urls);
   try {
-    let filePath = url;
-    if (typeof tool.writeTempFile === "function") filePath = (await tool.writeTempFile({ data: url })).filePath || url;
-    await tool.saveImageToPhotosAlbum({ filePath });
-    window.alert("小票已保存到相册。");
+    for (const url of urls) {
+      let filePath = url;
+      if (typeof tool.writeTempFile === "function") filePath = (await tool.writeTempFile({ data: url })).filePath || url;
+      await tool.saveImageToPhotosAlbum({ filePath });
+    }
+    window.alert(done);
   } catch (e) {
     window.alert("没能保存到相册。请在系统设置里允许小红书访问相册后再试。");
   }
 }
 
-function preview(url) {
+// 项目清单（负责人 2026-11-06 要，网站上是下载文本）：每个项目写名字和地址，照页面的分组和顺序，
+// 每张图 50 个，排成和页面一样的小票，在页面外面排好版再画，画完就删掉
+const PER_IMAGE = 50;
+const escHTML = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+export async function saveList(items, date) {
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+  const n = Math.ceil(items.length / PER_IMAGE), urls = [];
+  for (let i = 0; i < n; i++) {
+    const part = items.slice(i * PER_IMAGE, (i + 1) * PER_IMAGE);
+    const box = document.createElement("main");
+    box.className = "wrap";
+    box.style.cssText = "position:absolute;left:-10000px;top:0;margin:0";
+    box.innerHTML = `<div class="paper"><div class="inner">` +
+      `<p class="p b" style="text-align:center">MemMatch 项目收录清单</p>` +
+      `<p class="p small" style="text-align:center">共 ${items.length} 个　第 ${i + 1}/${n} 张　${escHTML(date)}</p>` +
+      // 小字一行正好 44 格（thermal.js 的 W_S）；多写了会画出纸外，渲染器不管 overflow 裁切
+      `<span class="l small" style="margin-bottom:8px">${"=".repeat(44)}</span>` +
+      part.map(([name, url], k) => `<div style="margin-top:${k ? 10 : 0}px">` +
+        `<p class="p b">${String(i * PER_IMAGE + k + 1).padStart(3, "0")} ${escHTML(name)}</p>` +
+        `<p class="p small" style="word-break:break-all">${escHTML(url || "")}</p></div>`).join("") +
+      `</div></div>`;
+    document.body.appendChild(box);
+    try { urls.push(drawReceipt(box.querySelector(".paper")).toDataURL("image/png")); } finally { box.remove(); }
+  }
+  await saveImages(urls, `项目清单已存成 ${n} 张图片，保存到相册。`);
+}
+
+function preview(urls) {
   const wrap = document.createElement("div");
   wrap.style.cssText = "position:fixed;top:0;right:0;bottom:0;left:0;z-index:99;background:rgba(0,0,0,.6);overflow:auto;text-align:center;padding:16px 0";
-  const img = new Image();
-  img.src = url;
-  img.alt = "推荐结果小票";
-  img.style.cssText = "width:372px;max-width:100%;";
-  wrap.appendChild(img);
+  for (const url of urls) {
+    const img = new Image();
+    img.src = url;
+    img.alt = "小票图片";
+    img.style.cssText = "display:block;margin:0 auto 16px;width:372px;max-width:100%;";
+    wrap.appendChild(img);
+  }
   wrap.addEventListener("click", () => wrap.remove());
   document.body.appendChild(wrap);
 }

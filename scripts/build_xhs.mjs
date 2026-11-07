@@ -47,9 +47,17 @@ const PATCHES = {
     [' target="_blank" rel="noopener"', "", 3],
   ],
   catalog: [
-    ['act(1, BACK.text, "→", `href="${BACK.href}"`) + act(2, "下载项目清单", "↓", \'type="button" id="listBtn"\')',
-     'act(1, BACK.text, "→", `href="${BACK.href}"`)'],
-    [/\/\/ 下载项目清单[\s\S]*?setTimeout\(\(\) => URL\.revokeObjectURL\(url\), 1000\);\n\}\);/, ""],
+    // “下载项目清单”改成“保存清单图片”：名字和地址排成几张小票图存进相册（scripts/xhs/snapshot.js 的 saveList）
+    ['act(2, "下载项目清单", "↓", \'type="button" id="listBtn"\')', 'act(2, "保存清单图片", "↓", \'type="button" id="listBtn"\')'],
+    [/\/\/ 下载项目清单[\s\S]*?setTimeout\(\(\) => URL\.revokeObjectURL\(url\), 1000\);\n\}\);/,
+     'let savingList = false;\n' +
+     'document.getElementById("listBtn").addEventListener("click", () => {\n' +
+     '  if (savingList) return;\n' +
+     '  savingList = true;\n' +
+     '  const all = [...groups.values(), other].flat();\n' +
+     '  window.__MM.saveList(all.map((p) => [splitName(p.name)[0], p.repo_url]), now.date)\n' +
+     '    .catch(() => window.alert("没能生成清单图片。")).then(() => { savingList = false; });\n' +
+     '});'],
     [' target="_blank" rel="noopener"', "", 2],
   ],
 };

@@ -5,7 +5,7 @@
 //   fetch → __MM.getData（数据随包放在 data.js 里）
 //   localStorage、sessionStorage → __MM.ls、__MM.ss（存进小工具的 Storage，低版本退回 localStorage）
 // 这个文件自己只用 window.xxx 访问浏览器的原物，不受上面的替换影响。只写 ES2017。
-import { saveReceipt } from "./snapshot.js";
+import { saveReceipt, saveList } from "./snapshot.js";
 
 /* ---------- Chrome 61 缺的几个 API（原型里实际用到的） ---------- */
 function def(obj, name, fn) {
@@ -233,6 +233,7 @@ window.__MM = {
   ls: storage(() => mem, true),
   ss: storage(() => session, false),
   getData,
+  saveList,
   async start(defs) {
     pages = defs;
     await Promise.all([loadStore(), avoidHostButtons()]);
