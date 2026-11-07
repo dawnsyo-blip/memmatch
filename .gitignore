@@ -13,3 +13,7 @@ cache/
 site/data/
 # 打包好的网站，由 scripts/build_dist.mjs 生成（npm run build）
 dist/
+
+# 小红书小工具版的上传包，由 scripts/build_xhs.mjs 生成（npm run build:xhs）
+dist-xhs/
+dist-xhs.zip

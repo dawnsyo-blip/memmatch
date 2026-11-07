@@ -120,7 +120,8 @@ for (const p of data.projects) {
 // 组内按 Star 数从多到少（负责人 2026-11-03 定）；Star 数相同按名字：英文在前、不分大小写，中文按拼音；
 // 没有 Star 数的（自主管理的两条做法）排在最后。名字开头的符号（如 /memory）不参与排序
 const zh = new Intl.Collator("zh-Hans-CN-u-co-pinyin", { sensitivity: "base" }), en = new Intl.Collator("en", { sensitivity: "base" });
-const bare = (p) => splitName(p.name)[0].replace(/^[^\p{L}\p{N}]+/u, "");
+// 不用 \p{L}：小红书小工具要兼容 Chrome 61；对收录的项目名和 \p{L}\p{N} 的结果一样
+const bare = (p) => splitName(p.name)[0].replace(/^[^0-9A-Za-zª-￿]+/, "");
 function byName(a, b) {
   const d = (b.stars ?? -1) - (a.stars ?? -1);
   if (d) return d;

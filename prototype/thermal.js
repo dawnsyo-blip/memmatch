@@ -63,7 +63,8 @@ export function wrapCols(s, w = W) {
 export function wrapItems(v, w = W) {
   const out = [];
   let cur = "";
-  for (const it of String(v).split(/(?<=、)|(?= > )/)) {
+  // 在每个“、”后面（句末的除外）和“ > ”前面切开；不用后行断言，小红书小工具要兼容 Chrome 61
+  for (const it of String(v).replace(/、(?!$)/g, "、\u0000").split(/\u0000|(?= > )/)) {
     const t = cur ? cur + it : it.trimStart();
     if (cols(t) <= w) { cur = t; continue; }
     if (cur) out.push(cur.trimEnd());

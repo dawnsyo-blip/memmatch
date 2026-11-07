@@ -123,12 +123,19 @@ def main():
     projects = data.read_text(encoding="utf8")
     names = "".join(p["name"] for p in json.loads(projects)["projects"])
     common = read("prototype/thermal.js", "data/questionnaire/questions.json")
+    result = read("prototype/result.html", "prototype/catalog.html", "prototype/sample.js", "data/usage_form.json",
+                  "site/assets/result-text.js", "engine/rule-engine.js", "engine/index.js") + projects
     sets = {
         "sarasa-mono": common + read("prototype/receipt.html") + names,
-        "sarasa-result": common + read("prototype/result.html", "prototype/catalog.html", "prototype/sample.js", "data/usage_form.json",
-                                       "site/assets/result-text.js", "engine/rule-engine.js", "engine/index.js") + projects,
+        "sarasa-result": common + result,
     }
-    OUT.mkdir(parents=True, exist_ok=True)
+    out_dir = OUT
+    # 小红书小工具版（scripts/build_xhs.mjs 调用）：三页合成一页，只用一套字体，收全部的字，
+    # 再加上打包脚本里替换进页面的文字。用法：--xhs 输出目录
+    if "--xhs" in os.sys.argv:
+        out_dir = Path(os.sys.argv[os.sys.argv.index("--xhs") + 1])
+        sets = {"sarasa": common + result + read("prototype/receipt.html", "scripts/build_xhs.mjs", "scripts/xhs/runtime.js")}
+    out_dir.mkdir(parents=True, exist_ok=True)
     for stem, text in sets.items():
         chars = chars_of(text)
         print(f"{stem}：{len(chars)} 个字符")
@@ -141,9 +148,9 @@ def main():
             sub = subset.Subsetter(opts)
             sub.populate(text=chars)
             sub.subset(font)
-            out = OUT / f"{stem}-{weight}.woff2"
+            out = out_dir / f"{stem}-{weight}.woff2"
             subset.save_font(font, str(out), opts)
-            print(" ", out.relative_to(ROOT), f"{out.stat().st_size // 1024} KB")
+            print(" ", out, f"{out.stat().st_size // 1024} KB")
 
 
 if __name__ == "__main__":

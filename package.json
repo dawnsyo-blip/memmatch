@@ -2,12 +2,16 @@
   "name": "memory-recommender",
   "private": true,
   "type": "module",
-  "description": "个人记忆库推荐网站：推荐引擎与测试（无第三方依赖）",
+  "description": "个人记忆库推荐网站：推荐引擎与测试（引擎和网站无第三方依赖；esbuild 只用来打包小红书小工具版）",
   "scripts": {
     "test": "node --test \"tests/*.test.js\"",
     "report": "node scripts/persona_report.mjs",
     "site": "node scripts/build_site_data.mjs && node scripts/serve.mjs",
     "build": "node scripts/build_dist.mjs",
-    "preview": "node scripts/build_dist.mjs && node scripts/serve.mjs 5174 dist"
+    "preview": "node scripts/build_dist.mjs && node scripts/serve.mjs 5174 dist",
+    "build:xhs": "node scripts/build_xhs.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
   }
 }
