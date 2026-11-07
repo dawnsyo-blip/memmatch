@@ -34,13 +34,14 @@ const PATCHES = {
     ["if (new URLSearchParams(location.search).has('debug')) {", "if (false) {"],
   ],
   result: [
-    // “自助服务”只留返回修改问卷、查看项目清单两行，重新编号
+    // “自助服务”的两个下载换成“保存小票图片”（存进相册，scripts/xhs/snapshot.js，点击由 runtime.js 处理），重新编号
     ['  act(1, "下载历史选择", "↓", \'type="button" id="saveAnswers"\') +\n' +
      '  act(2, "下载推荐结果", "↓", \'type="button" id="saveResults"\') +\n' +
      '  act(3, "返回修改问卷", "→", \'href="receipt.html"\') +\n' +
      '  act(4, "查看项目清单", "→", \'href="catalog.html"\') + `</div>` +',
-     '  act(1, "返回修改问卷", "→", \'href="receipt.html"\') +\n' +
-     '  act(2, "查看项目清单", "→", \'href="catalog.html"\') + `</div>` +'],
+     '  act(1, "保存小票图片", "↓", \'type="button" id="saveImage"\') +\n' +
+     '  act(2, "返回修改问卷", "→", \'href="receipt.html"\') +\n' +
+     '  act(3, "查看项目清单", "→", \'href="catalog.html"\') + `</div>` +'],
     [/\/\* ---------- 下载 ---------- \*\/[\s\S]*?saveText\(out, `记忆库推荐结果-\$\{now\.date\}\.txt`\);\n\}\);/, ""],
     ["历史选择只保存在您的浏览器中", "历史选择只保存在您的手机上"],
     [' target="_blank" rel="noopener"', "", 3],

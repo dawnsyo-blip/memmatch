@@ -134,7 +134,7 @@ def main():
     # 再加上打包脚本里替换进页面的文字。用法：--xhs 输出目录
     if "--xhs" in os.sys.argv:
         out_dir = Path(os.sys.argv[os.sys.argv.index("--xhs") + 1])
-        sets = {"sarasa": common + result + read("prototype/receipt.html", "scripts/build_xhs.mjs", "scripts/xhs/runtime.js")}
+        sets = {"sarasa": common + result + read("prototype/receipt.html", "scripts/build_xhs.mjs", "scripts/xhs/runtime.js", "scripts/xhs/snapshot.js")}
     out_dir.mkdir(parents=True, exist_ok=True)
     for stem, text in sets.items():
         chars = chars_of(text)

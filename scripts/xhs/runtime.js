@@ -5,6 +5,7 @@
 //   fetch → __MM.getData（数据随包放在 data.js 里）
 //   localStorage、sessionStorage → __MM.ls、__MM.ss（存进小工具的 Storage，低版本退回 localStorage）
 // 这个文件自己只用 window.xxx 访问浏览器的原物，不受上面的替换影响。只写 ES2017。
+import { saveReceipt } from "./snapshot.js";
 
 /* ---------- Chrome 61 缺的几个 API（原型里实际用到的） ---------- */
 function def(obj, name, fn) {
@@ -178,8 +179,17 @@ async function follow() {
   }
   window.alert("在小红书搜索“凉拌笨蕉皮”就能找到收银员。");
 }
+let saving = false;
 window.addEventListener("click", (e) => {
   if (e.defaultPrevented || e.button) return;
+  // 结果页“保存小票图片”（打包时加进页脚，见 build_xhs.mjs 的 PATCHES）
+  if (e.target.closest && e.target.closest("#saveImage")) {
+    const paper = document.querySelector(".paper");
+    if (!paper || saving) return;
+    saving = true;
+    saveReceipt(paper).catch((err) => { console.error(err); window.alert("没能生成小票图片。"); }).then(() => { saving = false; });
+    return;
+  }
   const a = e.target.closest && e.target.closest("a[href]");
   if (!a) return;
   const href = a.getAttribute("href");

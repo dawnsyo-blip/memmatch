@@ -216,7 +216,7 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
   - 右上角题数的颜色用 #aaa，对比度只有 2.2，负责人 2026-11-02 定保持这个颜色。
 
 上线（2026-11-04）：
-- 代码仓库：GitHub 私有仓库 https://github.com/dawnsyo-blip/memmatch（2026-11-05 建，负责人要求备份）。主分支 master，另有 codex-bubble-prototype 分支（Codex 的气泡问卷样张）。这台电脑访问 GitHub 要走代理，仓库的 git 设置里已经写了 http.https://github.com.proxy = http://127.0.0.1:1080，直接 `git push` 就行
+- 代码仓库：GitHub 私有仓库 https://github.com/dawnsyo-blip/memmatch（2026-11-05 建，负责人要求备份）。**每次 commit 完直接 `git push`**（负责人 2026-11-06 定，不用再问）。主分支 master，另有 codex-bubble-prototype 分支（Codex 的气泡问卷样张）。这台电脑访问 GitHub 要走代理，仓库的 git 设置里已经写了 http.https://github.com.proxy = http://127.0.0.1:1080，直接 `git push` 就行
 - VPS：狗云香港，Ubuntu 24.04，IP <VPS 的 IP>，只认密钥登录。密钥在负责人电脑的 `~/.ssh/memmatch`（设了口令，2026-10-15 生成），`~/.ssh/config` 里的短名字是 `memmatch`，所以 `ssh memmatch` 就能登录。Cloudflare 两条 A 记录都是“仅 DNS”
 - 域名 memmatch.fyi（Cloudflare 购买），部署在负责人的 VPS 上，只有静态文件，用 Caddy 提供。步骤在 `deploy/README.md`，上传用 `MEMMATCH_HOST=memmatch bash deploy/publish.sh`
 - `npm run build`（`scripts/build_dist.mjs`）把小票原型打包到 `dist/`：receipt.html 改名 index.html，引擎、`site/assets/result-text.js`、问卷配置、`usage_form.json`、项目数据收进 dist，路径改写成 dist 里的位置，开发用的提示（“npm run site”）换成访客看得懂的话；最后检查不能剩下指向仓库其它目录的路径。原型里新加读别处文件的路径，要在脚本的 FILES 和 REWRITE 里补上。`npm run preview` 在 http://localhost:5174/ 预览打包结果
@@ -230,7 +230,7 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
 小红书小工具版（2026-11-06，负责人要求接进小红书“小工具”）：
 - 小工具是打包上传的离线网页，规范在小红书给的 skill `.claude/skills/minitool-zip-builder/`（SKILL.md 和 references/，1.10.0）和在线文档 https://miniapp-sandbox.xiaohongshu.com/minitool/doc ：只能有一个 `index.html`；脚本必须是包里的外部文件、不能是 module、不能内联；不能联网（fetch 包里的文件也不行）、不能下载文件、不能开外链；JS、CSS 要兼容 Chrome 61（Android 8.1）；字体只能用包里的；zip 上限 10 MB、建议 2 MB 以内。改原型时别用 Chrome 61 解析不了的正则（后行断言 `(?<=`、`\p{L}`），否则小工具版整段脚本失效；其它新 API、新语法由打包补齐
 - `npm run build:xhs`（`scripts/build_xhs.mjs`）从原型生成 `dist-xhs/` 和上传包 `dist-xhs.zip`（都不进 git），原型不用改：三页的内嵌脚本各包成一个函数，由 `scripts/xhs/runtime.js` 在同一个页面里换内容；esbuild（开发依赖，只用来打包）打成一个经典脚本 `app.js`，语法降到 Chrome 61，`location`、`fetch`、`localStorage`、`sessionStorage` 换成运行时的替身；数据写进 `data.js`；字体合成一套（`subset_receipt_font.py --xhs`），不带“订购人”输入框的备用切片；CSS 的 `padding-block`、`min()` 纸宽、带 `:focus-visible` 的选择器列表在打包时改写
-- 和网站的差别：下载历史选择、下载推荐结果、下载项目清单三个按钮去掉，“自助服务”只剩两行；页尾写“历史选择只保存在您的手机上”；外链点了弹出提示和地址；收银员改成小工具的“关注作者”（客户端 9.51 起，低版本提示搜“凉拌笨蕉皮”）；答卷存在小工具的 Storage（9.46 起，整份存在键 `memmatch` 里），低版本退回 localStorage。去掉和改写的地方写在打包脚本的 `PATCHES`，每条要正好命中，原型改了对应文字时打包会报错，要同步改
+- 和网站的差别：下载历史选择、下载推荐结果、下载项目清单三个按钮去掉；结果页“自助服务”第 1 行换成“保存小票图片”（负责人 2026-11-06 要）：`scripts/xhs/snapshot.js` 按页面上每个字的实际位置把纸画到 canvas 上（背景、边框、文字、下划线、SVG 的 rect 和 path，收起的 details 只画标题行，底边画锯齿），用小工具的 `writeTempFile` ＋ `saveImageToPhotosAlbum` 存进相册；不用 html2canvas（要 iframe，小工具禁用）和 SVG foreignObject（iOS 上 canvas 导不出），也不加载图片；不在小红书里时在页面上盖一层显示这张图，方便在电脑上看效果。页面加了新的元素种类（比如图片、渐变）时要在 snapshot.js 里补画法；页尾写“历史选择只保存在您的手机上”；外链点了弹出提示和地址；收银员改成小工具的“关注作者”（客户端 9.51 起，低版本提示搜“凉拌笨蕉皮”）；答卷存在小工具的 Storage（9.46 起，整份存在键 `memmatch` 里），低版本退回 localStorage。去掉和改写的地方写在打包脚本的 `PATCHES`，每条要正好命中，原型改了对应文字时打包会报错，要同步改
 - 打包脚本最后会扫一遍禁用写法，并跑 skill 里的审计脚本。浏览器里跑通不算数，上传后要在创服平台的模拟器、安卓和 iPhone 真机上各试一遍
 
 小票原型（2026-11-03，`prototype/`；2026-11-04 负责人定为网站的样张，正式网站照它搭）：
