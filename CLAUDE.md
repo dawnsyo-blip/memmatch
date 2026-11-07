@@ -232,6 +232,7 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
 - `npm run build:xhs`（`scripts/build_xhs.mjs`）从原型生成 `dist-xhs/` 和上传包 `dist-xhs.zip`（都不进 git），原型不用改：三页的内嵌脚本各包成一个函数，由 `scripts/xhs/runtime.js` 在同一个页面里换内容；esbuild（开发依赖，只用来打包）打成一个经典脚本 `app.js`，语法降到 Chrome 61，`location`、`fetch`、`localStorage`、`sessionStorage` 换成运行时的替身；数据写进 `data.js`；字体合成一套（`subset_receipt_font.py --xhs`），不带“订购人”输入框的备用切片；CSS 的 `padding-block`、`min()` 纸宽、带 `:focus-visible` 的选择器列表在打包时改写
 - 和网站的差别：下载历史选择、下载推荐结果、下载项目清单三个按钮去掉；结果页“自助服务”第 1 行换成“保存小票图片”（负责人 2026-11-06 要）：`scripts/xhs/snapshot.js` 按页面上每个字的实际位置把纸画到 canvas 上（背景、边框、文字、下划线、SVG 的 rect 和 path，收起的 details 只画标题行，底边画锯齿），用小工具的 `writeTempFile` ＋ `saveImageToPhotosAlbum` 存进相册；不用 html2canvas（要 iframe，小工具禁用）和 SVG foreignObject（iOS 上 canvas 导不出），也不加载图片；不在小红书里时在页面上盖一层显示这张图，方便在电脑上看效果。页面加了新的元素种类（比如图片、渐变）时要在 snapshot.js 里补画法；页尾写“历史选择只保存在您的手机上”；外链点了弹出提示和地址；收银员改成小工具的“关注作者”（客户端 9.51 起，低版本提示搜“凉拌笨蕉皮”）；答卷存在小工具的 Storage（9.46 起，整份存在键 `memmatch` 里），低版本退回 localStorage。去掉和改写的地方写在打包脚本的 `PATCHES`，每条要正好命中，原型改了对应文字时打包会报错，要同步改
 - 上传用的图标 `docs/小红书/图标-1024.png`（小票剪影，照 `prototype/favicon.svg` 放大，四周留白免得被圆角裁掉）和封面 `docs/小红书/封面-1242x1656.png`（3 : 4，414×552 的手机画面截首页出纸后的样子）；首页改了要重截封面
+- 全屏打开时外壳的返回键和“···”盖在页面左上、右上（负责人 2026-11-06 要求让开）：运行时启动时用 `getWindowInfo`（9.49 起）读按钮位置，把 `--dock-pad`（出票口上方的留白，原 12px）加到按钮底边再往下 6px；低版本按安全区加 36px 估
 - 打包脚本最后会扫一遍禁用写法，并跑 skill 里的审计脚本。浏览器里跑通不算数，上传后要在创服平台的模拟器、安卓和 iPhone 真机上各试一遍
 
 小票原型（2026-11-03，`prototype/`；2026-11-04 负责人定为网站的样张，正式网站照它搭）：

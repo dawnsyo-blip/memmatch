@@ -200,6 +200,34 @@ window.addEventListener("click", (e) => {
   window.alert("小工具里打不开外部网页，可以在浏览器里访问：\n" + href);
 });
 
+/* ---------- 让开小工具外壳的按钮 ---------- */
+// 全屏打开时，左上角的返回键和右上角的“···”盖在页面上，会挡住出票口（负责人 2026-11-06 要求往下挪）。
+// 出票口、槽口阴影、纸的位置都跟着 --dock-pad（原来 12px）算，把它加到按钮底边再往下 6px。
+// getWindowInfo 是 9.49 起才有的；低版本在小红书里时按安全区再加 36px 估一个
+const DOCK_PAD = 12;
+async function avoidHostButtons() {
+  const t = tool();
+  if (!t) return;
+  const root = document.documentElement.style;
+  if (typeof t.getWindowInfo !== "function") {
+    root.setProperty("--dock-pad", `calc(${DOCK_PAD}px + var(--safe-area-inset-top, env(safe-area-inset-top, 0px)) + 36px)`);
+    return;
+  }
+  try {
+    const info = await Promise.race([t.getWindowInfo(), new Promise((r) => setTimeout(() => r(null), 1000))]);
+    const btns = (info && info.menuButtons) || {};
+    let bottom = 0;
+    for (const k of Object.keys(btns)) {
+      const b = btns[k];
+      if (!b) continue;
+      const y = b.bottom != null ? Number(b.bottom) : Number(b.top) + Number(b.height);
+      if (y > bottom) bottom = y;
+    }
+    if (bottom > 0) root.setProperty("--dock-pad", `${Math.max(DOCK_PAD, Math.ceil(bottom) + 6)}px`);
+  } catch (e) { /* 读不到就保持原样 */ }
+}
+window.addEventListener("resize", () => { avoidHostButtons(); });
+
 window.__MM = {
   loc,
   ls: storage(() => mem, true),
@@ -207,7 +235,7 @@ window.__MM = {
   getData,
   async start(defs) {
     pages = defs;
-    await loadStore();
+    await Promise.all([loadStore(), avoidHostButtons()]);
     go("receipt.html");
   },
 };
