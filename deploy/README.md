@@ -2,7 +2,7 @@
 
 网站只有静态文件：页面、脚本、字体、问卷配置和项目数据，推荐在访客的浏览器里计算。服务器上只需要一个网页服务器程序 Caddy，不需要数据库，也不需要后端程序。
 
-下面的命令按 Debian 或 Ubuntu 写。VPS 的 IP 是 `<VPS 的 IP>`（Cloudflare 的 DNS 记录里写的就是它）。`root` 是登录 VPS 的用户名，有的服务商默认叫 `ubuntu`、`admin` 或 `ecs-user`，以服务商控制台里写的为准。
+下面的命令按 Debian 或 Ubuntu 写。VPS 的 IP 下面写作 `<VPS 的 IP>`，换成你自己的（Cloudflare 的 DNS 记录里写的就是它）。`root` 是登录 VPS 的用户名，有的服务商默认叫 `ubuntu`、`admin` 或 `ecs-user`，以服务商控制台里写的为准。
 
 ## 第一次部署
 
@@ -25,7 +25,7 @@ DNS 生效一般要几分钟。在自己电脑上运行 `nslookup memmatch.fyi`�
 
 ### 2. 在 VPS 上安装 Caddy
 
-**登录 VPS**：这台 VPS 只认密钥登录，不接受密码。密钥在你电脑的 `C:\Users\你的用户名\.ssh\memmatch`（2026-10-15 生成，设了口令；`memmatch.pub` 是放在服务器上的公钥）。`C:\Users\你的用户名\.ssh\config` 里给它起了短名字 `memmatch`，所以在 PowerShell 或 Git Bash 里运行 `ssh memmatch`，输密钥的口令，就能登录。口令不是 VPS 的 root 密码，root 密码只在狗云面板的 VNC 里登录时用。
+**登录 VPS**：这台 VPS 只认密钥登录，不接受密码。密钥在你电脑的 `~/.ssh/memmatch`（Windows 上是 `C:\Users\你的用户名\.ssh\memmatch`）（2026-10-15 生成，设了口令；`memmatch.pub` 是放在服务器上的公钥）。`~/.ssh/config` 里给它起了短名字 `memmatch`，所以在 PowerShell 或 Git Bash 里运行 `ssh memmatch`，输密钥的口令，就能登录。口令不是 VPS 的 root 密码，root 密码只在狗云面板的 VNC 里登录时用。
 
 登录以后依次运行（来自 Caddy 官方安装说明）：
 

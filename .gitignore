@@ -17,3 +17,10 @@ dist/
 # 小红书小工具版的上传包，由 scripts/build_xhs.mjs 生成（npm run build:xhs）
 dist-xhs/
 dist-xhs.zip
+
+# 仓库公开（2026-11-19）后只留在本机、不进 git 的材料：
+# 小红书给的小工具 skill（没写允许转载）、旧版参考图（来源不明的截图）、别人仓库的 README 原文快照、负责人自己的表格
+.claude/skills/minitool-zip-builder/
+docs/前端/旧版/参考图/
+sources/snapshots/
+sources/负责人材料/记忆框架开源情况.xlsx

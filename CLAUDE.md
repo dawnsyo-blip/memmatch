@@ -216,8 +216,12 @@ cache/               下载的 README 和仓库缓存（不进 git，可重新�
   - 右上角题数的颜色用 #aaa，对比度只有 2.2，负责人 2026-11-02 定保持这个颜色。
 
 上线（2026-11-04）：
-- 代码仓库：GitHub 私有仓库 https://github.com/dawnsyo-blip/memmatch（2026-11-05 建，负责人要求备份）。**每次 commit 完直接 `git push`**（负责人 2026-11-06 定，不用再问）。主分支 master，另有 codex-bubble-prototype 分支（Codex 的气泡问卷样张）。这台电脑访问 GitHub 要走代理，仓库的 git 设置里已经写了 http.https://github.com.proxy = http://127.0.0.1:1080，直接 `git push` 就行
-- VPS：狗云香港，Ubuntu 24.04，IP <VPS 的 IP>，只认密钥登录。密钥在负责人电脑的 `~/.ssh/memmatch`（设了口令，2026-10-15 生成），`~/.ssh/config` 里的短名字是 `memmatch`，所以 `ssh memmatch` 就能登录。Cloudflare 两条 A 记录都是“仅 DNS”
+- 代码仓库：GitHub 仓库 https://github.com/dawnsyo-blip/memmatch（2026-11-05 建，负责人要求备份；2026-11-19 负责人决定公开，便于别人看设计思路）。**每次 commit 完直接 `git push`**（负责人 2026-11-06 定，不用再问）。主分支 master；codex-bubble-prototype 分支（Codex 的气泡问卷样张）只留在本机，不推到 GitHub（负责人 2026-11-19 定不公开）。这台电脑访问 GitHub 要走代理，仓库的 git 设置里已经写了 http.https://github.com.proxy = http://127.0.0.1:1080，直接 `git push` 就行
+- **仓库是公开的，提交前想一想能不能给所有人看**（2026-11-19 公开前清理过一次，用 git-filter-repo 把下面这些从全部历史里删掉了）：
+  - 只留在本机、写在 `.gitignore` 里的：小红书的小工具 skill `.claude/skills/minitool-zip-builder/`（没写允许转载）、`docs/前端/旧版/参考图/`（来源不明的截图）、`sources/snapshots/`（别人仓库的 README 原文；建候选表照常读本机的文件）、`sources/负责人材料/记忆框架开源情况.xlsx`（负责人自己的表，没怎么用到）
+  - 不写进仓库：VPS 的 IP（写作 `<VPS 的 IP>`）、本机用户名和路径（写成 `~/.ssh/...`）、任何密钥、口令、token；`env` 文件一直不跟踪
+  - 新加第三方的图片、文档、字体前先看许可；转载别人的原文只引用判断要用的片段。许可：代码、文档、数据 MIT（`LICENSE`），字体 OFL（`prototype/fonts/OFL.txt`，打包网站时随 fonts 目录一起带上）
+- VPS：狗云香港，Ubuntu 24.04，IP 不写进仓库（仓库公开，2026-11-19 负责人定；实际地址在负责人电脑的 `~/.ssh/config` 和 Cloudflare 的 DNS 记录里），只认密钥登录。密钥在负责人电脑的 `~/.ssh/memmatch`（设了口令，2026-10-15 生成），`~/.ssh/config` 里的短名字是 `memmatch`，所以 `ssh memmatch` 就能登录。Cloudflare 两条 A 记录都是“仅 DNS”
 - 域名 memmatch.fyi（Cloudflare 购买），部署在负责人的 VPS 上，只有静态文件，用 Caddy 提供。步骤在 `deploy/README.md`，上传用 `MEMMATCH_HOST=memmatch bash deploy/publish.sh`
 - `npm run build`（`scripts/build_dist.mjs`）把小票原型打包到 `dist/`：receipt.html 改名 index.html，引擎、`site/assets/result-text.js`、问卷配置、`usage_form.json`、项目数据收进 dist，路径改写成 dist 里的位置，开发用的提示（“npm run site”）换成访客看得懂的话；最后检查不能剩下指向仓库其它目录的路径。原型里新加读别处文件的路径，要在脚本的 FILES 和 REWRITE 里补上。`npm run preview` 在 http://localhost:5174/ 预览打包结果
 - 网页图标 `prototype/favicon.svg`（小票剪影，深色标签栏自动换成纸色）和 `apple-touch-icon.png`
